@@ -7,7 +7,9 @@ const webidl = require("webidl2");
 
 const Interface = require("./lib/constructs/interface");
 
-module.exports.generate = function (text, outputDir, implDir) {
+module.exports.generate = function (text, outputDir, implDir, opts) {
+  if (!opts) opts = {};
+
   const interfaces = {};
   const idl = webidl.parse(text);
   for (var i = 0; i < idl.length; ++i) {
@@ -20,7 +22,9 @@ module.exports.generate = function (text, outputDir, implDir) {
       case "implements":
         break; // handled later
       default:
-        throw new Error("Can't convert type '" + idl[i].type + "'");
+        if (!opts.suppressErrors) {
+          throw new Error("Can't convert type '" + idl[i].type + "'");
+        }
     }
   }
   for (var i = 0; i < idl.length; ++i) {
