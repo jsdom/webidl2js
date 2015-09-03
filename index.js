@@ -11,17 +11,23 @@ module.exports.generate = function (text, outputDir, implDir) {
   const interfaces = {};
   const idl = webidl.parse(text);
   for (var i = 0; i < idl.length; ++i) {
-    let obj = null;
+    let obj;
     switch (idl[i].type) {
       case "interface":
         obj = new Interface(idl[i]);
         interfaces[obj.name] = obj;
         break;
       case "implements":
-        interfaces[idl[i].target].implements(idl[i].implements);
-        continue;
+        break; // handled later
       default:
         throw new Error("Can't convert type '" + idl[i].type + "'");
+    }
+  }
+  for (var i = 0; i < idl.length; ++i) {
+    switch (idl[i].type) {
+      case "implements":
+        interfaces[idl[i].target].implements(idl[i].implements);
+        break;
     }
   }
 
