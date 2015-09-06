@@ -16,7 +16,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     let obj;
     switch (idl[i].type) {
       case "interface":
-        obj = new Interface(idl[i]);
+        obj = new Interface(idl[i], path.resolve(outputDir, implDir));
         interfaces[obj.name] = obj;
         break;
       case "implements":
