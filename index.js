@@ -16,6 +16,10 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     let obj;
     switch (idl[i].type) {
       case "interface":
+        if (idl[i].partial) {
+          break;
+        }
+
         obj = new Interface(idl[i], path.resolve(outputDir, implDir));
         interfaces[obj.name] = obj;
         break;
@@ -28,7 +32,22 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     }
   }
   for (var i = 0; i < idl.length; ++i) {
+    let oldMembers;
+    let extAttrs;
     switch (idl[i].type) {
+      case "interface":
+        if (!idl[i].partial) {
+          break;
+        }
+
+        if (opts.suppressErrors && !interfaces[idl[i].name]) {
+          break;
+        }
+        oldMembers = interfaces[idl[i].name].idl.members;
+        oldMembers.push.apply(oldMembers, idl[i].members);
+        extAttrs = interfaces[idl[i].name].idl.extAttrs;
+        extAttrs.push.apply(oldMembers, idl[i].extAttrs);
+        break;
       case "implements":
         interfaces[idl[i].target].implements(idl[i].implements);
         break;
