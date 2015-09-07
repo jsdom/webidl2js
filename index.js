@@ -49,6 +49,9 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
         extAttrs.push.apply(oldMembers, idl[i].extAttrs);
         break;
       case "implements":
+        if (opts.suppressErrors && !interfaces[idl[i].target]) {
+          break;
+        }
         interfaces[idl[i].target].implements(idl[i].implements);
         break;
     }
