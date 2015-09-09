@@ -70,5 +70,5 @@ const Impl = require("${path.join(implDir, obj.name)}.js");\n\n` + source;
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
   }
 
-  fs.copySync(__dirname + "/lib/utils.js", outputDir + "/utils.js");
+  fs.copySync(__dirname + "/lib/output/utils.js", outputDir + "/utils.js");
 };
