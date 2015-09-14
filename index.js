@@ -73,10 +73,11 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     source = `"use strict";
 
 const conversions = require("webidl-conversions");
+const utils = require("${relativeUtils}");
 const Impl = require("${implFile}.js");\n\n` + source;
 
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
   }
 
-  fs.copySync(__dirname + "/lib/output/utils.js", outputDir + "/utils.js");
+  fs.copySync(__dirname + "/lib/output/utils.js", opts.utilPath);
 };
