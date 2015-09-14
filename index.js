@@ -9,6 +9,7 @@ const Interface = require("./lib/constructs/interface");
 
 module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts) opts = {};
+  if (!opts.implSuffix) opts.implSuffix = "";
 
   const interfaces = {};
   const idl = webidl.parse(text);
@@ -20,7 +21,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
           break;
         }
 
-        obj = new Interface(idl[i], path.resolve(outputDir, implDir));
+        obj = new Interface(idl[i], { implDir: path.resolve(outputDir, implDir), implSuffix: opts.implSuffix });
         interfaces[obj.name] = obj;
         break;
       case "implements":
@@ -62,10 +63,17 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     const obj = interfaces[keys[i]];
     let source = obj.toString();
 
+    let implFile = path.join(implDir, obj.name + opts.implSuffix);
+    if (implFile[0] !== ".") {
+      implFile = "./" + implFile;
+    }
+
+    const relativeUtils = path.relative(outputDir, opts.utilPath);
+
     source = `"use strict";
 
 const conversions = require("webidl-conversions");
-const Impl = require("${path.join(implDir, obj.name)}.js");\n\n` + source;
+const Impl = require("${implFile}.js");\n\n` + source;
 
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
   }
