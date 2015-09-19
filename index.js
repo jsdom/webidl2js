@@ -59,6 +59,8 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     }
   }
 
+  let utilsText = fs.readFileSync(__dirname + "/lib/output/utils.js");
+
   const keys = Object.keys(interfaces);
   for (let i = 0; i < keys.length; ++i) {
     const obj = interfaces[keys[i]];
@@ -78,7 +80,8 @@ const utils = require("${relativeUtils}");
 const Impl = require("${implFile}.js");\n\n` + source;
 
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
+    utilsText += `module.exports.implSymbols["${keys[i]}"] = Symbol("${keys[i]} implementation");\n`;
   }
 
-  fs.copySync(__dirname + "/lib/output/utils.js", opts.utilPath);
+  fs.writeFileSync(opts.utilPath, utilsText);
 };
