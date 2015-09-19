@@ -69,7 +69,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
       implFile = "./" + implFile;
     }
 
-    const relativeUtils = path.relative(outputDir, opts.utilPath);
+    const relativeUtils = path.relative(outputDir, opts.utilPath).replace(/\\/g, '/');
 
     source = `"use strict";
 
