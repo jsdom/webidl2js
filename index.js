@@ -10,6 +10,7 @@ const Interface = require("./lib/constructs/interface");
 module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts) opts = {};
   if (!opts.implSuffix) opts.implSuffix = "";
+  if (!opts.utilPath) opts.utilPath = path.join(implDir, "utils.js");
 
   const interfaces = {};
   const idl = webidl.parse(text);
