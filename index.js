@@ -6,6 +6,7 @@ const path = require("path");
 const webidl = require("webidl2");
 
 const Interface = require("./lib/constructs/interface");
+const Dictionary = require("./lib/constructs/dictionary");
 
 module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts) opts = {};
@@ -13,7 +14,16 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts.utilPath) opts.utilPath = path.join(implDir, "utils.js");
 
   const interfaces = {};
+  const dictionaries = {};
+  const customTypes = new Set();
   const idl = webidl.parse(text);
+  for (var i = 0; i < idl.length; ++i) {
+    switch (idl[i].type) {
+      case "dictionary":
+        customTypes.add(idl[i].name);
+        break;
+    }
+  }
   for (var i = 0; i < idl.length; ++i) {
     let obj;
     switch (idl[i].type) {
@@ -22,11 +32,15 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
           break;
         }
 
-        obj = new Interface(idl[i], { implDir: path.resolve(outputDir, implDir), implSuffix: opts.implSuffix });
+        obj = new Interface(idl[i], { implDir: path.resolve(outputDir, implDir), implSuffix: opts.implSuffix, customTypes });
         interfaces[obj.name] = obj;
         break;
       case "implements":
         break; // handled later
+      case "dictionary":
+        obj = new Dictionary(idl[i], { customTypes });
+        dictionaries[obj.name] = obj;
+        break;
       default:
         if (!opts.suppressErrors) {
           throw new Error("Can't convert type '" + idl[i].type + "'");
@@ -61,7 +75,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
 
   let utilsText = fs.readFileSync(__dirname + "/lib/output/utils.js");
 
-  const keys = Object.keys(interfaces);
+  let keys = Object.keys(interfaces);
   for (let i = 0; i < keys.length; ++i) {
     const obj = interfaces[keys[i]];
     let source = obj.toString();
@@ -81,6 +95,21 @@ const Impl = require("${implFile}.js");\n\n` + source;
 
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
     utilsText += `module.exports.implSymbols["${keys[i]}"] = Symbol("${keys[i]} implementation");\n`;
+  }
+
+  keys = Object.keys(dictionaries);
+  for (let i = 0; i < keys.length; ++i) {
+    const obj = dictionaries[keys[i]];
+    let source = obj.toString();
+
+    const relativeUtils = path.relative(outputDir, opts.utilPath).replace(/\\/g, '/');
+
+    source = `"use strict";
+
+const conversions = require("webidl-conversions");
+const utils = require("${relativeUtils}");\n\n` + source;
+
+    fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
   }
 
   fs.writeFileSync(opts.utilPath, utilsText);
