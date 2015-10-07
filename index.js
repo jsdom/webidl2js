@@ -11,7 +11,7 @@ const Dictionary = require("./lib/constructs/dictionary");
 module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts) opts = {};
   if (!opts.implSuffix) opts.implSuffix = "";
-  if (!opts.utilPath) opts.utilPath = path.join(implDir, "utils.js");
+  if (!opts.utilPath) opts.utilPath = path.join(outputDir, "utils.js");
 
   const interfaces = {};
   const dictionaries = {};
