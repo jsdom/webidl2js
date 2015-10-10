@@ -102,7 +102,10 @@ const Impl = require("${implFile}.js");\n\n` + source;
     const obj = dictionaries[keys[i]];
     let source = obj.toString();
 
-    const relativeUtils = path.relative(outputDir, opts.utilPath).replace(/\\/g, '/');
+    let relativeUtils = path.relative(outputDir, opts.utilPath).replace(/\\/g, '/');
+    if (relativeUtils[0] !== ".") {
+      relativeUtils = "./" + relativeUtils;
+    }
 
     source = `"use strict";
 
