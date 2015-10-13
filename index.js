@@ -116,11 +116,5 @@ const utils = require("${relativeUtils}");\n\n` + source;
   }
 
   let utilsText = fs.readFileSync(__dirname + "/lib/output/utils.js");
-  const interfaceNames = opts.utilSymbols || [];
-  interfaceNames.push.apply(interfaceNames, Object.keys(interfaces));
-  for (let i = 0; i < interfaceNames.length; ++i) {
-    utilsText += `module.exports.implSymbols["${interfaceNames[i]}"] = Symbol("${interfaceNames[i]} implementation");\n`;
-  }
-
   fs.writeFileSync(opts.utilPath, utilsText);
 };
