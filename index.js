@@ -12,7 +12,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
   if (!opts) opts = {};
   if (!opts.implSuffix) opts.implSuffix = "";
   if (!opts.utilPath) opts.utilPath = path.join(outputDir, "utils.js");
-  implDir = implDir.replace(/\\/g, "/"); // fix windows file paths
+  implDir = path.relative(outputDir, implDir).replace(/\\/g, "/"); // fix windows file paths
 
   const interfaces = {};
   const dictionaries = {};
