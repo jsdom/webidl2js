@@ -93,7 +93,13 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
   let utilsText = fs.readFileSync(__dirname + "/lib/output/utils.js");
   fs.writeFileSync(opts.utilPath, utilsText);
 
-  let keys = Object.keys(interfaces);
+  let keys = Object.keys(interfaces).concat(Object.keys(dictionaries));
+  for (let key of keys) {
+    const obj = interfaces[key] || dictionaries[key];
+    fs.writeFileSync(path.join(outputDir, obj.name + ".js"), "");
+  }
+
+  keys = Object.keys(interfaces);
   for (let i = 0; i < keys.length; ++i) {
     const obj = interfaces[keys[i]];
     let source = obj.toString();
