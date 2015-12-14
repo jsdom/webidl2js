@@ -95,8 +95,11 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
 
   let keys = Object.keys(interfaces).concat(Object.keys(dictionaries));
   for (let key of keys) {
-    const obj = interfaces[key] || dictionaries[key];
-    fs.writeFileSync(path.join(outputDir, obj.name + ".js"), "");
+    if (interfaces[key]) {
+      fs.writeFileSync(path.join(outputDir, interfaces[key].name + ".js"), "module.exports = { interface: function () {} }");
+    } else {
+      fs.writeFileSync(path.join(outputDir, dictionaries[key].name + ".js"), "");
+    }
   }
 
   keys = Object.keys(interfaces);
