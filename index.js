@@ -120,8 +120,8 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     source = `"use strict";
 
 const conversions = require("webidl-conversions");
-const utils = require("${relativeUtils}");
-const Impl = require("${implFile}.js");\n\n` + source;
+const utils = require("${relativeUtils}");\n${source}
+const Impl = require("${implFile}.js");\n`;
 
     fs.writeFileSync(path.join(outputDir, obj.name + ".js"), source);
   }
