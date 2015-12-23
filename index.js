@@ -113,7 +113,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
     }
 
     let relativeUtils = path.relative(outputDir, opts.utilPath).replace(/\\/g, '/');
-    if (relativeUtils[0] != ".") {
+    if (relativeUtils[0] !== ".") {
       relativeUtils = "./" + relativeUtils;
     }
 
