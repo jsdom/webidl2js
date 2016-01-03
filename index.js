@@ -67,7 +67,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
         oldMembers = interfaces[idl[i].name].idl.members;
         oldMembers.push.apply(oldMembers, idl[i].members);
         extAttrs = interfaces[idl[i].name].idl.extAttrs;
-        extAttrs.push.apply(oldMembers, idl[i].extAttrs);
+        extAttrs.push.apply(extAttrs, idl[i].extAttrs);
         break;
       case "dictionary":
         if (!idl[i].partial) {
@@ -79,7 +79,7 @@ module.exports.generate = function (text, outputDir, implDir, opts) {
         oldMembers = dictionaries[idl[i].name].idl.members;
         oldMembers.push.apply(oldMembers, idl[i].members);
         extAttrs = dictionaries[idl[i].name].idl.extAttrs;
-        extAttrs.push.apply(oldMembers, idl[i].extAttrs);
+        extAttrs.push.apply(extAttrs, idl[i].extAttrs);
         break;
       case "implements":
         if (opts.suppressErrors && !interfaces[idl[i].target]) {
