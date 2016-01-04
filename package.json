@@ -1,6 +1,6 @@
 {
   "name": "webidl2js",
-  "version": "3.0.2",
+  "version": "4.0.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "index.js",
   "dependencies": {
