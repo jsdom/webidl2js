@@ -1,8 +1,10 @@
 const fs = require("fs");
-const transformer = require("..");
+const Transformer = require("..");
 
-transformer.generate(
-  fs.readFileSync(__dirname + "/cases/URL.idl", { encoding: "utf-8" }),
-  __dirname + "/output/",
-  "./test/implementations/"
-);
+const transformer = new Transformer()
+  .addSource(__dirname + "/cases/URL.idl", __dirname + "/implementations/")
+  .generate(__dirname + "/output/")
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });

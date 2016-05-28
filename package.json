@@ -2,11 +2,12 @@
   "name": "webidl2js",
   "version": "4.3.3",
   "description": "Auto-generates class structures for WebIDL specifications",
-  "main": "index.js",
+  "main": "lib/transformer.js",
   "dependencies": {
-    "fs-extra": "~0.23.1",
-    "webidl2": "^2.0.11",
-    "webidl-conversions": "^2.0.0"
+    "co": "^4.6.0",
+    "pn": "^1.0.0",
+    "webidl-conversions": "^2.0.0",
+    "webidl2": "^2.0.11"
   },
   "devDependencies": {},
   "scripts": {
