@@ -1,6 +1,6 @@
 {
   "name": "webidl2js",
-  "version": "4.3.3",
+  "version": "5.0.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
   "dependencies": {
