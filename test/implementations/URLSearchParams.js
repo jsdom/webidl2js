@@ -68,6 +68,10 @@ class URLSearchParamsImpl {
     this.delete(name);
     this.append(name, value);
   }
+
+  [Symbol.iterator]() {
+    return this._list[Symbol.iterator]();
+  }
 }
 
 module.exports = {
