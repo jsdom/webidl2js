@@ -1,0 +1,7 @@
+[Constructor]
+interface SeqAndRec {
+  void recordConsumer(record<USVString, double> rec);
+  void recordConsumer2(record<USVString, Iface> rec);
+  void sequenceConsumer(sequence<USVString> seq);
+  void sequenceConsumer2(sequence<Iface> seq);
+};

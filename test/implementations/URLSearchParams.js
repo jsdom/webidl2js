@@ -1,2 +1,7 @@
 "use strict";
-exports.implementation = class {};
+
+class URLSearchParamsImpl {}
+
+module.exports = {
+  implementation: URLSearchParamsImpl
+};
