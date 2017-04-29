@@ -1,4 +1,3 @@
-/*
 [Constructor(USVString url, optional USVString base),
  Exposed=(Window,Worker)]
 interface URL {
@@ -14,19 +13,4 @@ interface URL {
            attribute USVString search;
   [SameObject] readonly attribute URLSearchParams searchParams;
            attribute USVString hash;
-};
-*/
-
-[Constructor(optional (USVString or URLSearchParams) init = ""),
- Exposed=(Window,Worker)]
-interface URLSearchParams {
-  void append(USVString name, USVString value);
-  void delete(USVString name);
-  USVString? get(USVString name);
-  sequence<USVString> getAll(USVString name);
-  boolean has(USVString name);
-  void set(USVString name, USVString value);
-  iterable<USVString, USVString>;
-  // The following operation on its own currently doesn't work.
-  // stringifier;
 };
