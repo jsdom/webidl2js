@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - 6
+  - stable
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
