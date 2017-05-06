@@ -10,9 +10,12 @@
     "webidl-conversions": "^4.0.0",
     "webidl2": "^2.0.11"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^20.0.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "update-snapshots": "jest --updateSnapshot"
   },
   "author": "Sebastian Mayr <npm@smayr.name>",
   "license": "MIT"
