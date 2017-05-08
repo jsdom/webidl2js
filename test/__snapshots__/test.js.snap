@@ -1,5 +1,420 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PromiseTypes.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+const impl = utils.implSymbol;
+
+function PromiseTypes() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+PromiseTypes.prototype.voidPromiseConsumer = function voidPromiseConsumer(p) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  args[0] = Promise.resolve(args[0]).then(value => {}, reason => reason);
+  return this[impl].voidPromiseConsumer(...args);
+};
+
+PromiseTypes.prototype.promiseConsumer = function promiseConsumer(p) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  args[0] = Promise.resolve(args[0]).then(value => {
+    value = conversions[\\"double\\"](value, {
+      context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+    });
+    return value;
+  }, reason => reason);
+  return this[impl].promiseConsumer(...args);
+};
+
+Object.defineProperty(PromiseTypes.prototype, Symbol.toStringTag, {
+  value: \\"PromiseTypes\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
+  },
+  create(constructorArgs, privateData) {
+    let obj = Object.create(PromiseTypes.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(PromiseTypes.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+  },
+  interface: PromiseTypes,
+  expose: {
+    Window: { PromiseTypes: PromiseTypes }
+  }
+};
+module.exports = iface;
+
+const Impl = require(\\"../implementations/PromiseTypes.js\\");
+"
+`;
+
+exports[`SeqAndRec.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+const impl = utils.implSymbol;
+const convertURL = require(\\"./URL\\").convert;
+
+function SeqAndRec() {
+  iface.setup(this);
+}
+
+SeqAndRec.prototype.recordConsumer = function recordConsumer(rec) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  if (args[0] == null) {
+    args[0] = Object.create(null);
+  } else {
+    if (typeof args[0] !== \\"object\\") {
+      throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+    } else {
+      const result = Object.create(null);
+      const keys = Object.getOwnPropertyNames(args[0]);
+      for (let key of keys) {
+        const desc = Object.getOwnPropertyDescriptor(args[0], key);
+        if (desc && desc.enumerable) {
+          let typedKey = key;
+          let typedValue = args[0][key];
+          typedKey = conversions[\\"USVString\\"](typedKey, {
+            context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+          });
+          typedValue = conversions[\\"double\\"](typedValue, {
+            context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+          });
+          result[typedKey] = typedValue;
+        }
+      }
+      args[0] = result;
+    }
+  }
+  return this[impl].recordConsumer(...args);
+};
+
+SeqAndRec.prototype.recordConsumer2 = function recordConsumer2(rec) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  if (args[0] == null) {
+    args[0] = Object.create(null);
+  } else {
+    if (typeof args[0] !== \\"object\\") {
+      throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+    } else {
+      const result = Object.create(null);
+      const keys = Object.getOwnPropertyNames(args[0]);
+      for (let key of keys) {
+        const desc = Object.getOwnPropertyDescriptor(args[0], key);
+        if (desc && desc.enumerable) {
+          let typedKey = key;
+          let typedValue = args[0][key];
+          typedKey = conversions[\\"USVString\\"](typedKey, {
+            context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+          });
+          typedValue = convertURL(typedValue, {
+            context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+          });
+          result[typedKey] = typedValue;
+        }
+      }
+      args[0] = result;
+    }
+  }
+  return this[impl].recordConsumer2(...args);
+};
+
+SeqAndRec.prototype.sequenceConsumer = function sequenceConsumer(seq) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  if (typeof args[0] !== \\"object\\") {
+    throw new TypeError(
+      \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+    );
+  } else {
+    const V = [];
+    const tmp = args[0];
+    for (let nextItem of tmp) {
+      nextItem = conversions[\\"USVString\\"](nextItem, {
+        context: \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+      });
+      V.push(nextItem);
+    }
+    args[0] = V;
+  }
+  return this[impl].sequenceConsumer(...args);
+};
+
+SeqAndRec.prototype.sequenceConsumer2 = function sequenceConsumer2(seq) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  if (typeof args[0] !== \\"object\\") {
+    throw new TypeError(
+      \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+    );
+  } else {
+    const V = [];
+    const tmp = args[0];
+    for (let nextItem of tmp) {
+      nextItem = utils.tryImplForWrapper(nextItem);
+      V.push(nextItem);
+    }
+    args[0] = V;
+  }
+  return this[impl].sequenceConsumer2(...args);
+};
+
+SeqAndRec.prototype.frozenArrayConsumer = function frozenArrayConsumer(arr) {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  if (arguments.length < 1) {
+    throw new TypeError(
+      \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
+    );
+  }
+
+  const args = [];
+  for (let i = 0; i < arguments.length && i < 1; ++i) {
+    args[i] = arguments[i];
+  }
+  if (typeof args[0] !== \\"object\\") {
+    throw new TypeError(
+      \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+    );
+  } else {
+    const V = [];
+    const tmp = args[0];
+    for (let nextItem of tmp) {
+      nextItem = conversions[\\"double\\"](nextItem, {
+        context: \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+      });
+      V.push(nextItem);
+    }
+    args[0] = V;
+  }
+  args[0] = Object.freeze(args[0]);
+  return this[impl].frozenArrayConsumer(...args);
+};
+
+Object.defineProperty(SeqAndRec.prototype, Symbol.toStringTag, {
+  value: \\"SeqAndRec\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
+  },
+  create(constructorArgs, privateData) {
+    let obj = Object.create(SeqAndRec.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(SeqAndRec.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+  },
+  interface: SeqAndRec,
+  expose: {
+    Window: { SeqAndRec: SeqAndRec }
+  }
+};
+module.exports = iface;
+
+const Impl = require(\\"../implementations/SeqAndRec.js\\");
+"
+`;
+
 exports[`URL.idl 1`] = `
 "\\"use strict\\";
 
@@ -19,22 +434,28 @@ function URL(url) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 2; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
+  args[0] = conversions[\\"USVString\\"](args[0], { context: \\"Failed to construct 'URL': parameter 1\\" });
   if (args[1] !== undefined) {
-    args[1] = conversions[\\"USVString\\"](args[1]);
+    args[1] = conversions[\\"USVString\\"](args[1], { context: \\"Failed to construct 'URL': parameter 2\\" });
   }
 
   iface.setup(this, args);
 }
 
+URL.prototype.toJSON = function toJSON() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  return this[impl].toJSON();
+};
 Object.defineProperty(URL.prototype, \\"href\\", {
   get() {
     return this[impl].href;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
     this[impl].href = V;
   },
   enumerable: true,
@@ -61,7 +482,7 @@ Object.defineProperty(URL.prototype, \\"protocol\\", {
     return this[impl].protocol;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\" });
     this[impl].protocol = V;
   },
   enumerable: true,
@@ -73,7 +494,7 @@ Object.defineProperty(URL.prototype, \\"username\\", {
     return this[impl].username;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'username' property on 'URL': The provided value\\" });
     this[impl].username = V;
   },
   enumerable: true,
@@ -85,7 +506,7 @@ Object.defineProperty(URL.prototype, \\"password\\", {
     return this[impl].password;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'password' property on 'URL': The provided value\\" });
     this[impl].password = V;
   },
   enumerable: true,
@@ -97,7 +518,7 @@ Object.defineProperty(URL.prototype, \\"host\\", {
     return this[impl].host;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
     this[impl].host = V;
   },
   enumerable: true,
@@ -109,7 +530,7 @@ Object.defineProperty(URL.prototype, \\"hostname\\", {
     return this[impl].hostname;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\" });
     this[impl].hostname = V;
   },
   enumerable: true,
@@ -121,7 +542,7 @@ Object.defineProperty(URL.prototype, \\"port\\", {
     return this[impl].port;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
     this[impl].port = V;
   },
   enumerable: true,
@@ -133,7 +554,7 @@ Object.defineProperty(URL.prototype, \\"pathname\\", {
     return this[impl].pathname;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\" });
     this[impl].pathname = V;
   },
   enumerable: true,
@@ -145,7 +566,7 @@ Object.defineProperty(URL.prototype, \\"search\\", {
     return this[impl].search;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
     this[impl].search = V;
   },
   enumerable: true,
@@ -167,7 +588,7 @@ Object.defineProperty(URL.prototype, \\"hash\\", {
     return this[impl].hash;
   },
   set(V) {
-    V = conversions[\\"USVString\\"](V);
+    V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
     this[impl].hash = V;
   },
   enumerable: true,
@@ -210,6 +631,12 @@ const iface = {
       }
     }
     return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'URL'.\`);
   },
   create(constructorArgs, privateData) {
     let obj = Object.create(URL.prototype);
@@ -299,7 +726,12 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
 function URLSearchParams() {
   const args = [];
   for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
+  }
+  if (args[0] !== undefined) {
+    args[0] = utils.tryImplForWrapper(args[0]);
+  } else {
+    args[0] = \\"\\";
   }
 
   iface.setup(this, args);
@@ -319,10 +751,14 @@ URLSearchParams.prototype.append = function append(name, value) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 2; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
-  args[1] = conversions[\\"USVString\\"](args[1]);
+  args[0] = conversions[\\"USVString\\"](args[0], {
+    context: \\"Failed to execute 'append' on 'URLSearchParams': parameter 1\\"
+  });
+  args[1] = conversions[\\"USVString\\"](args[1], {
+    context: \\"Failed to execute 'append' on 'URLSearchParams': parameter 2\\"
+  });
   return this[impl].append(...args);
 };
 
@@ -338,9 +774,11 @@ URLSearchParams.prototype.delete = function _(name) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
+  args[0] = conversions[\\"USVString\\"](args[0], {
+    context: \\"Failed to execute 'delete' on 'URLSearchParams': parameter 1\\"
+  });
   return this[impl].delete(...args);
 };
 
@@ -356,9 +794,9 @@ URLSearchParams.prototype.get = function get(name) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
+  args[0] = conversions[\\"USVString\\"](args[0], { context: \\"Failed to execute 'get' on 'URLSearchParams': parameter 1\\" });
   return this[impl].get(...args);
 };
 
@@ -374,9 +812,11 @@ URLSearchParams.prototype.getAll = function getAll(name) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
+  args[0] = conversions[\\"USVString\\"](args[0], {
+    context: \\"Failed to execute 'getAll' on 'URLSearchParams': parameter 1\\"
+  });
   return utils.tryWrapperForImpl(this[impl].getAll(...args));
 };
 
@@ -392,9 +832,9 @@ URLSearchParams.prototype.has = function has(name) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
+  args[0] = conversions[\\"USVString\\"](args[0], { context: \\"Failed to execute 'has' on 'URLSearchParams': parameter 1\\" });
   return this[impl].has(...args);
 };
 
@@ -410,11 +850,18 @@ URLSearchParams.prototype.set = function set(name, value) {
 
   const args = [];
   for (let i = 0; i < arguments.length && i < 2; ++i) {
-    args[i] = utils.tryImplForWrapper(arguments[i]);
+    args[i] = arguments[i];
   }
-  args[0] = conversions[\\"USVString\\"](args[0]);
-  args[1] = conversions[\\"USVString\\"](args[1]);
+  args[0] = conversions[\\"USVString\\"](args[0], { context: \\"Failed to execute 'set' on 'URLSearchParams': parameter 1\\" });
+  args[1] = conversions[\\"USVString\\"](args[1], { context: \\"Failed to execute 'set' on 'URLSearchParams': parameter 2\\" });
   return this[impl].set(...args);
+};
+
+URLSearchParams.prototype.sort = function sort() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  return this[impl].sort();
 };
 
 URLSearchParams.prototype[Symbol.iterator] = function entries() {
@@ -501,6 +948,12 @@ const iface = {
       }
     }
     return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'URLSearchParams'.\`);
   },
   createDefaultIterator(target, kind) {
     const iterator = Object.create(IteratorPrototype);
@@ -596,6 +1049,12 @@ const iface = {
       }
     }
     return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
   },
   create(constructorArgs, privateData) {
     let obj = Object.create(ZeroArgConstructor.prototype);
