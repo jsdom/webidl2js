@@ -163,30 +163,26 @@ SeqAndRec.prototype.recordConsumer = function recordConsumer(rec) {
   for (let i = 0; i < arguments.length && i < 1; ++i) {
     args[i] = arguments[i];
   }
-  if (args[0] == null) {
-    args[0] = Object.create(null);
+  if (args[0] === null || (typeof args[0] !== \\"object\\" && typeof args[0] !== \\"function\\")) {
+    throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
   } else {
-    if (typeof args[0] !== \\"object\\") {
-      throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
-    } else {
-      const result = Object.create(null);
-      const keys = Object.getOwnPropertyNames(args[0]);
-      for (let key of keys) {
-        const desc = Object.getOwnPropertyDescriptor(args[0], key);
-        if (desc && desc.enumerable) {
-          let typedKey = key;
-          let typedValue = args[0][key];
-          typedKey = conversions[\\"USVString\\"](typedKey, {
-            context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
-          });
-          typedValue = conversions[\\"double\\"](typedValue, {
-            context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
-          });
-          result[typedKey] = typedValue;
-        }
+    const result = Object.create(null);
+    const keys = Object.getOwnPropertyNames(args[0]);
+    for (let key of keys) {
+      const desc = Object.getOwnPropertyDescriptor(args[0], key);
+      if (desc && desc.enumerable) {
+        let typedKey = key;
+        let typedValue = args[0][key];
+        typedKey = conversions[\\"USVString\\"](typedKey, {
+          context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+        });
+        typedValue = conversions[\\"double\\"](typedValue, {
+          context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+        });
+        result[typedKey] = typedValue;
       }
-      args[0] = result;
     }
+    args[0] = result;
   }
   return this[impl].recordConsumer(...args);
 };
@@ -207,30 +203,26 @@ SeqAndRec.prototype.recordConsumer2 = function recordConsumer2(rec) {
   for (let i = 0; i < arguments.length && i < 1; ++i) {
     args[i] = arguments[i];
   }
-  if (args[0] == null) {
-    args[0] = Object.create(null);
+  if (args[0] === null || (typeof args[0] !== \\"object\\" && typeof args[0] !== \\"function\\")) {
+    throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
   } else {
-    if (typeof args[0] !== \\"object\\") {
-      throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
-    } else {
-      const result = Object.create(null);
-      const keys = Object.getOwnPropertyNames(args[0]);
-      for (let key of keys) {
-        const desc = Object.getOwnPropertyDescriptor(args[0], key);
-        if (desc && desc.enumerable) {
-          let typedKey = key;
-          let typedValue = args[0][key];
-          typedKey = conversions[\\"USVString\\"](typedKey, {
-            context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
-          });
-          typedValue = convertURL(typedValue, {
-            context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
-          });
-          result[typedKey] = typedValue;
-        }
+    const result = Object.create(null);
+    const keys = Object.getOwnPropertyNames(args[0]);
+    for (let key of keys) {
+      const desc = Object.getOwnPropertyDescriptor(args[0], key);
+      if (desc && desc.enumerable) {
+        let typedKey = key;
+        let typedValue = args[0][key];
+        typedKey = conversions[\\"USVString\\"](typedKey, {
+          context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+        });
+        typedValue = convertURL(typedValue, {
+          context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+        });
+        result[typedKey] = typedValue;
       }
-      args[0] = result;
     }
+    args[0] = result;
   }
   return this[impl].recordConsumer2(...args);
 };
@@ -251,7 +243,7 @@ SeqAndRec.prototype.sequenceConsumer = function sequenceConsumer(seq) {
   for (let i = 0; i < arguments.length && i < 1; ++i) {
     args[i] = arguments[i];
   }
-  if (typeof args[0] !== \\"object\\") {
+  if (args[0] === null || (typeof args[0] !== \\"object\\" && typeof args[0] !== \\"function\\")) {
     throw new TypeError(
       \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
     );
@@ -285,7 +277,7 @@ SeqAndRec.prototype.sequenceConsumer2 = function sequenceConsumer2(seq) {
   for (let i = 0; i < arguments.length && i < 1; ++i) {
     args[i] = arguments[i];
   }
-  if (typeof args[0] !== \\"object\\") {
+  if (args[0] === null || (typeof args[0] !== \\"object\\" && typeof args[0] !== \\"function\\")) {
     throw new TypeError(
       \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
     );
@@ -317,7 +309,7 @@ SeqAndRec.prototype.frozenArrayConsumer = function frozenArrayConsumer(arr) {
   for (let i = 0; i < arguments.length && i < 1; ++i) {
     args[i] = arguments[i];
   }
-  if (typeof args[0] !== \\"object\\") {
+  if (args[0] === null || (typeof args[0] !== \\"object\\" && typeof args[0] !== \\"function\\")) {
     throw new TypeError(
       \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
     );
