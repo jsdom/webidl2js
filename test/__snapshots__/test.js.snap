@@ -167,8 +167,7 @@ SeqAndRec.prototype.recordConsumer = function recordConsumer(rec) {
     throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
   } else {
     const result = Object.create(null);
-    const keys = Object.getOwnPropertyNames(args[0]);
-    for (let key of keys) {
+    for (const key of Reflect.ownKeys(args[0])) {
       const desc = Object.getOwnPropertyDescriptor(args[0], key);
       if (desc && desc.enumerable) {
         let typedKey = key;
@@ -207,8 +206,7 @@ SeqAndRec.prototype.recordConsumer2 = function recordConsumer2(rec) {
     throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
   } else {
     const result = Object.create(null);
-    const keys = Object.getOwnPropertyNames(args[0]);
-    for (let key of keys) {
+    for (const key of Reflect.ownKeys(args[0])) {
       const desc = Object.getOwnPropertyDescriptor(args[0], key);
       if (desc && desc.enumerable) {
         let typedKey = key;
