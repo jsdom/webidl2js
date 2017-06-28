@@ -669,12 +669,14 @@ TypedefsAndUnions.prototype.arrayBufferViewOrURLMapConsumer = function arrayBuff
             let typedKey = key;
             let typedValue = args[0][key];
             typedKey = conversions[\\"USVString\\"](typedKey, {
-              context: \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
+              context:
+                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
                 \\" record\\" +
                 \\"'s key\\"
             });
             typedValue = convertURL(typedValue, {
-              context: \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
+              context:
+                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
                 \\" record\\" +
                 \\"'s value\\"
             });
@@ -1165,10 +1167,8 @@ function URLSearchParams() {
               const tmp = nextItem;
               for (let nextItem of tmp) {
                 nextItem = conversions[\\"USVString\\"](nextItem, {
-                  context: \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                    \\" sequence\\" +
-                    \\"'s element\\" +
-                    \\"'s element\\"
+                  context:
+                    \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\"'s element\\" + \\"'s element\\"
                 });
                 V.push(nextItem);
               }
