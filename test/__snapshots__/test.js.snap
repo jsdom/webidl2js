@@ -722,7 +722,7 @@ TypedefsAndUnions.prototype.arrayBufferViewDupConsumer = function arrayBufferVie
 };
 Object.defineProperty(TypedefsAndUnions.prototype, \\"buf\\", {
   get() {
-    return utils.tryWrapperForImpl(this[impl].buf);
+    return utils.tryWrapperForImpl(this[impl][\\"buf\\"]);
   },
   set(V) {
     if (V instanceof ArrayBuffer) {
@@ -732,7 +732,7 @@ Object.defineProperty(TypedefsAndUnions.prototype, \\"buf\\", {
         \\"Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value\\" + \\" is not of any supported type.\\"
       );
     }
-    this[impl].buf = V;
+    this[impl][\\"buf\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -740,13 +740,13 @@ Object.defineProperty(TypedefsAndUnions.prototype, \\"buf\\", {
 
 Object.defineProperty(TypedefsAndUnions.prototype, \\"time\\", {
   get() {
-    return this[impl].time;
+    return this[impl][\\"time\\"];
   },
   set(V) {
     V = conversions[\\"unsigned long long\\"](V, {
       context: \\"Failed to set the 'time' property on 'TypedefsAndUnions': The provided value\\"
     });
-    this[impl].time = V;
+    this[impl][\\"time\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -868,11 +868,11 @@ URL.prototype.toJSON = function toJSON() {
 };
 Object.defineProperty(URL.prototype, \\"href\\", {
   get() {
-    return this[impl].href;
+    return this[impl][\\"href\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
-    this[impl].href = V;
+    this[impl][\\"href\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -882,12 +882,12 @@ URL.prototype.toString = function toString() {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
   }
-  return this[impl].href;
+  return this[impl][\\"href\\"];
 };
 
 Object.defineProperty(URL.prototype, \\"origin\\", {
   get() {
-    return this[impl].origin;
+    return this[impl][\\"origin\\"];
   },
   enumerable: true,
   configurable: true
@@ -895,11 +895,11 @@ Object.defineProperty(URL.prototype, \\"origin\\", {
 
 Object.defineProperty(URL.prototype, \\"protocol\\", {
   get() {
-    return this[impl].protocol;
+    return this[impl][\\"protocol\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\" });
-    this[impl].protocol = V;
+    this[impl][\\"protocol\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -907,11 +907,11 @@ Object.defineProperty(URL.prototype, \\"protocol\\", {
 
 Object.defineProperty(URL.prototype, \\"username\\", {
   get() {
-    return this[impl].username;
+    return this[impl][\\"username\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'username' property on 'URL': The provided value\\" });
-    this[impl].username = V;
+    this[impl][\\"username\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -919,11 +919,11 @@ Object.defineProperty(URL.prototype, \\"username\\", {
 
 Object.defineProperty(URL.prototype, \\"password\\", {
   get() {
-    return this[impl].password;
+    return this[impl][\\"password\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'password' property on 'URL': The provided value\\" });
-    this[impl].password = V;
+    this[impl][\\"password\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -931,11 +931,11 @@ Object.defineProperty(URL.prototype, \\"password\\", {
 
 Object.defineProperty(URL.prototype, \\"host\\", {
   get() {
-    return this[impl].host;
+    return this[impl][\\"host\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
-    this[impl].host = V;
+    this[impl][\\"host\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -943,11 +943,11 @@ Object.defineProperty(URL.prototype, \\"host\\", {
 
 Object.defineProperty(URL.prototype, \\"hostname\\", {
   get() {
-    return this[impl].hostname;
+    return this[impl][\\"hostname\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\" });
-    this[impl].hostname = V;
+    this[impl][\\"hostname\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -955,11 +955,11 @@ Object.defineProperty(URL.prototype, \\"hostname\\", {
 
 Object.defineProperty(URL.prototype, \\"port\\", {
   get() {
-    return this[impl].port;
+    return this[impl][\\"port\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
-    this[impl].port = V;
+    this[impl][\\"port\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -967,11 +967,11 @@ Object.defineProperty(URL.prototype, \\"port\\", {
 
 Object.defineProperty(URL.prototype, \\"pathname\\", {
   get() {
-    return this[impl].pathname;
+    return this[impl][\\"pathname\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\" });
-    this[impl].pathname = V;
+    this[impl][\\"pathname\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -979,11 +979,11 @@ Object.defineProperty(URL.prototype, \\"pathname\\", {
 
 Object.defineProperty(URL.prototype, \\"search\\", {
   get() {
-    return this[impl].search;
+    return this[impl][\\"search\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
-    this[impl].search = V;
+    this[impl][\\"search\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -992,7 +992,7 @@ Object.defineProperty(URL.prototype, \\"search\\", {
 Object.defineProperty(URL.prototype, \\"searchParams\\", {
   get() {
     return utils.getSameObject(this, \\"searchParams\\", () => {
-      return utils.tryWrapperForImpl(this[impl].searchParams);
+      return utils.tryWrapperForImpl(this[impl][\\"searchParams\\"]);
     });
   },
   enumerable: true,
@@ -1001,11 +1001,11 @@ Object.defineProperty(URL.prototype, \\"searchParams\\", {
 
 Object.defineProperty(URL.prototype, \\"hash\\", {
   get() {
-    return this[impl].hash;
+    return this[impl][\\"hash\\"];
   },
   set(V) {
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
-    this[impl].hash = V;
+    this[impl][\\"hash\\"] = V;
   },
   enumerable: true,
   configurable: true
@@ -1542,13 +1542,13 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperty(obj, \\"href\\", {
       get() {
-        return obj[impl].href;
+        return obj[impl][\\"href\\"];
       },
       set(V) {
         V = conversions[\\"USVString\\"](V, {
           context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
         });
-        obj[impl].href = V;
+        obj[impl][\\"href\\"] = V;
       },
       enumerable: true,
       configurable: false
@@ -1562,13 +1562,13 @@ const iface = {
         if (!this || !module.exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
-        return obj[impl].href;
+        return obj[impl][\\"href\\"];
       }
     });
 
     Object.defineProperty(obj, \\"origin\\", {
       get() {
-        return obj[impl].origin;
+        return obj[impl][\\"origin\\"];
       },
       enumerable: true,
       configurable: false
@@ -1576,13 +1576,13 @@ const iface = {
 
     Object.defineProperty(obj, \\"protocol\\", {
       get() {
-        return obj[impl].protocol;
+        return obj[impl][\\"protocol\\"];
       },
       set(V) {
         V = conversions[\\"USVString\\"](V, {
           context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
         });
-        obj[impl].protocol = V;
+        obj[impl][\\"protocol\\"] = V;
       },
       enumerable: true,
       configurable: false
