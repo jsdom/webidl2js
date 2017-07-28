@@ -3,6 +3,10 @@ node_js:
   - 6
   - stable
 
+script:
+  - npm test
+  - npm run lint
+
 branches:
   only:
     - master

@@ -11,11 +11,13 @@
     "webidl2": "^4.0.0"
   },
   "devDependencies": {
+    "eslint": "^4.3.0",
     "jest": "^20.0.4"
   },
   "scripts": {
     "test": "jest",
-    "update-snapshots": "jest --updateSnapshot"
+    "update-snapshots": "jest --updateSnapshot",
+    "lint": "eslint ."
   },
   "author": "Sebastian Mayr <npm@smayr.name>",
   "license": "MIT"
