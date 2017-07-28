@@ -15,7 +15,7 @@ module.exports = {
       const key = \\"boolWithDefault\\";
       let value = obj === undefined || obj === null ? undefined : obj[key];
       if (value !== undefined) {
-        value = conversions[\\"boolean\\"](value, { context: \`\${context} has member boolWithDefault that\` });
+        value = conversions[\\"boolean\\"](value, { context: context + \\" has member boolWithDefault that\\" });
 
         ret[key] = value;
       } else {
@@ -27,7 +27,7 @@ module.exports = {
       const key = \\"requiredInterface\\";
       let value = obj === undefined || obj === null ? undefined : obj[key];
       if (value !== undefined) {
-        value = convertURL(value, { context: \`\${context} has member requiredInterface that\` });
+        value = convertURL(value, { context: context + \\" has member requiredInterface that\\" });
 
         ret[key] = value;
       } else {
@@ -40,12 +40,12 @@ module.exports = {
       let value = obj === undefined || obj === null ? undefined : obj[key];
       if (value !== undefined) {
         if (!utils.isObject(value)) {
-          throw new TypeError(\`\${context} has member seq that\` + \\" is not an iterable object.\\");
+          throw new TypeError(context + \\" has member seq that\\" + \\" is not an iterable object.\\");
         } else {
           const V = [];
           const tmp = value;
           for (let nextItem of tmp) {
-            nextItem = convertURLSearchParams(nextItem, { context: \`\${context} has member seq that\` + \\"'s element\\" });
+            nextItem = convertURLSearchParams(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
 
             V.push(nextItem);
           }
@@ -60,7 +60,7 @@ module.exports = {
       const key = \\"vanillaString\\";
       let value = obj === undefined || obj === null ? undefined : obj[key];
       if (value !== undefined) {
-        value = conversions[\\"DOMString\\"](value, { context: \`\${context} has member vanillaString that\` });
+        value = conversions[\\"DOMString\\"](value, { context: context + \\" has member vanillaString that\\" });
 
         ret[key] = value;
       }
@@ -238,7 +238,8 @@ PromiseTypes.prototype.voidPromiseConsumer = function voidPromiseConsumer(p) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
+      \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -261,7 +262,8 @@ PromiseTypes.prototype.promiseConsumer = function promiseConsumer(p) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
+      \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -386,7 +388,8 @@ SeqAndRec.prototype.recordConsumer = function recordConsumer(rec) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+      \\"Failed to execute 'recordConsumer' on 'SeqAndRec': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -431,7 +434,8 @@ SeqAndRec.prototype.recordConsumer2 = function recordConsumer2(rec) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
+      \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -476,7 +480,8 @@ SeqAndRec.prototype.sequenceConsumer = function sequenceConsumer(seq) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+      \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -514,7 +519,8 @@ SeqAndRec.prototype.sequenceConsumer2 = function sequenceConsumer2(seq) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
+      \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -550,7 +556,8 @@ SeqAndRec.prototype.frozenArrayConsumer = function frozenArrayConsumer(arr) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
+      \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1105,7 +1112,8 @@ TypedefsAndUnions.prototype.numOrStrConsumer = function numOrStrConsumer(a) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1136,7 +1144,8 @@ TypedefsAndUnions.prototype.numOrStrOrNullConsumer = function numOrStrOrNullCons
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1173,7 +1182,8 @@ TypedefsAndUnions.prototype.numOrStrOrURLOrNullConsumer = function numOrStrOrURL
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1212,7 +1222,8 @@ TypedefsAndUnions.prototype.urlMapInnerConsumer = function urlMapInnerConsumer(a
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1259,7 +1270,8 @@ TypedefsAndUnions.prototype.urlMapConsumer = function urlMapConsumer(a) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1309,7 +1321,8 @@ TypedefsAndUnions.prototype.bufferSourceOrURLConsumer = function bufferSourceOrU
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1340,7 +1353,8 @@ TypedefsAndUnions.prototype.arrayBufferViewOrURLMapConsumer = function arrayBuff
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1406,7 +1420,8 @@ TypedefsAndUnions.prototype.arrayBufferViewDupConsumer = function arrayBufferVie
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
+      \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 \\" +
+        \\"argument required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -1557,11 +1572,13 @@ const impl = utils.implSymbol;
 function URL(url) {
   if (!new.target) {
     throw new TypeError(
-      \\"Failed to construct 'URL'. Please use the 'new' operator; this constructor cannot be called as a function.\\"
+      \\"Failed to construct 'URL'. Please use the 'new' operator; this constructor \\" + \\"cannot be called as a function.\\"
     );
   }
   if (arguments.length < 1) {
-    throw new TypeError(\\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\");
+    throw new TypeError(
+      \\"Failed to construct 'URL': 1 \\" + \\"argument required, but only \\" + arguments.length + \\" present.\\"
+    );
   }
 
   const args = [];
@@ -1980,7 +1997,8 @@ URLSearchParams.prototype.append = function append(name, value) {
 
   if (arguments.length < 2) {
     throw new TypeError(
-      \\"Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only \\" +
+      \\"Failed to execute 'append' on 'URLSearchParams': 2 \\" +
+        \\"arguments required, but only \\" +
         arguments.length +
         \\" present.\\"
     );
@@ -2009,7 +2027,10 @@ URLSearchParams.prototype.delete = function _(name) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+      \\"Failed to execute 'delete' on 'URLSearchParams': 1 \\" +
+        \\"argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
     );
   }
 
@@ -2032,7 +2053,10 @@ URLSearchParams.prototype.get = function get(name) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+      \\"Failed to execute 'get' on 'URLSearchParams': 1 \\" +
+        \\"argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
     );
   }
 
@@ -2053,7 +2077,10 @@ URLSearchParams.prototype.getAll = function getAll(name) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+      \\"Failed to execute 'getAll' on 'URLSearchParams': 1 \\" +
+        \\"argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
     );
   }
 
@@ -2076,7 +2103,10 @@ URLSearchParams.prototype.has = function has(name) {
 
   if (arguments.length < 1) {
     throw new TypeError(
-      \\"Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+      \\"Failed to execute 'has' on 'URLSearchParams': 1 \\" +
+        \\"argument required, but only \\" +
+        arguments.length +
+        \\" present.\\"
     );
   }
 
@@ -2097,7 +2127,10 @@ URLSearchParams.prototype.set = function set(name, value) {
 
   if (arguments.length < 2) {
     throw new TypeError(
-      \\"Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only \\" + arguments.length + \\" present.\\"
+      \\"Failed to execute 'set' on 'URLSearchParams': 2 \\" +
+        \\"arguments required, but only \\" +
+        arguments.length +
+        \\" present.\\"
     );
   }
 
@@ -2149,11 +2182,13 @@ URLSearchParams.prototype.forEach = function forEach(callback) {
     throw new TypeError(\\"Illegal invocation\\");
   }
   if (arguments.length < 1) {
-    throw new TypeError(\\"Failed to execute 'forEach' on 'URLSearchParams': 1 argument required, but only 0 present.\\");
+    throw new TypeError(
+      \\"Failed to execute 'forEach' on 'URLSearchParams': 1 argument required, \\" + \\"but only 0 present.\\"
+    );
   }
   if (typeof callback !== \\"function\\") {
     throw new TypeError(
-      \\"Failed to execute 'forEach' on 'URLSearchParams': The callback provided as parameter 1 is not a function.\\"
+      \\"Failed to execute 'forEach' on 'URLSearchParams': The callback provided as parameter \\" + \\"1 is not a function.\\"
     );
   }
   const thisArg = arguments[1];
@@ -2399,7 +2434,10 @@ const iface = {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'assign' on 'Unforgeable': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \\"Failed to execute 'assign' on 'Unforgeable': 1 \\" +
+            \\"argument required, but only \\" +
+            arguments.length +
+            \\" present.\\"
         );
       }
 
