@@ -123,6 +123,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: PromiseTypes,
   expose: {
@@ -393,6 +396,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: SeqAndRec,
   expose: {
@@ -819,6 +825,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: TypedefsAndUnions,
   expose: {
@@ -1078,6 +1087,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: URL,
   expose: {
@@ -1462,6 +1474,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: URLSearchParams,
   expose: {
@@ -1621,6 +1636,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: Unforgeable,
   expose: {
@@ -1711,6 +1729,9 @@ const iface = {
       configurable: true
     });
     obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
   },
   interface: ZeroArgConstructor,
   expose: {
