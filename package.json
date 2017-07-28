@@ -6,9 +6,9 @@
   "dependencies": {
     "co": "^4.6.0",
     "pn": "^1.0.0",
-    "prettier": "^1.5.2",
+    "prettier": "^1.5.3",
     "webidl-conversions": "^4.0.0",
-    "webidl2": "^4.0.0"
+    "webidl2": "^4.1.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
