@@ -1,5 +1,224 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Dictionary.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const convertURL = require(\\"./URL\\").convert;
+const convertURLSearchParams = require(\\"./URLSearchParams\\").convert;
+
+module.exports = {
+  convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
+    {
+      const key = \\"boolWithDefault\\";
+      let value = obj === undefined || obj === null ? undefined : obj[key];
+      if (value !== undefined) {
+        value = conversions[\\"boolean\\"](value, { context: \`\${context} has member boolWithDefault that\` });
+
+        ret[key] = value;
+      } else {
+        ret[key] = false;
+      }
+    }
+
+    {
+      const key = \\"requiredInterface\\";
+      let value = obj === undefined || obj === null ? undefined : obj[key];
+      if (value !== undefined) {
+        value = convertURL(value, { context: \`\${context} has member requiredInterface that\` });
+
+        ret[key] = value;
+      } else {
+        throw new TypeError(\\"requiredInterface is required in 'Dictionary'\\");
+      }
+    }
+
+    {
+      const key = \\"seq\\";
+      let value = obj === undefined || obj === null ? undefined : obj[key];
+      if (value !== undefined) {
+        if (!utils.isObject(value)) {
+          throw new TypeError(\`\${context} has member seq that\` + \\" is not an iterable object.\\");
+        } else {
+          const V = [];
+          const tmp = value;
+          for (let nextItem of tmp) {
+            nextItem = convertURLSearchParams(nextItem, { context: \`\${context} has member seq that\` + \\"'s element\\" });
+
+            V.push(nextItem);
+          }
+          value = V;
+        }
+
+        ret[key] = value;
+      }
+    }
+
+    {
+      const key = \\"vanillaString\\";
+      let value = obj === undefined || obj === null ? undefined : obj[key];
+      if (value !== undefined) {
+        value = conversions[\\"DOMString\\"](value, { context: \`\${context} has member vanillaString that\` });
+
+        ret[key] = value;
+      }
+    }
+  },
+
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (obj !== undefined && typeof obj !== \\"object\\" && typeof obj !== \\"function\\") {
+      throw new TypeError(\`\${context} is not an object.\`);
+    }
+
+    const ret = Object.create(null);
+    module.exports.convertInherit(obj, ret, { context });
+    return ret;
+  }
+};
+"
+`;
+
+exports[`Factory.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+module.exports = {
+  createInterface: function(defaultPrivateData = {}) {
+    function Factory() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    Factory.prototype.method = function method() {
+      if (!this || !module.exports.is(this)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return this[impl].method();
+    };
+
+    Object.defineProperty(Factory.prototype, \\"attribute\\", {
+      get() {
+        return this[impl][\\"attribute\\"];
+      },
+
+      set(V) {
+        V = conversions[\\"double\\"](V, {
+          context: \\"Failed to set the 'attribute' property on 'Factory': The provided value\\"
+        });
+
+        this[impl][\\"attribute\\"] = V;
+      },
+
+      enumerable: true,
+      configurable: true
+    });
+
+    Object.defineProperty(Factory, \\"constant\\", {
+      value: 42,
+      enumerable: true
+    });
+    Object.defineProperty(Factory.prototype, \\"constant\\", {
+      value: 42,
+      enumerable: true
+    });
+
+    Object.defineProperty(Factory.prototype, Symbol.toStringTag, {
+      value: \\"Factory\\",
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+
+    const iface = {
+      create(constructorArgs, privateData) {
+        let obj = Object.create(Factory.prototype);
+        this.setup(obj, constructorArgs, privateData);
+        return obj;
+      },
+      createImpl(constructorArgs, privateData) {
+        let obj = Object.create(Factory.prototype);
+        this.setup(obj, constructorArgs, privateData);
+        return utils.implForWrapper(obj);
+      },
+      _internalSetup(obj) {},
+      setup(obj, constructorArgs, privateData) {
+        if (!privateData) privateData = {};
+
+        for (var prop in defaultPrivateData) {
+          if (!(prop in privateData)) {
+            privateData[prop] = defaultPrivateData[prop];
+          }
+        }
+
+        privateData.wrapper = obj;
+
+        this._internalSetup(obj);
+        Object.defineProperty(obj, impl, {
+          value: new Impl.implementation(constructorArgs, privateData),
+          writable: false,
+          enumerable: false,
+          configurable: true
+        });
+        obj[impl][utils.wrapperSymbol] = obj;
+        if (Impl.init) {
+          Impl.init(obj[impl], privateData);
+        }
+      },
+      interface: Factory,
+      expose: {
+        Window: { Factory }
+      }
+    }; // iface
+    return iface;
+  }, // createInterface
+
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'Factory'.\`);
+  }
+}; // module.exports
+
+const Impl = require(\\"../implementations/Factory.js\\");
+"
+`;
+
 exports[`PromiseTypes.idl 1`] = `
 "\\"use strict\\";
 
@@ -442,6 +661,426 @@ const iface = {
 module.exports = iface;
 
 const Impl = require(\\"../implementations/SeqAndRec.js\\");
+"
+`;
+
+exports[`StringifierAttribute.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function StringifierAttribute() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+Object.defineProperty(StringifierAttribute.prototype, \\"attr\\", {
+  get() {
+    return this[impl][\\"attr\\"];
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+StringifierAttribute.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+  return this[impl][\\"attr\\"];
+};
+
+Object.defineProperty(StringifierAttribute.prototype, Symbol.toStringTag, {
+  value: \\"StringifierAttribute\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(StringifierAttribute.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(StringifierAttribute.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+  },
+  interface: StringifierAttribute,
+  expose: {
+    Window: { StringifierAttribute }
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/StringifierAttribute.js\\");
+"
+`;
+
+exports[`StringifierDefaultOperation.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function StringifierDefaultOperation() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+StringifierDefaultOperation.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].toString();
+};
+
+Object.defineProperty(StringifierDefaultOperation.prototype, Symbol.toStringTag, {
+  value: \\"StringifierDefaultOperation\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(StringifierDefaultOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(StringifierDefaultOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+  },
+  interface: StringifierDefaultOperation,
+  expose: {
+    Window: { StringifierDefaultOperation }
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
+"
+`;
+
+exports[`StringifierNamedOperation.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function StringifierNamedOperation() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+StringifierNamedOperation.prototype.operation = function operation() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].operation();
+};
+
+Object.defineProperty(StringifierNamedOperation.prototype, Symbol.toStringTag, {
+  value: \\"StringifierNamedOperation\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(StringifierNamedOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(StringifierNamedOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+  },
+  interface: StringifierNamedOperation,
+  expose: {
+    Window: { StringifierNamedOperation }
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
+"
+`;
+
+exports[`StringifierOperation.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function StringifierOperation() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+StringifierOperation.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].toString();
+};
+
+Object.defineProperty(StringifierOperation.prototype, Symbol.toStringTag, {
+  value: \\"StringifierOperation\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(StringifierOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(StringifierOperation.prototype);
+    this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+  },
+  interface: StringifierOperation,
+  expose: {
+    Window: { StringifierOperation }
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/StringifierOperation.js\\");
 "
 `;
 
