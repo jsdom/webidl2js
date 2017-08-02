@@ -153,12 +153,12 @@ module.exports = {
     const iface = {
       create(constructorArgs, privateData) {
         let obj = Object.create(Factory.prototype);
-        this.setup(obj, constructorArgs, privateData);
+        obj = this.setup(obj, constructorArgs, privateData);
         return obj;
       },
       createImpl(constructorArgs, privateData) {
         let obj = Object.create(Factory.prototype);
-        this.setup(obj, constructorArgs, privateData);
+        obj = this.setup(obj, constructorArgs, privateData);
         return utils.implForWrapper(obj);
       },
       _internalSetup(obj) {},
@@ -184,6 +184,7 @@ module.exports = {
         if (Impl.init) {
           Impl.init(obj[impl], privateData);
         }
+        return obj;
       },
       interface: Factory,
       expose: {
@@ -353,12 +354,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(PromiseTypes.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(PromiseTypes.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -378,6 +379,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: PromiseTypes,
   expose: {
@@ -663,12 +665,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(SeqAndRec.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(SeqAndRec.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -688,6 +690,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: SeqAndRec,
   expose: {
@@ -785,12 +788,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(StringifierAttribute.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(StringifierAttribute.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -810,6 +813,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: StringifierAttribute,
   expose: {
@@ -895,12 +899,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(StringifierDefaultOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(StringifierDefaultOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -920,6 +924,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: StringifierDefaultOperation,
   expose: {
@@ -1005,12 +1010,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(StringifierNamedOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(StringifierNamedOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -1030,6 +1035,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: StringifierNamedOperation,
   expose: {
@@ -1115,12 +1121,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(StringifierOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(StringifierOperation.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -1140,6 +1146,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: StringifierOperation,
   expose: {
@@ -1608,12 +1615,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(TypedefsAndUnions.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(TypedefsAndUnions.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -1633,6 +1640,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: TypedefsAndUnions,
   expose: {
@@ -2005,12 +2013,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(URL.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(URL.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -2030,6 +2038,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: URL,
   expose: {
@@ -2153,12 +2162,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(URLList.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(URLList.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -2178,6 +2187,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: URLList,
   expose: {
@@ -2603,12 +2613,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(URLSearchParams.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(URLSearchParams.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -2628,6 +2638,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: URLSearchParams,
   expose: {
@@ -2706,12 +2717,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(Unforgeable.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(Unforgeable.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {
@@ -2832,6 +2843,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: Unforgeable,
   expose: {
@@ -2909,12 +2921,12 @@ const iface = {
 
   create(constructorArgs, privateData) {
     let obj = Object.create(ZeroArgConstructor.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
     let obj = Object.create(ZeroArgConstructor.prototype);
-    this.setup(obj, constructorArgs, privateData);
+    obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
@@ -2934,6 +2946,7 @@ const iface = {
     if (Impl.init) {
       Impl.init(obj[impl], privateData);
     }
+    return obj;
   },
   interface: ZeroArgConstructor,
   expose: {
