@@ -6,8 +6,8 @@ exports[`Dictionary.idl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL\\").convert;
-const convertURLSearchParams = require(\\"./URLSearchParams\\").convert;
+const convertURL = require(\\"./URL.js\\").convert;
+const convertURLSearchParams = require(\\"./URLSearchParams.js\\").convert;
 
 module.exports = {
   convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
@@ -396,7 +396,7 @@ exports[`SeqAndRec.idl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL\\").convert;
+const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 
 function SeqAndRec() {
@@ -1158,8 +1158,8 @@ exports[`TypedefsAndUnions.idl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const isURL = require(\\"./URL\\").is;
-const convertURL = require(\\"./URL\\").convert;
+const isURL = require(\\"./URL.js\\").is;
+const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 
 function TypedefsAndUnions() {
