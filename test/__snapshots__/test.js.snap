@@ -2188,7 +2188,7 @@ URLSearchParams.prototype.forEach = function forEach(callback) {
   }
   if (typeof callback !== \\"function\\") {
     throw new TypeError(
-      \\"Failed to execute 'forEach' on 'URLSearchParams': The callback provided as parameter \\" + \\"1 is not a function.\\"
+      \\"Failed to execute 'forEach' on 'URLSearchParams': The callback provided \\" + \\"as parameter 1 is not a function.\\"
     );
   }
   const thisArg = arguments[1];
