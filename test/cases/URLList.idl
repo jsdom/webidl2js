@@ -1,0 +1,6 @@
+// Adapted from NodeList
+interface URLList {
+  getter URL? item(unsigned long index);
+  readonly attribute unsigned long length;
+  iterable<URL>;
+};
