@@ -1,0 +1,5 @@
+interface UnforgeableMap {
+  [Unforgeable] readonly attribute DOMString a;
+  getter DOMString (DOMString x);
+  setter DOMString (DOMString x);
+};
