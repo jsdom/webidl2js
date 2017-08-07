@@ -111,10 +111,18 @@ module.exports = {
 
     Object.defineProperty(Factory.prototype, \\"attribute\\", {
       get() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         return this[impl][\\"attribute\\"];
       },
 
       set(V) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         V = conversions[\\"double\\"](V, {
           context: \\"Failed to set the 'attribute' property on 'Factory': The provided value\\"
         });
@@ -713,6 +721,10 @@ Object.defineProperty(StringifierAttribute, \\"prototype\\", {
 
 Object.defineProperty(StringifierAttribute.prototype, \\"attr\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"attr\\"];
   },
 
@@ -1499,10 +1511,18 @@ TypedefsAndUnions.prototype.arrayBufferViewDupConsumer = function arrayBufferVie
 
 Object.defineProperty(TypedefsAndUnions.prototype, \\"buf\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return utils.tryWrapperForImpl(this[impl][\\"buf\\"]);
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     if (V instanceof ArrayBuffer) {
     } else if (ArrayBuffer.isView(V) && (V instanceof Uint8Array || V instanceof Uint16Array)) {
     } else {
@@ -1519,10 +1539,18 @@ Object.defineProperty(TypedefsAndUnions.prototype, \\"buf\\", {
 
 Object.defineProperty(TypedefsAndUnions.prototype, \\"time\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"time\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"unsigned long long\\"](V, {
       context: \\"Failed to set the 'time' property on 'TypedefsAndUnions': The provided value\\"
     });
@@ -1668,10 +1696,18 @@ URL.prototype.toJSON = function toJSON() {
 
 Object.defineProperty(URL.prototype, \\"href\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"href\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
 
     this[impl][\\"href\\"] = V;
@@ -1690,6 +1726,10 @@ URL.prototype.toString = function toString() {
 
 Object.defineProperty(URL.prototype, \\"origin\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"origin\\"];
   },
 
@@ -1699,10 +1739,18 @@ Object.defineProperty(URL.prototype, \\"origin\\", {
 
 Object.defineProperty(URL.prototype, \\"protocol\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"protocol\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\" });
 
     this[impl][\\"protocol\\"] = V;
@@ -1714,10 +1762,18 @@ Object.defineProperty(URL.prototype, \\"protocol\\", {
 
 Object.defineProperty(URL.prototype, \\"username\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"username\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'username' property on 'URL': The provided value\\" });
 
     this[impl][\\"username\\"] = V;
@@ -1729,10 +1785,18 @@ Object.defineProperty(URL.prototype, \\"username\\", {
 
 Object.defineProperty(URL.prototype, \\"password\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"password\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'password' property on 'URL': The provided value\\" });
 
     this[impl][\\"password\\"] = V;
@@ -1744,10 +1808,18 @@ Object.defineProperty(URL.prototype, \\"password\\", {
 
 Object.defineProperty(URL.prototype, \\"host\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"host\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
 
     this[impl][\\"host\\"] = V;
@@ -1759,10 +1831,18 @@ Object.defineProperty(URL.prototype, \\"host\\", {
 
 Object.defineProperty(URL.prototype, \\"hostname\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"hostname\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\" });
 
     this[impl][\\"hostname\\"] = V;
@@ -1774,10 +1854,18 @@ Object.defineProperty(URL.prototype, \\"hostname\\", {
 
 Object.defineProperty(URL.prototype, \\"port\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"port\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
 
     this[impl][\\"port\\"] = V;
@@ -1789,10 +1877,18 @@ Object.defineProperty(URL.prototype, \\"port\\", {
 
 Object.defineProperty(URL.prototype, \\"pathname\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"pathname\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\" });
 
     this[impl][\\"pathname\\"] = V;
@@ -1804,10 +1900,18 @@ Object.defineProperty(URL.prototype, \\"pathname\\", {
 
 Object.defineProperty(URL.prototype, \\"search\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"search\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
 
     this[impl][\\"search\\"] = V;
@@ -1819,6 +1923,10 @@ Object.defineProperty(URL.prototype, \\"search\\", {
 
 Object.defineProperty(URL.prototype, \\"searchParams\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return utils.getSameObject(this, \\"searchParams\\", () => {
       return utils.tryWrapperForImpl(this[impl][\\"searchParams\\"]);
     });
@@ -1830,10 +1938,18 @@ Object.defineProperty(URL.prototype, \\"searchParams\\", {
 
 Object.defineProperty(URL.prototype, \\"hash\\", {
   get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     return this[impl][\\"hash\\"];
   },
 
   set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
     V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
 
     this[impl][\\"hash\\"] = V;
@@ -2451,10 +2567,18 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperty(obj, \\"href\\", {
       get() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         return obj[impl][\\"href\\"];
       },
 
       set(V) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         V = conversions[\\"USVString\\"](V, {
           context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
         });
@@ -2480,6 +2604,10 @@ const iface = {
 
     Object.defineProperty(obj, \\"origin\\", {
       get() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         return obj[impl][\\"origin\\"];
       },
 
@@ -2489,10 +2617,18 @@ const iface = {
 
     Object.defineProperty(obj, \\"protocol\\", {
       get() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         return obj[impl][\\"protocol\\"];
       },
 
       set(V) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
         V = conversions[\\"USVString\\"](V, {
           context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
         });
