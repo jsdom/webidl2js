@@ -3080,6 +3080,14 @@ URLSearchParams.prototype.sort = function sort() {
   return this[impl].sort();
 };
 
+URLSearchParams.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].toString();
+};
+
 URLSearchParams.prototype.entries = URLSearchParams.prototype[Symbol.iterator];
 
 URLSearchParams.prototype.keys = function keys() {
@@ -3094,14 +3102,6 @@ URLSearchParams.prototype.values = function values() {
     throw new TypeError(\\"Illegal invocation\\");
   }
   return module.exports.createDefaultIterator(this, \\"value\\");
-};
-
-URLSearchParams.prototype.toString = function toString() {
-  if (!this || !module.exports.is(this)) {
-    throw new TypeError(\\"Illegal invocation\\");
-  }
-
-  return this[impl].toString();
 };
 
 Object.defineProperty(URLSearchParams.prototype, Symbol.toStringTag, {
@@ -3970,6 +3970,32 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {
+    obj.assign = function assign(url) {
+      if (!this || !module.exports.is(this)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      if (arguments.length < 1) {
+        throw new TypeError(
+          \\"Failed to execute 'assign' on 'Unforgeable': 1 \\" +
+            \\"argument required, but only \\" +
+            arguments.length +
+            \\" present.\\"
+        );
+      }
+
+      const args = [];
+      for (let i = 0; i < arguments.length && i < 1; ++i) {
+        args[i] = arguments[i];
+      }
+
+      args[0] = conversions[\\"USVString\\"](args[0], {
+        context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
+      });
+
+      return this[impl].assign(...args);
+    };
+
     Object.defineProperty(obj, \\"href\\", {
       get() {
         if (!this || !module.exports.is(this)) {
@@ -4044,32 +4070,6 @@ const iface = {
       enumerable: true,
       configurable: false
     });
-
-    obj.assign = function assign(url) {
-      if (!this || !module.exports.is(this)) {
-        throw new TypeError(\\"Illegal invocation\\");
-      }
-
-      if (arguments.length < 1) {
-        throw new TypeError(
-          \\"Failed to execute 'assign' on 'Unforgeable': 1 \\" +
-            \\"argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
-        );
-      }
-
-      const args = [];
-      for (let i = 0; i < arguments.length && i < 1; ++i) {
-        args[i] = arguments[i];
-      }
-
-      args[0] = conversions[\\"USVString\\"](args[0], {
-        context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
-      });
-
-      return this[impl].assign(...args);
-    };
   },
   setup(obj, constructorArgs, privateData) {
     if (!privateData) privateData = {};
@@ -4264,7 +4264,7 @@ const iface = {
           const namedValue = target[impl][utils.namedGet](P);
 
           return {
-            writable: false,
+            writable: true,
             enumerable: true,
             configurable: true,
             value: utils.tryWrapperForImpl(namedValue)
@@ -4279,7 +4279,22 @@ const iface = {
           return Reflect.set(target, P, V, receiver);
         }
         if (target === receiver) {
-          typeof P === \\"string\\" && !utils.isArrayIndexPropName(P);
+          if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+            let namedValue = V;
+
+            namedValue = conversions[\\"DOMString\\"](namedValue, {
+              context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
+            });
+
+            const creating = !target[impl][utils.supportsPropertyName](P);
+            if (creating) {
+              target[impl][utils.namedSetNew](P, namedValue);
+            } else {
+              target[impl][utils.namedSetExisting](P, namedValue);
+            }
+
+            return true;
+          }
         }
         let ownDesc;
 
@@ -4321,10 +4336,24 @@ const iface = {
         }
         if (![\\"a\\"].includes(P)) {
           if (!Object.prototype.hasOwnProperty.call(target, P)) {
-            const creating = !target[impl][utils.supportsPropertyName](P);
-            if (!creating) {
+            if (desc.get || desc.set) {
               return false;
             }
+
+            let namedValue = desc.value;
+
+            namedValue = conversions[\\"DOMString\\"](namedValue, {
+              context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
+            });
+
+            const creating = !target[impl][utils.supportsPropertyName](P);
+            if (creating) {
+              target[impl][utils.namedSetNew](P, namedValue);
+            } else {
+              target[impl][utils.namedSetExisting](P, namedValue);
+            }
+
+            return true;
           }
         }
         return Reflect.defineProperty(target, P, desc);
