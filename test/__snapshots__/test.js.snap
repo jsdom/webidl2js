@@ -94,6 +94,13 @@ module.exports = {
       throw new TypeError(\\"Illegal constructor\\");
     }
 
+    Object.defineProperty(Factory, \\"prototype\\", {
+      value: Factory.prototype,
+      writable: false,
+      enumerable: false,
+      configurable: false
+    });
+
     Factory.prototype.method = function method() {
       if (!this || !module.exports.is(this)) {
         throw new TypeError(\\"Illegal invocation\\");
@@ -230,6 +237,13 @@ const impl = utils.implSymbol;
 function PromiseTypes() {
   throw new TypeError(\\"Illegal constructor\\");
 }
+
+Object.defineProperty(PromiseTypes, \\"prototype\\", {
+  value: PromiseTypes.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
 
 PromiseTypes.prototype.voidPromiseConsumer = function voidPromiseConsumer(p) {
   if (!this || !module.exports.is(this)) {
@@ -380,6 +394,13 @@ const impl = utils.implSymbol;
 function SeqAndRec() {
   iface.setup(this);
 }
+
+Object.defineProperty(SeqAndRec, \\"prototype\\", {
+  value: SeqAndRec.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
 
 SeqAndRec.prototype.recordConsumer = function recordConsumer(rec) {
   if (!this || !module.exports.is(this)) {
@@ -683,6 +704,13 @@ function StringifierAttribute() {
   throw new TypeError(\\"Illegal constructor\\");
 }
 
+Object.defineProperty(StringifierAttribute, \\"prototype\\", {
+  value: StringifierAttribute.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 Object.defineProperty(StringifierAttribute.prototype, \\"attr\\", {
   get() {
     return this[impl][\\"attr\\"];
@@ -794,6 +822,13 @@ function StringifierDefaultOperation() {
   throw new TypeError(\\"Illegal constructor\\");
 }
 
+Object.defineProperty(StringifierDefaultOperation, \\"prototype\\", {
+  value: StringifierDefaultOperation.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 StringifierDefaultOperation.prototype.toString = function toString() {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
@@ -897,6 +932,13 @@ function StringifierNamedOperation() {
   throw new TypeError(\\"Illegal constructor\\");
 }
 
+Object.defineProperty(StringifierNamedOperation, \\"prototype\\", {
+  value: StringifierNamedOperation.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 StringifierNamedOperation.prototype.operation = function operation() {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
@@ -999,6 +1041,13 @@ const impl = utils.implSymbol;
 function StringifierOperation() {
   throw new TypeError(\\"Illegal constructor\\");
 }
+
+Object.defineProperty(StringifierOperation, \\"prototype\\", {
+  value: StringifierOperation.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
 
 StringifierOperation.prototype.toString = function toString() {
   if (!this || !module.exports.is(this)) {
@@ -1104,6 +1153,13 @@ const impl = utils.implSymbol;
 function TypedefsAndUnions() {
   throw new TypeError(\\"Illegal constructor\\");
 }
+
+Object.defineProperty(TypedefsAndUnions, \\"prototype\\", {
+  value: TypedefsAndUnions.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
 
 TypedefsAndUnions.prototype.numOrStrConsumer = function numOrStrConsumer(a) {
   if (!this || !module.exports.is(this)) {
@@ -1595,6 +1651,13 @@ function URL(url) {
   iface.setup(this, args);
 }
 
+Object.defineProperty(URL, \\"prototype\\", {
+  value: URL.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 URL.prototype.toJSON = function toJSON() {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
@@ -1990,6 +2053,13 @@ function URLSearchParams() {
   iface.setup(this, args);
 }
 
+Object.defineProperty(URLSearchParams, \\"prototype\\", {
+  value: URLSearchParams.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 URLSearchParams.prototype.append = function append(name, value) {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
@@ -2317,6 +2387,13 @@ function Unforgeable() {
   throw new TypeError(\\"Illegal constructor\\");
 }
 
+Object.defineProperty(Unforgeable, \\"prototype\\", {
+  value: Unforgeable.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
 Object.defineProperty(Unforgeable.prototype, Symbol.toStringTag, {
   value: \\"Unforgeable\\",
   writable: false,
@@ -2492,6 +2569,13 @@ const impl = utils.implSymbol;
 function ZeroArgConstructor() {
   iface.setup(this);
 }
+
+Object.defineProperty(ZeroArgConstructor, \\"prototype\\", {
+  value: ZeroArgConstructor.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
 
 Object.defineProperty(ZeroArgConstructor.prototype, Symbol.toStringTag, {
   value: \\"ZeroArgConstructor\\",
