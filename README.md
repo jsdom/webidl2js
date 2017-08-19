@@ -88,7 +88,7 @@ The above is a simplification of the actual generated code, but should give you 
 
 For more examples, you can check out the `test/` directory (with the generated output being in `test/__snapshots__`). Alternately, you can install [jsdom](https://www.npmjs.com/package/jsdom), [whatwg-url](https://www.npmjs.com/package/whatwg-url), or [domexception](https://www.npmjs.com/package/domexception) from npm and check out their source code. (Note that browsing them on GitHub will not work, as we do not check the generated files into Git, but instead generate them as part of publishing the package to npm.)
 
-## Generation API
+## Wrapper class file generation API
 
 A typical Node.js script that compiles IDL using webidl2js looks like the following:
 
@@ -120,7 +120,123 @@ The transformer will also generate a file named `utils.js` inside the wrapper cl
 
 Note that webidl2js works best when there is a single transformer instance that knows about as many files as possible. This allows it to resolve type references, e.g. when one operation has an argument type referring to some other interface.
 
-## Features
+## Generated wrapper class file API
+
+The example above showed a simplified generated wrapper file with only three exports: `create`, `is`, and `interface`. In reality the generated wrapper file will contain more functionality, documented here. This functionality is different between generated wrapper files for interfaces and for dictionaries.
+
+### For interfaces
+
+Note that all of the below are still exported for "mixin" interfaces, but either don't work ([#53](https://github.com/jsdom/webidl2js/issues/53)) or don't make sense ([#55](https://github.com/jsdom/webidl2js/issues/55)).
+
+#### `isImpl(value)`
+
+Returns a boolean indicating whether _value_ is an instance of the corresponding implementation class.
+
+This is especially useful inside implementation class files, where incoming wrappers will be _unwrapped_, so that you only ever see implementation class instances ("impls").
+
+#### `is(value)`
+
+Returns a boolean indicating whether _value_ is an instance of the wrapper class.
+
+This is useful in other parts of your program that are not implementation class files, but instead receive wrapper classes from client code.
+
+#### `convert(value, { context })`
+
+Performs the Web IDL conversion algorithm for this interface, converting _value_ into the correct representation of the interface type suitable for consumption by implementation classes: the corresponding impl.
+
+In practice, this means doing a type-check equivalent to `is(value)`, and if it passes, returns the corresponding impl. If the type-check fails, it throws an informative exception. _context_ can be used to describe the provided value in any resulting error message.
+
+#### `create(constructorArgs, privateData)`
+
+Creates a new instance of the wrapper class and corresponding implementation class, passing in the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
+
+This is useful in other parts of your program that are not implementation class files, but instead want to interface with them from the outside. It's also mostly useful when creating instances of classes that do not have a `[Constructor]`, i.e. are not constructible via their wrapper class constructor.
+
+#### `createImpl(constructorArgs, privateData)`
+
+Creates a new instance of the wrapper class and corresponding implementation class, passing in the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
+
+This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
+
+#### `interface`
+
+This export is the wrapper class interface, suitable for example for putting on a global scope or exporting to module consumers who don't know anything about webidl2js.
+
+#### `expose`
+
+This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]` to generate a data structure of the form:
+
+```js
+{
+  nameOfGlobal1: {
+    nameOfInterface: InterfaceClass
+  },
+  nameOfGlobal2: {
+    nameOfInterface: InterfaceClass
+  },
+  // etc.
+}
+```
+
+This format is a bit verbose, and may be simplified in the future ([#58](https://github.com/jsdom/webidl2js/issues/58)).
+
+### For dictionaries
+
+#### `convert(value, { context })`
+
+Performs the Web IDL conversion algorithm for this dictionary, converting _value_ into the correct representation of the dictionary type suitable for consumption by implementation classes: a `null`-[[Prototype]] object with its properties properly converted.
+
+If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
+
+## Writing implementation class files
+
+webidl2js tries to ensure that your hand-authored implementation class files can be as straightforward as possible, leaving all the boilerplate in the generated wrapper file.
+
+Implementation class files contain a single export, `implementation`, whose value is the implementation class. (See [#59](https://github.com/jsdom/webidl2js/issues/59) for potentially making this the default export instead.) The class will contain the following elements:
+
+### The constructor
+
+A constructor for your implementation class, with signature `(constructorArgs, privateData)` can serve several purposes:
+
+- Setting up initial state that will always be used, such as caches or default values
+- Processing constructor arguments `constructorArgs` passed to the wrapper class constructor, if the interface in question has a `[Constructor]` extended attribute.
+- Processing any private data `privateData` which is provided when other parts of your program use the generated `create()` or `createImpl()` exports of the wrapper class file. This is useful for constructing instances with specific state that cannot be constructed via the wrapper class constructor.
+
+If you don't need to do any of these things, the constructor is entirely optional.
+
+Additionally, the constructor should not be provided for mixin classes; it will never be called.
+
+### Methods implementing IDL operations
+
+IDL operations that you wish to implement need to have corresponding methods on the implementation class.
+
+The wrapper class will take care of type conversions for the arguments, so you can operate on the incoming data assuming it is converted to the appropriate Web IDL type. You can also assume that your `this` value is an implementation class; appropriate brand-checking was performed by the wrapper class.
+
+The wrapper class will even convert any implementation classes you return to the corresponding wrapper classes. This allows you to usually stay entirely within the realm of impls and never deal with wrappers yourself.
+
+However, note that apart from Web IDL container return values, this impl-back-to-wrapper conversion doesn't work in a "deep" fashion. That is, if you directly return an impl, or return an array or object containing impls from a `sequence<>`, `FrozenArray<>`, or `record<>`-returning operation, the conversion will work. But if you return some other container (such as your own `NodeList` implementation) containing impls, the impl classes will escape to your consumers. Caution is advised.
+
+One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js currently does not dispatch to separate implementation class methods, but instead performs the overload resolution algorithm and then sends the result to the same backing method. We're considering changing this ([#29](https://github.com/jsdom/webidl2js/issues/29)), but in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate `isImpl()` functions) to determine which case of the overload you ended up in.
+
+### Properties implementing IDL attributes
+
+IDL attributes that you wish to implement need to have corresponding properties on the implementation class. As with operations, the wrapper class will take care of type conversions for setter arguments, and convert any impls you return into wrappers.
+
+Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
+
+### Other, non-exposed data and functionality
+
+Your implementation class can contain other properties and methods in support of the wrapped properties and methods that the wrapper class calls into. These can be used to factor out common algorithms, or store private state, or keep caches, or anything of the sort.
+
+Because of the intermediary wrapper class, there is no need to be concerned about these properties and methods being exposed to consumers of the wrappers. As such, you can name them whatever you want. We often conventionally use a leading underscore prefix, so as to make it clearer that unprefixed class members are exposed and prefixed ones are not. But this is just a convention; no matter what name you use, they will not be visible to wrapper class users.
+
+### Inheritance
+
+It is often useful for implementation class files to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
+
+However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
+
+## Web IDL features
 
 webidl2js is implementing an ever-growing subset of the Web IDL specification. So far we have implemented:
 
