@@ -220,7 +220,9 @@ The wrapper class will take care of type conversions for the arguments, so you c
 
 The wrapper class will even convert any implementation classes you return to the corresponding wrapper classes. This allows you to usually stay entirely within the realm of impls and never deal with wrappers yourself.
 
-However, note that apart from Web IDL container return values, this impl-back-to-wrapper conversion doesn't work in a "deep" fashion. That is, if you directly return an impl, or return an array or object containing impls from a `sequence<>`, `FrozenArray<>`, or `record<>`-returning operation, the conversion will work. But if you return some other container (such as your own `NodeList` implementation) containing impls, the impl classes will escape to your consumers. Caution is advised.
+However, note that apart from Web IDL container return values, this impl-back-to-wrapper conversion doesn't work in a "deep" fashion. That is, if you directly return an impl, or return an array or object containing impls from a `sequence<>`, `FrozenArray<>`, or `record<>`-returning operation, the conversion will work. But if you return some other container (such as your own `NodeList` implementation) containing impls, the impl classes will escape to your consumers. To fix this, you'll need to manually use the `wrapperFromImpl` util to ensure consumers only ever see wrappers.
+
+The same holds true in reverse: if you accept some other container as an argument, then webidl2js will not automatically be able to find all the wrappers it contains an convert them into impls; you will need to use `implFromWrapper` before processing them.
 
 One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js currently does not dispatch to separate implementation class methods, but instead performs the overload resolution algorithm and then sends the result to the same backing method. We're considering changing this ([#29](https://github.com/jsdom/webidl2js/issues/29)), but in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate `isImpl()` functions) to determine which case of the overload you ended up in.
 
@@ -241,6 +243,32 @@ Because of the intermediary wrapper class, there is no need to be concerned abou
 It is often useful for implementation class files to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
 
 However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
+
+## The generated utilities file
+
+Along with the generated wrapper class files, webidl2js will also generate a utilities file, `utils.js`, in the same directory. (We may make the name less generic; see [#52](https://github.com/jsdom/webidl2js/issues/52) for this and other concerns.) This contains several functions for converting between wrapper and implementation classes.
+
+Using these functions should be rare, in ideal circumstances. Most of the time, you can operate entirely on wrapper classes from the outside, and entirely on implementation classes while writing implementation class code. But, exceptions exist, such as when needing to reach into the internals of a class you only have the wrapper of, or dealing with unusual containers inside your implementation classes (as explained above).
+
+### `wrapperForImpl(impl)`
+
+Returns the corresponding wrapper class instance for a given implementation class instance, or `null` if the argument is not an implementation class instance.
+
+### `tryWrapperForImpl(value)`
+
+Returns the corresponding wrapper class instance for a given implementation class instance, or returns the argument back if it is not a wrapper class instance.
+
+This is useful for scenarios when you are not sure whether your incoming value is an impl, wrapper, or some other value, and just want to ensure that you don't end up with an impl. An example is exposing values to consumers who don't know anything about webidl2js.
+
+### `implForWrapper(wrapper)`
+
+Returns the corresponding impl class instance for a given wrapper class instance, or `null` if the argument is not a wrapper class instance.
+
+This can be useful when you are given a wrapper, but need to modify its inaccessible internals hidden inside the corresponding impl.
+
+### `tryImplForWrapper(value)`
+
+Returns the corresponding impl class instance for a given wrapper class instance, or returns the argument back if it is not an implementation class instance.
 
 ## Web IDL features
 
