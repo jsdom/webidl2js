@@ -88,7 +88,7 @@ The above is a simplification of the actual generated code, but should give you 
 
 For more examples, you can check out the `test/` directory (with the generated output being in `test/__snapshots__`). Alternately, you can install [jsdom](https://www.npmjs.com/package/jsdom), [whatwg-url](https://www.npmjs.com/package/whatwg-url), or [domexception](https://www.npmjs.com/package/domexception) from npm and check out their source code. (Note that browsing them on GitHub will not work, as we do not check the generated files into Git, but instead generate them as part of publishing the package to npm.)
 
-## API
+## Generation API
 
 A typical Node.js script that compiles IDL using webidl2js looks like the following:
 
@@ -107,7 +107,7 @@ transformer.generate("wrappers").catch(err => {
 
 The main module's default export is a class which you can construct with a few options:
 
-- `implSuffix`: a suffix used, if any, to find files within the soruce directory based on the IDL file name.
+- `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name.
 - `suppressErrors`: set to true to suppress errors during generation.
 
 The `addSource()` method can then be called multiple times to add directories containing `.idl` IDL files and `.js` implementation class files.
@@ -174,19 +174,21 @@ Notable missing features include:
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`
-- `[OverrideBuiltins]`
+- `[OverrideBuiltins]` ([in progress](https://github.com/jsdom/webidl2js/pull/48))
 - `[SecureContext]`
 - `[TreatNonObjectAsNull]`
 
-## Nonstandard Extended Attributes
+## Nonstandard extended attributes
 
 A couple of non-standard extended attributes are baked in to webidl2js.
 
 ### `[Reflect]`
 
-The `[Reflect]` extended attribute is implemented to call `this.getAttribute` or `this.setAttribute` and process the input our output using [webidl-html-reflector](https://github.com/domenic/webidl-html-reflector), generating both a getter and a setter. If `[Reflect]` is specified, the implementation class does not need to implement any getter or setter logic.
+The `[Reflect]` extended attribute is used on IDL attributes to implement the rules for [reflecting a content attribute to an IDL attribute](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#reflect). If `[Reflect]` is specified, the implementation class does not need to implement any getter or setter logic; webidl2js will take care of it.
 
 By default the attribute passed to `this.getAttribute` and `this.setAttribute` will be the same as the name of the property being reflected. You can use the form `[Reflect=custom]` or `[Reflect=custom_with_dashes]` to change that to be `"custom"` or `"custom-with-dashes"`, respectively.
+
+Note that only the basics of the reflect algorithm are implemented so far: `boolean`, `DOMString`, `long`, and `unsigned long`, with no parametrizations.
 
 In the future we may move this extended attribute out into some sort of plugin, since it is more related to HTML than to Web IDL.
 
