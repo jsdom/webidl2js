@@ -8,8 +8,18 @@ As a very minimal example, the Web IDL file
 
 ```webidl
 interface SomeInterface {
-  void someOperation(DOMString arg);
+  unsigned long long add(unsigned long x, unsigned long y);
 }
+```
+
+combined with the JavaScript implementation class file
+
+```js
+exports.implementation = class {
+  add(x, y) {
+    return x + y;
+  }
+};
 ```
 
 will generate a JavaScript wrapper class file roughly like this:
@@ -18,30 +28,33 @@ will generate a JavaScript wrapper class file roughly like this:
 const conversions = require("webidl-conversions");
 const impl = require("./utils.js").implSymbol;
 
-const implModule = require("../implementations/SomeInterface-impl.js");
+const Impl = require("./SomeInterface-impl.js").implementation;
 
 function SomeInterface() {
-  throw TypeError("Illegal constructor");
+  throw new TypeError("Illegal constructor");
 }
 
-SomeInterface.prototype.someOperation = function someOperation(arg) {
-  if (!isInstanceOfSomeInterface(this)) {
+SomeInterface.prototype.add = function add(x, y) {
+  if (!exports.is(this)) {
     throw new TypeError("Illegal invocation");
   }
-  if (arguments.length < 1) {
+  if (arguments.length < 2) {
     throw new TypeError(
-      "Failed to execute 'someOperation' on 'SomeInterface': 1 argument required, but only " +
+      "Failed to execute 'add' on 'SomeInterface': 2 arguments required, but only " +
         arguments.length +
         " present."
     );
   }
 
   const args = [];
-  args[0] = conversions["DOMString"](args[0], {
-    context: "Failed to execute 'someOperation' on 'SomeInterface': parameter 1"
+  args[0] = conversions["unsigned long"](arguments[0], {
+    context: "Failed to execute 'add' on 'SomeInterface': parameter 1"
+  });
+  args[1] = conversions["unsigned long"](arguments[1], {
+    context: "Failed to execute 'add' on 'SomeInterface': parameter 2"
   });
 
-  this[impl].someOperation(...args);
+  this[impl].add(...args);
 };
 
 Object.defineProperty(SomeInterface.prototype, Symbol.toStringTag, {
@@ -51,23 +64,27 @@ Object.defineProperty(SomeInterface.prototype, Symbol.toStringTag, {
   configurable: true
 });
 
+exports.interface = SomeInterface;
+
 exports.create = (constructorArgs = [], privateData = {}) => {
   const obj = Object.create(SomeInterface.prototype);
-  obj[impl] = new implModule.implementation(constructorArgs, privateData);
+  obj[impl] = new Impl(constructorArgs, privateData);
   return obj;
-}
+};
+
+exports.is = obj => obj && obj[impl] instanceof Impl;
 ```
 
 The above is a simplification of the actual generated code, but should give you some idea of what's going on. We bring your attention to a few points:
 
-* webidl2js takes pains to fully implement Web IDL semantics. Here you can see some on display, such as:
-  * Uncallable constructors, when no `[Constructor]` extended attribute is specified.
-  * Brand-checking on operation invocation
-  * Argument-length checking for non-optional arguments
-  * Argument conversion according to the rules specified in Web IDL for given argument types
-  * @@toStringTag semantics to make `Object.prototype.toString.call()` behave correctly
-* After performing Web IDL-related processing, webidl2js delegates to the implementation class for the non-boilerplate parts of `someOperation()`.
-* webidl2js attempts to generate informative error messages using what it knows.
+- webidl2js takes pains to fully implement Web IDL semantics. Here you can see some on display, such as:
+  - Uncallable constructors, when no `[Constructor]` extended attribute is specified.
+  - Brand-checking on operation invocation
+  - Argument-length checking for non-optional arguments
+  - Argument conversion according to the rules specified in Web IDL for given argument types
+  - @@toStringTag semantics to make `Object.prototype.toString.call()` behave correctly
+- After performing Web IDL-related processing, webidl2js delegates to the implementation class for the non-boilerplate parts of `add()`. This allows you to focus on writing the interesting parts of the implementation without worrying about types, brand-checking, parameter-processing, etc.
+- webidl2js attempts to generate informative error messages using what it knows.
 
 For more examples, you can check out the `test/` directory (with the generated output being in `test/__snapshots__`). Alternately, you can install [jsdom](https://www.npmjs.com/package/jsdom), [whatwg-url](https://www.npmjs.com/package/whatwg-url), or [domexception](https://www.npmjs.com/package/domexception) from npm and check out their source code. (Note that browsing them on GitHub will not work, as we do not check the generated files into Git, but instead generate them as part of publishing the package to npm.)
 
@@ -117,13 +134,14 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
   - Class strings (with the semantics of [heycam/webidl#357](https://github.com/heycam/webidl/pull/357))
 - Dictionary types
 - Union types
-- Callback function types
+- Callback function types, somewhat
 - Nullable types
 - `sequence<>` types
 - `record<>` types
 - `Promise<>` types
 - `FrozenArray<>` types
 - `typedef`s
+- Partial interfaces and dictionaries
 - Basic types (via [webidl-conversions](https://github.com/jsdom/webidl-conversions))
 - Mixins, i.e. `implements` (with a [notable bug](https://github.com/jsdom/webidl2js/issues/49))
 - Overload resolution (although [tricky cases are not easy on the implementation class](https://github.com/jsdom/webidl2js/issues/29))
@@ -142,7 +160,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 Notable missing features include:
 
 - Legacy platform objects, i.e. those using `getter`/`setter`/`deleter` declarations ([in progress](https://github.com/jsdom/webidl2js/pull/48))
-- Partial interfaces
 - Namespaces
 - Enumeration types ([#28](https://github.com/jsdom/webidl2js/issues/28))
 - Callback interfaces
