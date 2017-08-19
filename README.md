@@ -184,7 +184,7 @@ This export contains information about where an interface is supposed to be expo
 }
 ```
 
-This format is a bit verbose, and may be simplified in the future ([#58](https://github.com/jsdom/webidl2js/issues/58)).
+This format may seem a bit verbose, but eventually when we support `[NamedConstructor]`, there will be potentially more than one key/value pair per global, and it will show its worth.
 
 ### For dictionaries
 
