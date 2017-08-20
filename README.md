@@ -126,7 +126,7 @@ The example above showed a simplified generated wrapper file with only three exp
 
 ### For interfaces
 
-Note that all of the below are still exported for "mixin" interfaces, but either don't work ([#53](https://github.com/jsdom/webidl2js/issues/53)) or don't make sense ([#55](https://github.com/jsdom/webidl2js/issues/55)).
+Note that all of the below are still exported for "mixin" interfaces, but only `isImpl()` and `is()` make sense ([#55](https://github.com/jsdom/webidl2js/issues/55)).
 
 #### `isImpl(value)`
 
@@ -134,11 +134,15 @@ Returns a boolean indicating whether _value_ is an instance of the corresponding
 
 This is especially useful inside implementation class files, where incoming wrappers will be _unwrapped_, so that you only ever see implementation class instances ("impls").
 
+This also works when used with mixin implementation classes: that is, `generatedModuleForMixin.isImpl(implForMixinTarget)` will be true.
+
 #### `is(value)`
 
 Returns a boolean indicating whether _value_ is an instance of the wrapper class.
 
 This is useful in other parts of your program that are not implementation class files, but instead receive wrapper classes from client code.
+
+This also works when used with mixin wrapper classes: that is, `generatedModuleForMixin.is(wrapperForMixinTarget)` will be true.
 
 #### `convert(value, { context })`
 
@@ -224,7 +228,7 @@ However, note that apart from Web IDL container return values, this impl-back-to
 
 The same holds true in reverse: if you accept some other container as an argument, then webidl2js will not automatically be able to find all the wrappers it contains an convert them into impls; you will need to use `implFromWrapper` before processing them.
 
-One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js currently does not dispatch to separate implementation class methods, but instead performs the overload resolution algorithm and then sends the result to the same backing method. We're considering changing this ([#29](https://github.com/jsdom/webidl2js/issues/29)), but in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate `isImpl()` functions) to determine which case of the overload you ended up in.
+One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js is not always as helpful as it could be. It does not dispatch to separate implementation class methods, but instead performs the overload resolution algorithm and then sends the result to the same backing method. In some cases, it won't even unwrap incoming wrappers into impls. We're hoping to fix this ([#29](https://github.com/jsdom/webidl2js/issues/29)), but in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate `isImpl()` functions) to determine which case of the overload you ended up in, and manual unwrapping.
 
 ### Properties implementing IDL attributes
 
