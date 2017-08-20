@@ -309,6 +309,8 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Constructor]`
 - `[EnforceRange]`
 - `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[LegacyArrayClass]`
+- `[LegacyUnenumerableNamedProperties]`
 - `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
@@ -322,13 +324,10 @@ Notable missing features include:
 - Namespaces
 - Enumeration types ([#28](https://github.com/jsdom/webidl2js/issues/28))
 - Callback interfaces
-- Named constructors
 - `maplike<>` and `setlike<>`
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]` and `[PrimaryGlobal]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LegacyArrayClass]`
-- `[LegacyUnemerableNamedProperties]`
 - `[LegacyWindowAlias]`
 - `[LenientSetter]`
 - `[LenientThis]`
