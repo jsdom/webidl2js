@@ -236,6 +236,10 @@ IDL attributes that you wish to implement need to have corresponding properties 
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
 
+### Indexed and named properties
+
+TODO: document these
+
 ### Other, non-exposed data and functionality
 
 Your implementation class can contain other properties and methods in support of the wrapped properties and methods that the wrapper class calls into. These can be used to factor out common algorithms, or store private state, or keep caches, or anything of the sort.
@@ -284,6 +288,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
   - Operations
   - Constants
   - Stringifiers
+  - Named and indexed `getter`/`setter`/`deleter` declarations
   - `iterable<>` declarations
   - Class strings (with the semantics of [heycam/webidl#357](https://github.com/heycam/webidl/pull/357))
 - Dictionary types
@@ -304,6 +309,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Constructor]`
 - `[EnforceRange]`
 - `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
 - `[SameObject]` (automatic caching)
@@ -313,7 +319,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 
 Notable missing features include:
 
-- Legacy platform objects, i.e. those using `getter`/`setter`/`deleter` declarations ([in progress](https://github.com/jsdom/webidl2js/pull/48))
 - Namespaces
 - Enumeration types ([#28](https://github.com/jsdom/webidl2js/issues/28))
 - Callback interfaces
@@ -328,7 +333,6 @@ Notable missing features include:
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`
-- `[OverrideBuiltins]` ([in progress](https://github.com/jsdom/webidl2js/pull/48))
 - `[SecureContext]`
 - `[TreatNonObjectAsNull]`
 
@@ -351,3 +355,9 @@ In the future we may move this extended attribute out into some sort of plugin, 
 This extended attribute can be applied to interfaces to cause them to generate a factory that generates wrapper classes, instead of generating a single wrapper class.
 
 It is currently used by [jsdom](https://github.com/tmpvar/jsdom) for classes which need to specialize their behavior per `Window` object; by default [jsdom shares classes across all `Window`s](https://github.com/tmpvar/jsdom#shared-constructors-and-prototypes), but with `[WebIDL2JSFactory]`, an exception can be made for certain classes that need it.
+
+### `[WebIDL2JSValueAsUnsupported=value]`
+
+This extended attribute can be applied to named or indexed getters or setters. It says that the interface's supported property names/indices can be automatically derived by looking at the return value of its indexed getter/setter: whenever `value` is returned, the name/index is unsupported. Typically, `value` is either `undefined` or `null`.
+
+In practice, this means that the implementation class only needs to implement a single method (the named/indexed getter method), and doesn't need to implement the `[idlUtils.supportsPropertyName]()` or `[idlUtils.supportsPropertyIndex]()` method separately.
