@@ -2607,7 +2607,7 @@ URLList.prototype.item = function item(index) {
 
 URLList.prototype.entries = Array.prototype.entries;
 URLList.prototype.keys = Array.prototype.keys;
-URLList.prototype.values = Array.prototype.values;
+URLList.prototype.values = Array.prototype[Symbol.iterator];
 
 Object.defineProperty(URLList.prototype, \\"length\\", {
   get() {
