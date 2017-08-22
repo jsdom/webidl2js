@@ -236,6 +236,16 @@ IDL attributes that you wish to implement need to have corresponding properties 
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
 
+### toString method implementing IDL stringifier
+
+Web IDL allows stringifiers to be either *aliased* to a specific attribute or named operation, or *standalone*. If the interface defines a standalone stringifier, the implementation class should define a string-returning `toString` method implementing the stringification behavior of that interface. The method is not needed if the stringifier is aliased: webidl2js will just call the attribute getter or named operation for stringification.
+
+```webidl
+stringifier;                                 // `toString()` is needed on the implementation class.
+stringifier attribute DOMString attr;        // `toString()` is not needed.
+stringifier           DOMString operation(); // `toString()` is not needed.
+```
+
 ### Indexed and named properties
 
 TODO: document these
