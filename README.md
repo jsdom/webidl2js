@@ -248,7 +248,17 @@ stringifier           DOMString operation(); // `toString()` is not needed.
 
 ### Indexed and named properties
 
-TODO: document these
+IDL indexed and named properties require multiple things on the implementation class to work properly.
+
+The first is the getters, (optional) setters, and (optional) deleters operations. Much like stringifiers, getters, setters, and deleters can either be standalone or aliased to a named operation (though not an attribute). If an operation is standalone, then the implementation class must implement following symbol-named methods. The `utils` object below refers to the default export from the generated utilities file `utils.js`.
+
+- Getters: `utils.indexedGet`, `utils.namedGet`
+- Setters: `utils.indexedSetNew`, `utils.indexedSetExisting`, `utils.namedSetNew`, `utils.namedSetExisting`
+- Deleters: `utils.namedDelete`
+
+The second is the interface's supported property indices/names. By default, the implementation class should implement both a Boolean-returning `utils.supportsPropertyIndex`/`utils.supportsPropertyName` method that takes a single Number or String argument, respectively, and an iterable-returning `utils.supportedPropertyIndices`/`utils.supportedPropertyNames` for each variety of getters the interface exposes.
+
+If the getter function always returns a constant value for unsupported properties, webidl2js also offers a non-standard extended attribute `[WebIDL2JSValueAsUnsupported]` (documented below) that would simply call the getter function to check if a property index/name is supported, so that `supportsPropertyIndex`/`supportsPropertyName` would not need to be implemented separately. However, when using the extended attribute, be very sure that the value specified in the attribute is returned *if and only if* the property is unsupported.
 
 ### Other, non-exposed data and functionality
 
