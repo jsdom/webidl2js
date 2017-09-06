@@ -355,6 +355,780 @@ const Impl = require(\\"../implementations/LegacyArrayClass.js\\");
 "
 `;
 
+exports[`MixedIn.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+const Mixin = require(\\"./Mixin.js\\");
+
+function MixedIn() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+Object.defineProperty(MixedIn, \\"prototype\\", {
+  value: MixedIn.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
+Mixin.mixedInto.push(MixedIn);
+
+MixedIn.prototype.mixedInOp = function mixedInOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixedInOp();
+};
+
+MixedIn.prototype.mixinOp = function mixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinOp();
+};
+
+MixedIn.prototype.mixinMixinOp = function mixinMixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinMixinOp();
+};
+
+MixedIn.prototype.mixinInheritedOp = function mixinInheritedOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinInheritedOp();
+};
+
+MixedIn.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinInheritedOp();
+};
+
+Object.defineProperty(MixedIn.prototype, \\"mixedInAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixedInAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value\\"
+    });
+
+    this[impl][\\"mixedInAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixedIn.prototype, \\"mixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinAttr' property on 'MixedIn': The provided value\\"
+    });
+
+    this[impl][\\"mixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixedIn.prototype, \\"mixinMixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinMixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinMixinAttr' property on 'MixedIn': The provided value\\"
+    });
+
+    this[impl][\\"mixinMixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixedIn.prototype, \\"mixinInheritedAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinInheritedAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinInheritedAttr' property on 'MixedIn': The provided value\\"
+    });
+
+    this[impl][\\"mixinInheritedAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixedIn, \\"mixedInConst\\", {
+  value: 43,
+  enumerable: true
+});
+Object.defineProperty(MixedIn.prototype, \\"mixedInConst\\", {
+  value: 43,
+  enumerable: true
+});
+
+Object.defineProperty(MixedIn, \\"mixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(MixedIn.prototype, \\"mixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(MixedIn, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(MixedIn.prototype, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(MixedIn, \\"mixinInheritedConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(MixedIn.prototype, \\"mixinInheritedConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(MixedIn.prototype, Symbol.toStringTag, {
+  value: \\"MixedIn\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(MixedIn.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(MixedIn.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+    return obj;
+  },
+  interface: MixedIn,
+  expose: {
+    Window: { MixedIn }
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/MixedIn.js\\");
+"
+`;
+
+exports[`Mixin.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+const MixinInherited = require(\\"./MixinInherited.js\\");
+const MixinMixin = require(\\"./MixinMixin.js\\");
+
+function Mixin() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+Object.setPrototypeOf(Mixin.prototype, MixinInherited.interface.prototype);
+Object.setPrototypeOf(Mixin, MixinInherited.interface);
+
+Object.defineProperty(Mixin, \\"prototype\\", {
+  value: Mixin.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
+MixinMixin.mixedInto.push(Mixin);
+
+Mixin.prototype.mixinOp = function mixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinOp();
+};
+
+Mixin.prototype.mixinMixinOp = function mixinMixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinMixinOp();
+};
+
+Object.defineProperty(Mixin.prototype, \\"mixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinAttr' property on 'Mixin': The provided value\\"
+    });
+
+    this[impl][\\"mixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(Mixin.prototype, \\"mixinMixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinMixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinMixinAttr' property on 'Mixin': The provided value\\"
+    });
+
+    this[impl][\\"mixinMixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(Mixin, \\"mixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(Mixin.prototype, \\"mixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(Mixin, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(Mixin.prototype, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(Mixin.prototype, Symbol.toStringTag, {
+  value: \\"Mixin\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'Mixin'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(Mixin.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(Mixin.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {
+    MixinInherited._internalSetup(obj);
+  },
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+    return obj;
+  },
+  interface: Mixin,
+  expose: {}
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/Mixin.js\\");
+"
+`;
+
+exports[`MixinInherited.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function MixinInherited() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+Object.defineProperty(MixinInherited, \\"prototype\\", {
+  value: MixinInherited.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
+MixinInherited.prototype.mixinInheritedOp = function mixinInheritedOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinInheritedOp();
+};
+
+MixinInherited.prototype.toString = function toString() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinInheritedOp();
+};
+
+Object.defineProperty(MixinInherited.prototype, \\"mixinInheritedAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinInheritedAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinInheritedAttr' property on 'MixinInherited': The provided value\\"
+    });
+
+    this[impl][\\"mixinInheritedAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixinInherited, \\"mixinInheritedConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(MixinInherited.prototype, \\"mixinInheritedConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(MixinInherited.prototype, Symbol.toStringTag, {
+  value: \\"MixinInherited\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'MixinInherited'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(MixinInherited.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(MixinInherited.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+    return obj;
+  },
+  interface: MixinInherited,
+  expose: {}
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/MixinInherited.js\\");
+"
+`;
+
+exports[`MixinMixin.idl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+
+function MixinMixin() {
+  throw new TypeError(\\"Illegal constructor\\");
+}
+
+Object.defineProperty(MixinMixin, \\"prototype\\", {
+  value: MixinMixin.prototype,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+
+MixinMixin.prototype.mixinMixinOp = function mixinMixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinMixinOp();
+};
+
+Object.defineProperty(MixinMixin.prototype, \\"mixinMixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinMixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinMixinAttr' property on 'MixinMixin': The provided value\\"
+    });
+
+    this[impl][\\"mixinMixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
+Object.defineProperty(MixinMixin, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(MixinMixin.prototype, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(MixinMixin.prototype, Symbol.toStringTag, {
+  value: \\"MixinMixin\\",
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+
+const iface = {
+  mixedInto: [],
+  is(obj) {
+    if (obj) {
+      if (obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (obj instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
+        if (wrapper instanceof module.exports.mixedInto[i]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'MixinMixin'.\`);
+  },
+
+  create(constructorArgs, privateData) {
+    let obj = Object.create(MixinMixin.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(constructorArgs, privateData) {
+    let obj = Object.create(MixinMixin.prototype);
+    obj = this.setup(obj, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, constructorArgs, privateData) {
+    if (!privateData) privateData = {};
+
+    privateData.wrapper = obj;
+
+    this._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(constructorArgs, privateData),
+      writable: false,
+      enumerable: false,
+      configurable: true
+    });
+
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+    return obj;
+  },
+  interface: MixinMixin,
+  expose: {}
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/MixinMixin.js\\");
+"
+`;
+
 exports[`Overloads.idl 1`] = `
 "\\"use strict\\";
 
@@ -4336,6 +5110,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
+const MixinMixin = require(\\"./MixinMixin.js\\");
 
 function UnderscoredProperties() {
   throw new TypeError(\\"Illegal constructor\\");
@@ -4347,6 +5122,8 @@ Object.defineProperty(UnderscoredProperties, \\"prototype\\", {
   enumerable: false,
   configurable: false
 });
+
+MixinMixin.mixedInto.push(UnderscoredProperties);
 
 UnderscoredProperties.prototype.operation = function operation(sequence) {
   if (!this || !module.exports.is(this)) {
@@ -4385,6 +5162,14 @@ UnderscoredProperties.prototype.operation = function operation(sequence) {
   }
 
   return this[impl].operation(...args);
+};
+
+UnderscoredProperties.prototype.mixinMixinOp = function mixinMixinOp() {
+  if (!this || !module.exports.is(this)) {
+    throw new TypeError(\\"Illegal invocation\\");
+  }
+
+  return this[impl].mixinMixinOp();
 };
 
 UnderscoredProperties.static = function _(_void) {
@@ -4434,11 +5219,45 @@ Object.defineProperty(UnderscoredProperties.prototype, \\"attribute\\", {
   configurable: true
 });
 
+Object.defineProperty(UnderscoredProperties.prototype, \\"mixinMixinAttr\\", {
+  get() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"mixinMixinAttr\\"];
+  },
+
+  set(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'mixinMixinAttr' property on 'UnderscoredProperties': The provided value\\"
+    });
+
+    this[impl][\\"mixinMixinAttr\\"] = V;
+  },
+
+  enumerable: true,
+  configurable: true
+});
+
 Object.defineProperty(UnderscoredProperties, \\"const\\", {
   value: 42,
   enumerable: true
 });
 Object.defineProperty(UnderscoredProperties.prototype, \\"const\\", {
+  value: 42,
+  enumerable: true
+});
+
+Object.defineProperty(UnderscoredProperties, \\"mixinMixinConst\\", {
+  value: 42,
+  enumerable: true
+});
+Object.defineProperty(UnderscoredProperties.prototype, \\"mixinMixinConst\\", {
   value: 42,
   enumerable: true
 });
