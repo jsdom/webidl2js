@@ -136,6 +136,7 @@ This is especially useful inside implementation class files, where incoming wrap
 
 This also works when used with mixin implementation classes: that is, `generatedModuleForMixin.isImpl(implForMixinTarget)` will be true.
 
+<a id="interface-is"></a>
 #### `is(value)`
 
 Returns a boolean indicating whether _value_ is an instance of the wrapper class.
@@ -228,7 +229,47 @@ However, note that apart from Web IDL container return values, this impl-back-to
 
 The same holds true in reverse: if you accept some other container as an argument, then webidl2js will not automatically be able to find all the wrappers it contains an convert them into impls; you will need to use `implFromWrapper` before processing them.
 
-One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js is not always as helpful as it could be. It does not dispatch to separate implementation class methods, but instead performs the overload resolution algorithm and then sends the result to the same backing method. In some cases, it won't even unwrap incoming wrappers into impls. We're hoping to fix this ([#29](https://github.com/jsdom/webidl2js/issues/29)), but in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate `isImpl()` functions) to determine which case of the overload you ended up in, and manual unwrapping.
+<a id="overloaded-operations"></a>
+#### Overloaded operations
+
+One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js is not always as helpful as it could be.
+
+1. webidl2js does not yet implement the [overload resolution algorithm](https://heycam.github.io/webidl/#dfn-overload-resolution-algorithm) fully. Take the `overload1()` operations below. webidl2js fully handles type conversion for both `first` and `second` arguments, but does not try to convert the third argument even if it is provided.
+
+   ```webidl
+   void overload1(DOMString first, long second);
+   void overload1(DOMString first, long second, DOMString third);
+   ```
+
+   For the `overload2()` operations, webidl2js only converts `second` argument because its type is unambiguous, and calls the implementation method with `first` unconverted. What this means is that, webidl2js will not try to unwrap the `first` argument into impl even if it is a `Blob`.
+
+   ```webidl
+   void overload2(Blob first, long second);
+   void overload2(long first, long second);
+   ```
+
+2. webidl2js does not dispatch overloaded operations to separate implementation class methods, but instead performs type conversions if possible and then sends the result to the same backing method.
+
+We're hoping to fix both of these problems in [#29](https://github.com/jsdom/webidl2js/issues/29). But in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate [`is()`](#interface-is) functions) to determine which case of the overload you ended up in, and manual conversion with [webidl-conversions][] and/or unwrapping.
+
+<a id="variadic-operations"></a>
+#### Variadic operations
+
+Variadic operations are fully supported by webidl2js, but only if the particular operation is not overloaded. So while type conversions for the `simple1` and `simple2` operations below are fully implemented, webidl2js will not provide any variadic semantics for `overloaded1()` or `overloaded2()`.
+
+```webidl
+void simple1(DOMString... strings);
+
+void simple2(DOMString first, URL... urls);
+
+void overloaded1(DOMString... strings);
+void overloaded1(unsigned long... numbers);
+
+void overloaded2(DOMString first, DOMString... strings);
+void overloaded2(unsigned long first, DOMString... strings);
+```
+
+We hope to fix this problem in the overload resolution overhaul ([#29](https://github.com/jsdom/webidl2js/issues/29)). Right now, however, manual conversions will be needed for overloaded variadic operations.
 
 ### Properties implementing IDL attributes
 
@@ -321,10 +362,10 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `FrozenArray<>` types
 - `typedef`s
 - Partial interfaces and dictionaries
-- Basic types (via [webidl-conversions](https://github.com/jsdom/webidl-conversions))
+- Basic types (via [webidl-conversions][])
 - Mixins, i.e. `implements` (with a [notable bug](https://github.com/jsdom/webidl2js/issues/49))
-- Overload resolution (although [tricky cases are not easy on the implementation class](https://github.com/jsdom/webidl2js/issues/29))
-- Variadic arguments
+- Overload resolution (although [tricky cases are not easy on the implementation class](#overloaded-operations))
+- Variadic arguments ([only non-overloaded operations](#variadic-operations) are supported though)
 - `[Clamp]`
 - `[Constructor]`
 - `[EnforceRange]`
@@ -380,3 +421,5 @@ It is currently used by [jsdom](https://github.com/tmpvar/jsdom) for classes whi
 This extended attribute can be applied to named or indexed getters or setters. It says that whether the interface supports a given property name/index can be automatically derived by looking at the return value of its indexed getter/setter: whenever `value` is returned, the name/index is unsupported. Typically, `value` is either `undefined` or `null`.
 
 In practice, this means that the implementation class only needs to implement a single method (the named/indexed getter method), and doesn't need to implement the `[idlUtils.supportsPropertyName]()` or `[idlUtils.supportsPropertyIndex]()` method separately.
+
+[webidl-conversions]: https://github.com/jsdom/webidl-conversions
