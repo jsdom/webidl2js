@@ -236,6 +236,30 @@ IDL attributes that you wish to implement need to have corresponding properties 
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
 
+### toString method implementing IDL stringifier
+
+Web IDL allows stringifiers to be either *aliased* to a specific attribute or named operation, or *standalone*. If the interface defines a standalone stringifier, the implementation class should define a string-returning `toString` method implementing the stringification behavior of that interface. The method is not needed if the stringifier is aliased: webidl2js will just call the attribute getter or named operation for stringification.
+
+```webidl
+stringifier;                                 // `toString()` is needed on the implementation class.
+stringifier attribute DOMString attr;        // `toString()` is not needed.
+stringifier           DOMString operation(); // `toString()` is not needed.
+```
+
+### Indexed and named properties
+
+IDL indexed and named properties require multiple things on the implementation class to work properly.
+
+The first is the getters, (optional) setters, and (optional) deleters operations. Much like stringifiers, getters, setters, and deleters can either be standalone or aliased to a named operation (though not an attribute). If an operation is standalone, then the implementation class must implement following symbol-named methods. The `utils` object below refers to the default export from the generated utilities file `utils.js`.
+
+- Getters: `utils.indexedGet`, `utils.namedGet`
+- Setters: `utils.indexedSetNew`, `utils.indexedSetExisting`, `utils.namedSetNew`, `utils.namedSetExisting`
+- Deleters: `utils.namedDelete`
+
+The second is the interface's supported property indices/names. By default, the implementation class should implement both a Boolean-returning `utils.supportsPropertyIndex`/`utils.supportsPropertyName` method that takes a single Number or String argument, respectively, and an iterable-returning `utils.supportedPropertyIndices`/`utils.supportedPropertyNames` for each variety of getters the interface exposes.
+
+If the getter function always returns a constant value for unsupported properties, webidl2js also offers a non-standard extended attribute `[WebIDL2JSValueAsUnsupported]` (documented below) that would simply call the getter function to check if a property index/name is supported, so that `supportsPropertyIndex`/`supportsPropertyName` would not need to be implemented separately. However, when using the extended attribute, be very sure that the value specified in the attribute is returned *if and only if* the property is unsupported.
+
 ### Other, non-exposed data and functionality
 
 Your implementation class can contain other properties and methods in support of the wrapped properties and methods that the wrapper class calls into. These can be used to factor out common algorithms, or store private state, or keep caches, or anything of the sort.
@@ -284,6 +308,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
   - Operations
   - Constants
   - Stringifiers
+  - Named and indexed `getter`/`setter`/`deleter` declarations
   - `iterable<>` declarations
   - Class strings (with the semantics of [heycam/webidl#357](https://github.com/heycam/webidl/pull/357))
 - Dictionary types
@@ -304,6 +329,9 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Constructor]`
 - `[EnforceRange]`
 - `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[LegacyArrayClass]`
+- `[LegacyUnenumerableNamedProperties]`
+- `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
 - `[SameObject]` (automatic caching)
@@ -313,22 +341,17 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 
 Notable missing features include:
 
-- Legacy platform objects, i.e. those using `getter`/`setter`/`deleter` declarations ([in progress](https://github.com/jsdom/webidl2js/pull/48))
 - Namespaces
 - Enumeration types ([#28](https://github.com/jsdom/webidl2js/issues/28))
 - Callback interfaces
-- Named constructors
 - `maplike<>` and `setlike<>`
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]` and `[PrimaryGlobal]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LegacyArrayClass]`
-- `[LegacyUnemerableNamedProperties]`
 - `[LegacyWindowAlias]`
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`
-- `[OverrideBuiltins]` ([in progress](https://github.com/jsdom/webidl2js/pull/48))
 - `[SecureContext]`
 - `[TreatNonObjectAsNull]`
 
@@ -351,3 +374,9 @@ In the future we may move this extended attribute out into some sort of plugin, 
 This extended attribute can be applied to interfaces to cause them to generate a factory that generates wrapper classes, instead of generating a single wrapper class.
 
 It is currently used by [jsdom](https://github.com/tmpvar/jsdom) for classes which need to specialize their behavior per `Window` object; by default [jsdom shares classes across all `Window`s](https://github.com/tmpvar/jsdom#shared-constructors-and-prototypes), but with `[WebIDL2JSFactory]`, an exception can be made for certain classes that need it.
+
+### `[WebIDL2JSValueAsUnsupported=value]`
+
+This extended attribute can be applied to named or indexed getters or setters. It says that whether the interface supports a given property name/index can be automatically derived by looking at the return value of its indexed getter/setter: whenever `value` is returned, the name/index is unsupported. Typically, `value` is either `undefined` or `null`.
+
+In practice, this means that the implementation class only needs to implement a single method (the named/indexed getter method), and doesn't need to implement the `[idlUtils.supportsPropertyName]()` or `[idlUtils.supportsPropertyIndex]()` method separately.
