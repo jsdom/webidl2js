@@ -1,5 +1,6 @@
 interface Variadic {
   void simple1(DOMString... strings);
+
   void simple2(DOMString first, URL... urls);
 
   void overloaded1(DOMString... strings);
