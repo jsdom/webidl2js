@@ -4558,6 +4558,129 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
+exports[`URLCallback.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+module.exports = {
+  convert(value, { context = \\"The provided value\\" } = {}) {
+    if (typeof value !== \\"function\\" && !treatNonObjectAsNull) {
+      throw new TypeError(context + \\" is not a function\\");
+    }
+
+    function wrapper(...args) {
+      if (new.target !== undefined) {
+        throw new Error(
+          \\"Internal error: do not call converted callback function with \`new\`; instead use \\" +
+            \\"convertedFunc.construct()\\"
+        );
+      }
+
+      let returned;
+
+      for (let i = 0; i < args.length; i++) {
+        args[i] = utils.tryWrapperForImpl(args[i]);
+      }
+      if (args.length < 2) {
+        for (let i = args.length; i < 2; i++) {
+          args[i] = undefined;
+        }
+      } else if (args.length > 2) {
+        args.length = 2;
+      }
+
+      returned = Reflect.apply(value, this, args);
+
+      returned = convertURL(returned, { context: context });
+
+      return returned;
+    }
+    wrapper.construct = function(...args) {
+      for (let i = 0; i < args.length; i++) {
+        args[i] = utils.tryWrapperForImpl(args[i]);
+      }
+      if (args.length < 2) {
+        for (let i = args.length; i < 2; i++) {
+          args[i] = undefined;
+        }
+      } else if (args.length > 2) {
+        args.length = 2;
+      }
+
+      let returned = Reflect.construct(value, args);
+
+      returned = convertURL(returned, { context: context });
+
+      return returned;
+    };
+    return wrapper;
+  }
+};
+"
+`;
+
+exports[`URLHandlerNonNull.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+module.exports = {
+  convert(value, { context = \\"The provided value\\" } = {}) {
+    function wrapper(...args) {
+      if (new.target !== undefined) {
+        throw new Error(
+          \\"Internal error: do not call converted callback function with \`new\`; instead use \\" +
+            \\"convertedFunc.construct()\\"
+        );
+      }
+
+      let returned;
+      if (typeof value === \\"function\\") {
+        for (let i = 0; i < args.length; i++) {
+          args[i] = utils.tryWrapperForImpl(args[i]);
+        }
+        if (args.length < 1) {
+          for (let i = args.length; i < 1; i++) {
+            args[i] = undefined;
+          }
+        } else if (args.length > 1) {
+          args.length = 1;
+        }
+
+        returned = Reflect.apply(value, this, args);
+      }
+
+      returned = conversions[\\"any\\"](returned, { context: context });
+
+      return returned;
+    }
+    wrapper.construct = function(...args) {
+      for (let i = 0; i < args.length; i++) {
+        args[i] = utils.tryWrapperForImpl(args[i]);
+      }
+      if (args.length < 1) {
+        for (let i = args.length; i < 1; i++) {
+          args[i] = undefined;
+        }
+      } else if (args.length > 1) {
+        args.length = 1;
+      }
+
+      let returned = Reflect.construct(value, args);
+
+      returned = conversions[\\"any\\"](returned, { context: context });
+
+      return returned;
+    };
+    return wrapper;
+  }
+};
+"
+`;
+
 exports[`URLList.webidl 1`] = `
 "\\"use strict\\";
 
