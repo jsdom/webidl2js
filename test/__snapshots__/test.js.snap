@@ -1779,7 +1779,7 @@ Static.prototype.def = function def() {
 };
 
 Static.def = function def() {
-  return Impl.def();
+  return Impl.implementation.def();
 };
 
 Object.defineProperty(Static.prototype, \\"abc\\", {
@@ -1807,13 +1807,13 @@ Object.defineProperty(Static.prototype, \\"abc\\", {
 
 Object.defineProperty(Static, \\"abc\\", {
   get() {
-    return Impl[\\"abc\\"];
+    return Impl.implementation[\\"abc\\"];
   },
 
   set(V) {
     V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
 
-    Impl[\\"abc\\"] = V;
+    Impl.implementation[\\"abc\\"] = V;
   },
 
   enumerable: true,
@@ -5191,7 +5191,7 @@ UnderscoredProperties.static = function _(_void) {
     context: \\"Failed to execute 'static' on 'UnderscoredProperties': parameter 1\\"
   });
 
-  return Impl.static(...args);
+  return Impl.implementation.static(...args);
 };
 
 Object.defineProperty(UnderscoredProperties.prototype, \\"attribute\\", {
