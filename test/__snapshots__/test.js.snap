@@ -1807,13 +1807,13 @@ Object.defineProperty(Static.prototype, \\"abc\\", {
 
 Object.defineProperty(Static, \\"abc\\", {
   get() {
-    return Impl[\\"abc\\"];
+    return Impl.implementation[\\"abc\\"];
   },
 
   set(V) {
     V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
 
-    Impl[\\"abc\\"] = V;
+    Impl.implementation[\\"abc\\"] = V;
   },
 
   enumerable: true,
