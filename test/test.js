@@ -22,7 +22,7 @@ const idlFiles = fs.readdirSync(casesDir);
 
 for (const idlFile of idlFiles) {
   test(idlFile, () => {
-    const outputFile = path.resolve(outputDir, path.basename(idlFile, ".idl") + ".js");
+    const outputFile = path.resolve(outputDir, path.basename(idlFile, ".webidl") + ".js");
     const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
     expect(output).toMatchSnapshot();

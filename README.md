@@ -110,11 +110,11 @@ The main module's default export is a class which you can construct with a few o
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name.
 - `suppressErrors`: set to true to suppress errors during generation.
 
-The `addSource()` method can then be called multiple times to add directories containing `.idl` IDL files and `.js` implementation class files.
+The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
 
 Finally, the `generate()` method will generate corresponding wrapper class files in the given directory.
 
-In this example, a file at `idl/SomeInterface.idl` would generate a new wrapper class at `wrappers/SomeInterface.js`, which would refer to an implementation class at `impls/SomeInterface-impl.js`. (In practice, usually at least two of these directories are the same, making `implSuffix` a useful option.)
+In this example, a file at `idl/SomeInterface.webidl` would generate a new wrapper class at `wrappers/SomeInterface.js`, which would refer to an implementation class at `impls/SomeInterface-impl.js`. (In practice, usually at least two of these directories are the same, making `implSuffix` a useful option.)
 
 The transformer will also generate a file named `utils.js` inside the wrapper class directory, which contains utilities used by all the wrapper class files.
 

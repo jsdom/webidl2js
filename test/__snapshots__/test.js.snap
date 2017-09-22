@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dictionary.idl 1`] = `
+exports[`Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -80,7 +80,7 @@ module.exports = {
 "
 `;
 
-exports[`Factory.idl 1`] = `
+exports[`Factory.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -236,7 +236,7 @@ const Impl = require(\\"../implementations/Factory.js\\");
 "
 `;
 
-exports[`LegacyArrayClass.idl 1`] = `
+exports[`LegacyArrayClass.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -355,7 +355,7 @@ const Impl = require(\\"../implementations/LegacyArrayClass.js\\");
 "
 `;
 
-exports[`MixedIn.idl 1`] = `
+exports[`MixedIn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -638,7 +638,7 @@ const Impl = require(\\"../implementations/MixedIn.js\\");
 "
 `;
 
-exports[`Mixin.idl 1`] = `
+exports[`Mixin.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -833,7 +833,7 @@ const Impl = require(\\"../implementations/Mixin.js\\");
 "
 `;
 
-exports[`MixinInherited.idl 1`] = `
+exports[`MixinInherited.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -985,7 +985,7 @@ const Impl = require(\\"../implementations/MixinInherited.js\\");
 "
 `;
 
-exports[`MixinMixin.idl 1`] = `
+exports[`MixinMixin.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1129,7 +1129,7 @@ const Impl = require(\\"../implementations/MixinMixin.js\\");
 "
 `;
 
-exports[`Overloads.idl 1`] = `
+exports[`Overloads.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1281,7 +1281,7 @@ const Impl = require(\\"../implementations/Overloads.js\\");
 "
 `;
 
-exports[`PromiseTypes.idl 1`] = `
+exports[`PromiseTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1439,7 +1439,7 @@ const Impl = require(\\"../implementations/PromiseTypes.js\\");
 "
 `;
 
-exports[`SeqAndRec.idl 1`] = `
+exports[`SeqAndRec.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1751,7 +1751,7 @@ const Impl = require(\\"../implementations/SeqAndRec.js\\");
 "
 `;
 
-exports[`Static.idl 1`] = `
+exports[`Static.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1905,7 +1905,7 @@ const Impl = require(\\"../implementations/Static.js\\");
 "
 `;
 
-exports[`Storage.idl 1`] = `
+exports[`Storage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2283,7 +2283,7 @@ const Impl = require(\\"../implementations/Storage.js\\");
 "
 `;
 
-exports[`StringifierAttribute.idl 1`] = `
+exports[`StringifierAttribute.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2407,7 +2407,7 @@ const Impl = require(\\"../implementations/StringifierAttribute.js\\");
 "
 `;
 
-exports[`StringifierDefaultOperation.idl 1`] = `
+exports[`StringifierDefaultOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2519,7 +2519,7 @@ const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
 "
 `;
 
-exports[`StringifierNamedOperation.idl 1`] = `
+exports[`StringifierNamedOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2639,7 +2639,7 @@ const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
 "
 `;
 
-exports[`StringifierOperation.idl 1`] = `
+exports[`StringifierOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2751,7 +2751,7 @@ const Impl = require(\\"../implementations/StringifierOperation.js\\");
 "
 `;
 
-exports[`TypedefsAndUnions.idl 1`] = `
+exports[`TypedefsAndUnions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3246,7 +3246,7 @@ const Impl = require(\\"../implementations/TypedefsAndUnions.js\\");
 "
 `;
 
-exports[`URL.idl 1`] = `
+exports[`URL.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3646,7 +3646,7 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
-exports[`URLList.idl 1`] = `
+exports[`URLList.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3955,7 +3955,7 @@ const Impl = require(\\"../implementations/URLList.js\\");
 "
 `;
 
-exports[`URLSearchParams.idl 1`] = `
+exports[`URLSearchParams.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4408,7 +4408,7 @@ const Impl = require(\\"../implementations/URLSearchParams.js\\");
 "
 `;
 
-exports[`URLSearchParamsCollection.idl 1`] = `
+exports[`URLSearchParamsCollection.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4770,7 +4770,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
 `;
 
-exports[`URLSearchParamsCollection2.idl 1`] = `
+exports[`URLSearchParamsCollection2.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5103,7 +5103,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
 `;
 
-exports[`UnderscoredProperties.idl 1`] = `
+exports[`UnderscoredProperties.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5347,7 +5347,7 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`Unforgeable.idl 1`] = `
+exports[`Unforgeable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5552,7 +5552,7 @@ const Impl = require(\\"../implementations/Unforgeable.js\\");
 "
 `;
 
-exports[`UnforgeableMap.idl 1`] = `
+exports[`UnforgeableMap.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5844,7 +5844,7 @@ const Impl = require(\\"../implementations/UnforgeableMap.js\\");
 "
 `;
 
-exports[`Variadic.idl 1`] = `
+exports[`Variadic.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6029,7 +6029,7 @@ const Impl = require(\\"../implementations/Variadic.js\\");
 "
 `;
 
-exports[`ZeroArgConstructor.idl 1`] = `
+exports[`ZeroArgConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
