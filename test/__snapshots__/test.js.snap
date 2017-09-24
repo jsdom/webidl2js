@@ -195,14 +195,17 @@ module.exports = {
     return iface;
   }, // createInterface
 
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -216,8 +219,8 @@ module.exports = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -278,14 +281,17 @@ Object.defineProperty(LegacyArrayClass.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -299,8 +305,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -363,6 +369,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const Mixin = require(\\"./Mixin.js\\");
+const MixinMixin = require(\\"./MixinMixin.js\\");
+const MixinInherited = require(\\"./MixinInherited.js\\");
 
 function MixedIn() {
   throw new TypeError(\\"Illegal constructor\\");
@@ -374,8 +382,6 @@ Object.defineProperty(MixedIn, \\"prototype\\", {
   enumerable: false,
   configurable: false
 });
-
-Mixin.mixedInto.push(MixedIn);
 
 MixedIn.prototype.mixedInOp = function mixedInOp() {
   if (!this || !module.exports.is(this)) {
@@ -561,14 +567,17 @@ Object.defineProperty(MixedIn.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -582,8 +591,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -634,6 +643,12 @@ const iface = {
 }; // iface
 module.exports = iface;
 
+Mixin._mixedIntoPredicates.push(module.exports.is);
+
+MixinMixin._mixedIntoPredicates.push(module.exports.is);
+
+MixinInherited._mixedIntoPredicates.push(module.exports.is);
+
 const Impl = require(\\"../implementations/MixedIn.js\\");
 "
 `;
@@ -661,8 +676,6 @@ Object.defineProperty(Mixin, \\"prototype\\", {
   enumerable: false,
   configurable: false
 });
-
-MixinMixin.mixedInto.push(Mixin);
 
 Mixin.prototype.mixinOp = function mixinOp() {
   if (!this || !module.exports.is(this)) {
@@ -756,14 +769,17 @@ Object.defineProperty(Mixin.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -777,8 +793,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -828,6 +844,8 @@ const iface = {
   expose: {}
 }; // iface
 module.exports = iface;
+
+MixinMixin._mixedIntoPredicates.push(module.exports.is);
 
 const Impl = require(\\"../implementations/Mixin.js\\");
 "
@@ -910,14 +928,17 @@ Object.defineProperty(MixinInherited.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -931,8 +952,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -1054,14 +1075,17 @@ Object.defineProperty(MixinMixin.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -1075,8 +1099,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -1204,14 +1228,17 @@ Object.defineProperty(Overloads.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -1225,8 +1252,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -1362,14 +1389,17 @@ Object.defineProperty(PromiseTypes.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -1383,8 +1413,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -1674,14 +1704,17 @@ Object.defineProperty(SeqAndRec.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -1695,8 +1728,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -1828,14 +1861,17 @@ Object.defineProperty(Static.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -1849,8 +1885,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -2042,14 +2078,17 @@ Object.defineProperty(Storage.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -2063,8 +2102,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -2230,7 +2269,7 @@ const iface = {
         if (typeof P === \\"symbol\\") {
           return Reflect.defineProperty(target, P, desc);
         }
-        if (!Object.prototype.hasOwnProperty.call(target, P)) {
+        if (!utils.hasOwn(target, P)) {
           if (desc.get || desc.set) {
             return false;
           }
@@ -2330,14 +2369,17 @@ Object.defineProperty(StringifierAttribute.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -2351,8 +2393,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -2442,14 +2484,17 @@ Object.defineProperty(StringifierDefaultOperation.prototype, Symbol.toStringTag,
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -2463,8 +2508,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -2562,14 +2607,17 @@ Object.defineProperty(StringifierNamedOperation.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -2583,8 +2631,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -2674,14 +2722,17 @@ Object.defineProperty(StringifierOperation.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -2695,8 +2746,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -3169,14 +3220,17 @@ Object.defineProperty(TypedefsAndUnions.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -3190,8 +3244,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -3568,14 +3622,17 @@ Object.defineProperty(URL.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -3589,8 +3646,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -3718,14 +3775,17 @@ Object.defineProperty(URLList.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -3739,8 +3799,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -4319,14 +4379,17 @@ Object.defineProperty(URLSearchParams.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -4340,8 +4403,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -4507,14 +4570,17 @@ Object.defineProperty(URLSearchParamsCollection.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -4528,8 +4594,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -4722,7 +4788,7 @@ const iface = {
         if (utils.isArrayIndexPropName(P)) {
           return false;
         }
-        if (!Object.prototype.hasOwnProperty.call(target, P)) {
+        if (!utils.hasOwn(target, P)) {
           const creating = !(target[impl].namedItem(P) !== null);
           if (!creating) {
             return false;
@@ -4809,14 +4875,17 @@ Object.defineProperty(URLSearchParamsCollection2.prototype, Symbol.toStringTag, 
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -4830,8 +4899,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -5041,7 +5110,7 @@ const iface = {
         if (utils.isArrayIndexPropName(P)) {
           return false;
         }
-        if (!Object.prototype.hasOwnProperty.call(target, P)) {
+        if (!utils.hasOwn(target, P)) {
           if (desc.get || desc.set) {
             return false;
           }
@@ -5122,8 +5191,6 @@ Object.defineProperty(UnderscoredProperties, \\"prototype\\", {
   enumerable: false,
   configurable: false
 });
-
-MixinMixin.mixedInto.push(UnderscoredProperties);
 
 UnderscoredProperties.prototype.operation = function operation(sequence) {
   if (!this || !module.exports.is(this)) {
@@ -5270,14 +5337,17 @@ Object.defineProperty(UnderscoredProperties.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -5291,8 +5361,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -5343,6 +5413,8 @@ const iface = {
 }; // iface
 module.exports = iface;
 
+MixinMixin._mixedIntoPredicates.push(module.exports.is);
+
 const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
@@ -5374,14 +5446,17 @@ Object.defineProperty(Unforgeable.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -5395,8 +5470,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -5579,14 +5654,17 @@ Object.defineProperty(UnforgeableMap.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -5600,8 +5678,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -5786,7 +5864,7 @@ const iface = {
           return Reflect.defineProperty(target, P, desc);
         }
         if (![\\"a\\"].includes(P)) {
-          if (!Object.prototype.hasOwnProperty.call(target, P)) {
+          if (!utils.hasOwn(target, P)) {
             if (desc.get || desc.set) {
               return false;
             }
@@ -5952,14 +6030,17 @@ Object.defineProperty(Variadic.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -5973,8 +6054,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
@@ -6056,14 +6137,17 @@ Object.defineProperty(ZeroArgConstructor.prototype, Symbol.toStringTag, {
 });
 
 const iface = {
-  mixedInto: [],
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
         return true;
       }
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (obj instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
           return true;
         }
       }
@@ -6077,8 +6161,8 @@ const iface = {
       }
 
       const wrapper = utils.wrapperForImpl(obj);
-      for (let i = 0; i < module.exports.mixedInto.length; ++i) {
-        if (wrapper instanceof module.exports.mixedInto[i]) {
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
           return true;
         }
       }
