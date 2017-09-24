@@ -274,7 +274,7 @@ We hope to fix this problem in the overload resolution overhaul ([#29](https://g
 
 #### Static operations
 
-IDL static operations are declared as properties on the constructor, to mimic how the generated class works. This makes the ES2015 `class` syntax especially idiomatic for defining an interface implementation.
+IDL static operations are declared as properties on the constructor, to mimic how the generated class works. This makes using `class` syntax especially idiomatic for defining an interface implementation, as you can just use `static` methods.
 
 ### Properties implementing IDL attributes
 
@@ -284,7 +284,7 @@ Note that for IDL attributes that are `readonly`, these properties do not need t
 
 #### Static attributes
 
-Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute. Note, unless the `[WebIDL2JSFactory]` extended attribute is specified on the interface, any mutations to writable static attributes of the class will reflect on other places that use the same interface.
+Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute. Note that, unless the `[WebIDL2JSFactory]` extended attribute is specified on the interface, any mutations to writable static attributes of the class will reflect on other places that use the same interface.
 
 ### toString method implementing IDL stringifier
 
