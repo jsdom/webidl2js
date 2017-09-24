@@ -272,11 +272,19 @@ void overloaded2(unsigned long first, DOMString... strings);
 
 We hope to fix this problem in the overload resolution overhaul ([#29](https://github.com/jsdom/webidl2js/issues/29)). Right now, however, manual conversions will be needed for overloaded variadic operations.
 
+#### Static operations
+
+IDL static operations are declared as properties on the constructor, to mimic how the generated class works. This makes using `class` syntax especially idiomatic for defining an interface implementation, as you can just use `static` methods.
+
 ### Properties implementing IDL attributes
 
 IDL attributes that you wish to implement need to have corresponding properties on the implementation class. As with operations, the wrapper class will take care of type conversions for setter arguments, and convert any impls you return into wrappers.
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
+
+#### Static attributes
+
+Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute. Note that, unless the `[WebIDL2JSFactory]` extended attribute is specified on the interface, any mutations to writable static attributes of the class will reflect on other places that use the same interface.
 
 ### toString method implementing IDL stringifier
 
