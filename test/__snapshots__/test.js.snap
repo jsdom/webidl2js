@@ -87,6 +87,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
+const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 
 function Enum() {
@@ -135,7 +136,10 @@ Object.defineProperty(Enum.prototype, \\"attr\\", {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    V = convertRequestDestination(V, { context: \\"Failed to set the 'attr' property on 'Enum': The provided value\\" });
+    V = \`\${V}\`;
+    if (!RequestDestination.enumerationValues.has(V)) {
+      return;
+    }
 
     this[impl][\\"attr\\"] = V;
   },
@@ -1643,6 +1647,7 @@ const enumerationValues = new Set([
   \\"xslt\\"
 ]);
 module.exports = {
+  enumerationValues,
   convert(value, { context = \\"The provided value\\" } = {}) {
     const string = \`\${value}\`;
     if (!enumerationValues.has(value)) {
