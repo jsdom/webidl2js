@@ -1,5 +1,6 @@
 interface TypedefsAndUnions {
   void numOrStrConsumer(NumOrStr a);
+  void numOrEnumConsumer((double or RequestDestination)? a);
   void numOrStrOrNullConsumer(NumOrStrOrNull a);
   void numOrStrOrURLOrNullConsumer(NumOrStrOrURLOrNull? a);
   void urlMapInnerConsumer(URLMapInner a);

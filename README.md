@@ -362,6 +362,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
   - `iterable<>` declarations
   - Class strings (with the semantics of [heycam/webidl#357](https://github.com/heycam/webidl/pull/357))
 - Dictionary types
+- Enumeration types
 - Union types
 - Callback function types, somewhat
 - Nullable types
@@ -392,7 +393,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 Notable missing features include:
 
 - Namespaces
-- Enumeration types ([#28](https://github.com/jsdom/webidl2js/issues/28))
 - Callback interfaces
 - `maplike<>` and `setlike<>`
 - `[AllowShared]`
