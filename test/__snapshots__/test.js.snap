@@ -3535,7 +3535,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 
 function URL(url) {
-  if (!new.target) {
+  if (new.target === undefined) {
     throw new TypeError(
       \\"Failed to construct 'URL'. Please use the 'new' operator; this constructor \\" + \\"cannot be called as a function.\\"
     );
