@@ -4439,7 +4439,7 @@ URLSearchParams.prototype.append = function append(name, value) {
   return this[impl].append(...args);
 };
 
-URLSearchParams.prototype.delete = function _(name) {
+URLSearchParams.prototype.delete = function _delete(name) {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
   }
@@ -5465,7 +5465,7 @@ UnderscoredProperties.prototype.mixinMixinOp = function mixinMixinOp() {
   return this[impl].mixinMixinOp();
 };
 
-UnderscoredProperties.static = function _(_void) {
+UnderscoredProperties.static = function _static(_void) {
   if (arguments.length < 1) {
     throw new TypeError(
       \\"Failed to execute 'static' on 'UnderscoredProperties': \\" +
