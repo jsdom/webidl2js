@@ -228,49 +228,11 @@ However, note that apart from Web IDL container return values, this impl-back-to
 
 The same holds true in reverse: if you accept some other container as an argument, then webidl2js will not automatically be able to find all the wrappers it contains an convert them into impls; you will need to use `implFromWrapper` before processing them.
 
+Variadic operations are fully supported by webidl2js.
+
 #### Overloaded operations
 
-One other subtlety here is overloads: if the IDL file defines overloads for a given operation, webidl2js is not always as helpful as it could be.
-
-1. webidl2js does not yet implement the [overload resolution algorithm](https://heycam.github.io/webidl/#dfn-overload-resolution-algorithm) fully. Take the `overload1()` operations below:
-
-   ```webidl
-   void overload1(DOMString first, long second);
-   void overload1(DOMString first, long second, DOMString third);
-   ```
-
-   webidl2js fully handles type conversion for both `first` and `second` arguments, but does not try to convert the third argument even if it is provided.
-
-   Similarly, consider the following `overload2()` operations:
-
-   ```webidl
-   void overload2(Blob first, long second);
-   void overload2(long first, long second);
-   ```
-
-   webidl2js only converts `second` argument because its type is unambiguous, and calls the implementation method with `first` unconverted. In particular, this means that webidl2js will not try to unwrap the `first` argument into a `Blob` implementation class, even if it is a `Blob`.
-
-2. webidl2js does not dispatch overloaded operations to separate implementation class methods, but instead performs type conversions if possible and then sends the result to the same backing method.
-
-We're hoping to fix both of these problems in [#29](https://github.com/jsdom/webidl2js/issues/29). But in the meantime, properly implementing overloads requires doing some extra type-checking (often using appropriate [`is()`](#isvalue) functions) to determine which case of the overload you ended up in, and manual conversion with [webidl-conversions][] and/or unwrapping.
-
-#### Variadic operations
-
-Variadic operations are fully supported by webidl2js, but only if the particular operation is not overloaded. So while type conversions for the `simple1` and `simple2` operations below are fully implemented, webidl2js will not provide any variadic semantics for `overloaded1()` or `overloaded2()`.
-
-```webidl
-void simple1(DOMString... strings);
-
-void simple2(DOMString first, URL... urls);
-
-void overloaded1(DOMString... strings);
-void overloaded1(unsigned long... numbers);
-
-void overloaded2(DOMString first, DOMString... strings);
-void overloaded2(unsigned long first, DOMString... strings);
-```
-
-We hope to fix this problem in the overload resolution overhaul ([#29](https://github.com/jsdom/webidl2js/issues/29)). Right now, however, manual conversions will be needed for overloaded variadic operations.
+In the case of overloaded operations, webidl2js is not always as helpful as it could be. Due to the fact that JavaScript does not have a C++-like method overloading system, all overloads of a method are dispatched to the same implementation method, which means that the implementation class would need to do some secondary overload resolution to determine which overload is actually called.
 
 #### Static operations
 
@@ -375,7 +337,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Basic types (via [webidl-conversions][])
 - Mixins, i.e. `implements`
 - Overload resolution (although [tricky cases are not easy on the implementation class](#overloaded-operations))
-- Variadic arguments ([only non-overloaded operations](#variadic-operations) are supported though)
+- Variadic arguments
 - `[Clamp]`
 - `[Constructor]`
 - `[EnforceRange]`

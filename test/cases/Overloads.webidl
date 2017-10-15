@@ -1,8 +1,19 @@
+[Constructor,
+ Constructor(DOMString arg1),
+ Constructor(URL arg1)]
 interface Overloads {
   DOMString compatible(DOMString arg1);
   byte compatible(DOMString arg1, DOMString arg2);
   Promise<DOMString> compatible(DOMString arg1, DOMString arg2, optional long arg3 = 0);
 
-  DOMString incompatible(DOMString arg1);
-  byte incompatible(long arg1);
+  DOMString incompatible1(DOMString arg1);
+  byte incompatible1(long arg1);
+
+  DOMString incompatible2(DOMString arg1);
+  byte incompatible2(DOMString arg1, DOMString arg2);
+
+  DOMString incompatible3(DOMString arg1, optional URL arg2);
+  byte incompatible3(DOMString arg1, DOMString arg2);
+  byte incompatible3(DOMString arg1, BufferSource arg2);
+  byte incompatible3(DOMString arg1, long arg2, BufferSource arg3, BufferSource arg4);
 };
