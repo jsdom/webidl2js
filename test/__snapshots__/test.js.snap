@@ -532,6 +532,17 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 
 function HTMLConstructor() {
+  if (new.target === undefined) {
+    throw new TypeError(
+      \\"Failed to construct 'HTMLConstructor'. Please use the 'new' operator; this constructor \\" +
+        \\"cannot be called as a function.\\"
+    );
+  }
+
+  if (new.target === HTMLConstructor) {
+    throw new TypeError(\\"Illegal constructor\\");
+  }
+
   iface.setup(this, [], { newTarget: new.target });
 }
 
@@ -554,14 +565,13 @@ HTMLConstructor.prototype.focus = function focus() {
   if (!this || !module.exports.is(this)) {
     throw new TypeError(\\"Illegal invocation\\");
   }
-
   const args = [];
-  for (let i = 0; i < arguments.length && i < 1; ++i) {
-    args[i] = arguments[i];
-  }
-
-  if (args[0] !== undefined) {
-    args[0] = utils.tryImplForWrapper(args[0]);
+  {
+    let curArg = arguments[0];
+    if (curArg !== undefined) {
+      curArg = utils.tryImplForWrapper(curArg);
+    }
+    args.push(curArg);
   }
   return this[impl].focus(...args);
 };
