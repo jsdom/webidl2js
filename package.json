@@ -8,11 +8,11 @@
     "pn": "^1.0.0",
     "prettier": "^1.5.3",
     "webidl-conversions": "^4.0.0",
-    "webidl2": "^4.1.0"
+    "webidl2": "^8.1.0"
   },
   "devDependencies": {
     "eslint": "^4.3.0",
-    "jest": "^20.0.4"
+    "jest": "^21.2.1"
   },
   "scripts": {
     "test": "jest",
