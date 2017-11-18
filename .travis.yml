@@ -4,8 +4,8 @@ node_js:
   - stable
 
 script:
-  - npm test
-  - npm run lint
+  - yarn test
+  - yarn lint
 
 branches:
   only:
