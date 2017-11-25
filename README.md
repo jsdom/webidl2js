@@ -350,7 +350,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[SameObject]` (automatic caching)
 - `[TreatNullAs]`
 - `[Unforgeable]`
-- `[Unscopeable]`
+- `[Unscopable]`
 
 Notable missing features include:
 
