@@ -9,13 +9,13 @@ As a very minimal example, the Web IDL file
 ```webidl
 interface SomeInterface {
   unsigned long long add(unsigned long x, unsigned long y);
-}
+};
 ```
 
 combined with the JavaScript implementation class file
 
 ```js
-exports.implementation = class {
+exports.implementation = class SomeInterfaceImpl {
   add(x, y) {
     return x + y;
   }
@@ -30,38 +30,38 @@ const impl = require("./utils.js").implSymbol;
 
 const Impl = require("./SomeInterface-impl.js").implementation;
 
-function SomeInterface() {
-  throw new TypeError("Illegal constructor");
+class SomeInterface {
+  constructor() {
+    throw new TypeError("Illegal constructor");
+  }
+
+  add(x, y) {
+    if (!exports.is(this)) {
+      throw new TypeError("Illegal invocation");
+    }
+    if (arguments.length < 2) {
+      throw new TypeError(
+        "Failed to execute 'add' on 'SomeInterface': 2 arguments required, but only " +
+          arguments.length +
+          " present."
+      );
+    }
+
+    const args = [];
+    args[0] = conversions["unsigned long"](arguments[0], {
+      context: "Failed to execute 'add' on 'SomeInterface': parameter 1"
+    });
+    args[1] = conversions["unsigned long"](arguments[1], {
+      context: "Failed to execute 'add' on 'SomeInterface': parameter 2"
+    });
+
+    return this[impl].add(...args);
+  }
 }
 
-SomeInterface.prototype.add = function add(x, y) {
-  if (!exports.is(this)) {
-    throw new TypeError("Illegal invocation");
-  }
-  if (arguments.length < 2) {
-    throw new TypeError(
-      "Failed to execute 'add' on 'SomeInterface': 2 arguments required, but only " +
-        arguments.length +
-        " present."
-    );
-  }
-
-  const args = [];
-  args[0] = conversions["unsigned long"](arguments[0], {
-    context: "Failed to execute 'add' on 'SomeInterface': parameter 1"
-  });
-  args[1] = conversions["unsigned long"](arguments[1], {
-    context: "Failed to execute 'add' on 'SomeInterface': parameter 2"
-  });
-
-  this[impl].add(...args);
-};
-
-Object.defineProperty(SomeInterface.prototype, Symbol.toStringTag, {
-  value: "SomeInterface",
-  writable: false,
-  enumerable: false,
-  configurable: true
+Object.defineProperties(SomeInterface.prototype, {
+  add: { enumerable: true },
+  [Symbol.toStringTag]: { value: "SomeInterface", configurable: true }
 });
 
 exports.interface = SomeInterface;
@@ -82,6 +82,7 @@ The above is a simplification of the actual generated code, but should give you 
   - Brand-checking on operation invocation
   - Argument-length checking for non-optional arguments
   - Argument conversion according to the rules specified in Web IDL for given argument types
+  - Enumerability of operations
   - @@toStringTag semantics to make `Object.prototype.toString.call()` behave correctly
 - After performing Web IDL-related processing, webidl2js delegates to the implementation class for the non-boilerplate parts of `add()`. This allows you to focus on writing the interesting parts of the implementation without worrying about types, brand-checking, parameter-processing, etc.
 - webidl2js attempts to generate informative error messages using what it knows.
