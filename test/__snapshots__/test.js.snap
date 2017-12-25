@@ -7049,3 +7049,61 @@ module.exports = iface;
 const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
 "
 `;
+
+exports[`bundle-entry.js 1`] = `
+"\\"use strict\\";
+
+const allExports = Object.create(null);
+exports.bootstrap = function (globalName, globalObj, defaultPrivateData) {
+  const exportsWithFactories = Object.assign(Object.create(null), allExports);
+  for (const name of Object.keys(exportsWithFactories)) {
+    const obj = exportsWithFactories[name];
+    if (typeof obj.expose === \\"function\\") {
+      obj.expose(globalName, globalObj);
+    } else if (typeof obj.createInterface === \\"function\\") {
+      const iface = obj.createInterface(defaultPrivateData);
+      // Mix in is()/isImpl().
+      Object.assign(iface, obj);
+      exportsWithFactories[name] = iface;
+      iface.expose(globalName, globalObj);
+    }
+  }
+  return exportsWithFactories;
+};
+
+// Below this line, exports will be added.
+allExports[\\"DictionaryConvert\\"] = require(\\"./DictionaryConvert\\");
+allExports[\\"Enum\\"] = require(\\"./Enum\\");
+allExports[\\"Factory\\"] = require(\\"./Factory\\");
+allExports[\\"Global\\"] = require(\\"./Global\\");
+allExports[\\"LegacyArrayClass\\"] = require(\\"./LegacyArrayClass\\");
+allExports[\\"MixedIn\\"] = require(\\"./MixedIn\\");
+allExports[\\"Mixin\\"] = require(\\"./Mixin\\");
+allExports[\\"MixinInherited\\"] = require(\\"./MixinInherited\\");
+allExports[\\"MixinMixin\\"] = require(\\"./MixinMixin\\");
+allExports[\\"Overloads\\"] = require(\\"./Overloads\\");
+allExports[\\"PromiseTypes\\"] = require(\\"./PromiseTypes\\");
+allExports[\\"Reflect\\"] = require(\\"./Reflect\\");
+allExports[\\"SeqAndRec\\"] = require(\\"./SeqAndRec\\");
+allExports[\\"Static\\"] = require(\\"./Static\\");
+allExports[\\"Storage\\"] = require(\\"./Storage\\");
+allExports[\\"StringifierAttribute\\"] = require(\\"./StringifierAttribute\\");
+allExports[\\"StringifierDefaultOperation\\"] = require(\\"./StringifierDefaultOperation\\");
+allExports[\\"StringifierNamedOperation\\"] = require(\\"./StringifierNamedOperation\\");
+allExports[\\"StringifierOperation\\"] = require(\\"./StringifierOperation\\");
+allExports[\\"TypedefsAndUnions\\"] = require(\\"./TypedefsAndUnions\\");
+allExports[\\"URL\\"] = require(\\"./URL\\");
+allExports[\\"URLList\\"] = require(\\"./URLList\\");
+allExports[\\"URLSearchParams\\"] = require(\\"./URLSearchParams\\");
+allExports[\\"URLSearchParamsCollection\\"] = require(\\"./URLSearchParamsCollection\\");
+allExports[\\"URLSearchParamsCollection2\\"] = require(\\"./URLSearchParamsCollection2\\");
+allExports[\\"UnderscoredProperties\\"] = require(\\"./UnderscoredProperties\\");
+allExports[\\"Unforgeable\\"] = require(\\"./Unforgeable\\");
+allExports[\\"UnforgeableMap\\"] = require(\\"./UnforgeableMap\\");
+allExports[\\"Unscopable\\"] = require(\\"./Unscopable\\");
+allExports[\\"Variadic\\"] = require(\\"./Variadic\\");
+allExports[\\"ZeroArgConstructor\\"] = require(\\"./ZeroArgConstructor\\");
+allExports[\\"Dictionary\\"] = require(\\"./Dictionary\\");
+allExports[\\"RequestDestination\\"] = require(\\"./RequestDestination\\");
+"
+`;

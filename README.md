@@ -299,6 +299,12 @@ This can be useful when you are given a wrapper, but need to modify its inaccess
 
 Returns the corresponding impl class instance for a given wrapper class instance, or returns the argument back if it is not an implementation class instance.
 
+## The generated `bundle-entry.js` file
+
+webidl2js also generates a `bundle-entry.js` file in the same directory as all interface wrapper files and the utilities file. This file contains only one exported function, `bootstrap(globalName, globalObj, defaultPrivateData)`, which when called will expose all interfaces generated onto the provided `globalObj`. For interfaces annotated with `[WebIDL2JSFactory]` (documented below), it will automatically create the interface with the given `defaultPrivateData` and expose them the same way as ordinary interfaces. The return value is an object containing all interface wrappers, including the newly created ones for `[WebIDL2JSFactory]`.
+
+As the name implies, this file is also fit for bundling all interface files through a code bundler such as Browserify and webpack, for faster loading of the initial interface wrappers. Care must be taken however to avoid bundling the implementation files as well.
+
 ## Web IDL features
 
 webidl2js is implementing an ever-growing subset of the Web IDL specification. So far we have implemented:
