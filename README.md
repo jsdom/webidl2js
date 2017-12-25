@@ -173,23 +173,11 @@ jsdom does this for `Window`, which is written in custom, non-webidl2js-generate
 
 This export is the wrapper class interface, suitable for example for putting on a global scope or exporting to module consumers who don't know anything about webidl2js.
 
-#### `expose`
+#### `expose(globalName, obj)`
 
-This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]` to generate a data structure of the form:
+This function allows the interface object to be automatically exposed on a global object `obj`, taking into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]`. The `globalName` parameter specifies the [global name](https://heycam.github.io/webidl/#dfn-global-name) of the interface the provided global object implements, such as `Window`, `Worker`, and `Worklet`.
 
-```js
-{
-  nameOfGlobal1: {
-    nameOfInterface: InterfaceClass
-  },
-  nameOfGlobal2: {
-    nameOfInterface: InterfaceClass
-  },
-  // etc.
-}
-```
-
-This format may seem a bit verbose, but eventually when we support `[NamedConstructor]`, there will be potentially more than one key/value pair per global, and it will show its worth.
+A limitation of the current implementation of `expose()` is that it does not yet support the `[SecureContext]` extended attribute, and all members of the interface are exposed regardless of the origin of that global object. This is expected to be remedied in the future.
 
 ### For dictionaries
 
@@ -342,7 +330,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[Constructor]`
 - `[EnforceRange]`
-- `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[Exposed]` and `[NoInterfaceObject]` (through the exported `expose()` function)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[OverrideBuiltins]`
