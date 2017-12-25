@@ -118,12 +118,7 @@ class DictionaryConvert {
 }
 Object.defineProperties(DictionaryConvert.prototype, {
   op: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"DictionaryConvert\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -184,8 +179,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -264,12 +257,7 @@ class Enum {
 Object.defineProperties(Enum.prototype, {
   op: { enumerable: true },
   attr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Enum\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -330,8 +318,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -398,27 +384,10 @@ module.exports = {
     Object.defineProperties(Factory.prototype, {
       method: { enumerable: true },
       attribute: { enumerable: true },
-      [Symbol.toStringTag]: {
-        value: \\"Factory\\",
-        configurable: true,
-        enumerable: false,
-        writable: false
-      },
-      constant: {
-        value: 42,
-        configurable: false,
-        enumerable: true,
-        writable: false
-      }
+      [Symbol.toStringTag]: { value: \\"Factory\\", configurable: true },
+      constant: { value: 42, enumerable: true }
     });
-    Object.defineProperties(Factory, {
-      constant: {
-        value: 42,
-        configurable: false,
-        enumerable: true,
-        writable: false
-      }
-    });
+    Object.defineProperties(Factory, { constant: { value: 42, enumerable: true } });
     const iface = {
       create(constructorArgs, privateData) {
         let obj = Object.create(Factory.prototype);
@@ -445,8 +414,6 @@ module.exports = {
         this._internalSetup(obj);
         Object.defineProperty(obj, impl, {
           value: new Impl.implementation(constructorArgs, privateData),
-          writable: false,
-          enumerable: false,
           configurable: true
         });
 
@@ -521,14 +488,7 @@ class Global {
     throw new TypeError(\\"Illegal constructor\\");
   }
 }
-Object.defineProperties(Global.prototype, {
-  [Symbol.toStringTag]: {
-    value: \\"Global\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
+Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -673,8 +633,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -719,12 +677,7 @@ class LegacyArrayClass {
 Object.setPrototypeOf(LegacyArrayClass.prototype, Array.prototype);
 Object.defineProperties(LegacyArrayClass.prototype, {
   length: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"LegacyArrayClass\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -785,8 +738,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -953,62 +904,17 @@ Object.defineProperties(MixedIn.prototype, {
   mixinAttr: { enumerable: true },
   mixinMixinAttr: { enumerable: true },
   mixinInheritedAttr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"MixedIn\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  mixedInConst: {
-    value: 43,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinInheritedConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"MixedIn\\", configurable: true },
+  mixedInConst: { value: 43, enumerable: true },
+  mixinConst: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true },
+  mixinInheritedConst: { value: 42, enumerable: true }
 });
 Object.defineProperties(MixedIn, {
-  mixedInConst: {
-    value: 43,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinInheritedConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  mixedInConst: { value: 43, enumerable: true },
+  mixinConst: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true },
+  mixinInheritedConst: { value: 42, enumerable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1069,8 +975,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -1173,38 +1077,13 @@ Object.defineProperties(Mixin.prototype, {
   mixinMixinOp: { enumerable: true },
   mixinAttr: { enumerable: true },
   mixinMixinAttr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Mixin\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  mixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Mixin\\", configurable: true },
+  mixinConst: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true }
 });
 Object.defineProperties(Mixin, {
-  mixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  mixinConst: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1267,8 +1146,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -1342,27 +1219,10 @@ Object.defineProperties(MixinInherited.prototype, {
   mixinInheritedOp: { enumerable: true },
   toString: { enumerable: true },
   mixinInheritedAttr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"MixinInherited\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  mixinInheritedConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"MixinInherited\\", configurable: true },
+  mixinInheritedConst: { value: 42, enumerable: true }
 });
-Object.defineProperties(MixinInherited, {
-  mixinInheritedConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
-});
+Object.defineProperties(MixinInherited, { mixinInheritedConst: { value: 42, enumerable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -1422,8 +1282,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -1486,27 +1344,10 @@ class MixinMixin {
 Object.defineProperties(MixinMixin.prototype, {
   mixinMixinOp: { enumerable: true },
   mixinMixinAttr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"MixinMixin\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"MixinMixin\\", configurable: true },
+  mixinMixinConst: { value: 42, enumerable: true }
 });
-Object.defineProperties(MixinMixin, {
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
-});
+Object.defineProperties(MixinMixin, { mixinMixinConst: { value: 42, enumerable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -1566,8 +1407,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -1909,12 +1748,7 @@ Object.defineProperties(Overloads.prototype, {
   incompatible1: { enumerable: true },
   incompatible2: { enumerable: true },
   incompatible3: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Overloads\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1975,8 +1809,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -2061,12 +1893,7 @@ class PromiseTypes {
 Object.defineProperties(PromiseTypes.prototype, {
   voidPromiseConsumer: { enumerable: true },
   promiseConsumer: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"PromiseTypes\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2127,8 +1954,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -2298,12 +2123,7 @@ Object.defineProperties(Reflect.prototype, {
   ReflectedUnsignedLong: { enumerable: true },
   ReflectionTest: { enumerable: true },
   withUnderscore: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Reflect\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2364,8 +2184,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -2633,12 +2451,7 @@ Object.defineProperties(SeqAndRec.prototype, {
   sequenceConsumer: { enumerable: true },
   sequenceConsumer2: { enumerable: true },
   frozenArrayConsumer: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"SeqAndRec\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2699,8 +2512,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -2775,12 +2586,7 @@ class Static {
 Object.defineProperties(Static.prototype, {
   def: { enumerable: true },
   abc: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Static\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
 });
 Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
 const iface = {
@@ -2842,8 +2648,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -2983,12 +2787,7 @@ Object.defineProperties(Storage.prototype, {
   removeItem: { enumerable: true },
   clear: { enumerable: true },
   length: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Storage\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3049,8 +2848,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -3266,12 +3063,7 @@ class StringifierAttribute {
 Object.defineProperties(StringifierAttribute.prototype, {
   attr: { enumerable: true },
   toString: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"StringifierAttribute\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3332,8 +3124,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -3377,12 +3167,7 @@ class StringifierDefaultOperation {
 }
 Object.defineProperties(StringifierDefaultOperation.prototype, {
   toString: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"StringifierDefaultOperation\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3443,8 +3228,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -3497,12 +3280,7 @@ class StringifierNamedOperation {
 Object.defineProperties(StringifierNamedOperation.prototype, {
   operation: { enumerable: true },
   toString: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"StringifierNamedOperation\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3563,8 +3341,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -3608,12 +3384,7 @@ class StringifierOperation {
 }
 Object.defineProperties(StringifierOperation.prototype, {
   toString: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"StringifierOperation\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3674,8 +3445,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -4120,12 +3889,7 @@ Object.defineProperties(TypedefsAndUnions.prototype, {
   arrayBufferViewDupConsumer: { enumerable: true },
   buf: { enumerable: true },
   time: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"TypedefsAndUnions\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4186,8 +3950,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -4465,12 +4227,7 @@ Object.defineProperties(URL.prototype, {
   search: { enumerable: true },
   searchParams: { enumerable: true },
   hash: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"URL\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4531,8 +4288,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -4597,42 +4352,12 @@ class URLList {
 Object.defineProperties(URLList.prototype, {
   item: { enumerable: true },
   length: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"URLList\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  [Symbol.iterator]: {
-    value: Array.prototype[Symbol.iterator],
-    configurable: true,
-    enumerable: false,
-    writable: true
-  },
-  keys: {
-    value: Array.prototype.keys,
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  values: {
-    value: Array.prototype[Symbol.iterator],
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  entries: {
-    value: Array.prototype.entries,
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  forEach: {
-    value: Array.prototype.forEach,
-    configurable: true,
-    enumerable: true,
-    writable: true
-  }
+  [Symbol.toStringTag]: { value: \\"URLList\\", configurable: true },
+  [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true },
+  keys: { value: Array.prototype.keys, configurable: true, enumerable: true, writable: true },
+  values: { value: Array.prototype[Symbol.iterator], configurable: true, enumerable: true, writable: true },
+  entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
+  forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4693,8 +4418,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -4918,8 +4641,6 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   },
   [Symbol.toStringTag]: {
     value: \\"URLSearchParams Iterator\\",
-    writable: false,
-    enumerable: false,
     configurable: true
   }
 });
@@ -5221,18 +4942,8 @@ Object.defineProperties(URLSearchParams.prototype, {
   values: { enumerable: true },
   entries: { enumerable: true },
   forEach: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"URLSearchParams\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  [Symbol.iterator]: {
-    value: URLSearchParams.prototype.entries,
-    configurable: true,
-    enumerable: false,
-    writable: true
-  }
+  [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
+  [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -5278,8 +4989,6 @@ const iface = {
     const iterator = Object.create(IteratorPrototype);
     Object.defineProperty(iterator, utils.iterInternalSymbol, {
       value: { target, kind, index: 0 },
-      writable: false,
-      enumerable: false,
       configurable: true
     });
     return iterator;
@@ -5304,8 +5013,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -5398,18 +5105,8 @@ Object.defineProperties(URLSearchParamsCollection.prototype, {
   item: { enumerable: true },
   namedItem: { enumerable: true },
   length: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"URLSearchParamsCollection\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  [Symbol.iterator]: {
-    value: Array.prototype[Symbol.iterator],
-    configurable: true,
-    enumerable: false,
-    writable: true
-  }
+  [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
+  [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -5470,8 +5167,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -5694,18 +5389,8 @@ class URLSearchParamsCollection2 extends URLSearchParamsCollection.interface {
   }
 }
 Object.defineProperties(URLSearchParamsCollection2.prototype, {
-  [Symbol.toStringTag]: {
-    value: \\"URLSearchParamsCollection2\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  [Symbol.iterator]: {
-    value: Array.prototype[Symbol.iterator],
-    configurable: true,
-    enumerable: false,
-    writable: true
-  }
+  [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
+  [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -5768,8 +5453,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -6127,39 +5810,14 @@ Object.defineProperties(UnderscoredProperties.prototype, {
   mixinMixinOp: { enumerable: true },
   attribute: { enumerable: true },
   mixinMixinAttr: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"UnderscoredProperties\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  const: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"UnderscoredProperties\\", configurable: true },
+  const: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true }
 });
 Object.defineProperties(UnderscoredProperties, {
   static: { enumerable: true },
-  const: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  },
-  mixinMixinConst: {
-    value: 42,
-    configurable: false,
-    enumerable: true,
-    writable: false
-  }
+  const: { value: 42, enumerable: true },
+  mixinMixinConst: { value: 42, enumerable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6220,8 +5878,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -6257,14 +5913,7 @@ class Unforgeable {
     throw new TypeError(\\"Illegal constructor\\");
   }
 }
-Object.defineProperties(Unforgeable.prototype, {
-  [Symbol.toStringTag]: {
-    value: \\"Unforgeable\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
+Object.defineProperties(Unforgeable.prototype, { [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -6409,8 +6058,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -6445,12 +6092,7 @@ class UnforgeableMap {
   }
 }
 Object.defineProperties(UnforgeableMap.prototype, {
-  [Symbol.toStringTag]: {
-    value: \\"UnforgeableMap\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6526,8 +6168,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -6758,18 +6398,8 @@ class Unscopable {
 }
 Object.defineProperties(Unscopable.prototype, {
   unscopableTest: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Unscopable\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  },
-  [Symbol.unscopables]: {
-    value: { unscopableTest: true },
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Unscopable\\", configurable: true },
+  [Symbol.unscopables]: { value: { unscopableTest: true }, configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6830,8 +6460,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -7014,12 +6642,7 @@ Object.defineProperties(Variadic.prototype, {
   simple2: { enumerable: true },
   overloaded1: { enumerable: true },
   overloaded2: { enumerable: true },
-  [Symbol.toStringTag]: {
-    value: \\"Variadic\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7080,8 +6703,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
@@ -7116,12 +6737,7 @@ class ZeroArgConstructor {
   }
 }
 Object.defineProperties(ZeroArgConstructor.prototype, {
-  [Symbol.toStringTag]: {
-    value: \\"ZeroArgConstructor\\",
-    configurable: true,
-    enumerable: false,
-    writable: false
-  }
+  [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7182,8 +6798,6 @@ const iface = {
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(constructorArgs, privateData),
-      writable: false,
-      enumerable: false,
       configurable: true
     });
 
