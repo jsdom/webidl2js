@@ -1,4 +1,4 @@
-[Global]
+[Global=Global]
 interface Global {
   void op();
   [Unforgeable] void unforgeableOp();
