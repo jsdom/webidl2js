@@ -582,91 +582,88 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors(
-        Object.defineProperties(
-          {
-            op() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return this[impl].op();
-            },
-            unforgeableOp() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return this[impl].unforgeableOp();
-            },
-            get attr() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"attr\\"];
-            },
-            set attr(V) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              V = conversions[\\"DOMString\\"](V, {
-                context: \\"Failed to set the 'attr' property on 'Global': The provided value\\"
-              });
-
-              obj[impl][\\"attr\\"] = V;
-            },
-            get unforgeableAttr() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"unforgeableAttr\\"];
-            },
-            set unforgeableAttr(V) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              V = conversions[\\"DOMString\\"](V, {
-                context: \\"Failed to set the 'unforgeableAttr' property on 'Global': The provided value\\"
-              });
-
-              obj[impl][\\"unforgeableAttr\\"] = V;
-            },
-            get length() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"length\\"];
-            },
-            set length(V) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              V = conversions[\\"unsigned long\\"](V, {
-                context: \\"Failed to set the 'length' property on 'Global': The provided value\\"
-              });
-
-              obj[impl][\\"length\\"] = V;
-            },
-            [Symbol.iterator]: Array.prototype[Symbol.iterator],
-            keys: Array.prototype.keys,
-            values: Array.prototype[Symbol.iterator],
-            entries: Array.prototype.entries,
-            forEach: Array.prototype.forEach
-          },
-          {
-            unforgeableOp: { configurable: false, writable: false },
-            unforgeableAttr: { configurable: false },
-            [Symbol.iterator]: { enumerable: false }
+      Object.getOwnPropertyDescriptors({
+        op() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
           }
-        )
-      )
+
+          return this[impl].op();
+        },
+        unforgeableOp() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return this[impl].unforgeableOp();
+        },
+        get attr() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"attr\\"];
+        },
+        set attr(V) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          V = conversions[\\"DOMString\\"](V, {
+            context: \\"Failed to set the 'attr' property on 'Global': The provided value\\"
+          });
+
+          obj[impl][\\"attr\\"] = V;
+        },
+        get unforgeableAttr() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"unforgeableAttr\\"];
+        },
+        set unforgeableAttr(V) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          V = conversions[\\"DOMString\\"](V, {
+            context: \\"Failed to set the 'unforgeableAttr' property on 'Global': The provided value\\"
+          });
+
+          obj[impl][\\"unforgeableAttr\\"] = V;
+        },
+        get length() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"length\\"];
+        },
+        set length(V) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          V = conversions[\\"unsigned long\\"](V, {
+            context: \\"Failed to set the 'length' property on 'Global': The provided value\\"
+          });
+
+          obj[impl][\\"length\\"] = V;
+        },
+        [Symbol.iterator]: Array.prototype[Symbol.iterator],
+        keys: Array.prototype.keys,
+        values: Array.prototype[Symbol.iterator],
+        entries: Array.prototype.entries,
+        forEach: Array.prototype.forEach
+      })
     );
+
+    Object.defineProperties(obj, {
+      unforgeableOp: { configurable: false, writable: false },
+      unforgeableAttr: { configurable: false },
+      [Symbol.iterator]: { enumerable: false }
+    });
   },
   setup(obj, constructorArgs, privateData) {
     if (!privateData) privateData = {};
@@ -6321,91 +6318,88 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors(
-        Object.defineProperties(
-          {
-            assign(url) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              if (arguments.length < 1) {
-                throw new TypeError(
-                  \\"Failed to execute 'assign' on 'Unforgeable': 1 argument required, but only \\" +
-                    arguments.length +
-                    \\" present.\\"
-                );
-              }
-              const args = [];
-              {
-                let curArg = arguments[0];
-                curArg = conversions[\\"USVString\\"](curArg, {
-                  context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
-                });
-                args.push(curArg);
-              }
-              return this[impl].assign(...args);
-            },
-            get href() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"href\\"];
-            },
-            set href(V) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              V = conversions[\\"USVString\\"](V, {
-                context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
-              });
-
-              obj[impl][\\"href\\"] = V;
-            },
-            toString() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-              return obj[impl][\\"href\\"];
-            },
-            get origin() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"origin\\"];
-            },
-            get protocol() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              return obj[impl][\\"protocol\\"];
-            },
-            set protocol(V) {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
-
-              V = conversions[\\"USVString\\"](V, {
-                context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
-              });
-
-              obj[impl][\\"protocol\\"] = V;
-            }
-          },
-          {
-            assign: { configurable: false, writable: false },
-            href: { configurable: false },
-            toString: { configurable: false, writable: false },
-            origin: { configurable: false },
-            protocol: { configurable: false }
+      Object.getOwnPropertyDescriptors({
+        assign(url) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
           }
-        )
-      )
+
+          if (arguments.length < 1) {
+            throw new TypeError(
+              \\"Failed to execute 'assign' on 'Unforgeable': 1 argument required, but only \\" +
+                arguments.length +
+                \\" present.\\"
+            );
+          }
+          const args = [];
+          {
+            let curArg = arguments[0];
+            curArg = conversions[\\"USVString\\"](curArg, {
+              context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
+            });
+            args.push(curArg);
+          }
+          return this[impl].assign(...args);
+        },
+        get href() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"href\\"];
+        },
+        set href(V) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
+          });
+
+          obj[impl][\\"href\\"] = V;
+        },
+        toString() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+          return obj[impl][\\"href\\"];
+        },
+        get origin() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"origin\\"];
+        },
+        get protocol() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return obj[impl][\\"protocol\\"];
+        },
+        set protocol(V) {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
+          });
+
+          obj[impl][\\"protocol\\"] = V;
+        }
+      })
     );
+
+    Object.defineProperties(obj, {
+      assign: { configurable: false, writable: false },
+      href: { configurable: false },
+      toString: { configurable: false, writable: false },
+      origin: { configurable: false },
+      protocol: { configurable: false }
+    });
   },
   setup(obj, constructorArgs, privateData) {
     if (!privateData) privateData = {};
@@ -6511,21 +6505,18 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors(
-        Object.defineProperties(
-          {
-            get a() {
-              if (!this || !module.exports.is(this)) {
-                throw new TypeError(\\"Illegal invocation\\");
-              }
+      Object.getOwnPropertyDescriptors({
+        get a() {
+          if (!this || !module.exports.is(this)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
 
-              return obj[impl][\\"a\\"];
-            }
-          },
-          { a: { configurable: false } }
-        )
-      )
+          return obj[impl][\\"a\\"];
+        }
+      })
     );
+
+    Object.defineProperties(obj, { a: { configurable: false } });
   },
   setup(obj, constructorArgs, privateData) {
     if (!privateData) privateData = {};
