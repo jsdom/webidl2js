@@ -129,13 +129,6 @@ Object.defineProperties(DictionaryConvert.prototype, {
     writable: false
   }
 });
-Object.defineProperties(DictionaryConvert, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -289,13 +282,6 @@ Object.defineProperties(Enum.prototype, {
     writable: false
   }
 });
-Object.defineProperties(Enum, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -444,11 +430,6 @@ module.exports = {
       }
     });
     Object.defineProperties(Factory, {
-      prototype: {
-        configurable: false,
-        enumerable: false,
-        writable: false
-      },
       constant: {
         value: 42,
         configurable: false,
@@ -562,13 +543,6 @@ Object.defineProperties(Global.prototype, {
   [Symbol.toStringTag]: {
     value: \\"Global\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(Global, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -783,13 +757,6 @@ Object.defineProperties(LegacyArrayClass.prototype, {
   [Symbol.toStringTag]: {
     value: \\"LegacyArrayClass\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(LegacyArrayClass, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -1085,11 +1052,6 @@ Object.defineProperties(MixedIn.prototype, {
   }
 });
 Object.defineProperties(MixedIn, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   mixedInConst: {
     value: 43,
     configurable: false,
@@ -1312,11 +1274,6 @@ Object.defineProperties(Mixin.prototype, {
   }
 });
 Object.defineProperties(Mixin, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   mixinConst: {
     value: 42,
     configurable: false,
@@ -1491,11 +1448,6 @@ Object.defineProperties(MixinInherited.prototype, {
   }
 });
 Object.defineProperties(MixinInherited, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   mixinInheritedConst: {
     value: 42,
     configurable: false,
@@ -1647,11 +1599,6 @@ Object.defineProperties(MixinMixin.prototype, {
   }
 });
 Object.defineProperties(MixinMixin, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   mixinMixinConst: {
     value: 42,
     configurable: false,
@@ -2084,13 +2031,6 @@ Object.defineProperties(Overloads.prototype, {
     writable: false
   }
 });
-Object.defineProperties(Overloads, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -2247,13 +2187,6 @@ Object.defineProperties(PromiseTypes.prototype, {
   [Symbol.toStringTag]: {
     value: \\"PromiseTypes\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(PromiseTypes, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -2509,13 +2442,6 @@ Object.defineProperties(Reflect.prototype, {
   [Symbol.toStringTag]: {
     value: \\"Reflect\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(Reflect, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -2875,13 +2801,6 @@ Object.defineProperties(SeqAndRec.prototype, {
     writable: false
   }
 });
-Object.defineProperties(SeqAndRec, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3032,11 +2951,6 @@ Object.defineProperties(Static.prototype, {
   }
 });
 Object.defineProperties(Static, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   def: {
     configurable: true,
     enumerable: true,
@@ -3273,13 +3187,6 @@ Object.defineProperties(Storage.prototype, {
   [Symbol.toStringTag]: {
     value: \\"Storage\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(Storage, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -3574,13 +3481,6 @@ Object.defineProperties(StringifierAttribute.prototype, {
     writable: false
   }
 });
-Object.defineProperties(StringifierAttribute, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3692,13 +3592,6 @@ Object.defineProperties(StringifierDefaultOperation.prototype, {
   [Symbol.toStringTag]: {
     value: \\"StringifierDefaultOperation\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(StringifierDefaultOperation, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -3831,13 +3724,6 @@ Object.defineProperties(StringifierNamedOperation.prototype, {
     writable: false
   }
 });
-Object.defineProperties(StringifierNamedOperation, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3949,13 +3835,6 @@ Object.defineProperties(StringifierOperation.prototype, {
   [Symbol.toStringTag]: {
     value: \\"StringifierOperation\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(StringifierOperation, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -4514,13 +4393,6 @@ Object.defineProperties(TypedefsAndUnions.prototype, {
     writable: false
   }
 });
-Object.defineProperties(TypedefsAndUnions, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -4910,13 +4782,6 @@ Object.defineProperties(URL.prototype, {
     writable: false
   }
 });
-Object.defineProperties(URL, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -5084,13 +4949,6 @@ Object.defineProperties(URLList.prototype, {
     configurable: true,
     enumerable: true,
     writable: true
-  }
-});
-Object.defineProperties(URLList, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
   }
 });
 const iface = {
@@ -5741,13 +5599,6 @@ Object.defineProperties(URLSearchParams.prototype, {
     writable: true
   }
 });
-Object.defineProperties(URLSearchParams, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -5934,13 +5785,6 @@ Object.defineProperties(URLSearchParamsCollection.prototype, {
     configurable: true,
     enumerable: false,
     writable: true
-  }
-});
-Object.defineProperties(URLSearchParamsCollection, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
   }
 });
 const iface = {
@@ -6237,13 +6081,6 @@ Object.defineProperties(URLSearchParamsCollection2.prototype, {
     configurable: true,
     enumerable: false,
     writable: true
-  }
-});
-Object.defineProperties(URLSearchParamsCollection2, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
   }
 });
 const iface = {
@@ -6700,11 +6537,6 @@ Object.defineProperties(UnderscoredProperties.prototype, {
   }
 });
 Object.defineProperties(UnderscoredProperties, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  },
   static: {
     configurable: true,
     enumerable: true,
@@ -6823,13 +6655,6 @@ Object.defineProperties(Unforgeable.prototype, {
   [Symbol.toStringTag]: {
     value: \\"Unforgeable\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(Unforgeable, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -7037,13 +6862,6 @@ Object.defineProperties(UnforgeableMap.prototype, {
   [Symbol.toStringTag]: {
     value: \\"UnforgeableMap\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(UnforgeableMap, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
@@ -7378,13 +7196,6 @@ Object.defineProperties(Unscopable.prototype, {
     writable: false
   }
 });
-Object.defineProperties(Unscopable, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7651,13 +7462,6 @@ Object.defineProperties(Variadic.prototype, {
     writable: false
   }
 });
-Object.defineProperties(Variadic, {
-  prototype: {
-    configurable: false,
-    enumerable: false,
-    writable: false
-  }
-});
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7756,13 +7560,6 @@ Object.defineProperties(ZeroArgConstructor.prototype, {
   [Symbol.toStringTag]: {
     value: \\"ZeroArgConstructor\\",
     configurable: true,
-    enumerable: false,
-    writable: false
-  }
-});
-Object.defineProperties(ZeroArgConstructor, {
-  prototype: {
-    configurable: false,
     enumerable: false,
     writable: false
   }
