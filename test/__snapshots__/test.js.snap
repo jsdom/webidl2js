@@ -117,11 +117,7 @@ class DictionaryConvert {
   }
 }
 Object.defineProperties(DictionaryConvert.prototype, {
-  op: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  op: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"DictionaryConvert\\",
     configurable: true,
@@ -266,15 +262,8 @@ class Enum {
   }
 }
 Object.defineProperties(Enum.prototype, {
-  op: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  attr: {
-    configurable: true,
-    enumerable: true
-  },
+  op: { enumerable: true },
+  attr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Enum\\",
     configurable: true,
@@ -407,15 +396,8 @@ module.exports = {
       }
     }
     Object.defineProperties(Factory.prototype, {
-      method: {
-        configurable: true,
-        enumerable: true,
-        writable: true
-      },
-      attribute: {
-        configurable: true,
-        enumerable: true
-      },
+      method: { enumerable: true },
+      attribute: { enumerable: true },
       [Symbol.toStringTag]: {
         value: \\"Factory\\",
         configurable: true,
@@ -678,20 +660,9 @@ const iface = {
             forEach: Array.prototype.forEach
           },
           {
-            unforgeableOp: {
-              configurable: false,
-              enumerable: true,
-              writable: false
-            },
-            unforgeableAttr: {
-              configurable: false,
-              enumerable: true
-            },
-            [Symbol.iterator]: {
-              configurable: true,
-              enumerable: false,
-              writable: true
-            }
+            unforgeableOp: { configurable: false, writable: false },
+            unforgeableAttr: { configurable: false },
+            [Symbol.iterator]: { enumerable: false }
           }
         )
       )
@@ -750,10 +721,7 @@ class LegacyArrayClass {
 }
 Object.setPrototypeOf(LegacyArrayClass.prototype, Array.prototype);
 Object.defineProperties(LegacyArrayClass.prototype, {
-  length: {
-    configurable: true,
-    enumerable: true
-  },
+  length: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"LegacyArrayClass\\",
     configurable: true,
@@ -979,47 +947,15 @@ class MixedIn {
   }
 }
 Object.defineProperties(MixedIn.prototype, {
-  mixedInOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinMixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinInheritedOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixedInAttr: {
-    configurable: true,
-    enumerable: true
-  },
-  mixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
-  mixinMixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
-  mixinInheritedAttr: {
-    configurable: true,
-    enumerable: true
-  },
+  mixedInOp: { enumerable: true },
+  mixinOp: { enumerable: true },
+  mixinMixinOp: { enumerable: true },
+  mixinInheritedOp: { enumerable: true },
+  toString: { enumerable: true },
+  mixedInAttr: { enumerable: true },
+  mixinAttr: { enumerable: true },
+  mixinMixinAttr: { enumerable: true },
+  mixinInheritedAttr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"MixedIn\\",
     configurable: true,
@@ -1236,24 +1172,10 @@ class Mixin extends MixinInherited.interface {
   }
 }
 Object.defineProperties(Mixin.prototype, {
-  mixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinMixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
-  mixinMixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
+  mixinOp: { enumerable: true },
+  mixinMixinOp: { enumerable: true },
+  mixinAttr: { enumerable: true },
+  mixinMixinAttr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Mixin\\",
     configurable: true,
@@ -1420,20 +1342,9 @@ class MixinInherited {
   }
 }
 Object.defineProperties(MixinInherited.prototype, {
-  mixinInheritedOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinInheritedAttr: {
-    configurable: true,
-    enumerable: true
-  },
+  mixinInheritedOp: { enumerable: true },
+  toString: { enumerable: true },
+  mixinInheritedAttr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"MixinInherited\\",
     configurable: true,
@@ -1576,15 +1487,8 @@ class MixinMixin {
   }
 }
 Object.defineProperties(MixinMixin.prototype, {
-  mixinMixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinMixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
+  mixinMixinOp: { enumerable: true },
+  mixinMixinAttr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"MixinMixin\\",
     configurable: true,
@@ -2004,26 +1908,10 @@ class Overloads {
   }
 }
 Object.defineProperties(Overloads.prototype, {
-  compatible: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  incompatible1: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  incompatible2: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  incompatible3: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  compatible: { enumerable: true },
+  incompatible1: { enumerable: true },
+  incompatible2: { enumerable: true },
+  incompatible3: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Overloads\\",
     configurable: true,
@@ -2174,16 +2062,8 @@ class PromiseTypes {
   }
 }
 Object.defineProperties(PromiseTypes.prototype, {
-  voidPromiseConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  promiseConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  voidPromiseConsumer: { enumerable: true },
+  promiseConsumer: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"PromiseTypes\\",
     configurable: true,
@@ -2415,30 +2295,12 @@ class Reflect {
   }
 }
 Object.defineProperties(Reflect.prototype, {
-  ReflectedBoolean: {
-    configurable: true,
-    enumerable: true
-  },
-  ReflectedDOMString: {
-    configurable: true,
-    enumerable: true
-  },
-  ReflectedLong: {
-    configurable: true,
-    enumerable: true
-  },
-  ReflectedUnsignedLong: {
-    configurable: true,
-    enumerable: true
-  },
-  ReflectionTest: {
-    configurable: true,
-    enumerable: true
-  },
-  withUnderscore: {
-    configurable: true,
-    enumerable: true
-  },
+  ReflectedBoolean: { enumerable: true },
+  ReflectedDOMString: { enumerable: true },
+  ReflectedLong: { enumerable: true },
+  ReflectedUnsignedLong: { enumerable: true },
+  ReflectionTest: { enumerable: true },
+  withUnderscore: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Reflect\\",
     configurable: true,
@@ -2769,31 +2631,11 @@ class SeqAndRec {
   }
 }
 Object.defineProperties(SeqAndRec.prototype, {
-  recordConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  recordConsumer2: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  sequenceConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  sequenceConsumer2: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  frozenArrayConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  recordConsumer: { enumerable: true },
+  recordConsumer2: { enumerable: true },
+  sequenceConsumer: { enumerable: true },
+  sequenceConsumer2: { enumerable: true },
+  frozenArrayConsumer: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"SeqAndRec\\",
     configurable: true,
@@ -2934,15 +2776,8 @@ class Static {
   }
 }
 Object.defineProperties(Static.prototype, {
-  def: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  abc: {
-    configurable: true,
-    enumerable: true
-  },
+  def: { enumerable: true },
+  abc: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Static\\",
     configurable: true,
@@ -2950,17 +2785,7 @@ Object.defineProperties(Static.prototype, {
     writable: false
   }
 });
-Object.defineProperties(Static, {
-  def: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  abc: {
-    configurable: true,
-    enumerable: true
-  }
-});
+Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
   // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3155,35 +2980,12 @@ class Storage {
   }
 }
 Object.defineProperties(Storage.prototype, {
-  key: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  getItem: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  setItem: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  removeItem: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  clear: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  length: {
-    configurable: true,
-    enumerable: true
-  },
+  key: { enumerable: true },
+  getItem: { enumerable: true },
+  setItem: { enumerable: true },
+  removeItem: { enumerable: true },
+  clear: { enumerable: true },
+  length: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Storage\\",
     configurable: true,
@@ -3465,15 +3267,8 @@ class StringifierAttribute {
   }
 }
 Object.defineProperties(StringifierAttribute.prototype, {
-  attr: {
-    configurable: true,
-    enumerable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  attr: { enumerable: true },
+  toString: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"StringifierAttribute\\",
     configurable: true,
@@ -3584,11 +3379,7 @@ class StringifierDefaultOperation {
   }
 }
 Object.defineProperties(StringifierDefaultOperation.prototype, {
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  toString: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"StringifierDefaultOperation\\",
     configurable: true,
@@ -3707,16 +3498,8 @@ class StringifierNamedOperation {
   }
 }
 Object.defineProperties(StringifierNamedOperation.prototype, {
-  operation: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  operation: { enumerable: true },
+  toString: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"StringifierNamedOperation\\",
     configurable: true,
@@ -3827,11 +3610,7 @@ class StringifierOperation {
   }
 }
 Object.defineProperties(StringifierOperation.prototype, {
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  toString: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"StringifierOperation\\",
     configurable: true,
@@ -4333,59 +4112,17 @@ class TypedefsAndUnions {
   }
 }
 Object.defineProperties(TypedefsAndUnions.prototype, {
-  numOrStrConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  numOrEnumConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  numOrStrOrNullConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  numOrStrOrURLOrNullConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  urlMapInnerConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  urlMapConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  bufferSourceOrURLConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  arrayBufferViewOrURLMapConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  arrayBufferViewDupConsumer: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  buf: {
-    configurable: true,
-    enumerable: true
-  },
-  time: {
-    configurable: true,
-    enumerable: true
-  },
+  numOrStrConsumer: { enumerable: true },
+  numOrEnumConsumer: { enumerable: true },
+  numOrStrOrNullConsumer: { enumerable: true },
+  numOrStrOrURLOrNullConsumer: { enumerable: true },
+  urlMapInnerConsumer: { enumerable: true },
+  urlMapConsumer: { enumerable: true },
+  bufferSourceOrURLConsumer: { enumerable: true },
+  arrayBufferViewOrURLMapConsumer: { enumerable: true },
+  arrayBufferViewDupConsumer: { enumerable: true },
+  buf: { enumerable: true },
+  time: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"TypedefsAndUnions\\",
     configurable: true,
@@ -4717,64 +4454,20 @@ class URL {
   }
 }
 Object.defineProperties(URL.prototype, {
-  toJSON: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  href: {
-    configurable: true,
-    enumerable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  origin: {
-    configurable: true,
-    enumerable: true
-  },
-  protocol: {
-    configurable: true,
-    enumerable: true
-  },
-  username: {
-    configurable: true,
-    enumerable: true
-  },
-  password: {
-    configurable: true,
-    enumerable: true
-  },
-  host: {
-    configurable: true,
-    enumerable: true
-  },
-  hostname: {
-    configurable: true,
-    enumerable: true
-  },
-  port: {
-    configurable: true,
-    enumerable: true
-  },
-  pathname: {
-    configurable: true,
-    enumerable: true
-  },
-  search: {
-    configurable: true,
-    enumerable: true
-  },
-  searchParams: {
-    configurable: true,
-    enumerable: true
-  },
-  hash: {
-    configurable: true,
-    enumerable: true
-  },
+  toJSON: { enumerable: true },
+  href: { enumerable: true },
+  toString: { enumerable: true },
+  origin: { enumerable: true },
+  protocol: { enumerable: true },
+  username: { enumerable: true },
+  password: { enumerable: true },
+  host: { enumerable: true },
+  hostname: { enumerable: true },
+  port: { enumerable: true },
+  pathname: { enumerable: true },
+  search: { enumerable: true },
+  searchParams: { enumerable: true },
+  hash: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"URL\\",
     configurable: true,
@@ -4905,15 +4598,8 @@ class URLList {
   }
 }
 Object.defineProperties(URLList.prototype, {
-  item: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  length: {
-    configurable: true,
-    enumerable: true
-  },
+  item: { enumerable: true },
+  length: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"URLList\\",
     configurable: true,
@@ -5526,66 +5212,18 @@ class URLSearchParams {
   }
 }
 Object.defineProperties(URLSearchParams.prototype, {
-  append: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  delete: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  get: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  getAll: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  has: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  set: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  sort: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  toString: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  keys: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  values: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  entries: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  forEach: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  append: { enumerable: true },
+  delete: { enumerable: true },
+  get: { enumerable: true },
+  getAll: { enumerable: true },
+  has: { enumerable: true },
+  set: { enumerable: true },
+  sort: { enumerable: true },
+  toString: { enumerable: true },
+  keys: { enumerable: true },
+  values: { enumerable: true },
+  entries: { enumerable: true },
+  forEach: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"URLSearchParams\\",
     configurable: true,
@@ -5760,20 +5398,9 @@ class URLSearchParamsCollection {
   }
 }
 Object.defineProperties(URLSearchParamsCollection.prototype, {
-  item: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  namedItem: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  length: {
-    configurable: true,
-    enumerable: true
-  },
+  item: { enumerable: true },
+  namedItem: { enumerable: true },
+  length: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"URLSearchParamsCollection\\",
     configurable: true,
@@ -6499,24 +6126,10 @@ class UnderscoredProperties {
   }
 }
 Object.defineProperties(UnderscoredProperties.prototype, {
-  operation: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  mixinMixinOp: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  attribute: {
-    configurable: true,
-    enumerable: true
-  },
-  mixinMixinAttr: {
-    configurable: true,
-    enumerable: true
-  },
+  operation: { enumerable: true },
+  mixinMixinOp: { enumerable: true },
+  attribute: { enumerable: true },
+  mixinMixinAttr: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"UnderscoredProperties\\",
     configurable: true,
@@ -6537,11 +6150,7 @@ Object.defineProperties(UnderscoredProperties.prototype, {
   }
 });
 Object.defineProperties(UnderscoredProperties, {
-  static: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  static: { enumerable: true },
   const: {
     value: 42,
     configurable: false,
@@ -6788,28 +6397,11 @@ const iface = {
             }
           },
           {
-            assign: {
-              configurable: false,
-              enumerable: true,
-              writable: false
-            },
-            href: {
-              configurable: false,
-              enumerable: true
-            },
-            toString: {
-              configurable: false,
-              enumerable: true,
-              writable: false
-            },
-            origin: {
-              configurable: false,
-              enumerable: true
-            },
-            protocol: {
-              configurable: false,
-              enumerable: true
-            }
+            assign: { configurable: false, writable: false },
+            href: { configurable: false },
+            toString: { configurable: false, writable: false },
+            origin: { configurable: false },
+            protocol: { configurable: false }
           }
         )
       )
@@ -6930,12 +6522,7 @@ const iface = {
               return obj[impl][\\"a\\"];
             }
           },
-          {
-            a: {
-              configurable: false,
-              enumerable: true
-            }
-          }
+          { a: { configurable: false } }
         )
       )
     );
@@ -7179,10 +6766,7 @@ class Unscopable {
   }
 }
 Object.defineProperties(Unscopable.prototype, {
-  unscopableTest: {
-    configurable: true,
-    enumerable: true
-  },
+  unscopableTest: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Unscopable\\",
     configurable: true,
@@ -7435,26 +7019,10 @@ class Variadic {
   }
 }
 Object.defineProperties(Variadic.prototype, {
-  simple1: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  simple2: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  overloaded1: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
-  overloaded2: {
-    configurable: true,
-    enumerable: true,
-    writable: true
-  },
+  simple1: { enumerable: true },
+  simple2: { enumerable: true },
+  overloaded1: { enumerable: true },
+  overloaded2: { enumerable: true },
   [Symbol.toStringTag]: {
     value: \\"Variadic\\",
     configurable: true,
