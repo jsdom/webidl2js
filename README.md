@@ -175,7 +175,7 @@ This export is the wrapper class interface, suitable for example for putting on 
 
 #### `expose(globalName, obj)`
 
-This function allows the interface object to be automatically exposed on a global object `obj`, taking into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]`. The `globalName` parameter specifies the [global name](https://heycam.github.io/webidl/#dfn-global-name) of the interface the provided global object implements, such as `Window`, `Worker`, and `Worklet`.
+This function allows the interface object to be automatically exposed on a global object `obj`, taking into account the Web IDL extended attributes `[Expose]`, `[NoInterfaceObject]`, and `[LegacyWindowAlias]`. The `globalName` parameter specifies the [global name](https://heycam.github.io/webidl/#dfn-global-name) of the interface the provided global object implements, such as `Window`, `Worker`, and `Worklet`.
 
 A limitation of the current implementation of `expose()` is that it does not yet support the `[SecureContext]` extended attribute, and all members of the interface are exposed regardless of the origin of that global object. This is expected to be remedied in the future.
 
@@ -333,6 +333,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Exposed]` and `[NoInterfaceObject]` (through the exported `expose()` function)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
+- `[LegacyWindowAlias]`
 - `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
@@ -349,7 +350,6 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LegacyWindowAlias]`
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`

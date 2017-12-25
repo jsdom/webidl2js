@@ -1,5 +1,6 @@
 [Constructor(USVString url, optional USVString base),
- Exposed=(Window,Worker)]
+ Exposed=(Window,Worker),
+ LegacyWindowAlias=webkitURL]
 interface URL {
   stringifier attribute USVString href;
   readonly attribute USVString origin;

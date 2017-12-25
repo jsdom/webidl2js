@@ -4437,6 +4437,14 @@ const iface = {
   expose(globalName, obj) {
     switch (globalName) {
       case \\"Window\\":
+        Object.defineProperty(obj, \\"webkitURL\\", {
+          value: URL,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+
+      // fall-through
       case \\"Worker\\":
         Object.defineProperty(obj, \\"URL\\", {
           value: URL,
