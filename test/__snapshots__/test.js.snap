@@ -4906,7 +4906,7 @@ class URLSearchParams {
     return module.exports.createDefaultIterator(this, \\"key+value\\");
   }
 
-  forEach() {
+  forEach(callback) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
     }
