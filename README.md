@@ -360,7 +360,7 @@ Notable missing features include:
 - `maplike<>` and `setlike<>`
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
-- `[Global]` and `[PrimaryGlobal]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
+- `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LegacyWindowAlias]`
 - `[LenientSetter]`
 - `[LenientThis]`
