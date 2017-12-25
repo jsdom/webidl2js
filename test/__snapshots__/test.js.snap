@@ -4897,7 +4897,7 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
     configurable: true
   },
   [Symbol.toStringTag]: {
-    value: \\"URLSearchParamsIterator\\",
+    value: \\"URLSearchParams Iterator\\",
     writable: false,
     enumerable: false,
     configurable: true
