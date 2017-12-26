@@ -285,6 +285,10 @@ It is often useful for implementation class files to inherit from each other, if
 
 However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
 
+### Other requirements
+
+The generated interface wrapper files use modern JavaScript features such as `class` definitions and `Proxy`. They will not work on JavaScript runtimes that do not support the ECMAScript 2015 standard.
+
 ## The generated utilities file
 
 Along with the generated wrapper class files, webidl2js will also generate a utilities file, `utils.js`, in the same directory. (We may make the name less generic; see [#52](https://github.com/jsdom/webidl2js/issues/52) for this and other concerns.) This contains several functions for converting between wrapper and implementation classes.
