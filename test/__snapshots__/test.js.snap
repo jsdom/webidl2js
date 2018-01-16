@@ -542,7 +542,7 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors({
+      utils.getOwnPropertyDescriptors({
         op() {
           if (!this || !module.exports.is(this)) {
             throw new TypeError(\\"Illegal invocation\\");
@@ -5967,7 +5967,7 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors({
+      utils.getOwnPropertyDescriptors({
         assign(url) {
           if (!this || !module.exports.is(this)) {
             throw new TypeError(\\"Illegal invocation\\");
@@ -6147,7 +6147,7 @@ const iface = {
   _internalSetup(obj) {
     Object.defineProperties(
       obj,
-      Object.getOwnPropertyDescriptors({
+      utils.getOwnPropertyDescriptors({
         get a() {
           if (!this || !module.exports.is(this)) {
             throw new TypeError(\\"Illegal invocation\\");
