@@ -1458,7 +1458,7 @@ class Overloads {
         }
       }
     }
-    return iface.setup(Object.create(Overloads.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args);
   }
 
   compatible(arg1) {
@@ -2249,7 +2249,7 @@ const impl = utils.implSymbol;
 
 class SeqAndRec {
   constructor() {
-    return iface.setup(Object.create(SeqAndRec.prototype));
+    return iface.setup(Object.create(new.target.prototype));
   }
 
   recordConsumer(rec) {
@@ -3996,7 +3996,7 @@ class URL {
       }
       args.push(curArg);
     }
-    return iface.setup(Object.create(URL.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args);
   }
 
   toJSON() {
@@ -4720,7 +4720,7 @@ class URLSearchParams {
       }
       args.push(curArg);
     }
-    return iface.setup(Object.create(URLSearchParams.prototype), args);
+    return iface.setup(Object.create(new.target.prototype), args);
   }
 
   append(name, value) {
@@ -6733,7 +6733,7 @@ const impl = utils.implSymbol;
 
 class ZeroArgConstructor {
   constructor() {
-    return iface.setup(Object.create(ZeroArgConstructor.prototype));
+    return iface.setup(Object.create(new.target.prototype));
   }
 }
 Object.defineProperties(ZeroArgConstructor.prototype, {
