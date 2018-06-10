@@ -110,6 +110,7 @@ The main module's default export is a class which you can construct with a few o
 
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name.
 - `suppressErrors`: set to true to suppress errors during generation.
+- `urlTypes`: setting this to true will add support for `instanceof` checks for WHATWG `URL` and `URLSearchParams` classes. They are part of the global object in node 10+ (this options takes precedence over user-defined `URL` classes!)
 
 The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
 
