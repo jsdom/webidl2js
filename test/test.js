@@ -44,6 +44,13 @@ for (const idlFiles of testDirs) {
   }
 }
 
+test("bundle-entry.js", () => {
+  const outputFile = path.resolve(outputDir, "bundle-entry.js");
+  const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+  expect(output).toMatchSnapshot();
+});
+
 test("utils.js", () => {
   const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
   const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });
