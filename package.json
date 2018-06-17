@@ -1,6 +1,6 @@
 {
   "name": "@platformparity/webidl2js",
-  "version": "9.0.0-wip.1",
+  "version": "9.0.0-wip.2",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
   "files": [
