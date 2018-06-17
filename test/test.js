@@ -18,7 +18,10 @@ beforeAll(() => {
   transformer.addSource(casesDir, implsDir);
 
   const transformerV10 = new Transformer({
-    urlTypes: true
+    genericWrap: true,
+    externalType: {
+      url: ["URL", "URLSearchParams"]
+    }
   });
   transformerV10.addSource(casesDirV10, implsDir);
 
