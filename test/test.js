@@ -39,6 +39,7 @@ const testDirs = [
 for (const idlFiles of testDirs) {
   for (const idlFile of idlFiles) {
     test(idlFile, () => {
+      // FIXME: wrong `outputDir`...
       const outputFile = path.resolve(outputDir, path.basename(idlFile, ".webidl") + ".js");
       const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
