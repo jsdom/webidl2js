@@ -1,14 +1,20 @@
 {
-  "name": "webidl2js",
-  "version": "9.0.0",
+  "name": "@platformparity/webidl2js",
+  "version": "9.0.0-wip.3",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "co": "^4.6.0",
     "pn": "^1.0.0",
     "prettier": "^1.9.2",
-    "webidl-conversions": "^4.0.0",
-    "webidl2": "^9.0.0"
+    "webidl-conversions": "^4.0.2",
+    "webidl2": "^10.3.1"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
@@ -20,5 +26,17 @@
     "lint": "eslint ."
   },
   "author": "Sebastian Mayr <npm@smayr.name>",
-  "license": "MIT"
+  "license": "MIT",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platformparity/webidl2js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/platformparity/webidl2js/issues"
+  },
+  "homepage": "https://github.com/platformparity/webidl2js#readme"
 }

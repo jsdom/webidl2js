@@ -1,16 +1,14 @@
 language: node_js
-node_js:
-  - 6
-  - stable
-
-script:
-  - yarn test
-  - yarn lint
-
-branches:
-  only:
-    - master
-
+node_js: node
+deploy:
+  provider: npm
+  email: mail@qwtel.com
+  api_key:
+    secure: rGEC+5PUEYqvoqZTlGhFtusgUNIh6iooRmQAkkt6fTkC57U+D7FLVBB0c4oKzwC0F+UZZ/Ly7DE+VyHEicVoj1wJ/kNeO+i41L56xHXBnUeSRXY+V72KuEeAqppnDVN0I/Ar0kUFa9HNA6yzcDSo8s9KPtYXW2IhcqqYEbc+gTzLClbDOZopc3zc6Qok1qrh1hpFYd8hgTch9by4DSfPXO40Ow3WyFCazIP4GYb6FPjf6Twcj7dZVGoHT/QaT/misOx/ygFhY7RXA6/kLRLexLSkFwi2ZNC78XoR9iOOJ/HDGn7Xtu0je6g6AlliSXfblnXO3cehBuY7KpzKAyrcJ97PFkEcOrZZr/NzcJQ6iC7FwQrVy3+yE2EgyJEpJheMgHN3kXAcIm/X7Hte4vL+LvtvcLBYK/jWVkSuh/cqzHewf9mRYK4cgcAKCMZKa4YasE4Ve5aThQFZb+AR1NbrJenwlkqCb+WYK9bLkLnC6MXHO2yw94S5z3xbw77oKingIJYJxUzGaTmwdObhB+kbUtfcc2YEkwO587hgf4B0ItmfNU5PQyga2Z3mMveWV3G2yjTsfYjR+pQNHThMYwZ3mFqEpxDjJuEI/V/mQSLv1b1/39orze3QaWUsTenYz5N1tIx89ENSreT9MzkkgcFo3AnMyE0uNMQ9ZmN/fJrjJg8=
+  on:
+    tags: true
+    repo: platformparity/webidl2js
+  skip_cleanup: true
 notifications:
   email:
     on_success: never

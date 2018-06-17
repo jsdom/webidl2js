@@ -1,7 +1,7 @@
 # node specific
 node_modules/
 npm-debug.log
-package-lock.json
 
 # project specific
-/test/output/*
+/test/output/*.js
+/test/output/v10/*.js

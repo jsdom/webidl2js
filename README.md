@@ -110,6 +110,7 @@ The main module's default export is a class which you can construct with a few o
 
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name.
 - `suppressErrors`: set to true to suppress errors during generation.
+- `urlTypes`: setting this to true will add support for `instanceof` checks for WHATWG `URL` and `URLSearchParams` classes. They are part of the global object in node 10+ (this options takes precedence over user-defined `URL` classes!)
 
 The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
 
@@ -173,23 +174,11 @@ jsdom does this for `Window`, which is written in custom, non-webidl2js-generate
 
 This export is the wrapper class interface, suitable for example for putting on a global scope or exporting to module consumers who don't know anything about webidl2js.
 
-#### `expose`
+#### `expose(globalName, obj)`
 
-This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]` to generate a data structure of the form:
+This function allows the interface object to be automatically exposed on a global object `obj`, taking into account the Web IDL extended attributes `[Expose]`, `[NoInterfaceObject]`, and `[LegacyWindowAlias]`. The `globalName` parameter specifies the [global name](https://heycam.github.io/webidl/#dfn-global-name) of the interface the provided global object implements, such as `Window`, `Worker`, and `Worklet`.
 
-```js
-{
-  nameOfGlobal1: {
-    nameOfInterface: InterfaceClass
-  },
-  nameOfGlobal2: {
-    nameOfInterface: InterfaceClass
-  },
-  // etc.
-}
-```
-
-This format may seem a bit verbose, but eventually when we support `[NamedConstructor]`, there will be potentially more than one key/value pair per global, and it will show its worth.
+A limitation of the current implementation of `expose()` is that it does not yet support the `[SecureContext]` extended attribute, and all members of the interface are exposed regardless of the origin of that global object. This is expected to be remedied in the future.
 
 ### For dictionaries
 
@@ -315,6 +304,12 @@ This can be useful when you are given a wrapper, but need to modify its inaccess
 
 Returns the corresponding impl class instance for a given wrapper class instance, or returns the argument back if it is not an implementation class instance.
 
+## The generated `bundle-entry.js` file
+
+webidl2js also generates a `bundle-entry.js` file in the same directory as all interface wrapper files and the utilities file. This file contains only one exported function, `bootstrap(globalName, globalObj, defaultPrivateData)`, which when called will expose all interfaces generated onto the provided `globalObj`. For interfaces annotated with `[WebIDL2JSFactory]` (documented below), it will automatically create the interface with the given `defaultPrivateData` and expose them the same way as ordinary interfaces. The return value is an object containing all interface wrappers, including the newly created ones for `[WebIDL2JSFactory]`.
+
+As the name implies, this file is also fit for bundling all interface files through a code bundler such as Browserify and webpack, for faster loading of the initial interface wrappers. Care must be taken however to avoid bundling the implementation files as well.
+
 ## Web IDL features
 
 webidl2js is implementing an ever-growing subset of the Web IDL specification. So far we have implemented:
@@ -346,9 +341,10 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[Constructor]`
 - `[EnforceRange]`
-- `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[Exposed]` and `[NoInterfaceObject]` (through the exported `expose()` function)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
+- `[LegacyWindowAlias]`
 - `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
@@ -364,8 +360,7 @@ Notable missing features include:
 - `maplike<>` and `setlike<>`
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
-- `[Global]` and `[PrimaryGlobal]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LegacyWindowAlias]`
+- `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`
