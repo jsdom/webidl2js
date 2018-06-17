@@ -24,7 +24,7 @@ beforeAll(() => {
 
   return Promise.all([
     transformer.generate(outputDir),
-    transformerV10.generate(outputDirV10),
+    transformerV10.generate(outputDirV10)
   ]);
 });
 
