@@ -6,12 +6,12 @@ const fs = require("fs");
 const path = require("path");
 const Transformer = require("..");
 
-const rootDir = path.resolve(__dirname, "..");
-const casesDir = path.resolve(__dirname, "cases");
-const casesDirV10 = path.resolve(__dirname, "cases-v10");
-const implsDir = path.resolve(__dirname, "implementations");
-const outputDir = path.resolve(__dirname, "output");
-const outputDirV10 = path.resolve(__dirname, "output/v10");
+const rootDir = path.resolve(".");
+const casesDir = path.resolve("test/cases");
+const casesDirV10 = path.resolve("test/cases-v10");
+const implsDir = path.resolve("test/implementations");
+const outputDir = path.resolve("test/output");
+const outputDirV10 = path.resolve("test/output/v10");
 
 beforeAll(() => {
   const transformer = new Transformer();
