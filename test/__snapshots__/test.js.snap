@@ -4817,7 +4817,8 @@ class URLSearchParams {
       });
       args.push(curArg);
     }
-    return utils.tryWrapperForImpl(this[impl].getAll(...args));
+    const res = this[impl].getAll(...args);
+    return res && res.map ? res.map(utils.tryWrapperForImpl) : res;
   }
 
   has(name) {
