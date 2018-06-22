@@ -12,7 +12,11 @@ const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
 
 beforeAll(() => {
-  const transformer = new Transformer();
+  const transformer = new Transformer({
+    externalTypes: {
+      "@platformparity/streams": ["ReadableStream"]
+    }
+  });
   transformer.addSource(casesDir, implsDir);
 
   return transformer.generate(outputDir);
