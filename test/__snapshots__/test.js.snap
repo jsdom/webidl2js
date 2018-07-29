@@ -1878,13 +1878,16 @@ class PromiseTypes {
     const args = [];
     {
       let curArg = arguments[0];
-      curArg = Promise.resolve(curArg).then(value => {
-        value = conversions[\\"double\\"](value, {
-          context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-        });
+      curArg = Promise.resolve(curArg).then(
+        value => {
+          value = conversions[\\"double\\"](value, {
+            context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+          });
 
-        return value;
-      }, reason => reason);
+          return value;
+        },
+        reason => reason
+      );
       args.push(curArg);
     }
     return this[impl].promiseConsumer(...args);

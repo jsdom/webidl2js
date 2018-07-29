@@ -6,19 +6,22 @@
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
     "co": "^4.6.0",
-    "pn": "^1.0.0",
-    "prettier": "^1.9.2",
+    "pn": "^1.1.0",
+    "prettier": "^1.14.0",
     "webidl-conversions": "^4.0.0",
     "webidl2": "^9.0.0"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
-    "jest": "^21.2.1"
+    "jest": "^23.4.2"
   },
   "scripts": {
     "test": "jest",
     "update-snapshots": "jest --updateSnapshot",
     "lint": "eslint ."
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "author": "Sebastian Mayr <npm@smayr.name>",
   "license": "MIT"
