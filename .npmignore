@@ -1,1 +1,4 @@
 test/
+.eslint*
+.travis.yml
+yarn.lock
