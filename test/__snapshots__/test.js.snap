@@ -991,6 +991,14 @@ class MixedIn {
     return this[impl].mixedInOp();
   }
 
+  ifaceMixinOp() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl].ifaceMixinOp();
+  }
+
   mixinOp() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1041,6 +1049,26 @@ class MixedIn {
     });
 
     this[impl][\\"mixedInAttr\\"] = V;
+  }
+
+  get ifaceMixinAttr() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"ifaceMixinAttr\\"];
+  }
+
+  set ifaceMixinAttr(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"DOMString\\"](V, {
+      context: \\"Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value\\"
+    });
+
+    this[impl][\\"ifaceMixinAttr\\"] = V;
   }
 
   get mixinAttr() {
@@ -1105,22 +1133,26 @@ class MixedIn {
 }
 Object.defineProperties(MixedIn.prototype, {
   mixedInOp: { enumerable: true },
+  ifaceMixinOp: { enumerable: true },
   mixinOp: { enumerable: true },
   mixinMixinOp: { enumerable: true },
   mixinInheritedOp: { enumerable: true },
   toString: { enumerable: true },
   mixedInAttr: { enumerable: true },
+  ifaceMixinAttr: { enumerable: true },
   mixinAttr: { enumerable: true },
   mixinMixinAttr: { enumerable: true },
   mixinInheritedAttr: { enumerable: true },
   [Symbol.toStringTag]: { value: \\"MixedIn\\", configurable: true },
   mixedInConst: { value: 43, enumerable: true },
+  ifaceMixinConst: { value: 42, enumerable: true },
   mixinConst: { value: 42, enumerable: true },
   mixinMixinConst: { value: 42, enumerable: true },
   mixinInheritedConst: { value: 42, enumerable: true }
 });
 Object.defineProperties(MixedIn, {
   mixedInConst: { value: 43, enumerable: true },
+  ifaceMixinConst: { value: 42, enumerable: true },
   mixinConst: { value: 42, enumerable: true },
   mixinMixinConst: { value: 42, enumerable: true },
   mixinInheritedConst: { value: 42, enumerable: true }
