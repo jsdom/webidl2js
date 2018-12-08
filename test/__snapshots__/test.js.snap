@@ -6607,11 +6607,32 @@ class Unscopable {
 
     this[impl][\\"unscopableTest\\"] = V;
   }
+
+  get unscopableMixin() {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    return this[impl][\\"unscopableMixin\\"];
+  }
+
+  set unscopableMixin(V) {
+    if (!this || !module.exports.is(this)) {
+      throw new TypeError(\\"Illegal invocation\\");
+    }
+
+    V = conversions[\\"boolean\\"](V, {
+      context: \\"Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value\\"
+    });
+
+    this[impl][\\"unscopableMixin\\"] = V;
+  }
 }
 Object.defineProperties(Unscopable.prototype, {
   unscopableTest: { enumerable: true },
+  unscopableMixin: { enumerable: true },
   [Symbol.toStringTag]: { value: \\"Unscopable\\", configurable: true },
-  [Symbol.unscopables]: { value: { unscopableTest: true }, configurable: true }
+  [Symbol.unscopables]: { value: { unscopableTest: true, unscopableMixin: true }, configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
