@@ -9,7 +9,7 @@
     "pn": "^1.1.0",
     "prettier": "^1.14.0",
     "webidl-conversions": "^4.0.0",
-    "webidl2": "10.3.0"
+    "webidl2": "^10.3.3"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
