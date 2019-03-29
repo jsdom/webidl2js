@@ -2236,7 +2236,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    return this.hasAttribute(\\"ReflectedBoolean\\");
+    return this.hasAttributeNS(null, \\"reflectedboolean\\");
   }
 
   set ReflectedBoolean(V) {
@@ -2249,9 +2249,9 @@ class Reflect {
     });
 
     if (V) {
-      this.setAttribute(\\"ReflectedBoolean\\", \\"\\");
+      this.setAttributeNS(null, \\"reflectedboolean\\", \\"\\");
     } else {
-      this.removeAttribute(\\"ReflectedBoolean\\");
+      this.removeAttributeNS(null, \\"reflectedboolean\\");
     }
   }
 
@@ -2260,7 +2260,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    const value = this.getAttribute(\\"ReflectedDOMString\\");
+    const value = this.getAttributeNS(null, \\"reflecteddomstring\\");
     return value === null ? \\"\\" : value;
   }
 
@@ -2273,7 +2273,7 @@ class Reflect {
       context: \\"Failed to set the 'ReflectedDOMString' property on 'Reflect': The provided value\\"
     });
 
-    this.setAttribute(\\"ReflectedDOMString\\", V);
+    this.setAttributeNS(null, \\"reflecteddomstring\\", V);
   }
 
   get ReflectedLong() {
@@ -2281,7 +2281,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    const value = parseInt(this.getAttribute(\\"ReflectedLong\\"));
+    const value = parseInt(this.getAttributeNS(null, \\"reflectedlong\\"));
     return isNaN(value) || value < -2147483648 || value > 2147483647 ? 0 : value;
   }
 
@@ -2294,7 +2294,7 @@ class Reflect {
       context: \\"Failed to set the 'ReflectedLong' property on 'Reflect': The provided value\\"
     });
 
-    this.setAttribute(\\"ReflectedLong\\", String(V));
+    this.setAttributeNS(null, \\"reflectedlong\\", String(V));
   }
 
   get ReflectedUnsignedLong() {
@@ -2302,7 +2302,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    const value = parseInt(this.getAttribute(\\"ReflectedUnsignedLong\\"));
+    const value = parseInt(this.getAttributeNS(null, \\"reflectedunsignedlong\\"));
     return isNaN(value) || value < 0 || value > 2147483647 ? 0 : value;
   }
 
@@ -2315,7 +2315,7 @@ class Reflect {
       context: \\"Failed to set the 'ReflectedUnsignedLong' property on 'Reflect': The provided value\\"
     });
 
-    this.setAttribute(\\"ReflectedUnsignedLong\\", String(V > 2147483647 ? 0 : V));
+    this.setAttributeNS(null, \\"reflectedunsignedlong\\", String(V > 2147483647 ? 0 : V));
   }
 
   get ReflectionTest() {
@@ -2323,7 +2323,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    const value = this.getAttribute(\\"reflection\\");
+    const value = this.getAttributeNS(null, \\"reflection\\");
     return value === null ? \\"\\" : value;
   }
 
@@ -2336,7 +2336,7 @@ class Reflect {
       context: \\"Failed to set the 'ReflectionTest' property on 'Reflect': The provided value\\"
     });
 
-    this.setAttribute(\\"reflection\\", V);
+    this.setAttributeNS(null, \\"reflection\\", V);
   }
 
   get withUnderscore() {
@@ -2344,7 +2344,7 @@ class Reflect {
       throw new TypeError(\\"Illegal invocation\\");
     }
 
-    const value = this.getAttribute(\\"with-underscore\\");
+    const value = this.getAttributeNS(null, \\"with-underscore\\");
     return value === null ? \\"\\" : value;
   }
 
@@ -2357,7 +2357,7 @@ class Reflect {
       context: \\"Failed to set the 'withUnderscore' property on 'Reflect': The provided value\\"
     });
 
-    this.setAttribute(\\"with-underscore\\", V);
+    this.setAttributeNS(null, \\"with-underscore\\", V);
   }
 }
 Object.defineProperties(Reflect.prototype, {
