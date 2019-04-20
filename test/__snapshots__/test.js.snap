@@ -2519,11 +2519,12 @@ class SeqAndRec {
           const desc = Object.getOwnPropertyDescriptor(curArg, key);
           if (desc && desc.enumerable) {
             let typedKey = key;
-            let typedValue = curArg[key];
 
             typedKey = conversions[\\"USVString\\"](typedKey, {
               context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
             });
+
+            let typedValue = curArg[key];
 
             typedValue = conversions[\\"double\\"](typedValue, {
               context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
@@ -2562,11 +2563,12 @@ class SeqAndRec {
           const desc = Object.getOwnPropertyDescriptor(curArg, key);
           if (desc && desc.enumerable) {
             let typedKey = key;
-            let typedValue = curArg[key];
 
             typedKey = conversions[\\"USVString\\"](typedKey, {
               context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
             });
+
+            let typedValue = curArg[key];
 
             typedValue = convertURL(typedValue, {
               context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
@@ -3887,11 +3889,12 @@ class TypedefsAndUnions {
           const desc = Object.getOwnPropertyDescriptor(curArg, key);
           if (desc && desc.enumerable) {
             let typedKey = key;
-            let typedValue = curArg[key];
 
             typedKey = conversions[\\"USVString\\"](typedKey, {
               context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
             });
+
+            let typedValue = curArg[key];
 
             typedValue = convertURL(typedValue, {
               context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
@@ -3935,11 +3938,12 @@ class TypedefsAndUnions {
             const desc = Object.getOwnPropertyDescriptor(curArg, key);
             if (desc && desc.enumerable) {
               let typedKey = key;
-              let typedValue = curArg[key];
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
                 context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
               });
+
+              let typedValue = curArg[key];
 
               typedValue = convertURL(typedValue, {
                 context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
@@ -4018,7 +4022,6 @@ class TypedefsAndUnions {
               const desc = Object.getOwnPropertyDescriptor(curArg, key);
               if (desc && desc.enumerable) {
                 let typedKey = key;
-                let typedValue = curArg[key];
 
                 typedKey = conversions[\\"USVString\\"](typedKey, {
                   context:
@@ -4026,6 +4029,8 @@ class TypedefsAndUnions {
                     \\" record\\" +
                     \\"'s key\\"
                 });
+
+                let typedValue = curArg[key];
 
                 typedValue = convertURL(typedValue, {
                   context:
@@ -4940,11 +4945,12 @@ class URLSearchParams {
                 const desc = Object.getOwnPropertyDescriptor(curArg, key);
                 if (desc && desc.enumerable) {
                   let typedKey = key;
-                  let typedValue = curArg[key];
 
                   typedKey = conversions[\\"USVString\\"](typedKey, {
                     context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s key\\"
                   });
+
+                  let typedValue = curArg[key];
 
                   typedValue = conversions[\\"USVString\\"](typedValue, {
                     context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s value\\"
