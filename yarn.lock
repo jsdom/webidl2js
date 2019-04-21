@@ -3489,9 +3489,10 @@ webidl-conversions@^4.0.0, webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
 
-webidl2@^10.3.1:
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/webidl2/-/webidl2-10.3.1.tgz#4982fdb80847547b704396e009198efdc176fdd2"
+webidl2@^10.3.3:
+  version "10.3.3"
+  resolved "https://registry.yarnpkg.com/webidl2/-/webidl2-10.3.3.tgz#9e6562df1ecd466dba0cdb713a0db073bbe1039a"
+  integrity sha512-C3rxCpkX2XQ9FW1EIllN0nW2zlN21S+PgE59xQ6ErI5awVaXYm3TTsDDsdCYIfwjVwNZZIpKjcW1xJF89ZlAew==
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.3"
