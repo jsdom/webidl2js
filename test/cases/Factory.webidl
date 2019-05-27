@@ -1,6 +1,6 @@
 [WebIDL2JSFactory]
 interface Factory {
   DOMString method();
-  attribute double attribute;
+  attribute double _attribute;
   const unsigned short constant = 42;
 };
