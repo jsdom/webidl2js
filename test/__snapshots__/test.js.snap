@@ -4564,6 +4564,8 @@ exports[`URLCallback.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const convertURL = require(\\"./URL.js\\").convert;
+
 module.exports = {
   convert(value, { context = \\"The provided value\\" } = {}) {
     if (typeof value !== \\"function\\" && !treatNonObjectAsNull) {
