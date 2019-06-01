@@ -6670,7 +6670,7 @@ Object.defineProperties(Unscopable.prototype, {
   unscopableTest: { enumerable: true },
   unscopableMixin: { enumerable: true },
   [Symbol.toStringTag]: { value: \\"Unscopable\\", configurable: true },
-  [Symbol.unscopables]: { value: { unscopableTest: true, unscopableMixin: true }, configurable: true }
+  [Symbol.unscopables]: { value: { unscopableTest: true, unscopableMixin: true, __proto__: null }, configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
