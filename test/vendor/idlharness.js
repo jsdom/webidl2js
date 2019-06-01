@@ -711,22 +711,7 @@ policies and contribution forms [3].
   }
 
   function exposed_in(globals) {
-      if ('document' in self) {
-          return globals.has("Window");
-      }
-      if ('DedicatedWorkerGlobalScope' in self &&
-          self instanceof DedicatedWorkerGlobalScope) {
-          return globals.has("DedicatedWorker");
-      }
-      if ('SharedWorkerGlobalScope' in self &&
-          self instanceof SharedWorkerGlobalScope) {
-          return globals.has("SharedWorker");
-      }
-      if ('ServiceWorkerGlobalScope' in self &&
-          self instanceof ServiceWorkerGlobalScope) {
-          return globals.has("ServiceWorker");
-      }
-      throw new IdlHarnessError("Unexpected global object");
+      return true;
   }
 
   /**
