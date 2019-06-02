@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DOMImplementation.webidl 1`] = `
+exports[`Generation DOMImplementation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -209,7 +209,7 @@ const Impl = require(\\"../implementations/DOMImplementation.js\\");
 "
 `;
 
-exports[`Dictionary.webidl 1`] = `
+exports[`Generation Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -289,7 +289,7 @@ module.exports = {
 "
 `;
 
-exports[`DictionaryConvert.webidl 1`] = `
+exports[`Generation DictionaryConvert.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -408,7 +408,7 @@ const Impl = require(\\"../implementations/DictionaryConvert.js\\");
 "
 `;
 
-exports[`Enum.webidl 1`] = `
+exports[`Generation EnumInterface.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -418,7 +418,7 @@ const convertRequestDestination = require(\\"./RequestDestination.js\\").convert
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 
-class Enum {
+class EnumInterface {
   constructor() {
     throw new TypeError(\\"Illegal constructor\\");
   }
@@ -430,13 +430,13 @@ class Enum {
 
     if (arguments.length < 1) {
       throw new TypeError(
-        \\"Failed to execute 'op' on 'Enum': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+        \\"Failed to execute 'op' on 'EnumInterface': 1 argument required, but only \\" + arguments.length + \\" present.\\"
       );
     }
     const args = [];
     {
       let curArg = arguments[0];
-      curArg = convertRequestDestination(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
+      curArg = convertRequestDestination(curArg, { context: \\"Failed to execute 'op' on 'EnumInterface': parameter 1\\" });
       args.push(curArg);
     }
     return this[impl].op(...args);
@@ -463,10 +463,10 @@ class Enum {
     this[impl][\\"attr\\"] = V;
   }
 }
-Object.defineProperties(Enum.prototype, {
+Object.defineProperties(EnumInterface.prototype, {
   op: { enumerable: true },
   attr: { enumerable: true },
-  [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
+  [Symbol.toStringTag]: { value: \\"EnumInterface\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -505,16 +505,16 @@ const iface = {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
     }
-    throw new TypeError(\`\${context} is not of type 'Enum'.\`);
+    throw new TypeError(\`\${context} is not of type 'EnumInterface'.\`);
   },
 
   create(constructorArgs, privateData) {
-    let obj = Object.create(Enum.prototype);
+    let obj = Object.create(EnumInterface.prototype);
     obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
-    let obj = Object.create(Enum.prototype);
+    let obj = Object.create(EnumInterface.prototype);
     obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
@@ -536,18 +536,18 @@ const iface = {
     }
     return obj;
   },
-  interface: Enum,
+  interface: EnumInterface,
   expose: {
-    Window: { Enum }
+    Window: { EnumInterface }
   }
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Enum.js\\");
+const Impl = require(\\"../implementations/EnumInterface.js\\");
 "
 `;
 
-exports[`Factory.webidl 1`] = `
+exports[`Generation Factory.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -684,7 +684,7 @@ const Impl = require(\\"../implementations/Factory.js\\");
 "
 `;
 
-exports[`Global.webidl 1`] = `
+exports[`Generation Global.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -862,7 +862,7 @@ const Impl = require(\\"../implementations/Global.js\\");
 "
 `;
 
-exports[`LegacyArrayClass.webidl 1`] = `
+exports[`Generation LegacyArrayClass.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -967,7 +967,7 @@ const Impl = require(\\"../implementations/LegacyArrayClass.js\\");
 "
 `;
 
-exports[`MixedIn.webidl 1`] = `
+exports[`Generation MixedIn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1242,7 +1242,7 @@ const Impl = require(\\"../implementations/MixedIn.js\\");
 "
 `;
 
-exports[`Mixin.webidl 1`] = `
+exports[`Generation Mixin.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1407,7 +1407,7 @@ const Impl = require(\\"../implementations/Mixin.js\\");
 "
 `;
 
-exports[`MixinInherited.webidl 1`] = `
+exports[`Generation MixinInherited.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1541,7 +1541,7 @@ const Impl = require(\\"../implementations/MixinInherited.js\\");
 "
 `;
 
-exports[`MixinMixin.webidl 1`] = `
+exports[`Generation MixinMixin.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1666,7 +1666,7 @@ const Impl = require(\\"../implementations/MixinMixin.js\\");
 "
 `;
 
-exports[`Overloads.webidl 1`] = `
+exports[`Generation Overloads.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2070,7 +2070,7 @@ const Impl = require(\\"../implementations/Overloads.js\\");
 "
 `;
 
-exports[`PromiseTypes.webidl 1`] = `
+exports[`Generation PromiseTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2218,7 +2218,7 @@ const Impl = require(\\"../implementations/PromiseTypes.js\\");
 "
 `;
 
-exports[`Reflect.webidl 1`] = `
+exports[`Generation ReflectAttribute.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2226,7 +2226,7 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 
-class Reflect {
+class ReflectAttribute {
   constructor() {
     throw new TypeError(\\"Illegal constructor\\");
   }
@@ -2245,7 +2245,7 @@ class Reflect {
     }
 
     V = conversions[\\"boolean\\"](V, {
-      context: \\"Failed to set the 'ReflectedBoolean' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'ReflectedBoolean' property on 'ReflectAttribute': The provided value\\"
     });
 
     if (V) {
@@ -2270,7 +2270,7 @@ class Reflect {
     }
 
     V = conversions[\\"DOMString\\"](V, {
-      context: \\"Failed to set the 'ReflectedDOMString' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'ReflectedDOMString' property on 'ReflectAttribute': The provided value\\"
     });
 
     this.setAttributeNS(null, \\"reflecteddomstring\\", V);
@@ -2291,7 +2291,7 @@ class Reflect {
     }
 
     V = conversions[\\"long\\"](V, {
-      context: \\"Failed to set the 'ReflectedLong' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'ReflectedLong' property on 'ReflectAttribute': The provided value\\"
     });
 
     this.setAttributeNS(null, \\"reflectedlong\\", String(V));
@@ -2312,7 +2312,7 @@ class Reflect {
     }
 
     V = conversions[\\"unsigned long\\"](V, {
-      context: \\"Failed to set the 'ReflectedUnsignedLong' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'ReflectedUnsignedLong' property on 'ReflectAttribute': The provided value\\"
     });
 
     this.setAttributeNS(null, \\"reflectedunsignedlong\\", String(V > 2147483647 ? 0 : V));
@@ -2333,7 +2333,7 @@ class Reflect {
     }
 
     V = conversions[\\"DOMString\\"](V, {
-      context: \\"Failed to set the 'ReflectionTest' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'ReflectionTest' property on 'ReflectAttribute': The provided value\\"
     });
 
     this.setAttributeNS(null, \\"reflection\\", V);
@@ -2354,20 +2354,20 @@ class Reflect {
     }
 
     V = conversions[\\"DOMString\\"](V, {
-      context: \\"Failed to set the 'withUnderscore' property on 'Reflect': The provided value\\"
+      context: \\"Failed to set the 'withUnderscore' property on 'ReflectAttribute': The provided value\\"
     });
 
     this.setAttributeNS(null, \\"with-underscore\\", V);
   }
 }
-Object.defineProperties(Reflect.prototype, {
+Object.defineProperties(ReflectAttribute.prototype, {
   ReflectedBoolean: { enumerable: true },
   ReflectedDOMString: { enumerable: true },
   ReflectedLong: { enumerable: true },
   ReflectedUnsignedLong: { enumerable: true },
   ReflectionTest: { enumerable: true },
   withUnderscore: { enumerable: true },
-  [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
+  [Symbol.toStringTag]: { value: \\"ReflectAttribute\\", configurable: true }
 });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2406,16 +2406,16 @@ const iface = {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
     }
-    throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
+    throw new TypeError(\`\${context} is not of type 'ReflectAttribute'.\`);
   },
 
   create(constructorArgs, privateData) {
-    let obj = Object.create(Reflect.prototype);
+    let obj = Object.create(ReflectAttribute.prototype);
     obj = this.setup(obj, constructorArgs, privateData);
     return obj;
   },
   createImpl(constructorArgs, privateData) {
-    let obj = Object.create(Reflect.prototype);
+    let obj = Object.create(ReflectAttribute.prototype);
     obj = this.setup(obj, constructorArgs, privateData);
     return utils.implForWrapper(obj);
   },
@@ -2437,18 +2437,18 @@ const iface = {
     }
     return obj;
   },
-  interface: Reflect,
+  interface: ReflectAttribute,
   expose: {
-    Window: { Reflect }
+    Window: { ReflectAttribute }
   }
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Reflect.js\\");
+const Impl = require(\\"../implementations/ReflectAttribute.js\\");
 "
 `;
 
-exports[`RequestDestination.webidl 1`] = `
+exports[`Generation RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
 const enumerationValues = new Set([
@@ -2482,7 +2482,7 @@ module.exports = {
 "
 `;
 
-exports[`SeqAndRec.webidl 1`] = `
+exports[`Generation SeqAndRec.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2778,7 +2778,7 @@ const Impl = require(\\"../implementations/SeqAndRec.js\\");
 "
 `;
 
-exports[`Static.webidl 1`] = `
+exports[`Generation Static.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2914,7 +2914,7 @@ const Impl = require(\\"../implementations/Static.js\\");
 "
 `;
 
-exports[`Storage.webidl 1`] = `
+exports[`Generation Storage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3278,7 +3278,7 @@ const Impl = require(\\"../implementations/Storage.js\\");
 "
 `;
 
-exports[`StringifierAttribute.webidl 1`] = `
+exports[`Generation StringifierAttribute.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3390,7 +3390,7 @@ const Impl = require(\\"../implementations/StringifierAttribute.js\\");
 "
 `;
 
-exports[`StringifierDefaultOperation.webidl 1`] = `
+exports[`Generation StringifierDefaultOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3494,7 +3494,7 @@ const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
 "
 `;
 
-exports[`StringifierNamedOperation.webidl 1`] = `
+exports[`Generation StringifierNamedOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3607,7 +3607,7 @@ const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
 "
 `;
 
-exports[`StringifierOperation.webidl 1`] = `
+exports[`Generation StringifierOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3711,7 +3711,7 @@ const Impl = require(\\"../implementations/StringifierOperation.js\\");
 "
 `;
 
-exports[`TypedefsAndUnions.webidl 1`] = `
+exports[`Generation TypedefsAndUnions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4219,7 +4219,7 @@ const Impl = require(\\"../implementations/TypedefsAndUnions.js\\");
 "
 `;
 
-exports[`URL.webidl 1`] = `
+exports[`Generation URL.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4558,7 +4558,7 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
-exports[`URLList.webidl 1`] = `
+exports[`Generation URLList.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4847,7 +4847,7 @@ const Impl = require(\\"../implementations/URLList.js\\");
 "
 `;
 
-exports[`URLSearchParams.webidl 1`] = `
+exports[`Generation URLSearchParams.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5284,7 +5284,7 @@ const Impl = require(\\"../implementations/URLSearchParams.js\\");
 "
 `;
 
-exports[`URLSearchParamsCollection.webidl 1`] = `
+exports[`Generation URLSearchParamsCollection.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5623,7 +5623,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
 `;
 
-exports[`URLSearchParamsCollection2.webidl 1`] = `
+exports[`Generation URLSearchParamsCollection2.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5938,7 +5938,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
 `;
 
-exports[`UnderscoredProperties.webidl 1`] = `
+exports[`Generation UnderscoredProperties.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6150,7 +6150,7 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`Unforgeable.webidl 1`] = `
+exports[`Generation Unforgeable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6328,7 +6328,7 @@ const Impl = require(\\"../implementations/Unforgeable.js\\");
 "
 `;
 
-exports[`UnforgeableMap.webidl 1`] = `
+exports[`Generation UnforgeableMap.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6613,7 +6613,7 @@ const Impl = require(\\"../implementations/UnforgeableMap.js\\");
 "
 `;
 
-exports[`Unscopable.webidl 1`] = `
+exports[`Generation Unscopable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6751,7 +6751,7 @@ const Impl = require(\\"../implementations/Unscopable.js\\");
 "
 `;
 
-exports[`Variadic.webidl 1`] = `
+exports[`Generation Variadic.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6994,7 +6994,7 @@ const Impl = require(\\"../implementations/Variadic.js\\");
 "
 `;
 
-exports[`ZeroArgConstructor.webidl 1`] = `
+exports[`Generation ZeroArgConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");

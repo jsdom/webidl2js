@@ -1,4 +1,4 @@
-interface Reflect {
+interface ReflectAttribute {
   [Reflect] attribute boolean ReflectedBoolean;
   [FooBar, Reflect] attribute DOMString ReflectedDOMString;
   [Reflect, FooBar] attribute long ReflectedLong;
