@@ -159,7 +159,7 @@ This is useful in other parts of your program that are not implementation class 
 
 #### `createImpl(constructorArgs, privateData)`
 
-Creates a new instance of the wrapper class and corresponding implementation class, passing in the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
+Creates a new instance of the wrapper class and corresponding implementation class, passing in the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the implementation class.
 
 This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
 
