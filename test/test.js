@@ -10,7 +10,21 @@ const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
 
 beforeAll(() => {
-  const transformer = new Transformer();
+  const transformer = new Transformer({
+    processCEReactions(_, code) {
+      return `
+        // CEReaction pre steps
+        ${code}
+        // CEReaction post steps
+      `;
+    },
+    processHTMLConstructor(_, code) {
+      return `
+        // HTMLConstructor
+        ${code}
+      `;
+    }
+  });
   transformer.addSource(casesDir, implsDir);
 
   return transformer.generate(outputDir);
