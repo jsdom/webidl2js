@@ -23,6 +23,9 @@
   "jest": {
     "testEnvironment": "node"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "author": "Sebastian Mayr <npm@smayr.name>",
   "license": "MIT"
 }
