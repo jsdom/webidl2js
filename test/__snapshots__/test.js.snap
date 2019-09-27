@@ -474,7 +474,7 @@ const iface = {
       },
 
       defineProperty(target, P, desc) {
-        // CEReaction pre steps
+        // CEReaction
 
         if (typeof P === \\"symbol\\") {
           return Reflect.defineProperty(target, P, desc);
@@ -500,12 +500,10 @@ const iface = {
           return true;
         }
         return Reflect.defineProperty(target, P, desc);
-
-        // CEReaction post steps
       },
 
       deleteProperty(target, P) {
-        // CEReaction pre steps
+        // CEReaction
 
         if (typeof P === \\"symbol\\") {
           return Reflect.deleteProperty(target, P);
@@ -517,8 +515,6 @@ const iface = {
         }
 
         return Reflect.deleteProperty(target, P);
-
-        // CEReaction post steps
       },
 
       preventExtensions() {
@@ -540,15 +536,13 @@ const iface = {
       }
 
       method() {
-        // CEReaction pre steps
+        // CEReaction
 
         if (!this || !module.exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return this[impl].method();
-
-        // CEReaction post steps
       }
 
       get attr() {
@@ -556,9 +550,8 @@ const iface = {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        // CEReaction pre steps
+        // CEReaction
         return this[impl][\\"attr\\"];
-        // CEReaction post steps
       }
 
       set attr(V) {
@@ -570,9 +563,8 @@ const iface = {
           context: \\"Failed to set the 'attr' property on 'CEReactions': The provided value\\"
         });
 
-        // CEReaction pre steps
+        // CEReaction
         this[impl][\\"attr\\"] = V;
-        // CEReaction post steps
       }
     }
     Object.defineProperties(CEReactions.prototype, {

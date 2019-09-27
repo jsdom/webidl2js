@@ -110,8 +110,8 @@ The main module's default export is a class which you can construct with a few o
 
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name. (default: `""`)
 - `suppressErrors`: set to true to suppress errors during generation. (default: `false`)
-- `processCEReactions`: an optional hook to post-process the generated code for IDL operation and attributes annotated with the [`[CEReaction]`](https://html.spec.whatwg.org/multipage/custom-elements.html#cereactions) extended attributes. The processor expects the following signature `(idl: IdlOperation | IdlAttribute, code: string): string` where `idl` is the parsed [operation member](https://github.com/w3c/webidl2.js#operation-member) and [attribute member](https://github.com/w3c/webidl2.js#attribute-member) and `code` the generated accessor code.
-- `processHTMLConstructor`: an optional hook to post-process the generated code for IDL interfaces where the constructor is annotated with the [`[HTMLConstructor]`](https://html.spec.whatwg.org/multipage/dom.html#htmlconstructor) extended attribute. The processor expects the following signature `(idl: IdlOperation, code: string): string` where `idl` is the parsed [interface](https://github.com/w3c/webidl2.js#interface) and `code` generated interface code.
+- `processCEReactions`: an optional hook to post-process the generated code for IDL operation and attributes annotated with the [`[CEReaction]`](https://html.spec.whatwg.org/multipage/custom-elements.html#cereactions) extended attribute. The processor expects the following signature `(idl: IdlOperation | IdlAttribute, code: string): string` where `idl` is the parsed [operation member](https://github.com/w3c/webidl2.js#operation-member) and [attribute member](https://github.com/w3c/webidl2.js#attribute-member) and `code` the generated accessor body code. (default: pass-through)
+- `processHTMLConstructor`: an optional hook to post-process the generated code for IDL interfaces where the constructor is annotated with the [`[HTMLConstructor]`](https://html.spec.whatwg.org/multipage/dom.html#htmlconstructor) extended attribute. The processor expects the following signature `(idl: IdlOperation, code: string): string` where `idl` is the parsed [interface](https://github.com/w3c/webidl2.js#interface) and `code` generated interface code. (default: pass-through)
 
 The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
 
@@ -122,6 +122,35 @@ In this example, a file at `idl/SomeInterface.webidl` would generate a new wrapp
 The transformer will also generate a file named `utils.js` inside the wrapper class directory, which contains utilities used by all the wrapper class files.
 
 Note that webidl2js works best when there is a single transformer instance that knows about as many files as possible. This allows it to resolve type references, e.g. when one operation has an argument type referring to some other interface.
+
+By default webidl2js ignores HTML defined extended attributes like `[CEReactions]` and `[HTMLConstructor]` since they requires implementation details knowledge. The `processCEReactions` and `processHTMLConstructor` hooks provide a way to transform the wrapper class files.
+
+```js
+"use strict";
+const WebIDL2JS = require("webidl2js");
+
+const transformer = new WebIDL2JS({ 
+  implSuffix: "-impl",
+  processCEReactions(idl, code) {
+    return `
+      console.log("Run custom element reactions steps for ${idl.name}");
+      ${code}
+    `;
+  },
+  processHTMLConstructor(idl, code) {
+    return `
+      console.log("Interface ${idl.name} is annotated with [HTMLConstructor]");
+      ${code}
+    `;
+  }
+});
+
+transformer.addSource("idl", "impls");
+transformer.generate("wrappers").catch(err => {
+  console.error(err.stack);
+  process.exit(1);
+});
+```
 
 ## Generated wrapper class file API
 
@@ -339,8 +368,10 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[TreatNullAs]`
 - `[Unforgeable]`
 - `[Unscopable]`
-- `[CEReactions]`
-- `[HTMLConstructor]`
+
+Supported Web IDL extensions defined in HTML:
+- `[CEReactions]` - behavior can be defined via the `processCEReactions` hook
+- `[HTMLConstructor]` - behavior can be defined via the `processHTMLConstructor` hook
 
 Notable missing features include:
 
