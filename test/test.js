@@ -13,8 +13,9 @@ beforeAll(() => {
   const transformer = new Transformer({
     processCEReactions(_, code) {
       return `
-        // CEReaction
+        // CEReactions pre steps
         ${code}
+        // CEReactions post steps
       `;
     },
     processHTMLConstructor(_, code) {

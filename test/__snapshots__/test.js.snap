@@ -429,12 +429,16 @@ const iface = {
               context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
             });
 
+            // CEReactions pre steps
+
             const creating = !target[impl][utils.supportsPropertyName](P);
             if (creating) {
               target[impl][utils.namedSetNew](P, namedValue);
             } else {
               target[impl][utils.namedSetExisting](P, namedValue);
             }
+
+            // CEReactions post steps
 
             return true;
           }
@@ -474,8 +478,6 @@ const iface = {
       },
 
       defineProperty(target, P, desc) {
-        // CEReaction
-
         if (typeof P === \\"symbol\\") {
           return Reflect.defineProperty(target, P, desc);
         }
@@ -490,6 +492,8 @@ const iface = {
             context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
           });
 
+          // CEReactions pre steps
+
           const creating = !target[impl][utils.supportsPropertyName](P);
           if (creating) {
             target[impl][utils.namedSetNew](P, namedValue);
@@ -497,21 +501,25 @@ const iface = {
             target[impl][utils.namedSetExisting](P, namedValue);
           }
 
+          // CEReactions post steps
+
           return true;
         }
         return Reflect.defineProperty(target, P, desc);
       },
 
       deleteProperty(target, P) {
-        // CEReaction
-
         if (typeof P === \\"symbol\\") {
           return Reflect.deleteProperty(target, P);
         }
 
         if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+          // CEReactions pre steps
+
           target[impl][utils.namedDelete](P);
           return true;
+
+          // CEReactions post steps
         }
 
         return Reflect.deleteProperty(target, P);
@@ -536,13 +544,15 @@ const iface = {
       }
 
       method() {
-        // CEReaction
-
         if (!this || !module.exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
+        // CEReactions pre steps
+
         return this[impl].method();
+
+        // CEReactions post steps
       }
 
       get attr() {
@@ -550,8 +560,9 @@ const iface = {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        // CEReaction
+        // CEReactions pre steps
         return this[impl][\\"attr\\"];
+        // CEReactions post steps
       }
 
       set attr(V) {
@@ -563,8 +574,9 @@ const iface = {
           context: \\"Failed to set the 'attr' property on 'CEReactions': The provided value\\"
         });
 
-        // CEReaction
+        // CEReactions pre steps
         this[impl][\\"attr\\"] = V;
+        // CEReactions post steps
       }
     }
     Object.defineProperties(CEReactions.prototype, {

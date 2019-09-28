@@ -110,7 +110,7 @@ The main module's default export is a class which you can construct with a few o
 
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name. (default: `""`)
 - `suppressErrors`: set to true to suppress errors during generation. (default: `false`)
-- `processCEReactions`: an optional hook to post-process the generated code for IDL operation and attributes annotated with the [`[CEReaction]`](https://html.spec.whatwg.org/multipage/custom-elements.html#cereactions) extended attribute. The processor expects the following signature `(idl: IdlOperation | IdlAttribute, code: string): string` where `idl` is the parsed [operation member](https://github.com/w3c/webidl2.js#operation-member) and [attribute member](https://github.com/w3c/webidl2.js#attribute-member) and `code` the generated accessor body code. (default: pass-through)
+- `processCEReactions`: an optional hook to post-process the generated code for IDL operation and attributes annotated with the [`[CEReaction]`](https://html.spec.whatwg.org/multipage/custom-elements.html#cereactions) extended attribute. The processor expects the following signature `(idl: IdlOperation | IdlAttribute, code: string): string` where `idl` is the parsed [operation member](https://github.com/w3c/webidl2.js#operation-member) and [attribute member](https://github.com/w3c/webidl2.js#attribute-member) and `code` the generated set or delete code. (default: pass-through)
 - `processHTMLConstructor`: an optional hook to post-process the generated code for IDL interfaces where the constructor is annotated with the [`[HTMLConstructor]`](https://html.spec.whatwg.org/multipage/dom.html#htmlconstructor) extended attribute. The processor expects the following signature `(idl: IdlOperation, code: string): string` where `idl` is the parsed [interface](https://github.com/w3c/webidl2.js#interface) and `code` generated interface code. (default: pass-through)
 
 The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
@@ -133,13 +133,14 @@ const transformer = new WebIDL2JS({
   implSuffix: "-impl",
   processCEReactions(idl, code) {
     return `
-      console.log("Run custom element reactions steps for ${idl.name}");
+      // CEReactions pre steps
       ${code}
+      // CEReactions post steps
     `;
   },
   processHTMLConstructor(idl, code) {
     return `
-      console.log("Interface ${idl.name} is annotated with [HTMLConstructor]");
+      // HTMLConstructor
       ${code}
     `;
   }
