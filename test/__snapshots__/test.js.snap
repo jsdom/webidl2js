@@ -398,8 +398,16 @@ const iface = {
     return obj;
   },
   interface: DictionaryConvert,
-  expose: {
-    Window: { DictionaryConvert }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"DictionaryConvert\\", {
+          value: DictionaryConvert,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -537,8 +545,16 @@ const iface = {
     return obj;
   },
   interface: Enum,
-  expose: {
-    Window: { Enum }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Enum\\", {
+          value: Enum,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -633,8 +649,16 @@ module.exports = {
         return obj;
       },
       interface: Factory,
-      expose: {
-        Window: { Factory }
+      expose(globalName, obj) {
+        switch (globalName) {
+          case \\"Window\\":
+            Object.defineProperty(obj, \\"Factory\\", {
+              value: Factory,
+              writable: true,
+              enumerable: false,
+              configurable: true
+            });
+        }
       }
     }; // iface
     return iface;
@@ -852,8 +876,16 @@ const iface = {
     return obj;
   },
   interface: Global,
-  expose: {
-    Window: { Global }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Global\\", {
+          value: Global,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -957,8 +989,16 @@ const iface = {
     return obj;
   },
   interface: LegacyArrayClass,
-  expose: {
-    Window: { LegacyArrayClass }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"LegacyArrayClass\\", {
+          value: LegacyArrayClass,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -1226,8 +1266,16 @@ const iface = {
     return obj;
   },
   interface: MixedIn,
-  expose: {
-    Window: { MixedIn }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"MixedIn\\", {
+          value: MixedIn,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -1397,7 +1445,7 @@ const iface = {
     return obj;
   },
   interface: Mixin,
-  expose: {}
+  expose(globalName, obj) {}
 }; // iface
 module.exports = iface;
 
@@ -1533,7 +1581,7 @@ const iface = {
     return obj;
   },
   interface: MixinInherited,
-  expose: {}
+  expose(globalName, obj) {}
 }; // iface
 module.exports = iface;
 
@@ -1658,7 +1706,7 @@ const iface = {
     return obj;
   },
   interface: MixinMixin,
-  expose: {}
+  expose(globalName, obj) {}
 }; // iface
 module.exports = iface;
 
@@ -2060,8 +2108,16 @@ const iface = {
     return obj;
   },
   interface: Overloads,
-  expose: {
-    Window: { Overloads }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Overloads\\", {
+          value: Overloads,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -2208,8 +2264,16 @@ const iface = {
     return obj;
   },
   interface: PromiseTypes,
-  expose: {
-    Window: { PromiseTypes }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"PromiseTypes\\", {
+          value: PromiseTypes,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -2438,8 +2502,16 @@ const iface = {
     return obj;
   },
   interface: Reflect,
-  expose: {
-    Window: { Reflect }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Reflect\\", {
+          value: Reflect,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -2768,8 +2840,16 @@ const iface = {
     return obj;
   },
   interface: SeqAndRec,
-  expose: {
-    Window: { SeqAndRec }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"SeqAndRec\\", {
+          value: SeqAndRec,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -2904,8 +2984,16 @@ const iface = {
     return obj;
   },
   interface: Static,
-  expose: {
-    Window: { Static }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Static\\", {
+          value: Static,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -3268,8 +3356,16 @@ const iface = {
     return obj;
   },
   interface: Storage,
-  expose: {
-    Window: { Storage }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Storage\\", {
+          value: Storage,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -3380,8 +3476,16 @@ const iface = {
     return obj;
   },
   interface: StringifierAttribute,
-  expose: {
-    Window: { StringifierAttribute }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"StringifierAttribute\\", {
+          value: StringifierAttribute,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -3484,8 +3588,16 @@ const iface = {
     return obj;
   },
   interface: StringifierDefaultOperation,
-  expose: {
-    Window: { StringifierDefaultOperation }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"StringifierDefaultOperation\\", {
+          value: StringifierDefaultOperation,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -3597,8 +3709,16 @@ const iface = {
     return obj;
   },
   interface: StringifierNamedOperation,
-  expose: {
-    Window: { StringifierNamedOperation }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"StringifierNamedOperation\\", {
+          value: StringifierNamedOperation,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -3701,8 +3821,16 @@ const iface = {
     return obj;
   },
   interface: StringifierOperation,
-  expose: {
-    Window: { StringifierOperation }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"StringifierOperation\\", {
+          value: StringifierOperation,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -4209,8 +4337,16 @@ const iface = {
     return obj;
   },
   interface: TypedefsAndUnions,
-  expose: {
-    Window: { TypedefsAndUnions }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"TypedefsAndUnions\\", {
+          value: TypedefsAndUnions,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -4547,9 +4683,25 @@ const iface = {
     return obj;
   },
   interface: URL,
-  expose: {
-    Window: { URL },
-    Worker: { URL }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"webkitURL\\", {
+          value: URL,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+
+      // fall-through
+      case \\"Worker\\":
+        Object.defineProperty(obj, \\"URL\\", {
+          value: URL,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -4837,8 +4989,16 @@ const iface = {
     return obj;
   },
   interface: URLList,
-  expose: {
-    Window: { URLList }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"URLList\\", {
+          value: URLList,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -5273,9 +5433,17 @@ const iface = {
     return obj;
   },
   interface: URLSearchParams,
-  expose: {
-    Window: { URLSearchParams },
-    Worker: { URLSearchParams }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+      case \\"Worker\\":
+        Object.defineProperty(obj, \\"URLSearchParams\\", {
+          value: URLSearchParams,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -5613,8 +5781,16 @@ const iface = {
     return obj;
   },
   interface: URLSearchParamsCollection,
-  expose: {
-    Window: { URLSearchParamsCollection }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"URLSearchParamsCollection\\", {
+          value: URLSearchParamsCollection,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -5928,8 +6104,16 @@ const iface = {
     return obj;
   },
   interface: URLSearchParamsCollection2,
-  expose: {
-    Window: { URLSearchParamsCollection2 }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"URLSearchParamsCollection2\\", {
+          value: URLSearchParamsCollection2,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -6138,8 +6322,16 @@ const iface = {
     return obj;
   },
   interface: UnderscoredProperties,
-  expose: {
-    Window: { UnderscoredProperties }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"UnderscoredProperties\\", {
+          value: UnderscoredProperties,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -6318,8 +6510,16 @@ const iface = {
     return obj;
   },
   interface: Unforgeable,
-  expose: {
-    Window: { Unforgeable }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Unforgeable\\", {
+          value: Unforgeable,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -6603,8 +6803,16 @@ const iface = {
     return obj;
   },
   interface: UnforgeableMap,
-  expose: {
-    Window: { UnforgeableMap }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"UnforgeableMap\\", {
+          value: UnforgeableMap,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -6741,8 +6949,16 @@ const iface = {
     return obj;
   },
   interface: Unscopable,
-  expose: {
-    Window: { Unscopable }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Unscopable\\", {
+          value: Unscopable,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -6984,8 +7200,16 @@ const iface = {
     return obj;
   },
   interface: Variadic,
-  expose: {
-    Window: { Variadic }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"Variadic\\", {
+          value: Variadic,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
@@ -7079,12 +7303,78 @@ const iface = {
     return obj;
   },
   interface: ZeroArgConstructor,
-  expose: {
-    Window: { ZeroArgConstructor }
+  expose(globalName, obj) {
+    switch (globalName) {
+      case \\"Window\\":
+        Object.defineProperty(obj, \\"ZeroArgConstructor\\", {
+          value: ZeroArgConstructor,
+          writable: true,
+          enumerable: false,
+          configurable: true
+        });
+    }
   }
 }; // iface
 module.exports = iface;
 
 const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
+"
+`;
+
+exports[`bundle-entry.js 1`] = `
+"\\"use strict\\";
+
+const allExports = Object.create(null);
+exports.bootstrap = function (globalName, globalObj, defaultPrivateData) {
+  const exportsWithFactories = Object.assign(Object.create(null), allExports);
+  for (const name of Object.keys(exportsWithFactories)) {
+    const obj = exportsWithFactories[name];
+    if (typeof obj.expose === \\"function\\") {
+      obj.expose(globalName, globalObj);
+    } else if (typeof obj.createInterface === \\"function\\") {
+      const iface = obj.createInterface(defaultPrivateData);
+      // Mix in is()/isImpl().
+      Object.assign(iface, obj);
+      exportsWithFactories[name] = iface;
+      iface.expose(globalName, globalObj);
+    }
+  }
+  return exportsWithFactories;
+};
+
+// Below this line, exports will be added.
+allExports[\\"DictionaryConvert\\"] = require(\\"./DictionaryConvert\\");
+allExports[\\"Enum\\"] = require(\\"./Enum\\");
+allExports[\\"Factory\\"] = require(\\"./Factory\\");
+allExports[\\"Global\\"] = require(\\"./Global\\");
+allExports[\\"LegacyArrayClass\\"] = require(\\"./LegacyArrayClass\\");
+allExports[\\"MixedIn\\"] = require(\\"./MixedIn\\");
+allExports[\\"Mixin\\"] = require(\\"./Mixin\\");
+allExports[\\"MixinInherited\\"] = require(\\"./MixinInherited\\");
+allExports[\\"MixinMixin\\"] = require(\\"./MixinMixin\\");
+allExports[\\"Overloads\\"] = require(\\"./Overloads\\");
+allExports[\\"PromiseTypes\\"] = require(\\"./PromiseTypes\\");
+allExports[\\"Reflect\\"] = require(\\"./Reflect\\");
+allExports[\\"SeqAndRec\\"] = require(\\"./SeqAndRec\\");
+allExports[\\"Static\\"] = require(\\"./Static\\");
+allExports[\\"Storage\\"] = require(\\"./Storage\\");
+allExports[\\"StringifierAttribute\\"] = require(\\"./StringifierAttribute\\");
+allExports[\\"StringifierDefaultOperation\\"] = require(\\"./StringifierDefaultOperation\\");
+allExports[\\"StringifierNamedOperation\\"] = require(\\"./StringifierNamedOperation\\");
+allExports[\\"StringifierOperation\\"] = require(\\"./StringifierOperation\\");
+allExports[\\"TypedefsAndUnions\\"] = require(\\"./TypedefsAndUnions\\");
+allExports[\\"URL\\"] = require(\\"./URL\\");
+allExports[\\"URLList\\"] = require(\\"./URLList\\");
+allExports[\\"URLSearchParams\\"] = require(\\"./URLSearchParams\\");
+allExports[\\"URLSearchParamsCollection\\"] = require(\\"./URLSearchParamsCollection\\");
+allExports[\\"URLSearchParamsCollection2\\"] = require(\\"./URLSearchParamsCollection2\\");
+allExports[\\"UnderscoredProperties\\"] = require(\\"./UnderscoredProperties\\");
+allExports[\\"Unforgeable\\"] = require(\\"./Unforgeable\\");
+allExports[\\"UnforgeableMap\\"] = require(\\"./UnforgeableMap\\");
+allExports[\\"Unscopable\\"] = require(\\"./Unscopable\\");
+allExports[\\"Variadic\\"] = require(\\"./Variadic\\");
+allExports[\\"ZeroArgConstructor\\"] = require(\\"./ZeroArgConstructor\\");
+allExports[\\"Dictionary\\"] = require(\\"./Dictionary\\");
+allExports[\\"RequestDestination\\"] = require(\\"./RequestDestination\\");
 "
 `;
