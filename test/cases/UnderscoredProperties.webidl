@@ -5,5 +5,3 @@ interface _UnderscoredProperties {
   static void _static(DOMString _void);
   void _operation(sequence<DOMString> _sequence);
 };
-
-UnderscoredProperties implements _MixinMixin;
