@@ -1,6 +1,7 @@
 [Constructor,
  Constructor(DOMString arg1),
- Constructor(URL arg1)]
+ Constructor(URL arg1),
+ Exposed=Window]
 interface Overloads {
   DOMString compatible(DOMString arg1);
   byte compatible(DOMString arg1, DOMString arg2);

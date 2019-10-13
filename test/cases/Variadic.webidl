@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface Variadic {
   void simple1(DOMString... strings);
 

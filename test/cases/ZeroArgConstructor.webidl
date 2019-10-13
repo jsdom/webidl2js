@@ -1,2 +1,2 @@
-[Constructor]
+[Constructor,Exposed=Window]
 interface ZeroArgConstructor {};

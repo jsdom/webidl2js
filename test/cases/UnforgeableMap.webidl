@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface UnforgeableMap {
   [Unforgeable] readonly attribute DOMString a;
   getter DOMString (DOMString x);

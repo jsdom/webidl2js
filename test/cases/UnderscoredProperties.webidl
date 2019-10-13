@@ -1,4 +1,5 @@
 // https://heycam.github.io/webidl/#idl-names
+[Exposed=Window]
 interface _UnderscoredProperties {
   const byte _const = 42;
   attribute byte _attribute;

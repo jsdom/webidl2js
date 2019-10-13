@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface Unscopable {
   [Unscopable] attribute boolean unscopableTest;
 };

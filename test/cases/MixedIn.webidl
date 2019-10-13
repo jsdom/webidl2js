@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface MixedIn {
   attribute DOMString mixedInAttr;
             DOMString mixedInOp();
