@@ -341,7 +341,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Partial interfaces and dictionaries
 - Interface mixins
 - Basic types (via [webidl-conversions][])
-- Old-style mixins, i.e. `implements`
 - Overload resolution (although [tricky cases are not easy on the implementation class](#overloaded-operations))
 - Variadic arguments
 - `[Clamp]`

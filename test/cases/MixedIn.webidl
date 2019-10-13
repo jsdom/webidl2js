@@ -3,7 +3,6 @@ interface MixedIn {
             DOMString mixedInOp();
   const     byte      mixedInConst = 43;
 };
-MixedIn implements Mixin;
 MixedIn includes InterfaceMixin;
 
 partial interface mixin InterfaceMixin {
