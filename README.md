@@ -247,7 +247,7 @@ Note that for IDL attributes that are `readonly`, these properties do not need t
 
 #### Static attributes
 
-Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute. Note that, unless the `[WebIDL2JSFactory]` extended attribute is specified on the interface, any mutations to writable static attributes of the class will reflect on other places that use the same interface.
+Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute.
 
 ### toString method implementing IDL stringifier
 
@@ -385,12 +385,6 @@ By default the attribute passed to `this.getAttribute` and `this.setAttribute` w
 Note that only the basics of the reflect algorithm are implemented so far: `boolean`, `DOMString`, `long`, and `unsigned long`, with no parametrizations.
 
 In the future we may move this extended attribute out into some sort of plugin, since it is more related to HTML than to Web IDL.
-
-### `[WebIDL2JSFactory]`
-
-This extended attribute can be applied to interfaces to cause them to generate a factory that generates wrapper classes, instead of generating a single wrapper class.
-
-It is currently used by [jsdom](https://github.com/tmpvar/jsdom) for classes which need to specialize their behavior per `Window` object; by default [jsdom shares classes across all `Window`s](https://github.com/tmpvar/jsdom#shared-constructors-and-prototypes), but with `[WebIDL2JSFactory]`, an exception can be made for certain classes that need it.
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
