@@ -20,7 +20,10 @@
     "lint": "eslint ."
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "watchPathIgnorePatterns": [
+      "<rootDir>/test/output"
+    ]
   },
   "engines": {
     "node": ">=8"
