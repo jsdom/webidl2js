@@ -175,7 +175,7 @@ This export is the wrapper class interface, suitable for example for putting on 
 
 #### `expose`
 
-This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attribute `[Expose]` to generate a data structure of the form:
+This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attribute `[Exposed]` to generate a data structure of the form:
 
 ```js
 {
