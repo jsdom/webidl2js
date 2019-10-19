@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface Unforgeable {
   [Unforgeable] stringifier attribute USVString href;
   [Unforgeable] readonly attribute USVString origin;

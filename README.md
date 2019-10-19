@@ -175,7 +175,7 @@ This export is the wrapper class interface, suitable for example for putting on 
 
 #### `expose`
 
-This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attributes `[Expose]` and `[NoInterfaceObject]` to generate a data structure of the form:
+This export contains information about where an interface is supposed to be exposed as a property. It takes into account the Web IDL extended attribute `[Exposed]` to generate a data structure of the form:
 
 ```js
 {
@@ -346,7 +346,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[Constructor]`
 - `[EnforceRange]`
-- `[Exposed]` and `[NoInterfaceObject]` (by exporting metadata on where/whether it is exposed)
+- `[Exposed]` (by exporting metadata on where/whether it is exposed)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[OverrideBuiltins]`

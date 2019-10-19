@@ -1,4 +1,5 @@
 // https://html.spec.whatwg.org/multipage/webstorage.html#storage-2<Paste>
+[Exposed=Window]
 interface Storage {
   readonly attribute unsigned long length;
   DOMString? key(unsigned long index);

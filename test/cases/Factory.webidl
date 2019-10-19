@@ -1,4 +1,4 @@
-[WebIDL2JSFactory]
+[WebIDL2JSFactory,Exposed=Window]
 interface Factory {
   DOMString method();
   attribute double _attribute;

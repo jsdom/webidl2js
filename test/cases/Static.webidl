@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface Static {
   static attribute DOMString abc;
   attribute DOMString abc;

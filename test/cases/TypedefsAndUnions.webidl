@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface TypedefsAndUnions {
   void numOrStrConsumer(NumOrStr a);
   void numOrEnumConsumer((double or RequestDestination)? a);

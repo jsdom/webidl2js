@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface Reflect {
   [Reflect] attribute boolean ReflectedBoolean;
   [FooBar, Reflect] attribute DOMString ReflectedDOMString;
