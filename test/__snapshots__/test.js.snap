@@ -9,11 +9,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class DOMImplementation {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedDOMImplementation {
   createDocumentType(qualifiedName, publicId, systemId) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -173,16 +169,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"DOMImplementation\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor DOMImplementation is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor DOMImplementation is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -190,14 +186,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -206,10 +200,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: DOMImplementation,
-  expose: {
-    Window: { DOMImplementation }
   },
 
   install(globalObject) {
@@ -220,7 +210,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedDOMImplementation.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -340,11 +330,7 @@ const convertDictionary = require(\\"./Dictionary.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class DictionaryConvert {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedDictionaryConvert {
   op() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -413,16 +399,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"DictionaryConvert\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor DictionaryConvert is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor DictionaryConvert is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -430,14 +416,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -446,10 +430,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: DictionaryConvert,
-  expose: {
-    Window: { DictionaryConvert }
   },
 
   install(globalObject) {
@@ -460,7 +440,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedDictionaryConvert.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -501,11 +481,7 @@ const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Enum {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedEnum {
   op(destination) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -593,16 +569,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Enum\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Enum is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Enum is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -610,14 +586,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -626,10 +600,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Enum,
-  expose: {
-    Window: { Enum }
   },
 
   install(globalObject) {
@@ -640,7 +610,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedEnum.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -679,11 +649,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Global {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-}
+class SharedGlobal {}
 Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -727,16 +693,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Global\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Global is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Global is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -829,14 +795,12 @@ const iface = {
       [Symbol.iterator]: { enumerable: false }
     });
   },
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -845,10 +809,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Global,
-  expose: {
-    Window: { Global }
   },
 
   install(globalObject) {
@@ -859,7 +819,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedGlobal.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -898,11 +858,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class LegacyArrayClass {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedLegacyArrayClass {
   get length() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -958,16 +914,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"LegacyArrayClass\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor LegacyArrayClass is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor LegacyArrayClass is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -975,14 +931,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -991,10 +945,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: LegacyArrayClass,
-  expose: {
-    Window: { LegacyArrayClass }
   },
 
   install(globalObject) {
@@ -1005,7 +955,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedLegacyArrayClass.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -1044,11 +994,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class MixedIn {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedMixedIn {
   mixedInOp() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1160,16 +1106,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"MixedIn\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor MixedIn is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor MixedIn is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1177,14 +1123,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -1194,10 +1138,6 @@ const iface = {
     }
     return obj;
   },
-  interface: MixedIn,
-  expose: {
-    Window: { MixedIn }
-  },
 
   install(globalObject) {
     const MixedIn = function() {
@@ -1205,14 +1145,14 @@ const iface = {
     };
 
     Object.defineProperties(MixedIn, {
-      mixedInConst: Object.getOwnPropertyDescriptor(iface.interface, \\"mixedInConst\\"),
-      ifaceMixinConst: Object.getOwnPropertyDescriptor(iface.interface, \\"ifaceMixinConst\\")
+      mixedInConst: Object.getOwnPropertyDescriptor(SharedMixedIn, \\"mixedInConst\\"),
+      ifaceMixinConst: Object.getOwnPropertyDescriptor(SharedMixedIn, \\"ifaceMixinConst\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedMixedIn.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -1248,37 +1188,12 @@ exports[`Overloads.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
+const isURL = require(\\"./URL.js\\").is;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Overloads {
-  constructor() {
-    const args = [];
-    switch (arguments.length) {
-      case 0:
-        break;
-      default: {
-        let curArg = arguments[0];
-        if (isURL(curArg)) {
-          {
-            let curArg = arguments[0];
-            curArg = convertURL(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
-            args.push(curArg);
-          }
-        } else {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
-            args.push(curArg);
-          }
-        }
-      }
-    }
-    return iface.setup(Object.create(new.target.prototype), args, undefined);
-  }
-
+class SharedOverloads {
   compatible(arg1) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1610,16 +1525,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Overloads\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Overloads is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Overloads is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1627,14 +1542,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -1643,10 +1556,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Overloads,
-  expose: {
-    Window: { Overloads }
   },
 
   install(globalObject) {
@@ -1672,13 +1581,13 @@ const iface = {
           }
         }
       }
-      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+      return iface.setup(Object.create(new.target.prototype), globalObject, args);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedOverloads.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -1717,11 +1626,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class PromiseTypes {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedPromiseTypes {
   voidPromiseConsumer(p) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1820,16 +1725,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"PromiseTypes\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor PromiseTypes is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor PromiseTypes is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1837,14 +1742,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -1853,10 +1756,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: PromiseTypes,
-  expose: {
-    Window: { PromiseTypes }
   },
 
   install(globalObject) {
@@ -1867,7 +1766,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedPromiseTypes.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -1906,11 +1805,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Reflect {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedReflect {
   get ReflectedBoolean() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2091,16 +1986,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Reflect\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Reflect is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Reflect is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2108,14 +2003,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -2124,10 +2017,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Reflect,
-  expose: {
-    Window: { Reflect }
   },
 
   install(globalObject) {
@@ -2138,7 +2027,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedReflect.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -2212,11 +2101,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SeqAndRec {
-  constructor() {
-    return iface.setup(Object.create(new.target.prototype), undefined, undefined);
-  }
-
+class SharedSeqAndRec {
   recordConsumer(rec) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2462,16 +2347,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"SeqAndRec\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor SeqAndRec is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor SeqAndRec is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2479,14 +2364,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -2496,20 +2379,16 @@ const iface = {
     }
     return obj;
   },
-  interface: SeqAndRec,
-  expose: {
-    Window: { SeqAndRec }
-  },
 
   install(globalObject) {
     const SeqAndRec = function() {
-      return iface.setup(Object.create(new.target.prototype), undefined, { globalObject });
+      return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedSeqAndRec.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -2548,11 +2427,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Static {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStatic {
   def() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2639,16 +2514,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Static\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Static is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Static is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2656,14 +2531,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -2673,10 +2546,6 @@ const iface = {
     }
     return obj;
   },
-  interface: Static,
-  expose: {
-    Window: { Static }
-  },
 
   install(globalObject) {
     const Static = function() {
@@ -2684,14 +2553,14 @@ const iface = {
     };
 
     Object.defineProperties(Static, {
-      def: Object.getOwnPropertyDescriptor(iface.interface, \\"def\\"),
-      abc: Object.getOwnPropertyDescriptor(iface.interface, \\"abc\\")
+      def: Object.getOwnPropertyDescriptor(SharedStatic, \\"def\\"),
+      abc: Object.getOwnPropertyDescriptor(SharedStatic, \\"abc\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStatic.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -2730,11 +2599,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Storage {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStorage {
   key(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2885,16 +2750,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Storage\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Storage is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Storage is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2902,14 +2767,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -3083,10 +2946,6 @@ const iface = {
     }
     return obj;
   },
-  interface: Storage,
-  expose: {
-    Window: { Storage }
-  },
 
   install(globalObject) {
     const Storage = function() {
@@ -3096,7 +2955,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStorage.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -3135,11 +2994,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class StringifierAttribute {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStringifierAttribute {
   get attr() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3202,16 +3057,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"StringifierAttribute\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor StringifierAttribute is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor StringifierAttribute is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3219,14 +3074,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -3235,10 +3088,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: StringifierAttribute,
-  expose: {
-    Window: { StringifierAttribute }
   },
 
   install(globalObject) {
@@ -3249,7 +3098,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStringifierAttribute.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -3288,11 +3137,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class StringifierDefaultOperation {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStringifierDefaultOperation {
   toString() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3347,16 +3192,18 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor StringifierDefaultOperation is not installed on the passed global object\\");
+      throw new Error(
+        \\"Internal error: constructor StringifierDefaultOperation is not installed on the passed global object\\"
+      );
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3364,14 +3211,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -3380,10 +3225,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: StringifierDefaultOperation,
-  expose: {
-    Window: { StringifierDefaultOperation }
   },
 
   install(globalObject) {
@@ -3394,7 +3235,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStringifierDefaultOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -3433,11 +3274,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class StringifierNamedOperation {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStringifierNamedOperation {
   operation() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3501,16 +3338,18 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"StringifierNamedOperation\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor StringifierNamedOperation is not installed on the passed global object\\");
+      throw new Error(
+        \\"Internal error: constructor StringifierNamedOperation is not installed on the passed global object\\"
+      );
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3518,14 +3357,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -3534,10 +3371,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: StringifierNamedOperation,
-  expose: {
-    Window: { StringifierNamedOperation }
   },
 
   install(globalObject) {
@@ -3548,7 +3381,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStringifierNamedOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -3587,11 +3420,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class StringifierOperation {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedStringifierOperation {
   toString() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3646,16 +3475,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"StringifierOperation\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor StringifierOperation is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor StringifierOperation is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3663,14 +3492,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -3679,10 +3506,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: StringifierOperation,
-  expose: {
-    Window: { StringifierOperation }
   },
 
   install(globalObject) {
@@ -3693,7 +3516,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedStringifierOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -3735,11 +3558,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class TypedefsAndUnions {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedTypedefsAndUnions {
   numOrStrConsumer(a) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4195,16 +4014,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"TypedefsAndUnions\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor TypedefsAndUnions is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor TypedefsAndUnions is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4212,14 +4031,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -4228,10 +4045,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: TypedefsAndUnions,
-  expose: {
-    Window: { TypedefsAndUnions }
   },
 
   install(globalObject) {
@@ -4242,7 +4055,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedTypedefsAndUnions.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -4281,27 +4094,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class URL {
-  constructor(url) {
-    if (arguments.length < 1) {
-      throw new TypeError(\\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\");
-    }
-    const args = [];
-    {
-      let curArg = arguments[0];
-      curArg = conversions[\\"USVString\\"](curArg, { context: \\"Failed to construct 'URL': parameter 1\\" });
-      args.push(curArg);
-    }
-    {
-      let curArg = arguments[1];
-      if (curArg !== undefined) {
-        curArg = conversions[\\"USVString\\"](curArg, { context: \\"Failed to construct 'URL': parameter 2\\" });
-      }
-      args.push(curArg);
-    }
-    return iface.setup(Object.create(new.target.prototype), args, undefined);
-  }
-
+class SharedURL {
   toJSON() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4574,16 +4367,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"URL\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor URL is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor URL is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4591,14 +4384,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -4607,11 +4398,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: URL,
-  expose: {
-    Window: { URL },
-    Worker: { URL }
   },
 
   install(globalObject) {
@@ -4634,13 +4420,13 @@ const iface = {
         }
         args.push(curArg);
       }
-      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+      return iface.setup(Object.create(new.target.prototype), globalObject, args);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedURL.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -4679,11 +4465,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class URLList {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedURLList {
   item(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4763,16 +4545,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"URLList\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor URLList is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor URLList is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4780,14 +4562,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -4957,10 +4737,6 @@ const iface = {
     }
     return obj;
   },
-  interface: URLList,
-  expose: {
-    Window: { URLList }
-  },
 
   install(globalObject) {
     const URLList = function() {
@@ -4970,7 +4746,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedURLList.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -5047,86 +4823,7 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
     configurable: true
   }
 });
-class URLSearchParams {
-  constructor() {
-    const args = [];
-    {
-      let curArg = arguments[0];
-      if (curArg !== undefined) {
-        if (utils.isObject(curArg)) {
-          if (curArg[Symbol.iterator] !== undefined) {
-            if (!utils.isObject(curArg)) {
-              throw new TypeError(
-                \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\" is not an iterable object.\\"
-              );
-            } else {
-              const V = [];
-              const tmp = curArg;
-              for (let nextItem of tmp) {
-                if (!utils.isObject(nextItem)) {
-                  throw new TypeError(
-                    \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                      \\" sequence\\" +
-                      \\"'s element\\" +
-                      \\" is not an iterable object.\\"
-                  );
-                } else {
-                  const V = [];
-                  const tmp = nextItem;
-                  for (let nextItem of tmp) {
-                    nextItem = conversions[\\"USVString\\"](nextItem, {
-                      context:
-                        \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\"'s element\\" + \\"'s element\\"
-                    });
-
-                    V.push(nextItem);
-                  }
-                  nextItem = V;
-                }
-
-                V.push(nextItem);
-              }
-              curArg = V;
-            }
-          } else {
-            if (!utils.isObject(curArg)) {
-              throw new TypeError(
-                \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\" is not an object.\\"
-              );
-            } else {
-              const result = Object.create(null);
-              for (const key of Reflect.ownKeys(curArg)) {
-                const desc = Object.getOwnPropertyDescriptor(curArg, key);
-                if (desc && desc.enumerable) {
-                  let typedKey = key;
-
-                  typedKey = conversions[\\"USVString\\"](typedKey, {
-                    context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s key\\"
-                  });
-
-                  let typedValue = curArg[key];
-
-                  typedValue = conversions[\\"USVString\\"](typedValue, {
-                    context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s value\\"
-                  });
-
-                  result[typedKey] = typedValue;
-                }
-              }
-              curArg = result;
-            }
-          }
-        } else {
-          curArg = conversions[\\"USVString\\"](curArg, { context: \\"Failed to construct 'URLSearchParams': parameter 1\\" });
-        }
-      } else {
-        curArg = \\"\\";
-      }
-      args.push(curArg);
-    }
-    return iface.setup(Object.create(new.target.prototype), args, undefined);
-  }
-
+class SharedURLSearchParams {
   append(name, value) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -5400,16 +5097,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"URLSearchParams\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor URLSearchParams is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -5417,14 +5114,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -5433,11 +5128,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: URLSearchParams,
-  expose: {
-    Window: { URLSearchParams },
-    Worker: { URLSearchParams }
   },
 
   install(globalObject) {
@@ -5522,13 +5212,13 @@ const iface = {
         }
         args.push(curArg);
       }
-      return iface.setup(Object.create(new.target.prototype), args, { globalObject });
+      return iface.setup(Object.create(new.target.prototype), globalObject, args);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedURLSearchParams.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -5567,11 +5257,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class URLSearchParamsCollection {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedURLSearchParamsCollection {
   item(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -5675,16 +5361,18 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor URLSearchParamsCollection is not installed on the passed global object\\");
+      throw new Error(
+        \\"Internal error: constructor URLSearchParamsCollection is not installed on the passed global object\\"
+      );
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -5692,14 +5380,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -5895,10 +5581,6 @@ const iface = {
     }
     return obj;
   },
-  interface: URLSearchParamsCollection,
-  expose: {
-    Window: { URLSearchParamsCollection }
-  },
 
   install(globalObject) {
     const URLSearchParamsCollection = function() {
@@ -5908,7 +5590,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedURLSearchParamsCollection.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -5949,11 +5631,7 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
-class URLSearchParamsCollection2 extends URLSearchParamsCollection.interface {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-}
+class SharedURLSearchParamsCollection2 {}
 Object.defineProperties(URLSearchParamsCollection2.prototype, {
   [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
   [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
@@ -6000,16 +5678,18 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor URLSearchParamsCollection2 is not installed on the passed global object\\");
+      throw new Error(
+        \\"Internal error: constructor URLSearchParamsCollection2 is not installed on the passed global object\\"
+      );
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6019,14 +5699,12 @@ const iface = {
   _internalSetup(obj) {
     URLSearchParamsCollection._internalSetup(obj);
   },
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -6251,10 +5929,6 @@ const iface = {
     }
     return obj;
   },
-  interface: URLSearchParamsCollection2,
-  expose: {
-    Window: { URLSearchParamsCollection2 }
-  },
 
   install(globalObject) {
     const URLSearchParamsCollection2 = function() {
@@ -6270,7 +5944,7 @@ const iface = {
     const proto = Object.create(globalObject.URLSearchParamsCollection.prototype);
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedURLSearchParamsCollection2.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -6309,11 +5983,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class UnderscoredProperties {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedUnderscoredProperties {
   operation(sequence) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -6441,16 +6111,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"UnderscoredProperties\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor UnderscoredProperties is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor UnderscoredProperties is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6458,14 +6128,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -6475,10 +6143,6 @@ const iface = {
     }
     return obj;
   },
-  interface: UnderscoredProperties,
-  expose: {
-    Window: { UnderscoredProperties }
-  },
 
   install(globalObject) {
     const UnderscoredProperties = function() {
@@ -6486,14 +6150,14 @@ const iface = {
     };
 
     Object.defineProperties(UnderscoredProperties, {
-      const: Object.getOwnPropertyDescriptor(iface.interface, \\"const\\"),
-      static: Object.getOwnPropertyDescriptor(iface.interface, \\"static\\")
+      const: Object.getOwnPropertyDescriptor(SharedUnderscoredProperties, \\"const\\"),
+      static: Object.getOwnPropertyDescriptor(SharedUnderscoredProperties, \\"static\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedUnderscoredProperties.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -6532,11 +6196,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Unforgeable {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-}
+class SharedUnforgeable {}
 Object.defineProperties(Unforgeable.prototype, { [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6580,16 +6240,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Unforgeable\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Unforgeable is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Unforgeable is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6682,14 +6342,12 @@ const iface = {
       protocol: { configurable: false }
     });
   },
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -6698,10 +6356,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Unforgeable,
-  expose: {
-    Window: { Unforgeable }
   },
 
   install(globalObject) {
@@ -6712,7 +6366,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedUnforgeable.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -6751,11 +6405,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class UnforgeableMap {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-}
+class SharedUnforgeableMap {}
 Object.defineProperties(UnforgeableMap.prototype, {
   [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
 });
@@ -6801,16 +6451,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"UnforgeableMap\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor UnforgeableMap is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor UnforgeableMap is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6833,14 +6483,12 @@ const iface = {
 
     Object.defineProperties(obj, { a: { configurable: false } });
   },
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -7025,10 +6673,6 @@ const iface = {
     }
     return obj;
   },
-  interface: UnforgeableMap,
-  expose: {
-    Window: { UnforgeableMap }
-  },
 
   install(globalObject) {
     const UnforgeableMap = function() {
@@ -7038,7 +6682,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedUnforgeableMap.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -7077,11 +6721,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Unscopable {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedUnscopable {
   get unscopableTest() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -7170,16 +6810,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Unscopable\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Unscopable is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Unscopable is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -7187,14 +6827,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -7203,10 +6841,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Unscopable,
-  expose: {
-    Window: { Unscopable }
   },
 
   install(globalObject) {
@@ -7217,7 +6851,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedUnscopable.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -7257,11 +6891,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class Variadic {
-  constructor() {
-    throw new TypeError(\\"Illegal constructor\\");
-  }
-
+class SharedVariadic {
   simple1() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -7454,16 +7084,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"Variadic\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor Variadic is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor Variadic is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -7471,14 +7101,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -7487,10 +7115,6 @@ const iface = {
       Impl.init(obj[impl], privateData);
     }
     return obj;
-  },
-  interface: Variadic,
-  expose: {
-    Window: { Variadic }
   },
 
   install(globalObject) {
@@ -7501,7 +7125,7 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedVariadic.prototype),
       constructor: {
         writable: true,
         configurable: true,
@@ -7540,11 +7164,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class ZeroArgConstructor {
-  constructor() {
-    return iface.setup(Object.create(new.target.prototype), undefined, undefined);
-  }
-}
+class SharedZeroArgConstructor {}
 Object.defineProperties(ZeroArgConstructor.prototype, {
   [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
 });
@@ -7590,16 +7210,16 @@ const iface = {
 
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
-      throw new TypeError(\\"Invalid global object\\");
+      throw new Error(\\"Internal error: invalid global object\\");
     }
 
     const ctor = globalObject[ctorRegistry][\\"ZeroArgConstructor\\"];
     if (ctor === undefined) {
-      throw new TypeError(\\"Constructor ZeroArgConstructor is not installed on the passed global object\\");
+      throw new Error(\\"Internal error: constructor ZeroArgConstructor is not installed on the passed global object\\");
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, constructorArgs, { ...privateData, globalObject });
+    obj = this.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -7607,14 +7227,12 @@ const iface = {
     return utils.implForWrapper(obj);
   },
   _internalSetup(obj) {},
-  setup(obj, constructorArgs, privateData) {
-    if (!privateData) privateData = {};
-
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
     });
 
@@ -7624,20 +7242,16 @@ const iface = {
     }
     return obj;
   },
-  interface: ZeroArgConstructor,
-  expose: {
-    Window: { ZeroArgConstructor }
-  },
 
   install(globalObject) {
     const ZeroArgConstructor = function() {
-      return iface.setup(Object.create(new.target.prototype), undefined, { globalObject });
+      return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(iface.interface.prototype),
+      ...Object.getOwnPropertyDescriptors(SharedZeroArgConstructor.prototype),
       constructor: {
         writable: true,
         configurable: true,
