@@ -15,20 +15,33 @@ interface SomeInterface {
 combined with the JavaScript implementation class file
 
 ```js
-exports.implementation = class SomeInterfaceImpl {
+module.exports = class SomeInterfaceImpl {
   add(x, y) {
     return x + y;
   }
 };
 ```
 
+> Note: It's also possible to use ES2015 module default export syntax:
+>
+> ```js
+> export default class SomeInterfaceImpl {
+>   add(x, y) {
+>     return x + y;
+>   }
+> };
+> ```
+
 will generate a JavaScript wrapper class file roughly like this:
 
 ```js
 const conversions = require("webidl-conversions");
-const impl = require("./utils.js").implSymbol;
+const utils = require("./utils.js");
+const impl = utils.implSymbol;
 
-const Impl = require("./SomeInterface-impl.js").implementation;
+// utils.importStar is roughly equivalent to Babel's _interopRequireWildcard()
+// and TypeScript's __importStar() functions.
+const Impl = utils.importStar(require("./SomeInterface-impl.js")).default;
 
 class SomeInterface {
   constructor() {
