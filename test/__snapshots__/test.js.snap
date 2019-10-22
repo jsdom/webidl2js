@@ -137,7 +137,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -150,7 +150,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -188,7 +188,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -205,7 +205,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/DOMImplementation.js\\");
+const Impl = utils.importStar(require(\\"../implementations/DOMImplementation.js\\"));
 "
 `;
 
@@ -336,7 +336,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -349,7 +349,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -387,7 +387,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -404,7 +404,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/DictionaryConvert.js\\");
+const Impl = utils.importStar(require(\\"../implementations/DictionaryConvert.js\\"));
 "
 `;
 
@@ -475,7 +475,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -488,7 +488,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -526,7 +526,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -543,7 +543,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Enum.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Enum.js\\"));
 "
 `;
 
@@ -622,7 +622,7 @@ module.exports = {
 
         this._internalSetup(obj);
         Object.defineProperty(obj, impl, {
-          value: new Impl.implementation(constructorArgs, privateData),
+          value: new Impl.default(constructorArgs, privateData),
           configurable: true
         });
 
@@ -646,7 +646,7 @@ module.exports = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -659,7 +659,7 @@ module.exports = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -680,7 +680,7 @@ module.exports = {
   }
 }; // module.exports
 
-const Impl = require(\\"../implementations/Factory.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Factory.js\\"));
 "
 `;
 
@@ -705,7 +705,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -718,7 +718,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -841,7 +841,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -858,7 +858,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Global.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Global.js\\"));
 "
 `;
 
@@ -895,7 +895,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -908,7 +908,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -946,7 +946,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -963,7 +963,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/LegacyArrayClass.js\\");
+const Impl = utils.importStar(require(\\"../implementations/LegacyArrayClass.js\\"));
 "
 `;
 
@@ -1056,7 +1056,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -1069,7 +1069,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -1107,7 +1107,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -1124,7 +1124,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/MixedIn.js\\");
+const Impl = utils.importStar(require(\\"../implementations/MixedIn.js\\"));
 "
 `;
 
@@ -1460,7 +1460,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -1473,7 +1473,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -1511,7 +1511,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -1528,7 +1528,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Overloads.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Overloads.js\\"));
 "
 `;
 
@@ -1608,7 +1608,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -1621,7 +1621,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -1659,7 +1659,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -1676,7 +1676,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/PromiseTypes.js\\");
+const Impl = utils.importStar(require(\\"../implementations/PromiseTypes.js\\"));
 "
 `;
 
@@ -1838,7 +1838,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -1851,7 +1851,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -1889,7 +1889,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -1906,7 +1906,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Reflect.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Reflect.js\\"));
 "
 `;
 
@@ -2168,7 +2168,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -2181,7 +2181,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -2219,7 +2219,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -2236,7 +2236,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/SeqAndRec.js\\");
+const Impl = utils.importStar(require(\\"../implementations/SeqAndRec.js\\"));
 "
 `;
 
@@ -2280,15 +2280,15 @@ class Static {
   }
 
   static def() {
-    return Impl.implementation.def();
+    return Impl.default.def();
   }
 
   static get abc() {
-    return Impl.implementation[\\"abc\\"];
+    return Impl.default[\\"abc\\"];
   }
 
   static set abc(V) {
-    return Impl.implementation[\\"abc\\"];
+    return Impl.default[\\"abc\\"];
   }
 }
 Object.defineProperties(Static.prototype, {
@@ -2304,7 +2304,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -2317,7 +2317,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -2355,7 +2355,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -2372,7 +2372,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Static.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Static.js\\"));
 "
 `;
 
@@ -2504,7 +2504,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -2517,7 +2517,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -2555,7 +2555,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -2736,7 +2736,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Storage.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Storage.js\\"));
 "
 `;
 
@@ -2780,7 +2780,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -2793,7 +2793,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -2831,7 +2831,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -2848,7 +2848,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/StringifierAttribute.js\\");
+const Impl = utils.importStar(require(\\"../implementations/StringifierAttribute.js\\"));
 "
 `;
 
@@ -2884,7 +2884,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -2897,7 +2897,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -2935,7 +2935,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -2952,7 +2952,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
+const Impl = utils.importStar(require(\\"../implementations/StringifierDefaultOperation.js\\"));
 "
 `;
 
@@ -2997,7 +2997,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -3010,7 +3010,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -3048,7 +3048,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -3065,7 +3065,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
+const Impl = utils.importStar(require(\\"../implementations/StringifierNamedOperation.js\\"));
 "
 `;
 
@@ -3101,7 +3101,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -3114,7 +3114,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -3152,7 +3152,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -3169,7 +3169,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/StringifierOperation.js\\");
+const Impl = utils.importStar(require(\\"../implementations/StringifierOperation.js\\"));
 "
 `;
 
@@ -3609,7 +3609,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -3622,7 +3622,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -3660,7 +3660,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -3677,7 +3677,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/TypedefsAndUnions.js\\");
+const Impl = utils.importStar(require(\\"../implementations/TypedefsAndUnions.js\\"));
 "
 `;
 
@@ -3947,7 +3947,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -3960,7 +3960,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -3998,7 +3998,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -4016,7 +4016,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/URL.js\\");
+const Impl = utils.importStar(require(\\"../implementations/URL.js\\"));
 "
 `;
 
@@ -4077,7 +4077,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -4090,7 +4090,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -4128,7 +4128,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -4305,7 +4305,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/URLList.js\\");
+const Impl = utils.importStar(require(\\"../implementations/URLList.js\\"));
 "
 `;
 
@@ -4664,7 +4664,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -4677,7 +4677,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -4724,7 +4724,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -4742,7 +4742,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/URLSearchParams.js\\");
+const Impl = utils.importStar(require(\\"../implementations/URLSearchParams.js\\"));
 "
 `;
 
@@ -4827,7 +4827,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -4840,7 +4840,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -4878,7 +4878,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -5081,7 +5081,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
+const Impl = utils.importStar(require(\\"../implementations/URLSearchParamsCollection.js\\"));
 "
 `;
 
@@ -5111,7 +5111,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -5124,7 +5124,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -5164,7 +5164,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -5396,7 +5396,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
+const Impl = utils.importStar(require(\\"../implementations/URLSearchParamsCollection2.js\\"));
 "
 `;
 
@@ -5485,7 +5485,7 @@ class UnderscoredProperties {
       });
       args.push(curArg);
     }
-    return Impl.implementation.static(...args);
+    return Impl.default.static(...args);
   }
 }
 Object.defineProperties(UnderscoredProperties.prototype, {
@@ -5505,7 +5505,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -5518,7 +5518,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -5556,7 +5556,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -5573,7 +5573,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
+const Impl = utils.importStar(require(\\"../implementations/UnderscoredProperties.js\\"));
 "
 `;
 
@@ -5598,7 +5598,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -5611,7 +5611,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -5734,7 +5734,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -5751,7 +5751,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Unforgeable.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Unforgeable.js\\"));
 "
 `;
 
@@ -5778,7 +5778,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -5791,7 +5791,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -5844,7 +5844,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -6036,7 +6036,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/UnforgeableMap.js\\");
+const Impl = utils.importStar(require(\\"../implementations/UnforgeableMap.js\\"));
 "
 `;
 
@@ -6106,7 +6106,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -6119,7 +6119,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -6157,7 +6157,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -6174,7 +6174,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Unscopable.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Unscopable.js\\"));
 "
 `;
 
@@ -6349,7 +6349,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -6362,7 +6362,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -6400,7 +6400,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -6417,7 +6417,7 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/Variadic.js\\");
+const Impl = utils.importStar(require(\\"../implementations/Variadic.js\\"));
 "
 `;
 
@@ -6444,7 +6444,7 @@ const iface = {
   _mixedIntoPredicates: [],
   is(obj) {
     if (obj) {
-      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.default) {
         return true;
       }
       for (const isMixedInto of module.exports._mixedIntoPredicates) {
@@ -6457,7 +6457,7 @@ const iface = {
   },
   isImpl(obj) {
     if (obj) {
-      if (obj instanceof Impl.implementation) {
+      if (obj instanceof Impl.default) {
         return true;
       }
 
@@ -6495,7 +6495,7 @@ const iface = {
 
     this._internalSetup(obj);
     Object.defineProperty(obj, impl, {
-      value: new Impl.implementation(constructorArgs, privateData),
+      value: new Impl.default(constructorArgs, privateData),
       configurable: true
     });
 
@@ -6512,6 +6512,6 @@ const iface = {
 }; // iface
 module.exports = iface;
 
-const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
+const Impl = utils.importStar(require(\\"../implementations/ZeroArgConstructor.js\\"));
 "
 `;
