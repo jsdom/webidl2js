@@ -9,7 +9,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedDOMImplementation {
+class DOMImplementation {
   createDocumentType(qualifiedName, publicId, systemId) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -203,21 +203,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const DOMImplementation = function() {
+    const ctor = function DOMImplementation() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedDOMImplementation.prototype),
+      ...Object.getOwnPropertyDescriptors(DOMImplementation.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: DOMImplementation
+        value: ctor
       }
     });
-    Object.defineProperty(DOMImplementation, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -225,12 +225,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"DOMImplementation\\"] = DOMImplementation;
+    globalObject[ctorRegistry][\\"DOMImplementation\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"DOMImplementation\\", {
       configurable: true,
       writable: true,
-      value: DOMImplementation
+      value: ctor
     });
   }
 }; // iface
@@ -330,7 +330,7 @@ const convertDictionary = require(\\"./Dictionary.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedDictionaryConvert {
+class DictionaryConvert {
   op() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -433,21 +433,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const DictionaryConvert = function() {
+    const ctor = function DictionaryConvert() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedDictionaryConvert.prototype),
+      ...Object.getOwnPropertyDescriptors(DictionaryConvert.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: DictionaryConvert
+        value: ctor
       }
     });
-    Object.defineProperty(DictionaryConvert, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -455,12 +455,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"DictionaryConvert\\"] = DictionaryConvert;
+    globalObject[ctorRegistry][\\"DictionaryConvert\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"DictionaryConvert\\", {
       configurable: true,
       writable: true,
-      value: DictionaryConvert
+      value: ctor
     });
   }
 }; // iface
@@ -481,7 +481,7 @@ const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedEnum {
+class Enum {
   op(destination) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -603,21 +603,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Enum = function() {
+    const ctor = function Enum() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedEnum.prototype),
+      ...Object.getOwnPropertyDescriptors(Enum.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Enum
+        value: ctor
       }
     });
-    Object.defineProperty(Enum, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -625,12 +625,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Enum\\"] = Enum;
+    globalObject[ctorRegistry][\\"Enum\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Enum\\", {
       configurable: true,
       writable: true,
-      value: Enum
+      value: ctor
     });
   }
 }; // iface
@@ -649,7 +649,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedGlobal {}
+class Global {}
 Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -812,21 +812,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Global = function() {
+    const ctor = function Global() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedGlobal.prototype),
+      ...Object.getOwnPropertyDescriptors(Global.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Global
+        value: ctor
       }
     });
-    Object.defineProperty(Global, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -834,12 +834,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Global\\"] = Global;
+    globalObject[ctorRegistry][\\"Global\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Global\\", {
       configurable: true,
       writable: true,
-      value: Global
+      value: ctor
     });
   }
 }; // iface
@@ -858,7 +858,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedLegacyArrayClass {
+class LegacyArrayClass {
   get length() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -948,21 +948,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const LegacyArrayClass = function() {
+    const ctor = function LegacyArrayClass() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedLegacyArrayClass.prototype),
+      ...Object.getOwnPropertyDescriptors(LegacyArrayClass.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: LegacyArrayClass
+        value: ctor
       }
     });
-    Object.defineProperty(LegacyArrayClass, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -970,12 +970,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"LegacyArrayClass\\"] = LegacyArrayClass;
+    globalObject[ctorRegistry][\\"LegacyArrayClass\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"LegacyArrayClass\\", {
       configurable: true,
       writable: true,
-      value: LegacyArrayClass
+      value: ctor
     });
   }
 }; // iface
@@ -994,7 +994,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedMixedIn {
+class MixedIn {
   mixedInOp() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1140,26 +1140,26 @@ const iface = {
   },
 
   install(globalObject) {
-    const MixedIn = function() {
+    const ctor = function MixedIn() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
-    Object.defineProperties(MixedIn, {
-      mixedInConst: Object.getOwnPropertyDescriptor(SharedMixedIn, \\"mixedInConst\\"),
-      ifaceMixinConst: Object.getOwnPropertyDescriptor(SharedMixedIn, \\"ifaceMixinConst\\")
+    Object.defineProperties(ctor, {
+      mixedInConst: Object.getOwnPropertyDescriptor(MixedIn, \\"mixedInConst\\"),
+      ifaceMixinConst: Object.getOwnPropertyDescriptor(MixedIn, \\"ifaceMixinConst\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedMixedIn.prototype),
+      ...Object.getOwnPropertyDescriptors(MixedIn.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: MixedIn
+        value: ctor
       }
     });
-    Object.defineProperty(MixedIn, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -1167,12 +1167,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"MixedIn\\"] = MixedIn;
+    globalObject[ctorRegistry][\\"MixedIn\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"MixedIn\\", {
       configurable: true,
       writable: true,
-      value: MixedIn
+      value: ctor
     });
   }
 }; // iface
@@ -1193,7 +1193,7 @@ const isURL = require(\\"./URL.js\\").is;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedOverloads {
+class Overloads {
   compatible(arg1) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1559,7 +1559,7 @@ const iface = {
   },
 
   install(globalObject) {
-    const Overloads = function() {
+    const ctor = function Overloads() {
       const args = [];
       switch (arguments.length) {
         case 0:
@@ -1587,14 +1587,14 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedOverloads.prototype),
+      ...Object.getOwnPropertyDescriptors(Overloads.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Overloads
+        value: ctor
       }
     });
-    Object.defineProperty(Overloads, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -1602,12 +1602,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Overloads\\"] = Overloads;
+    globalObject[ctorRegistry][\\"Overloads\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Overloads\\", {
       configurable: true,
       writable: true,
-      value: Overloads
+      value: ctor
     });
   }
 }; // iface
@@ -1626,7 +1626,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedPromiseTypes {
+class PromiseTypes {
   voidPromiseConsumer(p) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -1759,21 +1759,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const PromiseTypes = function() {
+    const ctor = function PromiseTypes() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedPromiseTypes.prototype),
+      ...Object.getOwnPropertyDescriptors(PromiseTypes.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: PromiseTypes
+        value: ctor
       }
     });
-    Object.defineProperty(PromiseTypes, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -1781,12 +1781,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"PromiseTypes\\"] = PromiseTypes;
+    globalObject[ctorRegistry][\\"PromiseTypes\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"PromiseTypes\\", {
       configurable: true,
       writable: true,
-      value: PromiseTypes
+      value: ctor
     });
   }
 }; // iface
@@ -1805,7 +1805,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedReflect {
+class Reflect {
   get ReflectedBoolean() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2020,21 +2020,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Reflect = function() {
+    const ctor = function Reflect() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedReflect.prototype),
+      ...Object.getOwnPropertyDescriptors(Reflect.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Reflect
+        value: ctor
       }
     });
-    Object.defineProperty(Reflect, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -2042,12 +2042,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Reflect\\"] = Reflect;
+    globalObject[ctorRegistry][\\"Reflect\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Reflect\\", {
       configurable: true,
       writable: true,
-      value: Reflect
+      value: ctor
     });
   }
 }; // iface
@@ -2101,7 +2101,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedSeqAndRec {
+class SeqAndRec {
   recordConsumer(rec) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2381,21 +2381,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const SeqAndRec = function() {
+    const ctor = function SeqAndRec() {
       return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedSeqAndRec.prototype),
+      ...Object.getOwnPropertyDescriptors(SeqAndRec.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: SeqAndRec
+        value: ctor
       }
     });
-    Object.defineProperty(SeqAndRec, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -2403,12 +2403,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"SeqAndRec\\"] = SeqAndRec;
+    globalObject[ctorRegistry][\\"SeqAndRec\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"SeqAndRec\\", {
       configurable: true,
       writable: true,
-      value: SeqAndRec
+      value: ctor
     });
   }
 }; // iface
@@ -2427,7 +2427,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStatic {
+class Static {
   def() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2548,26 +2548,26 @@ const iface = {
   },
 
   install(globalObject) {
-    const Static = function() {
+    const ctor = function Static() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
-    Object.defineProperties(Static, {
-      def: Object.getOwnPropertyDescriptor(SharedStatic, \\"def\\"),
-      abc: Object.getOwnPropertyDescriptor(SharedStatic, \\"abc\\")
+    Object.defineProperties(ctor, {
+      def: Object.getOwnPropertyDescriptor(Static, \\"def\\"),
+      abc: Object.getOwnPropertyDescriptor(Static, \\"abc\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStatic.prototype),
+      ...Object.getOwnPropertyDescriptors(Static.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Static
+        value: ctor
       }
     });
-    Object.defineProperty(Static, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -2575,12 +2575,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Static\\"] = Static;
+    globalObject[ctorRegistry][\\"Static\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Static\\", {
       configurable: true,
       writable: true,
-      value: Static
+      value: ctor
     });
   }
 }; // iface
@@ -2599,7 +2599,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStorage {
+class Storage {
   key(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -2948,21 +2948,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Storage = function() {
+    const ctor = function Storage() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStorage.prototype),
+      ...Object.getOwnPropertyDescriptors(Storage.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Storage
+        value: ctor
       }
     });
-    Object.defineProperty(Storage, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -2970,12 +2970,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Storage\\"] = Storage;
+    globalObject[ctorRegistry][\\"Storage\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Storage\\", {
       configurable: true,
       writable: true,
-      value: Storage
+      value: ctor
     });
   }
 }; // iface
@@ -2994,7 +2994,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStringifierAttribute {
+class StringifierAttribute {
   get attr() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3091,21 +3091,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const StringifierAttribute = function() {
+    const ctor = function StringifierAttribute() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStringifierAttribute.prototype),
+      ...Object.getOwnPropertyDescriptors(StringifierAttribute.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: StringifierAttribute
+        value: ctor
       }
     });
-    Object.defineProperty(StringifierAttribute, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -3113,12 +3113,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"StringifierAttribute\\"] = StringifierAttribute;
+    globalObject[ctorRegistry][\\"StringifierAttribute\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"StringifierAttribute\\", {
       configurable: true,
       writable: true,
-      value: StringifierAttribute
+      value: ctor
     });
   }
 }; // iface
@@ -3137,7 +3137,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStringifierDefaultOperation {
+class StringifierDefaultOperation {
   toString() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3228,21 +3228,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const StringifierDefaultOperation = function() {
+    const ctor = function StringifierDefaultOperation() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStringifierDefaultOperation.prototype),
+      ...Object.getOwnPropertyDescriptors(StringifierDefaultOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: StringifierDefaultOperation
+        value: ctor
       }
     });
-    Object.defineProperty(StringifierDefaultOperation, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -3250,12 +3250,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"] = StringifierDefaultOperation;
+    globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"StringifierDefaultOperation\\", {
       configurable: true,
       writable: true,
-      value: StringifierDefaultOperation
+      value: ctor
     });
   }
 }; // iface
@@ -3274,7 +3274,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStringifierNamedOperation {
+class StringifierNamedOperation {
   operation() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3374,21 +3374,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const StringifierNamedOperation = function() {
+    const ctor = function StringifierNamedOperation() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStringifierNamedOperation.prototype),
+      ...Object.getOwnPropertyDescriptors(StringifierNamedOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: StringifierNamedOperation
+        value: ctor
       }
     });
-    Object.defineProperty(StringifierNamedOperation, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -3396,12 +3396,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"StringifierNamedOperation\\"] = StringifierNamedOperation;
+    globalObject[ctorRegistry][\\"StringifierNamedOperation\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"StringifierNamedOperation\\", {
       configurable: true,
       writable: true,
-      value: StringifierNamedOperation
+      value: ctor
     });
   }
 }; // iface
@@ -3420,7 +3420,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedStringifierOperation {
+class StringifierOperation {
   toString() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -3509,21 +3509,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const StringifierOperation = function() {
+    const ctor = function StringifierOperation() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedStringifierOperation.prototype),
+      ...Object.getOwnPropertyDescriptors(StringifierOperation.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: StringifierOperation
+        value: ctor
       }
     });
-    Object.defineProperty(StringifierOperation, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -3531,12 +3531,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"StringifierOperation\\"] = StringifierOperation;
+    globalObject[ctorRegistry][\\"StringifierOperation\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"StringifierOperation\\", {
       configurable: true,
       writable: true,
-      value: StringifierOperation
+      value: ctor
     });
   }
 }; // iface
@@ -3558,7 +3558,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedTypedefsAndUnions {
+class TypedefsAndUnions {
   numOrStrConsumer(a) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4048,21 +4048,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const TypedefsAndUnions = function() {
+    const ctor = function TypedefsAndUnions() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedTypedefsAndUnions.prototype),
+      ...Object.getOwnPropertyDescriptors(TypedefsAndUnions.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: TypedefsAndUnions
+        value: ctor
       }
     });
-    Object.defineProperty(TypedefsAndUnions, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -4070,12 +4070,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"TypedefsAndUnions\\"] = TypedefsAndUnions;
+    globalObject[ctorRegistry][\\"TypedefsAndUnions\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"TypedefsAndUnions\\", {
       configurable: true,
       writable: true,
-      value: TypedefsAndUnions
+      value: ctor
     });
   }
 }; // iface
@@ -4094,7 +4094,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedURL {
+class URL {
   toJSON() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4401,7 +4401,7 @@ const iface = {
   },
 
   install(globalObject) {
-    const URL = function(url) {
+    const ctor = function URL(url) {
       if (arguments.length < 1) {
         throw new TypeError(
           \\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\"
@@ -4426,14 +4426,14 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedURL.prototype),
+      ...Object.getOwnPropertyDescriptors(URL.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: URL
+        value: ctor
       }
     });
-    Object.defineProperty(URL, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -4441,12 +4441,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"URL\\"] = URL;
+    globalObject[ctorRegistry][\\"URL\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"URL\\", {
       configurable: true,
       writable: true,
-      value: URL
+      value: ctor
     });
   }
 }; // iface
@@ -4465,7 +4465,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedURLList {
+class URLList {
   item(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -4739,21 +4739,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const URLList = function() {
+    const ctor = function URLList() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedURLList.prototype),
+      ...Object.getOwnPropertyDescriptors(URLList.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: URLList
+        value: ctor
       }
     });
-    Object.defineProperty(URLList, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -4761,12 +4761,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"URLList\\"] = URLList;
+    globalObject[ctorRegistry][\\"URLList\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"URLList\\", {
       configurable: true,
       writable: true,
-      value: URLList
+      value: ctor
     });
   }
 }; // iface
@@ -4823,7 +4823,7 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
     configurable: true
   }
 });
-class SharedURLSearchParams {
+class URLSearchParams {
   append(name, value) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -5131,7 +5131,7 @@ const iface = {
   },
 
   install(globalObject) {
-    const URLSearchParams = function() {
+    const ctor = function URLSearchParams() {
       const args = [];
       {
         let curArg = arguments[0];
@@ -5218,14 +5218,14 @@ const iface = {
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedURLSearchParams.prototype),
+      ...Object.getOwnPropertyDescriptors(URLSearchParams.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: URLSearchParams
+        value: ctor
       }
     });
-    Object.defineProperty(URLSearchParams, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -5233,12 +5233,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"URLSearchParams\\"] = URLSearchParams;
+    globalObject[ctorRegistry][\\"URLSearchParams\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"URLSearchParams\\", {
       configurable: true,
       writable: true,
-      value: URLSearchParams
+      value: ctor
     });
   }
 }; // iface
@@ -5257,7 +5257,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedURLSearchParamsCollection {
+class URLSearchParamsCollection {
   item(index) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -5583,21 +5583,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const URLSearchParamsCollection = function() {
+    const ctor = function URLSearchParamsCollection() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedURLSearchParamsCollection.prototype),
+      ...Object.getOwnPropertyDescriptors(URLSearchParamsCollection.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: URLSearchParamsCollection
+        value: ctor
       }
     });
-    Object.defineProperty(URLSearchParamsCollection, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -5605,12 +5605,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"] = URLSearchParamsCollection;
+    globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"URLSearchParamsCollection\\", {
       configurable: true,
       writable: true,
-      value: URLSearchParamsCollection
+      value: ctor
     });
   }
 }; // iface
@@ -5631,7 +5631,7 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
-class SharedURLSearchParamsCollection2 {}
+class URLSearchParamsCollection2 {}
 Object.defineProperties(URLSearchParamsCollection2.prototype, {
   [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
   [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
@@ -5931,7 +5931,7 @@ const iface = {
   },
 
   install(globalObject) {
-    const URLSearchParamsCollection2 = function() {
+    const ctor = function URLSearchParamsCollection2() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
@@ -5944,14 +5944,14 @@ const iface = {
     const proto = Object.create(globalObject.URLSearchParamsCollection.prototype);
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedURLSearchParamsCollection2.prototype),
+      ...Object.getOwnPropertyDescriptors(URLSearchParamsCollection2.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: URLSearchParamsCollection2
+        value: ctor
       }
     });
-    Object.defineProperty(URLSearchParamsCollection2, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -5959,12 +5959,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"] = URLSearchParamsCollection2;
+    globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"URLSearchParamsCollection2\\", {
       configurable: true,
       writable: true,
-      value: URLSearchParamsCollection2
+      value: ctor
     });
   }
 }; // iface
@@ -5983,7 +5983,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedUnderscoredProperties {
+class UnderscoredProperties {
   operation(sequence) {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -6145,26 +6145,26 @@ const iface = {
   },
 
   install(globalObject) {
-    const UnderscoredProperties = function() {
+    const ctor = function UnderscoredProperties() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
-    Object.defineProperties(UnderscoredProperties, {
-      const: Object.getOwnPropertyDescriptor(SharedUnderscoredProperties, \\"const\\"),
-      static: Object.getOwnPropertyDescriptor(SharedUnderscoredProperties, \\"static\\")
+    Object.defineProperties(ctor, {
+      const: Object.getOwnPropertyDescriptor(UnderscoredProperties, \\"const\\"),
+      static: Object.getOwnPropertyDescriptor(UnderscoredProperties, \\"static\\")
     });
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedUnderscoredProperties.prototype),
+      ...Object.getOwnPropertyDescriptors(UnderscoredProperties.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: UnderscoredProperties
+        value: ctor
       }
     });
-    Object.defineProperty(UnderscoredProperties, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -6172,12 +6172,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"UnderscoredProperties\\"] = UnderscoredProperties;
+    globalObject[ctorRegistry][\\"UnderscoredProperties\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"UnderscoredProperties\\", {
       configurable: true,
       writable: true,
-      value: UnderscoredProperties
+      value: ctor
     });
   }
 }; // iface
@@ -6196,7 +6196,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedUnforgeable {}
+class Unforgeable {}
 Object.defineProperties(Unforgeable.prototype, { [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true } });
 const iface = {
   // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6359,21 +6359,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Unforgeable = function() {
+    const ctor = function Unforgeable() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedUnforgeable.prototype),
+      ...Object.getOwnPropertyDescriptors(Unforgeable.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Unforgeable
+        value: ctor
       }
     });
-    Object.defineProperty(Unforgeable, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -6381,12 +6381,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Unforgeable\\"] = Unforgeable;
+    globalObject[ctorRegistry][\\"Unforgeable\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Unforgeable\\", {
       configurable: true,
       writable: true,
-      value: Unforgeable
+      value: ctor
     });
   }
 }; // iface
@@ -6405,7 +6405,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedUnforgeableMap {}
+class UnforgeableMap {}
 Object.defineProperties(UnforgeableMap.prototype, {
   [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
 });
@@ -6675,21 +6675,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const UnforgeableMap = function() {
+    const ctor = function UnforgeableMap() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedUnforgeableMap.prototype),
+      ...Object.getOwnPropertyDescriptors(UnforgeableMap.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: UnforgeableMap
+        value: ctor
       }
     });
-    Object.defineProperty(UnforgeableMap, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -6697,12 +6697,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"UnforgeableMap\\"] = UnforgeableMap;
+    globalObject[ctorRegistry][\\"UnforgeableMap\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"UnforgeableMap\\", {
       configurable: true,
       writable: true,
-      value: UnforgeableMap
+      value: ctor
     });
   }
 }; // iface
@@ -6721,7 +6721,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedUnscopable {
+class Unscopable {
   get unscopableTest() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -6844,21 +6844,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Unscopable = function() {
+    const ctor = function Unscopable() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedUnscopable.prototype),
+      ...Object.getOwnPropertyDescriptors(Unscopable.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Unscopable
+        value: ctor
       }
     });
-    Object.defineProperty(Unscopable, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -6866,12 +6866,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Unscopable\\"] = Unscopable;
+    globalObject[ctorRegistry][\\"Unscopable\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Unscopable\\", {
       configurable: true,
       writable: true,
-      value: Unscopable
+      value: ctor
     });
   }
 }; // iface
@@ -6891,7 +6891,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedVariadic {
+class Variadic {
   simple1() {
     if (!this || !module.exports.is(this)) {
       throw new TypeError(\\"Illegal invocation\\");
@@ -7118,21 +7118,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const Variadic = function() {
+    const ctor = function Variadic() {
       throw new TypeError(\\"Illegal constructor\\");
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedVariadic.prototype),
+      ...Object.getOwnPropertyDescriptors(Variadic.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: Variadic
+        value: ctor
       }
     });
-    Object.defineProperty(Variadic, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -7140,12 +7140,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"Variadic\\"] = Variadic;
+    globalObject[ctorRegistry][\\"Variadic\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"Variadic\\", {
       configurable: true,
       writable: true,
-      value: Variadic
+      value: ctor
     });
   }
 }; // iface
@@ -7164,7 +7164,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
-class SharedZeroArgConstructor {}
+class ZeroArgConstructor {}
 Object.defineProperties(ZeroArgConstructor.prototype, {
   [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
 });
@@ -7244,21 +7244,21 @@ const iface = {
   },
 
   install(globalObject) {
-    const ZeroArgConstructor = function() {
+    const ctor = function ZeroArgConstructor() {
       return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
     };
 
     const proto = {};
 
     Object.defineProperties(proto, {
-      ...Object.getOwnPropertyDescriptors(SharedZeroArgConstructor.prototype),
+      ...Object.getOwnPropertyDescriptors(ZeroArgConstructor.prototype),
       constructor: {
         writable: true,
         configurable: true,
-        value: ZeroArgConstructor
+        value: ctor
       }
     });
-    Object.defineProperty(ZeroArgConstructor, \\"prototype\\", {
+    Object.defineProperty(ctor, \\"prototype\\", {
       writable: false,
       value: proto
     });
@@ -7266,12 +7266,12 @@ const iface = {
     if (globalObject[ctorRegistry] === undefined) {
       globalObject[ctorRegistry] = {};
     }
-    globalObject[ctorRegistry][\\"ZeroArgConstructor\\"] = ZeroArgConstructor;
+    globalObject[ctorRegistry][\\"ZeroArgConstructor\\"] = ctor;
 
     Object.defineProperty(globalObject, \\"ZeroArgConstructor\\", {
       configurable: true,
       writable: true,
-      value: ZeroArgConstructor
+      value: ctor
     });
   }
 }; // iface
