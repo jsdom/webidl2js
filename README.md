@@ -153,7 +153,7 @@ In practice, this means doing a type-check equivalent to `is(value)`, and if it 
 
 #### `install(globalObject)`
 
-This method creates a brand new wrapper constructor and prototype and attach it to the passed `globalObject`. It also attaches the created constructor on the passed `globalObject` for it to be reused when creating new wrapper instances on the same `globalObject`. It is important to invoke `install` before invoking `create`, `createImpl` or `setup` otherwise they will throw.
+This method creates a brand new wrapper constructor and prototype and attach it to the passed `globalObject`. It also registers the created constructor with the `globalObject`'s global constructor registry, which makes `create()`, `createImpl()`, and `setup()` work. (Thus, it is important to invoke `install()` before invoking those methods, as otherwise they will throw.)
 
 #### `create(globalObject, constructorArgs, privateData)`
 
