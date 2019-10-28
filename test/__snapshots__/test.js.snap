@@ -178,7 +178,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -189,7 +189,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -223,7 +223,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"DOMImplementation\\"] = ctor;
 
@@ -408,7 +408,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -419,7 +419,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -453,7 +453,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"DictionaryConvert\\"] = ctor;
 
@@ -578,7 +578,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -589,7 +589,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -623,7 +623,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Enum\\"] = ctor;
 
@@ -702,7 +702,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -798,7 +798,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -832,7 +832,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Global\\"] = ctor;
 
@@ -923,7 +923,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -934,7 +934,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -968,7 +968,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"LegacyArrayClass\\"] = ctor;
 
@@ -1115,7 +1115,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1126,7 +1126,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -1165,7 +1165,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"MixedIn\\"] = ctor;
 
@@ -1534,7 +1534,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1545,7 +1545,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -1600,7 +1600,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Overloads\\"] = ctor;
 
@@ -1734,7 +1734,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -1745,7 +1745,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -1779,7 +1779,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"PromiseTypes\\"] = ctor;
 
@@ -1995,7 +1995,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2006,7 +2006,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -2040,7 +2040,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Reflect\\"] = ctor;
 
@@ -2356,7 +2356,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2367,7 +2367,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -2401,7 +2401,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"SeqAndRec\\"] = ctor;
 
@@ -2523,7 +2523,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2534,7 +2534,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -2573,7 +2573,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Static\\"] = ctor;
 
@@ -2759,7 +2759,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -2770,7 +2770,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -2968,7 +2968,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Storage\\"] = ctor;
 
@@ -3066,7 +3066,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3077,7 +3077,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -3111,7 +3111,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"StringifierAttribute\\"] = ctor;
 
@@ -3203,7 +3203,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3214,7 +3214,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -3248,7 +3248,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"] = ctor;
 
@@ -3349,7 +3349,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3360,7 +3360,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -3394,7 +3394,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"StringifierNamedOperation\\"] = ctor;
 
@@ -3484,7 +3484,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -3495,7 +3495,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -3529,7 +3529,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"StringifierOperation\\"] = ctor;
 
@@ -4023,7 +4023,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4034,7 +4034,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -4068,7 +4068,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"TypedefsAndUnions\\"] = ctor;
 
@@ -4376,7 +4376,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4387,7 +4387,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -4439,7 +4439,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"URL\\"] = ctor;
 
@@ -4554,7 +4554,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -4565,7 +4565,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -4759,7 +4759,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"URLList\\"] = ctor;
 
@@ -5106,7 +5106,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -5117,7 +5117,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -5231,7 +5231,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"URLSearchParams\\"] = ctor;
 
@@ -5372,7 +5372,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -5383,7 +5383,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -5603,7 +5603,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"] = ctor;
 
@@ -5689,7 +5689,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -5702,7 +5702,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -5937,7 +5937,7 @@ const iface = {
 
     if (globalObject.URLSearchParamsCollection === undefined) {
       throw new Error(
-        \\"Evaluation order error. Attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
+        \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
       );
     }
 
@@ -5957,7 +5957,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"] = ctor;
 
@@ -6120,7 +6120,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6131,7 +6131,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -6170,7 +6170,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"UnderscoredProperties\\"] = ctor;
 
@@ -6249,7 +6249,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6345,7 +6345,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -6379,7 +6379,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Unforgeable\\"] = ctor;
 
@@ -6460,7 +6460,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6486,7 +6486,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -6695,7 +6695,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"UnforgeableMap\\"] = ctor;
 
@@ -6819,7 +6819,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -6830,7 +6830,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -6864,7 +6864,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Unscopable\\"] = ctor;
 
@@ -7093,7 +7093,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -7104,7 +7104,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -7138,7 +7138,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"Variadic\\"] = ctor;
 
@@ -7219,7 +7219,7 @@ const iface = {
     }
 
     let obj = Object.create(ctor.prototype);
-    obj = this.setup(obj, globalObject, constructorArgs, privateData);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
   createImpl(globalObject, constructorArgs, privateData) {
@@ -7230,7 +7230,7 @@ const iface = {
   setup(obj, globalObject, constructorArgs = [], privateData = {}) {
     privateData.wrapper = obj;
 
-    this._internalSetup(obj);
+    iface._internalSetup(obj);
     Object.defineProperty(obj, impl, {
       value: new Impl.implementation(globalObject, constructorArgs, privateData),
       configurable: true
@@ -7264,7 +7264,7 @@ const iface = {
     });
 
     if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = {};
+      globalObject[ctorRegistry] = Object.create(null);
     }
     globalObject[ctorRegistry][\\"ZeroArgConstructor\\"] = ctor;
 
