@@ -1614,7 +1614,10 @@ const iface = {
         const args = [];
         {
           let curArg = arguments[0];
-          curArg = Promise.resolve(curArg).then(value => {}, reason => reason);
+          curArg = Promise.resolve(curArg).then(
+            value => {},
+            reason => reason
+          );
           args.push(curArg);
         }
         return this[impl].voidPromiseConsumer(...args);

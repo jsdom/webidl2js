@@ -6,12 +6,12 @@
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
     "pn": "^1.1.0",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "webidl-conversions": "^4.0.0",
     "webidl2": "^23.10.1"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "jest": "^24.9.0"
   },
   "scripts": {
