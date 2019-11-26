@@ -430,15 +430,16 @@ const iface = {
             });
 
             // CEReactions pre steps
-
-            const creating = !target[impl][utils.supportsPropertyName](P);
-            if (creating) {
-              target[impl][utils.namedSetNew](P, namedValue);
-            } else {
-              target[impl][utils.namedSetExisting](P, namedValue);
+            try {
+              const creating = !target[impl][utils.supportsPropertyName](P);
+              if (creating) {
+                target[impl][utils.namedSetNew](P, namedValue);
+              } else {
+                target[impl][utils.namedSetExisting](P, namedValue);
+              }
+            } finally {
+              // CEReactions post steps
             }
-
-            // CEReactions post steps
 
             return true;
           }
@@ -493,15 +494,16 @@ const iface = {
           });
 
           // CEReactions pre steps
-
-          const creating = !target[impl][utils.supportsPropertyName](P);
-          if (creating) {
-            target[impl][utils.namedSetNew](P, namedValue);
-          } else {
-            target[impl][utils.namedSetExisting](P, namedValue);
+          try {
+            const creating = !target[impl][utils.supportsPropertyName](P);
+            if (creating) {
+              target[impl][utils.namedSetNew](P, namedValue);
+            } else {
+              target[impl][utils.namedSetExisting](P, namedValue);
+            }
+          } finally {
+            // CEReactions post steps
           }
-
-          // CEReactions post steps
 
           return true;
         }
@@ -515,11 +517,12 @@ const iface = {
 
         if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
           // CEReactions pre steps
-
-          target[impl][utils.namedDelete](P);
-          return true;
-
-          // CEReactions post steps
+          try {
+            target[impl][utils.namedDelete](P);
+            return true;
+          } finally {
+            // CEReactions post steps
+          }
         }
 
         return Reflect.deleteProperty(target, P);
@@ -549,10 +552,11 @@ const iface = {
         }
 
         // CEReactions pre steps
-
-        return this[impl].method();
-
-        // CEReactions post steps
+        try {
+          return this[impl].method();
+        } finally {
+          // CEReactions post steps
+        }
       }
 
       get attr() {
@@ -561,8 +565,11 @@ const iface = {
         }
 
         // CEReactions pre steps
-        return this[impl][\\"attr\\"];
-        // CEReactions post steps
+        try {
+          return this[impl][\\"attr\\"];
+        } finally {
+          // CEReactions post steps
+        }
       }
 
       set attr(V) {
@@ -575,8 +582,11 @@ const iface = {
         });
 
         // CEReactions pre steps
-        this[impl][\\"attr\\"] = V;
-        // CEReactions post steps
+        try {
+          this[impl][\\"attr\\"] = V;
+        } finally {
+          // CEReactions post steps
+        }
       }
     }
     Object.defineProperties(CEReactions.prototype, {

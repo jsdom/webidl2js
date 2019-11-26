@@ -14,8 +14,11 @@ beforeAll(() => {
     processCEReactions(_, code) {
       return `
         // CEReactions pre steps
-        ${code}
-        // CEReactions post steps
+        try {
+          ${code}
+        } finally {
+          // CEReactions post steps
+        }
       `;
     },
     processHTMLConstructor(_, code) {
