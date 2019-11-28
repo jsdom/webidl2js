@@ -6,6 +6,8 @@ exports[`BufferSourceTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const preSteps___CEReactions = require(\\"../CEReactions.js\\").preSteps;
+const postSteps___CEReactions = require(\\"../CEReactions.js\\").postSteps;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -429,7 +431,7 @@ const iface = {
               context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
             });
 
-            // CEReactions pre steps
+            preSteps___CEReactions(globalObject);
             try {
               const creating = !target[impl][utils.supportsPropertyName](P);
               if (creating) {
@@ -438,7 +440,7 @@ const iface = {
                 target[impl][utils.namedSetExisting](P, namedValue);
               }
             } finally {
-              // CEReactions post steps
+              postSteps___CEReactions(globalObject);
             }
 
             return true;
@@ -493,7 +495,7 @@ const iface = {
             context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
           });
 
-          // CEReactions pre steps
+          preSteps___CEReactions(globalObject);
           try {
             const creating = !target[impl][utils.supportsPropertyName](P);
             if (creating) {
@@ -502,7 +504,7 @@ const iface = {
               target[impl][utils.namedSetExisting](P, namedValue);
             }
           } finally {
-            // CEReactions post steps
+            postSteps___CEReactions(globalObject);
           }
 
           return true;
@@ -516,12 +518,12 @@ const iface = {
         }
 
         if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
-          // CEReactions pre steps
+          preSteps___CEReactions(globalObject);
           try {
             target[impl][utils.namedDelete](P);
             return true;
           } finally {
-            // CEReactions post steps
+            postSteps___CEReactions(globalObject);
           }
         }
 
@@ -551,11 +553,11 @@ const iface = {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        // CEReactions pre steps
+        preSteps___CEReactions(globalObject);
         try {
           return this[impl].method();
         } finally {
-          // CEReactions post steps
+          postSteps___CEReactions(globalObject);
         }
       }
 
@@ -564,11 +566,11 @@ const iface = {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        // CEReactions pre steps
+        preSteps___CEReactions(globalObject);
         try {
           return this[impl][\\"attr\\"];
         } finally {
-          // CEReactions post steps
+          postSteps___CEReactions(globalObject);
         }
       }
 
@@ -581,11 +583,11 @@ const iface = {
           context: \\"Failed to set the 'attr' property on 'CEReactions': The provided value\\"
         });
 
-        // CEReactions pre steps
+        preSteps___CEReactions(globalObject);
         try {
           this[impl][\\"attr\\"] = V;
         } finally {
-          // CEReactions post steps
+          postSteps___CEReactions(globalObject);
         }
       }
     }
@@ -1401,8 +1403,7 @@ exports[`HTMLConstructor.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-// HTMLConstructor
-
+const HTMLConstructor___HTMLConstructor = require(\\"../HTMLConstructor.js\\").HTMLConstructor;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -1484,7 +1485,7 @@ const iface = {
   install(globalObject) {
     class HTMLConstructor {
       constructor() {
-        throw new TypeError(\\"Illegal constructor\\");
+        return HTMLConstructor___HTMLConstructor.HTMLConstructor(globalObject);
       }
     }
     Object.defineProperties(HTMLConstructor.prototype, {
