@@ -28,7 +28,7 @@ beforeAll(() => {
       const identifier = this.addImport("../HTMLConstructor", "HTMLConstructor");
 
       return `
-        return ${identifier}.HTMLConstructor(globalObject);
+        return ${identifier}.HTMLConstructor(globalObject, interfaceName);
       `;
     }
   });
