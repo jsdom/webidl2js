@@ -10,10 +10,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is BufferSourceTypes} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -27,6 +32,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -42,6 +48,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -49,6 +56,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'BufferSourceTypes'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {BufferSourceTypes}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -63,6 +76,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -278,10 +297,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is DOMImplementation} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -295,6 +319,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -310,6 +335,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -317,6 +343,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'DOMImplementation'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {DOMImplementation}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -331,6 +363,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -503,6 +541,7 @@ const convertURL = require(\\"./URL.js\\").convert;
 const convertURLSearchParams = require(\\"./URLSearchParams.js\\").convert;
 
 module.exports = {
+  /** @return {Dictionary} */
   convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
     {
       const key = \\"boolWithDefault\\";
@@ -560,6 +599,7 @@ module.exports = {
     }
   },
 
+  /** @return {Dictionary} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (obj !== undefined && typeof obj !== \\"object\\" && typeof obj !== \\"function\\") {
       throw new TypeError(\`\${context} is not an object.\`);
@@ -584,10 +624,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is DictionaryConvert} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -601,6 +646,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -616,6 +662,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -623,6 +670,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'DictionaryConvert'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {DictionaryConvert}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -637,6 +690,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -720,10 +779,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Enum} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -737,6 +801,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -752,6 +817,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -759,6 +825,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Enum'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Enum}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -773,6 +845,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -873,10 +951,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Global} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -890,6 +973,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -905,6 +989,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -912,6 +997,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Global'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Global}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -926,6 +1017,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -1067,10 +1164,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is LegacyArrayClass} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -1084,6 +1186,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -1099,6 +1202,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -1106,6 +1210,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'LegacyArrayClass'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {LegacyArrayClass}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -1120,6 +1230,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -1188,10 +1304,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is MixedIn} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -1205,6 +1326,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -1220,6 +1342,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -1227,6 +1350,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {MixedIn}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -1241,6 +1370,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -1367,10 +1502,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Overloads} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -1384,6 +1524,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -1399,6 +1540,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -1406,6 +1548,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Overloads'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Overloads}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -1420,6 +1568,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -1784,10 +1938,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is PromiseTypes} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -1801,6 +1960,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -1816,6 +1976,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -1823,6 +1984,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {PromiseTypes}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -1837,6 +2004,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -1951,10 +2124,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Reflect} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -1968,6 +2146,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -1983,6 +2162,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -1990,6 +2170,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Reflect}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -2004,6 +2190,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -2209,7 +2401,9 @@ const enumerationValues = new Set([
   \\"xslt\\"
 ]);
 module.exports = {
+  /** @type {ReadonlySet<RequestDestination>} */
   enumerationValues,
+  /** @return {RequestDestination} */
   convert(value, { context = \\"The provided value\\" } = {}) {
     const string = \`\${value}\`;
     if (!enumerationValues.has(value)) {
@@ -2232,10 +2426,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is SeqAndRec} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -2249,6 +2448,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -2264,6 +2464,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -2271,6 +2472,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {SeqAndRec}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -2285,6 +2492,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -2547,10 +2760,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Static} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -2564,6 +2782,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -2579,6 +2798,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -2586,6 +2806,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Static'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Static}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -2600,6 +2826,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -2701,10 +2933,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Storage} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -2718,6 +2955,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -2733,6 +2971,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -2740,6 +2979,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Storage'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Storage}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -2754,6 +2999,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -3091,10 +3342,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is StringifierAttribute} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -3108,6 +3364,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -3123,6 +3380,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -3130,6 +3388,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {StringifierAttribute}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -3144,6 +3408,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -3219,10 +3489,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is StringifierDefaultOperation} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -3236,6 +3511,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -3251,6 +3527,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -3258,6 +3535,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {StringifierDefaultOperation}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -3274,6 +3557,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -3341,10 +3630,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is StringifierNamedOperation} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -3358,6 +3652,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -3373,6 +3668,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -3380,6 +3676,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {StringifierNamedOperation}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -3396,6 +3698,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -3472,10 +3780,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is StringifierOperation} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -3489,6 +3802,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -3504,6 +3818,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -3511,6 +3826,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {StringifierOperation}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -3525,6 +3846,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -3595,10 +3922,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is TypedefsAndUnions} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -3612,6 +3944,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -3627,6 +3960,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -3634,6 +3968,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'TypedefsAndUnions'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {TypedefsAndUnions}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -3648,6 +3988,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -4120,10 +4466,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is URL} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -4137,6 +4488,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -4152,6 +4504,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -4159,6 +4512,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'URL'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {URL}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -4173,6 +4532,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -4488,10 +4853,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is URLList} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -4505,6 +4875,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -4520,6 +4891,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -4527,6 +4899,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'URLList'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {URLList}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -4541,6 +4919,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -4794,6 +5178,7 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+/** @type {IterableIterator<any>} */
 const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   next: {
     value: function next() {
@@ -4834,10 +5219,15 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
 });
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is URLSearchParams} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -4851,6 +5241,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -4866,6 +5257,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -4873,6 +5265,10 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'URLSearchParams'.\`);
   },
 
+  /**
+   * @param {\\"key\\" | \\"value\\" | \\"key+value\\"} kind
+   * @return {IterableIterator<any>}
+   */
   createDefaultIterator(target, kind) {
     const iterator = Object.create(IteratorPrototype);
     Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -4882,6 +5278,12 @@ const iface = {
     return iterator;
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {URLSearchParams}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -4896,6 +5298,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -5261,10 +5669,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is URLSearchParamsCollection} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -5278,6 +5691,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -5293,6 +5707,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -5300,6 +5715,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {URLSearchParamsCollection}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -5316,6 +5737,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -5620,10 +6047,15 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is URLSearchParamsCollection2} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -5637,6 +6069,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -5652,6 +6085,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -5659,6 +6093,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection2'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {URLSearchParamsCollection2}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -5675,6 +6115,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -5956,10 +6402,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is UnderscoredProperties} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -5973,6 +6424,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -5988,6 +6440,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -5995,6 +6448,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'UnderscoredProperties'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {UnderscoredProperties}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -6009,6 +6468,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -6149,10 +6614,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Unforgeable} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -6166,6 +6636,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -6181,6 +6652,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -6188,6 +6660,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Unforgeable'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Unforgeable}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -6202,6 +6680,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -6345,10 +6829,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is UnforgeableMap} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -6362,6 +6851,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -6377,6 +6867,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -6384,6 +6875,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'UnforgeableMap'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {UnforgeableMap}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -6398,6 +6895,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -6646,10 +7149,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Unscopable} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -6663,6 +7171,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -6678,6 +7187,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -6685,6 +7195,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Unscopable'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Unscopable}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -6699,6 +7215,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -6804,10 +7326,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is Variadic} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -6821,6 +7348,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -6836,6 +7364,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -6843,6 +7372,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'Variadic'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Variadic}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -6857,6 +7392,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
@@ -7066,10 +7607,15 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const iface = {
-  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
-  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
-  // implementing this mixin interface.
+  /**
+   * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+   * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+   * implementing this mixin interface.
+   *
+   * @type {Array<(obj: any) => boolean>}
+   */
   _mixedIntoPredicates: [],
+  /** @return {obj is ZeroArgConstructor} */
   is(obj) {
     if (obj) {
       if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
@@ -7083,6 +7629,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {obj is Impl.implementation} */
   isImpl(obj) {
     if (obj) {
       if (obj instanceof Impl.implementation) {
@@ -7098,6 +7645,7 @@ const iface = {
     }
     return false;
   },
+  /** @return {Impl.implementation} */
   convert(obj, { context = \\"The provided value\\" } = {}) {
     if (module.exports.is(obj)) {
       return utils.implForWrapper(obj);
@@ -7105,6 +7653,12 @@ const iface = {
     throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
   },
 
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {ZeroArgConstructor}
+   */
   create(globalObject, constructorArgs, privateData) {
     if (globalObject[ctorRegistry] === undefined) {
       throw new Error(\\"Internal error: invalid global object\\");
@@ -7119,6 +7673,12 @@ const iface = {
     obj = iface.setup(obj, globalObject, constructorArgs, privateData);
     return obj;
   },
+  /**
+   * @param {any} globalObject
+   * @param {any[]} [constructorArgs]
+   * @param {any} [privateData]
+   * @return {Impl.implementation}
+   */
   createImpl(globalObject, constructorArgs, privateData) {
     const obj = iface.create(globalObject, constructorArgs, privateData);
     return utils.implForWrapper(obj);
