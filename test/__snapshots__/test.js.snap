@@ -85,6 +85,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"BufferSourceTypes\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface BufferSourceTypes\\");
+    }
     class BufferSourceTypes {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -250,9 +255,6 @@ const iface = {
       u8aUnion: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"BufferSourceTypes\\"] = BufferSourceTypes;
 
     Object.defineProperty(globalObject, \\"BufferSourceTypes\\", {
@@ -353,6 +355,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"DOMImplementation\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface DOMImplementation\\");
+    }
     class DOMImplementation {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -475,9 +482,6 @@ const iface = {
       hasFeature: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"DOMImplementation\\"] = DOMImplementation;
 
     Object.defineProperty(globalObject, \\"DOMImplementation\\", {
@@ -659,6 +663,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"DictionaryConvert\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface DictionaryConvert\\");
+    }
     class DictionaryConvert {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -690,9 +699,6 @@ const iface = {
       op: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"DictionaryConvert\\"] = DictionaryConvert;
 
     Object.defineProperty(globalObject, \\"DictionaryConvert\\", {
@@ -795,6 +801,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Enum\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Enum\\");
+    }
     class Enum {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -845,9 +856,6 @@ const iface = {
       attr: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Enum\\"] = Enum;
 
     Object.defineProperty(globalObject, \\"Enum\\", {
@@ -1033,15 +1041,17 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Global\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Global\\");
+    }
     class Global {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
       }
     }
     Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Global\\"] = Global;
 
     Object.defineProperty(globalObject, \\"Global\\", {
@@ -1142,6 +1152,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"LegacyArrayClass\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface LegacyArrayClass\\");
+    }
     class LegacyArrayClass {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -1160,9 +1175,6 @@ const iface = {
       length: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"LegacyArrayClass\\"] = LegacyArrayClass;
 
     Object.defineProperty(globalObject, \\"LegacyArrayClass\\", {
@@ -1263,6 +1275,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"MixedIn\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface MixedIn\\");
+    }
     class MixedIn {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -1337,9 +1354,6 @@ const iface = {
       mixedInConst: { value: 43, enumerable: true },
       ifaceMixinConst: { value: 42, enumerable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"MixedIn\\"] = MixedIn;
 
     Object.defineProperty(globalObject, \\"MixedIn\\", {
@@ -1442,6 +1456,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Overloads\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Overloads\\");
+    }
     class Overloads {
       constructor() {
         const args = [];
@@ -1756,9 +1775,6 @@ const iface = {
       incompatible3: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Overloads\\"] = Overloads;
 
     Object.defineProperty(globalObject, \\"Overloads\\", {
@@ -1859,6 +1875,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"PromiseTypes\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface PromiseTypes\\");
+    }
     class PromiseTypes {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -1923,9 +1944,6 @@ const iface = {
       promiseConsumer: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"PromiseTypes\\"] = PromiseTypes;
 
     Object.defineProperty(globalObject, \\"PromiseTypes\\", {
@@ -2026,6 +2044,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Reflect\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Reflect\\");
+    }
     class Reflect {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -2169,9 +2192,6 @@ const iface = {
       withUnderscore: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Reflect\\"] = Reflect;
 
     Object.defineProperty(globalObject, \\"Reflect\\", {
@@ -2307,6 +2327,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"SeqAndRec\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface SeqAndRec\\");
+    }
     class SeqAndRec {
       constructor() {
         return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -2519,9 +2544,6 @@ const iface = {
       frozenArrayConsumer: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"SeqAndRec\\"] = SeqAndRec;
 
     Object.defineProperty(globalObject, \\"SeqAndRec\\", {
@@ -2622,6 +2644,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Static\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Static\\");
+    }
     class Static {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -2673,9 +2700,6 @@ const iface = {
       [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
     });
     Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Static\\"] = Static;
 
     Object.defineProperty(globalObject, \\"Static\\", {
@@ -2940,6 +2964,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Storage\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Storage\\");
+    }
     class Storage {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -3063,9 +3092,6 @@ const iface = {
       length: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Storage\\"] = Storage;
 
     Object.defineProperty(globalObject, \\"Storage\\", {
@@ -3166,6 +3192,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"StringifierAttribute\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface StringifierAttribute\\");
+    }
     class StringifierAttribute {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -3191,9 +3222,6 @@ const iface = {
       toString: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"StringifierAttribute\\"] = StringifierAttribute;
 
     Object.defineProperty(globalObject, \\"StringifierAttribute\\", {
@@ -3296,6 +3324,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface StringifierDefaultOperation\\");
+    }
     class StringifierDefaultOperation {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -3313,9 +3346,6 @@ const iface = {
       toString: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"StringifierDefaultOperation\\"] = StringifierDefaultOperation;
 
     Object.defineProperty(globalObject, \\"StringifierDefaultOperation\\", {
@@ -3418,6 +3448,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"StringifierNamedOperation\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface StringifierNamedOperation\\");
+    }
     class StringifierNamedOperation {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -3444,9 +3479,6 @@ const iface = {
       toString: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"StringifierNamedOperation\\"] = StringifierNamedOperation;
 
     Object.defineProperty(globalObject, \\"StringifierNamedOperation\\", {
@@ -3547,6 +3579,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"StringifierOperation\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface StringifierOperation\\");
+    }
     class StringifierOperation {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -3564,9 +3601,6 @@ const iface = {
       toString: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"StringifierOperation\\"] = StringifierOperation;
 
     Object.defineProperty(globalObject, \\"StringifierOperation\\", {
@@ -3670,6 +3704,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"TypedefsAndUnions\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface TypedefsAndUnions\\");
+    }
     class TypedefsAndUnions {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -4092,9 +4131,6 @@ const iface = {
       time: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"TypedefsAndUnions\\"] = TypedefsAndUnions;
 
     Object.defineProperty(globalObject, \\"TypedefsAndUnions\\", {
@@ -4195,6 +4231,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"URL\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface URL\\");
+    }
     class URL {
       constructor(url) {
         if (arguments.length < 1) {
@@ -4460,9 +4501,6 @@ const iface = {
       hash: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"URL\\"] = URL;
 
     Object.defineProperty(globalObject, \\"URL\\", {
@@ -4723,6 +4761,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"URLList\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface URLList\\");
+    }
     class URLList {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -4767,9 +4810,6 @@ const iface = {
       entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
       forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"URLList\\"] = URLList;
 
     Object.defineProperty(globalObject, \\"URLList\\", {
@@ -4918,6 +4958,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"URLSearchParams\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface URLSearchParams\\");
+    }
     class URLSearchParams {
       constructor() {
         const args = [];
@@ -5233,9 +5278,6 @@ const iface = {
       [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
       [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"URLSearchParams\\"] = URLSearchParams;
 
     Object.defineProperty(globalObject, \\"URLSearchParams\\", {
@@ -5524,6 +5566,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface URLSearchParamsCollection\\");
+    }
     class URLSearchParamsCollection {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -5590,9 +5637,6 @@ const iface = {
       [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
       [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"URLSearchParamsCollection\\"] = URLSearchParamsCollection;
 
     Object.defineProperty(globalObject, \\"URLSearchParamsCollection\\", {
@@ -5919,6 +5963,12 @@ const iface = {
         \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
       );
     }
+
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface URLSearchParamsCollection2\\");
+    }
     class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -5928,9 +5978,6 @@ const iface = {
       [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
       [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"URLSearchParamsCollection2\\"] = URLSearchParamsCollection2;
 
     Object.defineProperty(globalObject, \\"URLSearchParamsCollection2\\", {
@@ -6031,6 +6078,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"UnderscoredProperties\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface UnderscoredProperties\\");
+    }
     class UnderscoredProperties {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -6121,9 +6173,6 @@ const iface = {
       static: { enumerable: true },
       const: { value: 42, enumerable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"UnderscoredProperties\\"] = UnderscoredProperties;
 
     Object.defineProperty(globalObject, \\"UnderscoredProperties\\", {
@@ -6309,6 +6358,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Unforgeable\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Unforgeable\\");
+    }
     class Unforgeable {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -6317,9 +6371,6 @@ const iface = {
     Object.defineProperties(Unforgeable.prototype, {
       [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Unforgeable\\"] = Unforgeable;
 
     Object.defineProperty(globalObject, \\"Unforgeable\\", {
@@ -6610,6 +6661,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"UnforgeableMap\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface UnforgeableMap\\");
+    }
     class UnforgeableMap {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -6618,9 +6674,6 @@ const iface = {
     Object.defineProperties(UnforgeableMap.prototype, {
       [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"UnforgeableMap\\"] = UnforgeableMap;
 
     Object.defineProperty(globalObject, \\"UnforgeableMap\\", {
@@ -6721,6 +6774,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Unscopable\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Unscopable\\");
+    }
     class Unscopable {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -6775,9 +6833,6 @@ const iface = {
         configurable: true
       }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Unscopable\\"] = Unscopable;
 
     Object.defineProperty(globalObject, \\"Unscopable\\", {
@@ -6879,6 +6934,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"Variadic\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface Variadic\\");
+    }
     class Variadic {
       constructor() {
         throw new TypeError(\\"Illegal constructor\\");
@@ -7038,9 +7098,6 @@ const iface = {
       overloaded2: { enumerable: true },
       [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"Variadic\\"] = Variadic;
 
     Object.defineProperty(globalObject, \\"Variadic\\", {
@@ -7141,6 +7198,11 @@ const iface = {
   },
 
   install(globalObject) {
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    } else if (globalObject[ctorRegistry][\\"ZeroArgConstructor\\"]) {
+      throw new Error(\\"Internal error: attempting to install already installed interface ZeroArgConstructor\\");
+    }
     class ZeroArgConstructor {
       constructor() {
         return iface.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -7149,9 +7211,6 @@ const iface = {
     Object.defineProperties(ZeroArgConstructor.prototype, {
       [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
     });
-    if (globalObject[ctorRegistry] === undefined) {
-      globalObject[ctorRegistry] = Object.create(null);
-    }
     globalObject[ctorRegistry][\\"ZeroArgConstructor\\"] = ZeroArgConstructor;
 
     Object.defineProperty(globalObject, \\"ZeroArgConstructor\\", {
