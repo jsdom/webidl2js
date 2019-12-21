@@ -1,5 +1,220 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AnyType.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+const ctorRegistry = utils.ctorRegistrySymbol;
+
+const iface = {
+  // When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+  // method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+  // implementing this mixin interface.
+  _mixedIntoPredicates: [],
+  is(obj) {
+    if (obj) {
+      if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+        return true;
+      }
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(obj)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  isImpl(obj) {
+    if (obj) {
+      if (obj instanceof Impl.implementation) {
+        return true;
+      }
+
+      const wrapper = utils.wrapperForImpl(obj);
+      for (const isMixedInto of module.exports._mixedIntoPredicates) {
+        if (isMixedInto(wrapper)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  },
+  convert(obj, { context = \\"The provided value\\" } = {}) {
+    if (module.exports.is(obj)) {
+      return utils.implForWrapper(obj);
+    }
+    throw new TypeError(\`\${context} is not of type 'AnyType'.\`);
+  },
+
+  create(globalObject, constructorArgs, privateData) {
+    if (globalObject[ctorRegistry] === undefined) {
+      throw new Error(\\"Internal error: invalid global object\\");
+    }
+
+    const ctor = globalObject[ctorRegistry][\\"AnyType\\"];
+    if (ctor === undefined) {
+      throw new Error(\\"Internal error: constructor AnyType is not installed on the passed global object\\");
+    }
+
+    let obj = Object.create(ctor.prototype);
+    obj = iface.setup(obj, globalObject, constructorArgs, privateData);
+    return obj;
+  },
+  createImpl(globalObject, constructorArgs, privateData) {
+    const obj = iface.create(globalObject, constructorArgs, privateData);
+    return utils.implForWrapper(obj);
+  },
+  _internalSetup(obj) {},
+  setup(obj, globalObject, constructorArgs = [], privateData = {}) {
+    privateData.wrapper = obj;
+
+    iface._internalSetup(obj);
+    Object.defineProperty(obj, impl, {
+      value: new Impl.implementation(globalObject, constructorArgs, privateData),
+      configurable: true
+    });
+
+    obj[impl][utils.wrapperSymbol] = obj;
+    if (Impl.init) {
+      Impl.init(obj[impl], privateData);
+    }
+    return obj;
+  },
+
+  install(globalObject) {
+    class AnyType {
+      constructor() {
+        throw new TypeError(\\"Illegal constructor\\");
+      }
+
+      getAny() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(this[impl].getAny());
+      }
+
+      setAny(param) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        if (arguments.length < 1) {
+          throw new TypeError(
+            \\"Failed to execute 'setAny' on 'AnyType': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          );
+        }
+        const args = [];
+        {
+          let curArg = arguments[0];
+          curArg = utils.tryImplForWrapper(curArg);
+          args.push(curArg);
+        }
+        return this[impl].setAny(...args);
+      }
+
+      getObject() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(this[impl].getObject());
+      }
+
+      setObject(obj) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        if (arguments.length < 1) {
+          throw new TypeError(
+            \\"Failed to execute 'setObject' on 'AnyType': 1 argument required, but only \\" +
+              arguments.length +
+              \\" present.\\"
+          );
+        }
+        const args = [];
+        {
+          let curArg = arguments[0];
+          curArg = utils.tryImplForWrapper(
+            conversions[\\"object\\"](curArg, { context: \\"Failed to execute 'setObject' on 'AnyType': parameter 1\\" })
+          );
+          args.push(curArg);
+        }
+        return this[impl].setObject(...args);
+      }
+
+      get attrAny() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(this[impl][\\"attrAny\\"]);
+      }
+
+      set attrAny(V) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = utils.tryImplForWrapper(V);
+
+        this[impl][\\"attrAny\\"] = V;
+      }
+
+      get attrObject() {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(this[impl][\\"attrObject\\"]);
+      }
+
+      set attrObject(V) {
+        if (!this || !module.exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = utils.tryImplForWrapper(
+          conversions[\\"object\\"](V, {
+            context: \\"Failed to set the 'attrObject' property on 'AnyType': The provided value\\"
+          })
+        );
+
+        this[impl][\\"attrObject\\"] = V;
+      }
+    }
+    Object.defineProperties(AnyType.prototype, {
+      getAny: { enumerable: true },
+      setAny: { enumerable: true },
+      getObject: { enumerable: true },
+      setObject: { enumerable: true },
+      attrAny: { enumerable: true },
+      attrObject: { enumerable: true },
+      [Symbol.toStringTag]: { value: \\"AnyType\\", configurable: true }
+    });
+    if (globalObject[ctorRegistry] === undefined) {
+      globalObject[ctorRegistry] = Object.create(null);
+    }
+    globalObject[ctorRegistry][\\"AnyType\\"] = AnyType;
+
+    Object.defineProperty(globalObject, \\"AnyType\\", {
+      configurable: true,
+      writable: true,
+      value: AnyType
+    });
+  }
+}; // iface
+module.exports = iface;
+
+const Impl = require(\\"../implementations/AnyType.js\\");
+"
+`;
+
 exports[`BufferSourceTypes.webidl 1`] = `
 "\\"use strict\\";
 
