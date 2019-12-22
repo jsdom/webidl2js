@@ -1,6 +1,7 @@
-[Constructor(USVString url, optional USVString base),
- Exposed=(Window,Worker)]
+[Exposed=(Window,Worker)]
 interface URL {
+  constructor(USVString url, optional USVString base);
+
   stringifier attribute USVString href;
   readonly attribute USVString origin;
            attribute USVString protocol;
