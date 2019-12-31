@@ -1,17 +1,17 @@
 {
   "name": "webidl2js",
-  "version": "10.0.0",
+  "version": "12.0.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
     "pn": "^1.1.0",
-    "prettier": "^1.18.2",
-    "webidl-conversions": "^4.0.0",
+    "prettier": "^1.19.1",
+    "webidl-conversions": "^5.0.0",
     "webidl2": "^23.10.1"
   },
   "devDependencies": {
-    "eslint": "^6.5.1",
+    "eslint": "^6.6.0",
     "jest": "^24.9.0"
   },
   "scripts": {

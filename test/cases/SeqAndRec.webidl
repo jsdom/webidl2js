@@ -1,5 +1,7 @@
-[Constructor,Exposed=Window]
+[Exposed=Window]
 interface SeqAndRec {
+  constructor();
+
   void recordConsumer(record<USVString, double> rec);
   void recordConsumer2(record<USVString, URL> rec);
   void sequenceConsumer(sequence<USVString> seq);
