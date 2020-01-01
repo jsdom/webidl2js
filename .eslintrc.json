@@ -233,5 +233,17 @@
     "require-yield": "error",
     "template-curly-spacing": ["error", "never"],
     "yield-star-spacing": ["error", "after"]
-  }
+  },
+  "overrides": [
+    {
+      "files": [
+        "test/test.js",
+        "test/*.test.js"
+      ],
+      "env": {
+        "es2020": true,
+        "jest": true
+      }
+    }
+  ]
 }

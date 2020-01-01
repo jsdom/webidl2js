@@ -1,5 +1,3 @@
-/* eslint-env node, jest */
-
 "use strict";
 
 const fs = require("fs");
