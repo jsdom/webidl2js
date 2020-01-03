@@ -328,7 +328,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Variadic arguments
 - `[Clamp]`
 - `[EnforceRange]`
-- `[Exposed]` (by exporting metadata on where/whether it is exposed)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[OverrideBuiltins]`
@@ -347,6 +346,7 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]` and `[PrimaryGlobal]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
+- `[Exposed]`
 - `[LegacyWindowAlias]`
 - `[LenientSetter]`
 - `[LenientThis]`
