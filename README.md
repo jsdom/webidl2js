@@ -134,9 +134,15 @@ Both hooks have the signature `(code) => replacementCode`, where:
 
 If either hook is omitted, then the code will not be replaced, i.e. the default is equivalent to `(code) => code`.
 
-Both hooks also some utility methods that are are accessible via `this`:
+Both hooks also have some utility methods that are accessible via `this`:
 
 - `addImport(relPath, importedIdentifier)` utility to require external modules from the generated interface. This method accepts 2 parameters: `relPath` the relative path from the generated interface file and `importedIdentifier` the identifier to import. This method returns the local identifier from the imported path.
+
+The following variables are available in the scope of the replacement code:
+
+- `globalObject` (object) is the global object associated with the interface
+
+- `interfaceName` (string) is the name of the interface
 
 An example of code that uses these hooks is as follows:
 
@@ -147,21 +153,24 @@ const WebIDL2JS = require("webidl2js");
 const transformer = new WebIDL2JS({
   implSuffix: "-impl",
   processCEReactions(code) {
+    const ceReactionsPreSteps = this.addImport("../ce-reactions", "ceReactionsPreSteps");
+    const ceReactionsPostSteps = this.addImport("../ce-reactions", "ceReactionsPostSteps");
+
     return `
-      // CEReactions pre steps
+      ${ceReactionsPreSteps}(globalObject);
       try {
         ${code}
       } finally {
-        // CEReactions post steps
+        ${ceReactionsPostSteps}(globalObject);
       }
     `;
   },
   processHTMLConstructor(code) {
-    const identifier = this.addImport("../HTMLConstructor", "HTMLConstructor");
+    const htmlConstructor = this.addImport("../HTMLConstructor", "HTMLConstructor");
 
     return `
-      // HTMLConstructor
       ${code}
+      ${htmlConstructor}(globalObject, interfaceName);
     `;
   }
 });
