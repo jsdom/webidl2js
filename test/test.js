@@ -12,23 +12,22 @@ const outputDir = path.resolve(__dirname, "output");
 beforeAll(() => {
   const transformer = new Transformer({
     processCEReactions(code) {
-      const preSteps = this.addImport("../CEReactions", "preSteps");
-      const postSteps = this.addImport("../CEReactions", "postSteps");
+      const ceReactions = this.addImport("../CEReactions");
 
       return `
-        ${preSteps}(globalObject);
+        ${ceReactions}.preSteps(globalObject);
         try {
           ${code}
         } finally {
-          ${postSteps}(globalObject);
+          ${ceReactions}.postSteps(globalObject);
         }
       `;
     },
     processHTMLConstructor() {
-      const identifier = this.addImport("../HTMLConstructor", "HTMLConstructor");
+      const htmlConstructor = this.addImport("../HTMLConstructor", "HTMLConstructor");
 
       return `
-        return ${identifier}.HTMLConstructor(globalObject, interfaceName);
+        return ${htmlConstructor}(globalObject, interfaceName);
       `;
     }
   });

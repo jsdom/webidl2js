@@ -274,8 +274,7 @@ exports[`CEReactions.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const preSteps_CEReactions = require(\\"../CEReactions.js\\").preSteps;
-const postSteps_CEReactions = require(\\"../CEReactions.js\\").postSteps;
+const CEReactions = require(\\"../CEReactions.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -433,7 +432,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
           });
 
-          preSteps_CEReactions(globalObject);
+          CEReactions.preSteps(globalObject);
           try {
             const creating = !target[impl][utils.supportsPropertyName](P);
             if (creating) {
@@ -442,7 +441,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
               target[impl][utils.namedSetExisting](P, namedValue);
             }
           } finally {
-            postSteps_CEReactions(globalObject);
+            CEReactions.postSteps(globalObject);
           }
 
           return true;
@@ -497,7 +496,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
           context: \\"Failed to set the '\\" + P + \\"' property on 'CEReactions': The provided value\\"
         });
 
-        preSteps_CEReactions(globalObject);
+        CEReactions.preSteps(globalObject);
         try {
           const creating = !target[impl][utils.supportsPropertyName](P);
           if (creating) {
@@ -506,7 +505,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             target[impl][utils.namedSetExisting](P, namedValue);
           }
         } finally {
-          postSteps_CEReactions(globalObject);
+          CEReactions.postSteps(globalObject);
         }
 
         return true;
@@ -520,12 +519,12 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       }
 
       if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
-        preSteps_CEReactions(globalObject);
+        CEReactions.preSteps(globalObject);
         try {
           target[impl][utils.namedDelete](P);
           return true;
         } finally {
-          postSteps_CEReactions(globalObject);
+          CEReactions.postSteps(globalObject);
         }
       }
 
@@ -556,11 +555,11 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      preSteps_CEReactions(globalObject);
+      CEReactions.preSteps(globalObject);
       try {
         return this[impl].method();
       } finally {
-        postSteps_CEReactions(globalObject);
+        CEReactions.postSteps(globalObject);
       }
     }
 
@@ -569,11 +568,11 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      preSteps_CEReactions(globalObject);
+      CEReactions.preSteps(globalObject);
       try {
         return this[impl][\\"attr\\"];
       } finally {
-        postSteps_CEReactions(globalObject);
+        CEReactions.postSteps(globalObject);
       }
     }
 
@@ -586,11 +585,11 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'attr' property on 'CEReactions': The provided value\\"
       });
 
-      preSteps_CEReactions(globalObject);
+      CEReactions.preSteps(globalObject);
       try {
         this[impl][\\"attr\\"] = V;
       } finally {
-        postSteps_CEReactions(globalObject);
+        CEReactions.postSteps(globalObject);
       }
     }
   }
@@ -1492,7 +1491,7 @@ exports.install = function install(globalObject) {
   const interfaceName = \\"HTMLConstructor\\";
   class HTMLConstructor {
     constructor() {
-      return HTMLConstructor_HTMLConstructor.HTMLConstructor(globalObject, interfaceName);
+      return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
     }
   }
   Object.defineProperties(HTMLConstructor.prototype, {

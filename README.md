@@ -136,7 +136,7 @@ If either hook is omitted, then the code will not be replaced, i.e. the default 
 
 Both hooks also have some utility methods that are accessible via `this`:
 
-- `addImport(relPath, importedIdentifier)` utility to require external modules from the generated interface. This method accepts 2 parameters: `relPath` the relative path from the generated interface file and `importedIdentifier` the identifier to import. This method returns the local identifier from the imported path.
+- `addImport(relPath, [importedIdentifier])` utility to require external modules from the generated interface. This method accepts 2 parameters: `relPath` the relative path from the generated interface file, and an optional `importedIdentifier` the identifier to import. This method returns the local identifier from the imported path.
 
 The following variables are available in the scope of the replacement code:
 
@@ -153,24 +153,24 @@ const WebIDL2JS = require("webidl2js");
 const transformer = new WebIDL2JS({
   implSuffix: "-impl",
   processCEReactions(code) {
-    const ceReactionsPreSteps = this.addImport("../ce-reactions", "ceReactionsPreSteps");
-    const ceReactionsPostSteps = this.addImport("../ce-reactions", "ceReactionsPostSteps");
+    // Add `require("../ce-reactions")` to generated file.
+    const ceReactions = this.addImport("../ce-reactions");
 
     return `
-      ${ceReactionsPreSteps}(globalObject);
+      ${ceReactions}.preSteps(globalObject);
       try {
         ${code}
       } finally {
-        ${ceReactionsPostSteps}(globalObject);
+        ${ceReactions}.postSteps(globalObject);
       }
     `;
   },
-  processHTMLConstructor(code) {
+  processHTMLConstructor(/* code */) {
+    // Add `require("../HTMLConstructor").HTMLConstructor` to generated file.
     const htmlConstructor = this.addImport("../HTMLConstructor", "HTMLConstructor");
 
     return `
-      ${code}
-      ${htmlConstructor}(globalObject, interfaceName);
+      return ${htmlConstructor}(globalObject, interfaceName);
     `;
   }
 });
