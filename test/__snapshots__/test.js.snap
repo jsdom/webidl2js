@@ -6,7 +6,7 @@ exports[`BufferSourceTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -17,7 +17,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -45,7 +46,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'BufferSourceTypes'.\`);
 };
@@ -66,21 +67,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -115,7 +113,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bs(...args);
+      return implForWrapper(this).bs(...args);
     }
 
     ab(ab) {
@@ -138,7 +136,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].ab(...args);
+      return implForWrapper(this).ab(...args);
     }
 
     abv(abv) {
@@ -164,7 +162,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abv(...args);
+      return implForWrapper(this).abv(...args);
     }
 
     u8a(u8) {
@@ -187,7 +185,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].u8a(...args);
+      return implForWrapper(this).u8a(...args);
     }
 
     abUnion(ab) {
@@ -213,7 +211,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abUnion(...args);
+      return implForWrapper(this).abUnion(...args);
     }
 
     u8aUnion(ab) {
@@ -239,7 +237,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].u8aUnion(...args);
+      return implForWrapper(this).u8aUnion(...args);
     }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
@@ -273,7 +271,7 @@ exports[`DOMImplementation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -284,7 +282,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -312,7 +311,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'DOMImplementation'.\`);
 };
@@ -333,21 +332,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -392,7 +388,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocumentType(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).createDocumentType(...args));
     }
 
     createDocument(namespace, qualifiedName) {
@@ -440,7 +436,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocument(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).createDocument(...args));
     }
 
     createHTMLDocument() {
@@ -457,7 +453,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createHTMLDocument(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).createHTMLDocument(...args));
     }
 
     hasFeature() {
@@ -465,7 +461,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].hasFeature();
+      return implForWrapper(this).hasFeature();
     }
   }
   Object.defineProperties(DOMImplementation.prototype, {
@@ -576,7 +572,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const convertDictionary = require(\\"./Dictionary.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -587,7 +583,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -615,7 +612,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'DictionaryConvert'.\`);
 };
@@ -636,21 +633,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -680,7 +674,7 @@ exports.install = function install(globalObject) {
         curArg = convertDictionary(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return implForWrapper(this).op(...args);
     }
   }
   Object.defineProperties(DictionaryConvert.prototype, {
@@ -711,7 +705,7 @@ const utils = require(\\"./utils.js\\");
 
 const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
 const RequestDestination = require(\\"./RequestDestination.js\\");
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -722,7 +716,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -750,7 +745,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Enum'.\`);
 };
@@ -771,21 +766,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -812,7 +804,7 @@ exports.install = function install(globalObject) {
         curArg = convertRequestDestination(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return implForWrapper(this).op(...args);
     }
 
     get attr() {
@@ -820,7 +812,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"attr\\"]);
+      return utils.tryWrapperForImpl(implForWrapper(this)[\\"attr\\"]);
     }
 
     set attr(V) {
@@ -833,7 +825,7 @@ exports.install = function install(globalObject) {
         return;
       }
 
-      this[impl][\\"attr\\"] = V;
+      implForWrapper(this)[\\"attr\\"] = V;
     }
   }
   Object.defineProperties(Enum.prototype, {
@@ -863,7 +855,7 @@ exports[`Global.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -874,7 +866,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -902,7 +895,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Global'.\`);
 };
@@ -923,7 +916,7 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -934,21 +927,21 @@ exports._internalSetup = function _internalSetup(obj) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].op();
+        return implForWrapper(this).op();
       },
       unforgeableOp() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].unforgeableOp();
+        return implForWrapper(this).unforgeableOp();
       },
       get attr() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"attr\\"];
+        return implForWrapper(obj)[\\"attr\\"];
       },
       set attr(V) {
         if (!this || !exports.is(this)) {
@@ -959,14 +952,14 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'attr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"attr\\"] = V;
+        implForWrapper(obj)[\\"attr\\"] = V;
       },
       get unforgeableAttr() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"unforgeableAttr\\"];
+        return implForWrapper(obj)[\\"unforgeableAttr\\"];
       },
       set unforgeableAttr(V) {
         if (!this || !exports.is(this)) {
@@ -977,14 +970,14 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'unforgeableAttr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"unforgeableAttr\\"] = V;
+        implForWrapper(obj)[\\"unforgeableAttr\\"] = V;
       },
       get length() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"length\\"];
+        return implForWrapper(obj)[\\"length\\"];
       },
       set length(V) {
         if (!this || !exports.is(this)) {
@@ -995,7 +988,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'length' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"length\\"] = V;
+        implForWrapper(obj)[\\"length\\"] = V;
       },
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
       keys: Array.prototype.keys,
@@ -1015,14 +1008,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -1056,7 +1046,7 @@ exports[`LegacyArrayClass.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -1067,7 +1057,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -1095,7 +1086,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'LegacyArrayClass'.\`);
 };
@@ -1116,21 +1107,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -1146,7 +1134,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return implForWrapper(this)[\\"length\\"];
     }
   }
   Object.setPrototypeOf(LegacyArrayClass.prototype, Array.prototype);
@@ -1176,7 +1164,7 @@ exports[`MixedIn.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -1187,7 +1175,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -1215,7 +1204,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
 };
@@ -1236,21 +1225,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -1266,7 +1252,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].mixedInOp();
+      return implForWrapper(this).mixedInOp();
     }
 
     ifaceMixinOp() {
@@ -1274,7 +1260,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].ifaceMixinOp();
+      return implForWrapper(this).ifaceMixinOp();
     }
 
     get mixedInAttr() {
@@ -1282,7 +1268,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"mixedInAttr\\"];
+      return implForWrapper(this)[\\"mixedInAttr\\"];
     }
 
     set mixedInAttr(V) {
@@ -1294,7 +1280,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"mixedInAttr\\"] = V;
+      implForWrapper(this)[\\"mixedInAttr\\"] = V;
     }
 
     get ifaceMixinAttr() {
@@ -1302,7 +1288,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"ifaceMixinAttr\\"];
+      return implForWrapper(this)[\\"ifaceMixinAttr\\"];
     }
 
     set ifaceMixinAttr(V) {
@@ -1314,7 +1300,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"ifaceMixinAttr\\"] = V;
+      implForWrapper(this)[\\"ifaceMixinAttr\\"] = V;
     }
   }
   Object.defineProperties(MixedIn.prototype, {
@@ -1354,7 +1340,7 @@ const utils = require(\\"./utils.js\\");
 
 const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -1365,7 +1351,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -1393,7 +1380,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Overloads'.\`);
 };
@@ -1414,21 +1401,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -1526,7 +1510,7 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return utils.tryWrapperForImpl(this[impl].compatible(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).compatible(...args));
     }
 
     incompatible1(arg1) {
@@ -1562,7 +1546,7 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].incompatible1(...args);
+      return implForWrapper(this).incompatible1(...args);
     }
 
     incompatible2(arg1) {
@@ -1604,7 +1588,7 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible2(...args);
+      return implForWrapper(this).incompatible2(...args);
     }
 
     incompatible3(arg1) {
@@ -1738,7 +1722,7 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible3(...args);
+      return implForWrapper(this).incompatible3(...args);
     }
   }
   Object.defineProperties(Overloads.prototype, {
@@ -1770,7 +1754,7 @@ exports[`PromiseTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -1781,7 +1765,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -1809,7 +1794,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
 };
@@ -1830,21 +1815,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -1876,7 +1858,7 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].voidPromiseConsumer(...args);
+      return implForWrapper(this).voidPromiseConsumer(...args);
     }
 
     promiseConsumer(p) {
@@ -1906,7 +1888,7 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].promiseConsumer(...args);
+      return implForWrapper(this).promiseConsumer(...args);
     }
   }
   Object.defineProperties(PromiseTypes.prototype, {
@@ -1936,7 +1918,7 @@ exports[`Reflect.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -1947,7 +1929,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -1975,7 +1958,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
 };
@@ -1996,21 +1979,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -2026,7 +2006,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].hasAttributeNS(null, \\"reflectedboolean\\");
+      return implForWrapper(this).hasAttributeNS(null, \\"reflectedboolean\\");
     }
 
     set ReflectedBoolean(V) {
@@ -2039,9 +2019,9 @@ exports.install = function install(globalObject) {
       });
 
       if (V) {
-        this[impl].setAttributeNS(null, \\"reflectedboolean\\", \\"\\");
+        implForWrapper(this).setAttributeNS(null, \\"reflectedboolean\\", \\"\\");
       } else {
-        this[impl].removeAttributeNS(null, \\"reflectedboolean\\");
+        implForWrapper(this).removeAttributeNS(null, \\"reflectedboolean\\");
       }
     }
 
@@ -2050,7 +2030,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      const value = this[impl].getAttributeNS(null, \\"reflecteddomstring\\");
+      const value = implForWrapper(this).getAttributeNS(null, \\"reflecteddomstring\\");
       return value === null ? \\"\\" : value;
     }
 
@@ -2063,7 +2043,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ReflectedDOMString' property on 'Reflect': The provided value\\"
       });
 
-      this[impl].setAttributeNS(null, \\"reflecteddomstring\\", V);
+      implForWrapper(this).setAttributeNS(null, \\"reflecteddomstring\\", V);
     }
 
     get ReflectedLong() {
@@ -2071,7 +2051,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      const value = parseInt(this[impl].getAttributeNS(null, \\"reflectedlong\\"));
+      const value = parseInt(implForWrapper(this).getAttributeNS(null, \\"reflectedlong\\"));
       return isNaN(value) || value < -2147483648 || value > 2147483647 ? 0 : value;
     }
 
@@ -2084,7 +2064,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ReflectedLong' property on 'Reflect': The provided value\\"
       });
 
-      this[impl].setAttributeNS(null, \\"reflectedlong\\", String(V));
+      implForWrapper(this).setAttributeNS(null, \\"reflectedlong\\", String(V));
     }
 
     get ReflectedUnsignedLong() {
@@ -2092,7 +2072,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      const value = parseInt(this[impl].getAttributeNS(null, \\"reflectedunsignedlong\\"));
+      const value = parseInt(implForWrapper(this).getAttributeNS(null, \\"reflectedunsignedlong\\"));
       return isNaN(value) || value < 0 || value > 2147483647 ? 0 : value;
     }
 
@@ -2105,7 +2085,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ReflectedUnsignedLong' property on 'Reflect': The provided value\\"
       });
 
-      this[impl].setAttributeNS(null, \\"reflectedunsignedlong\\", String(V > 2147483647 ? 0 : V));
+      implForWrapper(this).setAttributeNS(null, \\"reflectedunsignedlong\\", String(V > 2147483647 ? 0 : V));
     }
 
     get ReflectionTest() {
@@ -2113,7 +2093,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      const value = this[impl].getAttributeNS(null, \\"reflection\\");
+      const value = implForWrapper(this).getAttributeNS(null, \\"reflection\\");
       return value === null ? \\"\\" : value;
     }
 
@@ -2126,7 +2106,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ReflectionTest' property on 'Reflect': The provided value\\"
       });
 
-      this[impl].setAttributeNS(null, \\"reflection\\", V);
+      implForWrapper(this).setAttributeNS(null, \\"reflection\\", V);
     }
 
     get withUnderscore() {
@@ -2134,7 +2114,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      const value = this[impl].getAttributeNS(null, \\"with-underscore\\");
+      const value = implForWrapper(this).getAttributeNS(null, \\"with-underscore\\");
       return value === null ? \\"\\" : value;
     }
 
@@ -2147,7 +2127,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'withUnderscore' property on 'Reflect': The provided value\\"
       });
 
-      this[impl].setAttributeNS(null, \\"with-underscore\\", V);
+      implForWrapper(this).setAttributeNS(null, \\"with-underscore\\", V);
     }
   }
   Object.defineProperties(Reflect.prototype, {
@@ -2215,7 +2195,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const convertURL = require(\\"./URL.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -2226,7 +2206,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -2254,7 +2235,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
 };
@@ -2275,21 +2256,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -2341,7 +2319,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer(...args);
+      return implForWrapper(this).recordConsumer(...args);
     }
 
     recordConsumer2(rec) {
@@ -2385,7 +2363,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer2(...args);
+      return implForWrapper(this).recordConsumer2(...args);
     }
 
     sequenceConsumer(seq) {
@@ -2421,7 +2399,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer(...args);
+      return implForWrapper(this).sequenceConsumer(...args);
     }
 
     sequenceConsumer2(seq) {
@@ -2455,7 +2433,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer2(...args);
+      return implForWrapper(this).sequenceConsumer2(...args);
     }
 
     frozenArrayConsumer(arr) {
@@ -2492,7 +2470,7 @@ exports.install = function install(globalObject) {
         curArg = Object.freeze(curArg);
         args.push(curArg);
       }
-      return this[impl].frozenArrayConsumer(...args);
+      return implForWrapper(this).frozenArrayConsumer(...args);
     }
   }
   Object.defineProperties(SeqAndRec.prototype, {
@@ -2525,7 +2503,7 @@ exports[`Static.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -2536,7 +2514,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -2564,7 +2543,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Static'.\`);
 };
@@ -2585,21 +2564,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -2615,7 +2591,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].def();
+      return implForWrapper(this).def();
     }
 
     get abc() {
@@ -2623,7 +2599,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"abc\\"];
+      return implForWrapper(this)[\\"abc\\"];
     }
 
     set abc(V) {
@@ -2633,7 +2609,7 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
 
-      this[impl][\\"abc\\"] = V;
+      implForWrapper(this)[\\"abc\\"] = V;
     }
 
     static def() {
@@ -2676,7 +2652,7 @@ exports[`Storage.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -2687,7 +2663,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -2715,7 +2692,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Storage'.\`);
 };
@@ -2736,17 +2713,15 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
   obj = new Proxy(obj, {
     get(target, P, receiver) {
@@ -2789,7 +2764,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     ownKeys(target) {
       const keys = new Set();
 
-      for (const key of target[impl][utils.supportedPropertyNames]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyNames]) {
         if (!(key in target)) {
           keys.add(\`\${key}\`);
         }
@@ -2807,8 +2782,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       }
       let ignoreNamedProps = false;
 
-      if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
-        const namedValue = target[impl].getItem(P);
+      if (implForWrapper(target)[utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+        const namedValue = implForWrapper(target).getItem(P);
 
         return {
           writable: true,
@@ -2833,7 +2808,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             context: \\"Failed to set the '\\" + P + \\"' property on 'Storage': The provided value\\"
           });
 
-          target[impl].setItem(P, namedValue);
+          implForWrapper(target).setItem(P, namedValue);
 
           return true;
         }
@@ -2887,7 +2862,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
           context: \\"Failed to set the '\\" + P + \\"' property on 'Storage': The provided value\\"
         });
 
-        target[impl].setItem(P, namedValue);
+        implForWrapper(target).setItem(P, namedValue);
 
         return true;
       }
@@ -2899,8 +2874,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
         return Reflect.deleteProperty(target, P);
       }
 
-      if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
-        target[impl].removeItem(P);
+      if (implForWrapper(target)[utils.supportsPropertyName](P) && !(P in target)) {
+        implForWrapper(target).removeItem(P);
         return true;
       }
 
@@ -2912,9 +2887,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     }
   });
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -2941,7 +2915,7 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"unsigned long\\"](curArg, { context: \\"Failed to execute 'key' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].key(...args);
+      return implForWrapper(this).key(...args);
     }
 
     getItem(key) {
@@ -2960,7 +2934,7 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'getItem' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].getItem(...args);
+      return implForWrapper(this).getItem(...args);
     }
 
     setItem(key, value) {
@@ -2984,7 +2958,7 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'setItem' on 'Storage': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].setItem(...args);
+      return implForWrapper(this).setItem(...args);
     }
 
     removeItem(key) {
@@ -3005,7 +2979,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].removeItem(...args);
+      return implForWrapper(this).removeItem(...args);
     }
 
     clear() {
@@ -3013,7 +2987,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].clear();
+      return implForWrapper(this).clear();
     }
 
     get length() {
@@ -3021,7 +2995,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return implForWrapper(this)[\\"length\\"];
     }
   }
   Object.defineProperties(Storage.prototype, {
@@ -3055,7 +3029,7 @@ exports[`StringifierAttribute.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -3066,7 +3040,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -3094,7 +3069,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
 };
@@ -3115,21 +3090,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -3145,14 +3117,14 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attr\\"];
+      return implForWrapper(this)[\\"attr\\"];
     }
 
     toString() {
       if (!this || !exports.is(this)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"attr\\"];
+      return implForWrapper(this)[\\"attr\\"];
     }
   }
   Object.defineProperties(StringifierAttribute.prototype, {
@@ -3182,7 +3154,7 @@ exports[`StringifierDefaultOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -3193,7 +3165,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -3221,7 +3194,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
 };
@@ -3244,21 +3217,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -3274,7 +3244,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return implForWrapper(this).toString();
     }
   }
   Object.defineProperties(StringifierDefaultOperation.prototype, {
@@ -3303,7 +3273,7 @@ exports[`StringifierNamedOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -3314,7 +3284,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -3342,7 +3313,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
 };
@@ -3365,21 +3336,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -3395,7 +3363,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return implForWrapper(this).operation();
     }
 
     toString() {
@@ -3403,7 +3371,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return implForWrapper(this).operation();
     }
   }
   Object.defineProperties(StringifierNamedOperation.prototype, {
@@ -3433,7 +3401,7 @@ exports[`StringifierOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -3444,7 +3412,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -3472,7 +3441,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
 };
@@ -3493,21 +3462,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -3523,7 +3489,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return implForWrapper(this).toString();
     }
   }
   Object.defineProperties(StringifierOperation.prototype, {
@@ -3555,7 +3521,7 @@ const utils = require(\\"./utils.js\\");
 const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
 const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -3566,7 +3532,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -3594,7 +3561,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'TypedefsAndUnions'.\`);
 };
@@ -3615,21 +3582,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -3667,7 +3631,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrConsumer(...args);
+      return implForWrapper(this).numOrStrConsumer(...args);
     }
 
     numOrEnumConsumer(a) {
@@ -3700,7 +3664,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrEnumConsumer(...args);
+      return implForWrapper(this).numOrEnumConsumer(...args);
     }
 
     numOrStrOrNullConsumer(a) {
@@ -3736,7 +3700,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrNullConsumer(...args);
+      return implForWrapper(this).numOrStrOrNullConsumer(...args);
     }
 
     numOrStrOrURLOrNullConsumer(a) {
@@ -3774,7 +3738,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrURLOrNullConsumer(...args);
+      return implForWrapper(this).numOrStrOrURLOrNullConsumer(...args);
     }
 
     urlMapInnerConsumer(a) {
@@ -3820,7 +3784,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapInnerConsumer(...args);
+      return implForWrapper(this).urlMapInnerConsumer(...args);
     }
 
     urlMapConsumer(a) {
@@ -3870,7 +3834,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapConsumer(...args);
+      return implForWrapper(this).urlMapConsumer(...args);
     }
 
     bufferSourceOrURLConsumer(b) {
@@ -3900,7 +3864,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bufferSourceOrURLConsumer(...args);
+      return implForWrapper(this).bufferSourceOrURLConsumer(...args);
     }
 
     arrayBufferViewOrURLMapConsumer(b) {
@@ -3966,7 +3930,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewOrURLMapConsumer(...args);
+      return implForWrapper(this).arrayBufferViewOrURLMapConsumer(...args);
     }
 
     arrayBufferViewDupConsumer(b) {
@@ -3993,7 +3957,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewDupConsumer(...args);
+      return implForWrapper(this).arrayBufferViewDupConsumer(...args);
     }
 
     get buf() {
@@ -4001,7 +3965,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"buf\\"]);
+      return utils.tryWrapperForImpl(implForWrapper(this)[\\"buf\\"]);
     }
 
     set buf(V) {
@@ -4020,7 +3984,7 @@ exports.install = function install(globalObject) {
             \\" is not of any supported type.\\"
         );
       }
-      this[impl][\\"buf\\"] = V;
+      implForWrapper(this)[\\"buf\\"] = V;
     }
 
     get time() {
@@ -4028,7 +3992,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"time\\"];
+      return implForWrapper(this)[\\"time\\"];
     }
 
     set time(V) {
@@ -4040,7 +4004,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'time' property on 'TypedefsAndUnions': The provided value\\"
       });
 
-      this[impl][\\"time\\"] = V;
+      implForWrapper(this)[\\"time\\"] = V;
     }
   }
   Object.defineProperties(TypedefsAndUnions.prototype, {
@@ -4079,7 +4043,7 @@ exports[`URL.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -4090,7 +4054,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -4118,7 +4083,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'URL'.\`);
 };
@@ -4139,21 +4104,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -4187,7 +4149,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toJSON();
+      return implForWrapper(this).toJSON();
     }
 
     get href() {
@@ -4195,7 +4157,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"href\\"];
+      return implForWrapper(this)[\\"href\\"];
     }
 
     set href(V) {
@@ -4205,14 +4167,14 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
 
-      this[impl][\\"href\\"] = V;
+      implForWrapper(this)[\\"href\\"] = V;
     }
 
     toString() {
       if (!this || !exports.is(this)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"href\\"];
+      return implForWrapper(this)[\\"href\\"];
     }
 
     get origin() {
@@ -4220,7 +4182,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"origin\\"];
+      return implForWrapper(this)[\\"origin\\"];
     }
 
     get protocol() {
@@ -4228,7 +4190,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"protocol\\"];
+      return implForWrapper(this)[\\"protocol\\"];
     }
 
     set protocol(V) {
@@ -4240,7 +4202,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"protocol\\"] = V;
+      implForWrapper(this)[\\"protocol\\"] = V;
     }
 
     get username() {
@@ -4248,7 +4210,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"username\\"];
+      return implForWrapper(this)[\\"username\\"];
     }
 
     set username(V) {
@@ -4260,7 +4222,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'username' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"username\\"] = V;
+      implForWrapper(this)[\\"username\\"] = V;
     }
 
     get password() {
@@ -4268,7 +4230,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"password\\"];
+      return implForWrapper(this)[\\"password\\"];
     }
 
     set password(V) {
@@ -4280,7 +4242,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'password' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"password\\"] = V;
+      implForWrapper(this)[\\"password\\"] = V;
     }
 
     get host() {
@@ -4288,7 +4250,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"host\\"];
+      return implForWrapper(this)[\\"host\\"];
     }
 
     set host(V) {
@@ -4298,7 +4260,7 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
 
-      this[impl][\\"host\\"] = V;
+      implForWrapper(this)[\\"host\\"] = V;
     }
 
     get hostname() {
@@ -4306,7 +4268,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hostname\\"];
+      return implForWrapper(this)[\\"hostname\\"];
     }
 
     set hostname(V) {
@@ -4318,7 +4280,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"hostname\\"] = V;
+      implForWrapper(this)[\\"hostname\\"] = V;
     }
 
     get port() {
@@ -4326,7 +4288,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"port\\"];
+      return implForWrapper(this)[\\"port\\"];
     }
 
     set port(V) {
@@ -4336,7 +4298,7 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
 
-      this[impl][\\"port\\"] = V;
+      implForWrapper(this)[\\"port\\"] = V;
     }
 
     get pathname() {
@@ -4344,7 +4306,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"pathname\\"];
+      return implForWrapper(this)[\\"pathname\\"];
     }
 
     set pathname(V) {
@@ -4356,7 +4318,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"pathname\\"] = V;
+      implForWrapper(this)[\\"pathname\\"] = V;
     }
 
     get search() {
@@ -4364,7 +4326,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"search\\"];
+      return implForWrapper(this)[\\"search\\"];
     }
 
     set search(V) {
@@ -4374,7 +4336,7 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
 
-      this[impl][\\"search\\"] = V;
+      implForWrapper(this)[\\"search\\"] = V;
     }
 
     get searchParams() {
@@ -4383,7 +4345,7 @@ exports.install = function install(globalObject) {
       }
 
       return utils.getSameObject(this, \\"searchParams\\", () => {
-        return utils.tryWrapperForImpl(this[impl][\\"searchParams\\"]);
+        return utils.tryWrapperForImpl(implForWrapper(this)[\\"searchParams\\"]);
       });
     }
 
@@ -4392,7 +4354,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hash\\"];
+      return implForWrapper(this)[\\"hash\\"];
     }
 
     set hash(V) {
@@ -4402,7 +4364,7 @@ exports.install = function install(globalObject) {
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
 
-      this[impl][\\"hash\\"] = V;
+      implForWrapper(this)[\\"hash\\"] = V;
     }
   }
   Object.defineProperties(URL.prototype, {
@@ -4444,7 +4406,7 @@ exports[`URLList.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -4455,7 +4417,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -4483,7 +4446,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'URLList'.\`);
 };
@@ -4504,17 +4467,15 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
   obj = new Proxy(obj, {
     get(target, P, receiver) {
@@ -4557,7 +4518,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     ownKeys(target) {
       const keys = new Set();
 
-      for (const key of target[impl][utils.supportedPropertyIndices]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyIndices]) {
         keys.add(\`\${key}\`);
       }
 
@@ -4576,8 +4537,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
 
-        if (target[impl][utils.supportsPropertyIndex](index)) {
-          const indexedValue = target[impl].item(index);
+        if (implForWrapper(target)[utils.supportsPropertyIndex](index)) {
+          const indexedValue = implForWrapper(target).item(index);
           return {
             writable: false,
             enumerable: true,
@@ -4603,8 +4564,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
 
-        if (target[impl][utils.supportsPropertyIndex](index)) {
-          const indexedValue = target[impl].item(index);
+        if (implForWrapper(target)[utils.supportsPropertyIndex](index)) {
+          const indexedValue = implForWrapper(target).item(index);
           ownDesc = {
             writable: false,
             enumerable: true,
@@ -4665,7 +4626,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        return !target[impl][utils.supportsPropertyIndex](index);
+        return !implForWrapper(target)[utils.supportsPropertyIndex](index);
       }
 
       return Reflect.deleteProperty(target, P);
@@ -4676,9 +4637,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     }
   });
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -4707,7 +4667,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).item(...args));
     }
 
     get length() {
@@ -4715,7 +4675,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return implForWrapper(this)[\\"length\\"];
     }
   }
   Object.defineProperties(URLList.prototype, {
@@ -4750,7 +4710,7 @@ exports[`URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 const IteratorPrototype = Object.create(utils.IteratorPrototype, {
@@ -4758,7 +4718,7 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
     value: function next() {
       const internal = this[utils.iterInternalSymbol];
       const { target, kind, index } = internal;
-      const values = Array.from(target[impl]);
+      const values = Array.from(implForWrapper(target));
       const len = values.length;
       if (index >= len) {
         return { value: undefined, done: true };
@@ -4800,7 +4760,8 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -4828,7 +4789,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'URLSearchParams'.\`);
 };
@@ -4858,21 +4819,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -4990,7 +4948,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].append(...args);
+      return implForWrapper(this).append(...args);
     }
 
     delete(name) {
@@ -5013,7 +4971,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].delete(...args);
+      return implForWrapper(this).delete(...args);
     }
 
     get(name) {
@@ -5036,7 +4994,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].get(...args);
+      return implForWrapper(this).get(...args);
     }
 
     getAll(name) {
@@ -5059,7 +5017,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].getAll(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).getAll(...args));
     }
 
     has(name) {
@@ -5082,7 +5040,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].has(...args);
+      return implForWrapper(this).has(...args);
     }
 
     set(name, value) {
@@ -5112,7 +5070,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].set(...args);
+      return implForWrapper(this).set(...args);
     }
 
     sort() {
@@ -5120,7 +5078,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].sort();
+      return implForWrapper(this).sort();
     }
 
     toString() {
@@ -5128,7 +5086,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return implForWrapper(this).toString();
     }
 
     keys() {
@@ -5165,12 +5123,12 @@ exports.install = function install(globalObject) {
         );
       }
       const thisArg = arguments[1];
-      let pairs = Array.from(this[impl]);
+      let pairs = Array.from(implForWrapper(this));
       let i = 0;
       while (i < pairs.length) {
         const [key, value] = pairs[i].map(utils.tryWrapperForImpl);
         callback.call(thisArg, value, key, this);
-        pairs = Array.from(this[impl]);
+        pairs = Array.from(implForWrapper(this));
         i++;
       }
     }
@@ -5213,7 +5171,7 @@ exports[`URLSearchParamsCollection.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -5224,7 +5182,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -5252,7 +5211,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection'.\`);
 };
@@ -5275,17 +5234,15 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
   obj = new Proxy(obj, {
     get(target, P, receiver) {
@@ -5328,11 +5285,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     ownKeys(target) {
       const keys = new Set();
 
-      for (const key of target[impl][utils.supportedPropertyIndices]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyIndices]) {
         keys.add(\`\${key}\`);
       }
 
-      for (const key of target[impl][utils.supportedPropertyNames]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyNames]) {
         if (!(key in target)) {
           keys.add(\`\${key}\`);
         }
@@ -5352,7 +5309,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        const indexedValue = target[impl].item(index);
+        const indexedValue = implForWrapper(target).item(index);
         if (indexedValue !== undefined) {
           return {
             writable: false,
@@ -5364,7 +5321,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
         ignoreNamedProps = true;
       }
 
-      const namedValue = target[impl].namedItem(P);
+      const namedValue = implForWrapper(target).namedItem(P);
 
       if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
         return {
@@ -5391,7 +5348,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        const indexedValue = target[impl].item(index);
+        const indexedValue = implForWrapper(target).item(index);
         if (indexedValue !== undefined) {
           ownDesc = {
             writable: false,
@@ -5443,7 +5400,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
         return false;
       }
       if (!utils.hasOwn(target, P)) {
-        const creating = !(target[impl].namedItem(P) !== null);
+        const creating = !(implForWrapper(target).namedItem(P) !== null);
         if (!creating) {
           return false;
         }
@@ -5458,10 +5415,10 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        return !(target[impl].item(index) !== undefined);
+        return !(implForWrapper(target).item(index) !== undefined);
       }
 
-      if (target[impl].namedItem(P) !== null && !(P in target)) {
+      if (implForWrapper(target).namedItem(P) !== null && !(P in target)) {
         return false;
       }
 
@@ -5473,9 +5430,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     }
   });
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -5506,7 +5462,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).item(...args));
     }
 
     namedItem(name) {
@@ -5529,7 +5485,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].namedItem(...args));
+      return utils.tryWrapperForImpl(implForWrapper(this).namedItem(...args));
     }
 
     get length() {
@@ -5537,7 +5493,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return implForWrapper(this)[\\"length\\"];
     }
   }
   Object.defineProperties(URLSearchParamsCollection.prototype, {
@@ -5570,7 +5526,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const convertURL = require(\\"./URL.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
@@ -5582,7 +5538,8 @@ const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -5610,7 +5567,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection2'.\`);
 };
@@ -5633,7 +5590,7 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {
   URLSearchParamsCollection._internalSetup(obj);
@@ -5642,10 +5599,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
   obj = new Proxy(obj, {
     get(target, P, receiver) {
@@ -5688,11 +5643,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     ownKeys(target) {
       const keys = new Set();
 
-      for (const key of target[impl][utils.supportedPropertyIndices]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyIndices]) {
         keys.add(\`\${key}\`);
       }
 
-      for (const key of target[impl][utils.supportedPropertyNames]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyNames]) {
         if (!(key in target)) {
           keys.add(\`\${key}\`);
         }
@@ -5712,7 +5667,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        const indexedValue = target[impl].item(index);
+        const indexedValue = implForWrapper(target).item(index);
         if (indexedValue !== undefined) {
           return {
             writable: false,
@@ -5724,7 +5679,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
         ignoreNamedProps = true;
       }
 
-      const namedValue = target[impl].namedItem(P);
+      const namedValue = implForWrapper(target).namedItem(P);
 
       if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
         return {
@@ -5752,11 +5707,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
           });
 
-          const creating = !(target[impl].namedItem(P) !== null);
+          const creating = !(implForWrapper(target).namedItem(P) !== null);
           if (creating) {
-            target[impl][utils.namedSetNew](P, namedValue);
+            implForWrapper(target)[utils.namedSetNew](P, namedValue);
           } else {
-            target[impl][utils.namedSetExisting](P, namedValue);
+            implForWrapper(target)[utils.namedSetExisting](P, namedValue);
           }
 
           return true;
@@ -5766,7 +5721,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        const indexedValue = target[impl].item(index);
+        const indexedValue = implForWrapper(target).item(index);
         if (indexedValue !== undefined) {
           ownDesc = {
             writable: false,
@@ -5828,11 +5783,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
           context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
         });
 
-        const creating = !(target[impl].namedItem(P) !== null);
+        const creating = !(implForWrapper(target).namedItem(P) !== null);
         if (creating) {
-          target[impl][utils.namedSetNew](P, namedValue);
+          implForWrapper(target)[utils.namedSetNew](P, namedValue);
         } else {
-          target[impl][utils.namedSetExisting](P, namedValue);
+          implForWrapper(target)[utils.namedSetExisting](P, namedValue);
         }
 
         return true;
@@ -5847,10 +5802,10 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 
       if (utils.isArrayIndexPropName(P)) {
         const index = P >>> 0;
-        return !(target[impl].item(index) !== undefined);
+        return !(implForWrapper(target).item(index) !== undefined);
       }
 
-      if (target[impl].namedItem(P) !== null && !(P in target)) {
+      if (implForWrapper(target).namedItem(P) !== null && !(P in target)) {
         return false;
       }
 
@@ -5862,9 +5817,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     }
   });
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -5906,7 +5860,7 @@ exports[`UnderscoredProperties.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -5917,7 +5871,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -5945,7 +5900,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'UnderscoredProperties'.\`);
 };
@@ -5966,21 +5921,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -6024,7 +5976,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].operation(...args);
+      return implForWrapper(this).operation(...args);
     }
 
     get attribute() {
@@ -6032,7 +5984,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attribute\\"];
+      return implForWrapper(this)[\\"attribute\\"];
     }
 
     set attribute(V) {
@@ -6044,7 +5996,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value\\"
       });
 
-      this[impl][\\"attribute\\"] = V;
+      implForWrapper(this)[\\"attribute\\"] = V;
     }
 
     static static(void_) {
@@ -6098,7 +6050,7 @@ exports[`Unforgeable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -6109,7 +6061,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -6137,7 +6090,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Unforgeable'.\`);
 };
@@ -6158,7 +6111,7 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -6184,14 +6137,14 @@ exports._internalSetup = function _internalSetup(obj) {
           });
           args.push(curArg);
         }
-        return this[impl].assign(...args);
+        return implForWrapper(this).assign(...args);
       },
       get href() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"href\\"];
+        return implForWrapper(obj)[\\"href\\"];
       },
       set href(V) {
         if (!this || !exports.is(this)) {
@@ -6202,27 +6155,27 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"href\\"] = V;
+        implForWrapper(obj)[\\"href\\"] = V;
       },
       toString() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
-        return obj[impl][\\"href\\"];
+        return implForWrapper(obj)[\\"href\\"];
       },
       get origin() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"origin\\"];
+        return implForWrapper(obj)[\\"origin\\"];
       },
       get protocol() {
         if (!this || !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"protocol\\"];
+        return implForWrapper(obj)[\\"protocol\\"];
       },
       set protocol(V) {
         if (!this || !exports.is(this)) {
@@ -6233,7 +6186,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"protocol\\"] = V;
+        implForWrapper(obj)[\\"protocol\\"] = V;
       }
     })
   );
@@ -6250,14 +6203,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -6293,7 +6243,7 @@ exports[`UnforgeableMap.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -6304,7 +6254,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -6332,7 +6283,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'UnforgeableMap'.\`);
 };
@@ -6353,7 +6304,7 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -6364,7 +6315,7 @@ exports._internalSetup = function _internalSetup(obj) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"a\\"];
+        return implForWrapper(obj)[\\"a\\"];
       }
     })
   );
@@ -6375,10 +6326,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
   obj = new Proxy(obj, {
     get(target, P, receiver) {
@@ -6421,7 +6370,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     ownKeys(target) {
       const keys = new Set();
 
-      for (const key of target[impl][utils.supportedPropertyNames]) {
+      for (const key of implForWrapper(target)[utils.supportedPropertyNames]) {
         if (!(key in target)) {
           keys.add(\`\${key}\`);
         }
@@ -6439,8 +6388,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       }
       let ignoreNamedProps = false;
 
-      if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
-        const namedValue = target[impl][utils.namedGet](P);
+      if (implForWrapper(target)[utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+        const namedValue = implForWrapper(target)[utils.namedGet](P);
 
         return {
           writable: true,
@@ -6465,11 +6414,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
           });
 
-          const creating = !target[impl][utils.supportsPropertyName](P);
+          const creating = !implForWrapper(target)[utils.supportsPropertyName](P);
           if (creating) {
-            target[impl][utils.namedSetNew](P, namedValue);
+            implForWrapper(target)[utils.namedSetNew](P, namedValue);
           } else {
-            target[impl][utils.namedSetExisting](P, namedValue);
+            implForWrapper(target)[utils.namedSetExisting](P, namedValue);
           }
 
           return true;
@@ -6525,11 +6474,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
             context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
           });
 
-          const creating = !target[impl][utils.supportsPropertyName](P);
+          const creating = !implForWrapper(target)[utils.supportsPropertyName](P);
           if (creating) {
-            target[impl][utils.namedSetNew](P, namedValue);
+            implForWrapper(target)[utils.namedSetNew](P, namedValue);
           } else {
-            target[impl][utils.namedSetExisting](P, namedValue);
+            implForWrapper(target)[utils.namedSetExisting](P, namedValue);
           }
 
           return true;
@@ -6543,7 +6492,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
         return Reflect.deleteProperty(target, P);
       }
 
-      if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+      if (implForWrapper(target)[utils.supportsPropertyName](P) && !(P in target)) {
         return false;
       }
 
@@ -6555,9 +6504,8 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     }
   });
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -6593,7 +6541,7 @@ exports[`Unscopable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -6604,7 +6552,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -6632,7 +6581,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Unscopable'.\`);
 };
@@ -6653,21 +6602,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -6683,7 +6629,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableTest\\"];
+      return implForWrapper(this)[\\"unscopableTest\\"];
     }
 
     set unscopableTest(V) {
@@ -6695,7 +6641,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableTest' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableTest\\"] = V;
+      implForWrapper(this)[\\"unscopableTest\\"] = V;
     }
 
     get unscopableMixin() {
@@ -6703,7 +6649,7 @@ exports.install = function install(globalObject) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableMixin\\"];
+      return implForWrapper(this)[\\"unscopableMixin\\"];
     }
 
     set unscopableMixin(V) {
@@ -6715,7 +6661,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableMixin\\"] = V;
+      implForWrapper(this)[\\"unscopableMixin\\"] = V;
     }
   }
   Object.defineProperties(Unscopable.prototype, {
@@ -6750,7 +6696,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const convertURL = require(\\"./URL.js\\").convert;
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -6761,7 +6707,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -6789,7 +6736,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'Variadic'.\`);
 };
@@ -6810,21 +6757,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
@@ -6847,7 +6791,7 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].simple1(...args);
+      return implForWrapper(this).simple1(...args);
     }
 
     simple2(first) {
@@ -6873,7 +6817,7 @@ exports.install = function install(globalObject) {
         curArg = convertURL(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
         args.push(curArg);
       }
-      return this[impl].simple2(...args);
+      return implForWrapper(this).simple2(...args);
     }
 
     overloaded1() {
@@ -6905,7 +6849,7 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded1(...args);
+      return implForWrapper(this).overloaded1(...args);
     }
 
     overloaded2(first) {
@@ -6979,7 +6923,7 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded2(...args);
+      return implForWrapper(this).overloaded2(...args);
     }
   }
   Object.defineProperties(Variadic.prototype, {
@@ -7011,7 +6955,7 @@ exports[`ZeroArgConstructor.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const impl = utils.implSymbol;
+const implForWrapper = utils.implForWrapper;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
 /**
@@ -7022,7 +6966,8 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
   if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+    const impl = implForWrapper(obj);
+    if (impl !== null && impl instanceof Impl.implementation) {
       return true;
     }
     for (const isMixedInto of exports._mixedIntoPredicates) {
@@ -7050,7 +6995,7 @@ exports.isImpl = function isImpl(obj) {
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
-    return utils.implForWrapper(obj);
+    return implForWrapper(obj);
   }
   throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
 };
@@ -7071,21 +7016,18 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
 };
 exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
   const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+  return implForWrapper(obj);
 };
 exports._internalSetup = function _internalSetup(obj) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
   exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
+  utils.initWrapperImplMapping(obj, impl);
 
-  obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
-    Impl.init(obj[impl], privateData);
+    Impl.init(impl, privateData);
   }
   return obj;
 };
