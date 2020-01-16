@@ -2886,6 +2886,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       return false;
     }
   });
+  utils.initWrapperImplMapping(obj, impl);
 
   if (Impl.init) {
     Impl.init(impl, privateData);
@@ -4636,6 +4637,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       return false;
     }
   });
+  utils.initWrapperImplMapping(obj, impl);
 
   if (Impl.init) {
     Impl.init(impl, privateData);
@@ -5429,6 +5431,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       return false;
     }
   });
+  utils.initWrapperImplMapping(obj, impl);
 
   if (Impl.init) {
     Impl.init(impl, privateData);
@@ -5816,6 +5819,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       return false;
     }
   });
+  utils.initWrapperImplMapping(obj, impl);
 
   if (Impl.init) {
     Impl.init(impl, privateData);
@@ -6503,6 +6507,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
       return false;
     }
   });
+  utils.initWrapperImplMapping(obj, impl);
 
   if (Impl.init) {
     Impl.init(impl, privateData);
