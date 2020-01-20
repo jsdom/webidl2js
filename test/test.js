@@ -10,7 +10,27 @@ const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
 
 beforeAll(() => {
-  const transformer = new Transformer();
+  const transformer = new Transformer({
+    processCEReactions(code) {
+      const ceReactions = this.addImport("../CEReactions");
+
+      return `
+        ${ceReactions}.preSteps(globalObject);
+        try {
+          ${code}
+        } finally {
+          ${ceReactions}.postSteps(globalObject);
+        }
+      `;
+    },
+    processHTMLConstructor() {
+      const htmlConstructor = this.addImport("../HTMLConstructor", "HTMLConstructor");
+
+      return `
+        return ${htmlConstructor}(globalObject, interfaceName);
+      `;
+    }
+  });
   transformer.addSource(casesDir, implsDir);
 
   return transformer.generate(outputDir);

@@ -1,0 +1,2 @@
+[HTMLConstructor]
+interface HTMLConstructor {};
