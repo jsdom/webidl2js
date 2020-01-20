@@ -8,6 +8,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -50,7 +53,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'BufferSourceTypes'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -60,30 +65,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor BufferSourceTypes is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"BufferSourceTypes\\";
@@ -277,6 +289,9 @@ const utils = require(\\"./utils.js\\");
 const CEReactions = require(\\"../CEReactions.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -319,7 +334,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'CEReactions'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -329,32 +346,39 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor CEReactions is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"CEReactions\\";
@@ -624,6 +648,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -666,7 +693,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'DOMImplementation'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -676,30 +705,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor DOMImplementation is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"DOMImplementation\\";
@@ -928,6 +964,9 @@ const utils = require(\\"./utils.js\\");
 const convertDictionary = require(\\"./Dictionary.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -970,7 +1009,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'DictionaryConvert'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -980,30 +1021,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor DictionaryConvert is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"DictionaryConvert\\";
@@ -1064,6 +1112,9 @@ const convertRequestDestination = require(\\"./RequestDestination.js\\").convert
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1106,7 +1157,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Enum'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1116,30 +1169,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Enum is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Enum\\";
@@ -1217,6 +1277,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1259,7 +1322,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Global'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1269,13 +1334,35 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Global is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -1363,21 +1450,6 @@ exports._internalSetup = function _internalSetup(obj) {
     [Symbol.iterator]: { enumerable: false }
   });
 };
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Global\\";
@@ -1412,6 +1484,9 @@ const utils = require(\\"./utils.js\\");
 const HTMLConstructor_HTMLConstructor = require(\\"../HTMLConstructor.js\\").HTMLConstructor;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1454,7 +1529,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'HTMLConstructor'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1464,30 +1541,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor HTMLConstructor is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"HTMLConstructor\\";
@@ -1523,6 +1607,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1565,7 +1652,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'LegacyArrayClass'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1575,30 +1664,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor LegacyArrayClass is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"LegacyArrayClass\\";
@@ -1644,6 +1740,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1686,7 +1785,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1696,30 +1797,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor MixedIn is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"MixedIn\\";
@@ -1823,6 +1931,9 @@ const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1865,7 +1976,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Overloads'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -1875,30 +1988,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Overloads is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Overloads\\";
@@ -2240,6 +2360,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2282,7 +2405,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -2292,30 +2417,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor PromiseTypes is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"PromiseTypes\\";
@@ -2407,6 +2539,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2449,7 +2584,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -2459,30 +2596,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Reflect is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Reflect\\";
@@ -2687,6 +2831,9 @@ const utils = require(\\"./utils.js\\");
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -2729,7 +2876,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -2739,30 +2888,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor SeqAndRec is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"SeqAndRec\\";
@@ -2998,6 +3154,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3040,7 +3199,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Static'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3050,30 +3211,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Static is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Static\\";
@@ -3150,6 +3318,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3192,7 +3363,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Storage'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3202,32 +3375,39 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Storage is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Storage\\";
@@ -3532,6 +3712,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3574,7 +3757,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3584,30 +3769,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor StringifierAttribute is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"StringifierAttribute\\";
@@ -3660,6 +3852,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3702,7 +3897,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3714,30 +3911,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     );
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"StringifierDefaultOperation\\";
@@ -3782,6 +3986,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3824,7 +4031,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3836,30 +4045,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     );
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"StringifierNamedOperation\\";
@@ -3913,6 +4129,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3955,7 +4174,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -3965,30 +4186,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor StringifierOperation is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"StringifierOperation\\";
@@ -4036,6 +4264,9 @@ const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4078,7 +4309,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'TypedefsAndUnions'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -4088,30 +4321,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor TypedefsAndUnions is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"TypedefsAndUnions\\";
@@ -4561,6 +4801,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4603,7 +4846,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'URL'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -4613,30 +4858,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor URL is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"URL\\";
@@ -4927,6 +5179,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4969,7 +5224,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'URLList'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -4979,32 +5236,39 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor URLList is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"URLList\\";
@@ -5236,6 +5500,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   next: {
@@ -5326,7 +5593,9 @@ exports.createDefaultIterator = function createDefaultIterator(target, kind) {
   return iterator;
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -5336,30 +5605,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"URLSearchParams\\";
@@ -5700,6 +5976,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -5742,7 +6021,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -5754,32 +6035,39 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     );
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"URLSearchParamsCollection\\";
@@ -6060,6 +6348,9 @@ const utils = require(\\"./utils.js\\");
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 /**
@@ -6103,7 +6394,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection2'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -6115,33 +6408,40 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     );
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {
   URLSearchParamsCollection._internalSetup(obj);
-};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
 };
 
 exports.install = function install(globalObject) {
@@ -6400,6 +6700,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6442,7 +6745,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'UnderscoredProperties'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -6452,30 +6757,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor UnderscoredProperties is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"UnderscoredProperties\\";
@@ -6593,6 +6905,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6635,7 +6950,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Unforgeable'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -6645,13 +6962,35 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Unforgeable is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -6739,21 +7078,6 @@ exports._internalSetup = function _internalSetup(obj) {
     protocol: { configurable: false }
   });
 };
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Unforgeable\\";
@@ -6789,6 +7113,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6831,7 +7158,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'UnforgeableMap'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -6841,13 +7170,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor UnforgeableMap is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  wrapperObject = new Proxy(wrapperObject, proxyHandler);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {
   Object.defineProperties(
@@ -6864,23 +7217,6 @@ exports._internalSetup = function _internalSetup(obj) {
   );
 
   Object.defineProperties(obj, { a: { configurable: false } });
-};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj = new Proxy(obj, proxyHandler);
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
 };
 
 exports.install = function install(globalObject) {
@@ -7092,6 +7428,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7134,7 +7473,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Unscopable'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -7144,30 +7485,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Unscopable is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Unscopable\\";
@@ -7250,6 +7598,9 @@ const utils = require(\\"./utils.js\\");
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7292,7 +7643,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'Variadic'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -7302,30 +7655,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor Variadic is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"Variadic\\";
@@ -7512,6 +7872,9 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+const wrapperSymbol = utils.wrapperSymbol;
+const globalObjectSymbol = utils.globalObjectSymbol;
+const createWrapperSymbol = utils.createWrapperSymbol;
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7554,7 +7917,9 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
 };
 
-exports.create = function create(globalObject, constructorArgs, privateData) {
+function createWrapper(implObject) {
+  const globalObject = implObject[globalObjectSymbol];
+
   if (globalObject[ctorRegistry] === undefined) {
     throw new Error(\\"Internal error: invalid global object\\");
   }
@@ -7564,30 +7929,37 @@ exports.create = function create(globalObject, constructorArgs, privateData) {
     throw new Error(\\"Internal error: constructor ZeroArgConstructor is not installed on the passed global object\\");
   }
 
-  let obj = Object.create(ctor.prototype);
-  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
-  return obj;
+  let wrapperObject = Object.create(ctor.prototype);
+  exports._internalSetup(wrapperObject);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+  return wrapperObject;
+}
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+  return utils.wrapperForImpl(implObject);
 };
-exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
-  const obj = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(obj);
+exports.createImpl = function createImpl(globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = new Impl.implementation(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = null;
+  implObject[globalObjectSymbol] = globalObject;
+  implObject[createWrapperSymbol] = createWrapper;
+
+  return implObject;
+};
+exports.setup = function setup(wrapperObject, globalObject, constructorArgs = [], privateData = {}) {
+  const implObject = exports.createImpl(globalObject, constructorArgs, privateData);
+
+  implObject[wrapperSymbol] = wrapperObject;
+  wrapperObject[impl] = implObject;
+
+  exports._internalSetup(wrapperObject);
+
+  return wrapperObject;
 };
 exports._internalSetup = function _internalSetup(obj) {};
-exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
-  privateData.wrapper = obj;
-
-  exports._internalSetup(obj);
-  Object.defineProperty(obj, impl, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  obj[impl][utils.wrapperSymbol] = obj;
-  if (Impl.init) {
-    Impl.init(obj[impl], privateData);
-  }
-  return obj;
-};
 
 exports.install = function install(globalObject) {
   const interfaceName = \\"ZeroArgConstructor\\";
