@@ -502,6 +502,7 @@ const proxyHandler = {
     }
     if (target === receiver) {
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+        const globalObject = target[impl]._globalObject;
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -566,6 +567,7 @@ const proxyHandler = {
         return false;
       }
 
+      const globalObject = target[impl]._globalObject;
       let namedValue = desc.value;
 
       namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -8101,6 +8103,7 @@ const proxyHandler = {
     }
     if (target === receiver) {
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+        const globalObject = target[impl]._globalObject;
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -8160,6 +8163,7 @@ const proxyHandler = {
         return false;
       }
 
+      const globalObject = target[impl]._globalObject;
       let namedValue = desc.value;
 
       namedValue = conversions[\\"DOMString\\"](namedValue, {
