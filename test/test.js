@@ -67,6 +67,28 @@ describe("with processors", () => {
   }
 });
 
+describe("package imports work", () => {
+  beforeAll(() => {
+    const transformer = new Transformer({
+      processCEReactions(code) {
+        this.addImport("webidl-url");
+
+        return code;
+      }
+    });
+    transformer.addSource(casesDir, implsDir);
+
+    return transformer.generate(outputDir);
+  });
+
+  test("CEReactions.webidl", () => {
+    const outputFile = path.resolve(outputDir, "CEReactions.js");
+    const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+    expect(output).toMatchSnapshot();
+  });
+});
+
 test("utils.js", () => {
   const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
   const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });
