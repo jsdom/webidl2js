@@ -347,7 +347,14 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     configurable: true
   });
 
-  obj = new Proxy(obj, proxyHandler);
+  {
+    let proxyHandler = proxyHandlerCache.get(globalObject);
+    if (proxyHandler === undefined) {
+      proxyHandler = new ProxyHandler(globalObject);
+      proxyHandlerCache.set(globalObject, proxyHandler);
+    }
+    obj = new Proxy(obj, proxyHandler);
+  }
 
   obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
@@ -423,7 +430,12 @@ exports.install = function install(globalObject) {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -444,7 +456,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -459,7 +471,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -474,7 +486,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -494,15 +506,16 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
     if (target === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
-        const globalObject = target[impl]._globalObject;
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -556,18 +569,19 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (!utils.hasOwn(target, P)) {
       if (desc.get || desc.set) {
         return false;
       }
 
-      const globalObject = target[impl]._globalObject;
       let namedValue = desc.value;
 
       namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -589,12 +603,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
       CEReactions.preSteps(globalObject);
@@ -607,12 +623,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/CEReactions.js\\");
 "
@@ -7963,7 +7979,14 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
     configurable: true
   });
 
-  obj = new Proxy(obj, proxyHandler);
+  {
+    let proxyHandler = proxyHandlerCache.get(globalObject);
+    if (proxyHandler === undefined) {
+      proxyHandler = new ProxyHandler(globalObject);
+      proxyHandlerCache.set(globalObject, proxyHandler);
+    }
+    obj = new Proxy(obj, proxyHandler);
+  }
 
   obj[impl][utils.wrapperSymbol] = obj;
   if (Impl.init) {
@@ -8024,7 +8047,12 @@ exports.install = function install(globalObject) {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -8045,7 +8073,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -8060,7 +8088,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -8075,7 +8103,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -8095,15 +8123,16 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
     if (target === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
-        const globalObject = target[impl]._globalObject;
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -8152,18 +8181,19 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (!utils.hasOwn(target, P)) {
       if (desc.get || desc.set) {
         return false;
       }
 
-      const globalObject = target[impl]._globalObject;
       let namedValue = desc.value;
 
       namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -8180,12 +8210,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
       target[impl][utils.namedDelete](P);
@@ -8193,12 +8225,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/CEReactions.js\\");
 "
