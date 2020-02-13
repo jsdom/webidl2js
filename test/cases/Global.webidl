@@ -8,4 +8,7 @@ interface Global {
   getter DOMString (unsigned long index);
   attribute unsigned long length;
   iterable<DOMString>;
+
+  static void staticOp();
+  static attribute DOMString staticAttr;
 };

@@ -1282,28 +1282,28 @@ exports._internalSetup = function _internalSetup(obj) {
     obj,
     Object.getOwnPropertyDescriptors({
       op() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].op();
+        return obj[impl].op();
       },
       unforgeableOp() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].unforgeableOp();
+        return obj[impl].unforgeableOp();
       },
       get attr() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"attr\\"];
       },
       set attr(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1314,14 +1314,14 @@ exports._internalSetup = function _internalSetup(obj) {
         obj[impl][\\"attr\\"] = V;
       },
       get unforgeableAttr() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"unforgeableAttr\\"];
       },
       set unforgeableAttr(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1332,14 +1332,14 @@ exports._internalSetup = function _internalSetup(obj) {
         obj[impl][\\"unforgeableAttr\\"] = V;
       },
       get length() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"length\\"];
       },
       set length(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1385,8 +1385,21 @@ exports.install = function install(globalObject) {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
+
+    static staticOp() {
+      return Impl.implementation.staticOp();
+    }
+
+    static get staticAttr() {
+      return Impl.implementation[\\"staticAttr\\"];
+    }
+
+    static set staticAttr(V) {
+      return Impl.implementation[\\"staticAttr\\"];
+    }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+  Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
   if (globalObject[ctorRegistry] === undefined) {
     globalObject[ctorRegistry] = Object.create(null);
   }
@@ -8866,28 +8879,28 @@ exports._internalSetup = function _internalSetup(obj) {
     obj,
     Object.getOwnPropertyDescriptors({
       op() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].op();
+        return obj[impl].op();
       },
       unforgeableOp() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].unforgeableOp();
+        return obj[impl].unforgeableOp();
       },
       get attr() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"attr\\"];
       },
       set attr(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -8898,14 +8911,14 @@ exports._internalSetup = function _internalSetup(obj) {
         obj[impl][\\"attr\\"] = V;
       },
       get unforgeableAttr() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"unforgeableAttr\\"];
       },
       set unforgeableAttr(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -8916,14 +8929,14 @@ exports._internalSetup = function _internalSetup(obj) {
         obj[impl][\\"unforgeableAttr\\"] = V;
       },
       get length() {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
         return obj[impl][\\"length\\"];
       },
       set length(V) {
-        if (!this || !exports.is(this)) {
+        if (this !== null && this !== undefined && !exports.is(this)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -8969,8 +8982,21 @@ exports.install = function install(globalObject) {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
+
+    static staticOp() {
+      return Impl.implementation.staticOp();
+    }
+
+    static get staticAttr() {
+      return Impl.implementation[\\"staticAttr\\"];
+    }
+
+    static set staticAttr(V) {
+      return Impl.implementation[\\"staticAttr\\"];
+    }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+  Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
   if (globalObject[ctorRegistry] === undefined) {
     globalObject[ctorRegistry] = Object.create(null);
   }
