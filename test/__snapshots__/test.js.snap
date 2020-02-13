@@ -7504,6 +7504,197 @@ const Impl = require(\\"../implementations/Variadic.js\\");
 "
 `;
 
+exports[`with processors Window.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+const ctorRegistry = utils.ctorRegistrySymbol;
+
+/**
+ * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+ * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+ * implementing this mixin interface.
+ */
+exports._mixedIntoPredicates = [];
+exports.is = function is(obj) {
+  if (obj) {
+    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      return true;
+    }
+    for (const isMixedInto of exports._mixedIntoPredicates) {
+      if (isMixedInto(obj)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+exports.isImpl = function isImpl(obj) {
+  if (obj) {
+    if (obj instanceof Impl.implementation) {
+      return true;
+    }
+
+    const wrapper = utils.wrapperForImpl(obj);
+    for (const isMixedInto of exports._mixedIntoPredicates) {
+      if (isMixedInto(wrapper)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (exports.is(obj)) {
+    return utils.implForWrapper(obj);
+  }
+  throw new TypeError(\`\${context} is not of type 'Window'.\`);
+};
+
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  if (globalObject[ctorRegistry] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistry][\\"Window\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor Window is not installed on the passed global object\\");
+  }
+
+  let obj = Object.create(ctor.prototype);
+  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
+  return obj;
+};
+exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
+  const obj = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(obj);
+};
+exports._internalSetup = function _internalSetup(obj) {};
+exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
+  privateData.wrapper = obj;
+
+  exports._internalSetup(obj);
+  Object.defineProperty(obj, impl, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  obj[impl][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[impl], privateData);
+  }
+  return obj;
+};
+
+exports.install = function install(globalObject) {
+  const interfaceName = \\"Window\\";
+  class Window {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(Window.prototype, { [Symbol.toStringTag]: { value: \\"Window\\", configurable: true } });
+  const NamedPropertiesObject = new Proxy(
+    Object.create(globalObject.Object.prototype, {
+      [Symbol.toStringTag]: { value: \\"WindowProperties\\", configurable: true }
+    }),
+    {
+      get(target, P, receiver) {
+        if (typeof P === \\"symbol\\") {
+          return Reflect.get(target, P, receiver);
+        }
+        const desc = this.getOwnPropertyDescriptor(target, P);
+        if (desc === undefined) {
+          const parent = Object.getPrototypeOf(target);
+          if (parent === null) {
+            return undefined;
+          }
+          return Reflect.get(parent, P, receiver);
+        }
+        if (!desc.get && !desc.set) {
+          return desc.value;
+        }
+        const getter = desc.get;
+        if (getter === undefined) {
+          return undefined;
+        }
+        return Reflect.apply(getter, receiver, []);
+      },
+
+      has(target, P) {
+        if (typeof P === \\"symbol\\") {
+          return Reflect.has(target, P);
+        }
+        const desc = this.getOwnPropertyDescriptor(target, P);
+        if (desc !== undefined) {
+          return true;
+        }
+        const parent = Object.getPrototypeOf(target);
+        if (parent !== null) {
+          return Reflect.has(parent, P);
+        }
+        return false;
+      },
+
+      getOwnPropertyDescriptor(target, P) {
+        const object = globalObject;
+        if (typeof P === \\"symbol\\") {
+          return Reflect.getOwnPropertyDescriptor(target, P);
+        }
+
+        if (object[impl][utils.supportsPropertyName](P) && !(P in object)) {
+          const namedValue = object[impl][utils.namedGet](P);
+
+          return {
+            writable: true,
+            enumerable: false,
+            configurable: true,
+            value: utils.tryWrapperForImpl(namedValue)
+          };
+        }
+        return Reflect.getOwnPropertyDescriptor(target, P);
+      },
+
+      defineProperty() {
+        return false;
+      },
+
+      deleteProperty() {
+        return false;
+      },
+
+      setPrototypeOf(O, V) {
+        // 1. Return ? SetImmutablePrototype(O, V).
+        return Reflect.getPrototypeOf(O) === V;
+      },
+
+      preventExtensions() {
+        return false;
+      }
+    }
+  );
+
+  Object.setPrototypeOf(Window.prototype, NamedPropertiesObject);
+
+  if (globalObject[ctorRegistry] === undefined) {
+    globalObject[ctorRegistry] = Object.create(null);
+  }
+  globalObject[ctorRegistry][interfaceName] = Window;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: Window
+  });
+};
+
+const Impl = require(\\"../implementations/Window.js\\");
+"
+`;
+
 exports[`with processors ZeroArgConstructor.webidl 1`] = `
 "\\"use strict\\";
 
@@ -15084,6 +15275,197 @@ exports.install = function install(globalObject) {
 };
 
 const Impl = require(\\"../implementations/Variadic.js\\");
+"
+`;
+
+exports[`without processors Window.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const impl = utils.implSymbol;
+const ctorRegistry = utils.ctorRegistrySymbol;
+
+/**
+ * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
+ * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
+ * implementing this mixin interface.
+ */
+exports._mixedIntoPredicates = [];
+exports.is = function is(obj) {
+  if (obj) {
+    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
+      return true;
+    }
+    for (const isMixedInto of exports._mixedIntoPredicates) {
+      if (isMixedInto(obj)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+exports.isImpl = function isImpl(obj) {
+  if (obj) {
+    if (obj instanceof Impl.implementation) {
+      return true;
+    }
+
+    const wrapper = utils.wrapperForImpl(obj);
+    for (const isMixedInto of exports._mixedIntoPredicates) {
+      if (isMixedInto(wrapper)) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (exports.is(obj)) {
+    return utils.implForWrapper(obj);
+  }
+  throw new TypeError(\`\${context} is not of type 'Window'.\`);
+};
+
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  if (globalObject[ctorRegistry] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistry][\\"Window\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor Window is not installed on the passed global object\\");
+  }
+
+  let obj = Object.create(ctor.prototype);
+  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
+  return obj;
+};
+exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
+  const obj = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(obj);
+};
+exports._internalSetup = function _internalSetup(obj) {};
+exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
+  privateData.wrapper = obj;
+
+  exports._internalSetup(obj);
+  Object.defineProperty(obj, impl, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  obj[impl][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[impl], privateData);
+  }
+  return obj;
+};
+
+exports.install = function install(globalObject) {
+  const interfaceName = \\"Window\\";
+  class Window {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(Window.prototype, { [Symbol.toStringTag]: { value: \\"Window\\", configurable: true } });
+  const NamedPropertiesObject = new Proxy(
+    Object.create(globalObject.Object.prototype, {
+      [Symbol.toStringTag]: { value: \\"WindowProperties\\", configurable: true }
+    }),
+    {
+      get(target, P, receiver) {
+        if (typeof P === \\"symbol\\") {
+          return Reflect.get(target, P, receiver);
+        }
+        const desc = this.getOwnPropertyDescriptor(target, P);
+        if (desc === undefined) {
+          const parent = Object.getPrototypeOf(target);
+          if (parent === null) {
+            return undefined;
+          }
+          return Reflect.get(parent, P, receiver);
+        }
+        if (!desc.get && !desc.set) {
+          return desc.value;
+        }
+        const getter = desc.get;
+        if (getter === undefined) {
+          return undefined;
+        }
+        return Reflect.apply(getter, receiver, []);
+      },
+
+      has(target, P) {
+        if (typeof P === \\"symbol\\") {
+          return Reflect.has(target, P);
+        }
+        const desc = this.getOwnPropertyDescriptor(target, P);
+        if (desc !== undefined) {
+          return true;
+        }
+        const parent = Object.getPrototypeOf(target);
+        if (parent !== null) {
+          return Reflect.has(parent, P);
+        }
+        return false;
+      },
+
+      getOwnPropertyDescriptor(target, P) {
+        const object = globalObject;
+        if (typeof P === \\"symbol\\") {
+          return Reflect.getOwnPropertyDescriptor(target, P);
+        }
+
+        if (object[impl][utils.supportsPropertyName](P) && !(P in object)) {
+          const namedValue = object[impl][utils.namedGet](P);
+
+          return {
+            writable: true,
+            enumerable: false,
+            configurable: true,
+            value: utils.tryWrapperForImpl(namedValue)
+          };
+        }
+        return Reflect.getOwnPropertyDescriptor(target, P);
+      },
+
+      defineProperty() {
+        return false;
+      },
+
+      deleteProperty() {
+        return false;
+      },
+
+      setPrototypeOf(O, V) {
+        // 1. Return ? SetImmutablePrototype(O, V).
+        return Reflect.getPrototypeOf(O) === V;
+      },
+
+      preventExtensions() {
+        return false;
+      }
+    }
+  );
+
+  Object.setPrototypeOf(Window.prototype, NamedPropertiesObject);
+
+  if (globalObject[ctorRegistry] === undefined) {
+    globalObject[ctorRegistry] = Object.create(null);
+  }
+  globalObject[ctorRegistry][interfaceName] = Window;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: Window
+  });
+};
+
+const Impl = require(\\"../implementations/Window.js\\");
 "
 `;
 
