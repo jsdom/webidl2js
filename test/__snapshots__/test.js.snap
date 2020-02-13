@@ -252,6 +252,7 @@ exports.install = function install(globalObject) {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(BufferSourceTypes.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -453,6 +454,7 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(CEReactions.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -909,6 +911,7 @@ exports.install = function install(globalObject) {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DOMImplementation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -1164,6 +1167,7 @@ exports.install = function install(globalObject) {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DictionaryConvert.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -1361,6 +1365,7 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Enum.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -1596,6 +1601,7 @@ exports.install = function install(globalObject) {
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Global.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -1750,6 +1756,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(HTMLConstructor.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -1913,6 +1920,7 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(LegacyArrayClass.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -2132,6 +2140,7 @@ exports.install = function install(globalObject) {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(MixedIn.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -2593,6 +2602,7 @@ exports.install = function install(globalObject) {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Overloads.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -2802,6 +2812,7 @@ exports.install = function install(globalObject) {
     promiseConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(PromiseTypes.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -3090,6 +3101,7 @@ exports.install = function install(globalObject) {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Reflect.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -3477,6 +3489,7 @@ exports.install = function install(globalObject) {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(SeqAndRec.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -3671,6 +3684,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Static.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -3931,6 +3945,7 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Storage.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -4265,6 +4280,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierAttribute.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -4429,6 +4445,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierDefaultOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -4602,6 +4619,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierNamedOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -4764,6 +4782,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -5334,6 +5353,7 @@ exports.install = function install(globalObject) {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(TypedefsAndUnions.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -5742,6 +5762,7 @@ exports.install = function install(globalObject) {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URL.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -5932,6 +5953,7 @@ exports.install = function install(globalObject) {
     entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
     forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLList.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -6598,6 +6620,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParams.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -6813,6 +6836,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -7167,6 +7191,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection2.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -7617,6 +7642,7 @@ exports.install = function install(globalObject) {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnderscoredProperties.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -7855,6 +7881,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(Unforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unforgeable.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -8025,6 +8052,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(UnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnforgeableMap.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -8399,6 +8427,7 @@ exports.install = function install(globalObject) {
       configurable: true
     }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unscopable.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -8704,6 +8733,7 @@ exports.install = function install(globalObject) {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Variadic.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -8857,6 +8887,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(ZeroArgConstructor.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -9167,6 +9198,7 @@ exports.install = function install(globalObject) {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(BufferSourceTypes.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -9352,6 +9384,7 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(CEReactions.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -9793,6 +9826,7 @@ exports.install = function install(globalObject) {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DOMImplementation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -10048,6 +10082,7 @@ exports.install = function install(globalObject) {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DictionaryConvert.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -10245,6 +10280,7 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Enum.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -10480,6 +10516,7 @@ exports.install = function install(globalObject) {
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Global.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -10633,6 +10670,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(HTMLConstructor.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -10796,6 +10834,7 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(LegacyArrayClass.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -11015,6 +11054,7 @@ exports.install = function install(globalObject) {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(MixedIn.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -11476,6 +11516,7 @@ exports.install = function install(globalObject) {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Overloads.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -11685,6 +11726,7 @@ exports.install = function install(globalObject) {
     promiseConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(PromiseTypes.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -11973,6 +12015,7 @@ exports.install = function install(globalObject) {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Reflect.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -12360,6 +12403,7 @@ exports.install = function install(globalObject) {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(SeqAndRec.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -12554,6 +12598,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Static.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -12814,6 +12859,7 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Storage.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -13148,6 +13194,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierAttribute.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -13312,6 +13359,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierDefaultOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -13485,6 +13533,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierNamedOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -13647,6 +13696,7 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierOperation.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -14217,6 +14267,7 @@ exports.install = function install(globalObject) {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(TypedefsAndUnions.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -14625,6 +14676,7 @@ exports.install = function install(globalObject) {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URL.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -14815,6 +14867,7 @@ exports.install = function install(globalObject) {
     entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
     forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLList.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -15481,6 +15534,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParams.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -15696,6 +15750,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -16050,6 +16105,7 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection2.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -16500,6 +16556,7 @@ exports.install = function install(globalObject) {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnderscoredProperties.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -16738,6 +16795,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(Unforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unforgeable.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -16908,6 +16966,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(UnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnforgeableMap.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -17282,6 +17341,7 @@ exports.install = function install(globalObject) {
       configurable: true
     }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unscopable.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -17587,6 +17647,7 @@ exports.install = function install(globalObject) {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Variadic.prototype, utils.inspectCustomSymbol, {
       value: {
@@ -17740,6 +17801,7 @@ exports.install = function install(globalObject) {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
+
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(ZeroArgConstructor.prototype, utils.inspectCustomSymbol, {
       value: {
