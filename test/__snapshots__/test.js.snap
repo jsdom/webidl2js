@@ -7597,6 +7597,7 @@ exports.install = function install(globalObject) {
     }
   }
   Object.defineProperties(Window.prototype, { [Symbol.toStringTag]: { value: \\"Window\\", configurable: true } });
+
   const NamedPropertiesObject = new Proxy(
     Object.create(globalObject.Object.prototype, {
       [Symbol.toStringTag]: { value: \\"WindowProperties\\", configurable: true }
@@ -15371,6 +15372,7 @@ exports.install = function install(globalObject) {
     }
   }
   Object.defineProperties(Window.prototype, { [Symbol.toStringTag]: { value: \\"Window\\", configurable: true } });
+
   const NamedPropertiesObject = new Proxy(
     Object.create(globalObject.Object.prototype, {
       [Symbol.toStringTag]: { value: \\"WindowProperties\\", configurable: true }
