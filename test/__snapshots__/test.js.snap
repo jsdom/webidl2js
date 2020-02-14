@@ -465,7 +465,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -482,7 +482,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl][utils.namedGet](P);
 
       return {
@@ -594,7 +594,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       CEReactions.preSteps(globalObject);
       try {
         target[impl][utils.namedDelete](P);
@@ -3398,7 +3398,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -3415,7 +3415,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl].getItem(P);
 
       return {
@@ -3507,7 +3507,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       target[impl].removeItem(P);
       return true;
     }
@@ -5907,7 +5907,7 @@ const proxyHandler = {
     }
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -5940,7 +5940,7 @@ const proxyHandler = {
 
     const namedValue = target[impl].namedItem(P);
 
-    if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && namedValue !== null && utils.isNamedPropertyVisible(P, target)) {
       return {
         writable: false,
         enumerable: false,
@@ -6035,7 +6035,7 @@ const proxyHandler = {
       return !(target[impl].item(index) !== undefined);
     }
 
-    if (target[impl].namedItem(P) !== null && !(P in target)) {
+    if (target[impl].namedItem(P) !== null && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -6219,7 +6219,7 @@ const proxyHandler = {
     }
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -6252,7 +6252,7 @@ const proxyHandler = {
 
     const namedValue = target[impl].namedItem(P);
 
-    if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && namedValue !== null && utils.isNamedPropertyVisible(P, target)) {
       return {
         writable: true,
         enumerable: true,
@@ -6376,7 +6376,7 @@ const proxyHandler = {
       return !(target[impl].item(index) !== undefined);
     }
 
-    if (target[impl].namedItem(P) !== null && !(P in target)) {
+    if (target[impl].namedItem(P) !== null && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -6947,7 +6947,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -6964,7 +6964,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl][utils.namedGet](P);
 
       return {
@@ -7068,7 +7068,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -7646,7 +7646,7 @@ exports.install = function install(globalObject) {
           return Reflect.getOwnPropertyDescriptor(target, P);
         }
 
-        if (object[impl][utils.supportsPropertyName](P) && !(P in object)) {
+        if (object[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, object)) {
           const namedValue = object[impl][utils.namedGet](P);
 
           return {
@@ -7678,6 +7678,7 @@ exports.install = function install(globalObject) {
     }
   );
 
+  utils.registerNamedPropertiesObject(NamedPropertiesObject);
   Object.setPrototypeOf(Window.prototype, NamedPropertiesObject);
 
   if (globalObject[ctorRegistry] === undefined) {
@@ -8256,7 +8257,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -8273,7 +8274,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl][utils.namedGet](P);
 
       return {
@@ -8375,7 +8376,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       target[impl][utils.namedDelete](P);
       return true;
     }
@@ -11173,7 +11174,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -11190,7 +11191,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl].getItem(P);
 
       return {
@@ -11282,7 +11283,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       target[impl].removeItem(P);
       return true;
     }
@@ -13682,7 +13683,7 @@ const proxyHandler = {
     }
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -13715,7 +13716,7 @@ const proxyHandler = {
 
     const namedValue = target[impl].namedItem(P);
 
-    if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && namedValue !== null && utils.isNamedPropertyVisible(P, target)) {
       return {
         writable: false,
         enumerable: false,
@@ -13810,7 +13811,7 @@ const proxyHandler = {
       return !(target[impl].item(index) !== undefined);
     }
 
-    if (target[impl].namedItem(P) !== null && !(P in target)) {
+    if (target[impl].namedItem(P) !== null && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -13994,7 +13995,7 @@ const proxyHandler = {
     }
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -14027,7 +14028,7 @@ const proxyHandler = {
 
     const namedValue = target[impl].namedItem(P);
 
-    if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && namedValue !== null && utils.isNamedPropertyVisible(P, target)) {
       return {
         writable: true,
         enumerable: true,
@@ -14151,7 +14152,7 @@ const proxyHandler = {
       return !(target[impl].item(index) !== undefined);
     }
 
-    if (target[impl].namedItem(P) !== null && !(P in target)) {
+    if (target[impl].namedItem(P) !== null && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -14722,7 +14723,7 @@ const proxyHandler = {
     const keys = new Set();
 
     for (const key of target[impl][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
+      if (utils.isNamedPropertyVisible(key, target)) {
         keys.add(\`\${key}\`);
       }
     }
@@ -14739,7 +14740,7 @@ const proxyHandler = {
     }
     let ignoreNamedProps = false;
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (!ignoreNamedProps && target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       const namedValue = target[impl][utils.namedGet](P);
 
       return {
@@ -14843,7 +14844,7 @@ const proxyHandler = {
       return Reflect.deleteProperty(target, P);
     }
 
-    if (target[impl][utils.supportsPropertyName](P) && !(P in target)) {
+    if (target[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, target)) {
       return false;
     }
 
@@ -15421,7 +15422,7 @@ exports.install = function install(globalObject) {
           return Reflect.getOwnPropertyDescriptor(target, P);
         }
 
-        if (object[impl][utils.supportsPropertyName](P) && !(P in object)) {
+        if (object[impl][utils.supportsPropertyName](P) && utils.isNamedPropertyVisible(P, object)) {
           const namedValue = object[impl][utils.namedGet](P);
 
           return {
@@ -15453,6 +15454,7 @@ exports.install = function install(globalObject) {
     }
   );
 
+  utils.registerNamedPropertiesObject(NamedPropertiesObject);
   Object.setPrototypeOf(Window.prototype, NamedPropertiesObject);
 
   if (globalObject[ctorRegistry] === undefined) {
