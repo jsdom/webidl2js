@@ -68,11 +68,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -343,11 +343,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -695,11 +695,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1003,11 +1003,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1140,11 +1140,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1298,7 +1298,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -1401,7 +1401,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1524,11 +1524,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1635,11 +1635,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1758,11 +1758,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1947,11 +1947,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2368,11 +2368,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2537,11 +2537,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2841,11 +2841,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3157,11 +3157,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3318,11 +3318,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3707,11 +3707,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3839,11 +3839,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3962,11 +3962,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4093,11 +4093,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4217,11 +4217,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4759,11 +4759,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5170,11 +5170,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5530,11 +5530,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5956,11 +5956,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6321,13 +6321,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
-  URLSearchParamsCollection._internalSetup(obj);
+exports._internalSetup = function _internalSetup(obj, globalObject) {
+  URLSearchParamsCollection._internalSetup(obj, globalObject);
 };
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6658,11 +6658,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6856,7 +6856,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -6956,7 +6956,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7063,7 +7063,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -7084,7 +7084,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7368,11 +7368,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7534,11 +7534,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7800,11 +7800,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7911,11 +7911,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8185,11 +8185,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8507,11 +8507,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8815,11 +8815,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8952,11 +8952,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9110,7 +9110,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -9213,7 +9213,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9335,11 +9335,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9446,11 +9446,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9569,11 +9569,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9758,11 +9758,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10179,11 +10179,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10348,11 +10348,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10652,11 +10652,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10968,11 +10968,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11129,11 +11129,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11518,11 +11518,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11650,11 +11650,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11773,11 +11773,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11904,11 +11904,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12028,11 +12028,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12570,11 +12570,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12981,11 +12981,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -13341,11 +13341,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -13767,11 +13767,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -14132,13 +14132,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
-  URLSearchParamsCollection._internalSetup(obj);
+exports._internalSetup = function _internalSetup(obj, globalObject) {
+  URLSearchParamsCollection._internalSetup(obj, globalObject);
 };
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -14469,11 +14469,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -14667,7 +14667,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -14767,7 +14767,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -14874,7 +14874,7 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
@@ -14895,7 +14895,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -15179,11 +15179,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -15345,11 +15345,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -15611,11 +15611,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
