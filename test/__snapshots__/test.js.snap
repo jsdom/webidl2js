@@ -9,6 +9,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"BufferSourceTypes\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -86,7 +88,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"BufferSourceTypes\\";
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -278,6 +279,8 @@ const CEReactions = require(\\"../CEReactions.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"CEReactions\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -364,7 +367,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"CEReactions\\";
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -643,6 +645,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"DOMImplementation\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -720,7 +724,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"DOMImplementation\\";
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -947,6 +950,8 @@ const convertDictionary = require(\\"./Dictionary.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"DictionaryConvert\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -1024,7 +1029,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"DictionaryConvert\\";
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1082,6 +1086,8 @@ const convertRequestDestination = require(\\"./RequestDestination.js\\").convert
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Enum\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1160,7 +1166,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Enum\\";
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1235,6 +1240,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Global\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1398,7 +1405,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Global\\";
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1430,6 +1436,8 @@ const utils = require(\\"./utils.js\\");
 const HTMLConstructor_HTMLConstructor = require(\\"../HTMLConstructor.js\\").HTMLConstructor;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"HTMLConstructor\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1508,7 +1516,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"HTMLConstructor\\";
   class HTMLConstructor {
     constructor() {
       return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
@@ -1541,6 +1548,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyArrayClass\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1619,7 +1628,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"LegacyArrayClass\\";
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1662,6 +1670,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"MixedIn\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -1740,7 +1750,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"MixedIn\\";
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1842,6 +1851,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Overloads\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -1919,7 +1930,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Overloads\\";
   class Overloads {
     constructor() {
       const args = [];
@@ -2259,6 +2269,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"PromiseTypes\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -2336,7 +2348,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"PromiseTypes\\";
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2426,6 +2437,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Reflect\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -2503,7 +2516,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Reflect\\";
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2706,6 +2718,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"SeqAndRec\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -2783,7 +2797,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"SeqAndRec\\";
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -3017,6 +3030,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Static\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3094,7 +3109,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Static\\";
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3168,6 +3182,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Storage\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3248,7 +3264,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Storage\\";
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3551,6 +3566,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"StringifierAttribute\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -3628,7 +3645,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierAttribute\\";
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3678,6 +3694,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierDefaultOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3758,7 +3776,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierDefaultOperation\\";
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3800,6 +3817,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierNamedOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -3880,7 +3899,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierNamedOperation\\";
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3931,6 +3949,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4009,7 +4029,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierOperation\\";
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4054,6 +4073,8 @@ const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"TypedefsAndUnions\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -4132,7 +4153,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"TypedefsAndUnions\\";
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4580,6 +4600,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URL\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -4657,7 +4679,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URL\\";
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -4946,6 +4967,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLList\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -5025,7 +5048,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLList\\";
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5255,6 +5277,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLSearchParams\\";
+
 const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   next: {
     value: function next() {
@@ -5380,7 +5404,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParams\\";
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -5719,6 +5742,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLSearchParamsCollection\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -5800,7 +5825,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParamsCollection\\";
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6080,6 +6104,8 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
+const interfaceName = \\"URLSearchParamsCollection2\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -6163,8 +6189,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParamsCollection2\\";
-
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -6419,6 +6443,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"UnderscoredProperties\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -6496,7 +6522,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"UnderscoredProperties\\";
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6611,6 +6636,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Unforgeable\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6774,7 +6801,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Unforgeable\\";
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6807,6 +6833,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"UnforgeableMap\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -6902,7 +6930,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"UnforgeableMap\\";
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7111,6 +7138,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Unscopable\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7188,7 +7217,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Unscopable\\";
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7269,6 +7297,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Variadic\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7346,7 +7376,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Variadic\\";
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7531,6 +7560,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"ZeroArgConstructor\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7608,7 +7639,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"ZeroArgConstructor\\";
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -7641,6 +7671,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"BufferSourceTypes\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -7719,7 +7751,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"BufferSourceTypes\\";
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7910,6 +7941,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"CEReactions\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -7996,7 +8029,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"CEReactions\\";
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8245,6 +8277,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"DOMImplementation\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -8322,7 +8356,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"DOMImplementation\\";
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8549,6 +8582,8 @@ const convertDictionary = require(\\"./Dictionary.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"DictionaryConvert\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -8626,7 +8661,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"DictionaryConvert\\";
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8684,6 +8718,8 @@ const convertRequestDestination = require(\\"./RequestDestination.js\\").convert
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Enum\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -8762,7 +8798,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Enum\\";
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8837,6 +8872,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Global\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -9000,7 +9037,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Global\\";
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9031,6 +9067,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"HTMLConstructor\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -9109,7 +9147,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"HTMLConstructor\\";
   class HTMLConstructor {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9142,6 +9179,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyArrayClass\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -9220,7 +9259,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"LegacyArrayClass\\";
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9263,6 +9301,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"MixedIn\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -9341,7 +9381,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"MixedIn\\";
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9443,6 +9482,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Overloads\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -9520,7 +9561,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Overloads\\";
   class Overloads {
     constructor() {
       const args = [];
@@ -9860,6 +9900,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"PromiseTypes\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -9937,7 +9979,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"PromiseTypes\\";
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10027,6 +10068,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Reflect\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -10104,7 +10147,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Reflect\\";
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10307,6 +10349,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"SeqAndRec\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -10384,7 +10428,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"SeqAndRec\\";
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -10618,6 +10661,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Static\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -10695,7 +10740,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Static\\";
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10769,6 +10813,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Storage\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -10849,7 +10895,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Storage\\";
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11152,6 +11197,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"StringifierAttribute\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -11229,7 +11276,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierAttribute\\";
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11279,6 +11325,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierDefaultOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -11359,7 +11407,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierDefaultOperation\\";
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11401,6 +11448,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierNamedOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -11481,7 +11530,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierNamedOperation\\";
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11532,6 +11580,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"StringifierOperation\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -11610,7 +11660,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"StringifierOperation\\";
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11655,6 +11704,8 @@ const isURL = require(\\"./URL.js\\").is;
 const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"TypedefsAndUnions\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -11733,7 +11784,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"TypedefsAndUnions\\";
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12181,6 +12231,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URL\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -12258,7 +12310,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URL\\";
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -12547,6 +12598,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLList\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -12626,7 +12679,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLList\\";
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12856,6 +12908,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLSearchParams\\";
+
 const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   next: {
     value: function next() {
@@ -12981,7 +13035,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParams\\";
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -13320,6 +13373,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"URLSearchParamsCollection\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -13401,7 +13456,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParamsCollection\\";
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13681,6 +13735,8 @@ const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
+const interfaceName = \\"URLSearchParamsCollection2\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -13764,8 +13820,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"URLSearchParamsCollection2\\";
-
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -14020,6 +14074,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"UnderscoredProperties\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -14097,7 +14153,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"UnderscoredProperties\\";
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14212,6 +14267,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Unforgeable\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -14375,7 +14432,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Unforgeable\\";
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14408,6 +14464,8 @@ const utils = require(\\"./utils.js\\");
 
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"UnforgeableMap\\";
 
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
@@ -14503,7 +14561,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"UnforgeableMap\\";
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14712,6 +14769,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Unscopable\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -14789,7 +14848,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Unscopable\\";
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14870,6 +14928,8 @@ const convertURL = require(\\"./URL.js\\").convert;
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"Variadic\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -14947,7 +15007,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"Variadic\\";
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15132,6 +15191,8 @@ const utils = require(\\"./utils.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
+const interfaceName = \\"ZeroArgConstructor\\";
+
 /**
  * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
  * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
@@ -15209,7 +15270,6 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
-  const interfaceName = \\"ZeroArgConstructor\\";
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
