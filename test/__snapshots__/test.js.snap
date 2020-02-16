@@ -255,40 +255,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(BufferSourceTypes.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -457,40 +429,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(CEReactions.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -914,40 +858,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DOMImplementation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -1170,40 +1086,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DictionaryConvert.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -1368,39 +1256,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Enum.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -1604,40 +1465,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Global.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -1759,40 +1592,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(HTMLConstructor.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -1923,40 +1728,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(LegacyArrayClass.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -2143,40 +1920,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(MixedIn.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -2605,40 +2354,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Overloads.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -2815,40 +2536,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(PromiseTypes.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -3104,40 +2797,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Reflect.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -3492,40 +3157,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(SeqAndRec.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -3687,40 +3324,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Static.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -3948,40 +3557,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Storage.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -4283,40 +3864,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierAttribute.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -4448,40 +4001,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierDefaultOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -4622,40 +4147,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierNamedOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -4785,40 +4282,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -5356,40 +4825,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(TypedefsAndUnions.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -5765,39 +5206,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URL.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -5956,40 +5370,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLList.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -6623,40 +6009,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParams.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -6839,40 +6197,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -7194,40 +6524,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection2.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -7645,40 +6947,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnderscoredProperties.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -7884,40 +7158,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unforgeable.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -8055,40 +7301,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnforgeableMap.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -8430,40 +7648,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unscopable.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -8736,40 +7926,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Variadic.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -8890,40 +8052,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(ZeroArgConstructor.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -9201,40 +8335,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(BufferSourceTypes.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'BufferSourceTypes': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -9387,40 +8493,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(CEReactions.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'CEReactions': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -9829,40 +8907,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DOMImplementation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DOMImplementation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -10085,40 +9135,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(DictionaryConvert.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'DictionaryConvert': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -10283,39 +9305,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Enum.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Enum': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -10519,40 +9514,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Global.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Global': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -10673,40 +9640,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(HTMLConstructor.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'HTMLConstructor': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -10837,40 +9776,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(LegacyArrayClass.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'LegacyArrayClass': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -11057,40 +9968,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(MixedIn.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'MixedIn': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -11519,40 +10402,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Overloads.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Overloads': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -11729,40 +10584,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(PromiseTypes.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'PromiseTypes': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -12018,40 +10845,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Reflect.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Reflect': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -12406,40 +11205,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(SeqAndRec.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'SeqAndRec': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -12601,40 +11372,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Static.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Static': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -12862,40 +11605,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Storage.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Storage': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -13197,40 +11912,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierAttribute.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierAttribute': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -13362,40 +12049,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierDefaultOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierDefaultOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -13536,40 +12195,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierNamedOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierNamedOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -13699,40 +12330,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(StringifierOperation.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'StringifierOperation': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -14270,40 +12873,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(TypedefsAndUnions.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'TypedefsAndUnions': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -14679,39 +13254,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URL.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URL': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -14870,40 +13418,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLList.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLList': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -15537,40 +14057,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParams.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParams': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -15753,40 +14245,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -16108,40 +14572,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(URLSearchParamsCollection2.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'URLSearchParamsCollection2': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -16559,40 +14995,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnderscoredProperties.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnderscoredProperties': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -16798,40 +15206,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unforgeable.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unforgeable': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -16969,40 +15349,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(UnforgeableMap.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'UnforgeableMap': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -17344,40 +15696,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Unscopable.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Unscopable': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -17650,40 +15974,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(Variadic.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'Variadic': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
@@ -17804,40 +16100,12 @@ exports.install = function install(globalObject) {
 
   if (utils.hasOwn(Impl.implementation.prototype, utils.inspectCustomSymbol)) {
     Object.defineProperty(ZeroArgConstructor.prototype, utils.inspectCustomSymbol, {
-      value: {
-        [utils.inspectCustomSymbol](depth, ctx) {
-          if (!this || !exports.is(this)) {
-            throw new TypeError(\\"Illegal invocation\\");
-          }
-          if (arguments.length < 2) {
-            throw new TypeError(
-              \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': 2 arguments required, but only \\" +
-                arguments.length +
-                \\" present.\\"
-            );
-          }
-          const args = [];
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"unrestricted double\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-          {
-            let curArg = arguments[1];
-            curArg = conversions[\\"object\\"](curArg, {
-              context: \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 2\\"
-            });
-            conversions[\\"Function\\"](curArg.stylize, {
-              context:
-                \\"Failed to execute '[nodejs.util.inspect.custom]' on 'ZeroArgConstructor': parameter 2 has member stylize that\\"
-            });
-            args.push(curArg);
-          }
-          return this[impl][utils.inspectCustomSymbol](...args);
+      value(depth, ctx) {
+        if (!exports.is(this)) {
+          throw new TypeError(\\"Illegal invocation\\");
         }
-      }[utils.inspectCustomSymbol],
+        return this[impl][utils.inspectCustomSymbol](...arguments);
+      },
       writable: true,
       enumerable: false,
       configurable: true
