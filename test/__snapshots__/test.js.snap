@@ -11,39 +11,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"BufferSourceTypes\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -281,39 +253,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"CEReactions\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -647,39 +591,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DOMImplementation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -952,39 +868,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DictionaryConvert\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1089,39 +977,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Enum\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1243,39 +1103,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Global\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1439,39 +1271,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"HTMLConstructor\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1551,39 +1355,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"LegacyArrayClass\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1673,39 +1449,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"MixedIn\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -1853,39 +1601,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Overloads\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -2271,39 +1991,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"PromiseTypes\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -2439,39 +2131,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Reflect\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -2720,39 +2384,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"SeqAndRec\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3032,39 +2668,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Static\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3185,39 +2793,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Storage\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3568,39 +3148,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierAttribute\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3697,39 +3249,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierDefaultOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3820,39 +3344,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierNamedOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -3952,39 +3448,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -4076,39 +3544,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"TypedefsAndUnions\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -4602,39 +4042,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URL\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -4969,39 +4381,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLList\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -5318,39 +4702,11 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   }
 });
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -5744,39 +5100,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParamsCollection\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -6106,39 +5434,11 @@ const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 const interfaceName = \\"URLSearchParamsCollection2\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -6445,39 +5745,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnderscoredProperties\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -6639,39 +5911,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unforgeable\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -6836,39 +6080,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnforgeableMap\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -7140,39 +6356,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unscopable\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -7299,39 +6487,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Variadic\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -7562,39 +6722,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"ZeroArgConstructor\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -7674,39 +6806,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"BufferSourceTypes\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -7943,39 +7047,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"CEReactions\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -8279,39 +7355,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DOMImplementation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -8584,39 +7632,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DictionaryConvert\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -8721,39 +7741,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Enum\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -8875,39 +7867,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Global\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -9070,39 +8034,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"HTMLConstructor\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -9182,39 +8118,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"LegacyArrayClass\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -9304,39 +8212,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"MixedIn\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -9484,39 +8364,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Overloads\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -9902,39 +8754,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"PromiseTypes\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -10070,39 +8894,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Reflect\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -10351,39 +9147,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"SeqAndRec\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -10663,39 +9431,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Static\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -10816,39 +9556,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Storage\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -11199,39 +9911,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierAttribute\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -11328,39 +10012,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierDefaultOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -11451,39 +10107,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierNamedOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -11583,39 +10211,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierOperation\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -11707,39 +10307,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"TypedefsAndUnions\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -12233,39 +10805,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URL\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -12600,39 +11144,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLList\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -12949,39 +11465,11 @@ const IteratorPrototype = Object.create(utils.IteratorPrototype, {
   }
 });
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -13375,39 +11863,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParamsCollection\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -13737,39 +12197,11 @@ const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 const interfaceName = \\"URLSearchParamsCollection2\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -14076,39 +12508,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnderscoredProperties\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -14270,39 +12674,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unforgeable\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -14467,39 +12843,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnforgeableMap\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -14771,39 +13119,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unscopable\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -14930,39 +13250,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Variadic\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
@@ -15193,39 +13485,11 @@ const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"ZeroArgConstructor\\";
 
-/**
- * When an interface-module that implements this interface as a mixin is loaded, it will append its own \`.is()\`
- * method into this array. It allows objects that directly implements *those* interfaces to be recognized as
- * implementing this mixin interface.
- */
-exports._mixedIntoPredicates = [];
 exports.is = function is(obj) {
-  if (obj) {
-    if (utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation) {
-      return true;
-    }
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(obj)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && utils.hasOwn(obj, impl) && obj[impl] instanceof Impl.implementation;
 };
 exports.isImpl = function isImpl(obj) {
-  if (obj) {
-    if (obj instanceof Impl.implementation) {
-      return true;
-    }
-
-    const wrapper = utils.wrapperForImpl(obj);
-    for (const isMixedInto of exports._mixedIntoPredicates) {
-      if (isMixedInto(wrapper)) {
-        return true;
-      }
-    }
-  }
-  return false;
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
 };
 exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
   if (exports.is(obj)) {
