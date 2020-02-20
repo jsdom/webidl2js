@@ -188,23 +188,17 @@ The example above showed a simplified generated wrapper file with only three exp
 
 ### For interfaces
 
-Note that all of the below are still exported for "mixin" interfaces, but only `isImpl()` and `is()` make sense ([#55](https://github.com/jsdom/webidl2js/issues/55)).
-
 #### `isImpl(value)`
 
 Returns a boolean indicating whether _value_ is an instance of the corresponding implementation class.
 
 This is especially useful inside implementation class files, where incoming wrappers will be _unwrapped_, so that you only ever see implementation class instances ("impls").
 
-This also works when used with mixin implementation classes: that is, `generatedModuleForMixin.isImpl(implForMixinTarget)` will be true.
-
 #### `is(value)`
 
 Returns a boolean indicating whether _value_ is an instance of the wrapper class.
 
 This is useful in other parts of your program that are not implementation class files, but instead receive wrapper classes from client code.
-
-This also works when used with mixin wrapper classes: that is, `generatedModuleForMixin.is(wrapperForMixinTarget)` will be true.
 
 #### `convert(value, { context })`
 
@@ -258,8 +252,6 @@ A constructor for your implementation class, with signature `(globalObject, cons
 - Processing any private data `privateData` which is provided when other parts of your program use the generated `create()` or `createImpl()` exports of the wrapper class file. This is useful for constructing instances with specific state that cannot be constructed via the wrapper class constructor.
 
 If you don't need to do any of these things, the constructor is entirely optional.
-
-Additionally, the constructor should not be provided for mixin classes; it will never be called.
 
 ### Methods implementing IDL operations
 
