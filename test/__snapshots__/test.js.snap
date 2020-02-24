@@ -784,8 +784,8 @@ exports[`with processors Dictionary.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
-const convertURLSearchParams = require(\\"./URLSearchParams.js\\").convert;
+const URL = require(\\"./URL.js\\");
+const URLSearchParams = require(\\"./URLSearchParams.js\\");
 
 exports.convertInherit = function convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
   {
@@ -804,7 +804,7 @@ exports.convertInherit = function convertInherit(obj, ret, { context = \\"The pr
     const key = \\"requiredInterface\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = convertURL(value, { context: context + \\" has member requiredInterface that\\" });
+      value = URL.convert(value, { context: context + \\" has member requiredInterface that\\" });
 
       ret[key] = value;
     } else {
@@ -822,7 +822,7 @@ exports.convertInherit = function convertInherit(obj, ret, { context = \\"The pr
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = convertURLSearchParams(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
 
           V.push(nextItem);
         }
@@ -862,7 +862,7 @@ exports[`with processors DictionaryConvert.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertDictionary = require(\\"./Dictionary.js\\").convert;
+const Dictionary = require(\\"./Dictionary.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -938,7 +938,7 @@ exports.install = function install(globalObject) {
       }
       {
         let curArg = arguments[1];
-        curArg = convertDictionary(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
+        curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
         args.push(curArg);
       }
       return this[impl].op(...args);
@@ -970,7 +970,6 @@ exports[`with processors Enum.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
@@ -1044,7 +1043,7 @@ exports.install = function install(globalObject) {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = convertRequestDestination(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
+        curArg = RequestDestination.convert(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
         args.push(curArg);
       }
       return this[impl].op(...args);
@@ -1594,8 +1593,7 @@ exports[`with processors Overloads.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const isURL = require(\\"./URL.js\\").is;
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -1658,10 +1656,10 @@ exports.install = function install(globalObject) {
           break;
         default: {
           let curArg = arguments[0];
-          if (isURL(curArg)) {
+          if (URL.is(curArg)) {
             {
               let curArg = arguments[0];
-              curArg = convertURL(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
+              curArg = URL.convert(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
               args.push(curArg);
             }
           } else {
@@ -1860,17 +1858,17 @@ exports.install = function install(globalObject) {
               {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
-                  curArg = convertURL(curArg, {
+                  curArg = URL.convert(curArg, {
                     context: \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\"
                   });
                 }
                 args.push(curArg);
               }
-            } else if (isURL(curArg)) {
+            } else if (URL.is(curArg)) {
               {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
-                  curArg = convertURL(curArg, {
+                  curArg = URL.convert(curArg, {
                     context: \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\"
                   });
                 }
@@ -2378,7 +2376,7 @@ exports[`with processors SeqAndRec.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -2512,7 +2510,7 @@ exports.install = function install(globalObject) {
 
               let typedValue = curArg[key];
 
-              typedValue = convertURL(typedValue, {
+              typedValue = URL.convert(typedValue, {
                 context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
               });
 
@@ -3536,9 +3534,8 @@ exports[`with processors TypedefsAndUnions.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
-const isURL = require(\\"./URL.js\\").is;
-const convertURL = require(\\"./URL.js\\").convert;
+const RequestDestination = require(\\"./RequestDestination.js\\");
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -3651,7 +3648,7 @@ exports.install = function install(globalObject) {
               context: \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1\\"
             });
           } else {
-            curArg = convertRequestDestination(curArg, {
+            curArg = RequestDestination.convert(curArg, {
               context: \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1\\"
             });
           }
@@ -3715,7 +3712,7 @@ exports.install = function install(globalObject) {
         if (curArg === null || curArg === undefined) {
           curArg = null;
         } else {
-          if (isURL(curArg)) {
+          if (URL.is(curArg)) {
             curArg = utils.implForWrapper(curArg);
           } else if (typeof curArg === \\"number\\") {
             curArg = conversions[\\"double\\"](curArg, {
@@ -3767,7 +3764,7 @@ exports.install = function install(globalObject) {
 
               let typedValue = curArg[key];
 
-              typedValue = convertURL(typedValue, {
+              typedValue = URL.convert(typedValue, {
                 context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
               });
 
@@ -3816,7 +3813,7 @@ exports.install = function install(globalObject) {
 
                 let typedValue = curArg[key];
 
-                typedValue = convertURL(typedValue, {
+                typedValue = URL.convert(typedValue, {
                   context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
                 });
 
@@ -3846,7 +3843,7 @@ exports.install = function install(globalObject) {
       const args = [];
       {
         let curArg = arguments[0];
-        if (isURL(curArg)) {
+        if (URL.is(curArg)) {
           curArg = utils.implForWrapper(curArg);
         } else if (utils.isArrayBuffer(curArg)) {
         } else if (ArrayBuffer.isView(curArg)) {
@@ -3903,7 +3900,7 @@ exports.install = function install(globalObject) {
 
                   let typedValue = curArg[key];
 
-                  typedValue = convertURL(typedValue, {
+                  typedValue = URL.convert(typedValue, {
                     context:
                       \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
                       \\" record\\" +
@@ -5427,7 +5424,7 @@ exports[`with processors URLSearchParamsCollection2.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
@@ -5616,7 +5613,7 @@ const proxyHandler = {
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
         let namedValue = V;
 
-        namedValue = convertURL(namedValue, {
+        namedValue = URL.convert(namedValue, {
           context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
         });
 
@@ -5692,7 +5689,7 @@ const proxyHandler = {
 
       let namedValue = desc.value;
 
-      namedValue = convertURL(namedValue, {
+      namedValue = URL.convert(namedValue, {
         context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
       });
 
@@ -6481,7 +6478,7 @@ exports[`with processors Variadic.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -6576,7 +6573,7 @@ exports.install = function install(globalObject) {
       }
       for (let i = 1; i < arguments.length; i++) {
         let curArg = arguments[i];
-        curArg = convertURL(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
+        curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
         args.push(curArg);
       }
       return this[impl].simple2(...args);
@@ -7548,8 +7545,8 @@ exports[`without processors Dictionary.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
-const convertURLSearchParams = require(\\"./URLSearchParams.js\\").convert;
+const URL = require(\\"./URL.js\\");
+const URLSearchParams = require(\\"./URLSearchParams.js\\");
 
 exports.convertInherit = function convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
   {
@@ -7568,7 +7565,7 @@ exports.convertInherit = function convertInherit(obj, ret, { context = \\"The pr
     const key = \\"requiredInterface\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = convertURL(value, { context: context + \\" has member requiredInterface that\\" });
+      value = URL.convert(value, { context: context + \\" has member requiredInterface that\\" });
 
       ret[key] = value;
     } else {
@@ -7586,7 +7583,7 @@ exports.convertInherit = function convertInherit(obj, ret, { context = \\"The pr
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = convertURLSearchParams(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
 
           V.push(nextItem);
         }
@@ -7626,7 +7623,7 @@ exports[`without processors DictionaryConvert.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertDictionary = require(\\"./Dictionary.js\\").convert;
+const Dictionary = require(\\"./Dictionary.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -7702,7 +7699,7 @@ exports.install = function install(globalObject) {
       }
       {
         let curArg = arguments[1];
-        curArg = convertDictionary(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
+        curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
         args.push(curArg);
       }
       return this[impl].op(...args);
@@ -7734,7 +7731,6 @@ exports[`without processors Enum.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
@@ -7808,7 +7804,7 @@ exports.install = function install(globalObject) {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = convertRequestDestination(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
+        curArg = RequestDestination.convert(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
         args.push(curArg);
       }
       return this[impl].op(...args);
@@ -8357,8 +8353,7 @@ exports[`without processors Overloads.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const isURL = require(\\"./URL.js\\").is;
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -8421,10 +8416,10 @@ exports.install = function install(globalObject) {
           break;
         default: {
           let curArg = arguments[0];
-          if (isURL(curArg)) {
+          if (URL.is(curArg)) {
             {
               let curArg = arguments[0];
-              curArg = convertURL(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
+              curArg = URL.convert(curArg, { context: \\"Failed to construct 'Overloads': parameter 1\\" });
               args.push(curArg);
             }
           } else {
@@ -8623,17 +8618,17 @@ exports.install = function install(globalObject) {
               {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
-                  curArg = convertURL(curArg, {
+                  curArg = URL.convert(curArg, {
                     context: \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\"
                   });
                 }
                 args.push(curArg);
               }
-            } else if (isURL(curArg)) {
+            } else if (URL.is(curArg)) {
               {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
-                  curArg = convertURL(curArg, {
+                  curArg = URL.convert(curArg, {
                     context: \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\"
                   });
                 }
@@ -9141,7 +9136,7 @@ exports[`without processors SeqAndRec.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -9275,7 +9270,7 @@ exports.install = function install(globalObject) {
 
               let typedValue = curArg[key];
 
-              typedValue = convertURL(typedValue, {
+              typedValue = URL.convert(typedValue, {
                 context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
               });
 
@@ -10299,9 +10294,8 @@ exports[`without processors TypedefsAndUnions.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertRequestDestination = require(\\"./RequestDestination.js\\").convert;
-const isURL = require(\\"./URL.js\\").is;
-const convertURL = require(\\"./URL.js\\").convert;
+const RequestDestination = require(\\"./RequestDestination.js\\");
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -10414,7 +10408,7 @@ exports.install = function install(globalObject) {
               context: \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1\\"
             });
           } else {
-            curArg = convertRequestDestination(curArg, {
+            curArg = RequestDestination.convert(curArg, {
               context: \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1\\"
             });
           }
@@ -10478,7 +10472,7 @@ exports.install = function install(globalObject) {
         if (curArg === null || curArg === undefined) {
           curArg = null;
         } else {
-          if (isURL(curArg)) {
+          if (URL.is(curArg)) {
             curArg = utils.implForWrapper(curArg);
           } else if (typeof curArg === \\"number\\") {
             curArg = conversions[\\"double\\"](curArg, {
@@ -10530,7 +10524,7 @@ exports.install = function install(globalObject) {
 
               let typedValue = curArg[key];
 
-              typedValue = convertURL(typedValue, {
+              typedValue = URL.convert(typedValue, {
                 context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
               });
 
@@ -10579,7 +10573,7 @@ exports.install = function install(globalObject) {
 
                 let typedValue = curArg[key];
 
-                typedValue = convertURL(typedValue, {
+                typedValue = URL.convert(typedValue, {
                   context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
                 });
 
@@ -10609,7 +10603,7 @@ exports.install = function install(globalObject) {
       const args = [];
       {
         let curArg = arguments[0];
-        if (isURL(curArg)) {
+        if (URL.is(curArg)) {
           curArg = utils.implForWrapper(curArg);
         } else if (utils.isArrayBuffer(curArg)) {
         } else if (ArrayBuffer.isView(curArg)) {
@@ -10666,7 +10660,7 @@ exports.install = function install(globalObject) {
 
                   let typedValue = curArg[key];
 
-                  typedValue = convertURL(typedValue, {
+                  typedValue = URL.convert(typedValue, {
                     context:
                       \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
                       \\" record\\" +
@@ -12190,7 +12184,7 @@ exports[`without processors URLSearchParamsCollection2.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
@@ -12379,7 +12373,7 @@ const proxyHandler = {
       if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
         let namedValue = V;
 
-        namedValue = convertURL(namedValue, {
+        namedValue = URL.convert(namedValue, {
           context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
         });
 
@@ -12455,7 +12449,7 @@ const proxyHandler = {
 
       let namedValue = desc.value;
 
-      namedValue = convertURL(namedValue, {
+      namedValue = URL.convert(namedValue, {
         context: \\"Failed to set the '\\" + P + \\"' property on 'URLSearchParamsCollection2': The provided value\\"
       });
 
@@ -13244,7 +13238,7 @@ exports[`without processors Variadic.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const convertURL = require(\\"./URL.js\\").convert;
+const URL = require(\\"./URL.js\\");
 const impl = utils.implSymbol;
 const ctorRegistry = utils.ctorRegistrySymbol;
 
@@ -13339,7 +13333,7 @@ exports.install = function install(globalObject) {
       }
       for (let i = 1; i < arguments.length; i++) {
         let curArg = arguments[i];
-        curArg = convertURL(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
+        curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
         args.push(curArg);
       }
       return this[impl].simple2(...args);
