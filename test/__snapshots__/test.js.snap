@@ -6,8 +6,6 @@ exports[`with processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const ctorRegistry = utils.ctorRegistrySymbol;
-
 const interfaceName = \\"AsyncCallbackInterface\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -15,7 +13,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -58,7 +56,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
         return Promise.reject(err);
       }
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {};
@@ -1162,8 +1167,6 @@ exports[`with processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const ctorRegistry = utils.ctorRegistrySymbol;
-
 const interfaceName = \\"EventListener\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -1171,7 +1174,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -1199,7 +1202,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, args);
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {};
@@ -1912,7 +1922,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -1944,7 +1954,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       return callResult;
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {
@@ -7196,8 +7213,6 @@ exports[`without processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const ctorRegistry = utils.ctorRegistrySymbol;
-
 const interfaceName = \\"AsyncCallbackInterface\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -7205,7 +7220,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -7248,7 +7263,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
         return Promise.reject(err);
       }
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {};
@@ -8321,8 +8343,6 @@ exports[`without processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const ctorRegistry = utils.ctorRegistrySymbol;
-
 const interfaceName = \\"EventListener\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -8330,7 +8350,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -8358,7 +8378,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, args);
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {};
@@ -9070,7 +9097,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  return {
+  const { wrapper } = {
     wrapper(...args) {
       let completion;
       let thisArg = this;
@@ -9102,7 +9129,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       return callResult;
     }
-  }.wrapper;
+  };
+
+  Object.defineProperties(wrapper, {
+    [utils.wrapperSymbol]: { value },
+    value: { value, enumerable: true }
+  });
+
+  return wrapper;
 };
 
 exports.install = function install(globalObject) {
