@@ -6,6 +6,8 @@ exports[`with processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const ctorRegistry = utils.ctorRegistrySymbol;
+
 const interfaceName = \\"AsyncCallbackInterface\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -1160,6 +1162,8 @@ exports[`with processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const ctorRegistry = utils.ctorRegistrySymbol;
+
 const interfaceName = \\"EventListener\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -1898,6 +1902,8 @@ exports[`with processors NodeFilter.webidl 1`] = `
 
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
+
+const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"NodeFilter\\";
 
@@ -7190,6 +7196,8 @@ exports[`without processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const ctorRegistry = utils.ctorRegistrySymbol;
+
 const interfaceName = \\"AsyncCallbackInterface\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -8313,6 +8321,8 @@ exports[`without processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const ctorRegistry = utils.ctorRegistrySymbol;
+
 const interfaceName = \\"EventListener\\";
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
@@ -9050,6 +9060,8 @@ exports[`without processors NodeFilter.webidl 1`] = `
 
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
+
+const ctorRegistry = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"NodeFilter\\";
 
