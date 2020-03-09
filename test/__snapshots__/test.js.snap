@@ -60,6 +60,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -225,10 +230,10 @@ exports.install = function install(globalObject) {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = BufferSourceTypes;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: BufferSourceTypes
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -311,6 +316,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -364,10 +374,10 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = CEReactions;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: CEReactions
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -640,6 +650,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -762,10 +777,10 @@ exports.install = function install(globalObject) {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = DOMImplementation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: DOMImplementation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -917,6 +932,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -948,10 +968,10 @@ exports.install = function install(globalObject) {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = DictionaryConvert;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: DictionaryConvert
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1025,6 +1045,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1075,10 +1100,10 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Enum;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Enum
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1236,16 +1261,21 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Global;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Global
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1319,6 +1349,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class HTMLConstructor {
     constructor() {
       return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
@@ -1327,10 +1362,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = HTMLConstructor;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: HTMLConstructor
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1403,6 +1438,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1421,10 +1461,10 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = LegacyArrayClass;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: LegacyArrayClass
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1497,6 +1537,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1571,10 +1616,10 @@ exports.install = function install(globalObject) {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = MixedIn;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: MixedIn
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1648,6 +1693,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Overloads {
     constructor() {
       const args = [];
@@ -1962,10 +2012,10 @@ exports.install = function install(globalObject) {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Overloads;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Overloads
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2038,6 +2088,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2102,10 +2157,10 @@ exports.install = function install(globalObject) {
     promiseConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = PromiseTypes;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: PromiseTypes
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2178,6 +2233,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2321,10 +2381,10 @@ exports.install = function install(globalObject) {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Reflect;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Reflect
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2431,6 +2491,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -2639,10 +2704,10 @@ exports.install = function install(globalObject) {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = SeqAndRec;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: SeqAndRec
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2715,6 +2780,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2764,10 +2834,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Static;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Static
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2842,6 +2912,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2955,10 +3030,10 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Storage;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Storage
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3195,6 +3270,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3220,10 +3300,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierAttribute;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierAttribute
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3298,6 +3378,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3315,10 +3400,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierDefaultOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierDefaultOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3393,6 +3478,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3419,10 +3509,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierNamedOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierNamedOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3495,6 +3585,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3512,10 +3607,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3590,6 +3685,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4012,10 +4112,10 @@ exports.install = function install(globalObject) {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = TypedefsAndUnions;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: TypedefsAndUnions
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4088,6 +4188,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -4351,10 +4456,10 @@ exports.install = function install(globalObject) {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URL;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URL
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4429,6 +4534,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4473,10 +4583,10 @@ exports.install = function install(globalObject) {
     entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
     forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLList;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLList
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4757,6 +4867,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -5070,10 +5185,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParams;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParams
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5150,6 +5265,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5216,10 +5336,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParamsCollection;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParamsCollection
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5491,6 +5611,12 @@ exports.install = function install(globalObject) {
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
     );
   }
+
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5500,10 +5626,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParamsCollection2;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParamsCollection2
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5791,6 +5917,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5881,10 +6012,10 @@ exports.install = function install(globalObject) {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = UnderscoredProperties;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: UnderscoredProperties
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6042,6 +6173,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6050,10 +6186,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(Unforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Unforgeable;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Unforgeable
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6143,6 +6279,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6151,10 +6292,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(UnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = UnforgeableMap;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: UnforgeableMap
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6402,6 +6543,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6456,10 +6602,10 @@ exports.install = function install(globalObject) {
       configurable: true
     }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Unscopable;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Unscopable
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6533,6 +6679,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6692,10 +6843,10 @@ exports.install = function install(globalObject) {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Variadic;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Variadic
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6768,6 +6919,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -6776,10 +6932,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = ZeroArgConstructor;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: ZeroArgConstructor
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6852,6 +7008,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7017,10 +7178,10 @@ exports.install = function install(globalObject) {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = BufferSourceTypes;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: BufferSourceTypes
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7102,6 +7263,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7140,10 +7306,10 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = CEReactions;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: CEReactions
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7401,6 +7567,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7523,10 +7694,10 @@ exports.install = function install(globalObject) {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = DOMImplementation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: DOMImplementation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7678,6 +7849,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7709,10 +7885,10 @@ exports.install = function install(globalObject) {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = DictionaryConvert;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: DictionaryConvert
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7786,6 +7962,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7836,10 +8017,10 @@ exports.install = function install(globalObject) {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Enum;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Enum
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7997,16 +8178,21 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Global;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Global
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8079,6 +8265,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class HTMLConstructor {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8087,10 +8278,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = HTMLConstructor;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: HTMLConstructor
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8163,6 +8354,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8181,10 +8377,10 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyArrayClass\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = LegacyArrayClass;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: LegacyArrayClass
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8257,6 +8453,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8331,10 +8532,10 @@ exports.install = function install(globalObject) {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = MixedIn;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: MixedIn
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8408,6 +8609,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Overloads {
     constructor() {
       const args = [];
@@ -8722,10 +8928,10 @@ exports.install = function install(globalObject) {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Overloads;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Overloads
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8798,6 +9004,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8862,10 +9073,10 @@ exports.install = function install(globalObject) {
     promiseConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = PromiseTypes;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: PromiseTypes
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8938,6 +9149,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9081,10 +9297,10 @@ exports.install = function install(globalObject) {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Reflect;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Reflect
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9191,6 +9407,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -9399,10 +9620,10 @@ exports.install = function install(globalObject) {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = SeqAndRec;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: SeqAndRec
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9475,6 +9696,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9524,10 +9750,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Static;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Static
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9602,6 +9828,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9715,10 +9946,10 @@ exports.install = function install(globalObject) {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Storage;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Storage
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9955,6 +10186,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9980,10 +10216,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierAttribute;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierAttribute
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10058,6 +10294,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10075,10 +10316,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierDefaultOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierDefaultOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10153,6 +10394,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10179,10 +10425,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierNamedOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierNamedOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10255,6 +10501,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10272,10 +10523,10 @@ exports.install = function install(globalObject) {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = StringifierOperation;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: StringifierOperation
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10350,6 +10601,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10772,10 +11028,10 @@ exports.install = function install(globalObject) {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = TypedefsAndUnions;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: TypedefsAndUnions
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10848,6 +11104,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -11111,10 +11372,10 @@ exports.install = function install(globalObject) {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URL;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URL
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11189,6 +11450,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11233,10 +11499,10 @@ exports.install = function install(globalObject) {
     entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
     forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLList;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLList
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11517,6 +11783,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -11830,10 +12101,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParams;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParams
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11910,6 +12181,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11976,10 +12252,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParamsCollection;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParamsCollection
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12251,6 +12527,12 @@ exports.install = function install(globalObject) {
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
     );
   }
+
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12260,10 +12542,10 @@ exports.install = function install(globalObject) {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = URLSearchParamsCollection2;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: URLSearchParamsCollection2
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12551,6 +12833,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12641,10 +12928,10 @@ exports.install = function install(globalObject) {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = UnderscoredProperties;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: UnderscoredProperties
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12802,6 +13089,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12810,10 +13102,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(Unforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Unforgeable;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Unforgeable
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12903,6 +13195,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12911,10 +13208,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(UnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = UnforgeableMap;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: UnforgeableMap
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13162,6 +13459,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13216,10 +13518,10 @@ exports.install = function install(globalObject) {
       configurable: true
     }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Unscopable;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Unscopable
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13293,6 +13595,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13452,10 +13759,10 @@ exports.install = function install(globalObject) {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = Variadic;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: Variadic
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13528,6 +13835,11 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
 };
 
 exports.install = function install(globalObject) {
+  if (globalObject[ctorRegistry] === undefined) {
+    Object.defineProperty(globalObject, ctorRegistry, {
+      value: Object.create(null)
+    });
+  }
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -13536,10 +13848,10 @@ exports.install = function install(globalObject) {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistry] === undefined) {
-    globalObject[ctorRegistry] = Object.create(null);
-  }
-  globalObject[ctorRegistry][interfaceName] = ZeroArgConstructor;
+  Object.defineProperty(globalObject[ctorRegistry], interfaceName, {
+    enumerable: true,
+    value: ZeroArgConstructor
+  });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
