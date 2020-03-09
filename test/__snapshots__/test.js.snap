@@ -6,20 +6,12 @@ exports[`with processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"AsyncCallbackInterface\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function() {
+  function converted() {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -48,13 +40,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     } catch (err) {
       return Promise.reject(err);
     }
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {};
@@ -1158,20 +1149,12 @@ exports[`with processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"EventListener\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function(...args) {
+  function converted(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1196,13 +1179,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     }
 
     let callResult = Reflect.apply(X, thisArg, args);
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {};
@@ -1906,20 +1888,12 @@ exports[`with processors NodeFilter.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"NodeFilter\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function(...args) {
+  function converted(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1948,13 +1922,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     callResult = conversions[\\"unsigned short\\"](callResult, { context: context });
 
     return callResult;
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {
@@ -1981,7 +1954,7 @@ exports.install = function install(globalObject) {
     SHOW_NOTATION: { value: 0x800, enumerable: true }
   });
 
-  Object.defineProperty(globalObject, interfaceName, {
+  Object.defineProperty(globalObject, \\"NodeFilter\\", {
     configurable: true,
     writable: true,
     value: NodeFilter
@@ -7201,20 +7174,12 @@ exports[`without processors AsyncCallbackInterface.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"AsyncCallbackInterface\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function() {
+  function converted() {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -7243,13 +7208,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     } catch (err) {
       return Promise.reject(err);
     }
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {};
@@ -8322,20 +8286,12 @@ exports[`without processors EventListener.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"EventListener\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function(...args) {
+  function converted(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -8360,13 +8316,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     }
 
     let callResult = Reflect.apply(X, thisArg, args);
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {};
@@ -9069,20 +9024,12 @@ exports[`without processors NodeFilter.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const interfaceName = \\"NodeFilter\\";
-
-const converted = new WeakMap();
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   if (!utils.isObject(value)) {
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  let internalWrapper = converted.get(value);
-  if (internalWrapper !== undefined) {
-    return internalWrapper;
-  }
-
-  internalWrapper = function(...args) {
+  function converted(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -9111,13 +9058,12 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     callResult = conversions[\\"unsigned short\\"](callResult, { context: context });
 
     return callResult;
-  };
+  }
 
-  // This is necessary to avoid exposing \`internalWrapper\` to user code:
-  internalWrapper[utils.wrapperSymbol] = value;
-  converted.set(value, internalWrapper);
+  converted[utils.wrapperSymbol] = value;
+  converted.objectReference = value;
 
-  return internalWrapper;
+  return converted;
 };
 
 exports.install = function install(globalObject) {
@@ -9144,7 +9090,7 @@ exports.install = function install(globalObject) {
     SHOW_NOTATION: { value: 0x800, enumerable: true }
   });
 
-  Object.defineProperty(globalObject, interfaceName, {
+  Object.defineProperty(globalObject, \\"NodeFilter\\", {
     configurable: true,
     writable: true,
     value: NodeFilter
