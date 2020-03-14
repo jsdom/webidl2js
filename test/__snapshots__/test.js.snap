@@ -25,7 +25,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
         thisArg = O;
       }
 
-      let callResult = Reflect.apply(X, thisArg, []);
+      let callResult = Reflect.call(X, thisArg);
 
       callResult = Promise.resolve(callResult).then(
         value => {
@@ -1154,7 +1154,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation(...args) {
+  function callTheUserObjectsOperation(event) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1167,11 +1167,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    for (let i = 0; i < args.length; i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    event = utils.tryWrapperForImpl(event);
 
-    let callResult = Reflect.apply(X, thisArg, args);
+    let callResult = Reflect.call(X, thisArg, event);
   }
 
   callTheUserObjectsOperation[utils.wrapperSymbol] = value;
@@ -1886,7 +1884,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation(...args) {
+  function callTheUserObjectsOperation(node) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1899,11 +1897,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    for (let i = 0; i < args.length; i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    node = utils.tryWrapperForImpl(node);
 
-    let callResult = Reflect.apply(X, thisArg, args);
+    let callResult = Reflect.call(X, thisArg, node);
 
     callResult = conversions[\\"unsigned short\\"](callResult, { context: context });
 
@@ -7179,7 +7175,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
         thisArg = O;
       }
 
-      let callResult = Reflect.apply(X, thisArg, []);
+      let callResult = Reflect.call(X, thisArg);
 
       callResult = Promise.resolve(callResult).then(
         value => {
@@ -8277,7 +8273,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation(...args) {
+  function callTheUserObjectsOperation(event) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -8290,11 +8286,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    for (let i = 0; i < args.length; i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    event = utils.tryWrapperForImpl(event);
 
-    let callResult = Reflect.apply(X, thisArg, args);
+    let callResult = Reflect.call(X, thisArg, event);
   }
 
   callTheUserObjectsOperation[utils.wrapperSymbol] = value;
@@ -9008,7 +9002,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation(...args) {
+  function callTheUserObjectsOperation(node) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -9021,11 +9015,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    for (let i = 0; i < args.length; i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    node = utils.tryWrapperForImpl(node);
 
-    let callResult = Reflect.apply(X, thisArg, args);
+    let callResult = Reflect.call(X, thisArg, node);
 
     callResult = conversions[\\"unsigned short\\"](callResult, { context: context });
 
