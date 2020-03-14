@@ -240,7 +240,7 @@ If any part of the conversion fails, _context_ can be used to describe the provi
 
 #### `install(globalObject)`
 
-If this callback interface has constants, then this method creates a brand new legacy callback interface object and attaches it to the passed `globalObject`, otherwise, this method is a no-op.
+If this callback interface has constants, then this method creates a brand new legacy callback interface object and attaches it to the passed `globalObject`. Otherwise, this method is a no-op.
 
 ### For dictionaries
 
