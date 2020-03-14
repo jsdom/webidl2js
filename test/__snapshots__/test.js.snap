@@ -11,7 +11,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted() {
+  function callTheUserObjectsOperation() {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -42,10 +42,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     }
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {};
@@ -1154,7 +1154,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted(...args) {
+  function callTheUserObjectsOperation(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1170,21 +1170,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     for (let i = 0; i < args.length; i++) {
       args[i] = utils.tryWrapperForImpl(args[i]);
     }
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
 
     let callResult = Reflect.apply(X, thisArg, args);
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {};
@@ -1893,7 +1886,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted(...args) {
+  function callTheUserObjectsOperation(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1909,13 +1902,6 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     for (let i = 0; i < args.length; i++) {
       args[i] = utils.tryWrapperForImpl(args[i]);
     }
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
 
     let callResult = Reflect.apply(X, thisArg, args);
 
@@ -1924,10 +1910,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     return callResult;
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {
@@ -7179,7 +7165,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted() {
+  function callTheUserObjectsOperation() {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -7210,10 +7196,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     }
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {};
@@ -8291,7 +8277,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted(...args) {
+  function callTheUserObjectsOperation(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -8307,21 +8293,14 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     for (let i = 0; i < args.length; i++) {
       args[i] = utils.tryWrapperForImpl(args[i]);
     }
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
 
     let callResult = Reflect.apply(X, thisArg, args);
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {};
@@ -9029,7 +9008,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function converted(...args) {
+  function callTheUserObjectsOperation(...args) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -9045,13 +9024,6 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     for (let i = 0; i < args.length; i++) {
       args[i] = utils.tryWrapperForImpl(args[i]);
     }
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
 
     let callResult = Reflect.apply(X, thisArg, args);
 
@@ -9060,10 +9032,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     return callResult;
   }
 
-  converted[utils.wrapperSymbol] = value;
-  converted.objectReference = value;
+  callTheUserObjectsOperation[utils.wrapperSymbol] = value;
+  callTheUserObjectsOperation.objectReference = value;
 
-  return converted;
+  return callTheUserObjectsOperation;
 };
 
 exports.install = function install(globalObject) {
