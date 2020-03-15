@@ -26,8 +26,7 @@ will generate a JavaScript wrapper class file roughly like this:
 
 ```js
 const conversions = require("webidl-conversions");
-const impl = require("./utils.js").implSymbol;
-const ctorRegistry = require("./utils.js").ctorRegistrySymbol;
+const { implSymbol, ctorRegistrySymbol } = require("./utils.js");
 
 const Impl = require("./SomeInterface-impl.js").implementation;
 
@@ -56,7 +55,7 @@ class SomeInterface {
       context: "Failed to execute 'add' on 'SomeInterface': parameter 2"
     });
 
-    return this[impl].add(...args);
+    return this[implSymbol].add(...args);
   }
 }
 
@@ -66,13 +65,13 @@ Object.defineProperties(SomeInterface.prototype, {
 });
 
 exports.create = (globalObject, constructorArgs = [], privateData = {}) => {
-  const ctor = globalObject[ctorRegistry].SomeInterface;
+  const ctor = globalObject[ctorRegistrySymbol].SomeInterface;
   const obj = Object.create(ctor.prototype);
-  obj[impl] = new Impl(constructorArgs, privateData);
+  obj[implSymbol] = new Impl(constructorArgs, privateData);
   return obj;
 };
 
-exports.is = obj => obj && obj[impl] instanceof Impl;
+exports.is = obj => obj && obj[implSymbol] instanceof Impl;
 ```
 
 The above is a simplification of the actual generated code, but should give you some idea of what's going on. We bring your attention to a few points:
