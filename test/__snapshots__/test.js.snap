@@ -42,11 +42,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -66,7 +66,8 @@ exports.install = function install(globalObject) {
     }
 
     bs(source) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -89,11 +90,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bs(...args);
+      return esValue[impl].bs(...args);
     }
 
     ab(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -112,11 +114,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].ab(...args);
+      return esValue[impl].ab(...args);
     }
 
     abv(abv) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -138,11 +141,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abv(...args);
+      return esValue[impl].abv(...args);
     }
 
     u8a(u8) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -161,11 +165,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].u8a(...args);
+      return esValue[impl].u8a(...args);
     }
 
     abUnion(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -187,11 +192,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abUnion(...args);
+      return esValue[impl].abUnion(...args);
     }
 
     u8aUnion(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -213,7 +219,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].u8aUnion(...args);
+      return esValue[impl].u8aUnion(...args);
     }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
@@ -284,11 +290,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -317,33 +323,38 @@ exports.install = function install(globalObject) {
     }
 
     method() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       CEReactions.preSteps(globalObject);
       try {
-        return this[impl].method();
+        return esValue[impl].method();
       } finally {
         CEReactions.postSteps(globalObject);
       }
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       CEReactions.preSteps(globalObject);
       try {
-        return this[impl][\\"attr\\"];
+        return esValue[impl][\\"attr\\"];
       } finally {
         CEReactions.postSteps(globalObject);
       }
     }
 
     set attr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -353,7 +364,7 @@ exports.install = function install(globalObject) {
 
       CEReactions.preSteps(globalObject);
       try {
-        this[impl][\\"attr\\"] = V;
+        esValue[impl][\\"attr\\"] = V;
       } finally {
         CEReactions.postSteps(globalObject);
       }
@@ -622,11 +633,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -646,7 +657,8 @@ exports.install = function install(globalObject) {
     }
 
     createDocumentType(qualifiedName, publicId, systemId) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -679,11 +691,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocumentType(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createDocumentType(...args));
     }
 
     createDocument(namespace, qualifiedName) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -727,11 +740,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocument(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createDocument(...args));
     }
 
     createHTMLDocument() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -744,15 +758,16 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createHTMLDocument(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createHTMLDocument(...args));
     }
 
     hasFeature() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].hasFeature();
+      return esValue[impl].hasFeature();
     }
   }
   Object.defineProperties(DOMImplementation.prototype, {
@@ -899,11 +914,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -923,7 +938,8 @@ exports.install = function install(globalObject) {
     }
 
     op() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -941,7 +957,7 @@ exports.install = function install(globalObject) {
         curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return esValue[impl].op(...args);
     }
   }
   Object.defineProperties(DictionaryConvert.prototype, {
@@ -1007,11 +1023,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1031,7 +1047,8 @@ exports.install = function install(globalObject) {
     }
 
     op(destination) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1046,19 +1063,23 @@ exports.install = function install(globalObject) {
         curArg = RequestDestination.convert(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return esValue[impl].op(...args);
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"attr\\"]);
+      return utils.tryWrapperForImpl(esValue[impl][\\"attr\\"]);
     }
 
     set attr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1067,7 +1088,7 @@ exports.install = function install(globalObject) {
         return;
       }
 
-      this[impl][\\"attr\\"] = V;
+      esValue[impl][\\"attr\\"] = V;
     }
   }
   Object.defineProperties(Enum.prototype, {
@@ -1133,33 +1154,39 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       op() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].op();
+        return esValue[impl].op();
       },
       unforgeableOp() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].unforgeableOp();
+        return esValue[impl].unforgeableOp();
       },
       get attr() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"attr\\"];
+        return esValue[impl][\\"attr\\"];
       },
       set attr(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1167,17 +1194,21 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'attr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"attr\\"] = V;
+        esValue[impl][\\"attr\\"] = V;
       },
       get unforgeableAttr() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"unforgeableAttr\\"];
+        return esValue[impl][\\"unforgeableAttr\\"];
       },
       set unforgeableAttr(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1185,17 +1216,21 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'unforgeableAttr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"unforgeableAttr\\"] = V;
+        esValue[impl][\\"unforgeableAttr\\"] = V;
       },
       get length() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"length\\"];
+        return esValue[impl][\\"length\\"];
       },
       set length(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -1203,7 +1238,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'length' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"length\\"] = V;
+        esValue[impl][\\"length\\"] = V;
       },
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
       keys: Array.prototype.keys,
@@ -1222,7 +1257,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1240,8 +1275,25 @@ exports.install = function install(globalObject) {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
+
+    static staticOp() {
+      return Impl.implementation.staticOp();
+    }
+
+    static get staticAttr() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      return Impl.implementation[\\"staticAttr\\"];
+    }
+
+    static set staticAttr(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      return Impl.implementation[\\"staticAttr\\"];
+    }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+  Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
   if (globalObject[ctorRegistry] === undefined) {
     globalObject[ctorRegistry] = Object.create(null);
   }
@@ -1301,11 +1353,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1385,11 +1437,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1409,11 +1461,13 @@ exports.install = function install(globalObject) {
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.setPrototypeOf(LegacyArrayClass.prototype, Array.prototype);
@@ -1479,11 +1533,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1503,31 +1557,37 @@ exports.install = function install(globalObject) {
     }
 
     mixedInOp() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].mixedInOp();
+      return esValue[impl].mixedInOp();
     }
 
     ifaceMixinOp() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].ifaceMixinOp();
+      return esValue[impl].ifaceMixinOp();
     }
 
     get mixedInAttr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"mixedInAttr\\"];
+      return esValue[impl][\\"mixedInAttr\\"];
     }
 
     set mixedInAttr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1535,19 +1595,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"mixedInAttr\\"] = V;
+      esValue[impl][\\"mixedInAttr\\"] = V;
     }
 
     get ifaceMixinAttr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"ifaceMixinAttr\\"];
+      return esValue[impl][\\"ifaceMixinAttr\\"];
     }
 
     set ifaceMixinAttr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1555,7 +1619,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"ifaceMixinAttr\\"] = V;
+      esValue[impl][\\"ifaceMixinAttr\\"] = V;
     }
   }
   Object.defineProperties(MixedIn.prototype, {
@@ -1630,11 +1694,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -1675,7 +1739,8 @@ exports.install = function install(globalObject) {
     }
 
     compatible(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1740,11 +1805,12 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return utils.tryWrapperForImpl(this[impl].compatible(...args));
+      return utils.tryWrapperForImpl(esValue[impl].compatible(...args));
     }
 
     incompatible1(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1776,11 +1842,12 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].incompatible1(...args);
+      return esValue[impl].incompatible1(...args);
     }
 
     incompatible2(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1818,11 +1885,12 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible2(...args);
+      return esValue[impl].incompatible2(...args);
     }
 
     incompatible3(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -1952,7 +2020,7 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible3(...args);
+      return esValue[impl].incompatible3(...args);
     }
   }
   Object.defineProperties(Overloads.prototype, {
@@ -2020,11 +2088,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2044,7 +2112,8 @@ exports.install = function install(globalObject) {
     }
 
     voidPromiseConsumer(p) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2064,11 +2133,12 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].voidPromiseConsumer(...args);
+      return esValue[impl].voidPromiseConsumer(...args);
     }
 
     promiseConsumer(p) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2094,7 +2164,7 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].promiseConsumer(...args);
+      return esValue[impl].promiseConsumer(...args);
     }
   }
   Object.defineProperties(PromiseTypes.prototype, {
@@ -2160,11 +2230,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2184,7 +2254,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedBoolean() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2192,7 +2264,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedBoolean(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2208,7 +2282,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedDOMString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2217,7 +2293,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedDOMString(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2229,7 +2307,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedLong() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2238,7 +2318,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedLong(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2250,7 +2332,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedUnsignedLong() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2259,7 +2343,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedUnsignedLong(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2271,7 +2357,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectionTest() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2280,7 +2368,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectionTest(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2292,7 +2382,9 @@ exports.install = function install(globalObject) {
     }
 
     get withUnderscore() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2301,7 +2393,9 @@ exports.install = function install(globalObject) {
     }
 
     set withUnderscore(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2413,11 +2507,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2437,7 +2531,8 @@ exports.install = function install(globalObject) {
     }
 
     recordConsumer(rec) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2477,11 +2572,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer(...args);
+      return esValue[impl].recordConsumer(...args);
     }
 
     recordConsumer2(rec) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2521,11 +2617,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer2(...args);
+      return esValue[impl].recordConsumer2(...args);
     }
 
     sequenceConsumer(seq) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2557,11 +2654,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer(...args);
+      return esValue[impl].sequenceConsumer(...args);
     }
 
     sequenceConsumer2(seq) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2591,11 +2689,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer2(...args);
+      return esValue[impl].sequenceConsumer2(...args);
     }
 
     frozenArrayConsumer(arr) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2628,7 +2727,7 @@ exports.install = function install(globalObject) {
         curArg = Object.freeze(curArg);
         args.push(curArg);
       }
-      return this[impl].frozenArrayConsumer(...args);
+      return esValue[impl].frozenArrayConsumer(...args);
     }
   }
   Object.defineProperties(SeqAndRec.prototype, {
@@ -2697,11 +2796,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2721,29 +2820,34 @@ exports.install = function install(globalObject) {
     }
 
     def() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].def();
+      return esValue[impl].def();
     }
 
     get abc() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"abc\\"];
+      return esValue[impl][\\"abc\\"];
     }
 
     set abc(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
 
-      this[impl][\\"abc\\"] = V;
+      esValue[impl][\\"abc\\"] = V;
     }
 
     static def() {
@@ -2751,10 +2855,14 @@ exports.install = function install(globalObject) {
     }
 
     static get abc() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
       return Impl.implementation[\\"abc\\"];
     }
 
     static set abc(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
       return Impl.implementation[\\"abc\\"];
     }
   }
@@ -2822,11 +2930,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -2848,7 +2956,8 @@ exports.install = function install(globalObject) {
     }
 
     key(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2863,11 +2972,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"unsigned long\\"](curArg, { context: \\"Failed to execute 'key' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].key(...args);
+      return esValue[impl].key(...args);
     }
 
     getItem(key) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2882,11 +2992,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'getItem' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].getItem(...args);
+      return esValue[impl].getItem(...args);
     }
 
     setItem(key, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2906,11 +3017,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'setItem' on 'Storage': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].setItem(...args);
+      return esValue[impl].setItem(...args);
     }
 
     removeItem(key) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -2927,23 +3039,26 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].removeItem(...args);
+      return esValue[impl].removeItem(...args);
     }
 
     clear() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].clear();
+      return esValue[impl].clear();
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(Storage.prototype, {
@@ -3177,11 +3292,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3201,18 +3316,22 @@ exports.install = function install(globalObject) {
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attr\\"];
+      return esValue[impl][\\"attr\\"];
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"attr\\"];
+
+      return esValue[impl][\\"attr\\"];
     }
   }
   Object.defineProperties(StringifierAttribute.prototype, {
@@ -3280,11 +3399,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3304,11 +3423,12 @@ exports.install = function install(globalObject) {
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
   }
   Object.defineProperties(StringifierDefaultOperation.prototype, {
@@ -3375,11 +3495,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3399,19 +3519,21 @@ exports.install = function install(globalObject) {
     }
 
     operation() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return esValue[impl].operation();
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return esValue[impl].operation();
     }
   }
   Object.defineProperties(StringifierNamedOperation.prototype, {
@@ -3477,11 +3599,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3501,11 +3623,12 @@ exports.install = function install(globalObject) {
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
   }
   Object.defineProperties(StringifierOperation.prototype, {
@@ -3572,11 +3695,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -3596,7 +3719,8 @@ exports.install = function install(globalObject) {
     }
 
     numOrStrConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3622,11 +3746,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrConsumer(...args);
+      return esValue[impl].numOrStrConsumer(...args);
     }
 
     numOrEnumConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3655,11 +3780,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrEnumConsumer(...args);
+      return esValue[impl].numOrEnumConsumer(...args);
     }
 
     numOrStrOrNullConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3691,11 +3817,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrNullConsumer(...args);
+      return esValue[impl].numOrStrOrNullConsumer(...args);
     }
 
     numOrStrOrURLOrNullConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3729,11 +3856,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrURLOrNullConsumer(...args);
+      return esValue[impl].numOrStrOrURLOrNullConsumer(...args);
     }
 
     urlMapInnerConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3775,11 +3903,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapInnerConsumer(...args);
+      return esValue[impl].urlMapInnerConsumer(...args);
     }
 
     urlMapConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3825,11 +3954,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapConsumer(...args);
+      return esValue[impl].urlMapConsumer(...args);
     }
 
     bufferSourceOrURLConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3855,11 +3985,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bufferSourceOrURLConsumer(...args);
+      return esValue[impl].bufferSourceOrURLConsumer(...args);
     }
 
     arrayBufferViewOrURLMapConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3921,11 +4052,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewOrURLMapConsumer(...args);
+      return esValue[impl].arrayBufferViewOrURLMapConsumer(...args);
     }
 
     arrayBufferViewDupConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3948,19 +4080,23 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewDupConsumer(...args);
+      return esValue[impl].arrayBufferViewDupConsumer(...args);
     }
 
     get buf() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"buf\\"]);
+      return utils.tryWrapperForImpl(esValue[impl][\\"buf\\"]);
     }
 
     set buf(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3975,19 +4111,23 @@ exports.install = function install(globalObject) {
             \\" is not of any supported type.\\"
         );
       }
-      this[impl][\\"buf\\"] = V;
+      esValue[impl][\\"buf\\"] = V;
     }
 
     get time() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"time\\"];
+      return esValue[impl][\\"time\\"];
     }
 
     set time(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -3995,7 +4135,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'time' property on 'TypedefsAndUnions': The provided value\\"
       });
 
-      this[impl][\\"time\\"] = V;
+      esValue[impl][\\"time\\"] = V;
     }
   }
   Object.defineProperties(TypedefsAndUnions.prototype, {
@@ -4070,11 +4210,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4112,56 +4252,69 @@ exports.install = function install(globalObject) {
     }
 
     toJSON() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toJSON();
+      return esValue[impl].toJSON();
     }
 
     get href() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"href\\"];
+      return esValue[impl][\\"href\\"];
     }
 
     set href(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
 
-      this[impl][\\"href\\"] = V;
+      esValue[impl][\\"href\\"] = V;
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"href\\"];
+
+      return esValue[impl][\\"href\\"];
     }
 
     get origin() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"origin\\"];
+      return esValue[impl][\\"origin\\"];
     }
 
     get protocol() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"protocol\\"];
+      return esValue[impl][\\"protocol\\"];
     }
 
     set protocol(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4169,19 +4322,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"protocol\\"] = V;
+      esValue[impl][\\"protocol\\"] = V;
     }
 
     get username() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"username\\"];
+      return esValue[impl][\\"username\\"];
     }
 
     set username(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4189,19 +4346,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'username' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"username\\"] = V;
+      esValue[impl][\\"username\\"] = V;
     }
 
     get password() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"password\\"];
+      return esValue[impl][\\"password\\"];
     }
 
     set password(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4209,37 +4370,45 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'password' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"password\\"] = V;
+      esValue[impl][\\"password\\"] = V;
     }
 
     get host() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"host\\"];
+      return esValue[impl][\\"host\\"];
     }
 
     set host(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
 
-      this[impl][\\"host\\"] = V;
+      esValue[impl][\\"host\\"] = V;
     }
 
     get hostname() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hostname\\"];
+      return esValue[impl][\\"hostname\\"];
     }
 
     set hostname(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4247,37 +4416,45 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"hostname\\"] = V;
+      esValue[impl][\\"hostname\\"] = V;
     }
 
     get port() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"port\\"];
+      return esValue[impl][\\"port\\"];
     }
 
     set port(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
 
-      this[impl][\\"port\\"] = V;
+      esValue[impl][\\"port\\"] = V;
     }
 
     get pathname() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"pathname\\"];
+      return esValue[impl][\\"pathname\\"];
     }
 
     set pathname(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4285,53 +4462,63 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"pathname\\"] = V;
+      esValue[impl][\\"pathname\\"] = V;
     }
 
     get search() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"search\\"];
+      return esValue[impl][\\"search\\"];
     }
 
     set search(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
 
-      this[impl][\\"search\\"] = V;
+      esValue[impl][\\"search\\"] = V;
     }
 
     get searchParams() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       return utils.getSameObject(this, \\"searchParams\\", () => {
-        return utils.tryWrapperForImpl(this[impl][\\"searchParams\\"]);
+        return utils.tryWrapperForImpl(esValue[impl][\\"searchParams\\"]);
       });
     }
 
     get hash() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hash\\"];
+      return esValue[impl][\\"hash\\"];
     }
 
     set hash(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
 
-      this[impl][\\"hash\\"] = V;
+      esValue[impl][\\"hash\\"] = V;
     }
   }
   Object.defineProperties(URL.prototype, {
@@ -4409,11 +4596,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4435,7 +4622,8 @@ exports.install = function install(globalObject) {
     }
 
     item(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4452,15 +4640,17 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(esValue[impl].item(...args));
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(URLList.prototype, {
@@ -4739,11 +4929,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -4843,7 +5033,8 @@ exports.install = function install(globalObject) {
     }
 
     append(name, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4869,11 +5060,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].append(...args);
+      return esValue[impl].append(...args);
     }
 
     delete(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4892,11 +5084,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].delete(...args);
+      return esValue[impl].delete(...args);
     }
 
     get(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4915,11 +5108,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].get(...args);
+      return esValue[impl].get(...args);
     }
 
     getAll(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4938,11 +5132,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].getAll(...args));
+      return utils.tryWrapperForImpl(esValue[impl].getAll(...args));
     }
 
     has(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4961,11 +5156,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].has(...args);
+      return esValue[impl].has(...args);
     }
 
     set(name, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -4991,23 +5187,25 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].set(...args);
+      return esValue[impl].set(...args);
     }
 
     sort() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].sort();
+      return esValue[impl].sort();
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
 
     keys() {
@@ -5130,11 +5328,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5156,7 +5354,8 @@ exports.install = function install(globalObject) {
     }
 
     item(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -5175,11 +5374,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(esValue[impl].item(...args));
     }
 
     namedItem(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -5198,15 +5398,17 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].namedItem(...args));
+      return utils.tryWrapperForImpl(esValue[impl].namedItem(...args));
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(URLSearchParamsCollection.prototype, {
@@ -5464,13 +5666,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
-  URLSearchParamsCollection._internalSetup(obj);
+exports._internalSetup = function _internalSetup(obj, globalObject) {
+  URLSearchParamsCollection._internalSetup(obj, globalObject);
 };
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5773,11 +5975,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -5797,7 +5999,8 @@ exports.install = function install(globalObject) {
     }
 
     operation(sequence) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -5829,19 +6032,23 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].operation(...args);
+      return esValue[impl].operation(...args);
     }
 
     get attribute() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attribute\\"];
+      return esValue[impl][\\"attribute\\"];
     }
 
     set attribute(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -5849,7 +6056,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value\\"
       });
 
-      this[impl][\\"attribute\\"] = V;
+      esValue[impl][\\"attribute\\"] = V;
     }
 
     static static(void_) {
@@ -5939,12 +6146,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       assign(url) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -5963,17 +6171,21 @@ exports._internalSetup = function _internalSetup(obj) {
           });
           args.push(curArg);
         }
-        return this[impl].assign(...args);
+        return esValue[impl].assign(...args);
       },
       get href() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"href\\"];
+        return esValue[impl][\\"href\\"];
       },
       set href(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -5981,30 +6193,38 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"href\\"] = V;
+        esValue[impl][\\"href\\"] = V;
       },
       toString() {
-        if (!this || !exports.is(this)) {
+        const esValue = this;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
-        return obj[impl][\\"href\\"];
+
+        return esValue[impl][\\"href\\"];
       },
       get origin() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"origin\\"];
+        return esValue[impl][\\"origin\\"];
       },
       get protocol() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"protocol\\"];
+        return esValue[impl][\\"protocol\\"];
       },
       set protocol(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -6012,7 +6232,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"protocol\\"] = V;
+        esValue[impl][\\"protocol\\"] = V;
       }
     })
   );
@@ -6028,7 +6248,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6108,16 +6328,18 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       get a() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"a\\"];
+        return esValue[impl][\\"a\\"];
       }
     })
   );
@@ -6127,7 +6349,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6384,11 +6606,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6408,15 +6630,19 @@ exports.install = function install(globalObject) {
     }
 
     get unscopableTest() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableTest\\"];
+      return esValue[impl][\\"unscopableTest\\"];
     }
 
     set unscopableTest(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6424,19 +6650,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableTest' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableTest\\"] = V;
+      esValue[impl][\\"unscopableTest\\"] = V;
     }
 
     get unscopableMixin() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableMixin\\"];
+      return esValue[impl][\\"unscopableMixin\\"];
     }
 
     set unscopableMixin(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6444,7 +6674,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableMixin\\"] = V;
+      esValue[impl][\\"unscopableMixin\\"] = V;
     }
   }
   Object.defineProperties(Unscopable.prototype, {
@@ -6515,11 +6745,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6539,7 +6769,8 @@ exports.install = function install(globalObject) {
     }
 
     simple1() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -6550,11 +6781,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].simple1(...args);
+      return esValue[impl].simple1(...args);
     }
 
     simple2(first) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6576,11 +6808,12 @@ exports.install = function install(globalObject) {
         curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
         args.push(curArg);
       }
-      return this[impl].simple2(...args);
+      return esValue[impl].simple2(...args);
     }
 
     overloaded1() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -6608,11 +6841,12 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded1(...args);
+      return esValue[impl].overloaded1(...args);
     }
 
     overloaded2(first) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6682,7 +6916,7 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded2(...args);
+      return esValue[impl].overloaded2(...args);
     }
   }
   Object.defineProperties(Variadic.prototype, {
@@ -6750,11 +6984,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6834,11 +7068,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -6858,7 +7092,8 @@ exports.install = function install(globalObject) {
     }
 
     bs(source) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6881,11 +7116,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bs(...args);
+      return esValue[impl].bs(...args);
     }
 
     ab(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6904,11 +7140,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].ab(...args);
+      return esValue[impl].ab(...args);
     }
 
     abv(abv) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6930,11 +7167,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abv(...args);
+      return esValue[impl].abv(...args);
     }
 
     u8a(u8) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6953,11 +7191,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].u8a(...args);
+      return esValue[impl].u8a(...args);
     }
 
     abUnion(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -6979,11 +7218,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].abUnion(...args);
+      return esValue[impl].abUnion(...args);
     }
 
     u8aUnion(ab) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7005,7 +7245,7 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].u8aUnion(...args);
+      return esValue[impl].u8aUnion(...args);
     }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
@@ -7075,11 +7315,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7108,23 +7348,28 @@ exports.install = function install(globalObject) {
     }
 
     method() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].method();
+      return esValue[impl].method();
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attr\\"];
+      return esValue[impl][\\"attr\\"];
     }
 
     set attr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7132,7 +7377,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'attr' property on 'CEReactions': The provided value\\"
       });
 
-      this[impl][\\"attr\\"] = V;
+      esValue[impl][\\"attr\\"] = V;
     }
   }
   Object.defineProperties(CEReactions.prototype, {
@@ -7383,11 +7628,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7407,7 +7652,8 @@ exports.install = function install(globalObject) {
     }
 
     createDocumentType(qualifiedName, publicId, systemId) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7440,11 +7686,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocumentType(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createDocumentType(...args));
     }
 
     createDocument(namespace, qualifiedName) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7488,11 +7735,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createDocument(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createDocument(...args));
     }
 
     createHTMLDocument() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -7505,15 +7753,16 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].createHTMLDocument(...args));
+      return utils.tryWrapperForImpl(esValue[impl].createHTMLDocument(...args));
     }
 
     hasFeature() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].hasFeature();
+      return esValue[impl].hasFeature();
     }
   }
   Object.defineProperties(DOMImplementation.prototype, {
@@ -7660,11 +7909,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7684,7 +7933,8 @@ exports.install = function install(globalObject) {
     }
 
     op() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -7702,7 +7952,7 @@ exports.install = function install(globalObject) {
         curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'op' on 'DictionaryConvert': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return esValue[impl].op(...args);
     }
   }
   Object.defineProperties(DictionaryConvert.prototype, {
@@ -7768,11 +8018,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -7792,7 +8042,8 @@ exports.install = function install(globalObject) {
     }
 
     op(destination) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7807,19 +8058,23 @@ exports.install = function install(globalObject) {
         curArg = RequestDestination.convert(curArg, { context: \\"Failed to execute 'op' on 'Enum': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].op(...args);
+      return esValue[impl].op(...args);
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"attr\\"]);
+      return utils.tryWrapperForImpl(esValue[impl][\\"attr\\"]);
     }
 
     set attr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -7828,7 +8083,7 @@ exports.install = function install(globalObject) {
         return;
       }
 
-      this[impl][\\"attr\\"] = V;
+      esValue[impl][\\"attr\\"] = V;
     }
   }
   Object.defineProperties(Enum.prototype, {
@@ -7894,33 +8149,39 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       op() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].op();
+        return esValue[impl].op();
       },
       unforgeableOp() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return this[impl].unforgeableOp();
+        return esValue[impl].unforgeableOp();
       },
       get attr() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"attr\\"];
+        return esValue[impl][\\"attr\\"];
       },
       set attr(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -7928,17 +8189,21 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'attr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"attr\\"] = V;
+        esValue[impl][\\"attr\\"] = V;
       },
       get unforgeableAttr() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"unforgeableAttr\\"];
+        return esValue[impl][\\"unforgeableAttr\\"];
       },
       set unforgeableAttr(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -7946,17 +8211,21 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'unforgeableAttr' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"unforgeableAttr\\"] = V;
+        esValue[impl][\\"unforgeableAttr\\"] = V;
       },
       get length() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"length\\"];
+        return esValue[impl][\\"length\\"];
       },
       set length(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -7964,7 +8233,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'length' property on 'Global': The provided value\\"
         });
 
-        obj[impl][\\"length\\"] = V;
+        esValue[impl][\\"length\\"] = V;
       },
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
       keys: Array.prototype.keys,
@@ -7983,7 +8252,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8001,8 +8270,25 @@ exports.install = function install(globalObject) {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
     }
+
+    static staticOp() {
+      return Impl.implementation.staticOp();
+    }
+
+    static get staticAttr() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      return Impl.implementation[\\"staticAttr\\"];
+    }
+
+    static set staticAttr(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      return Impl.implementation[\\"staticAttr\\"];
+    }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
+  Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
   if (globalObject[ctorRegistry] === undefined) {
     globalObject[ctorRegistry] = Object.create(null);
   }
@@ -8061,11 +8347,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8145,11 +8431,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8169,11 +8455,13 @@ exports.install = function install(globalObject) {
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.setPrototypeOf(LegacyArrayClass.prototype, Array.prototype);
@@ -8239,11 +8527,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8263,31 +8551,37 @@ exports.install = function install(globalObject) {
     }
 
     mixedInOp() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].mixedInOp();
+      return esValue[impl].mixedInOp();
     }
 
     ifaceMixinOp() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].ifaceMixinOp();
+      return esValue[impl].ifaceMixinOp();
     }
 
     get mixedInAttr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"mixedInAttr\\"];
+      return esValue[impl][\\"mixedInAttr\\"];
     }
 
     set mixedInAttr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8295,19 +8589,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"mixedInAttr\\"] = V;
+      esValue[impl][\\"mixedInAttr\\"] = V;
     }
 
     get ifaceMixinAttr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"ifaceMixinAttr\\"];
+      return esValue[impl][\\"ifaceMixinAttr\\"];
     }
 
     set ifaceMixinAttr(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8315,7 +8613,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value\\"
       });
 
-      this[impl][\\"ifaceMixinAttr\\"] = V;
+      esValue[impl][\\"ifaceMixinAttr\\"] = V;
     }
   }
   Object.defineProperties(MixedIn.prototype, {
@@ -8390,11 +8688,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8435,7 +8733,8 @@ exports.install = function install(globalObject) {
     }
 
     compatible(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8500,11 +8799,12 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return utils.tryWrapperForImpl(this[impl].compatible(...args));
+      return utils.tryWrapperForImpl(esValue[impl].compatible(...args));
     }
 
     incompatible1(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8536,11 +8836,12 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].incompatible1(...args);
+      return esValue[impl].incompatible1(...args);
     }
 
     incompatible2(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8578,11 +8879,12 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible2(...args);
+      return esValue[impl].incompatible2(...args);
     }
 
     incompatible3(arg1) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8712,7 +9014,7 @@ exports.install = function install(globalObject) {
             args.push(curArg);
           }
       }
-      return this[impl].incompatible3(...args);
+      return esValue[impl].incompatible3(...args);
     }
   }
   Object.defineProperties(Overloads.prototype, {
@@ -8780,11 +9082,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8804,7 +9106,8 @@ exports.install = function install(globalObject) {
     }
 
     voidPromiseConsumer(p) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8824,11 +9127,12 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].voidPromiseConsumer(...args);
+      return esValue[impl].voidPromiseConsumer(...args);
     }
 
     promiseConsumer(p) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8854,7 +9158,7 @@ exports.install = function install(globalObject) {
         );
         args.push(curArg);
       }
-      return this[impl].promiseConsumer(...args);
+      return esValue[impl].promiseConsumer(...args);
     }
   }
   Object.defineProperties(PromiseTypes.prototype, {
@@ -8920,11 +9224,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -8944,7 +9248,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedBoolean() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8952,7 +9258,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedBoolean(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8968,7 +9276,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedDOMString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8977,7 +9287,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedDOMString(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8989,7 +9301,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedLong() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -8998,7 +9312,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedLong(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9010,7 +9326,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectedUnsignedLong() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9019,7 +9337,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectedUnsignedLong(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9031,7 +9351,9 @@ exports.install = function install(globalObject) {
     }
 
     get ReflectionTest() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9040,7 +9362,9 @@ exports.install = function install(globalObject) {
     }
 
     set ReflectionTest(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9052,7 +9376,9 @@ exports.install = function install(globalObject) {
     }
 
     get withUnderscore() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9061,7 +9387,9 @@ exports.install = function install(globalObject) {
     }
 
     set withUnderscore(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9173,11 +9501,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9197,7 +9525,8 @@ exports.install = function install(globalObject) {
     }
 
     recordConsumer(rec) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9237,11 +9566,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer(...args);
+      return esValue[impl].recordConsumer(...args);
     }
 
     recordConsumer2(rec) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9281,11 +9611,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].recordConsumer2(...args);
+      return esValue[impl].recordConsumer2(...args);
     }
 
     sequenceConsumer(seq) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9317,11 +9648,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer(...args);
+      return esValue[impl].sequenceConsumer(...args);
     }
 
     sequenceConsumer2(seq) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9351,11 +9683,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].sequenceConsumer2(...args);
+      return esValue[impl].sequenceConsumer2(...args);
     }
 
     frozenArrayConsumer(arr) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9388,7 +9721,7 @@ exports.install = function install(globalObject) {
         curArg = Object.freeze(curArg);
         args.push(curArg);
       }
-      return this[impl].frozenArrayConsumer(...args);
+      return esValue[impl].frozenArrayConsumer(...args);
     }
   }
   Object.defineProperties(SeqAndRec.prototype, {
@@ -9457,11 +9790,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9481,29 +9814,34 @@ exports.install = function install(globalObject) {
     }
 
     def() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].def();
+      return esValue[impl].def();
     }
 
     get abc() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"abc\\"];
+      return esValue[impl][\\"abc\\"];
     }
 
     set abc(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
 
-      this[impl][\\"abc\\"] = V;
+      esValue[impl][\\"abc\\"] = V;
     }
 
     static def() {
@@ -9511,10 +9849,14 @@ exports.install = function install(globalObject) {
     }
 
     static get abc() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
       return Impl.implementation[\\"abc\\"];
     }
 
     static set abc(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
       return Impl.implementation[\\"abc\\"];
     }
   }
@@ -9582,11 +9924,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9608,7 +9950,8 @@ exports.install = function install(globalObject) {
     }
 
     key(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9623,11 +9966,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"unsigned long\\"](curArg, { context: \\"Failed to execute 'key' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].key(...args);
+      return esValue[impl].key(...args);
     }
 
     getItem(key) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9642,11 +9986,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'getItem' on 'Storage': parameter 1\\" });
         args.push(curArg);
       }
-      return this[impl].getItem(...args);
+      return esValue[impl].getItem(...args);
     }
 
     setItem(key, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9666,11 +10011,12 @@ exports.install = function install(globalObject) {
         curArg = conversions[\\"DOMString\\"](curArg, { context: \\"Failed to execute 'setItem' on 'Storage': parameter 2\\" });
         args.push(curArg);
       }
-      return this[impl].setItem(...args);
+      return esValue[impl].setItem(...args);
     }
 
     removeItem(key) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -9687,23 +10033,26 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].removeItem(...args);
+      return esValue[impl].removeItem(...args);
     }
 
     clear() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].clear();
+      return esValue[impl].clear();
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(Storage.prototype, {
@@ -9937,11 +10286,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -9961,18 +10310,22 @@ exports.install = function install(globalObject) {
     }
 
     get attr() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attr\\"];
+      return esValue[impl][\\"attr\\"];
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"attr\\"];
+
+      return esValue[impl][\\"attr\\"];
     }
   }
   Object.defineProperties(StringifierAttribute.prototype, {
@@ -10040,11 +10393,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10064,11 +10417,12 @@ exports.install = function install(globalObject) {
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
   }
   Object.defineProperties(StringifierDefaultOperation.prototype, {
@@ -10135,11 +10489,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10159,19 +10513,21 @@ exports.install = function install(globalObject) {
     }
 
     operation() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return esValue[impl].operation();
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].operation();
+      return esValue[impl].operation();
     }
   }
   Object.defineProperties(StringifierNamedOperation.prototype, {
@@ -10237,11 +10593,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10261,11 +10617,12 @@ exports.install = function install(globalObject) {
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
   }
   Object.defineProperties(StringifierOperation.prototype, {
@@ -10332,11 +10689,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10356,7 +10713,8 @@ exports.install = function install(globalObject) {
     }
 
     numOrStrConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10382,11 +10740,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrConsumer(...args);
+      return esValue[impl].numOrStrConsumer(...args);
     }
 
     numOrEnumConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10415,11 +10774,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrEnumConsumer(...args);
+      return esValue[impl].numOrEnumConsumer(...args);
     }
 
     numOrStrOrNullConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10451,11 +10811,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrNullConsumer(...args);
+      return esValue[impl].numOrStrOrNullConsumer(...args);
     }
 
     numOrStrOrURLOrNullConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10489,11 +10850,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].numOrStrOrURLOrNullConsumer(...args);
+      return esValue[impl].numOrStrOrURLOrNullConsumer(...args);
     }
 
     urlMapInnerConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10535,11 +10897,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapInnerConsumer(...args);
+      return esValue[impl].urlMapInnerConsumer(...args);
     }
 
     urlMapConsumer(a) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10585,11 +10948,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].urlMapConsumer(...args);
+      return esValue[impl].urlMapConsumer(...args);
     }
 
     bufferSourceOrURLConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10615,11 +10979,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].bufferSourceOrURLConsumer(...args);
+      return esValue[impl].bufferSourceOrURLConsumer(...args);
     }
 
     arrayBufferViewOrURLMapConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10681,11 +11046,12 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewOrURLMapConsumer(...args);
+      return esValue[impl].arrayBufferViewOrURLMapConsumer(...args);
     }
 
     arrayBufferViewDupConsumer(b) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10708,19 +11074,23 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].arrayBufferViewDupConsumer(...args);
+      return esValue[impl].arrayBufferViewDupConsumer(...args);
     }
 
     get buf() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return utils.tryWrapperForImpl(this[impl][\\"buf\\"]);
+      return utils.tryWrapperForImpl(esValue[impl][\\"buf\\"]);
     }
 
     set buf(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10735,19 +11105,23 @@ exports.install = function install(globalObject) {
             \\" is not of any supported type.\\"
         );
       }
-      this[impl][\\"buf\\"] = V;
+      esValue[impl][\\"buf\\"] = V;
     }
 
     get time() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"time\\"];
+      return esValue[impl][\\"time\\"];
     }
 
     set time(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10755,7 +11129,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'time' property on 'TypedefsAndUnions': The provided value\\"
       });
 
-      this[impl][\\"time\\"] = V;
+      esValue[impl][\\"time\\"] = V;
     }
   }
   Object.defineProperties(TypedefsAndUnions.prototype, {
@@ -10830,11 +11204,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -10872,56 +11246,69 @@ exports.install = function install(globalObject) {
     }
 
     toJSON() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toJSON();
+      return esValue[impl].toJSON();
     }
 
     get href() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"href\\"];
+      return esValue[impl][\\"href\\"];
     }
 
     set href(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
 
-      this[impl][\\"href\\"] = V;
+      esValue[impl][\\"href\\"] = V;
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
-      return this[impl][\\"href\\"];
+
+      return esValue[impl][\\"href\\"];
     }
 
     get origin() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"origin\\"];
+      return esValue[impl][\\"origin\\"];
     }
 
     get protocol() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"protocol\\"];
+      return esValue[impl][\\"protocol\\"];
     }
 
     set protocol(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10929,19 +11316,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'protocol' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"protocol\\"] = V;
+      esValue[impl][\\"protocol\\"] = V;
     }
 
     get username() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"username\\"];
+      return esValue[impl][\\"username\\"];
     }
 
     set username(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10949,19 +11340,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'username' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"username\\"] = V;
+      esValue[impl][\\"username\\"] = V;
     }
 
     get password() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"password\\"];
+      return esValue[impl][\\"password\\"];
     }
 
     set password(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -10969,37 +11364,45 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'password' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"password\\"] = V;
+      esValue[impl][\\"password\\"] = V;
     }
 
     get host() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"host\\"];
+      return esValue[impl][\\"host\\"];
     }
 
     set host(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
 
-      this[impl][\\"host\\"] = V;
+      esValue[impl][\\"host\\"] = V;
     }
 
     get hostname() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hostname\\"];
+      return esValue[impl][\\"hostname\\"];
     }
 
     set hostname(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11007,37 +11410,45 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'hostname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"hostname\\"] = V;
+      esValue[impl][\\"hostname\\"] = V;
     }
 
     get port() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"port\\"];
+      return esValue[impl][\\"port\\"];
     }
 
     set port(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
 
-      this[impl][\\"port\\"] = V;
+      esValue[impl][\\"port\\"] = V;
     }
 
     get pathname() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"pathname\\"];
+      return esValue[impl][\\"pathname\\"];
     }
 
     set pathname(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11045,53 +11456,63 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'pathname' property on 'URL': The provided value\\"
       });
 
-      this[impl][\\"pathname\\"] = V;
+      esValue[impl][\\"pathname\\"] = V;
     }
 
     get search() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"search\\"];
+      return esValue[impl][\\"search\\"];
     }
 
     set search(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
 
-      this[impl][\\"search\\"] = V;
+      esValue[impl][\\"search\\"] = V;
     }
 
     get searchParams() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       return utils.getSameObject(this, \\"searchParams\\", () => {
-        return utils.tryWrapperForImpl(this[impl][\\"searchParams\\"]);
+        return utils.tryWrapperForImpl(esValue[impl][\\"searchParams\\"]);
       });
     }
 
     get hash() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"hash\\"];
+      return esValue[impl][\\"hash\\"];
     }
 
     set hash(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
 
-      this[impl][\\"hash\\"] = V;
+      esValue[impl][\\"hash\\"] = V;
     }
   }
   Object.defineProperties(URL.prototype, {
@@ -11169,11 +11590,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11195,7 +11616,8 @@ exports.install = function install(globalObject) {
     }
 
     item(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11212,15 +11634,17 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(esValue[impl].item(...args));
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(URLList.prototype, {
@@ -11499,11 +11923,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11603,7 +12027,8 @@ exports.install = function install(globalObject) {
     }
 
     append(name, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11629,11 +12054,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].append(...args);
+      return esValue[impl].append(...args);
     }
 
     delete(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11652,11 +12078,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].delete(...args);
+      return esValue[impl].delete(...args);
     }
 
     get(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11675,11 +12102,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].get(...args);
+      return esValue[impl].get(...args);
     }
 
     getAll(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11698,11 +12126,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].getAll(...args));
+      return utils.tryWrapperForImpl(esValue[impl].getAll(...args));
     }
 
     has(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11721,11 +12150,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].has(...args);
+      return esValue[impl].has(...args);
     }
 
     set(name, value) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11751,23 +12181,25 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].set(...args);
+      return esValue[impl].set(...args);
     }
 
     sort() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].sort();
+      return esValue[impl].sort();
     }
 
     toString() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl].toString();
+      return esValue[impl].toString();
     }
 
     keys() {
@@ -11890,11 +12322,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -11916,7 +12348,8 @@ exports.install = function install(globalObject) {
     }
 
     item(index) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11935,11 +12368,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].item(...args));
+      return utils.tryWrapperForImpl(esValue[impl].item(...args));
     }
 
     namedItem(name) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -11958,15 +12392,17 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(this[impl].namedItem(...args));
+      return utils.tryWrapperForImpl(esValue[impl].namedItem(...args));
     }
 
     get length() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"length\\"];
+      return esValue[impl][\\"length\\"];
     }
   }
   Object.defineProperties(URLSearchParamsCollection.prototype, {
@@ -12224,13 +12660,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
-  URLSearchParamsCollection._internalSetup(obj);
+exports._internalSetup = function _internalSetup(obj, globalObject) {
+  URLSearchParamsCollection._internalSetup(obj, globalObject);
 };
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12533,11 +12969,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12557,7 +12993,8 @@ exports.install = function install(globalObject) {
     }
 
     operation(sequence) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -12589,19 +13026,23 @@ exports.install = function install(globalObject) {
         }
         args.push(curArg);
       }
-      return this[impl].operation(...args);
+      return esValue[impl].operation(...args);
     }
 
     get attribute() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"attribute\\"];
+      return esValue[impl][\\"attribute\\"];
     }
 
     set attribute(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -12609,7 +13050,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value\\"
       });
 
-      this[impl][\\"attribute\\"] = V;
+      esValue[impl][\\"attribute\\"] = V;
     }
 
     static static(void_) {
@@ -12699,12 +13140,13 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       assign(url) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -12723,17 +13165,21 @@ exports._internalSetup = function _internalSetup(obj) {
           });
           args.push(curArg);
         }
-        return this[impl].assign(...args);
+        return esValue[impl].assign(...args);
       },
       get href() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"href\\"];
+        return esValue[impl][\\"href\\"];
       },
       set href(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -12741,30 +13187,38 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"href\\"] = V;
+        esValue[impl][\\"href\\"] = V;
       },
       toString() {
-        if (!this || !exports.is(this)) {
+        const esValue = this;
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
-        return obj[impl][\\"href\\"];
+
+        return esValue[impl][\\"href\\"];
       },
       get origin() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"origin\\"];
+        return esValue[impl][\\"origin\\"];
       },
       get protocol() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"protocol\\"];
+        return esValue[impl][\\"protocol\\"];
       },
       set protocol(V) {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
@@ -12772,7 +13226,7 @@ exports._internalSetup = function _internalSetup(obj) {
           context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
         });
 
-        obj[impl][\\"protocol\\"] = V;
+        esValue[impl][\\"protocol\\"] = V;
       }
     })
   );
@@ -12788,7 +13242,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -12868,16 +13322,18 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {
+exports._internalSetup = function _internalSetup(obj, globalObject) {
   Object.defineProperties(
     obj,
     Object.getOwnPropertyDescriptors({
       get a() {
-        if (!this || !exports.is(this)) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
           throw new TypeError(\\"Illegal invocation\\");
         }
 
-        return obj[impl][\\"a\\"];
+        return esValue[impl][\\"a\\"];
       }
     })
   );
@@ -12887,7 +13343,7 @@ exports._internalSetup = function _internalSetup(obj) {
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -13144,11 +13600,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -13168,15 +13624,19 @@ exports.install = function install(globalObject) {
     }
 
     get unscopableTest() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableTest\\"];
+      return esValue[impl][\\"unscopableTest\\"];
     }
 
     set unscopableTest(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -13184,19 +13644,23 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableTest' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableTest\\"] = V;
+      esValue[impl][\\"unscopableTest\\"] = V;
     }
 
     get unscopableMixin() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
-      return this[impl][\\"unscopableMixin\\"];
+      return esValue[impl][\\"unscopableMixin\\"];
     }
 
     set unscopableMixin(V) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -13204,7 +13668,7 @@ exports.install = function install(globalObject) {
         context: \\"Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value\\"
       });
 
-      this[impl][\\"unscopableMixin\\"] = V;
+      esValue[impl][\\"unscopableMixin\\"] = V;
     }
   }
   Object.defineProperties(Unscopable.prototype, {
@@ -13275,11 +13739,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
@@ -13299,7 +13763,8 @@ exports.install = function install(globalObject) {
     }
 
     simple1() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -13310,11 +13775,12 @@ exports.install = function install(globalObject) {
         });
         args.push(curArg);
       }
-      return this[impl].simple1(...args);
+      return esValue[impl].simple1(...args);
     }
 
     simple2(first) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -13336,11 +13802,12 @@ exports.install = function install(globalObject) {
         curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
         args.push(curArg);
       }
-      return this[impl].simple2(...args);
+      return esValue[impl].simple2(...args);
     }
 
     overloaded1() {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
       const args = [];
@@ -13368,11 +13835,12 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded1(...args);
+      return esValue[impl].overloaded1(...args);
     }
 
     overloaded2(first) {
-      if (!this || !exports.is(this)) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
         throw new TypeError(\\"Illegal invocation\\");
       }
 
@@ -13442,7 +13910,7 @@ exports.install = function install(globalObject) {
           }
         }
       }
-      return this[impl].overloaded2(...args);
+      return esValue[impl].overloaded2(...args);
     }
   }
   Object.defineProperties(Variadic.prototype, {
@@ -13510,11 +13978,11 @@ exports.createImpl = function createImpl(globalObject, constructorArgs, privateD
   const obj = exports.create(globalObject, constructorArgs, privateData);
   return utils.implForWrapper(obj);
 };
-exports._internalSetup = function _internalSetup(obj) {};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
 exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
   privateData.wrapper = obj;
 
-  exports._internalSetup(obj);
+  exports._internalSetup(obj, globalObject);
   Object.defineProperty(obj, impl, {
     value: new Impl.implementation(globalObject, constructorArgs, privateData),
     configurable: true
