@@ -5,7 +5,7 @@
   "main": "lib/transformer.js",
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "webidl-conversions": "^5.0.0",
     "webidl2": "^23.11.0"
   },
