@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const Transformer = require("..");
+const reflector = require("./reflector");
 
 const rootDir = path.resolve(__dirname, "..");
 const casesDir = path.resolve(__dirname, "cases");
@@ -50,6 +51,35 @@ describe("with processors", () => {
         return `
           return ${htmlConstructor}(globalObject, interfaceName);
         `;
+      },
+      processReflect(idl, implObj) {
+        const reflectAttr = idl.extAttrs.find(attr => attr.name === "Reflect");
+        const attrName =
+          reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/g, "-") || idl.name.toLowerCase();
+        if (idl.idlType.idlType === "USVString") {
+          const reflectURL = idl.extAttrs.find(attr => attr.name === "ReflectURL");
+          if (reflectURL) {
+            const whatwgURL = this.addImport("whatwg-url");
+            return {
+              get: `
+                const value = ${implObj}.getAttributeNS(null, "${attrName}");
+                if (value === null) {
+                  return "";
+                }
+                const urlRecord = ${whatwgURL}.parseURL(value, { baseURL: "http://localhost:8080/" });
+                return urlRecord === null ? conversions.USVString(value) : ${whatwgURL}.serializeURL(urlRecord);
+              `,
+              set: `
+                ${implObj}.setAttributeNS(null, "${attrName}", V);
+              `
+            };
+          }
+        }
+        const reflect = reflector[idl.idlType.idlType];
+        return {
+          get: reflect.get(implObj, attrName),
+          set: reflect.set(implObj, attrName)
+        };
       }
     });
     transformer.addSource(casesDir, implsDir);
