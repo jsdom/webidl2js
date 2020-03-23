@@ -19,10 +19,8 @@ describe("utils.js", () => {
       });
     }
 
-    const testBigInt = typeof BigInt === "function" && typeof BigInt("123") === "bigint" ? test : test.skip;
-
-    testBigInt("bigint", () => {
-      expect(utils.isObject(BigInt(123))).toBe(false);
+    test("bigint", () => {
+      expect(utils.isObject(123n)).toBe(false);
     });
 
     test("object", () => {
