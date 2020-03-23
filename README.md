@@ -241,7 +241,7 @@ function processReflect(idl, implName) {
       `
     };
   }
-  throw new Error(`Unknown IDL type: ${idl.idlType.idlType}`);
+  throw new Error(`Not-yet-implemented IDL type for reflection: ${idl.idlType.idlType}`);
 }
 ```
 
