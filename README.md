@@ -134,7 +134,7 @@ Both hooks have the signature `(code) => replacementCode`, where:
 
 If either hook is omitted, then the code will not be replaced, i.e. the default is equivalent to `(code) => code`.
 
-Both hooks also has a utility method that is accessible via `this`:
+Both hooks also have a utility method that is accessible via `this`:
 
 - `addImport(path, [importedIdentifier])` utility to require external modules from the generated interface. This method accepts 2 parameters: `path` the relative or absolute path from the generated interface file, and an optional `importedIdentifier` the identifier to import. This method returns the local identifier from the imported path.
 
