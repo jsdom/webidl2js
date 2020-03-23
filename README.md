@@ -222,12 +222,8 @@ An example processor function that implements `boolean` IDL attribute reflection
 
 ```js
 function processReflect(idl, implName) {
-  // Determine the name of the content attribute being reflected as follows:
-  // - if [Reflect] is provided with a value, then the value is the content attribute.
-  // - otherwise, the content attribute is the name of the IDL attribute, lowercased.
-  const reflectAttr = idl.extAttrs.find(attr => attr.name === "Reflect");
-  const attrName =
-    reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/g, "-") || idl.name.toLowerCase();
+  // Assume the name of the reflected content attribute is the same as the IDL attribute, lowercased.
+  const attrName = idl.name.toLowerCase();
 
   if (idl.idlType.idlType === "boolean") {
     return {
