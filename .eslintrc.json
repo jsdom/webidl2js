@@ -2,11 +2,10 @@
   "root": true,
   "env": {
     "node": true,
-    "es6": true,
-    "es2017": true
+    "es2020": true
   },
   "parserOptions": {
-    "ecmaVersion": 2019
+    "ecmaVersion": 2020
   },
   "rules": {
     // Possible errors

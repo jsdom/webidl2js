@@ -6,7 +6,7 @@
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
     "prettier": "^2.0.1",
-    "webidl-conversions": "^5.0.0",
+    "webidl-conversions": "^6.0.0",
     "webidl2": "^23.11.0"
   },
   "devDependencies": {
