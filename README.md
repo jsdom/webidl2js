@@ -477,7 +477,7 @@ Notable missing features include:
 
 ## Nonstandard extended attributes
 
-A non-standard extended attribute is baked in to webidl2js.
+One non-standard extended attribute is baked in to webidl2js:
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
