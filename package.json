@@ -1,18 +1,17 @@
 {
   "name": "webidl2js",
-  "version": "13.0.0",
+  "version": "15.0.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
-    "pn": "^1.1.0",
-    "prettier": "^1.19.1",
-    "webidl-conversions": "^5.0.0",
-    "webidl2": "^23.10.1"
+    "prettier": "^2.0.1",
+    "webidl-conversions": "^6.0.0",
+    "webidl2": "^23.11.0"
   },
   "devDependencies": {
-    "eslint": "^6.6.0",
-    "jest": "^24.9.0"
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0"
   },
   "scripts": {
     "test": "jest",
@@ -26,7 +25,7 @@
     ]
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "author": "Sebastian Mayr <npm@smayr.name>",
   "license": "MIT"
