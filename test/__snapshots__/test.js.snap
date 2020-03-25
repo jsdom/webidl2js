@@ -6,7 +6,8 @@ exports[`with processors BufferSourceTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"BufferSourceTypes\\";
 
@@ -253,7 +254,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const CEReactions = require(\\"../CEReactions.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"CEReactions\\";
 
@@ -595,7 +597,8 @@ exports[`with processors DOMImplementation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DOMImplementation\\";
 
@@ -875,7 +878,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DictionaryConvert\\";
 
@@ -983,7 +987,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const RequestDestination = require(\\"./RequestDestination.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Enum\\";
 
@@ -1113,7 +1118,8 @@ exports[`with processors Global.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Global\\";
 
@@ -1311,7 +1317,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const HTMLConstructor_HTMLConstructor = require(\\"../HTMLConstructor.js\\").HTMLConstructor;
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"HTMLConstructor\\";
 
@@ -1394,7 +1401,8 @@ exports[`with processors LegacyArrayClass.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"LegacyArrayClass\\";
 
@@ -1489,7 +1497,8 @@ exports[`with processors MixedIn.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"MixedIn\\";
 
@@ -1649,7 +1658,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Overloads\\";
 
@@ -2042,7 +2052,8 @@ exports[`with processors PromiseTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"PromiseTypes\\";
 
@@ -2184,7 +2195,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const whatwg_url = require(\\"whatwg-url\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Reflect\\";
 
@@ -2490,7 +2502,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"SeqAndRec\\";
 
@@ -2778,7 +2791,8 @@ exports[`with processors Static.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Static\\";
 
@@ -2911,7 +2925,8 @@ exports[`with processors Storage.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Storage\\";
 
@@ -3272,7 +3287,8 @@ exports[`with processors StringifierAttribute.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierAttribute\\";
 
@@ -3376,7 +3392,8 @@ exports[`with processors StringifierDefaultOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierDefaultOperation\\";
 
@@ -3471,7 +3488,8 @@ exports[`with processors StringifierNamedOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierNamedOperation\\";
 
@@ -3576,7 +3594,8 @@ exports[`with processors StringifierOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierOperation\\";
 
@@ -3671,7 +3690,8 @@ const utils = require(\\"./utils.js\\");
 
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"TypedefsAndUnions\\";
 
@@ -4185,7 +4205,8 @@ exports[`with processors URL.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URL\\";
 
@@ -4570,7 +4591,8 @@ exports[`with processors URLList.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLList\\";
 
@@ -4854,7 +4876,8 @@ exports[`with processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParams\\";
 
@@ -5298,7 +5321,8 @@ exports[`with processors URLSearchParamsCollection.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParamsCollection\\";
 
@@ -5634,7 +5658,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 const interfaceName = \\"URLSearchParamsCollection2\\";
@@ -5945,7 +5970,8 @@ exports[`with processors UnderscoredProperties.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnderscoredProperties\\";
 
@@ -6115,7 +6141,8 @@ exports[`with processors Unforgeable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unforgeable\\";
 
@@ -6296,7 +6323,8 @@ exports[`with processors UnforgeableMap.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnforgeableMap\\";
 
@@ -6573,7 +6601,8 @@ exports[`with processors Unscopable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unscopable\\";
 
@@ -6711,7 +6740,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Variadic\\";
 
@@ -6949,7 +6979,8 @@ exports[`with processors ZeroArgConstructor.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"ZeroArgConstructor\\";
 
@@ -7032,7 +7063,8 @@ exports[`without processors BufferSourceTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"BufferSourceTypes\\";
 
@@ -7278,7 +7310,8 @@ exports[`without processors CEReactions.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"CEReactions\\";
 
@@ -7590,7 +7623,8 @@ exports[`without processors DOMImplementation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DOMImplementation\\";
 
@@ -7870,7 +7904,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"DictionaryConvert\\";
 
@@ -7978,7 +8013,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const RequestDestination = require(\\"./RequestDestination.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Enum\\";
 
@@ -8108,7 +8144,8 @@ exports[`without processors Global.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Global\\";
 
@@ -8305,7 +8342,8 @@ exports[`without processors HTMLConstructor.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"HTMLConstructor\\";
 
@@ -8388,7 +8426,8 @@ exports[`without processors LegacyArrayClass.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"LegacyArrayClass\\";
 
@@ -8483,7 +8522,8 @@ exports[`without processors MixedIn.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"MixedIn\\";
 
@@ -8643,7 +8683,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Overloads\\";
 
@@ -9036,7 +9077,8 @@ exports[`without processors PromiseTypes.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"PromiseTypes\\";
 
@@ -9177,7 +9219,8 @@ exports[`without processors Reflect.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Reflect\\";
 
@@ -9469,7 +9512,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"SeqAndRec\\";
 
@@ -9757,7 +9801,8 @@ exports[`without processors Static.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Static\\";
 
@@ -9890,7 +9935,8 @@ exports[`without processors Storage.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Storage\\";
 
@@ -10251,7 +10297,8 @@ exports[`without processors StringifierAttribute.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierAttribute\\";
 
@@ -10355,7 +10402,8 @@ exports[`without processors StringifierDefaultOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierDefaultOperation\\";
 
@@ -10450,7 +10498,8 @@ exports[`without processors StringifierNamedOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierNamedOperation\\";
 
@@ -10555,7 +10604,8 @@ exports[`without processors StringifierOperation.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"StringifierOperation\\";
 
@@ -10650,7 +10700,8 @@ const utils = require(\\"./utils.js\\");
 
 const RequestDestination = require(\\"./RequestDestination.js\\");
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"TypedefsAndUnions\\";
 
@@ -11164,7 +11215,8 @@ exports[`without processors URL.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URL\\";
 
@@ -11549,7 +11601,8 @@ exports[`without processors URLList.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLList\\";
 
@@ -11833,7 +11886,8 @@ exports[`without processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParams\\";
 
@@ -12277,7 +12331,8 @@ exports[`without processors URLSearchParamsCollection.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParamsCollection\\";
 
@@ -12613,7 +12668,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const URLSearchParamsCollection = require(\\"./URLSearchParamsCollection.js\\");
 
 const interfaceName = \\"URLSearchParamsCollection2\\";
@@ -12924,7 +12980,8 @@ exports[`without processors UnderscoredProperties.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnderscoredProperties\\";
 
@@ -13094,7 +13151,8 @@ exports[`without processors Unforgeable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unforgeable\\";
 
@@ -13275,7 +13333,8 @@ exports[`without processors UnforgeableMap.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"UnforgeableMap\\";
 
@@ -13552,7 +13611,8 @@ exports[`without processors Unscopable.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Unscopable\\";
 
@@ -13690,7 +13750,8 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"Variadic\\";
 
@@ -13928,7 +13989,8 @@ exports[`without processors ZeroArgConstructor.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const { implSymbol, ctorRegistrySymbol } = utils;
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"ZeroArgConstructor\\";
 
