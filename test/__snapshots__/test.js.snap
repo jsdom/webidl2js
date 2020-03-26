@@ -802,7 +802,7 @@ const utils = require(\\"./utils.js\\");
 const URL = require(\\"./URL.js\\");
 const URLSearchParams = require(\\"./URLSearchParams.js\\");
 
-exports.convertInherit = function convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
+exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}) => {
   {
     const key = \\"boolWithDefault\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
@@ -865,7 +865,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   }
 
   const ret = Object.create(null);
-  module.exports.convertInherit(obj, ret, { context });
+  exports._convertInherit(obj, ret, { context });
   return ret;
 };
 "
@@ -7828,7 +7828,7 @@ const utils = require(\\"./utils.js\\");
 const URL = require(\\"./URL.js\\");
 const URLSearchParams = require(\\"./URLSearchParams.js\\");
 
-exports.convertInherit = function convertInherit(obj, ret, { context = \\"The provided value\\" } = {}) {
+exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}) => {
   {
     const key = \\"boolWithDefault\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
@@ -7891,7 +7891,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
   }
 
   const ret = Object.create(null);
-  module.exports.convertInherit(obj, ret, { context });
+  exports._convertInherit(obj, ret, { context });
   return ret;
 };
 "
