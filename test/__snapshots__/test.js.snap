@@ -1175,7 +1175,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation() {
+  function callTheUserObjectsOperation(event) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -1188,7 +1188,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    let callResult = Reflect.apply(X, thisArg, []);
+    event = utils.tryWrapperForImpl(event);
+
+    let callResult = Reflect.apply(X, thisArg, [event]);
   }
 
   callTheUserObjectsOperation[utils.wrapperSymbol] = value;
@@ -8483,7 +8485,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
     throw new TypeError(\`\${context} is not an object.\`);
   }
 
-  function callTheUserObjectsOperation() {
+  function callTheUserObjectsOperation(event) {
     let thisArg = this;
     let O = value;
     let X = O;
@@ -8496,7 +8498,9 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       thisArg = O;
     }
 
-    let callResult = Reflect.apply(X, thisArg, []);
+    event = utils.tryWrapperForImpl(event);
+
+    let callResult = Reflect.apply(X, thisArg, [event]);
   }
 
   callTheUserObjectsOperation[utils.wrapperSymbol] = value;
