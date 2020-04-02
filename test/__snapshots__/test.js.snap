@@ -29,7 +29,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       callResult = Promise.resolve(callResult).then(
         value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+          value = conversions[\\"any\\"](value, { context: \`\${context} promise value\` });
 
           return value;
         },
@@ -152,9 +152,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -164,7 +162,7 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'bs' on 'BufferSourceTypes': parameter 1\\" + \\" is not of any supported type.\\"
+            \\"Failed to execute 'bs' on 'BufferSourceTypes': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -180,9 +178,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -204,9 +200,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -215,7 +209,7 @@ exports.install = (globalObject, globalNames) => {
         if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'abv' on 'BufferSourceTypes': parameter 1\\" + \\" is not of any supported type.\\"
+            \\"Failed to execute 'abv' on 'BufferSourceTypes': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -231,9 +225,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -255,9 +247,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -282,9 +272,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -840,9 +828,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 3) {
         throw new TypeError(
-          \\"Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -878,9 +864,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -1285,12 +1269,12 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new TypeError(context + \\" has member 'seq' that\\" + \\" is not an iterable object.\\");
+        throw new TypeError(context + \\" has member 'seq' that is not an iterable object.\\");
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that's element\\" });
 
           V.push(nextItem);
         }
@@ -1561,7 +1545,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'op' on 'Enum': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'op' on 'Enum': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -1759,9 +1743,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -2407,9 +2389,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
         if (arguments.length < 1) {
           throw new TypeError(
-            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
+            \`Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \${arguments.length} present.\`
           );
         }
         const args = [];
@@ -3251,9 +3231,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'compatible' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'compatible' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3321,9 +3299,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible1' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible1' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3358,9 +3334,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible2' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible2' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3401,9 +3375,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible3' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible3' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3454,7 +3426,7 @@ exports.install = (globalObject, globalNames) => {
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new TypeError(
-                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\" + \\" is not of any supported type.\\"
+                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.\\"
                   );
                 }
                 args.push(curArg);
@@ -3466,7 +3438,7 @@ exports.install = (globalObject, globalNames) => {
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new TypeError(
-                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\" + \\" is not of any supported type.\\"
+                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.\\"
                   );
                 }
                 args.push(curArg);
@@ -3484,7 +3456,7 @@ exports.install = (globalObject, globalNames) => {
           break;
         case 3:
           throw new TypeError(
-            \\"Failed to execute 'incompatible3' on 'Overloads': only \\" + arguments.length + \\" arguments present.\\"
+            \`Failed to execute 'incompatible3' on 'Overloads': only \${arguments.length} arguments present.\`
           );
           break;
         default:
@@ -3508,7 +3480,7 @@ exports.install = (globalObject, globalNames) => {
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new TypeError(
-                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 3\\" + \\" is not of any supported type.\\"
+                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 3 is not of any supported type.\\"
               );
             }
             args.push(curArg);
@@ -3519,7 +3491,7 @@ exports.install = (globalObject, globalNames) => {
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new TypeError(
-                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 4\\" + \\" is not of any supported type.\\"
+                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 4 is not of any supported type.\\"
               );
             }
             args.push(curArg);
@@ -3687,9 +3659,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3712,9 +3682,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -3723,7 +3691,7 @@ exports.install = (globalObject, globalNames) => {
         curArg = Promise.resolve(curArg).then(
           value => {
             value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1 promise value\\"
             });
 
             return value;
@@ -4379,16 +4347,14 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
-          throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+          throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1 is not an object.\\");
         } else {
           const result = Object.create(null);
           for (const key of Reflect.ownKeys(curArg)) {
@@ -4397,13 +4363,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = conversions[\\"double\\"](typedValue, {
-                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -4424,16 +4390,14 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
-          throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+          throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1 is not an object.\\");
         } else {
           const result = Object.create(null);
           for (const key of Reflect.ownKeys(curArg)) {
@@ -4442,13 +4406,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(typedValue, {
-                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -4469,9 +4433,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4479,14 +4441,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"USVString\\"](nextItem, {
-              context: \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -4506,9 +4468,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4516,7 +4476,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
@@ -4541,9 +4501,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4551,14 +4509,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"double\\"](nextItem, {
-              context: \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -4862,7 +4820,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'key' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'key' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4882,7 +4840,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'getItem' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'getItem' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4902,7 +4860,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'setItem' on 'Storage': 2 arguments required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'setItem' on 'Storage': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -4927,7 +4885,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'removeItem' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'removeItem' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5760,9 +5718,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5791,9 +5747,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5825,9 +5779,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5862,9 +5814,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5901,9 +5851,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5911,7 +5859,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\" is not an object.\\"
+            \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.\\"
           );
         } else {
           const result = Object.create(null);
@@ -5921,13 +5869,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(typedValue, {
-                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -5948,9 +5896,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -5961,7 +5907,7 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (!utils.isObject(curArg)) {
             throw new TypeError(
-              \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\" is not an object.\\"
+              \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.\\"
             );
           } else {
             const result = Object.create(null);
@@ -5971,13 +5917,13 @@ exports.install = (globalObject, globalNames) => {
                 let typedKey = key;
 
                 typedKey = conversions[\\"USVString\\"](typedKey, {
-                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
+                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's key\\"
                 });
 
                 let typedValue = curArg[key];
 
                 typedValue = URL.convert(typedValue, {
-                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
+                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's value\\"
                 });
 
                 result[typedKey] = typedValue;
@@ -5999,9 +5945,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -6013,8 +5957,7 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-              \\" is not of any supported type.\\"
+            \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -6030,9 +5973,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -6045,9 +5986,7 @@ exports.install = (globalObject, globalNames) => {
           } else if (utils.isObject(curArg)) {
             if (!utils.isObject(curArg)) {
               throw new TypeError(
-                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                  \\" record\\" +
-                  \\" is not an object.\\"
+                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record is not an object.\\"
               );
             } else {
               const result = Object.create(null);
@@ -6058,18 +5997,14 @@ exports.install = (globalObject, globalNames) => {
 
                   typedKey = conversions[\\"USVString\\"](typedKey, {
                     context:
-                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                      \\" record\\" +
-                      \\"'s key\\"
+                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's key\\"
                   });
 
                   let typedValue = curArg[key];
 
                   typedValue = URL.convert(typedValue, {
                     context:
-                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                      \\" record\\" +
-                      \\"'s value\\"
+                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's value\\"
                   });
 
                   result[typedKey] = typedValue;
@@ -6079,8 +6014,7 @@ exports.install = (globalObject, globalNames) => {
             }
           } else {
             throw new TypeError(
-              \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                \\" is not of any supported type.\\"
+              \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
             );
           }
         }
@@ -6097,9 +6031,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -6108,8 +6040,7 @@ exports.install = (globalObject, globalNames) => {
         if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-              \\" is not of any supported type.\\"
+            \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -6141,8 +6072,7 @@ exports.install = (globalObject, globalNames) => {
       ) {
       } else {
         throw new TypeError(
-          \\"Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value\\" +
-            \\" is not of any supported type.\\"
+          \\"Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value is not of any supported type.\\"
         );
       }
       esValue[implSymbol][\\"buf\\"] = V;
@@ -6292,9 +6222,7 @@ exports.install = (globalObject, globalNames) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
-        throw new TypeError(
-          \\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\"
-        );
+        throw new TypeError(\`Failed to construct 'URL': 1 argument required, but only \${arguments.length} present.\`);
       }
       const args = [];
       {
@@ -6727,7 +6655,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'item' on 'URLList': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'item' on 'URLList': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7082,7 +7010,7 @@ exports.install = (globalObject, globalNames) => {
             if (curArg[Symbol.iterator] !== undefined) {
               if (!utils.isObject(curArg)) {
                 throw new TypeError(
-                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\" is not an iterable object.\\"
+                  \\"Failed to construct 'URLSearchParams': parameter 1 sequence is not an iterable object.\\"
                 );
               } else {
                 const V = [];
@@ -7090,21 +7018,14 @@ exports.install = (globalObject, globalNames) => {
                 for (let nextItem of tmp) {
                   if (!utils.isObject(nextItem)) {
                     throw new TypeError(
-                      \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                        \\" sequence\\" +
-                        \\"'s element\\" +
-                        \\" is not an iterable object.\\"
+                      \\"Failed to construct 'URLSearchParams': parameter 1 sequence's element is not an iterable object.\\"
                     );
                   } else {
                     const V = [];
                     const tmp = nextItem;
                     for (let nextItem of tmp) {
                       nextItem = conversions[\\"USVString\\"](nextItem, {
-                        context:
-                          \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                          \\" sequence\\" +
-                          \\"'s element\\" +
-                          \\"'s element\\"
+                        context: \\"Failed to construct 'URLSearchParams': parameter 1 sequence's element's element\\"
                       });
 
                       V.push(nextItem);
@@ -7118,9 +7039,7 @@ exports.install = (globalObject, globalNames) => {
               }
             } else {
               if (!utils.isObject(curArg)) {
-                throw new TypeError(
-                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\" is not an object.\\"
-                );
+                throw new TypeError(\\"Failed to construct 'URLSearchParams': parameter 1 record is not an object.\\");
               } else {
                 const result = Object.create(null);
                 for (const key of Reflect.ownKeys(curArg)) {
@@ -7129,13 +7048,13 @@ exports.install = (globalObject, globalNames) => {
                     let typedKey = key;
 
                     typedKey = conversions[\\"USVString\\"](typedKey, {
-                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s key\\"
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1 record's key\\"
                     });
 
                     let typedValue = curArg[key];
 
                     typedValue = conversions[\\"USVString\\"](typedValue, {
-                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s value\\"
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1 record's value\\"
                     });
 
                     result[typedKey] = typedValue;
@@ -7165,9 +7084,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7196,9 +7113,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7220,9 +7135,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7244,9 +7157,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7268,9 +7179,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7292,9 +7201,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7359,11 +7266,11 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
       }
       if (typeof callback !== \\"function\\") {
         throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
+          \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1 is not a function.\\"
         );
       }
       const thisArg = arguments[1];
@@ -7515,9 +7422,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -7539,9 +7444,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -8217,9 +8120,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -8227,14 +8128,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"DOMString\\"](nextItem, {
-              context: \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -8273,9 +8174,7 @@ exports.install = (globalObject, globalNames) => {
     static static(void_) {
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -8582,7 +8481,7 @@ exports.install = (globalObject, globalNames) => {
       for (let i = 0; i < arguments.length; i++) {
         let curArg = arguments[i];
         curArg = conversions[\\"DOMString\\"](curArg, {
-          context: \\"Failed to execute 'simple1' on 'Variadic': parameter \\" + (i + 1)
+          context: \`Failed to execute 'simple1' on 'Variadic': parameter \${i + 1}\`
         });
         args.push(curArg);
       }
@@ -8597,7 +8496,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'simple2' on 'Variadic': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'simple2' on 'Variadic': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -8610,7 +8509,7 @@ exports.install = (globalObject, globalNames) => {
       }
       for (let i = 1; i < arguments.length; i++) {
         let curArg = arguments[i];
-        curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
+        curArg = URL.convert(curArg, { context: \`Failed to execute 'simple2' on 'Variadic': parameter \${i + 1}\` });
         args.push(curArg);
       }
       return esValue[implSymbol].simple2(...args);
@@ -8631,7 +8530,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"unsigned long\\"](curArg, {
-                context: \\"Failed to execute 'overloaded1' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded1' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -8639,7 +8538,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded1' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded1' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -8657,9 +8556,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -8699,7 +8596,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded2' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded2' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -8714,7 +8611,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded2' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded2' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -8887,7 +8784,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       callResult = Promise.resolve(callResult).then(
         value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+          value = conversions[\\"any\\"](value, { context: \`\${context} promise value\` });
 
           return value;
         },
@@ -9010,9 +8907,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9022,7 +8917,7 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'bs' on 'BufferSourceTypes': parameter 1\\" + \\" is not of any supported type.\\"
+            \\"Failed to execute 'bs' on 'BufferSourceTypes': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -9038,9 +8933,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9062,9 +8955,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9073,7 +8964,7 @@ exports.install = (globalObject, globalNames) => {
         if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'abv' on 'BufferSourceTypes': parameter 1\\" + \\" is not of any supported type.\\"
+            \\"Failed to execute 'abv' on 'BufferSourceTypes': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -9089,9 +8980,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9113,9 +9002,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9140,9 +9027,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9657,9 +9542,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 3) {
         throw new TypeError(
-          \\"Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -9695,9 +9578,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -10102,12 +9983,12 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new TypeError(context + \\" has member 'seq' that\\" + \\" is not an iterable object.\\");
+        throw new TypeError(context + \\" has member 'seq' that is not an iterable object.\\");
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that's element\\" });
 
           V.push(nextItem);
         }
@@ -10378,7 +10259,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'op' on 'Enum': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'op' on 'Enum': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -10576,9 +10457,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -11223,9 +11102,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
         if (arguments.length < 1) {
           throw new TypeError(
-            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
+            \`Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \${arguments.length} present.\`
           );
         }
         const args = [];
@@ -12067,9 +11944,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'compatible' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'compatible' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12137,9 +12012,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible1' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible1' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12174,9 +12047,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible2' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible2' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12217,9 +12088,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'incompatible3' on 'Overloads': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'incompatible3' on 'Overloads': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12270,7 +12139,7 @@ exports.install = (globalObject, globalNames) => {
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new TypeError(
-                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\" + \\" is not of any supported type.\\"
+                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.\\"
                   );
                 }
                 args.push(curArg);
@@ -12282,7 +12151,7 @@ exports.install = (globalObject, globalNames) => {
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new TypeError(
-                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2\\" + \\" is not of any supported type.\\"
+                    \\"Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.\\"
                   );
                 }
                 args.push(curArg);
@@ -12300,7 +12169,7 @@ exports.install = (globalObject, globalNames) => {
           break;
         case 3:
           throw new TypeError(
-            \\"Failed to execute 'incompatible3' on 'Overloads': only \\" + arguments.length + \\" arguments present.\\"
+            \`Failed to execute 'incompatible3' on 'Overloads': only \${arguments.length} arguments present.\`
           );
           break;
         default:
@@ -12324,7 +12193,7 @@ exports.install = (globalObject, globalNames) => {
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new TypeError(
-                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 3\\" + \\" is not of any supported type.\\"
+                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 3 is not of any supported type.\\"
               );
             }
             args.push(curArg);
@@ -12335,7 +12204,7 @@ exports.install = (globalObject, globalNames) => {
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new TypeError(
-                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 4\\" + \\" is not of any supported type.\\"
+                \\"Failed to execute 'incompatible3' on 'Overloads': parameter 4 is not of any supported type.\\"
               );
             }
             args.push(curArg);
@@ -12503,9 +12372,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12528,9 +12395,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -12539,7 +12404,7 @@ exports.install = (globalObject, globalNames) => {
         curArg = Promise.resolve(curArg).then(
           value => {
             value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1 promise value\\"
             });
 
             return value;
@@ -13180,16 +13045,14 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
-          throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+          throw new TypeError(\\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1 is not an object.\\");
         } else {
           const result = Object.create(null);
           for (const key of Reflect.ownKeys(curArg)) {
@@ -13198,13 +13061,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = conversions[\\"double\\"](typedValue, {
-                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -13225,16 +13088,14 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
-          throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an object.\\");
+          throw new TypeError(\\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1 is not an object.\\");
         } else {
           const result = Object.create(null);
           for (const key of Reflect.ownKeys(curArg)) {
@@ -13243,13 +13104,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(typedValue, {
-                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -13270,9 +13131,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13280,14 +13139,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"USVString\\"](nextItem, {
-              context: \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -13307,9 +13166,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13317,7 +13174,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
@@ -13342,9 +13199,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13352,14 +13207,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"double\\"](nextItem, {
-              context: \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -13663,7 +13518,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'key' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'key' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13683,7 +13538,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'getItem' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'getItem' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13703,7 +13558,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'setItem' on 'Storage': 2 arguments required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'setItem' on 'Storage': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -13728,7 +13583,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'removeItem' on 'Storage': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'removeItem' on 'Storage': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14561,9 +14416,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14592,9 +14445,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14626,9 +14477,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14663,9 +14512,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14702,9 +14549,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14712,7 +14557,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\" is not an object.\\"
+            \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.\\"
           );
         } else {
           const result = Object.create(null);
@@ -14722,13 +14567,13 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions[\\"USVString\\"](typedKey, {
-                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
+                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's key\\"
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(typedValue, {
-                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
+                context: \\"Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's value\\"
               });
 
               result[typedKey] = typedValue;
@@ -14749,9 +14594,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14762,7 +14605,7 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (!utils.isObject(curArg)) {
             throw new TypeError(
-              \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\" is not an object.\\"
+              \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.\\"
             );
           } else {
             const result = Object.create(null);
@@ -14772,13 +14615,13 @@ exports.install = (globalObject, globalNames) => {
                 let typedKey = key;
 
                 typedKey = conversions[\\"USVString\\"](typedKey, {
-                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s key\\"
+                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's key\\"
                 });
 
                 let typedValue = curArg[key];
 
                 typedValue = URL.convert(typedValue, {
-                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1\\" + \\"'s value\\"
+                  context: \\"Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's value\\"
                 });
 
                 result[typedKey] = typedValue;
@@ -14800,9 +14643,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14814,8 +14655,7 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-              \\" is not of any supported type.\\"
+            \\"Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -14831,9 +14671,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14846,9 +14684,7 @@ exports.install = (globalObject, globalNames) => {
           } else if (utils.isObject(curArg)) {
             if (!utils.isObject(curArg)) {
               throw new TypeError(
-                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                  \\" record\\" +
-                  \\" is not an object.\\"
+                \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record is not an object.\\"
               );
             } else {
               const result = Object.create(null);
@@ -14859,18 +14695,14 @@ exports.install = (globalObject, globalNames) => {
 
                   typedKey = conversions[\\"USVString\\"](typedKey, {
                     context:
-                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                      \\" record\\" +
-                      \\"'s key\\"
+                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's key\\"
                   });
 
                   let typedValue = curArg[key];
 
                   typedValue = URL.convert(typedValue, {
                     context:
-                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                      \\" record\\" +
-                      \\"'s value\\"
+                      \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's value\\"
                   });
 
                   result[typedKey] = typedValue;
@@ -14880,8 +14712,7 @@ exports.install = (globalObject, globalNames) => {
             }
           } else {
             throw new TypeError(
-              \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-                \\" is not of any supported type.\\"
+              \\"Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
             );
           }
         }
@@ -14898,9 +14729,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -14909,8 +14738,7 @@ exports.install = (globalObject, globalNames) => {
         if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new TypeError(
-            \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1\\" +
-              \\" is not of any supported type.\\"
+            \\"Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.\\"
           );
         }
         args.push(curArg);
@@ -14942,8 +14770,7 @@ exports.install = (globalObject, globalNames) => {
       ) {
       } else {
         throw new TypeError(
-          \\"Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value\\" +
-            \\" is not of any supported type.\\"
+          \\"Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value is not of any supported type.\\"
         );
       }
       esValue[implSymbol][\\"buf\\"] = V;
@@ -15093,9 +14920,7 @@ exports.install = (globalObject, globalNames) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
-        throw new TypeError(
-          \\"Failed to construct 'URL': 1 argument required, but only \\" + arguments.length + \\" present.\\"
-        );
+        throw new TypeError(\`Failed to construct 'URL': 1 argument required, but only \${arguments.length} present.\`);
       }
       const args = [];
       {
@@ -15528,7 +15353,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'item' on 'URLList': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'item' on 'URLList': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -15883,7 +15708,7 @@ exports.install = (globalObject, globalNames) => {
             if (curArg[Symbol.iterator] !== undefined) {
               if (!utils.isObject(curArg)) {
                 throw new TypeError(
-                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" sequence\\" + \\" is not an iterable object.\\"
+                  \\"Failed to construct 'URLSearchParams': parameter 1 sequence is not an iterable object.\\"
                 );
               } else {
                 const V = [];
@@ -15891,21 +15716,14 @@ exports.install = (globalObject, globalNames) => {
                 for (let nextItem of tmp) {
                   if (!utils.isObject(nextItem)) {
                     throw new TypeError(
-                      \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                        \\" sequence\\" +
-                        \\"'s element\\" +
-                        \\" is not an iterable object.\\"
+                      \\"Failed to construct 'URLSearchParams': parameter 1 sequence's element is not an iterable object.\\"
                     );
                   } else {
                     const V = [];
                     const tmp = nextItem;
                     for (let nextItem of tmp) {
                       nextItem = conversions[\\"USVString\\"](nextItem, {
-                        context:
-                          \\"Failed to construct 'URLSearchParams': parameter 1\\" +
-                          \\" sequence\\" +
-                          \\"'s element\\" +
-                          \\"'s element\\"
+                        context: \\"Failed to construct 'URLSearchParams': parameter 1 sequence's element's element\\"
                       });
 
                       V.push(nextItem);
@@ -15919,9 +15737,7 @@ exports.install = (globalObject, globalNames) => {
               }
             } else {
               if (!utils.isObject(curArg)) {
-                throw new TypeError(
-                  \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\" is not an object.\\"
-                );
+                throw new TypeError(\\"Failed to construct 'URLSearchParams': parameter 1 record is not an object.\\");
               } else {
                 const result = Object.create(null);
                 for (const key of Reflect.ownKeys(curArg)) {
@@ -15930,13 +15746,13 @@ exports.install = (globalObject, globalNames) => {
                     let typedKey = key;
 
                     typedKey = conversions[\\"USVString\\"](typedKey, {
-                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s key\\"
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1 record's key\\"
                     });
 
                     let typedValue = curArg[key];
 
                     typedValue = conversions[\\"USVString\\"](typedValue, {
-                      context: \\"Failed to construct 'URLSearchParams': parameter 1\\" + \\" record\\" + \\"'s value\\"
+                      context: \\"Failed to construct 'URLSearchParams': parameter 1 record's value\\"
                     });
 
                     result[typedKey] = typedValue;
@@ -15966,9 +15782,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -15997,9 +15811,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16021,9 +15833,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16045,9 +15855,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16069,9 +15877,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16093,9 +15899,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 2) {
         throw new TypeError(
-          \\"Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16160,11 +15964,11 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
       }
       if (typeof callback !== \\"function\\") {
         throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
+          \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1 is not a function.\\"
         );
       }
       const thisArg = arguments[1];
@@ -16316,9 +16120,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -16340,9 +16142,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -17018,9 +16818,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -17028,14 +16826,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new TypeError(
-            \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1\\" + \\" is not an iterable object.\\"
+            \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1 is not an iterable object.\\"
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions[\\"DOMString\\"](nextItem, {
-              context: \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1\\" + \\"'s element\\"
+              context: \\"Failed to execute 'operation' on 'UnderscoredProperties': parameter 1's element\\"
             });
 
             V.push(nextItem);
@@ -17074,9 +16872,7 @@ exports.install = (globalObject, globalNames) => {
     static static(void_) {
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -17383,7 +17179,7 @@ exports.install = (globalObject, globalNames) => {
       for (let i = 0; i < arguments.length; i++) {
         let curArg = arguments[i];
         curArg = conversions[\\"DOMString\\"](curArg, {
-          context: \\"Failed to execute 'simple1' on 'Variadic': parameter \\" + (i + 1)
+          context: \`Failed to execute 'simple1' on 'Variadic': parameter \${i + 1}\`
         });
         args.push(curArg);
       }
@@ -17398,7 +17194,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'simple2' on 'Variadic': 1 argument required, but only \\" + arguments.length + \\" present.\\"
+          \`Failed to execute 'simple2' on 'Variadic': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -17411,7 +17207,7 @@ exports.install = (globalObject, globalNames) => {
       }
       for (let i = 1; i < arguments.length; i++) {
         let curArg = arguments[i];
-        curArg = URL.convert(curArg, { context: \\"Failed to execute 'simple2' on 'Variadic': parameter \\" + (i + 1) });
+        curArg = URL.convert(curArg, { context: \`Failed to execute 'simple2' on 'Variadic': parameter \${i + 1}\` });
         args.push(curArg);
       }
       return esValue[implSymbol].simple2(...args);
@@ -17432,7 +17228,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"unsigned long\\"](curArg, {
-                context: \\"Failed to execute 'overloaded1' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded1' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -17440,7 +17236,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded1' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded1' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -17458,9 +17254,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (arguments.length < 1) {
         throw new TypeError(
-          \\"Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only \\" +
-            arguments.length +
-            \\" present.\\"
+          \`Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only \${arguments.length} present.\`
         );
       }
       const args = [];
@@ -17500,7 +17294,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded2' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded2' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
@@ -17515,7 +17309,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions[\\"DOMString\\"](curArg, {
-                context: \\"Failed to execute 'overloaded2' on 'Variadic': parameter \\" + (i + 1)
+                context: \`Failed to execute 'overloaded2' on 'Variadic': parameter \${i + 1}\`
               });
               args.push(curArg);
             }
