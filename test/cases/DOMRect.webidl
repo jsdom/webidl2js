@@ -1,3 +1,5 @@
+// Simplified from https://drafts.fxtf.org/geometry-1/#domrect
+
 [Exposed=(Window,Worker),
  Serializable,
  LegacyWindowAlias=SVGRect]
