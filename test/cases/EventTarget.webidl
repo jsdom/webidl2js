@@ -8,7 +8,3 @@ interface EventTarget {
   // void removeEventListener(DOMString type, EventListener? callback);
   // boolean dispatchEvent(Event event);
 };
-
-callback interface EventListener {
-  void handleEvent(/* Event event */);
-};
