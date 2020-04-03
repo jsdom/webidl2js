@@ -1,4 +1,5 @@
-[Exposed=(Window,Worker)]
+[Exposed=(Window,Worker),
+ LegacyWindowAlias=webkitURL]
 interface URL {
   constructor(USVString url, optional USVString base);
 
