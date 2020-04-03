@@ -290,9 +290,9 @@ jsdom does this for `Window`, which is written in custom, non-webidl2js-generate
 
 #### `convert(value, { context })`
 
-Performs the Web IDL conversion algorithm for this callback interface, converting _value_ into a function that performs [call a user object’s operation](https://heycam.github.io/webidl/#call-a-user-objects-operation) when called, with `thisArg` being the `this` value of the converted function.
+Performs the Web IDL conversion algorithm for this callback interface, converting _value_ into a function that performs [call a user object’s operation](https://heycam.github.io/webidl/#call-a-user-objects-operation) when called, with _thisArg_ being the `this` value of the converted function.
 
-The resulting function has an `objectReference` property, which is the same object as `value` and can be used to perform identity checks, as `convert` returns a new function object every time.
+The resulting function has an _objectReference_ property, which is the same object as _value_ and can be used to perform identity checks, as `convert` returns a new function object every time.
 
 If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
 
