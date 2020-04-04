@@ -111,7 +111,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -368,7 +368,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -702,7 +702,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -845,6 +845,256 @@ const Impl = require(\\"../implementations/DOMImplementation.js\\");
 "
 `;
 
+exports[`with processors DOMRect.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"DOMRect\\";
+
+exports.is = function is(obj) {
+  return utils.isObject(obj) && utils.hasOwn(obj, implSymbol) && obj[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = function isImpl(obj) {
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
+};
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (exports.is(obj)) {
+    return utils.implForWrapper(obj);
+  }
+  throw new TypeError(\`\${context} is not of type 'DOMRect'.\`);
+};
+
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor DOMRect is not installed on the passed global object\\");
+  }
+
+  let obj = Object.create(ctor.prototype);
+  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
+  return obj;
+};
+exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
+  const obj = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(obj);
+};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
+exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
+  privateData.wrapper = obj;
+
+  exports._internalSetup(obj, globalObject);
+  Object.defineProperty(obj, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
+  return obj;
+};
+
+exports.install = (globalObject, globalName) => {
+  class DOMRect {
+    constructor() {
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 1\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[1];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 2\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[2];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 3\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[3];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 4\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      return exports.setup(Object.create(new.target.prototype), globalObject, args);
+    }
+
+    get x() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"x\\"];
+    }
+
+    set x(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'x' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"x\\"] = V;
+    }
+
+    get y() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"y\\"];
+    }
+
+    set y(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'y' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"y\\"] = V;
+    }
+
+    get width() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"width\\"];
+    }
+
+    set width(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'width' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"width\\"] = V;
+    }
+
+    get height() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"height\\"];
+    }
+
+    set height(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'height' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"height\\"] = V;
+    }
+
+    static fromRect() {
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          curArg = utils.tryImplForWrapper(curArg);
+        }
+        args.push(curArg);
+      }
+      return utils.tryWrapperForImpl(Impl.implementation.fromRect(...args));
+    }
+  }
+  Object.defineProperties(DOMRect.prototype, {
+    x: { enumerable: true },
+    y: { enumerable: true },
+    width: { enumerable: true },
+    height: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"DOMRect\\", configurable: true }
+  });
+  Object.defineProperties(DOMRect, { fromRect: { enumerable: true } });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = DOMRect;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: DOMRect
+  });
+
+  if (globalName === \\"Window\\") {
+    Object.defineProperty(globalObject, \\"SVGRect\\", {
+      configurable: true,
+      writable: true,
+      value: DOMRect
+    });
+  }
+};
+
+const Impl = require(\\"../implementations/DOMRect.js\\");
+"
+`;
+
 exports[`with processors Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
@@ -983,7 +1233,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1092,7 +1342,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1263,7 +1513,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -1482,7 +1732,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1582,7 +1832,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class HTMLConstructor {
     constructor() {
       return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
@@ -1666,7 +1916,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1762,7 +2012,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1995,7 +2245,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Overloads {
     constructor() {
       const args = [];
@@ -2389,7 +2639,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2532,7 +2782,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2839,7 +3089,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -3128,7 +3378,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3264,7 +3514,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3624,7 +3874,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3731,7 +3981,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3827,7 +4077,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3931,7 +4181,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4027,7 +4277,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4542,7 +4792,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -4863,6 +5113,14 @@ exports.install = function install(globalObject) {
     writable: true,
     value: URL
   });
+
+  if (globalName === \\"Window\\") {
+    Object.defineProperty(globalObject, \\"webkitURL\\", {
+      configurable: true,
+      writable: true,
+      value: URL
+    });
+  }
 };
 
 const Impl = require(\\"../implementations/URL.js\\");
@@ -4930,7 +5188,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5261,7 +5519,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -5662,7 +5920,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6002,7 +6260,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -6307,7 +6565,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6576,7 +6834,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6679,7 +6937,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6938,7 +7196,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7077,7 +7335,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7316,7 +7574,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -7452,7 +7710,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7708,7 +7966,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8012,7 +8270,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8155,6 +8413,256 @@ const Impl = require(\\"../implementations/DOMImplementation.js\\");
 "
 `;
 
+exports[`without processors DOMRect.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"DOMRect\\";
+
+exports.is = function is(obj) {
+  return utils.isObject(obj) && utils.hasOwn(obj, implSymbol) && obj[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = function isImpl(obj) {
+  return utils.isObject(obj) && obj instanceof Impl.implementation;
+};
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (exports.is(obj)) {
+    return utils.implForWrapper(obj);
+  }
+  throw new TypeError(\`\${context} is not of type 'DOMRect'.\`);
+};
+
+exports.create = function create(globalObject, constructorArgs, privateData) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor DOMRect is not installed on the passed global object\\");
+  }
+
+  let obj = Object.create(ctor.prototype);
+  obj = exports.setup(obj, globalObject, constructorArgs, privateData);
+  return obj;
+};
+exports.createImpl = function createImpl(globalObject, constructorArgs, privateData) {
+  const obj = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(obj);
+};
+exports._internalSetup = function _internalSetup(obj, globalObject) {};
+exports.setup = function setup(obj, globalObject, constructorArgs = [], privateData = {}) {
+  privateData.wrapper = obj;
+
+  exports._internalSetup(obj, globalObject);
+  Object.defineProperty(obj, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
+  return obj;
+};
+
+exports.install = (globalObject, globalName) => {
+  class DOMRect {
+    constructor() {
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 1\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[1];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 2\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[2];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 3\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      {
+        let curArg = arguments[3];
+        if (curArg !== undefined) {
+          curArg = conversions[\\"unrestricted double\\"](curArg, {
+            context: \\"Failed to construct 'DOMRect': parameter 4\\"
+          });
+        } else {
+          curArg = 0;
+        }
+        args.push(curArg);
+      }
+      return exports.setup(Object.create(new.target.prototype), globalObject, args);
+    }
+
+    get x() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"x\\"];
+    }
+
+    set x(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'x' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"x\\"] = V;
+    }
+
+    get y() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"y\\"];
+    }
+
+    set y(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'y' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"y\\"] = V;
+    }
+
+    get width() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"width\\"];
+    }
+
+    set width(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'width' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"width\\"] = V;
+    }
+
+    get height() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"height\\"];
+    }
+
+    set height(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      V = conversions[\\"unrestricted double\\"](V, {
+        context: \\"Failed to set the 'height' property on 'DOMRect': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"height\\"] = V;
+    }
+
+    static fromRect() {
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          curArg = utils.tryImplForWrapper(curArg);
+        }
+        args.push(curArg);
+      }
+      return utils.tryWrapperForImpl(Impl.implementation.fromRect(...args));
+    }
+  }
+  Object.defineProperties(DOMRect.prototype, {
+    x: { enumerable: true },
+    y: { enumerable: true },
+    width: { enumerable: true },
+    height: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"DOMRect\\", configurable: true }
+  });
+  Object.defineProperties(DOMRect, { fromRect: { enumerable: true } });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = DOMRect;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: DOMRect
+  });
+
+  if (globalName === \\"Window\\") {
+    Object.defineProperty(globalObject, \\"SVGRect\\", {
+      configurable: true,
+      writable: true,
+      value: DOMRect
+    });
+  }
+};
+
+const Impl = require(\\"../implementations/DOMRect.js\\");
+"
+`;
+
 exports[`without processors Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
@@ -8293,7 +8801,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8402,7 +8910,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8573,7 +9081,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -8792,7 +9300,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8891,7 +9399,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class HTMLConstructor {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8975,7 +9483,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9071,7 +9579,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9304,7 +9812,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Overloads {
     constructor() {
       const args = [];
@@ -9698,7 +10206,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9840,7 +10348,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10133,7 +10641,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -10422,7 +10930,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10558,7 +11066,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10918,7 +11426,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11025,7 +11533,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11121,7 +11629,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11225,7 +11733,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11321,7 +11829,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11836,7 +12344,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -12157,6 +12665,14 @@ exports.install = function install(globalObject) {
     writable: true,
     value: URL
   });
+
+  if (globalName === \\"Window\\") {
+    Object.defineProperty(globalObject, \\"webkitURL\\", {
+      configurable: true,
+      writable: true,
+      value: URL
+    });
+  }
 };
 
 const Impl = require(\\"../implementations/URL.js\\");
@@ -12224,7 +12740,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12555,7 +13071,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -12956,7 +13472,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13296,7 +13812,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -13601,7 +14117,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13870,7 +14386,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13973,7 +14489,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14232,7 +14748,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14371,7 +14887,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14610,7 +15126,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-exports.install = function install(globalObject) {
+exports.install = (globalObject, globalName) => {
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
