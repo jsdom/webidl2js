@@ -9,8 +9,8 @@ interface DOMRect /* : DOMRectReadOnly */ {
 
   [NewObject] static DOMRect fromRect(optional DOMRectInit other);
 
-  inherit attribute unrestricted double x;
-  inherit attribute unrestricted double y;
-  inherit attribute unrestricted double width;
-  inherit attribute unrestricted double height;
+  attribute unrestricted double x;
+  attribute unrestricted double y;
+  attribute unrestricted double width;
+  attribute unrestricted double height;
 };
