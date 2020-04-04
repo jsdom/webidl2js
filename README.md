@@ -454,6 +454,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Variadic arguments
 - `[Clamp]`
 - `[EnforceRange]`
+- `[Exposed]`
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
