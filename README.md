@@ -479,7 +479,6 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[Exposed]`
 - `[LenientSetter]`
 - `[LenientThis]`
 - `[NamedConstructor]`
