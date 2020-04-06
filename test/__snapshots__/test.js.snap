@@ -55,18 +55,13 @@ exports.interfaces = {
 };
 
 /**
- * Initialises the passed object as a new global.
+ * Initializes the passed object as a new global.
  *
  * The object is expected to contain all the global object properties
  * as specified in the ECMAScript specification.
  *
  * This function has to be added to the exports object
  * to avoid circular dependency issues.
- *
- * @param {object} globalObject
- * @param {Iterable<string>} globalNames
- *        The identifiers specified in the \`[Global]\` extended attribute
- *        on the interface's WebIDL definition.
  */
 exports.installInterfaces = (globalObject, globalNames) => {
   for (const iface of Object.values(exports.interfaces)) {
@@ -2112,7 +2107,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Global\\"]);
+const globalNames = [\\"Global\\"];
 
 /**
  * Initialises the passed obj as a new global.
@@ -2843,7 +2838,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Global1\\", \\"Global2\\"]);
+const globalNames = [\\"Global1\\", \\"Global2\\"];
 
 /**
  * Initialises the passed obj as a new global.
@@ -8940,7 +8935,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Window\\"]);
+const globalNames = [\\"Window\\"];
 
 /**
  * Initialises the passed obj as a new global.
@@ -11050,7 +11045,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Global\\"]);
+const globalNames = [\\"Global\\"];
 
 /**
  * Initialises the passed obj as a new global.
@@ -11738,7 +11733,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Global1\\", \\"Global2\\"]);
+const globalNames = [\\"Global1\\", \\"Global2\\"];
 
 /**
  * Initialises the passed obj as a new global.
@@ -17820,7 +17815,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const globalNames = new Set([\\"Window\\"]);
+const globalNames = [\\"Window\\"];
 
 /**
  * Initialises the passed obj as a new global.
