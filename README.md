@@ -264,9 +264,11 @@ Performs the Web IDL conversion algorithm for this interface, converting _value_
 
 In practice, this means doing a type-check equivalent to `is(value)`, and if it passes, returns the corresponding impl. If the type-check fails, it throws an informative exception. _context_ can be used to describe the provided value in any resulting error message.
 
-#### `install(globalObject)`
+#### `install(globalObject, globalNames)`
 
 This method creates a brand new wrapper constructor and prototype and attach it to the passed `globalObject`. It also registers the created constructor with the `globalObject`'s global constructor registry, which makes `create()`, `createImpl()`, and `setup()` work. (Thus, it is important to invoke `install()` before invoking those methods, as otherwise they will throw.)
+
+The second argument `globalNames` is an array containing the [global names](https://heycam.github.io/webidl/#dfn-global-name) of the interface that `globalObject` implements. This is used for the purposes of deciding which interfaces are [exposed](https://heycam.github.io/webidl/#dfn-exposed). For example, this array should be `["Window"]` for a [`Window`](https://html.spec.whatwg.org/multipage/window-object.html#window) global object. But for a [`DedicatedWorkerGlobalScope`](https://html.spec.whatwg.org/multipage/workers.html#dedicatedworkerglobalscope) global object, this array should be `["Worker", "DedicatedWorker"]`. Note that we do not yet implement [`[SecureContext]`](https://heycam.github.io/webidl/#SecureContext), so the "exposed" check is not fully implemented.
 
 #### `create(globalObject, constructorArgs, privateData)`
 
