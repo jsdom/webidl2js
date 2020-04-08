@@ -1954,7 +1954,7 @@ exports[`with processors Global.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -2116,7 +2116,7 @@ const globalNames = [\\"Global\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
@@ -2767,7 +2767,7 @@ exports[`with processors MultiGlobal.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -2847,7 +2847,7 @@ const globalNames = [\\"Global1\\", \\"Global2\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
@@ -8686,7 +8686,7 @@ exports[`with processors Window.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const EventTarget = require(\\"./EventTarget.js\\");
@@ -8944,7 +8944,7 @@ const globalNames = [\\"Window\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
@@ -10892,7 +10892,7 @@ exports[`without processors Global.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -11054,7 +11054,7 @@ const globalNames = [\\"Global\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
@@ -11662,7 +11662,7 @@ exports[`without processors MultiGlobal.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -11742,7 +11742,7 @@ const globalNames = [\\"Global1\\", \\"Global2\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
@@ -17566,7 +17566,7 @@ exports[`without processors Window.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
-const webidl2js_globals = require(\\"./webidl2js-globals.js.js\\");
+const webidl2js_globals = require(\\"./webidl2js-globals.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const EventTarget = require(\\"./EventTarget.js\\");
@@ -17824,7 +17824,7 @@ const globalNames = [\\"Window\\"];
  * as specified in the ECMAScript specification.
  */
 exports.setupGlobal = (obj, constructorArgs = [], privateData = {}) => {
-  webidl2js_globals.setupGlobal(obj, globalNames);
+  webidl2js_globals.installInterfaces(obj, globalNames);
 
   Object.setPrototypeOf(obj, obj[interfaceName].prototype);
   obj = exports.setup(obj, obj, constructorArgs, privateData);
