@@ -97,6 +97,13 @@ describe("with processors", () => {
   }
 });
 
+test("webidl2js-globals.js", () => {
+  const outputFile = path.resolve(outputDir, "webidl2js-globals.js");
+  const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+  expect(output).toMatchSnapshot();
+});
+
 test("utils.js", () => {
   const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
   const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });
