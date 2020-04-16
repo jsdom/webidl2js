@@ -12,6 +12,27 @@ const outputDir = path.resolve(__dirname, "output");
 
 const idlFiles = fs.readdirSync(casesDir);
 
+describe("built-in types", () => {
+  beforeAll(() => {
+    const transformer = new Transformer();
+    return transformer.generate(outputDir);
+  });
+
+  test("Function", () => {
+    const outputFile = path.resolve(outputDir, "Function.js");
+    const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+    expect(output).toMatchSnapshot();
+  });
+
+  test("VoidFunction", () => {
+    const outputFile = path.resolve(outputDir, "VoidFunction.js");
+    const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+    expect(output).toMatchSnapshot();
+  });
+});
+
 describe("without processors", () => {
   beforeAll(() => {
     const transformer = new Transformer();
