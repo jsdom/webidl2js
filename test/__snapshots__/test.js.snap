@@ -76,6 +76,62 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
+exports[`with processors AsyncCallbackFunction.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction() {
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    try {
+      callResult = Reflect.apply(value, thisArg, []);
+
+      callResult = Promise.resolve(callResult).then(
+        value => {
+          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+
+          return value;
+        },
+        reason => reason
+      );
+
+      return callResult;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  invokeTheCallbackFunction.construct = () => {
+    let callResult = Reflect.construct(value, []);
+
+    callResult = Promise.resolve(callResult).then(
+      value => {
+        value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+
+        return value;
+      },
+      reason => reason
+    );
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
 exports[`with processors AsyncCallbackInterface.webidl 1`] = `
 "\\"use strict\\";
 
@@ -5415,43 +5471,23 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
     throw new TypeError(context + \\" is not a function\\");
   }
 
-  function invokeTheCallbackFunction(...args) {
+  function invokeTheCallbackFunction(url, string) {
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
-    for (let i = 0; i < Math.min(args.length, 2); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 2) {
-      for (let i = args.length; i < 2; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 2) {
-      args.length = 2;
-    }
-
-    callResult = Reflect.apply(value, thisArg, args);
+    callResult = Reflect.apply(value, thisArg, [url, string]);
 
     callResult = URL.convert(callResult, { context: context });
 
     return callResult;
   }
 
-  invokeTheCallbackFunction.construct = (...args) => {
-    for (let i = 0; i < Math.min(args.length, 2); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+  invokeTheCallbackFunction.construct = (url, string) => {
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 2) {
-      for (let i = args.length; i < 2; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 2) {
-      args.length = 2;
-    }
-
-    let callResult = Reflect.construct(value, args);
+    let callResult = Reflect.construct(value, [url, string]);
 
     callResult = URL.convert(callResult, { context: context });
 
@@ -5473,24 +5509,14 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  function invokeTheCallbackFunction(...args) {
+  function invokeTheCallbackFunction(url) {
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
     if (typeof value === \\"function\\") {
-      for (let i = 0; i < Math.min(args.length, 1); i++) {
-        args[i] = utils.tryWrapperForImpl(args[i]);
-      }
+      url = utils.tryWrapperForImpl(url);
 
-      if (args.length < 1) {
-        for (let i = args.length; i < 1; i++) {
-          args[i] = undefined;
-        }
-      } else if (args.length > 1) {
-        args.length = 1;
-      }
-
-      callResult = Reflect.apply(value, thisArg, args);
+      callResult = Reflect.apply(value, thisArg, [url]);
     }
 
     callResult = conversions[\\"any\\"](callResult, { context: context });
@@ -5498,20 +5524,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
     return callResult;
   }
 
-  invokeTheCallbackFunction.construct = (...args) => {
-    for (let i = 0; i < Math.min(args.length, 1); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+  invokeTheCallbackFunction.construct = url => {
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
-
-    let callResult = Reflect.construct(value, args);
+    let callResult = Reflect.construct(value, [url]);
 
     callResult = conversions[\\"any\\"](callResult, { context: context });
 
@@ -8046,6 +8062,62 @@ exports.install = (globalObject, globalNames) => {
 };
 
 const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
+"
+`;
+
+exports[`without processors AsyncCallbackFunction.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction() {
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    try {
+      callResult = Reflect.apply(value, thisArg, []);
+
+      callResult = Promise.resolve(callResult).then(
+        value => {
+          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+
+          return value;
+        },
+        reason => reason
+      );
+
+      return callResult;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  invokeTheCallbackFunction.construct = () => {
+    let callResult = Reflect.construct(value, []);
+
+    callResult = Promise.resolve(callResult).then(
+      value => {
+        value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+
+        return value;
+      },
+      reason => reason
+    );
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
 "
 `;
 
@@ -13341,43 +13413,23 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
     throw new TypeError(context + \\" is not a function\\");
   }
 
-  function invokeTheCallbackFunction(...args) {
+  function invokeTheCallbackFunction(url, string) {
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
-    for (let i = 0; i < Math.min(args.length, 2); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 2) {
-      for (let i = args.length; i < 2; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 2) {
-      args.length = 2;
-    }
-
-    callResult = Reflect.apply(value, thisArg, args);
+    callResult = Reflect.apply(value, thisArg, [url, string]);
 
     callResult = URL.convert(callResult, { context: context });
 
     return callResult;
   }
 
-  invokeTheCallbackFunction.construct = (...args) => {
-    for (let i = 0; i < Math.min(args.length, 2); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+  invokeTheCallbackFunction.construct = (url, string) => {
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 2) {
-      for (let i = args.length; i < 2; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 2) {
-      args.length = 2;
-    }
-
-    let callResult = Reflect.construct(value, args);
+    let callResult = Reflect.construct(value, [url, string]);
 
     callResult = URL.convert(callResult, { context: context });
 
@@ -13399,24 +13451,14 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  function invokeTheCallbackFunction(...args) {
+  function invokeTheCallbackFunction(url) {
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
     if (typeof value === \\"function\\") {
-      for (let i = 0; i < Math.min(args.length, 1); i++) {
-        args[i] = utils.tryWrapperForImpl(args[i]);
-      }
+      url = utils.tryWrapperForImpl(url);
 
-      if (args.length < 1) {
-        for (let i = args.length; i < 1; i++) {
-          args[i] = undefined;
-        }
-      } else if (args.length > 1) {
-        args.length = 1;
-      }
-
-      callResult = Reflect.apply(value, thisArg, args);
+      callResult = Reflect.apply(value, thisArg, [url]);
     }
 
     callResult = conversions[\\"any\\"](callResult, { context: context });
@@ -13424,20 +13466,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
     return callResult;
   }
 
-  invokeTheCallbackFunction.construct = (...args) => {
-    for (let i = 0; i < Math.min(args.length, 1); i++) {
-      args[i] = utils.tryWrapperForImpl(args[i]);
-    }
+  invokeTheCallbackFunction.construct = url => {
+    url = utils.tryWrapperForImpl(url);
 
-    if (args.length < 1) {
-      for (let i = args.length; i < 1; i++) {
-        args[i] = undefined;
-      }
-    } else if (args.length > 1) {
-      args.length = 1;
-    }
-
-    let callResult = Reflect.construct(value, args);
+    let callResult = Reflect.construct(value, [url]);
 
     callResult = conversions[\\"any\\"](callResult, { context: context });
 
