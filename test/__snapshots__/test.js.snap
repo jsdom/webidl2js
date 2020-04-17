@@ -1221,7 +1221,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"boolWithDefault\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = conversions[\\"boolean\\"](value, { context: context + \\" has member boolWithDefault that\\" });
+      value = conversions[\\"boolean\\"](value, { context: context + \\" has member 'boolWithDefault' that\\" });
 
       ret[key] = value;
     } else {
@@ -1233,7 +1233,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"requiredInterface\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URL.convert(value, { context: context + \\" has member requiredInterface that\\" });
+      value = URL.convert(value, { context: context + \\" has member 'requiredInterface' that\\" });
 
       ret[key] = value;
     } else {
@@ -1246,12 +1246,12 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new TypeError(context + \\" has member seq that\\" + \\" is not an iterable object.\\");
+        throw new TypeError(context + \\" has member 'seq' that\\" + \\" is not an iterable object.\\");
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that\\" + \\"'s element\\" });
 
           V.push(nextItem);
         }
@@ -1266,7 +1266,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"vanillaString\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = conversions[\\"DOMString\\"](value, { context: context + \\" has member vanillaString that\\" });
+      value = conversions[\\"DOMString\\"](value, { context: context + \\" has member 'vanillaString' that\\" });
 
       ret[key] = value;
     }
@@ -3409,8 +3409,8 @@ exports.enumerationValues = enumerationValues;
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   const string = \`\${value}\`;
-  if (!enumerationValues.has(value)) {
-    throw new TypeError(\`\${context} '\${value}' is not a valid enumeration value for RequestDestination\`);
+  if (!enumerationValues.has(string)) {
+    throw new TypeError(\`\${context} '\${string}' is not a valid enumeration value for RequestDestination\`);
   }
   return string;
 };
@@ -9701,7 +9701,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"boolWithDefault\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = conversions[\\"boolean\\"](value, { context: context + \\" has member boolWithDefault that\\" });
+      value = conversions[\\"boolean\\"](value, { context: context + \\" has member 'boolWithDefault' that\\" });
 
       ret[key] = value;
     } else {
@@ -9713,7 +9713,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"requiredInterface\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URL.convert(value, { context: context + \\" has member requiredInterface that\\" });
+      value = URL.convert(value, { context: context + \\" has member 'requiredInterface' that\\" });
 
       ret[key] = value;
     } else {
@@ -9726,12 +9726,12 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new TypeError(context + \\" has member seq that\\" + \\" is not an iterable object.\\");
+        throw new TypeError(context + \\" has member 'seq' that\\" + \\" is not an iterable object.\\");
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
-          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member seq that\\" + \\"'s element\\" });
+          nextItem = URLSearchParams.convert(nextItem, { context: context + \\" has member 'seq' that\\" + \\"'s element\\" });
 
           V.push(nextItem);
         }
@@ -9746,7 +9746,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"vanillaString\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = conversions[\\"DOMString\\"](value, { context: context + \\" has member vanillaString that\\" });
+      value = conversions[\\"DOMString\\"](value, { context: context + \\" has member 'vanillaString' that\\" });
 
       ret[key] = value;
     }
@@ -11873,8 +11873,8 @@ exports.enumerationValues = enumerationValues;
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   const string = \`\${value}\`;
-  if (!enumerationValues.has(value)) {
-    throw new TypeError(\`\${context} '\${value}' is not a valid enumeration value for RequestDestination\`);
+  if (!enumerationValues.has(string)) {
+    throw new TypeError(\`\${context} '\${string}' is not a valid enumeration value for RequestDestination\`);
   }
   return string;
 };
