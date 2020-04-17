@@ -446,6 +446,24 @@ exports.install = (globalObject, globalNames) => {
       }
     }
 
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        CEReactions.preSteps(globalObject);
+        try {
+          return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+        } finally {
+          CEReactions.postSteps(globalObject);
+        }
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
     get attr() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -479,10 +497,31 @@ exports.install = (globalObject, globalNames) => {
         CEReactions.postSteps(globalObject);
       }
     }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        CEReactions.preSteps(globalObject);
+        try {
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+        } finally {
+          CEReactions.postSteps(globalObject);
+        }
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(CEReactions.prototype, {
     method: { enumerable: true },
+    promiseOperation: { enumerable: true },
     attr: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
@@ -3655,11 +3694,91 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].promiseConsumer(...args);
     }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    unforgeablePromiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get unforgeablePromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static staticPromiseOperation() {
+      try {
+        return utils.tryWrapperForImpl(Impl.implementation.staticPromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static get staticPromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        return Impl.implementation[\\"staticPromiseAttribute\\"];
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(PromiseTypes.prototype, {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
+    promiseOperation: { enumerable: true },
+    unforgeablePromiseOperation: { enumerable: true },
+    promiseAttribute: { enumerable: true },
+    unforgeablePromiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
+  });
+  Object.defineProperties(PromiseTypes, {
+    staticPromiseOperation: { enumerable: true },
+    staticPromiseAttribute: { enumerable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
     globalObject[ctorRegistrySymbol] = Object.create(null);
@@ -9166,6 +9285,19 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].method();
     }
 
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
     get attr() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -9189,10 +9321,26 @@ exports.install = (globalObject, globalNames) => {
 
       esValue[implSymbol][\\"attr\\"] = V;
     }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(CEReactions.prototype, {
     method: { enumerable: true },
+    promiseOperation: { enumerable: true },
     attr: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
@@ -12349,11 +12497,91 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].promiseConsumer(...args);
     }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    unforgeablePromiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get unforgeablePromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static staticPromiseOperation() {
+      try {
+        return utils.tryWrapperForImpl(Impl.implementation.staticPromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static get staticPromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        return Impl.implementation[\\"staticPromiseAttribute\\"];
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(PromiseTypes.prototype, {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
+    promiseOperation: { enumerable: true },
+    unforgeablePromiseOperation: { enumerable: true },
+    promiseAttribute: { enumerable: true },
+    unforgeablePromiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
+  });
+  Object.defineProperties(PromiseTypes, {
+    staticPromiseOperation: { enumerable: true },
+    staticPromiseAttribute: { enumerable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
     globalObject[ctorRegistrySymbol] = Object.create(null);
