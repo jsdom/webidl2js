@@ -5,13 +5,13 @@
   "main": "lib/transformer.js",
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
-    "prettier": "^2.0.2",
-    "webidl-conversions": "^6.0.0",
+    "prettier": "^2.0.4",
+    "webidl-conversions": "^6.1.0",
     "webidl2": "^23.11.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "jest": "^25.2.2"
+    "jest": "^25.3.0"
   },
   "scripts": {
     "test": "jest",
