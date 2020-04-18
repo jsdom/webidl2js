@@ -105,6 +105,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -364,6 +367,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   }
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -700,6 +706,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -904,6 +913,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1235,6 +1247,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1346,6 +1361,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1519,6 +1537,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1740,6 +1761,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1842,6 +1866,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -1928,6 +1955,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -2026,6 +2056,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -2267,6 +2300,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -2663,6 +2699,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -2808,6 +2847,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -3117,6 +3159,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -3408,6 +3453,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -3546,6 +3594,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -3908,6 +3959,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -4017,6 +4071,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -4115,6 +4172,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -4221,6 +4281,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -4319,6 +4382,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -4836,6 +4902,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -5234,6 +5303,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -5567,6 +5639,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -5970,6 +6045,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -6312,6 +6390,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -6620,6 +6701,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -6891,6 +6975,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -6996,6 +7083,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -7257,6 +7347,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -7398,6 +7491,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -7639,6 +7735,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -7777,6 +7876,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -8035,6 +8137,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   }
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -8341,6 +8446,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -8545,6 +8653,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -8876,6 +8987,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -8987,6 +9101,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9160,6 +9277,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9381,6 +9501,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9482,6 +9605,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9568,6 +9694,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9666,6 +9795,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -9907,6 +10039,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -10303,6 +10438,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -10447,6 +10585,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -10742,6 +10883,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11033,6 +11177,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11171,6 +11318,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11533,6 +11683,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11642,6 +11795,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11740,6 +11896,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11846,6 +12005,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -11944,6 +12106,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -12461,6 +12626,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -12859,6 +13027,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -13192,6 +13363,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -13595,6 +13769,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -13937,6 +14114,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -14245,6 +14425,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -14516,6 +14699,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -14621,6 +14807,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   obj = new Proxy(obj, proxyHandler);
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -14882,6 +15071,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -15023,6 +15215,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
@@ -15264,6 +15459,9 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   });
 
   obj[implSymbol][utils.wrapperSymbol] = obj;
+  if (Impl.init) {
+    Impl.init(obj[implSymbol], privateData);
+  }
   return obj;
 };
 
