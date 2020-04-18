@@ -282,12 +282,6 @@ Creates a new instance of the wrapper class and corresponding implementation cla
 
 This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
 
-### `new(globalObject)`
-
-Creates a new instance of the wrapper class and corresponding implementation class, but without invoking the implementation class constructor logic. Then returns the implementation class.
-
-This corresponds to the [Web IDL "new" algorithm](https://heycam.github.io/webidl/#new), and is useful when implementing specifications that initialize objects in different ways than their constructors do.
-
 #### `setup(obj, globalObject, constructorArgs, privateData)`
 
 This function is mostly used internally, and almost never should be called by your code. The one exception is if you need to inherit from a wrapper class corresponding to an interface without a `constructor`, from a non-webidl2js-generated class. Then, you can call `SuperClass.setup(this, globalObject, [], privateData)` as a substitute for doing `super()` (which would throw).

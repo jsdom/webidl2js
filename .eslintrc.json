@@ -157,7 +157,7 @@
     "linebreak-style": ["error", "unix"],
     "lines-around-comment": "off",
     "max-depth": "off",
-    "max-len": ["error", 120, { "ignoreUrls": true, "ignoreTemplateLiterals": true }],
+    "max-len": ["error", 120, { "ignoreUrls": true }],
     "max-nested-callbacks": "off",
     "max-params": "off",
     "max-statements": "off",
