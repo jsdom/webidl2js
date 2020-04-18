@@ -48,7 +48,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-exports.install = (globalObject, globalNames) => {};
+exports.install = function install(globalObject) {};
 "
 `;
 
@@ -111,12 +111,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -373,12 +368,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -712,12 +702,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -919,12 +904,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DOMRect {
     constructor() {
       const args = [];
@@ -1102,7 +1082,7 @@ exports.install = (globalObject, globalNames) => {
     value: DOMRect
   });
 
-  if (globalNames.includes(\\"Window\\")) {
+  if (globalName === \\"Window\\") {
     Object.defineProperty(globalObject, \\"SVGRect\\", {
       configurable: true,
       writable: true,
@@ -1253,12 +1233,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1367,12 +1342,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1479,7 +1449,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-exports.install = (globalObject, globalNames) => {};
+exports.install = function install(globalObject) {};
 "
 `;
 
@@ -1543,12 +1513,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -1767,12 +1732,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Global\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1872,12 +1832,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class HTMLConstructor {
     constructor() {
       return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
@@ -1961,12 +1916,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2062,12 +2012,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2207,13 +2152,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-
+exports.install = function install(globalObject) {
   const NodeFilter = () => {
     throw new TypeError(\\"Illegal invocation\\");
   };
@@ -2306,12 +2245,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Overloads {
     constructor() {
       const args = [];
@@ -2705,12 +2639,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2853,12 +2782,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3165,12 +3089,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -3459,12 +3378,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3600,12 +3514,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3965,12 +3874,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4077,12 +3981,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4178,12 +4077,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4287,12 +4181,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4388,12 +4277,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4908,12 +4792,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -5235,7 +5114,7 @@ exports.install = (globalObject, globalNames) => {
     value: URL
   });
 
-  if (globalNames.includes(\\"Window\\")) {
+  if (globalName === \\"Window\\") {
     Object.defineProperty(globalObject, \\"webkitURL\\", {
       configurable: true,
       writable: true,
@@ -5309,12 +5188,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5645,12 +5519,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -6051,12 +5920,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6396,13 +6260,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-
+exports.install = (globalObject, globalName) => {
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -6707,12 +6565,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6981,12 +6834,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7089,12 +6937,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7353,12 +7196,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7497,12 +7335,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7741,12 +7574,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -7819,7 +7647,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-exports.install = (globalObject, globalNames) => {};
+exports.install = function install(globalObject) {};
 "
 `;
 
@@ -7882,12 +7710,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8143,12 +7966,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8452,12 +8270,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8659,12 +8472,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DOMRect {
     constructor() {
       const args = [];
@@ -8842,7 +8650,7 @@ exports.install = (globalObject, globalNames) => {
     value: DOMRect
   });
 
-  if (globalNames.includes(\\"Window\\")) {
+  if (globalName === \\"Window\\") {
     Object.defineProperty(globalObject, \\"SVGRect\\", {
       configurable: true,
       writable: true,
@@ -8993,12 +8801,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9107,12 +8910,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9219,7 +9017,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-exports.install = (globalObject, globalNames) => {};
+exports.install = function install(globalObject) {};
 "
 `;
 
@@ -9283,12 +9081,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -9507,12 +9300,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Global\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9611,12 +9399,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class HTMLConstructor {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9700,12 +9483,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class LegacyArrayClass {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9801,12 +9579,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9946,13 +9719,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
   return callTheUserObjectsOperation;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-
+exports.install = function install(globalObject) {
   const NodeFilter = () => {
     throw new TypeError(\\"Illegal invocation\\");
   };
@@ -10045,12 +9812,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Overloads {
     constructor() {
       const args = [];
@@ -10444,12 +10206,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10591,12 +10348,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10889,12 +10641,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -11183,12 +10930,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11324,12 +11066,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11689,12 +11426,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11801,12 +11533,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11902,12 +11629,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12011,12 +11733,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12112,12 +11829,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12632,12 +12344,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -12959,7 +12666,7 @@ exports.install = (globalObject, globalNames) => {
     value: URL
   });
 
-  if (globalNames.includes(\\"Window\\")) {
+  if (globalName === \\"Window\\") {
     Object.defineProperty(globalObject, \\"webkitURL\\", {
       configurable: true,
       writable: true,
@@ -13033,12 +12740,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13369,12 +13071,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\", \\"Worker\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -13775,12 +13472,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14120,13 +13812,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-
+exports.install = (globalObject, globalName) => {
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -14431,12 +14117,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14705,12 +14386,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Unforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14813,12 +14489,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class UnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15077,12 +14748,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15221,12 +14887,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15465,12 +15126,7 @@ exports.setup = function setup(obj, globalObject, constructorArgs = [], privateD
   return obj;
 };
 
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
+exports.install = (globalObject, globalName) => {
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
