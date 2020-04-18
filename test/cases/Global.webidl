@@ -1,4 +1,4 @@
-[Global=Global,Exposed=Global]
+[Global=Global,Exposed=Window]
 interface Global {
   void op();
   [Unforgeable] void unforgeableOp();
