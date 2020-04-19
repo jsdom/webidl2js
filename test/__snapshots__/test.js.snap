@@ -111,6 +111,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -124,6 +127,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -391,6 +397,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -406,6 +415,9 @@ exports.new = globalObject => {
   wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -748,6 +760,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -761,6 +776,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -971,6 +989,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -984,6 +1005,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -1321,6 +1345,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -1334,6 +1361,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -1451,6 +1481,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -1464,6 +1497,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -1643,6 +1679,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -1656,6 +1695,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -1883,6 +1925,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -1896,6 +1941,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -2004,6 +2052,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -2017,6 +2068,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -2109,6 +2163,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -2122,6 +2179,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -2226,6 +2286,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -2239,6 +2302,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -2486,6 +2552,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -2499,6 +2568,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -2901,6 +2973,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -2914,6 +2989,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -3065,6 +3143,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -3078,6 +3159,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -3393,6 +3477,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -3406,6 +3493,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -3703,6 +3793,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -3716,6 +3809,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -3860,6 +3956,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -3875,6 +3974,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -4243,6 +4345,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -4256,6 +4361,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -4371,6 +4479,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -4384,6 +4495,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -4488,6 +4602,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -4501,6 +4618,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -4613,6 +4733,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -4626,6 +4749,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -4730,6 +4856,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -4743,6 +4872,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -5266,6 +5398,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -5279,6 +5414,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -5683,6 +5821,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -5698,6 +5839,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -6037,6 +6181,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -6050,6 +6197,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -6459,6 +6609,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -6474,6 +6627,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -6822,6 +6978,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -6837,6 +6996,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -7151,6 +7313,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -7164,6 +7329,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -7441,6 +7609,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -7454,6 +7625,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -7565,6 +7739,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -7580,6 +7757,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -7847,6 +8027,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -7860,6 +8043,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -8007,6 +8193,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -8020,6 +8209,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -8267,6 +8459,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -8280,6 +8475,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -8424,6 +8622,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -8437,6 +8638,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -8703,6 +8907,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -8718,6 +8925,9 @@ exports.new = globalObject => {
   wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -9030,6 +9240,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -9043,6 +9256,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -9253,6 +9469,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -9266,6 +9485,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -9603,6 +9825,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -9616,6 +9841,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -9733,6 +9961,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -9746,6 +9977,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -9925,6 +10159,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -9938,6 +10175,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -10165,6 +10405,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -10178,6 +10421,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -10285,6 +10531,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -10298,6 +10547,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -10390,6 +10642,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -10403,6 +10658,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -10507,6 +10765,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -10520,6 +10781,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -10767,6 +11031,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -10780,6 +11047,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -11182,6 +11452,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -11195,6 +11468,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -11345,6 +11621,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -11358,6 +11637,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -11659,6 +11941,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -11672,6 +11957,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -11969,6 +12257,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -11982,6 +12273,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12126,6 +12420,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -12141,6 +12438,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12509,6 +12809,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -12522,6 +12825,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12637,6 +12943,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -12650,6 +12959,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12754,6 +13066,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -12767,6 +13082,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12879,6 +13197,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -12892,6 +13213,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -12996,6 +13320,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -13009,6 +13336,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -13532,6 +13862,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -13545,6 +13878,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -13949,6 +14285,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -13964,6 +14303,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -14303,6 +14645,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -14316,6 +14661,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -14725,6 +15073,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -14740,6 +15091,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -15088,6 +15442,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -15103,6 +15460,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -15417,6 +15777,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -15430,6 +15793,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -15707,6 +16073,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -15720,6 +16089,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -15831,6 +16203,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -15846,6 +16221,9 @@ exports.new = globalObject => {
   wrapper = new Proxy(wrapper, proxyHandler);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -16113,6 +16491,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -16126,6 +16507,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -16273,6 +16657,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -16286,6 +16673,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
@@ -16533,6 +16923,9 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper;
 };
 
@@ -16546,6 +16939,9 @@ exports.new = globalObject => {
   });
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
   return wrapper[implSymbol];
 };
 
