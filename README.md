@@ -284,7 +284,7 @@ Creates a new instance of the wrapper class and corresponding implementation cla
 
 This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
 
-### `new(globalObject)`
+#### `new(globalObject)`
 
 Creates a new instance of the wrapper class and corresponding implementation class, but without invoking the implementation class constructor logic. Then returns the implementation class.
 
@@ -320,11 +320,15 @@ Performs the Web IDL conversion algorithm for this dictionary, converting _value
 
 If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
 
+### Other requirements
+
+The generated wrapper files use modern JavaScript features such as `class` definitions and `Proxy`. They will not work on JavaScript runtimes that do not support the ECMAScript 2015 standard.
+
 ## Writing implementation class files
 
 webidl2js tries to ensure that your hand-authored implementation class files can be as straightforward as possible, leaving all the boilerplate in the generated wrapper file.
 
-Implementation class files contain a single export, `implementation`, whose value is the implementation class. (See [#59](https://github.com/jsdom/webidl2js/issues/59) for potentially making this the default export instead.) The class will contain the following elements:
+The main export of implementation class is `implementation`, whose value is the implementation class. (See [#59](https://github.com/jsdom/webidl2js/issues/59) for potentially making this the default export instead.) The class will contain the following elements:
 
 ### The constructor
 
@@ -401,13 +405,13 @@ Because of the intermediary wrapper class, there is no need to be concerned abou
 
 ### Inheritance
 
-It is often useful for implementation class files to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
+It is often useful for implementation classes to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
 
 However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
 
-### Other requirements
+### The init export
 
-The generated interface wrapper files use modern JavaScript features such as `class` definitions and `Proxy`. They will not work on JavaScript runtimes that do not support the ECMAScript 2015 standard.
+In addition to the `implementation` export, for interfaces, your implementation class file can contain an `init` export. This would be a function taking as an argument an instance of the implementation class, and is called when any wrapper/implementation pairs are constructed (such as by the exports of the [generated wrapper module](https://github.com/jsdom/webidl2js#for-interfaces)). In particular, it is called even if they are constructed by [`new()`](newglobalobject), which does not invoke the implementation class constructor.
 
 ## The generated utilities file
 
