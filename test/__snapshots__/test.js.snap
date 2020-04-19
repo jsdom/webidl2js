@@ -129,7 +129,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -411,7 +411,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -766,7 +766,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -989,7 +989,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1339,7 +1339,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1469,7 +1469,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1661,7 +1661,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1901,7 +1901,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Global\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2022,7 +2022,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2127,7 +2127,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2244,7 +2244,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2504,7 +2504,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2919,7 +2919,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3083,7 +3083,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3411,7 +3411,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3721,7 +3721,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3880,7 +3880,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4261,7 +4261,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4389,7 +4389,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4506,7 +4506,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4631,7 +4631,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4748,7 +4748,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -5284,7 +5284,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -5703,7 +5703,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6055,7 +6055,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6479,7 +6479,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6842,7 +6842,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7169,7 +7169,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7459,7 +7459,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7585,7 +7585,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7865,7 +7865,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8025,7 +8025,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8285,7 +8285,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8442,7 +8442,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8723,7 +8723,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9048,7 +9048,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9271,7 +9271,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9621,7 +9621,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9751,7 +9751,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9943,7 +9943,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10183,7 +10183,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Global\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10303,7 +10303,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10408,7 +10408,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10525,7 +10525,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10785,7 +10785,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11200,7 +11200,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11363,7 +11363,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11677,7 +11677,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11987,7 +11987,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12146,7 +12146,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12527,7 +12527,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12655,7 +12655,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12772,7 +12772,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12897,7 +12897,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13014,7 +13014,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13550,7 +13550,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13969,7 +13969,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -14321,7 +14321,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -14745,7 +14745,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15108,7 +15108,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15435,7 +15435,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15725,7 +15725,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15851,7 +15851,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16131,7 +16131,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16291,7 +16291,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16551,7 +16551,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames) => {
+exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }

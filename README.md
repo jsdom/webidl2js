@@ -270,6 +270,8 @@ This method creates a brand new wrapper constructor and prototype and attach it 
 
 The second argument `globalNames` is an array containing the [global names](https://heycam.github.io/webidl/#dfn-global-name) of the interface that `globalObject` implements. This is used for the purposes of deciding which interfaces are [exposed](https://heycam.github.io/webidl/#dfn-exposed). For example, this array should be `["Window"]` for a [`Window`](https://html.spec.whatwg.org/multipage/window-object.html#window) global object. But for a [`DedicatedWorkerGlobalScope`](https://html.spec.whatwg.org/multipage/workers.html#dedicatedworkerglobalscope) global object, this array should be `["Worker", "DedicatedWorker"]`. Note that we do not yet implement [`[SecureContext]`](https://heycam.github.io/webidl/#SecureContext), so the "exposed" check is not fully implemented.
 
+Temporarily, until the next major release, `globalNames` defaults to `["Window"]`.
+
 #### `create(globalObject, constructorArgs, privateData)`
 
 Creates a new instance of the wrapper class and corresponding implementation class, passing in the `globalObject`, the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
@@ -304,9 +306,11 @@ The resulting function has an _objectReference_ property, which is the same obje
 
 If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
 
-#### `install(globalObject)`
+#### `install(globalObject, globalNames)`
 
 If this callback interface has constants, then this method creates a brand new legacy callback interface object and attaches it to the passed `globalObject`. Otherwise, this method is a no-op.
+
+The second argument `globalNames` is the same as for [the `install()` export for interfaces](#installglobalobject-globalnames). (However, it does not have a default.)
 
 ### For dictionaries
 
@@ -462,7 +466,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Variadic arguments
 - `[Clamp]`
 - `[EnforceRange]`
-- `[Exposed]`
+- `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
 - `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
