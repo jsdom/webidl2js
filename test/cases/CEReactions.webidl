@@ -1,3 +1,4 @@
+[Exposed=Window]
 interface CEReactions {
     [CEReactions] attribute DOMString attr;
     [CEReactions] void method();
