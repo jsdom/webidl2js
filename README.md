@@ -469,15 +469,16 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]`
+- `[LegacyLenientThis]`
+- `[LegacyNoInterfaceObject]`
+- `[LegacyNullToEmptyString]`
+- `[LegacyOverrideBuiltins]`
 - `[LegacyUnenumerableNamedProperties]`
+- `[LegacyUnforgeable]`
 - `[LegacyWindowAlias]`
-- `[NoInterfaceObject]`
-- `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
 - `[SameObject]` (automatic caching)
-- `[TreatNullAs]`
-- `[Unforgeable]`
 - `[Unscopable]`
 
 Supported Web IDL extensions defined in HTML:
@@ -492,11 +493,11 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LenientSetter]`
-- `[LenientThis]`
-- `[NamedConstructor]`
+- `[LegacyFactoryFunction]`
+- `[LegacyLenientSetter]`
+- `[LegacyNamespace]`
+- `[LegacyTreatNonObjectAsNull]`
 - `[SecureContext]`
-- `[TreatNonObjectAsNull]`
 
 ## Nonstandard extended attributes
 
