@@ -1,5 +1,5 @@
 [Exposed=Window]
-interface Unforgeable {
+interface LegacyUnforgeable {
   [LegacyUnforgeable] stringifier attribute USVString href;
   [LegacyUnforgeable] readonly attribute USVString origin;
   [LegacyUnforgeable] attribute USVString protocol;
