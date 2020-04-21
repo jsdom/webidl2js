@@ -471,7 +471,6 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
-- `[LegacyArrayClass]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
 - `[NoInterfaceObject]`
