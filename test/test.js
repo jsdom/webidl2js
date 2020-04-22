@@ -12,6 +12,25 @@ const outputDir = path.resolve(__dirname, "output");
 
 const idlFiles = fs.readdirSync(casesDir);
 
+describe("API", () => {
+  test("addFile", async () => {
+    const srcDir = path.resolve(__dirname, "fixtures", "custom-path");
+
+    const transformer = new Transformer();
+    transformer.addFile(
+      path.join(srcDir, "some.webidl"),
+      path.join(srcDir, "impl-file.js")
+    );
+
+    await transformer.generate(outputDir);
+
+    const outputFile = path.resolve(outputDir, "Foo.js");
+    const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+    expect(output).toMatchSnapshot();
+  });
+});
+
 describe("without processors", () => {
   beforeAll(() => {
     const transformer = new Transformer();
