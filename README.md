@@ -471,8 +471,10 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
+- `[LegacyLenientSetter]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
+- `[LenientThis]`
 - `[NoInterfaceObject]`
 - `[OverrideBuiltins]`
 - `[PutForwards]`
@@ -494,8 +496,6 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LenientSetter]`
-- `[LenientThis]`
 - `[NamedConstructor]`
 - `[SecureContext]`
 - `[TreatNonObjectAsNull]`
