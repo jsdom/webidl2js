@@ -270,6 +270,8 @@ This method creates a brand new wrapper constructor and prototype and attach it 
 
 The second argument `globalNames` is an array containing the [global names](https://heycam.github.io/webidl/#dfn-global-name) of the interface that `globalObject` implements. This is used for the purposes of deciding which interfaces are [exposed](https://heycam.github.io/webidl/#dfn-exposed). For example, this array should be `["Window"]` for a [`Window`](https://html.spec.whatwg.org/multipage/window-object.html#window) global object. But for a [`DedicatedWorkerGlobalScope`](https://html.spec.whatwg.org/multipage/workers.html#dedicatedworkerglobalscope) global object, this array should be `["Worker", "DedicatedWorker"]`. Note that we do not yet implement [`[SecureContext]`](https://heycam.github.io/webidl/#SecureContext), so the "exposed" check is not fully implemented.
 
+Temporarily, until the next major release, `globalNames` defaults to `["Window"]`.
+
 #### `create(globalObject, constructorArgs, privateData)`
 
 Creates a new instance of the wrapper class and corresponding implementation class, passing in the `globalObject`, the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
@@ -281,6 +283,12 @@ This is useful in other parts of your program that are not implementation class 
 Creates a new instance of the wrapper class and corresponding implementation class, passing in the `globalObject`, the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the implementation class.
 
 This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
+
+#### `new(globalObject)`
+
+Creates a new instance of the wrapper class and corresponding implementation class, but without invoking the implementation class constructor logic. Then returns the implementation class.
+
+This corresponds to the [Web IDL "new" algorithm](https://heycam.github.io/webidl/#new), and is useful when implementing specifications that initialize objects in different ways than their constructors do.
 
 #### `setup(obj, globalObject, constructorArgs, privateData)`
 
@@ -298,9 +306,11 @@ The resulting function has an _objectReference_ property, which is the same obje
 
 If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
 
-#### `install(globalObject)`
+#### `install(globalObject, globalNames)`
 
 If this callback interface has constants, then this method creates a brand new legacy callback interface object and attaches it to the passed `globalObject`. Otherwise, this method is a no-op.
+
+The second argument `globalNames` is the same as for [the `install()` export for interfaces](#installglobalobject-globalnames). (However, it does not have a default.)
 
 ### For dictionaries
 
@@ -310,11 +320,15 @@ Performs the Web IDL conversion algorithm for this dictionary, converting _value
 
 If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
 
+### Other requirements
+
+The generated wrapper files use modern JavaScript features such as `class` definitions and `Proxy`. They will not work on JavaScript runtimes that do not support the ECMAScript 2015 standard.
+
 ## Writing implementation class files
 
 webidl2js tries to ensure that your hand-authored implementation class files can be as straightforward as possible, leaving all the boilerplate in the generated wrapper file.
 
-Implementation class files contain a single export, `implementation`, whose value is the implementation class. (See [#59](https://github.com/jsdom/webidl2js/issues/59) for potentially making this the default export instead.) The class will contain the following elements:
+The main export of implementation class is `implementation`, whose value is the implementation class. (See [#59](https://github.com/jsdom/webidl2js/issues/59) for potentially making this the default export instead.) The class will contain the following elements:
 
 ### The constructor
 
@@ -391,13 +405,13 @@ Because of the intermediary wrapper class, there is no need to be concerned abou
 
 ### Inheritance
 
-It is often useful for implementation class files to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
+It is often useful for implementation classes to inherit from each other, if the corresponding IDL interfaces do. This gives a usually-appropriate implementation of all the inherited operations and attributes.
 
 However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
 
-### Other requirements
+### The init export
 
-The generated interface wrapper files use modern JavaScript features such as `class` definitions and `Proxy`. They will not work on JavaScript runtimes that do not support the ECMAScript 2015 standard.
+In addition to the `implementation` export, for interfaces, your implementation class file can contain an `init` export. This would be a function taking as an argument an instance of the implementation class, and is called when any wrapper/implementation pairs are constructed (such as by the exports of the [generated wrapper module](https://github.com/jsdom/webidl2js#for-interfaces)). In particular, it is called even if they are constructed by [`new()`](newglobalobject), which does not invoke the implementation class constructor.
 
 ## The generated utilities file
 
@@ -456,8 +470,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Variadic arguments
 - `[Clamp]`
 - `[EnforceRange]`
-- `[Exposed]`
-- `[LegacyArrayClass]`
+- `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
 - `[NoInterfaceObject]`
