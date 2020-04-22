@@ -9,8 +9,30 @@ const rootDir = path.resolve(__dirname, "..");
 const casesDir = path.resolve(__dirname, "cases");
 const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
+const fixturesDir = path.resolve(__dirname, "fixtures");
 
 const idlFiles = fs.readdirSync(casesDir);
+
+describe("Transformer API", () => {
+  describe("addSource", () => {
+    test("implementation file custom path", async () => {
+      const customPathDir = path.resolve(fixturesDir, "custom-path");
+
+      const transformer = new Transformer({ implSuffix: "-impl" });
+      transformer.addSource(
+        path.join(customPathDir, "some.webidl"),
+        path.join(customPathDir, "impl-file.js")
+      );
+
+      await transformer.generate(outputDir);
+
+      const outputFile = path.resolve(outputDir, "Foo.js");
+      const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+      expect(output).toMatchSnapshot();
+    });
+  });
+});
 
 describe("without processors", () => {
   beforeAll(() => {
