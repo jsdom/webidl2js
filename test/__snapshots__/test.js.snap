@@ -849,7 +849,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"function\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = Function.convert(value, { context: context + \\" has member function that\\" });
+      value = Function.convert(value, { context: context + \\" has member 'function' that\\" });
 
       ret[key] = value;
     }
@@ -859,7 +859,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlCallback\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URLCallback.convert(value, { context: context + \\" has member urlCallback that\\" });
+      value = URLCallback.convert(value, { context: context + \\" has member 'urlCallback' that\\" });
 
       ret[key] = value;
     }
@@ -872,7 +872,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
       if (value === null || value === undefined) {
         value = null;
       } else {
-        value = URLHandlerNonNull.convert(value, { context: context + \\" has member urlHandler that\\" });
+        value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
       }
       ret[key] = value;
     }
@@ -882,7 +882,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlHandlerNonNull\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URLHandlerNonNull.convert(value, { context: context + \\" has member urlHandlerNonNull that\\" });
+      value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandlerNonNull' that\\" });
 
       ret[key] = value;
     }
@@ -892,7 +892,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"voidFunction\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = VoidFunction.convert(value, { context: context + \\" has member voidFunction that\\" });
+      value = VoidFunction.convert(value, { context: context + \\" has member 'voidFunction' that\\" });
 
       ret[key] = value;
     }
@@ -9424,7 +9424,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"function\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = Function.convert(value, { context: context + \\" has member function that\\" });
+      value = Function.convert(value, { context: context + \\" has member 'function' that\\" });
 
       ret[key] = value;
     }
@@ -9434,7 +9434,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlCallback\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URLCallback.convert(value, { context: context + \\" has member urlCallback that\\" });
+      value = URLCallback.convert(value, { context: context + \\" has member 'urlCallback' that\\" });
 
       ret[key] = value;
     }
@@ -9447,7 +9447,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
       if (value === null || value === undefined) {
         value = null;
       } else {
-        value = URLHandlerNonNull.convert(value, { context: context + \\" has member urlHandler that\\" });
+        value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
       }
       ret[key] = value;
     }
@@ -9457,7 +9457,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlHandlerNonNull\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = URLHandlerNonNull.convert(value, { context: context + \\" has member urlHandlerNonNull that\\" });
+      value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandlerNonNull' that\\" });
 
       ret[key] = value;
     }
@@ -9467,7 +9467,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"voidFunction\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      value = VoidFunction.convert(value, { context: context + \\" has member voidFunction that\\" });
+      value = VoidFunction.convert(value, { context: context + \\" has member 'voidFunction' that\\" });
 
       ret[key] = value;
     }
