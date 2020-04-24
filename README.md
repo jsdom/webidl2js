@@ -471,6 +471,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
+- `[LegacyTreatNonObjectAsNull]`
 - `[LegacyUnenumerableNamedProperties]`
 - `[LegacyWindowAlias]`
 - `[NoInterfaceObject]`
@@ -498,7 +499,6 @@ Notable missing features include:
 - `[LenientThis]`
 - `[NamedConstructor]`
 - `[SecureContext]`
-- `[TreatNonObjectAsNull]`
 
 ## Nonstandard extended attributes
 
