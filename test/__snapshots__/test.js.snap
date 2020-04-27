@@ -3594,7 +3594,43 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {};
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      unforgeablePromiseOperation() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+      get unforgeablePromiseAttribute() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    unforgeablePromiseOperation: { configurable: false, writable: false },
+    unforgeablePromiseAttribute: { configurable: false }
+  });
+};
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
   privateData.wrapper = wrapper;
@@ -3708,19 +3744,6 @@ exports.install = (globalObject, globalNames) => {
       }
     }
 
-    unforgeablePromiseOperation() {
-      try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
     get promiseAttribute() {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
@@ -3730,20 +3753,6 @@ exports.install = (globalObject, globalNames) => {
         }
 
         return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    get unforgeablePromiseAttribute() {
-      try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -3771,9 +3780,7 @@ exports.install = (globalObject, globalNames) => {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
     promiseOperation: { enumerable: true },
-    unforgeablePromiseOperation: { enumerable: true },
     promiseAttribute: { enumerable: true },
-    unforgeablePromiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
   Object.defineProperties(PromiseTypes, {
@@ -12397,7 +12404,43 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {};
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      unforgeablePromiseOperation() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+      get unforgeablePromiseAttribute() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    unforgeablePromiseOperation: { configurable: false, writable: false },
+    unforgeablePromiseAttribute: { configurable: false }
+  });
+};
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
   privateData.wrapper = wrapper;
@@ -12511,19 +12554,6 @@ exports.install = (globalObject, globalNames) => {
       }
     }
 
-    unforgeablePromiseOperation() {
-      try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
     get promiseAttribute() {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
@@ -12533,20 +12563,6 @@ exports.install = (globalObject, globalNames) => {
         }
 
         return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
-      } catch (e) {
-        return Promise.reject(e);
-      }
-    }
-
-    get unforgeablePromiseAttribute() {
-      try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
       } catch (e) {
         return Promise.reject(e);
       }
@@ -12574,9 +12590,7 @@ exports.install = (globalObject, globalNames) => {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
     promiseOperation: { enumerable: true },
-    unforgeablePromiseOperation: { enumerable: true },
     promiseAttribute: { enumerable: true },
-    unforgeablePromiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
   });
   Object.defineProperties(PromiseTypes, {

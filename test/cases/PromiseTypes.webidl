@@ -6,8 +6,8 @@ interface PromiseTypes {
   Promise<void> promiseOperation();
   readonly attribute Promise<void> promiseAttribute;
 
-  [Unforgeable] Promise<void> unforgeablePromiseOperation();
-  [Unforgeable] readonly attribute Promise<void> unforgeablePromiseAttribute;
+  [LegacyUnforgeable] Promise<void> unforgeablePromiseOperation();
+  [LegacyUnforgeable] readonly attribute Promise<void> unforgeablePromiseAttribute;
 
   static Promise<void> staticPromiseOperation();
   static readonly attribute Promise<void> staticPromiseAttribute;
