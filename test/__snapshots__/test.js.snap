@@ -869,7 +869,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlHandler\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      if (value === null || value === undefined) {
+      if (!utils.isObject(value)) {
         value = null;
       } else {
         value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
@@ -9444,7 +9444,7 @@ exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}
     const key = \\"urlHandler\\";
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
-      if (value === null || value === undefined) {
+      if (!utils.isObject(value)) {
         value = null;
       } else {
         value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
