@@ -454,7 +454,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Enumeration types
 - Union types
 - Callback interfaces
-- Callback function types, somewhat
+- Callback functions
 - Nullable types
 - `sequence<>` types
 - `record<>` types
