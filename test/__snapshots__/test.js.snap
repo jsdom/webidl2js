@@ -267,7 +267,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -555,7 +555,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -575,6 +575,24 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
         return esValue[implSymbol].method();
       } finally {
         CEReactions.postSteps(globalObject);
+      }
+    }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        CEReactions.preSteps(globalObject);
+        try {
+          return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+        } finally {
+          CEReactions.postSteps(globalObject);
+        }
+      } catch (e) {
+        return Promise.reject(e);
       }
     }
 
@@ -611,10 +629,31 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
         CEReactions.postSteps(globalObject);
       }
     }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        CEReactions.preSteps(globalObject);
+        try {
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+        } finally {
+          CEReactions.postSteps(globalObject);
+        }
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(CEReactions.prototype, {
     method: { enumerable: true },
+    promiseOperation: { enumerable: true },
     attr: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
@@ -994,7 +1033,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1223,7 +1262,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1579,7 +1618,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1715,7 +1754,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -1913,7 +1952,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2159,7 +2198,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Global\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2286,7 +2325,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2311,6 +2350,723 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
 };
 
 const Impl = require(\\"../implementations/HTMLConstructor.js\\");
+"
+`;
+
+exports[`with processors LegacyLenientAttributes.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyLenientAttributes\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyLenientAttributes'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyLenientAttributes is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyLenientAttributes {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    get lenientSetter() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"lenientSetter\\"];
+    }
+
+    set lenientSetter(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+    }
+
+    get lenientThisSetter() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"lenientThisSetter\\"];
+    }
+
+    set lenientThisSetter(V) {}
+
+    get lenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"lenientThis\\"];
+    }
+
+    set lenientThis(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      V = conversions[\\"DOMString\\"](V, {
+        context: \\"Failed to set the 'lenientThis' property on 'LegacyLenientAttributes': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"lenientThis\\"] = V;
+    }
+
+    get readonlyLenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"readonlyLenientThis\\"];
+    }
+
+    get replaceableLenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"replaceableLenientThis\\"];
+    }
+
+    set replaceableLenientThis(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      Object.defineProperty(esValue, \\"replaceableLenientThis\\", {
+        configurable: true,
+        enumerable: true,
+        value: V,
+        writable: true
+      });
+    }
+  }
+  Object.defineProperties(LegacyLenientAttributes.prototype, {
+    lenientSetter: { enumerable: true },
+    lenientThisSetter: { enumerable: true },
+    lenientThis: { enumerable: true },
+    readonlyLenientThis: { enumerable: true },
+    replaceableLenientThis: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"LegacyLenientAttributes\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyLenientAttributes;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyLenientAttributes
+  });
+};
+
+const Impl = require(\\"../implementations/LegacyLenientAttributes.js\\");
+"
+`;
+
+exports[`with processors LegacyUnforgeable.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyUnforgeable\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyUnforgeable'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyUnforgeable is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      assign(url) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        if (arguments.length < 1) {
+          throw new TypeError(
+            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
+              arguments.length +
+              \\" present.\\"
+          );
+        }
+        const args = [];
+        {
+          let curArg = arguments[0];
+          curArg = conversions[\\"USVString\\"](curArg, {
+            context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+          });
+          args.push(curArg);
+        }
+        return esValue[implSymbol].assign(...args);
+      },
+      get href() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"href\\"];
+      },
+      set href(V) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = conversions[\\"USVString\\"](V, {
+          context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
+        });
+
+        esValue[implSymbol][\\"href\\"] = V;
+      },
+      toString() {
+        const esValue = this;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"href\\"];
+      },
+      get origin() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"origin\\"];
+      },
+      get protocol() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"protocol\\"];
+      },
+      set protocol(V) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = conversions[\\"USVString\\"](V, {
+          context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
+        });
+
+        esValue[implSymbol][\\"protocol\\"] = V;
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    assign: { configurable: false, writable: false },
+    href: { configurable: false },
+    toString: { configurable: false, writable: false },
+    origin: { configurable: false },
+    protocol: { configurable: false }
+  });
+};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyUnforgeable {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(LegacyUnforgeable.prototype, {
+    [Symbol.toStringTag]: { value: \\"LegacyUnforgeable\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeable;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyUnforgeable
+  });
+};
+
+const Impl = require(\\"../implementations/LegacyUnforgeable.js\\");
+"
+`;
+
+exports[`with processors LegacyUnforgeableMap.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyUnforgeableMap\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyUnforgeableMap'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyUnforgeableMap is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      get a() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"a\\"];
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, { a: { configurable: false } });
+};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper = new Proxy(wrapper, proxyHandler);
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper = new Proxy(wrapper, proxyHandler);
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyUnforgeableMap {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(LegacyUnforgeableMap.prototype, {
+    [Symbol.toStringTag]: { value: \\"LegacyUnforgeableMap\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeableMap;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyUnforgeableMap
+  });
+};
+
+const proxyHandler = {
+  get(target, P, receiver) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.get(target, P, receiver);
+    }
+    const desc = this.getOwnPropertyDescriptor(target, P);
+    if (desc === undefined) {
+      const parent = Object.getPrototypeOf(target);
+      if (parent === null) {
+        return undefined;
+      }
+      return Reflect.get(target, P, receiver);
+    }
+    if (!desc.get && !desc.set) {
+      return desc.value;
+    }
+    const getter = desc.get;
+    if (getter === undefined) {
+      return undefined;
+    }
+    return Reflect.apply(getter, receiver, []);
+  },
+
+  has(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.has(target, P);
+    }
+    const desc = this.getOwnPropertyDescriptor(target, P);
+    if (desc !== undefined) {
+      return true;
+    }
+    const parent = Object.getPrototypeOf(target);
+    if (parent !== null) {
+      return Reflect.has(parent, P);
+    }
+    return false;
+  },
+
+  ownKeys(target) {
+    const keys = new Set();
+
+    for (const key of target[implSymbol][utils.supportedPropertyNames]) {
+      if (!(key in target)) {
+        keys.add(\`\${key}\`);
+      }
+    }
+
+    for (const key of Reflect.ownKeys(target)) {
+      keys.add(key);
+    }
+    return [...keys];
+  },
+
+  getOwnPropertyDescriptor(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.getOwnPropertyDescriptor(target, P);
+    }
+    let ignoreNamedProps = false;
+
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+      const namedValue = target[implSymbol][utils.namedGet](P);
+
+      return {
+        writable: true,
+        enumerable: true,
+        configurable: true,
+        value: utils.tryWrapperForImpl(namedValue)
+      };
+    }
+
+    return Reflect.getOwnPropertyDescriptor(target, P);
+  },
+
+  set(target, P, V, receiver) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.set(target, P, V, receiver);
+    }
+    if (target === receiver) {
+      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+        let namedValue = V;
+
+        namedValue = conversions[\\"DOMString\\"](namedValue, {
+          context: \\"Failed to set the '\\" + P + \\"' property on 'LegacyUnforgeableMap': The provided value\\"
+        });
+
+        const creating = !target[implSymbol][utils.supportsPropertyName](P);
+        if (creating) {
+          target[implSymbol][utils.namedSetNew](P, namedValue);
+        } else {
+          target[implSymbol][utils.namedSetExisting](P, namedValue);
+        }
+
+        return true;
+      }
+    }
+    let ownDesc;
+
+    if (ownDesc === undefined) {
+      ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
+    }
+    if (ownDesc === undefined) {
+      const parent = Reflect.getPrototypeOf(target);
+      if (parent !== null) {
+        return Reflect.set(parent, P, V, receiver);
+      }
+      ownDesc = { writable: true, enumerable: true, configurable: true, value: undefined };
+    }
+    if (!ownDesc.writable) {
+      return false;
+    }
+    if (!utils.isObject(receiver)) {
+      return false;
+    }
+    const existingDesc = Reflect.getOwnPropertyDescriptor(receiver, P);
+    let valueDesc;
+    if (existingDesc !== undefined) {
+      if (existingDesc.get || existingDesc.set) {
+        return false;
+      }
+      if (!existingDesc.writable) {
+        return false;
+      }
+      valueDesc = { value: V };
+    } else {
+      valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
+    }
+    return Reflect.defineProperty(receiver, P, valueDesc);
+  },
+
+  defineProperty(target, P, desc) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.defineProperty(target, P, desc);
+    }
+    if (![\\"a\\"].includes(P)) {
+      if (!utils.hasOwn(target, P)) {
+        if (desc.get || desc.set) {
+          return false;
+        }
+
+        let namedValue = desc.value;
+
+        namedValue = conversions[\\"DOMString\\"](namedValue, {
+          context: \\"Failed to set the '\\" + P + \\"' property on 'LegacyUnforgeableMap': The provided value\\"
+        });
+
+        const creating = !target[implSymbol][utils.supportsPropertyName](P);
+        if (creating) {
+          target[implSymbol][utils.namedSetNew](P, namedValue);
+        } else {
+          target[implSymbol][utils.namedSetExisting](P, namedValue);
+        }
+
+        return true;
+      }
+    }
+    return Reflect.defineProperty(target, P, desc);
+  },
+
+  deleteProperty(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.deleteProperty(target, P);
+    }
+
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
+      return false;
+    }
+
+    return Reflect.deleteProperty(target, P);
+  },
+
+  preventExtensions() {
+    return false;
+  }
+};
+
+const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
 `;
 
@@ -2397,7 +3153,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -2663,7 +3419,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3048,7 +3804,43 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {};
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      unforgeablePromiseOperation() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+      get unforgeablePromiseAttribute() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    unforgeablePromiseOperation: { configurable: false, writable: false },
+    unforgeablePromiseAttribute: { configurable: false }
+  });
+};
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
   privateData.wrapper = wrapper;
@@ -3084,7 +3876,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3148,11 +3940,62 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
       }
       return esValue[implSymbol].promiseConsumer(...args);
     }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static staticPromiseOperation() {
+      try {
+        return utils.tryWrapperForImpl(Impl.implementation.staticPromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static get staticPromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        return Impl.implementation[\\"staticPromiseAttribute\\"];
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(PromiseTypes.prototype, {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
+    promiseOperation: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
+  });
+  Object.defineProperties(PromiseTypes, {
+    staticPromiseOperation: { enumerable: true },
+    staticPromiseAttribute: { enumerable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
     globalObject[ctorRegistrySymbol] = Object.create(null);
@@ -3254,7 +4097,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3471,6 +4314,143 @@ const Impl = require(\\"../implementations/Reflect.js\\");
 "
 `;
 
+exports[`with processors Replaceable.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Replaceable\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'Replaceable'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor Replaceable is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class Replaceable {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    get replaceable() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"replaceable\\"];
+    }
+
+    set replaceable(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      Object.defineProperty(esValue, \\"replaceable\\", {
+        configurable: true,
+        enumerable: true,
+        value: V,
+        writable: true
+      });
+    }
+  }
+  Object.defineProperties(Replaceable.prototype, {
+    replaceable: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"Replaceable\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = Replaceable;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: Replaceable
+  });
+};
+
+const Impl = require(\\"../implementations/Replaceable.js\\");
+"
+`;
+
 exports[`with processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
@@ -3588,7 +4568,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -3904,7 +4884,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4069,7 +5049,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4456,7 +5436,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4590,7 +5570,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4713,7 +5693,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4844,7 +5824,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -4967,7 +5947,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -5509,7 +6489,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6018,7 +6998,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6376,7 +7356,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -6806,7 +7786,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7175,7 +8155,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7508,7 +8488,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -7623,522 +8603,6 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`with processors Unforgeable.webidl 1`] = `
-"\\"use strict\\";
-
-const conversions = require(\\"webidl-conversions\\");
-const utils = require(\\"./utils.js\\");
-
-const implSymbol = utils.implSymbol;
-const ctorRegistrySymbol = utils.ctorRegistrySymbol;
-
-const interfaceName = \\"Unforgeable\\";
-
-exports.is = value => {
-  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
-};
-exports.isImpl = value => {
-  return utils.isObject(value) && value instanceof Impl.implementation;
-};
-exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
-  }
-  throw new TypeError(\`\${context} is not of type 'Unforgeable'.\`);
-};
-
-function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  const ctor = globalObject[ctorRegistrySymbol][\\"Unforgeable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Unforgeable is not installed on the passed global object\\");
-  }
-
-  return Object.create(ctor.prototype);
-}
-
-exports.create = (globalObject, constructorArgs, privateData) => {
-  const wrapper = makeWrapper(globalObject);
-  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
-};
-
-exports.createImpl = (globalObject, constructorArgs, privateData) => {
-  const wrapper = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(wrapper);
-};
-
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      assign(url) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        if (arguments.length < 1) {
-          throw new TypeError(
-            \\"Failed to execute 'assign' on 'Unforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
-          );
-        }
-        const args = [];
-        {
-          let curArg = arguments[0];
-          curArg = conversions[\\"USVString\\"](curArg, {
-            context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
-          });
-          args.push(curArg);
-        }
-        return esValue[implSymbol].assign(...args);
-      },
-      get href() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      set href(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"href\\"] = V;
-      },
-      toString() {
-        const esValue = this;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      get origin() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"origin\\"];
-      },
-      get protocol() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"protocol\\"];
-      },
-      set protocol(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"protocol\\"] = V;
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    assign: { configurable: false, writable: false },
-    href: { configurable: false },
-    toString: { configurable: false, writable: false },
-    origin: { configurable: false },
-    protocol: { configurable: false }
-  });
-};
-
-exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
-  privateData.wrapper = wrapper;
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper;
-};
-
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper[implSymbol];
-};
-
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-  class Unforgeable {
-    constructor() {
-      throw new TypeError(\\"Illegal constructor\\");
-    }
-  }
-  Object.defineProperties(Unforgeable.prototype, {
-    [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
-  });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Unforgeable;
-
-  Object.defineProperty(globalObject, interfaceName, {
-    configurable: true,
-    writable: true,
-    value: Unforgeable
-  });
-};
-
-const Impl = require(\\"../implementations/Unforgeable.js\\");
-"
-`;
-
-exports[`with processors UnforgeableMap.webidl 1`] = `
-"\\"use strict\\";
-
-const conversions = require(\\"webidl-conversions\\");
-const utils = require(\\"./utils.js\\");
-
-const implSymbol = utils.implSymbol;
-const ctorRegistrySymbol = utils.ctorRegistrySymbol;
-
-const interfaceName = \\"UnforgeableMap\\";
-
-exports.is = value => {
-  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
-};
-exports.isImpl = value => {
-  return utils.isObject(value) && value instanceof Impl.implementation;
-};
-exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
-  }
-  throw new TypeError(\`\${context} is not of type 'UnforgeableMap'.\`);
-};
-
-function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  const ctor = globalObject[ctorRegistrySymbol][\\"UnforgeableMap\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor UnforgeableMap is not installed on the passed global object\\");
-  }
-
-  return Object.create(ctor.prototype);
-}
-
-exports.create = (globalObject, constructorArgs, privateData) => {
-  const wrapper = makeWrapper(globalObject);
-  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
-};
-
-exports.createImpl = (globalObject, constructorArgs, privateData) => {
-  const wrapper = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(wrapper);
-};
-
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      get a() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"a\\"];
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, { a: { configurable: false } });
-};
-
-exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
-  privateData.wrapper = wrapper;
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  wrapper = new Proxy(wrapper, proxyHandler);
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper;
-};
-
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
-
-  wrapper = new Proxy(wrapper, proxyHandler);
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper[implSymbol];
-};
-
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-  class UnforgeableMap {
-    constructor() {
-      throw new TypeError(\\"Illegal constructor\\");
-    }
-  }
-  Object.defineProperties(UnforgeableMap.prototype, {
-    [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
-  });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = UnforgeableMap;
-
-  Object.defineProperty(globalObject, interfaceName, {
-    configurable: true,
-    writable: true,
-    value: UnforgeableMap
-  });
-};
-
-const proxyHandler = {
-  get(target, P, receiver) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.get(target, P, receiver);
-    }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc === undefined) {
-      const parent = Object.getPrototypeOf(target);
-      if (parent === null) {
-        return undefined;
-      }
-      return Reflect.get(target, P, receiver);
-    }
-    if (!desc.get && !desc.set) {
-      return desc.value;
-    }
-    const getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return Reflect.apply(getter, receiver, []);
-  },
-
-  has(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.has(target, P);
-    }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc !== undefined) {
-      return true;
-    }
-    const parent = Object.getPrototypeOf(target);
-    if (parent !== null) {
-      return Reflect.has(parent, P);
-    }
-    return false;
-  },
-
-  ownKeys(target) {
-    const keys = new Set();
-
-    for (const key of target[implSymbol][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
-        keys.add(\`\${key}\`);
-      }
-    }
-
-    for (const key of Reflect.ownKeys(target)) {
-      keys.add(key);
-    }
-    return [...keys];
-  },
-
-  getOwnPropertyDescriptor(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.getOwnPropertyDescriptor(target, P);
-    }
-    let ignoreNamedProps = false;
-
-    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
-      const namedValue = target[implSymbol][utils.namedGet](P);
-
-      return {
-        writable: true,
-        enumerable: true,
-        configurable: true,
-        value: utils.tryWrapperForImpl(namedValue)
-      };
-    }
-
-    return Reflect.getOwnPropertyDescriptor(target, P);
-  },
-
-  set(target, P, V, receiver) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.set(target, P, V, receiver);
-    }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
-        let namedValue = V;
-
-        namedValue = conversions[\\"DOMString\\"](namedValue, {
-          context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
-        });
-
-        const creating = !target[implSymbol][utils.supportsPropertyName](P);
-        if (creating) {
-          target[implSymbol][utils.namedSetNew](P, namedValue);
-        } else {
-          target[implSymbol][utils.namedSetExisting](P, namedValue);
-        }
-
-        return true;
-      }
-    }
-    let ownDesc;
-
-    if (ownDesc === undefined) {
-      ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
-    }
-    if (ownDesc === undefined) {
-      const parent = Reflect.getPrototypeOf(target);
-      if (parent !== null) {
-        return Reflect.set(parent, P, V, receiver);
-      }
-      ownDesc = { writable: true, enumerable: true, configurable: true, value: undefined };
-    }
-    if (!ownDesc.writable) {
-      return false;
-    }
-    if (!utils.isObject(receiver)) {
-      return false;
-    }
-    const existingDesc = Reflect.getOwnPropertyDescriptor(receiver, P);
-    let valueDesc;
-    if (existingDesc !== undefined) {
-      if (existingDesc.get || existingDesc.set) {
-        return false;
-      }
-      if (!existingDesc.writable) {
-        return false;
-      }
-      valueDesc = { value: V };
-    } else {
-      valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
-    }
-    return Reflect.defineProperty(receiver, P, valueDesc);
-  },
-
-  defineProperty(target, P, desc) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.defineProperty(target, P, desc);
-    }
-    if (![\\"a\\"].includes(P)) {
-      if (!utils.hasOwn(target, P)) {
-        if (desc.get || desc.set) {
-          return false;
-        }
-
-        let namedValue = desc.value;
-
-        namedValue = conversions[\\"DOMString\\"](namedValue, {
-          context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
-        });
-
-        const creating = !target[implSymbol][utils.supportsPropertyName](P);
-        if (creating) {
-          target[implSymbol][utils.namedSetNew](P, namedValue);
-        } else {
-          target[implSymbol][utils.namedSetExisting](P, namedValue);
-        }
-
-        return true;
-      }
-    }
-    return Reflect.defineProperty(target, P, desc);
-  },
-
-  deleteProperty(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.deleteProperty(target, P);
-    }
-
-    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
-      return false;
-    }
-
-    return Reflect.deleteProperty(target, P);
-  },
-
-  preventExtensions() {
-    return false;
-  }
-};
-
-const Impl = require(\\"../implementations/UnforgeableMap.js\\");
-"
-`;
-
 exports[`with processors Unscopable.webidl 1`] = `
 "\\"use strict\\";
 
@@ -8222,7 +8686,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8388,7 +8852,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8654,7 +9118,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -8873,7 +9337,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9160,7 +9624,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9176,6 +9640,19 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
       }
 
       return esValue[implSymbol].method();
+    }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
     }
 
     get attr() {
@@ -9201,10 +9678,26 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
 
       esValue[implSymbol][\\"attr\\"] = V;
     }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(CEReactions.prototype, {
     method: { enumerable: true },
+    promiseOperation: { enumerable: true },
     attr: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
@@ -9569,7 +10062,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -9798,7 +10291,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10154,7 +10647,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10290,7 +10783,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10488,7 +10981,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\", \\"AudioWorklet\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10734,7 +11227,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Global\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10860,7 +11353,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -10885,6 +11378,723 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
 };
 
 const Impl = require(\\"../implementations/HTMLConstructor.js\\");
+"
+`;
+
+exports[`without processors LegacyLenientAttributes.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyLenientAttributes\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyLenientAttributes'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyLenientAttributes is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyLenientAttributes {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    get lenientSetter() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"lenientSetter\\"];
+    }
+
+    set lenientSetter(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+    }
+
+    get lenientThisSetter() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"lenientThisSetter\\"];
+    }
+
+    set lenientThisSetter(V) {}
+
+    get lenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"lenientThis\\"];
+    }
+
+    set lenientThis(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      V = conversions[\\"DOMString\\"](V, {
+        context: \\"Failed to set the 'lenientThis' property on 'LegacyLenientAttributes': The provided value\\"
+      });
+
+      esValue[implSymbol][\\"lenientThis\\"] = V;
+    }
+
+    get readonlyLenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"readonlyLenientThis\\"];
+    }
+
+    get replaceableLenientThis() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        return;
+      }
+
+      return esValue[implSymbol][\\"replaceableLenientThis\\"];
+    }
+
+    set replaceableLenientThis(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      Object.defineProperty(esValue, \\"replaceableLenientThis\\", {
+        configurable: true,
+        enumerable: true,
+        value: V,
+        writable: true
+      });
+    }
+  }
+  Object.defineProperties(LegacyLenientAttributes.prototype, {
+    lenientSetter: { enumerable: true },
+    lenientThisSetter: { enumerable: true },
+    lenientThis: { enumerable: true },
+    readonlyLenientThis: { enumerable: true },
+    replaceableLenientThis: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"LegacyLenientAttributes\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyLenientAttributes;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyLenientAttributes
+  });
+};
+
+const Impl = require(\\"../implementations/LegacyLenientAttributes.js\\");
+"
+`;
+
+exports[`without processors LegacyUnforgeable.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyUnforgeable\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyUnforgeable'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyUnforgeable is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      assign(url) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        if (arguments.length < 1) {
+          throw new TypeError(
+            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
+              arguments.length +
+              \\" present.\\"
+          );
+        }
+        const args = [];
+        {
+          let curArg = arguments[0];
+          curArg = conversions[\\"USVString\\"](curArg, {
+            context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+          });
+          args.push(curArg);
+        }
+        return esValue[implSymbol].assign(...args);
+      },
+      get href() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"href\\"];
+      },
+      set href(V) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = conversions[\\"USVString\\"](V, {
+          context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
+        });
+
+        esValue[implSymbol][\\"href\\"] = V;
+      },
+      toString() {
+        const esValue = this;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"href\\"];
+      },
+      get origin() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"origin\\"];
+      },
+      get protocol() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"protocol\\"];
+      },
+      set protocol(V) {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        V = conversions[\\"USVString\\"](V, {
+          context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
+        });
+
+        esValue[implSymbol][\\"protocol\\"] = V;
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    assign: { configurable: false, writable: false },
+    href: { configurable: false },
+    toString: { configurable: false, writable: false },
+    origin: { configurable: false },
+    protocol: { configurable: false }
+  });
+};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyUnforgeable {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(LegacyUnforgeable.prototype, {
+    [Symbol.toStringTag]: { value: \\"LegacyUnforgeable\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeable;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyUnforgeable
+  });
+};
+
+const Impl = require(\\"../implementations/LegacyUnforgeable.js\\");
+"
+`;
+
+exports[`without processors LegacyUnforgeableMap.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"LegacyUnforgeableMap\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'LegacyUnforgeableMap'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor LegacyUnforgeableMap is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      get a() {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return esValue[implSymbol][\\"a\\"];
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, { a: { configurable: false } });
+};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper = new Proxy(wrapper, proxyHandler);
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper = new Proxy(wrapper, proxyHandler);
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class LegacyUnforgeableMap {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+  }
+  Object.defineProperties(LegacyUnforgeableMap.prototype, {
+    [Symbol.toStringTag]: { value: \\"LegacyUnforgeableMap\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeableMap;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyUnforgeableMap
+  });
+};
+
+const proxyHandler = {
+  get(target, P, receiver) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.get(target, P, receiver);
+    }
+    const desc = this.getOwnPropertyDescriptor(target, P);
+    if (desc === undefined) {
+      const parent = Object.getPrototypeOf(target);
+      if (parent === null) {
+        return undefined;
+      }
+      return Reflect.get(target, P, receiver);
+    }
+    if (!desc.get && !desc.set) {
+      return desc.value;
+    }
+    const getter = desc.get;
+    if (getter === undefined) {
+      return undefined;
+    }
+    return Reflect.apply(getter, receiver, []);
+  },
+
+  has(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.has(target, P);
+    }
+    const desc = this.getOwnPropertyDescriptor(target, P);
+    if (desc !== undefined) {
+      return true;
+    }
+    const parent = Object.getPrototypeOf(target);
+    if (parent !== null) {
+      return Reflect.has(parent, P);
+    }
+    return false;
+  },
+
+  ownKeys(target) {
+    const keys = new Set();
+
+    for (const key of target[implSymbol][utils.supportedPropertyNames]) {
+      if (!(key in target)) {
+        keys.add(\`\${key}\`);
+      }
+    }
+
+    for (const key of Reflect.ownKeys(target)) {
+      keys.add(key);
+    }
+    return [...keys];
+  },
+
+  getOwnPropertyDescriptor(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.getOwnPropertyDescriptor(target, P);
+    }
+    let ignoreNamedProps = false;
+
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+      const namedValue = target[implSymbol][utils.namedGet](P);
+
+      return {
+        writable: true,
+        enumerable: true,
+        configurable: true,
+        value: utils.tryWrapperForImpl(namedValue)
+      };
+    }
+
+    return Reflect.getOwnPropertyDescriptor(target, P);
+  },
+
+  set(target, P, V, receiver) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.set(target, P, V, receiver);
+    }
+    if (target === receiver) {
+      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+        let namedValue = V;
+
+        namedValue = conversions[\\"DOMString\\"](namedValue, {
+          context: \\"Failed to set the '\\" + P + \\"' property on 'LegacyUnforgeableMap': The provided value\\"
+        });
+
+        const creating = !target[implSymbol][utils.supportsPropertyName](P);
+        if (creating) {
+          target[implSymbol][utils.namedSetNew](P, namedValue);
+        } else {
+          target[implSymbol][utils.namedSetExisting](P, namedValue);
+        }
+
+        return true;
+      }
+    }
+    let ownDesc;
+
+    if (ownDesc === undefined) {
+      ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
+    }
+    if (ownDesc === undefined) {
+      const parent = Reflect.getPrototypeOf(target);
+      if (parent !== null) {
+        return Reflect.set(parent, P, V, receiver);
+      }
+      ownDesc = { writable: true, enumerable: true, configurable: true, value: undefined };
+    }
+    if (!ownDesc.writable) {
+      return false;
+    }
+    if (!utils.isObject(receiver)) {
+      return false;
+    }
+    const existingDesc = Reflect.getOwnPropertyDescriptor(receiver, P);
+    let valueDesc;
+    if (existingDesc !== undefined) {
+      if (existingDesc.get || existingDesc.set) {
+        return false;
+      }
+      if (!existingDesc.writable) {
+        return false;
+      }
+      valueDesc = { value: V };
+    } else {
+      valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
+    }
+    return Reflect.defineProperty(receiver, P, valueDesc);
+  },
+
+  defineProperty(target, P, desc) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.defineProperty(target, P, desc);
+    }
+    if (![\\"a\\"].includes(P)) {
+      if (!utils.hasOwn(target, P)) {
+        if (desc.get || desc.set) {
+          return false;
+        }
+
+        let namedValue = desc.value;
+
+        namedValue = conversions[\\"DOMString\\"](namedValue, {
+          context: \\"Failed to set the '\\" + P + \\"' property on 'LegacyUnforgeableMap': The provided value\\"
+        });
+
+        const creating = !target[implSymbol][utils.supportsPropertyName](P);
+        if (creating) {
+          target[implSymbol][utils.namedSetNew](P, namedValue);
+        } else {
+          target[implSymbol][utils.namedSetExisting](P, namedValue);
+        }
+
+        return true;
+      }
+    }
+    return Reflect.defineProperty(target, P, desc);
+  },
+
+  deleteProperty(target, P) {
+    if (typeof P === \\"symbol\\") {
+      return Reflect.deleteProperty(target, P);
+    }
+
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
+      return false;
+    }
+
+    return Reflect.deleteProperty(target, P);
+  },
+
+  preventExtensions() {
+    return false;
+  }
+};
+
+const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
 `;
 
@@ -10971,7 +12181,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11237,7 +12447,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11622,7 +12832,43 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {};
+exports._internalSetup = (wrapper, globalObject) => {
+  Object.defineProperties(
+    wrapper,
+    Object.getOwnPropertyDescriptors({
+      unforgeablePromiseOperation() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      },
+      get unforgeablePromiseAttribute() {
+        try {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"Illegal invocation\\");
+          }
+
+          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      }
+    })
+  );
+
+  Object.defineProperties(wrapper, {
+    unforgeablePromiseOperation: { configurable: false, writable: false },
+    unforgeablePromiseAttribute: { configurable: false }
+  });
+};
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
   privateData.wrapper = wrapper;
@@ -11658,7 +12904,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -11722,11 +12968,62 @@ exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
       }
       return esValue[implSymbol].promiseConsumer(...args);
     }
+
+    promiseOperation() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    get promiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        if (!exports.is(esValue)) {
+          throw new TypeError(\\"Illegal invocation\\");
+        }
+
+        return utils.tryWrapperForImpl(esValue[implSymbol][\\"promiseAttribute\\"]);
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static staticPromiseOperation() {
+      try {
+        return utils.tryWrapperForImpl(Impl.implementation.staticPromiseOperation());
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
+
+    static get staticPromiseAttribute() {
+      try {
+        const esValue = this !== null && this !== undefined ? this : globalObject;
+
+        return Impl.implementation[\\"staticPromiseAttribute\\"];
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    }
   }
   Object.defineProperties(PromiseTypes.prototype, {
     voidPromiseConsumer: { enumerable: true },
     promiseConsumer: { enumerable: true },
+    promiseOperation: { enumerable: true },
+    promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"PromiseTypes\\", configurable: true }
+  });
+  Object.defineProperties(PromiseTypes, {
+    staticPromiseOperation: { enumerable: true },
+    staticPromiseAttribute: { enumerable: true }
   });
   if (globalObject[ctorRegistrySymbol] === undefined) {
     globalObject[ctorRegistrySymbol] = Object.create(null);
@@ -11827,7 +13124,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12030,6 +13327,143 @@ const Impl = require(\\"../implementations/Reflect.js\\");
 "
 `;
 
+exports[`without processors Replaceable.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"Replaceable\\";
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'Replaceable'.\`);
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor Replaceable is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class Replaceable {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    get replaceable() {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      return esValue[implSymbol][\\"replaceable\\"];
+    }
+
+    set replaceable(V) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+
+      if (!exports.is(esValue)) {
+        throw new TypeError(\\"Illegal invocation\\");
+      }
+
+      Object.defineProperty(esValue, \\"replaceable\\", {
+        configurable: true,
+        enumerable: true,
+        value: V,
+        writable: true
+      });
+    }
+  }
+  Object.defineProperties(Replaceable.prototype, {
+    replaceable: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"Replaceable\\", configurable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = Replaceable;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: Replaceable
+  });
+};
+
+const Impl = require(\\"../implementations/Replaceable.js\\");
+"
+`;
+
 exports[`without processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
@@ -12147,7 +13581,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12463,7 +13897,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -12628,7 +14062,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13015,7 +14449,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13149,7 +14583,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13272,7 +14706,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13403,7 +14837,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -13526,7 +14960,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -14068,7 +15502,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -14577,7 +16011,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -14935,7 +16369,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\", \\"Worker\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15365,7 +16799,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -15734,7 +17168,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16067,7 +17501,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16182,522 +17616,6 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`without processors Unforgeable.webidl 1`] = `
-"\\"use strict\\";
-
-const conversions = require(\\"webidl-conversions\\");
-const utils = require(\\"./utils.js\\");
-
-const implSymbol = utils.implSymbol;
-const ctorRegistrySymbol = utils.ctorRegistrySymbol;
-
-const interfaceName = \\"Unforgeable\\";
-
-exports.is = value => {
-  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
-};
-exports.isImpl = value => {
-  return utils.isObject(value) && value instanceof Impl.implementation;
-};
-exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
-  }
-  throw new TypeError(\`\${context} is not of type 'Unforgeable'.\`);
-};
-
-function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  const ctor = globalObject[ctorRegistrySymbol][\\"Unforgeable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Unforgeable is not installed on the passed global object\\");
-  }
-
-  return Object.create(ctor.prototype);
-}
-
-exports.create = (globalObject, constructorArgs, privateData) => {
-  const wrapper = makeWrapper(globalObject);
-  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
-};
-
-exports.createImpl = (globalObject, constructorArgs, privateData) => {
-  const wrapper = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(wrapper);
-};
-
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      assign(url) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        if (arguments.length < 1) {
-          throw new TypeError(
-            \\"Failed to execute 'assign' on 'Unforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
-          );
-        }
-        const args = [];
-        {
-          let curArg = arguments[0];
-          curArg = conversions[\\"USVString\\"](curArg, {
-            context: \\"Failed to execute 'assign' on 'Unforgeable': parameter 1\\"
-          });
-          args.push(curArg);
-        }
-        return esValue[implSymbol].assign(...args);
-      },
-      get href() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      set href(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'href' property on 'Unforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"href\\"] = V;
-      },
-      toString() {
-        const esValue = this;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      get origin() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"origin\\"];
-      },
-      get protocol() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"protocol\\"];
-      },
-      set protocol(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'protocol' property on 'Unforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"protocol\\"] = V;
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    assign: { configurable: false, writable: false },
-    href: { configurable: false },
-    toString: { configurable: false, writable: false },
-    origin: { configurable: false },
-    protocol: { configurable: false }
-  });
-};
-
-exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
-  privateData.wrapper = wrapper;
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper;
-};
-
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper[implSymbol];
-};
-
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-  class Unforgeable {
-    constructor() {
-      throw new TypeError(\\"Illegal constructor\\");
-    }
-  }
-  Object.defineProperties(Unforgeable.prototype, {
-    [Symbol.toStringTag]: { value: \\"Unforgeable\\", configurable: true }
-  });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Unforgeable;
-
-  Object.defineProperty(globalObject, interfaceName, {
-    configurable: true,
-    writable: true,
-    value: Unforgeable
-  });
-};
-
-const Impl = require(\\"../implementations/Unforgeable.js\\");
-"
-`;
-
-exports[`without processors UnforgeableMap.webidl 1`] = `
-"\\"use strict\\";
-
-const conversions = require(\\"webidl-conversions\\");
-const utils = require(\\"./utils.js\\");
-
-const implSymbol = utils.implSymbol;
-const ctorRegistrySymbol = utils.ctorRegistrySymbol;
-
-const interfaceName = \\"UnforgeableMap\\";
-
-exports.is = value => {
-  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
-};
-exports.isImpl = value => {
-  return utils.isObject(value) && value instanceof Impl.implementation;
-};
-exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
-  }
-  throw new TypeError(\`\${context} is not of type 'UnforgeableMap'.\`);
-};
-
-function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  const ctor = globalObject[ctorRegistrySymbol][\\"UnforgeableMap\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor UnforgeableMap is not installed on the passed global object\\");
-  }
-
-  return Object.create(ctor.prototype);
-}
-
-exports.create = (globalObject, constructorArgs, privateData) => {
-  const wrapper = makeWrapper(globalObject);
-  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
-};
-
-exports.createImpl = (globalObject, constructorArgs, privateData) => {
-  const wrapper = exports.create(globalObject, constructorArgs, privateData);
-  return utils.implForWrapper(wrapper);
-};
-
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      get a() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"Illegal invocation\\");
-        }
-
-        return esValue[implSymbol][\\"a\\"];
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, { a: { configurable: false } });
-};
-
-exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
-  privateData.wrapper = wrapper;
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
-
-  wrapper = new Proxy(wrapper, proxyHandler);
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper;
-};
-
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
-
-  exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
-
-  wrapper = new Proxy(wrapper, proxyHandler);
-
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
-  if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
-  }
-  return wrapper[implSymbol];
-};
-
-const exposed = new Set([\\"Window\\"]);
-
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
-    return;
-  }
-  class UnforgeableMap {
-    constructor() {
-      throw new TypeError(\\"Illegal constructor\\");
-    }
-  }
-  Object.defineProperties(UnforgeableMap.prototype, {
-    [Symbol.toStringTag]: { value: \\"UnforgeableMap\\", configurable: true }
-  });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = UnforgeableMap;
-
-  Object.defineProperty(globalObject, interfaceName, {
-    configurable: true,
-    writable: true,
-    value: UnforgeableMap
-  });
-};
-
-const proxyHandler = {
-  get(target, P, receiver) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.get(target, P, receiver);
-    }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc === undefined) {
-      const parent = Object.getPrototypeOf(target);
-      if (parent === null) {
-        return undefined;
-      }
-      return Reflect.get(target, P, receiver);
-    }
-    if (!desc.get && !desc.set) {
-      return desc.value;
-    }
-    const getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return Reflect.apply(getter, receiver, []);
-  },
-
-  has(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.has(target, P);
-    }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc !== undefined) {
-      return true;
-    }
-    const parent = Object.getPrototypeOf(target);
-    if (parent !== null) {
-      return Reflect.has(parent, P);
-    }
-    return false;
-  },
-
-  ownKeys(target) {
-    const keys = new Set();
-
-    for (const key of target[implSymbol][utils.supportedPropertyNames]) {
-      if (!(key in target)) {
-        keys.add(\`\${key}\`);
-      }
-    }
-
-    for (const key of Reflect.ownKeys(target)) {
-      keys.add(key);
-    }
-    return [...keys];
-  },
-
-  getOwnPropertyDescriptor(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.getOwnPropertyDescriptor(target, P);
-    }
-    let ignoreNamedProps = false;
-
-    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
-      const namedValue = target[implSymbol][utils.namedGet](P);
-
-      return {
-        writable: true,
-        enumerable: true,
-        configurable: true,
-        value: utils.tryWrapperForImpl(namedValue)
-      };
-    }
-
-    return Reflect.getOwnPropertyDescriptor(target, P);
-  },
-
-  set(target, P, V, receiver) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.set(target, P, V, receiver);
-    }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
-        let namedValue = V;
-
-        namedValue = conversions[\\"DOMString\\"](namedValue, {
-          context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
-        });
-
-        const creating = !target[implSymbol][utils.supportsPropertyName](P);
-        if (creating) {
-          target[implSymbol][utils.namedSetNew](P, namedValue);
-        } else {
-          target[implSymbol][utils.namedSetExisting](P, namedValue);
-        }
-
-        return true;
-      }
-    }
-    let ownDesc;
-
-    if (ownDesc === undefined) {
-      ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
-    }
-    if (ownDesc === undefined) {
-      const parent = Reflect.getPrototypeOf(target);
-      if (parent !== null) {
-        return Reflect.set(parent, P, V, receiver);
-      }
-      ownDesc = { writable: true, enumerable: true, configurable: true, value: undefined };
-    }
-    if (!ownDesc.writable) {
-      return false;
-    }
-    if (!utils.isObject(receiver)) {
-      return false;
-    }
-    const existingDesc = Reflect.getOwnPropertyDescriptor(receiver, P);
-    let valueDesc;
-    if (existingDesc !== undefined) {
-      if (existingDesc.get || existingDesc.set) {
-        return false;
-      }
-      if (!existingDesc.writable) {
-        return false;
-      }
-      valueDesc = { value: V };
-    } else {
-      valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
-    }
-    return Reflect.defineProperty(receiver, P, valueDesc);
-  },
-
-  defineProperty(target, P, desc) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.defineProperty(target, P, desc);
-    }
-    if (![\\"a\\"].includes(P)) {
-      if (!utils.hasOwn(target, P)) {
-        if (desc.get || desc.set) {
-          return false;
-        }
-
-        let namedValue = desc.value;
-
-        namedValue = conversions[\\"DOMString\\"](namedValue, {
-          context: \\"Failed to set the '\\" + P + \\"' property on 'UnforgeableMap': The provided value\\"
-        });
-
-        const creating = !target[implSymbol][utils.supportsPropertyName](P);
-        if (creating) {
-          target[implSymbol][utils.namedSetNew](P, namedValue);
-        } else {
-          target[implSymbol][utils.namedSetExisting](P, namedValue);
-        }
-
-        return true;
-      }
-    }
-    return Reflect.defineProperty(target, P, desc);
-  },
-
-  deleteProperty(target, P) {
-    if (typeof P === \\"symbol\\") {
-      return Reflect.deleteProperty(target, P);
-    }
-
-    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
-      return false;
-    }
-
-    return Reflect.deleteProperty(target, P);
-  },
-
-  preventExtensions() {
-    return false;
-  }
-};
-
-const Impl = require(\\"../implementations/UnforgeableMap.js\\");
-"
-`;
-
 exports[`without processors Unscopable.webidl 1`] = `
 "\\"use strict\\";
 
@@ -16781,7 +17699,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -16947,7 +17865,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
@@ -17213,7 +18131,7 @@ exports.new = globalObject => {
 
 const exposed = new Set([\\"Window\\"]);
 
-exports.install = (globalObject, globalNames = [\\"Window\\"]) => {
+exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }

@@ -270,8 +270,6 @@ This method creates a brand new wrapper constructor and prototype and attach it 
 
 The second argument `globalNames` is an array containing the [global names](https://heycam.github.io/webidl/#dfn-global-name) of the interface that `globalObject` implements. This is used for the purposes of deciding which interfaces are [exposed](https://heycam.github.io/webidl/#dfn-exposed). For example, this array should be `["Window"]` for a [`Window`](https://html.spec.whatwg.org/multipage/window-object.html#window) global object. But for a [`DedicatedWorkerGlobalScope`](https://html.spec.whatwg.org/multipage/workers.html#dedicatedworkerglobalscope) global object, this array should be `["Worker", "DedicatedWorker"]`. Note that we do not yet implement [`[SecureContext]`](https://heycam.github.io/webidl/#SecureContext), so the "exposed" check is not fully implemented.
 
-Temporarily, until the next major release, `globalNames` defaults to `["Window"]`.
-
 #### `create(globalObject, constructorArgs, privateData)`
 
 Creates a new instance of the wrapper class and corresponding implementation class, passing in the `globalObject`, the `constructorArgs` array and `privateData` object to the implementation class constructor. Then returns the wrapper class.
@@ -310,7 +308,7 @@ If any part of the conversion fails, _context_ can be used to describe the provi
 
 If this callback interface has constants, then this method creates a brand new legacy callback interface object and attaches it to the passed `globalObject`. Otherwise, this method is a no-op.
 
-The second argument `globalNames` is the same as for [the `install()` export for interfaces](#installglobalobject-globalnames). (However, it does not have a default.)
+The second argument `globalNames` is the same as for [the `install()` export for interfaces](#installglobalobject-globalnames).
 
 ### For dictionaries
 
@@ -470,17 +468,19 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Variadic arguments
 - `[Clamp]`
 - `[EnforceRange]`
-- `[Exposed]` (temporarily defaulting to `[Exposed=Window]`)
+- `[Exposed]`
+- `[LegacyLenientThis]`
+- `[LegacyLenientSetter]`
+- `[LegacyNoInterfaceObject]`
+- `[LegacyNullToEmptyString]`
+- `[LegacyOverrideBuiltins]`
 - `[LegacyTreatNonObjectAsNull]`
 - `[LegacyUnenumerableNamedProperties]`
+- `[LegacyUnforgeable]`
 - `[LegacyWindowAlias]`
-- `[NoInterfaceObject]`
-- `[OverrideBuiltins]`
 - `[PutForwards]`
 - `[Replaceable]`
 - `[SameObject]` (automatic caching)
-- `[TreatNullAs]`
-- `[Unforgeable]`
 - `[Unscopable]`
 
 Supported Web IDL extensions defined in HTML:
@@ -495,9 +495,8 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LenientSetter]`
-- `[LenientThis]`
-- `[NamedConstructor]`
+- `[LegacyFactoryFunction]`
+- `[LegacyNamespace]`
 - `[SecureContext]`
 
 ## Nonstandard extended attributes

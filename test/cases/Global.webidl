@@ -1,9 +1,9 @@
 [Global=Global,Exposed=Global]
 interface Global {
   void op();
-  [Unforgeable] void unforgeableOp();
+  [LegacyUnforgeable] void unforgeableOp();
   attribute DOMString attr;
-  [Unforgeable] attribute DOMString unforgeableAttr;
+  [LegacyUnforgeable] attribute DOMString unforgeableAttr;
 
   getter DOMString (unsigned long index);
   attribute unsigned long length;

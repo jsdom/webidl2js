@@ -1,2 +1,3 @@
-[HTMLConstructor]
+[Exposed=Window,
+ HTMLConstructor]
 interface HTMLConstructor {};
