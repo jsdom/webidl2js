@@ -404,7 +404,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -2638,7 +2638,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -4820,7 +4820,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6685,7 +6685,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -7473,7 +7473,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -7842,7 +7842,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9255,7 +9255,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -11448,7 +11448,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13615,7 +13615,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -15480,7 +15480,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16268,7 +16268,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16637,7 +16637,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
 };
 
 exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+  let wrapper = makeWrapper(globalObject);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
