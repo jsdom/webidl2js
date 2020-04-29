@@ -2010,7 +2010,11 @@ exports.install = (globalObject, globalNames) => {
     static set staticAttr(V) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
-      return Impl.implementation[\\"staticAttr\\"];
+      V = conversions[\\"DOMString\\"](V, {
+        context: \\"Failed to set the 'staticAttr' property on 'Global': The provided value\\"
+      });
+
+      Impl.implementation[\\"staticAttr\\"] = V;
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
@@ -4727,7 +4731,9 @@ exports.install = (globalObject, globalNames) => {
     static set abc(V) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
-      return Impl.implementation[\\"abc\\"];
+      V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
+
+      Impl.implementation[\\"abc\\"] = V;
     }
   }
   Object.defineProperties(Static.prototype, {
@@ -10821,7 +10827,11 @@ exports.install = (globalObject, globalNames) => {
     static set staticAttr(V) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
-      return Impl.implementation[\\"staticAttr\\"];
+      V = conversions[\\"DOMString\\"](V, {
+        context: \\"Failed to set the 'staticAttr' property on 'Global': The provided value\\"
+      });
+
+      Impl.implementation[\\"staticAttr\\"] = V;
     }
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
@@ -13522,7 +13532,9 @@ exports.install = (globalObject, globalNames) => {
     static set abc(V) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
-      return Impl.implementation[\\"abc\\"];
+      V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
+
+      Impl.implementation[\\"abc\\"] = V;
     }
   }
   Object.defineProperties(Static.prototype, {
