@@ -501,7 +501,11 @@ Notable missing features include:
 
 ## Nonstandard extended attributes
 
-One non-standard extended attribute is baked in to webidl2js:
+A couple of non-standard extended attributes are baked in to webidl2js:
+
+### `[WebIDL2JSCallWithGlobal]`
+
+The `[WebIDL2JSCallWithGlobal]` extended attribute is used on IDL members to pass the  `globalObject` as the first parameter to static operations.
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
