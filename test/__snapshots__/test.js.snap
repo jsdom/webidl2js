@@ -7231,6 +7231,7 @@ exports[`with processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Function = require(\\"./Function.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -7647,13 +7648,11 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
       }
-      if (typeof callback !== \\"function\\") {
-        throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
-        );
-      }
+      callback = Function.convert(callback, {
+        context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
+      });
       const thisArg = arguments[1];
       let pairs = Array.from(this[implSymbol]);
       let i = 0;
@@ -16244,6 +16243,7 @@ exports[`without processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Function = require(\\"./Function.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -16660,13 +16660,11 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
       }
-      if (typeof callback !== \\"function\\") {
-        throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
-        );
-      }
+      callback = Function.convert(callback, {
+        context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
+      });
       const thisArg = arguments[1];
       let pairs = Array.from(this[implSymbol]);
       let i = 0;
