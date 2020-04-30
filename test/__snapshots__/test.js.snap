@@ -12,6 +12,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(...args) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -58,6 +62,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -88,6 +96,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -6841,6 +6853,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(url, string) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -6879,6 +6895,10 @@ const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   function invokeTheCallbackFunction(url) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -7648,7 +7668,7 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
       }
       callback = Function.convert(callback, {
         context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
@@ -9157,6 +9177,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -15853,6 +15877,10 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(url, string) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -15891,6 +15919,10 @@ const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   function invokeTheCallbackFunction(url) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -16660,7 +16692,7 @@ exports.install = (globalObject, globalNames) => {
         throw new TypeError(\\"Illegal invocation\\");
       }
       if (arguments.length < 1) {
-        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.\\");
+        throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
       }
       callback = Function.convert(callback, {
         context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
