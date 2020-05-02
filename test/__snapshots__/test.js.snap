@@ -27,14 +27,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = Promise.resolve(callResult).then(
-        value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-
-          return value;
-        },
-        reason => reason
-      );
+      callResult = new Promise(resolve => resolve(callResult)).then(value => {
+        value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+        return value;
+      });
 
       return callResult;
     } catch (err) {
@@ -3695,10 +3691,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {},
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -3720,16 +3713,12 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {
-            value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-            });
-
-            return value;
-          },
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg)).then(value => {
+          value = conversions[\\"double\\"](value, {
+            context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+          });
+          return value;
+        });
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
@@ -8885,14 +8874,10 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = Promise.resolve(callResult).then(
-        value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-
-          return value;
-        },
-        reason => reason
-      );
+      callResult = new Promise(resolve => resolve(callResult)).then(value => {
+        value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
+        return value;
+      });
 
       return callResult;
     } catch (err) {
@@ -12511,10 +12496,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {},
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -12536,16 +12518,12 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {
-            value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-            });
-
-            return value;
-          },
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg)).then(value => {
+          value = conversions[\\"double\\"](value, {
+            context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+          });
+          return value;
+        });
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
