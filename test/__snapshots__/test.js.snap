@@ -3708,6 +3708,26 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
+        Object.assign(curArg, {
+          then(onFulfilled, onRejected) {
+            return Promise.prototype.then.call(
+              this,
+              () => {
+                if (typeof onFulfilled === \\"function\\") {
+                  return onFulfilled();
+                }
+              },
+              reason => {
+                reason = conversions[\\"any\\"](reason, {
+                  context: \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+                });
+                if (typeof onRejected === \\"function\\") {
+                  return onRejected(reason);
+                }
+              }
+            );
+          }
+        });
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -12547,6 +12567,26 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
+        Object.assign(curArg, {
+          then(onFulfilled, onRejected) {
+            return Promise.prototype.then.call(
+              this,
+              () => {
+                if (typeof onFulfilled === \\"function\\") {
+                  return onFulfilled();
+                }
+              },
+              reason => {
+                reason = conversions[\\"any\\"](reason, {
+                  context: \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
+                });
+                if (typeof onRejected === \\"function\\") {
+                  return onRejected(reason);
+                }
+              }
+            );
+          }
+        });
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
