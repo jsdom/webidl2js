@@ -28,26 +28,6 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       let callResult = Reflect.apply(X, thisArg, []);
 
       callResult = new Promise(resolve => resolve(callResult));
-      Object.assign(callResult, {
-        then(onFulfilled, onRejected) {
-          return Promise.prototype.then.call(
-            this,
-            value => {
-              value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-              if (typeof onFulfilled === \\"function\\") {
-                return onFulfilled(value);
-              }
-            },
-            reason => {
-              reason = conversions[\\"any\\"](reason, { context: context + \\" promise value\\" });
-              if (typeof onRejected === \\"function\\") {
-                return onRejected(reason);
-              }
-            }
-          );
-        }
-      });
-
       return callResult;
     } catch (err) {
       return Promise.reject(err);
@@ -3708,26 +3688,6 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
-        Object.assign(curArg, {
-          then(onFulfilled, onRejected) {
-            return Promise.prototype.then.call(
-              this,
-              () => {
-                if (typeof onFulfilled === \\"function\\") {
-                  return onFulfilled();
-                }
-              },
-              reason => {
-                reason = conversions[\\"any\\"](reason, {
-                  context: \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onRejected === \\"function\\") {
-                  return onRejected(reason);
-                }
-              }
-            );
-          }
-        });
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -3750,29 +3710,6 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
-        Object.assign(curArg, {
-          then(onFulfilled, onRejected) {
-            return Promise.prototype.then.call(
-              this,
-              value => {
-                value = conversions[\\"double\\"](value, {
-                  context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onFulfilled === \\"function\\") {
-                  return onFulfilled(value);
-                }
-              },
-              reason => {
-                reason = conversions[\\"any\\"](reason, {
-                  context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onRejected === \\"function\\") {
-                  return onRejected(reason);
-                }
-              }
-            );
-          }
-        });
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
@@ -8929,26 +8866,6 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
       let callResult = Reflect.apply(X, thisArg, []);
 
       callResult = new Promise(resolve => resolve(callResult));
-      Object.assign(callResult, {
-        then(onFulfilled, onRejected) {
-          return Promise.prototype.then.call(
-            this,
-            value => {
-              value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-              if (typeof onFulfilled === \\"function\\") {
-                return onFulfilled(value);
-              }
-            },
-            reason => {
-              reason = conversions[\\"any\\"](reason, { context: context + \\" promise value\\" });
-              if (typeof onRejected === \\"function\\") {
-                return onRejected(reason);
-              }
-            }
-          );
-        }
-      });
-
       return callResult;
     } catch (err) {
       return Promise.reject(err);
@@ -12567,26 +12484,6 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
-        Object.assign(curArg, {
-          then(onFulfilled, onRejected) {
-            return Promise.prototype.then.call(
-              this,
-              () => {
-                if (typeof onFulfilled === \\"function\\") {
-                  return onFulfilled();
-                }
-              },
-              reason => {
-                reason = conversions[\\"any\\"](reason, {
-                  context: \\"Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onRejected === \\"function\\") {
-                  return onRejected(reason);
-                }
-              }
-            );
-          }
-        });
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -12609,29 +12506,6 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = new Promise(resolve => resolve(curArg));
-        Object.assign(curArg, {
-          then(onFulfilled, onRejected) {
-            return Promise.prototype.then.call(
-              this,
-              value => {
-                value = conversions[\\"double\\"](value, {
-                  context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onFulfilled === \\"function\\") {
-                  return onFulfilled(value);
-                }
-              },
-              reason => {
-                reason = conversions[\\"any\\"](reason, {
-                  context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-                });
-                if (typeof onRejected === \\"function\\") {
-                  return onRejected(reason);
-                }
-              }
-            );
-          }
-        });
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
