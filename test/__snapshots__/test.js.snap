@@ -1591,7 +1591,7 @@ exports.install = (globalObject, globalNames) => {
       }
 
       V = \`\${V}\`;
-      if (!RequestDestination.enumerationValues.has(V)) {
+      if (RequestDestination.enumerationValues.find(ev => ev.toLowerCase() === V.toLowerCase()) === undefined) {
         return;
       }
 
@@ -4248,7 +4248,7 @@ const Impl = require(\\"../implementations/Replaceable.js\\");
 exports[`with processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
-const enumerationValues = new Set([
+const enumerationValues = [
   \\"\\",
   \\"audio\\",
   \\"document\\",
@@ -4265,12 +4265,12 @@ const enumerationValues = new Set([
   \\"video\\",
   \\"worker\\",
   \\"xslt\\"
-]);
+];
 exports.enumerationValues = enumerationValues;
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   const string = \`\${value}\`;
-  if (!enumerationValues.has(string)) {
+  if (enumerationValues.find(ev => ev.toLowerCase() === string.toLowerCase()) === undefined) {
     throw new TypeError(\`\${context} '\${string}' is not a valid enumeration value for RequestDestination\`);
   }
   return string;
@@ -10408,7 +10408,7 @@ exports.install = (globalObject, globalNames) => {
       }
 
       V = \`\${V}\`;
-      if (!RequestDestination.enumerationValues.has(V)) {
+      if (RequestDestination.enumerationValues.find(ev => ev.toLowerCase() === V.toLowerCase()) === undefined) {
         return;
       }
 
@@ -13049,7 +13049,7 @@ const Impl = require(\\"../implementations/Replaceable.js\\");
 exports[`without processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
-const enumerationValues = new Set([
+const enumerationValues = [
   \\"\\",
   \\"audio\\",
   \\"document\\",
@@ -13066,12 +13066,12 @@ const enumerationValues = new Set([
   \\"video\\",
   \\"worker\\",
   \\"xslt\\"
-]);
+];
 exports.enumerationValues = enumerationValues;
 
 exports.convert = function convert(value, { context = \\"The provided value\\" } = {}) {
   const string = \`\${value}\`;
-  if (!enumerationValues.has(string)) {
+  if (enumerationValues.find(ev => ev.toLowerCase() === string.toLowerCase()) === undefined) {
     throw new TypeError(\`\${context} '\${string}' is not a valid enumeration value for RequestDestination\`);
   }
   return string;
