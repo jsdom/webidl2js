@@ -505,7 +505,7 @@ A couple of non-standard extended attributes are baked in to webidl2js:
 
 ### `[WebIDL2JSCallWithGlobal]`
 
-The `[WebIDL2JSCallWithGlobal]` extended attribute is used on IDL members to pass the  `globalObject` as the first parameter to static operations.
+When the `[WebIDL2JSCallWithGlobal]` extended attribute is specified on static IDL operations, the generated interface code passes the [current global object](https://html.spec.whatwg.org/multipage/webappapis.html#current-global-object) as the first parameter to the implementation code. All other parameters follow `globalObject` and are unchanged. This could be used to implement factory functions that create objects in the current realm.
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
