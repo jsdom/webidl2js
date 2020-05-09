@@ -740,10 +740,12 @@ class ProxyHandler {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
       const globalObject = this._globalObject;
 
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -2970,8 +2972,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -5260,8 +5264,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -7168,8 +7174,9 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
     }
     let ownDesc;
 
@@ -7998,10 +8005,9 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
-
-      typeof P === \\"string\\" && !utils.isArrayIndexPropName(P);
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
     }
     let ownDesc;
 
@@ -8312,10 +8318,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
-
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = URL.convert(namedValue, {
@@ -9811,10 +9817,12 @@ class ProxyHandler {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
       const globalObject = this._globalObject;
 
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -12025,8 +12033,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -14300,8 +14310,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = conversions[\\"DOMString\\"](namedValue, {
@@ -16208,8 +16220,9 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
     }
     let ownDesc;
 
@@ -17038,10 +17051,9 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
-
-      typeof P === \\"string\\" && !utils.isArrayIndexPropName(P);
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
     }
     let ownDesc;
 
@@ -17352,10 +17364,10 @@ const proxyHandler = {
     if (typeof P === \\"symbol\\") {
       return Reflect.set(target, P, V, receiver);
     }
-    if (target === receiver) {
-      utils.isArrayIndexPropName(P);
-
-      if (typeof P === \\"string\\" && !utils.isArrayIndexPropName(P)) {
+    // The \`receiver\` argument refers to the Proxy exotic object or an object
+    // that inherits from it, whereas \`target\` refers to the Proxy target:
+    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      if (typeof P === \\"string\\") {
         let namedValue = V;
 
         namedValue = URL.convert(namedValue, {
