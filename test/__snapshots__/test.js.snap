@@ -267,7 +267,7 @@ exports.install = (globalObject, globalNames) => {
     bs(source) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'bs' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'bs' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -295,7 +295,7 @@ exports.install = (globalObject, globalNames) => {
     ab(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'ab' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'ab' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -319,7 +319,7 @@ exports.install = (globalObject, globalNames) => {
     abv(abv) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'abv' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'abv' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -346,7 +346,7 @@ exports.install = (globalObject, globalNames) => {
     u8a(u8) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'u8a' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'u8a' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -370,7 +370,7 @@ exports.install = (globalObject, globalNames) => {
     abUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'abUnion' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'abUnion' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -397,7 +397,7 @@ exports.install = (globalObject, globalNames) => {
     u8aUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'u8aUnion' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'u8aUnion' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -555,7 +555,7 @@ exports.install = (globalObject, globalNames) => {
     method() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'method' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'method' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       CEReactions.preSteps(globalObject);
@@ -570,7 +570,7 @@ exports.install = (globalObject, globalNames) => {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'promiseOperation' called on an object that does not implement interface CEReactions.\\");
+          throw new TypeError(\\"'promiseOperation' called on an object that is not a valid instance of CEReactions.\\");
         }
 
         CEReactions.preSteps(globalObject);
@@ -588,7 +588,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       CEReactions.preSteps(globalObject);
@@ -603,7 +603,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set attr' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'set attr' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -624,7 +624,7 @@ exports.install = (globalObject, globalNames) => {
 
         if (!exports.is(esValue)) {
           throw new TypeError(
-            \\"'get promiseAttribute' called on an object that does not implement interface CEReactions.\\"
+            \\"'get promiseAttribute' called on an object that is not a valid instance of CEReactions.\\"
           );
         }
 
@@ -1036,7 +1036,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'createDocumentType' called on an object that does not implement interface DOMImplementation.\\"
+          \\"'createDocumentType' called on an object that is not a valid instance of DOMImplementation.\\"
         );
       }
 
@@ -1075,9 +1075,7 @@ exports.install = (globalObject, globalNames) => {
     createDocument(namespace, qualifiedName) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'createDocument' called on an object that does not implement interface DOMImplementation.\\"
-        );
+        throw new TypeError(\\"'createDocument' called on an object that is not a valid instance of DOMImplementation.\\");
       }
 
       if (arguments.length < 2) {
@@ -1127,7 +1125,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'createHTMLDocument' called on an object that does not implement interface DOMImplementation.\\"
+          \\"'createHTMLDocument' called on an object that is not a valid instance of DOMImplementation.\\"
         );
       }
       const args = [];
@@ -1146,7 +1144,7 @@ exports.install = (globalObject, globalNames) => {
     hasFeature() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'hasFeature' called on an object that does not implement interface DOMImplementation.\\");
+        throw new TypeError(\\"'hasFeature' called on an object that is not a valid instance of DOMImplementation.\\");
       }
 
       return esValue[implSymbol].hasFeature();
@@ -1316,7 +1314,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get x' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get x' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"x\\"];
@@ -1326,7 +1324,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set x' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set x' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -1340,7 +1338,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get y' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get y' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"y\\"];
@@ -1350,7 +1348,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set y' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set y' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -1364,7 +1362,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get width' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get width' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"width\\"];
@@ -1374,7 +1372,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set width' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set width' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -1388,7 +1386,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get height' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get height' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"height\\"];
@@ -1398,7 +1396,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set height' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set height' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -1626,7 +1624,7 @@ exports.install = (globalObject, globalNames) => {
     op() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'op' called on an object that does not implement interface DictionaryConvert.\\");
+        throw new TypeError(\\"'op' called on an object that is not a valid instance of DictionaryConvert.\\");
       }
       const args = [];
       {
@@ -1762,7 +1760,7 @@ exports.install = (globalObject, globalNames) => {
     op(destination) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'op' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'op' called on an object that is not a valid instance of Enum.\\");
       }
 
       if (arguments.length < 1) {
@@ -1783,7 +1781,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of Enum.\\");
       }
 
       return utils.tryWrapperForImpl(esValue[implSymbol][\\"attr\\"]);
@@ -1793,7 +1791,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set attr' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'set attr' called on an object that is not a valid instance of Enum.\\");
       }
 
       V = \`\${V}\`;
@@ -1960,7 +1958,7 @@ exports.install = (globalObject, globalNames) => {
     addEventListener(type, callback) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'addEventListener' called on an object that does not implement interface EventTarget.\\");
+        throw new TypeError(\\"'addEventListener' called on an object that is not a valid instance of EventTarget.\\");
       }
 
       if (arguments.length < 2) {
@@ -2066,7 +2064,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       op() {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'op' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'op' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol].op();
@@ -2074,7 +2072,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       unforgeableOp() {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'unforgeableOp' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'unforgeableOp' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol].unforgeableOp();
@@ -2083,7 +2081,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get attr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get attr' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"attr\\"];
@@ -2092,7 +2090,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set attr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set attr' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"DOMString\\"](V, {
@@ -2105,7 +2103,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get unforgeableAttr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get unforgeableAttr' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"unforgeableAttr\\"];
@@ -2114,7 +2112,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set unforgeableAttr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set unforgeableAttr' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"DOMString\\"](V, {
@@ -2127,7 +2125,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get length' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get length' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"length\\"];
@@ -2136,7 +2134,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set length' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set length' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"unsigned long\\"](V, {
@@ -2450,7 +2448,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get lenientSetter' called on an object that does not implement interface LegacyLenientAttributes.\\"
+          \\"'get lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes.\\"
         );
       }
 
@@ -2462,7 +2460,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'set lenientSetter' called on an object that does not implement interface LegacyLenientAttributes.\\"
+          \\"'set lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes.\\"
         );
       }
     }
@@ -2612,7 +2610,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       assign(url) {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'assign' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         if (arguments.length < 1) {
@@ -2636,7 +2634,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get href' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"href\\"];
@@ -2645,7 +2643,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set href' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         V = conversions[\\"USVString\\"](V, {
@@ -2657,7 +2655,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       toString() {
         const esValue = this;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'toString' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"href\\"];
@@ -2666,7 +2664,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get origin' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"origin\\"];
@@ -2675,9 +2673,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(
-            \\"'get protocol' called on an object that does not implement interface LegacyUnforgeable.\\"
-          );
+          throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"protocol\\"];
@@ -2686,9 +2682,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(
-            \\"'set protocol' called on an object that does not implement interface LegacyUnforgeable.\\"
-          );
+          throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         V = conversions[\\"USVString\\"](V, {
@@ -2826,7 +2820,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get a' called on an object that does not implement interface LegacyUnforgeableMap.\\");
+          throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
         }
 
         return esValue[implSymbol][\\"a\\"];
@@ -3173,7 +3167,7 @@ exports.install = (globalObject, globalNames) => {
     mixedInOp() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'mixedInOp' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'mixedInOp' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol].mixedInOp();
@@ -3182,7 +3176,7 @@ exports.install = (globalObject, globalNames) => {
     ifaceMixinOp() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'ifaceMixinOp' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'ifaceMixinOp' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol].ifaceMixinOp();
@@ -3192,7 +3186,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get mixedInAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'get mixedInAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol][\\"mixedInAttr\\"];
@@ -3202,7 +3196,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set mixedInAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'set mixedInAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -3216,7 +3210,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get ifaceMixinAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'get ifaceMixinAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol][\\"ifaceMixinAttr\\"];
@@ -3226,7 +3220,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set ifaceMixinAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'set ifaceMixinAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -3460,7 +3454,7 @@ exports.install = (globalObject, globalNames) => {
     compatible(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'compatible' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'compatible' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -3530,7 +3524,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible1(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible1' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible1' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -3567,7 +3561,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible2(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible2' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible2' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -3610,7 +3604,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible3(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible3' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible3' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -3821,7 +3815,7 @@ exports._internalSetup = (wrapper, globalObject) => {
           const esValue = this !== null && this !== undefined ? this : globalObject;
           if (!exports.is(esValue)) {
             throw new TypeError(
-              \\"'unforgeablePromiseOperation' called on an object that does not implement interface PromiseTypes.\\"
+              \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
             );
           }
 
@@ -3836,7 +3830,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
           if (!exports.is(esValue)) {
             throw new TypeError(
-              \\"'get unforgeablePromiseAttribute' called on an object that does not implement interface PromiseTypes.\\"
+              \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
             );
           }
 
@@ -3900,9 +3894,7 @@ exports.install = (globalObject, globalNames) => {
     voidPromiseConsumer(p) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'voidPromiseConsumer' called on an object that does not implement interface PromiseTypes.\\"
-        );
+        throw new TypeError(\\"'voidPromiseConsumer' called on an object that is not a valid instance of PromiseTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -3924,7 +3916,7 @@ exports.install = (globalObject, globalNames) => {
     promiseConsumer(p) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'promiseConsumer' called on an object that does not implement interface PromiseTypes.\\");
+        throw new TypeError(\\"'promiseConsumer' called on an object that is not a valid instance of PromiseTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -3947,7 +3939,7 @@ exports.install = (globalObject, globalNames) => {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'promiseOperation' called on an object that does not implement interface PromiseTypes.\\");
+          throw new TypeError(\\"'promiseOperation' called on an object that is not a valid instance of PromiseTypes.\\");
         }
 
         return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
@@ -3962,7 +3954,7 @@ exports.install = (globalObject, globalNames) => {
 
         if (!exports.is(esValue)) {
           throw new TypeError(
-            \\"'get promiseAttribute' called on an object that does not implement interface PromiseTypes.\\"
+            \\"'get promiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
           );
         }
 
@@ -4114,7 +4106,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedBoolean' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedBoolean' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol].hasAttributeNS(null, \\"reflectedboolean\\");
@@ -4124,7 +4116,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedBoolean' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedBoolean' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -4142,7 +4134,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedDOMString' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedDOMString' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = esValue[implSymbol].getAttributeNS(null, \\"reflecteddomstring\\");
@@ -4153,7 +4145,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedDOMString' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedDOMString' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -4167,7 +4159,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedLong' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = parseInt(esValue[implSymbol].getAttributeNS(null, \\"reflectedlong\\"));
@@ -4178,7 +4170,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedLong' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"long\\"](V, {
@@ -4192,9 +4184,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'get reflectedUnsignedLong' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'get reflectedUnsignedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = parseInt(esValue[implSymbol].getAttributeNS(null, \\"reflectedunsignedlong\\"));
@@ -4205,9 +4195,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'set reflectedUnsignedLong' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'set reflectedUnsignedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"unsigned long\\"](V, {
@@ -4221,9 +4209,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'get reflectedUSVStringURL' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'get reflectedUSVStringURL' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = esValue[implSymbol].getAttributeNS(null, \\"reflectedusvstringurl\\");
@@ -4238,9 +4224,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'set reflectedUSVStringURL' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'set reflectedUSVStringURL' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -4254,7 +4238,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectionTest' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectionTest' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = esValue[implSymbol].getAttributeNS(null, \\"reflection\\");
@@ -4265,7 +4249,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectionTest' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectionTest' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -4279,7 +4263,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get withUnderscore' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get withUnderscore' called on an object that is not a valid instance of Reflect.\\");
       }
 
       const value = esValue[implSymbol].getAttributeNS(null, \\"with-underscore\\");
@@ -4290,7 +4274,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set withUnderscore' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set withUnderscore' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -4422,7 +4406,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get replaceable' called on an object that does not implement interface Replaceable.\\");
+        throw new TypeError(\\"'get replaceable' called on an object that is not a valid instance of Replaceable.\\");
       }
 
       return esValue[implSymbol][\\"replaceable\\"];
@@ -4432,7 +4416,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set replaceable' called on an object that does not implement interface Replaceable.\\");
+        throw new TypeError(\\"'set replaceable' called on an object that is not a valid instance of Replaceable.\\");
       }
 
       Object.defineProperty(esValue, \\"replaceable\\", {
@@ -4592,7 +4576,7 @@ exports.install = (globalObject, globalNames) => {
     recordConsumer(rec) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'recordConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'recordConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -4637,7 +4621,7 @@ exports.install = (globalObject, globalNames) => {
     recordConsumer2(rec) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'recordConsumer2' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'recordConsumer2' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -4682,7 +4666,7 @@ exports.install = (globalObject, globalNames) => {
     sequenceConsumer(seq) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sequenceConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'sequenceConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -4719,7 +4703,7 @@ exports.install = (globalObject, globalNames) => {
     sequenceConsumer2(seq) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sequenceConsumer2' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'sequenceConsumer2' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -4754,7 +4738,7 @@ exports.install = (globalObject, globalNames) => {
     frozenArrayConsumer(arr) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'frozenArrayConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'frozenArrayConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -4908,7 +4892,7 @@ exports.install = (globalObject, globalNames) => {
     def() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'def' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'def' called on an object that is not a valid instance of Static.\\");
       }
 
       return esValue[implSymbol].def();
@@ -4918,7 +4902,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get abc' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'get abc' called on an object that is not a valid instance of Static.\\");
       }
 
       return esValue[implSymbol][\\"abc\\"];
@@ -4928,7 +4912,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set abc' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'set abc' called on an object that is not a valid instance of Static.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
@@ -5075,7 +5059,7 @@ exports.install = (globalObject, globalNames) => {
     key(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'key' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'key' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -5095,7 +5079,7 @@ exports.install = (globalObject, globalNames) => {
     getItem(key) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'getItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'getItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -5115,7 +5099,7 @@ exports.install = (globalObject, globalNames) => {
     setItem(key, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'setItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'setItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 2) {
@@ -5140,7 +5124,7 @@ exports.install = (globalObject, globalNames) => {
     removeItem(key) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'removeItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'removeItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -5162,7 +5146,7 @@ exports.install = (globalObject, globalNames) => {
     clear() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'clear' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'clear' called on an object that is not a valid instance of Storage.\\");
       }
 
       return esValue[implSymbol].clear();
@@ -5172,7 +5156,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get length' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'get length' called on an object that is not a valid instance of Storage.\\");
       }
 
       return esValue[implSymbol][\\"length\\"];
@@ -5463,7 +5447,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface StringifierAttribute.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of StringifierAttribute.\\");
       }
 
       return esValue[implSymbol][\\"attr\\"];
@@ -5472,7 +5456,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface StringifierAttribute.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of StringifierAttribute.\\");
       }
 
       return esValue[implSymbol][\\"attr\\"];
@@ -5597,7 +5581,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'toString' called on an object that does not implement interface StringifierDefaultOperation.\\"
+          \\"'toString' called on an object that is not a valid instance of StringifierDefaultOperation.\\"
         );
       }
 
@@ -5722,7 +5706,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'operation' called on an object that does not implement interface StringifierNamedOperation.\\"
+          \\"'operation' called on an object that is not a valid instance of StringifierNamedOperation.\\"
         );
       }
 
@@ -5733,7 +5717,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'toString' called on an object that does not implement interface StringifierNamedOperation.\\"
+          \\"'toString' called on an object that is not a valid instance of StringifierNamedOperation.\\"
         );
       }
 
@@ -5856,7 +5840,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface StringifierOperation.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of StringifierOperation.\\");
       }
 
       return esValue[implSymbol].toString();
@@ -5980,7 +5964,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6013,7 +5997,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrEnumConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrEnumConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6049,7 +6033,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrOrNullConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6088,7 +6072,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrOrURLOrNullConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrOrURLOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6129,7 +6113,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'urlMapInnerConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'urlMapInnerConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6177,9 +6161,7 @@ exports.install = (globalObject, globalNames) => {
     urlMapConsumer(a) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'urlMapConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
-        );
+        throw new TypeError(\\"'urlMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       if (arguments.length < 1) {
@@ -6231,7 +6213,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'bufferSourceOrURLConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'bufferSourceOrURLConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6264,7 +6246,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'arrayBufferViewOrURLMapConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'arrayBufferViewOrURLMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6333,7 +6315,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'arrayBufferViewDupConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'arrayBufferViewDupConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -6363,7 +6345,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get buf' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'get buf' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       return utils.tryWrapperForImpl(esValue[implSymbol][\\"buf\\"]);
@@ -6373,7 +6355,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set buf' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'set buf' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       if (utils.isArrayBuffer(V)) {
@@ -6394,7 +6376,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get time' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'get time' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       return esValue[implSymbol][\\"time\\"];
@@ -6404,7 +6386,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set time' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'set time' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       V = conversions[\\"unsigned long long\\"](V, {
@@ -6557,7 +6539,7 @@ exports.install = (globalObject, globalNames) => {
     toJSON() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toJSON' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'toJSON' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol].toJSON();
@@ -6567,7 +6549,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get href' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get href' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"href\\"];
@@ -6577,7 +6559,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set href' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set href' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
@@ -6588,7 +6570,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"href\\"];
@@ -6598,7 +6580,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get origin' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get origin' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"origin\\"];
@@ -6608,7 +6590,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get protocol' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"protocol\\"];
@@ -6618,7 +6600,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set protocol' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -6632,7 +6614,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get username' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get username' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"username\\"];
@@ -6642,7 +6624,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set username' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set username' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -6656,7 +6638,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get password' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get password' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"password\\"];
@@ -6666,7 +6648,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set password' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set password' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -6680,7 +6662,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get host' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get host' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"host\\"];
@@ -6690,7 +6672,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set host' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set host' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
@@ -6702,7 +6684,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get hostname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get hostname' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"hostname\\"];
@@ -6712,7 +6694,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set hostname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set hostname' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -6726,7 +6708,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get port' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get port' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"port\\"];
@@ -6736,7 +6718,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set port' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set port' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
@@ -6748,7 +6730,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get pathname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get pathname' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"pathname\\"];
@@ -6758,7 +6740,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set pathname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set pathname' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -6772,7 +6754,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get search' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get search' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"search\\"];
@@ -6782,7 +6764,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set search' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set search' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
@@ -6794,7 +6776,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get searchParams' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get searchParams' called on an object that is not a valid instance of URL.\\");
       }
 
       return utils.getSameObject(this, \\"searchParams\\", () => {
@@ -6806,7 +6788,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get hash' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get hash' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"hash\\"];
@@ -6816,7 +6798,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set hash' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set hash' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
@@ -7056,7 +7038,7 @@ exports.install = (globalObject, globalNames) => {
     item(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'item' called on an object that does not implement interface URLList.\\");
+        throw new TypeError(\\"'item' called on an object that is not a valid instance of URLList.\\");
       }
 
       if (arguments.length < 1) {
@@ -7079,7 +7061,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get length' called on an object that does not implement interface URLList.\\");
+        throw new TypeError(\\"'get length' called on an object that is not a valid instance of URLList.\\");
       }
 
       return esValue[implSymbol][\\"length\\"];
@@ -7495,7 +7477,7 @@ exports.install = (globalObject, globalNames) => {
     append(name, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'append' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'append' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 2) {
@@ -7526,7 +7508,7 @@ exports.install = (globalObject, globalNames) => {
     delete(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'delete' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'delete' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -7550,7 +7532,7 @@ exports.install = (globalObject, globalNames) => {
     get(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'get' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -7574,7 +7556,7 @@ exports.install = (globalObject, globalNames) => {
     getAll(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'getAll' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'getAll' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -7598,7 +7580,7 @@ exports.install = (globalObject, globalNames) => {
     has(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'has' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'has' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -7622,7 +7604,7 @@ exports.install = (globalObject, globalNames) => {
     set(name, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'set' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 2) {
@@ -7653,7 +7635,7 @@ exports.install = (globalObject, globalNames) => {
     sort() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sort' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'sort' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       return esValue[implSymbol].sort();
@@ -7662,7 +7644,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       return esValue[implSymbol].toString();
@@ -7670,28 +7652,28 @@ exports.install = (globalObject, globalNames) => {
 
     keys() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'keys' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'keys' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"key\\");
     }
 
     values() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'values' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'values' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"value\\");
     }
 
     entries() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'entries' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'entries' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"key+value\\");
     }
 
     forEach(callback) {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'forEach' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'forEach' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       if (arguments.length < 1) {
         throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
@@ -7843,7 +7825,7 @@ exports.install = (globalObject, globalNames) => {
     item(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'item' called on an object that does not implement interface URLSearchParamsCollection.\\");
+        throw new TypeError(\\"'item' called on an object that is not a valid instance of URLSearchParamsCollection.\\");
       }
 
       if (arguments.length < 1) {
@@ -7868,7 +7850,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'namedItem' called on an object that does not implement interface URLSearchParamsCollection.\\"
+          \\"'namedItem' called on an object that is not a valid instance of URLSearchParamsCollection.\\"
         );
       }
 
@@ -7895,7 +7877,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get length' called on an object that does not implement interface URLSearchParamsCollection.\\"
+          \\"'get length' called on an object that is not a valid instance of URLSearchParamsCollection.\\"
         );
       }
 
@@ -8549,7 +8531,7 @@ exports.install = (globalObject, globalNames) => {
     operation(sequence) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'operation' called on an object that does not implement interface UnderscoredProperties.\\");
+        throw new TypeError(\\"'operation' called on an object that is not a valid instance of UnderscoredProperties.\\");
       }
 
       if (arguments.length < 1) {
@@ -8588,7 +8570,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get attribute' called on an object that does not implement interface UnderscoredProperties.\\"
+          \\"'get attribute' called on an object that is not a valid instance of UnderscoredProperties.\\"
         );
       }
 
@@ -8600,7 +8582,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'set attribute' called on an object that does not implement interface UnderscoredProperties.\\"
+          \\"'set attribute' called on an object that is not a valid instance of UnderscoredProperties.\\"
         );
       }
 
@@ -8752,7 +8734,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get unscopableTest' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'get unscopableTest' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       return esValue[implSymbol][\\"unscopableTest\\"];
@@ -8762,7 +8744,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set unscopableTest' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'set unscopableTest' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -8776,7 +8758,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get unscopableMixin' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'get unscopableMixin' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       return esValue[implSymbol][\\"unscopableMixin\\"];
@@ -8786,7 +8768,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set unscopableMixin' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'set unscopableMixin' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -8917,7 +8899,7 @@ exports.install = (globalObject, globalNames) => {
     simple1() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'simple1' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'simple1' called on an object that is not a valid instance of Variadic.\\");
       }
       const args = [];
       for (let i = 0; i < arguments.length; i++) {
@@ -8933,7 +8915,7 @@ exports.install = (globalObject, globalNames) => {
     simple2(first) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'simple2' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'simple2' called on an object that is not a valid instance of Variadic.\\");
       }
 
       if (arguments.length < 1) {
@@ -8960,7 +8942,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded1() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'overloaded1' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'overloaded1' called on an object that is not a valid instance of Variadic.\\");
       }
       const args = [];
       switch (arguments.length) {
@@ -8993,7 +8975,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded2(first) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'overloaded2' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'overloaded2' called on an object that is not a valid instance of Variadic.\\");
       }
 
       if (arguments.length < 1) {
@@ -9382,7 +9364,7 @@ exports.install = (globalObject, globalNames) => {
     bs(source) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'bs' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'bs' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9410,7 +9392,7 @@ exports.install = (globalObject, globalNames) => {
     ab(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'ab' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'ab' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9434,7 +9416,7 @@ exports.install = (globalObject, globalNames) => {
     abv(abv) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'abv' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'abv' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9461,7 +9443,7 @@ exports.install = (globalObject, globalNames) => {
     u8a(u8) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'u8a' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'u8a' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9485,7 +9467,7 @@ exports.install = (globalObject, globalNames) => {
     abUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'abUnion' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'abUnion' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9512,7 +9494,7 @@ exports.install = (globalObject, globalNames) => {
     u8aUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'u8aUnion' called on an object that does not implement interface BufferSourceTypes.\\");
+        throw new TypeError(\\"'u8aUnion' called on an object that is not a valid instance of BufferSourceTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -9669,7 +9651,7 @@ exports.install = (globalObject, globalNames) => {
     method() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'method' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'method' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       return esValue[implSymbol].method();
@@ -9679,7 +9661,7 @@ exports.install = (globalObject, globalNames) => {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'promiseOperation' called on an object that does not implement interface CEReactions.\\");
+          throw new TypeError(\\"'promiseOperation' called on an object that is not a valid instance of CEReactions.\\");
         }
 
         return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
@@ -9692,7 +9674,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       return esValue[implSymbol][\\"attr\\"];
@@ -9702,7 +9684,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set attr' called on an object that does not implement interface CEReactions.\\");
+        throw new TypeError(\\"'set attr' called on an object that is not a valid instance of CEReactions.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -9718,7 +9700,7 @@ exports.install = (globalObject, globalNames) => {
 
         if (!exports.is(esValue)) {
           throw new TypeError(
-            \\"'get promiseAttribute' called on an object that does not implement interface CEReactions.\\"
+            \\"'get promiseAttribute' called on an object that is not a valid instance of CEReactions.\\"
           );
         }
 
@@ -10110,7 +10092,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'createDocumentType' called on an object that does not implement interface DOMImplementation.\\"
+          \\"'createDocumentType' called on an object that is not a valid instance of DOMImplementation.\\"
         );
       }
 
@@ -10149,9 +10131,7 @@ exports.install = (globalObject, globalNames) => {
     createDocument(namespace, qualifiedName) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'createDocument' called on an object that does not implement interface DOMImplementation.\\"
-        );
+        throw new TypeError(\\"'createDocument' called on an object that is not a valid instance of DOMImplementation.\\");
       }
 
       if (arguments.length < 2) {
@@ -10201,7 +10181,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'createHTMLDocument' called on an object that does not implement interface DOMImplementation.\\"
+          \\"'createHTMLDocument' called on an object that is not a valid instance of DOMImplementation.\\"
         );
       }
       const args = [];
@@ -10220,7 +10200,7 @@ exports.install = (globalObject, globalNames) => {
     hasFeature() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'hasFeature' called on an object that does not implement interface DOMImplementation.\\");
+        throw new TypeError(\\"'hasFeature' called on an object that is not a valid instance of DOMImplementation.\\");
       }
 
       return esValue[implSymbol].hasFeature();
@@ -10390,7 +10370,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get x' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get x' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"x\\"];
@@ -10400,7 +10380,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set x' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set x' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -10414,7 +10394,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get y' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get y' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"y\\"];
@@ -10424,7 +10404,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set y' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set y' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -10438,7 +10418,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get width' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get width' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"width\\"];
@@ -10448,7 +10428,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set width' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set width' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -10462,7 +10442,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get height' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'get height' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       return esValue[implSymbol][\\"height\\"];
@@ -10472,7 +10452,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set height' called on an object that does not implement interface DOMRect.\\");
+        throw new TypeError(\\"'set height' called on an object that is not a valid instance of DOMRect.\\");
       }
 
       V = conversions[\\"unrestricted double\\"](V, {
@@ -10700,7 +10680,7 @@ exports.install = (globalObject, globalNames) => {
     op() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'op' called on an object that does not implement interface DictionaryConvert.\\");
+        throw new TypeError(\\"'op' called on an object that is not a valid instance of DictionaryConvert.\\");
       }
       const args = [];
       {
@@ -10836,7 +10816,7 @@ exports.install = (globalObject, globalNames) => {
     op(destination) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'op' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'op' called on an object that is not a valid instance of Enum.\\");
       }
 
       if (arguments.length < 1) {
@@ -10857,7 +10837,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of Enum.\\");
       }
 
       return utils.tryWrapperForImpl(esValue[implSymbol][\\"attr\\"]);
@@ -10867,7 +10847,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set attr' called on an object that does not implement interface Enum.\\");
+        throw new TypeError(\\"'set attr' called on an object that is not a valid instance of Enum.\\");
       }
 
       V = \`\${V}\`;
@@ -11034,7 +11014,7 @@ exports.install = (globalObject, globalNames) => {
     addEventListener(type, callback) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'addEventListener' called on an object that does not implement interface EventTarget.\\");
+        throw new TypeError(\\"'addEventListener' called on an object that is not a valid instance of EventTarget.\\");
       }
 
       if (arguments.length < 2) {
@@ -11140,7 +11120,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       op() {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'op' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'op' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol].op();
@@ -11148,7 +11128,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       unforgeableOp() {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'unforgeableOp' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'unforgeableOp' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol].unforgeableOp();
@@ -11157,7 +11137,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get attr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get attr' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"attr\\"];
@@ -11166,7 +11146,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set attr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set attr' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"DOMString\\"](V, {
@@ -11179,7 +11159,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get unforgeableAttr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get unforgeableAttr' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"unforgeableAttr\\"];
@@ -11188,7 +11168,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set unforgeableAttr' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set unforgeableAttr' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"DOMString\\"](V, {
@@ -11201,7 +11181,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get length' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'get length' called on an object that is not a valid instance of Global.\\");
         }
 
         return esValue[implSymbol][\\"length\\"];
@@ -11210,7 +11190,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set length' called on an object that does not implement interface Global.\\");
+          throw new TypeError(\\"'set length' called on an object that is not a valid instance of Global.\\");
         }
 
         V = conversions[\\"unsigned long\\"](V, {
@@ -11523,7 +11503,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get lenientSetter' called on an object that does not implement interface LegacyLenientAttributes.\\"
+          \\"'get lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes.\\"
         );
       }
 
@@ -11535,7 +11515,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'set lenientSetter' called on an object that does not implement interface LegacyLenientAttributes.\\"
+          \\"'set lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes.\\"
         );
       }
     }
@@ -11685,7 +11665,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       assign(url) {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'assign' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         if (arguments.length < 1) {
@@ -11709,7 +11689,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get href' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"href\\"];
@@ -11718,7 +11698,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set href' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         V = conversions[\\"USVString\\"](V, {
@@ -11730,7 +11710,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       toString() {
         const esValue = this;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'toString' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"href\\"];
@@ -11739,7 +11719,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get origin' called on an object that does not implement interface LegacyUnforgeable.\\");
+          throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"origin\\"];
@@ -11748,9 +11728,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(
-            \\"'get protocol' called on an object that does not implement interface LegacyUnforgeable.\\"
-          );
+          throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         return esValue[implSymbol][\\"protocol\\"];
@@ -11759,9 +11737,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(
-            \\"'set protocol' called on an object that does not implement interface LegacyUnforgeable.\\"
-          );
+          throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
         }
 
         V = conversions[\\"USVString\\"](V, {
@@ -11899,7 +11875,7 @@ exports._internalSetup = (wrapper, globalObject) => {
         const esValue = this !== null && this !== undefined ? this : globalObject;
 
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get a' called on an object that does not implement interface LegacyUnforgeableMap.\\");
+          throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
         }
 
         return esValue[implSymbol][\\"a\\"];
@@ -12246,7 +12222,7 @@ exports.install = (globalObject, globalNames) => {
     mixedInOp() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'mixedInOp' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'mixedInOp' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol].mixedInOp();
@@ -12255,7 +12231,7 @@ exports.install = (globalObject, globalNames) => {
     ifaceMixinOp() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'ifaceMixinOp' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'ifaceMixinOp' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol].ifaceMixinOp();
@@ -12265,7 +12241,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get mixedInAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'get mixedInAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol][\\"mixedInAttr\\"];
@@ -12275,7 +12251,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set mixedInAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'set mixedInAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -12289,7 +12265,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get ifaceMixinAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'get ifaceMixinAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       return esValue[implSymbol][\\"ifaceMixinAttr\\"];
@@ -12299,7 +12275,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set ifaceMixinAttr' called on an object that does not implement interface MixedIn.\\");
+        throw new TypeError(\\"'set ifaceMixinAttr' called on an object that is not a valid instance of MixedIn.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -12533,7 +12509,7 @@ exports.install = (globalObject, globalNames) => {
     compatible(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'compatible' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'compatible' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -12603,7 +12579,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible1(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible1' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible1' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -12640,7 +12616,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible2(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible2' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible2' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -12683,7 +12659,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible3(arg1) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'incompatible3' called on an object that does not implement interface Overloads.\\");
+        throw new TypeError(\\"'incompatible3' called on an object that is not a valid instance of Overloads.\\");
       }
 
       if (arguments.length < 1) {
@@ -12894,7 +12870,7 @@ exports._internalSetup = (wrapper, globalObject) => {
           const esValue = this !== null && this !== undefined ? this : globalObject;
           if (!exports.is(esValue)) {
             throw new TypeError(
-              \\"'unforgeablePromiseOperation' called on an object that does not implement interface PromiseTypes.\\"
+              \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
             );
           }
 
@@ -12909,7 +12885,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
           if (!exports.is(esValue)) {
             throw new TypeError(
-              \\"'get unforgeablePromiseAttribute' called on an object that does not implement interface PromiseTypes.\\"
+              \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
             );
           }
 
@@ -12973,9 +12949,7 @@ exports.install = (globalObject, globalNames) => {
     voidPromiseConsumer(p) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'voidPromiseConsumer' called on an object that does not implement interface PromiseTypes.\\"
-        );
+        throw new TypeError(\\"'voidPromiseConsumer' called on an object that is not a valid instance of PromiseTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -12997,7 +12971,7 @@ exports.install = (globalObject, globalNames) => {
     promiseConsumer(p) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'promiseConsumer' called on an object that does not implement interface PromiseTypes.\\");
+        throw new TypeError(\\"'promiseConsumer' called on an object that is not a valid instance of PromiseTypes.\\");
       }
 
       if (arguments.length < 1) {
@@ -13020,7 +12994,7 @@ exports.install = (globalObject, globalNames) => {
       try {
         const esValue = this !== null && this !== undefined ? this : globalObject;
         if (!exports.is(esValue)) {
-          throw new TypeError(\\"'promiseOperation' called on an object that does not implement interface PromiseTypes.\\");
+          throw new TypeError(\\"'promiseOperation' called on an object that is not a valid instance of PromiseTypes.\\");
         }
 
         return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
@@ -13035,7 +13009,7 @@ exports.install = (globalObject, globalNames) => {
 
         if (!exports.is(esValue)) {
           throw new TypeError(
-            \\"'get promiseAttribute' called on an object that does not implement interface PromiseTypes.\\"
+            \\"'get promiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
           );
         }
 
@@ -13186,7 +13160,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedBoolean' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedBoolean' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectedBoolean\\"];
@@ -13196,7 +13170,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedBoolean' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedBoolean' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -13210,7 +13184,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedDOMString' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedDOMString' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectedDOMString\\"];
@@ -13220,7 +13194,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedDOMString' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedDOMString' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -13234,7 +13208,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectedLong' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectedLong\\"];
@@ -13244,7 +13218,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectedLong' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"long\\"](V, {
@@ -13258,9 +13232,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'get reflectedUnsignedLong' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'get reflectedUnsignedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectedUnsignedLong\\"];
@@ -13270,9 +13242,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'set reflectedUnsignedLong' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'set reflectedUnsignedLong' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"unsigned long\\"](V, {
@@ -13286,9 +13256,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'get reflectedUSVStringURL' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'get reflectedUSVStringURL' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectedUSVStringURL\\"];
@@ -13298,9 +13266,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'set reflectedUSVStringURL' called on an object that does not implement interface Reflect.\\"
-        );
+        throw new TypeError(\\"'set reflectedUSVStringURL' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -13314,7 +13280,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get reflectionTest' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get reflectionTest' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"reflectionTest\\"];
@@ -13324,7 +13290,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set reflectionTest' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set reflectionTest' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -13338,7 +13304,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get withUnderscore' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'get withUnderscore' called on an object that is not a valid instance of Reflect.\\");
       }
 
       return esValue[implSymbol][\\"withUnderscore\\"];
@@ -13348,7 +13314,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set withUnderscore' called on an object that does not implement interface Reflect.\\");
+        throw new TypeError(\\"'set withUnderscore' called on an object that is not a valid instance of Reflect.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, {
@@ -13480,7 +13446,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get replaceable' called on an object that does not implement interface Replaceable.\\");
+        throw new TypeError(\\"'get replaceable' called on an object that is not a valid instance of Replaceable.\\");
       }
 
       return esValue[implSymbol][\\"replaceable\\"];
@@ -13490,7 +13456,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set replaceable' called on an object that does not implement interface Replaceable.\\");
+        throw new TypeError(\\"'set replaceable' called on an object that is not a valid instance of Replaceable.\\");
       }
 
       Object.defineProperty(esValue, \\"replaceable\\", {
@@ -13650,7 +13616,7 @@ exports.install = (globalObject, globalNames) => {
     recordConsumer(rec) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'recordConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'recordConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -13695,7 +13661,7 @@ exports.install = (globalObject, globalNames) => {
     recordConsumer2(rec) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'recordConsumer2' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'recordConsumer2' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -13740,7 +13706,7 @@ exports.install = (globalObject, globalNames) => {
     sequenceConsumer(seq) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sequenceConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'sequenceConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -13777,7 +13743,7 @@ exports.install = (globalObject, globalNames) => {
     sequenceConsumer2(seq) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sequenceConsumer2' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'sequenceConsumer2' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -13812,7 +13778,7 @@ exports.install = (globalObject, globalNames) => {
     frozenArrayConsumer(arr) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'frozenArrayConsumer' called on an object that does not implement interface SeqAndRec.\\");
+        throw new TypeError(\\"'frozenArrayConsumer' called on an object that is not a valid instance of SeqAndRec.\\");
       }
 
       if (arguments.length < 1) {
@@ -13966,7 +13932,7 @@ exports.install = (globalObject, globalNames) => {
     def() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'def' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'def' called on an object that is not a valid instance of Static.\\");
       }
 
       return esValue[implSymbol].def();
@@ -13976,7 +13942,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get abc' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'get abc' called on an object that is not a valid instance of Static.\\");
       }
 
       return esValue[implSymbol][\\"abc\\"];
@@ -13986,7 +13952,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set abc' called on an object that does not implement interface Static.\\");
+        throw new TypeError(\\"'set abc' called on an object that is not a valid instance of Static.\\");
       }
 
       V = conversions[\\"DOMString\\"](V, { context: \\"Failed to set the 'abc' property on 'Static': The provided value\\" });
@@ -14133,7 +14099,7 @@ exports.install = (globalObject, globalNames) => {
     key(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'key' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'key' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -14153,7 +14119,7 @@ exports.install = (globalObject, globalNames) => {
     getItem(key) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'getItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'getItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -14173,7 +14139,7 @@ exports.install = (globalObject, globalNames) => {
     setItem(key, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'setItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'setItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 2) {
@@ -14198,7 +14164,7 @@ exports.install = (globalObject, globalNames) => {
     removeItem(key) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'removeItem' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'removeItem' called on an object that is not a valid instance of Storage.\\");
       }
 
       if (arguments.length < 1) {
@@ -14220,7 +14186,7 @@ exports.install = (globalObject, globalNames) => {
     clear() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'clear' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'clear' called on an object that is not a valid instance of Storage.\\");
       }
 
       return esValue[implSymbol].clear();
@@ -14230,7 +14196,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get length' called on an object that does not implement interface Storage.\\");
+        throw new TypeError(\\"'get length' called on an object that is not a valid instance of Storage.\\");
       }
 
       return esValue[implSymbol][\\"length\\"];
@@ -14521,7 +14487,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get attr' called on an object that does not implement interface StringifierAttribute.\\");
+        throw new TypeError(\\"'get attr' called on an object that is not a valid instance of StringifierAttribute.\\");
       }
 
       return esValue[implSymbol][\\"attr\\"];
@@ -14530,7 +14496,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface StringifierAttribute.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of StringifierAttribute.\\");
       }
 
       return esValue[implSymbol][\\"attr\\"];
@@ -14655,7 +14621,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'toString' called on an object that does not implement interface StringifierDefaultOperation.\\"
+          \\"'toString' called on an object that is not a valid instance of StringifierDefaultOperation.\\"
         );
       }
 
@@ -14780,7 +14746,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'operation' called on an object that does not implement interface StringifierNamedOperation.\\"
+          \\"'operation' called on an object that is not a valid instance of StringifierNamedOperation.\\"
         );
       }
 
@@ -14791,7 +14757,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'toString' called on an object that does not implement interface StringifierNamedOperation.\\"
+          \\"'toString' called on an object that is not a valid instance of StringifierNamedOperation.\\"
         );
       }
 
@@ -14914,7 +14880,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface StringifierOperation.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of StringifierOperation.\\");
       }
 
       return esValue[implSymbol].toString();
@@ -15038,7 +15004,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15071,7 +15037,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrEnumConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrEnumConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15107,7 +15073,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrOrNullConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15146,7 +15112,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'numOrStrOrURLOrNullConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'numOrStrOrURLOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15187,7 +15153,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'urlMapInnerConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'urlMapInnerConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15235,9 +15201,7 @@ exports.install = (globalObject, globalNames) => {
     urlMapConsumer(a) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(
-          \\"'urlMapConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
-        );
+        throw new TypeError(\\"'urlMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       if (arguments.length < 1) {
@@ -15289,7 +15253,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'bufferSourceOrURLConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'bufferSourceOrURLConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15322,7 +15286,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'arrayBufferViewOrURLMapConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'arrayBufferViewOrURLMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15391,7 +15355,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'arrayBufferViewDupConsumer' called on an object that does not implement interface TypedefsAndUnions.\\"
+          \\"'arrayBufferViewDupConsumer' called on an object that is not a valid instance of TypedefsAndUnions.\\"
         );
       }
 
@@ -15421,7 +15385,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get buf' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'get buf' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       return utils.tryWrapperForImpl(esValue[implSymbol][\\"buf\\"]);
@@ -15431,7 +15395,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set buf' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'set buf' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       if (utils.isArrayBuffer(V)) {
@@ -15452,7 +15416,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get time' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'get time' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       return esValue[implSymbol][\\"time\\"];
@@ -15462,7 +15426,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set time' called on an object that does not implement interface TypedefsAndUnions.\\");
+        throw new TypeError(\\"'set time' called on an object that is not a valid instance of TypedefsAndUnions.\\");
       }
 
       V = conversions[\\"unsigned long long\\"](V, {
@@ -15615,7 +15579,7 @@ exports.install = (globalObject, globalNames) => {
     toJSON() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toJSON' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'toJSON' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol].toJSON();
@@ -15625,7 +15589,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get href' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get href' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"href\\"];
@@ -15635,7 +15599,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set href' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set href' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'href' property on 'URL': The provided value\\" });
@@ -15646,7 +15610,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"href\\"];
@@ -15656,7 +15620,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get origin' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get origin' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"origin\\"];
@@ -15666,7 +15630,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get protocol' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"protocol\\"];
@@ -15676,7 +15640,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set protocol' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -15690,7 +15654,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get username' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get username' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"username\\"];
@@ -15700,7 +15664,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set username' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set username' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -15714,7 +15678,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get password' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get password' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"password\\"];
@@ -15724,7 +15688,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set password' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set password' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -15738,7 +15702,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get host' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get host' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"host\\"];
@@ -15748,7 +15712,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set host' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set host' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'host' property on 'URL': The provided value\\" });
@@ -15760,7 +15724,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get hostname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get hostname' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"hostname\\"];
@@ -15770,7 +15734,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set hostname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set hostname' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -15784,7 +15748,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get port' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get port' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"port\\"];
@@ -15794,7 +15758,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set port' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set port' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'port' property on 'URL': The provided value\\" });
@@ -15806,7 +15770,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get pathname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get pathname' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"pathname\\"];
@@ -15816,7 +15780,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set pathname' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set pathname' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, {
@@ -15830,7 +15794,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get search' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get search' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"search\\"];
@@ -15840,7 +15804,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set search' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set search' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'search' property on 'URL': The provided value\\" });
@@ -15852,7 +15816,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get searchParams' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get searchParams' called on an object that is not a valid instance of URL.\\");
       }
 
       return utils.getSameObject(this, \\"searchParams\\", () => {
@@ -15864,7 +15828,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get hash' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'get hash' called on an object that is not a valid instance of URL.\\");
       }
 
       return esValue[implSymbol][\\"hash\\"];
@@ -15874,7 +15838,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set hash' called on an object that does not implement interface URL.\\");
+        throw new TypeError(\\"'set hash' called on an object that is not a valid instance of URL.\\");
       }
 
       V = conversions[\\"USVString\\"](V, { context: \\"Failed to set the 'hash' property on 'URL': The provided value\\" });
@@ -16114,7 +16078,7 @@ exports.install = (globalObject, globalNames) => {
     item(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'item' called on an object that does not implement interface URLList.\\");
+        throw new TypeError(\\"'item' called on an object that is not a valid instance of URLList.\\");
       }
 
       if (arguments.length < 1) {
@@ -16137,7 +16101,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get length' called on an object that does not implement interface URLList.\\");
+        throw new TypeError(\\"'get length' called on an object that is not a valid instance of URLList.\\");
       }
 
       return esValue[implSymbol][\\"length\\"];
@@ -16553,7 +16517,7 @@ exports.install = (globalObject, globalNames) => {
     append(name, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'append' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'append' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 2) {
@@ -16584,7 +16548,7 @@ exports.install = (globalObject, globalNames) => {
     delete(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'delete' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'delete' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -16608,7 +16572,7 @@ exports.install = (globalObject, globalNames) => {
     get(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'get' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -16632,7 +16596,7 @@ exports.install = (globalObject, globalNames) => {
     getAll(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'getAll' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'getAll' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -16656,7 +16620,7 @@ exports.install = (globalObject, globalNames) => {
     has(name) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'has' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'has' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 1) {
@@ -16680,7 +16644,7 @@ exports.install = (globalObject, globalNames) => {
     set(name, value) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'set' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       if (arguments.length < 2) {
@@ -16711,7 +16675,7 @@ exports.install = (globalObject, globalNames) => {
     sort() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'sort' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'sort' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       return esValue[implSymbol].sort();
@@ -16720,7 +16684,7 @@ exports.install = (globalObject, globalNames) => {
     toString() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'toString' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'toString' called on an object that is not a valid instance of URLSearchParams.\\");
       }
 
       return esValue[implSymbol].toString();
@@ -16728,28 +16692,28 @@ exports.install = (globalObject, globalNames) => {
 
     keys() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'keys' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'keys' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"key\\");
     }
 
     values() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'values' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'values' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"value\\");
     }
 
     entries() {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'entries' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'entries' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       return exports.createDefaultIterator(this, \\"key+value\\");
     }
 
     forEach(callback) {
       if (!exports.is(this)) {
-        throw new TypeError(\\"'forEach' called on an object that does not implement interface URLSearchParams.\\");
+        throw new TypeError(\\"'forEach' called on an object that is not a valid instance of URLSearchParams.\\");
       }
       if (arguments.length < 1) {
         throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
@@ -16901,7 +16865,7 @@ exports.install = (globalObject, globalNames) => {
     item(index) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'item' called on an object that does not implement interface URLSearchParamsCollection.\\");
+        throw new TypeError(\\"'item' called on an object that is not a valid instance of URLSearchParamsCollection.\\");
       }
 
       if (arguments.length < 1) {
@@ -16926,7 +16890,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'namedItem' called on an object that does not implement interface URLSearchParamsCollection.\\"
+          \\"'namedItem' called on an object that is not a valid instance of URLSearchParamsCollection.\\"
         );
       }
 
@@ -16953,7 +16917,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get length' called on an object that does not implement interface URLSearchParamsCollection.\\"
+          \\"'get length' called on an object that is not a valid instance of URLSearchParamsCollection.\\"
         );
       }
 
@@ -17607,7 +17571,7 @@ exports.install = (globalObject, globalNames) => {
     operation(sequence) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'operation' called on an object that does not implement interface UnderscoredProperties.\\");
+        throw new TypeError(\\"'operation' called on an object that is not a valid instance of UnderscoredProperties.\\");
       }
 
       if (arguments.length < 1) {
@@ -17646,7 +17610,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'get attribute' called on an object that does not implement interface UnderscoredProperties.\\"
+          \\"'get attribute' called on an object that is not a valid instance of UnderscoredProperties.\\"
         );
       }
 
@@ -17658,7 +17622,7 @@ exports.install = (globalObject, globalNames) => {
 
       if (!exports.is(esValue)) {
         throw new TypeError(
-          \\"'set attribute' called on an object that does not implement interface UnderscoredProperties.\\"
+          \\"'set attribute' called on an object that is not a valid instance of UnderscoredProperties.\\"
         );
       }
 
@@ -17810,7 +17774,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get unscopableTest' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'get unscopableTest' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       return esValue[implSymbol][\\"unscopableTest\\"];
@@ -17820,7 +17784,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set unscopableTest' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'set unscopableTest' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -17834,7 +17798,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'get unscopableMixin' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'get unscopableMixin' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       return esValue[implSymbol][\\"unscopableMixin\\"];
@@ -17844,7 +17808,7 @@ exports.install = (globalObject, globalNames) => {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'set unscopableMixin' called on an object that does not implement interface Unscopable.\\");
+        throw new TypeError(\\"'set unscopableMixin' called on an object that is not a valid instance of Unscopable.\\");
       }
 
       V = conversions[\\"boolean\\"](V, {
@@ -17975,7 +17939,7 @@ exports.install = (globalObject, globalNames) => {
     simple1() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'simple1' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'simple1' called on an object that is not a valid instance of Variadic.\\");
       }
       const args = [];
       for (let i = 0; i < arguments.length; i++) {
@@ -17991,7 +17955,7 @@ exports.install = (globalObject, globalNames) => {
     simple2(first) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'simple2' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'simple2' called on an object that is not a valid instance of Variadic.\\");
       }
 
       if (arguments.length < 1) {
@@ -18018,7 +17982,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded1() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'overloaded1' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'overloaded1' called on an object that is not a valid instance of Variadic.\\");
       }
       const args = [];
       switch (arguments.length) {
@@ -18051,7 +18015,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded2(first) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
-        throw new TypeError(\\"'overloaded2' called on an object that does not implement interface Variadic.\\");
+        throw new TypeError(\\"'overloaded2' called on an object that is not a valid instance of Variadic.\\");
       }
 
       if (arguments.length < 1) {
