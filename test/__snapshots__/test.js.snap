@@ -1,5 +1,133 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`built-in types Function 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction(...args) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    for (let i = 0; i < args.length; i++) {
+      args[i] = utils.tryWrapperForImpl(args[i]);
+    }
+
+    callResult = Reflect.apply(value, thisArg, args);
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  }
+
+  invokeTheCallbackFunction.construct = (...args) => {
+    for (let i = 0; i < args.length; i++) {
+      args[i] = utils.tryWrapperForImpl(args[i]);
+    }
+
+    let callResult = Reflect.construct(value, args);
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
+exports[`built-in types VoidFunction 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    callResult = Reflect.apply(value, thisArg, []);
+  }
+
+  invokeTheCallbackFunction.construct = () => {
+    let callResult = Reflect.construct(value, []);
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
+exports[`with processors AsyncCallbackFunction.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    try {
+      callResult = Reflect.apply(value, thisArg, []);
+
+      callResult = new Promise(resolve => resolve(callResult));
+      return callResult;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  invokeTheCallbackFunction.construct = () => {
+    let callResult = Reflect.construct(value, []);
+
+    callResult = new Promise(resolve => resolve(callResult));
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
 exports[`with processors AsyncCallbackInterface.webidl 1`] = `
 "\\"use strict\\";
 
@@ -27,15 +155,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = Promise.resolve(callResult).then(
-        value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-
-          return value;
-        },
-        reason => reason
-      );
-
+      callResult = new Promise(resolve => resolve(callResult));
       return callResult;
     } catch (err) {
       return Promise.reject(err);
@@ -737,6 +857,84 @@ class ProxyHandler {
 }
 
 const Impl = require(\\"../implementations/CEReactions.js\\");
+"
+`;
+
+exports[`with processors CallbackUsage.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const Function = require(\\"./Function.js\\");
+const URLCallback = require(\\"./URLCallback.js\\");
+const URLHandlerNonNull = require(\\"./URLHandlerNonNull.js\\");
+const VoidFunction = require(\\"./VoidFunction.js\\");
+
+exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}) => {
+  {
+    const key = \\"function\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = Function.convert(value, { context: context + \\" has member 'function' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlCallback\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = URLCallback.convert(value, { context: context + \\" has member 'urlCallback' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlHandler\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      if (!utils.isObject(value)) {
+        value = null;
+      } else {
+        value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
+      }
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlHandlerNonNull\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandlerNonNull' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"voidFunction\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = VoidFunction.convert(value, { context: context + \\" has member 'voidFunction' that\\" });
+
+      ret[key] = value;
+    }
+  }
+};
+
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (obj !== undefined && typeof obj !== \\"object\\" && typeof obj !== \\"function\\") {
+    throw new TypeError(\`\${context} is not an object.\`);
+  }
+
+  const ret = Object.create(null);
+  exports._convertInherit(obj, ret, { context });
+  return ret;
+};
 "
 `;
 
@@ -3695,10 +3893,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {},
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -3720,16 +3915,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {
-            value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-            });
-
-            return value;
-          },
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
@@ -6623,6 +6809,98 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
+exports[`with processors URLCallback.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const URL = require(\\"./URL.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction(url, string) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    url = utils.tryWrapperForImpl(url);
+
+    callResult = Reflect.apply(value, thisArg, [url, string]);
+
+    callResult = URL.convert(callResult, { context: context });
+
+    return callResult;
+  }
+
+  invokeTheCallbackFunction.construct = (url, string) => {
+    url = utils.tryWrapperForImpl(url);
+
+    let callResult = Reflect.construct(value, [url, string]);
+
+    callResult = URL.convert(callResult, { context: context });
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
+exports[`with processors URLHandlerNonNull.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  function invokeTheCallbackFunction(url) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    if (typeof value === \\"function\\") {
+      url = utils.tryWrapperForImpl(url);
+
+      callResult = Reflect.apply(value, thisArg, [url]);
+    }
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  }
+
+  invokeTheCallbackFunction.construct = url => {
+    url = utils.tryWrapperForImpl(url);
+
+    let callResult = Reflect.construct(value, [url]);
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
 exports[`with processors URLList.webidl 1`] = `
 "\\"use strict\\";
 
@@ -6943,6 +7221,7 @@ exports[`with processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Function = require(\\"./Function.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -7361,11 +7640,9 @@ exports.install = (globalObject, globalNames) => {
       if (arguments.length < 1) {
         throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
       }
-      if (typeof callback !== \\"function\\") {
-        throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
-        );
-      }
+      callback = Function.convert(callback, {
+        context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
+      });
       const thisArg = arguments[1];
       let pairs = Array.from(this[implSymbol]);
       let i = 0;
@@ -8858,6 +9135,50 @@ const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
 "
 `;
 
+exports[`without processors AsyncCallbackFunction.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction() {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    try {
+      callResult = Reflect.apply(value, thisArg, []);
+
+      callResult = new Promise(resolve => resolve(callResult));
+      return callResult;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  }
+
+  invokeTheCallbackFunction.construct = () => {
+    let callResult = Reflect.construct(value, []);
+
+    callResult = new Promise(resolve => resolve(callResult));
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
 exports[`without processors AsyncCallbackInterface.webidl 1`] = `
 "\\"use strict\\";
 
@@ -8885,15 +9206,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = Promise.resolve(callResult).then(
-        value => {
-          value = conversions[\\"any\\"](value, { context: context + \\" promise value\\" });
-
-          return value;
-        },
-        reason => reason
-      );
-
+      callResult = new Promise(resolve => resolve(callResult));
       return callResult;
     } catch (err) {
       return Promise.reject(err);
@@ -9554,6 +9867,84 @@ class ProxyHandler {
 }
 
 const Impl = require(\\"../implementations/CEReactions.js\\");
+"
+`;
+
+exports[`without processors CallbackUsage.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const Function = require(\\"./Function.js\\");
+const URLCallback = require(\\"./URLCallback.js\\");
+const URLHandlerNonNull = require(\\"./URLHandlerNonNull.js\\");
+const VoidFunction = require(\\"./VoidFunction.js\\");
+
+exports._convertInherit = (obj, ret, { context = \\"The provided value\\" } = {}) => {
+  {
+    const key = \\"function\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = Function.convert(value, { context: context + \\" has member 'function' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlCallback\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = URLCallback.convert(value, { context: context + \\" has member 'urlCallback' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlHandler\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      if (!utils.isObject(value)) {
+        value = null;
+      } else {
+        value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandler' that\\" });
+      }
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"urlHandlerNonNull\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = URLHandlerNonNull.convert(value, { context: context + \\" has member 'urlHandlerNonNull' that\\" });
+
+      ret[key] = value;
+    }
+  }
+
+  {
+    const key = \\"voidFunction\\";
+    let value = obj === undefined || obj === null ? undefined : obj[key];
+    if (value !== undefined) {
+      value = VoidFunction.convert(value, { context: context + \\" has member 'voidFunction' that\\" });
+
+      ret[key] = value;
+    }
+  }
+};
+
+exports.convert = function convert(obj, { context = \\"The provided value\\" } = {}) {
+  if (obj !== undefined && typeof obj !== \\"object\\" && typeof obj !== \\"function\\") {
+    throw new TypeError(\`\${context} is not an object.\`);
+  }
+
+  const ret = Object.create(null);
+  exports._convertInherit(obj, ret, { context });
+  return ret;
+};
 "
 `;
 
@@ -12511,10 +12902,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {},
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].voidPromiseConsumer(...args);
@@ -12536,16 +12924,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = Promise.resolve(curArg).then(
-          value => {
-            value = conversions[\\"double\\"](value, {
-              context: \\"Failed to execute 'promiseConsumer' on 'PromiseTypes': parameter 1\\" + \\" promise value\\"
-            });
-
-            return value;
-          },
-          reason => reason
-        );
+        curArg = new Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
       return esValue[implSymbol].promiseConsumer(...args);
@@ -15424,6 +15803,98 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
+exports[`without processors URLCallback.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const URL = require(\\"./URL.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (typeof value !== \\"function\\") {
+    throw new TypeError(context + \\" is not a function\\");
+  }
+
+  function invokeTheCallbackFunction(url, string) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    url = utils.tryWrapperForImpl(url);
+
+    callResult = Reflect.apply(value, thisArg, [url, string]);
+
+    callResult = URL.convert(callResult, { context: context });
+
+    return callResult;
+  }
+
+  invokeTheCallbackFunction.construct = (url, string) => {
+    url = utils.tryWrapperForImpl(url);
+
+    let callResult = Reflect.construct(value, [url, string]);
+
+    callResult = URL.convert(callResult, { context: context });
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
+exports[`without processors URLHandlerNonNull.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  function invokeTheCallbackFunction(url) {
+    if (new.target !== undefined) {
+      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
+    }
+
+    const thisArg = utils.tryWrapperForImpl(this);
+    let callResult;
+
+    if (typeof value === \\"function\\") {
+      url = utils.tryWrapperForImpl(url);
+
+      callResult = Reflect.apply(value, thisArg, [url]);
+    }
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  }
+
+  invokeTheCallbackFunction.construct = url => {
+    url = utils.tryWrapperForImpl(url);
+
+    let callResult = Reflect.construct(value, [url]);
+
+    callResult = conversions[\\"any\\"](callResult, { context: context });
+
+    return callResult;
+  };
+
+  invokeTheCallbackFunction[utils.wrapperSymbol] = value;
+  invokeTheCallbackFunction.objectReference = value;
+
+  return invokeTheCallbackFunction;
+};
+"
+`;
+
 exports[`without processors URLList.webidl 1`] = `
 "\\"use strict\\";
 
@@ -15744,6 +16215,7 @@ exports[`without processors URLSearchParams.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Function = require(\\"./Function.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -16162,11 +16634,9 @@ exports.install = (globalObject, globalNames) => {
       if (arguments.length < 1) {
         throw new TypeError(\\"Failed to execute 'forEach' on 'iterable': 1 argument required, \\" + \\"but only 0 present.\\");
       }
-      if (typeof callback !== \\"function\\") {
-        throw new TypeError(
-          \\"Failed to execute 'forEach' on 'iterable': The callback provided \\" + \\"as parameter 1 is not a function.\\"
-        );
-      }
+      callback = Function.convert(callback, {
+        context: \\"Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1\\"
+      });
       const thisArg = arguments[1];
       let pairs = Array.from(this[implSymbol]);
       let i = 0;
