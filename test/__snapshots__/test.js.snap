@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`built-in types Function 1`] = `
+exports[`generation built-in types Function 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -50,7 +50,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`built-in types VoidFunction 1`] = `
+exports[`generation built-in types VoidFunction 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -84,7 +84,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`with processors AsyncCallbackFunction.webidl 1`] = `
+exports[`generation with processors AsyncCallbackFunction.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -128,7 +128,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`with processors AsyncCallbackInterface.webidl 1`] = `
+exports[`generation with processors AsyncCallbackInterface.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -172,7 +172,7 @@ exports.install = (globalObject, globalNames) => {};
 "
 `;
 
-exports[`with processors AsyncIterablePairArgs.webidl 1`] = `
+exports[`generation with processors AsyncIterablePairArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -446,7 +446,7 @@ const Impl = require(\\"../implementations/AsyncIterablePairArgs.js\\");
 "
 `;
 
-exports[`with processors AsyncIterablePairNoArgs.webidl 1`] = `
+exports[`generation with processors AsyncIterablePairNoArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -656,7 +656,7 @@ const Impl = require(\\"../implementations/AsyncIterablePairNoArgs.js\\");
 "
 `;
 
-exports[`with processors AsyncIterableValueArgs.webidl 1`] = `
+exports[`generation with processors AsyncIterableValueArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -845,7 +845,7 @@ const Impl = require(\\"../implementations/AsyncIterableValueArgs.js\\");
 "
 `;
 
-exports[`with processors AsyncIterableValueNoArgs.webidl 1`] = `
+exports[`generation with processors AsyncIterableValueNoArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1027,7 +1027,7 @@ const Impl = require(\\"../implementations/AsyncIterableValueNoArgs.js\\");
 "
 `;
 
-exports[`with processors AsyncIterableWithReturn.webidl 1`] = `
+exports[`generation with processors AsyncIterableWithReturn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1233,7 +1233,7 @@ const Impl = require(\\"../implementations/AsyncIterableWithReturn.js\\");
 "
 `;
 
-exports[`with processors BufferSourceTypes.webidl 1`] = `
+exports[`generation with processors BufferSourceTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1507,7 +1507,7 @@ const Impl = require(\\"../implementations/BufferSourceTypes.js\\");
 "
 `;
 
-exports[`with processors CEReactions.webidl 1`] = `
+exports[`generation with processors CEReactions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -1925,7 +1925,7 @@ const Impl = require(\\"../implementations/CEReactions.js\\");
 "
 `;
 
-exports[`with processors CallbackUsage.webidl 1`] = `
+exports[`generation with processors CallbackUsage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2003,7 +2003,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
 "
 `;
 
-exports[`with processors DOMImplementation.webidl 1`] = `
+exports[`generation with processors DOMImplementation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2236,7 +2236,7 @@ const Impl = require(\\"../implementations/DOMImplementation.js\\");
 "
 `;
 
-exports[`with processors DOMRect.webidl 1`] = `
+exports[`generation with processors DOMRect.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2512,7 +2512,7 @@ const Impl = require(\\"../implementations/DOMRect.js\\");
 "
 `;
 
-exports[`with processors Dictionary.webidl 1`] = `
+exports[`generation with processors Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2590,7 +2590,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
 "
 `;
 
-exports[`with processors DictionaryConvert.webidl 1`] = `
+exports[`generation with processors DictionaryConvert.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2726,7 +2726,7 @@ const Impl = require(\\"../implementations/DictionaryConvert.js\\");
 "
 `;
 
-exports[`with processors Enum.webidl 1`] = `
+exports[`generation with processors Enum.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2885,7 +2885,7 @@ const Impl = require(\\"../implementations/Enum.js\\");
 "
 `;
 
-exports[`with processors EventListener.webidl 1`] = `
+exports[`generation with processors EventListener.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -2924,7 +2924,7 @@ exports.install = (globalObject, globalNames) => {};
 "
 `;
 
-exports[`with processors EventTarget.webidl 1`] = `
+exports[`generation with processors EventTarget.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3072,7 +3072,7 @@ const Impl = require(\\"../implementations/EventTarget.js\\");
 "
 `;
 
-exports[`with processors Global.webidl 1`] = `
+exports[`generation with processors Global.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3301,7 +3301,7 @@ const Impl = require(\\"../implementations/Global.js\\");
 "
 `;
 
-exports[`with processors HTMLConstructor.webidl 1`] = `
+exports[`generation with processors HTMLConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3413,7 +3413,7 @@ const Impl = require(\\"../implementations/HTMLConstructor.js\\");
 "
 `;
 
-exports[`with processors LegacyLenientAttributes.webidl 1`] = `
+exports[`generation with processors LegacyLenientAttributes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3618,7 +3618,7 @@ const Impl = require(\\"../implementations/LegacyLenientAttributes.js\\");
 "
 `;
 
-exports[`with processors LegacyUnforgeable.webidl 1`] = `
+exports[`generation with processors LegacyUnforgeable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -3827,7 +3827,7 @@ const Impl = require(\\"../implementations/LegacyUnforgeable.js\\");
 "
 `;
 
-exports[`with processors LegacyUnforgeableMap.webidl 1`] = `
+exports[`generation with processors LegacyUnforgeableMap.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4136,7 +4136,7 @@ const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
 `;
 
-exports[`with processors MixedIn.webidl 1`] = `
+exports[`generation with processors MixedIn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4323,7 +4323,7 @@ const Impl = require(\\"../implementations/MixedIn.js\\");
 "
 `;
 
-exports[`with processors NodeFilter.webidl 1`] = `
+exports[`generation with processors NodeFilter.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4401,7 +4401,7 @@ exports.install = (globalObject, globalNames) => {
 "
 `;
 
-exports[`with processors Overloads.webidl 1`] = `
+exports[`generation with processors Overloads.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -4823,7 +4823,7 @@ const Impl = require(\\"../implementations/Overloads.js\\");
 "
 `;
 
-exports[`with processors PromiseTypes.webidl 1`] = `
+exports[`generation with processors PromiseTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5073,7 +5073,7 @@ const Impl = require(\\"../implementations/PromiseTypes.js\\");
 "
 `;
 
-exports[`with processors Reflect.webidl 1`] = `
+exports[`generation with processors Reflect.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5374,7 +5374,7 @@ const Impl = require(\\"../implementations/Reflect.js\\");
 "
 `;
 
-exports[`with processors Replaceable.webidl 1`] = `
+exports[`generation with processors Replaceable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5511,7 +5511,7 @@ const Impl = require(\\"../implementations/Replaceable.js\\");
 "
 `;
 
-exports[`with processors RequestDestination.webidl 1`] = `
+exports[`generation with processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
 const enumerationValues = new Set([
@@ -5544,7 +5544,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 "
 `;
 
-exports[`with processors SeqAndRec.webidl 1`] = `
+exports[`generation with processors SeqAndRec.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -5861,7 +5861,7 @@ const Impl = require(\\"../implementations/SeqAndRec.js\\");
 "
 `;
 
-exports[`with processors Static.webidl 1`] = `
+exports[`generation with processors Static.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6024,7 +6024,7 @@ const Impl = require(\\"../implementations/Static.js\\");
 "
 `;
 
-exports[`with processors Storage.webidl 1`] = `
+exports[`generation with processors Storage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6417,7 +6417,7 @@ const Impl = require(\\"../implementations/Storage.js\\");
 "
 `;
 
-exports[`with processors StringifierAttribute.webidl 1`] = `
+exports[`generation with processors StringifierAttribute.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6549,7 +6549,7 @@ const Impl = require(\\"../implementations/StringifierAttribute.js\\");
 "
 `;
 
-exports[`with processors StringifierDefaultOperation.webidl 1`] = `
+exports[`generation with processors StringifierDefaultOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6674,7 +6674,7 @@ const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
 "
 `;
 
-exports[`with processors StringifierNamedOperation.webidl 1`] = `
+exports[`generation with processors StringifierNamedOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6811,7 +6811,7 @@ const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
 "
 `;
 
-exports[`with processors StringifierOperation.webidl 1`] = `
+exports[`generation with processors StringifierOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -6932,7 +6932,7 @@ const Impl = require(\\"../implementations/StringifierOperation.js\\");
 "
 `;
 
-exports[`with processors TypedefsAndUnions.webidl 1`] = `
+exports[`generation with processors TypedefsAndUnions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -7492,7 +7492,7 @@ const Impl = require(\\"../implementations/TypedefsAndUnions.js\\");
 "
 `;
 
-exports[`with processors URL.webidl 1`] = `
+exports[`generation with processors URL.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -7913,7 +7913,7 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
-exports[`with processors URLCallback.webidl 1`] = `
+exports[`generation with processors URLCallback.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -7961,7 +7961,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`with processors URLHandlerNonNull.webidl 1`] = `
+exports[`generation with processors URLHandlerNonNull.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -8005,7 +8005,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`with processors URLList.webidl 1`] = `
+exports[`generation with processors URLList.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -8320,7 +8320,7 @@ const Impl = require(\\"../implementations/URLList.js\\");
 "
 `;
 
-exports[`with processors URLSearchParams.webidl 1`] = `
+exports[`generation with processors URLSearchParams.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -8781,7 +8781,7 @@ const Impl = require(\\"../implementations/URLSearchParams.js\\");
 "
 `;
 
-exports[`with processors URLSearchParamsCollection.webidl 1`] = `
+exports[`generation with processors URLSearchParamsCollection.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -9149,7 +9149,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
 `;
 
-exports[`with processors URLSearchParamsCollection2.webidl 1`] = `
+exports[`generation with processors URLSearchParamsCollection2.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -9492,7 +9492,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
 `;
 
-exports[`with processors UnderscoredProperties.webidl 1`] = `
+exports[`generation with processors UnderscoredProperties.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -9694,7 +9694,7 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`with processors Unscopable.webidl 1`] = `
+exports[`generation with processors Unscopable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -9859,7 +9859,7 @@ const Impl = require(\\"../implementations/Unscopable.js\\");
 "
 `;
 
-exports[`with processors Variadic.webidl 1`] = `
+exports[`generation with processors Variadic.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10126,7 +10126,7 @@ const Impl = require(\\"../implementations/Variadic.js\\");
 "
 `;
 
-exports[`with processors ZeroArgConstructor.webidl 1`] = `
+exports[`generation with processors ZeroArgConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10237,7 +10237,7 @@ const Impl = require(\\"../implementations/ZeroArgConstructor.js\\");
 "
 `;
 
-exports[`without processors AsyncCallbackFunction.webidl 1`] = `
+exports[`generation without processors AsyncCallbackFunction.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10281,7 +10281,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`without processors AsyncCallbackInterface.webidl 1`] = `
+exports[`generation without processors AsyncCallbackInterface.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10325,7 +10325,7 @@ exports.install = (globalObject, globalNames) => {};
 "
 `;
 
-exports[`without processors AsyncIterablePairArgs.webidl 1`] = `
+exports[`generation without processors AsyncIterablePairArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10599,7 +10599,7 @@ const Impl = require(\\"../implementations/AsyncIterablePairArgs.js\\");
 "
 `;
 
-exports[`without processors AsyncIterablePairNoArgs.webidl 1`] = `
+exports[`generation without processors AsyncIterablePairNoArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10809,7 +10809,7 @@ const Impl = require(\\"../implementations/AsyncIterablePairNoArgs.js\\");
 "
 `;
 
-exports[`without processors AsyncIterableValueArgs.webidl 1`] = `
+exports[`generation without processors AsyncIterableValueArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -10998,7 +10998,7 @@ const Impl = require(\\"../implementations/AsyncIterableValueArgs.js\\");
 "
 `;
 
-exports[`without processors AsyncIterableValueNoArgs.webidl 1`] = `
+exports[`generation without processors AsyncIterableValueNoArgs.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -11180,7 +11180,7 @@ const Impl = require(\\"../implementations/AsyncIterableValueNoArgs.js\\");
 "
 `;
 
-exports[`without processors AsyncIterableWithReturn.webidl 1`] = `
+exports[`generation without processors AsyncIterableWithReturn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -11386,7 +11386,7 @@ const Impl = require(\\"../implementations/AsyncIterableWithReturn.js\\");
 "
 `;
 
-exports[`without processors BufferSourceTypes.webidl 1`] = `
+exports[`generation without processors BufferSourceTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -11660,7 +11660,7 @@ const Impl = require(\\"../implementations/BufferSourceTypes.js\\");
 "
 `;
 
-exports[`without processors CEReactions.webidl 1`] = `
+exports[`generation without processors CEReactions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12037,7 +12037,7 @@ const Impl = require(\\"../implementations/CEReactions.js\\");
 "
 `;
 
-exports[`without processors CallbackUsage.webidl 1`] = `
+exports[`generation without processors CallbackUsage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12115,7 +12115,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
 "
 `;
 
-exports[`without processors DOMImplementation.webidl 1`] = `
+exports[`generation without processors DOMImplementation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12348,7 +12348,7 @@ const Impl = require(\\"../implementations/DOMImplementation.js\\");
 "
 `;
 
-exports[`without processors DOMRect.webidl 1`] = `
+exports[`generation without processors DOMRect.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12624,7 +12624,7 @@ const Impl = require(\\"../implementations/DOMRect.js\\");
 "
 `;
 
-exports[`without processors Dictionary.webidl 1`] = `
+exports[`generation without processors Dictionary.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12702,7 +12702,7 @@ exports.convert = function convert(obj, { context = \\"The provided value\\" } =
 "
 `;
 
-exports[`without processors DictionaryConvert.webidl 1`] = `
+exports[`generation without processors DictionaryConvert.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12838,7 +12838,7 @@ const Impl = require(\\"../implementations/DictionaryConvert.js\\");
 "
 `;
 
-exports[`without processors Enum.webidl 1`] = `
+exports[`generation without processors Enum.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -12997,7 +12997,7 @@ const Impl = require(\\"../implementations/Enum.js\\");
 "
 `;
 
-exports[`without processors EventListener.webidl 1`] = `
+exports[`generation without processors EventListener.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13036,7 +13036,7 @@ exports.install = (globalObject, globalNames) => {};
 "
 `;
 
-exports[`without processors EventTarget.webidl 1`] = `
+exports[`generation without processors EventTarget.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13184,7 +13184,7 @@ const Impl = require(\\"../implementations/EventTarget.js\\");
 "
 `;
 
-exports[`without processors Global.webidl 1`] = `
+exports[`generation without processors Global.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13413,7 +13413,7 @@ const Impl = require(\\"../implementations/Global.js\\");
 "
 `;
 
-exports[`without processors HTMLConstructor.webidl 1`] = `
+exports[`generation without processors HTMLConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13524,7 +13524,7 @@ const Impl = require(\\"../implementations/HTMLConstructor.js\\");
 "
 `;
 
-exports[`without processors LegacyLenientAttributes.webidl 1`] = `
+exports[`generation without processors LegacyLenientAttributes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13729,7 +13729,7 @@ const Impl = require(\\"../implementations/LegacyLenientAttributes.js\\");
 "
 `;
 
-exports[`without processors LegacyUnforgeable.webidl 1`] = `
+exports[`generation without processors LegacyUnforgeable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -13938,7 +13938,7 @@ const Impl = require(\\"../implementations/LegacyUnforgeable.js\\");
 "
 `;
 
-exports[`without processors LegacyUnforgeableMap.webidl 1`] = `
+exports[`generation without processors LegacyUnforgeableMap.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -14247,7 +14247,7 @@ const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
 `;
 
-exports[`without processors MixedIn.webidl 1`] = `
+exports[`generation without processors MixedIn.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -14434,7 +14434,7 @@ const Impl = require(\\"../implementations/MixedIn.js\\");
 "
 `;
 
-exports[`without processors NodeFilter.webidl 1`] = `
+exports[`generation without processors NodeFilter.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -14512,7 +14512,7 @@ exports.install = (globalObject, globalNames) => {
 "
 `;
 
-exports[`without processors Overloads.webidl 1`] = `
+exports[`generation without processors Overloads.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -14934,7 +14934,7 @@ const Impl = require(\\"../implementations/Overloads.js\\");
 "
 `;
 
-exports[`without processors PromiseTypes.webidl 1`] = `
+exports[`generation without processors PromiseTypes.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -15184,7 +15184,7 @@ const Impl = require(\\"../implementations/PromiseTypes.js\\");
 "
 `;
 
-exports[`without processors Reflect.webidl 1`] = `
+exports[`generation without processors Reflect.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -15470,7 +15470,7 @@ const Impl = require(\\"../implementations/Reflect.js\\");
 "
 `;
 
-exports[`without processors Replaceable.webidl 1`] = `
+exports[`generation without processors Replaceable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -15607,7 +15607,7 @@ const Impl = require(\\"../implementations/Replaceable.js\\");
 "
 `;
 
-exports[`without processors RequestDestination.webidl 1`] = `
+exports[`generation without processors RequestDestination.webidl 1`] = `
 "\\"use strict\\";
 
 const enumerationValues = new Set([
@@ -15640,7 +15640,7 @@ exports.convert = function convert(value, { context = \\"The provided value\\" }
 "
 `;
 
-exports[`without processors SeqAndRec.webidl 1`] = `
+exports[`generation without processors SeqAndRec.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -15957,7 +15957,7 @@ const Impl = require(\\"../implementations/SeqAndRec.js\\");
 "
 `;
 
-exports[`without processors Static.webidl 1`] = `
+exports[`generation without processors Static.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -16120,7 +16120,7 @@ const Impl = require(\\"../implementations/Static.js\\");
 "
 `;
 
-exports[`without processors Storage.webidl 1`] = `
+exports[`generation without processors Storage.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -16513,7 +16513,7 @@ const Impl = require(\\"../implementations/Storage.js\\");
 "
 `;
 
-exports[`without processors StringifierAttribute.webidl 1`] = `
+exports[`generation without processors StringifierAttribute.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -16645,7 +16645,7 @@ const Impl = require(\\"../implementations/StringifierAttribute.js\\");
 "
 `;
 
-exports[`without processors StringifierDefaultOperation.webidl 1`] = `
+exports[`generation without processors StringifierDefaultOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -16770,7 +16770,7 @@ const Impl = require(\\"../implementations/StringifierDefaultOperation.js\\");
 "
 `;
 
-exports[`without processors StringifierNamedOperation.webidl 1`] = `
+exports[`generation without processors StringifierNamedOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -16907,7 +16907,7 @@ const Impl = require(\\"../implementations/StringifierNamedOperation.js\\");
 "
 `;
 
-exports[`without processors StringifierOperation.webidl 1`] = `
+exports[`generation without processors StringifierOperation.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -17028,7 +17028,7 @@ const Impl = require(\\"../implementations/StringifierOperation.js\\");
 "
 `;
 
-exports[`without processors TypedefsAndUnions.webidl 1`] = `
+exports[`generation without processors TypedefsAndUnions.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -17588,7 +17588,7 @@ const Impl = require(\\"../implementations/TypedefsAndUnions.js\\");
 "
 `;
 
-exports[`without processors URL.webidl 1`] = `
+exports[`generation without processors URL.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -18009,7 +18009,7 @@ const Impl = require(\\"../implementations/URL.js\\");
 "
 `;
 
-exports[`without processors URLCallback.webidl 1`] = `
+exports[`generation without processors URLCallback.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -18057,7 +18057,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`without processors URLHandlerNonNull.webidl 1`] = `
+exports[`generation without processors URLHandlerNonNull.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -18101,7 +18101,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 "
 `;
 
-exports[`without processors URLList.webidl 1`] = `
+exports[`generation without processors URLList.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -18416,7 +18416,7 @@ const Impl = require(\\"../implementations/URLList.js\\");
 "
 `;
 
-exports[`without processors URLSearchParams.webidl 1`] = `
+exports[`generation without processors URLSearchParams.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -18877,7 +18877,7 @@ const Impl = require(\\"../implementations/URLSearchParams.js\\");
 "
 `;
 
-exports[`without processors URLSearchParamsCollection.webidl 1`] = `
+exports[`generation without processors URLSearchParamsCollection.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -19245,7 +19245,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
 `;
 
-exports[`without processors URLSearchParamsCollection2.webidl 1`] = `
+exports[`generation without processors URLSearchParamsCollection2.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -19588,7 +19588,7 @@ const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
 `;
 
-exports[`without processors UnderscoredProperties.webidl 1`] = `
+exports[`generation without processors UnderscoredProperties.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -19790,7 +19790,7 @@ const Impl = require(\\"../implementations/UnderscoredProperties.js\\");
 "
 `;
 
-exports[`without processors Unscopable.webidl 1`] = `
+exports[`generation without processors Unscopable.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -19955,7 +19955,7 @@ const Impl = require(\\"../implementations/Unscopable.js\\");
 "
 `;
 
-exports[`without processors Variadic.webidl 1`] = `
+exports[`generation without processors Variadic.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
@@ -20222,7 +20222,7 @@ const Impl = require(\\"../implementations/Variadic.js\\");
 "
 `;
 
-exports[`without processors ZeroArgConstructor.webidl 1`] = `
+exports[`generation without processors ZeroArgConstructor.webidl 1`] = `
 "\\"use strict\\";
 
 const conversions = require(\\"webidl-conversions\\");
