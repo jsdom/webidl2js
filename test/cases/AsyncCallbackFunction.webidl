@@ -1,0 +1,1 @@
+callback AsyncCallbackFunction = Promise<any> ();
