@@ -502,7 +502,11 @@ Notable missing features include:
 
 ## Nonstandard extended attributes
 
-One non-standard extended attribute is baked in to webidl2js:
+A couple of non-standard extended attributes are baked in to webidl2js:
+
+### `[WebIDL2JSCallWithGlobal]`
+
+When the `[WebIDL2JSCallWithGlobal]` extended attribute is specified on static IDL operations, the generated interface code passes the [current global object](https://html.spec.whatwg.org/multipage/webappapis.html#current-global-object) as the first parameter to the implementation code. All other parameters follow `globalObject` and are unchanged. This could be used to implement factory functions that create objects in the current realm.
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
