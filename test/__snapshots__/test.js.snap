@@ -185,43 +185,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterablePairArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterablePairArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -320,7 +314,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -328,14 +322,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -353,7 +347,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -361,14 +355,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -386,7 +380,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -394,14 +388,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -447,43 +441,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterablePairNoArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -653,43 +641,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterableValueArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterableValueArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -788,7 +770,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = URL.convert(args[0], {
+        arguments[0] = URL.convert(arguments[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterableValueArgs': parameter 1\\"
         });
       } else {
@@ -835,43 +817,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterableValueNoArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -997,6 +973,198 @@ exports.install = (globalObject, globalNames) => {
 };
 
 const Impl = require(\\"../implementations/AsyncIterableValueNoArgs.js\\");
+"
+`;
+
+exports[`with processors AsyncIterableWithReturn.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const Dictionary = require(\\"./Dictionary.js\\");
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"AsyncIterableWithReturn\\";
+
+const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
+  [Symbol.toStringTag]: {
+    value: \\"AsyncIterableWithReturn AsyncIterator\\",
+    configurable: true
+  }
+});
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
+
+AsyncIteratorPrototype.return = function (value) {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"return() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  if (internal.ongoingPromise) {
+    return Promise.reject(new TypeError(\\"return() cannot be called while an ongoing call to next() has not settled\\"));
+  }
+
+  if (internal.isFinished) {
+    return Promise.reject(new TypeError(\\"return() cannot be called after async iteration is already finished\\"));
+  }
+  internal.isFinished = true;
+
+  const returnPromise = internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+  return returnPromise.then(() => ({ value, done: true }));
+};
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'AsyncIterableWithReturn'.\`);
+};
+
+exports.createDefaultAsyncIterator = (target, kind) => {
+  const iterator = Object.create(AsyncIteratorPrototype);
+  Object.defineProperty(iterator, utils.iterInternalSymbol, {
+    value: { target, kind, ongoingPromise: null, isFinished: false },
+    configurable: true
+  });
+  return iterator;
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class AsyncIterableWithReturn {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    values() {
+      if (!exports.is(this)) {
+        throw new TypeError(\\"'values' called on an object that is not a valid instance of AsyncIterableWithReturn.\\");
+      }
+
+      const args = [];
+      arguments[0] = Dictionary.convert(arguments[0], {
+        context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
+      });
+
+      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      if (this[implSymbol][utils.asyncIteratorInit]) {
+        this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
+      }
+      return asyncIterator;
+    }
+  }
+  Object.defineProperties(AsyncIterableWithReturn.prototype, {
+    values: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"AsyncIterableWithReturn\\", configurable: true },
+    [Symbol.asyncIterator]: { value: AsyncIterableWithReturn.prototype.values, configurable: true, writable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableWithReturn;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: AsyncIterableWithReturn
+  });
+};
+
+const Impl = require(\\"../implementations/AsyncIterableWithReturn.js\\");
 "
 `;
 
@@ -10101,43 +10269,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterablePairArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterablePairArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -10236,7 +10398,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10244,14 +10406,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10269,7 +10431,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10277,14 +10439,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10302,7 +10464,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = conversions[\\"boolean\\"](args[0], {
+        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10310,14 +10472,14 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        args[1] = conversions[\\"DOMString\\"](args[1], {
+        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
 
-      args[2] = Dictionary.convert(args[2], {
+      arguments[2] = Dictionary.convert(arguments[2], {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10363,43 +10525,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterablePairNoArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -10569,43 +10725,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterableValueArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterableValueArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -10704,7 +10854,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        args[0] = URL.convert(args[0], {
+        arguments[0] = URL.convert(arguments[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterableValueArgs': parameter 1\\"
         });
       } else {
@@ -10751,43 +10901,37 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = \\"AsyncIterableValueNoArgs\\";
 
 const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this[utils.iterInternalSymbol];
-      if (!internal) {
-        return Promise.reject(
-          new TypeError(\\"next() called on an object that is not an async iterator prototype object\\")
-        );
-      }
-
-      const nextSteps = () => {
-        if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
-        }
-
-        const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-        return nextPromise.then(next => {
-          internal.ongoingPromise = null;
-          if (next === undefined) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        });
-      };
-
-      internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
-      return internal.ongoingPromise;
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
   [Symbol.toStringTag]: {
     value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
     configurable: true
   }
 });
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
 
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -10913,6 +11057,198 @@ exports.install = (globalObject, globalNames) => {
 };
 
 const Impl = require(\\"../implementations/AsyncIterableValueNoArgs.js\\");
+"
+`;
+
+exports[`without processors AsyncIterableWithReturn.webidl 1`] = `
+"\\"use strict\\";
+
+const conversions = require(\\"webidl-conversions\\");
+const utils = require(\\"./utils.js\\");
+
+const Dictionary = require(\\"./Dictionary.js\\");
+const implSymbol = utils.implSymbol;
+const ctorRegistrySymbol = utils.ctorRegistrySymbol;
+
+const interfaceName = \\"AsyncIterableWithReturn\\";
+
+const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
+  [Symbol.toStringTag]: {
+    value: \\"AsyncIterableWithReturn AsyncIterator\\",
+    configurable: true
+  }
+});
+
+AsyncIteratorPrototype.next = function () {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"next() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  const nextSteps = () => {
+    if (internal.isFinished) {
+      return Promise.resolve({ value: undefined, done: true });
+    }
+
+    const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+    return nextPromise.then(next => {
+      internal.ongoingPromise = null;
+      if (next === undefined) {
+        internal.isFinished = true;
+        return { value: undefined, done: true };
+      }
+      return { value: utils.tryWrapperForImpl(next), done: false };
+    });
+  };
+
+  internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+  return internal.ongoingPromise;
+};
+
+AsyncIteratorPrototype.return = function (value) {
+  const internal = this[utils.iterInternalSymbol];
+  if (!internal) {
+    return Promise.reject(new TypeError(\\"return() called on an object that is not an async iterator prototype object\\"));
+  }
+
+  if (internal.ongoingPromise) {
+    return Promise.reject(new TypeError(\\"return() cannot be called while an ongoing call to next() has not settled\\"));
+  }
+
+  if (internal.isFinished) {
+    return Promise.reject(new TypeError(\\"return() cannot be called after async iteration is already finished\\"));
+  }
+  internal.isFinished = true;
+
+  const returnPromise = internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+  return returnPromise.then(() => ({ value, done: true }));
+};
+
+exports.is = value => {
+  return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+};
+exports.isImpl = value => {
+  return utils.isObject(value) && value instanceof Impl.implementation;
+};
+exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
+  if (exports.is(value)) {
+    return utils.implForWrapper(value);
+  }
+  throw new TypeError(\`\${context} is not of type 'AsyncIterableWithReturn'.\`);
+};
+
+exports.createDefaultAsyncIterator = (target, kind) => {
+  const iterator = Object.create(AsyncIteratorPrototype);
+  Object.defineProperty(iterator, utils.iterInternalSymbol, {
+    value: { target, kind, ongoingPromise: null, isFinished: false },
+    configurable: true
+  });
+  return iterator;
+};
+
+function makeWrapper(globalObject) {
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
+  if (ctor === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
+  }
+
+  return Object.create(ctor.prototype);
+}
+
+exports.create = (globalObject, constructorArgs, privateData) => {
+  const wrapper = makeWrapper(globalObject);
+  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+};
+
+exports.createImpl = (globalObject, constructorArgs, privateData) => {
+  const wrapper = exports.create(globalObject, constructorArgs, privateData);
+  return utils.implForWrapper(wrapper);
+};
+
+exports._internalSetup = (wrapper, globalObject) => {};
+
+exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+  privateData.wrapper = wrapper;
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: new Impl.implementation(globalObject, constructorArgs, privateData),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper;
+};
+
+exports.new = globalObject => {
+  const wrapper = makeWrapper(globalObject);
+
+  exports._internalSetup(wrapper, globalObject);
+  Object.defineProperty(wrapper, implSymbol, {
+    value: Object.create(Impl.implementation.prototype),
+    configurable: true
+  });
+
+  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  if (Impl.init) {
+    Impl.init(wrapper[implSymbol]);
+  }
+  return wrapper[implSymbol];
+};
+
+const exposed = new Set([\\"Window\\"]);
+
+exports.install = (globalObject, globalNames) => {
+  if (!globalNames.some(globalName => exposed.has(globalName))) {
+    return;
+  }
+  class AsyncIterableWithReturn {
+    constructor() {
+      throw new TypeError(\\"Illegal constructor\\");
+    }
+
+    values() {
+      if (!exports.is(this)) {
+        throw new TypeError(\\"'values' called on an object that is not a valid instance of AsyncIterableWithReturn.\\");
+      }
+
+      const args = [];
+      arguments[0] = Dictionary.convert(arguments[0], {
+        context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
+      });
+
+      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      if (this[implSymbol][utils.asyncIteratorInit]) {
+        this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
+      }
+      return asyncIterator;
+    }
+  }
+  Object.defineProperties(AsyncIterableWithReturn.prototype, {
+    values: { enumerable: true },
+    [Symbol.toStringTag]: { value: \\"AsyncIterableWithReturn\\", configurable: true },
+    [Symbol.asyncIterator]: { value: AsyncIterableWithReturn.prototype.values, configurable: true, writable: true }
+  });
+  if (globalObject[ctorRegistrySymbol] === undefined) {
+    globalObject[ctorRegistrySymbol] = Object.create(null);
+  }
+  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableWithReturn;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: AsyncIterableWithReturn
+  });
+};
+
+const Impl = require(\\"../implementations/AsyncIterableWithReturn.js\\");
 "
 `;
 

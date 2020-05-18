@@ -523,6 +523,12 @@ A couple of non-standard extended attributes are baked in to webidl2js:
 
 When the `[WebIDL2JSCallWithGlobal]` extended attribute is specified on static IDL operations, the generated interface code passes the [current global object](https://html.spec.whatwg.org/multipage/webappapis.html#current-global-object) as the first parameter to the implementation code. All other parameters follow `globalObject` and are unchanged. This could be used to implement factory functions that create objects in the current realm.
 
+### `[WebIDL2JSHasReturnSteps]`
+
+This extended attribute can be applied to async iterable declarations. It declares that the implementation class will implement the `[idlUtils.asyncIteratorReturn]()` method.
+
+This is necessary because we need to figure out at code-generation time whether to generate a `return()` method on the async iterator prototype. At that point, only the Web IDL is available, not the implementation class properties. So, we need a signal in the Web IDL itself.
+
 ### `[WebIDL2JSValueAsUnsupported=value]`
 
 This extended attribute can be applied to named or indexed getters or setters. It says that whether the interface supports a given property name/index can be automatically derived by looking at the return value of its indexed getter/setter: whenever `value` is returned, the name/index is unsupported. Typically, `value` is either `undefined` or `_null`.
