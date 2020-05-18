@@ -314,7 +314,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -322,14 +323,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -347,7 +349,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -355,14 +358,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -380,7 +384,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -388,14 +393,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -770,7 +776,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = URL.convert(arguments[0], {
+        args[0] = arguments[0];
+        args[0] = URL.convert(args[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterableValueArgs': parameter 1\\"
         });
       } else {
@@ -1136,7 +1143,8 @@ exports.install = (globalObject, globalNames) => {
       }
 
       const args = [];
-      arguments[0] = Dictionary.convert(arguments[0], {
+      args[0] = arguments[0];
+      args[0] = Dictionary.convert(args[0], {
         context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
       });
 
@@ -10398,7 +10406,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10406,14 +10415,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10431,7 +10441,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10439,14 +10450,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10464,7 +10476,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = conversions[\\"boolean\\"](arguments[0], {
+        args[0] = arguments[0];
+        args[0] = conversions[\\"boolean\\"](args[0], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 1\\"
         });
       } else {
@@ -10472,14 +10485,15 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (arguments[1] !== undefined) {
-        arguments[1] = conversions[\\"DOMString\\"](arguments[1], {
+        args[1] = arguments[1];
+        args[1] = conversions[\\"DOMString\\"](args[1], {
           context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 2\\"
         });
       } else {
         args[1] = undefined;
       }
-
-      arguments[2] = Dictionary.convert(arguments[2], {
+      args[2] = arguments[2];
+      args[2] = Dictionary.convert(args[2], {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
@@ -10854,7 +10868,8 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
       if (arguments[0] !== undefined) {
-        arguments[0] = URL.convert(arguments[0], {
+        args[0] = arguments[0];
+        args[0] = URL.convert(args[0], {
           context: \\"Failed to execute 'values' on 'AsyncIterableValueArgs': parameter 1\\"
         });
       } else {
@@ -11220,7 +11235,8 @@ exports.install = (globalObject, globalNames) => {
       }
 
       const args = [];
-      arguments[0] = Dictionary.convert(arguments[0], {
+      args[0] = arguments[0];
+      args[0] = Dictionary.convert(args[0], {
         context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
       });
 
