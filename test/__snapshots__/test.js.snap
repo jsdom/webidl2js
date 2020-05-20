@@ -1181,6 +1181,7 @@ exports[`with processors DOMRect.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Dictionary = require(\\"./Dictionary.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -1412,9 +1413,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (curArg !== undefined) {
-          curArg = utils.tryImplForWrapper(curArg);
-        }
+        curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'fromRect' on 'DOMRect': parameter 1\\" });
         args.push(curArg);
       }
       return utils.tryWrapperForImpl(Impl.implementation.fromRect(globalObject, ...args));
@@ -10243,6 +10242,7 @@ exports[`without processors DOMRect.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const Dictionary = require(\\"./Dictionary.js\\");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -10474,9 +10474,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (curArg !== undefined) {
-          curArg = utils.tryImplForWrapper(curArg);
-        }
+        curArg = Dictionary.convert(curArg, { context: \\"Failed to execute 'fromRect' on 'DOMRect': parameter 1\\" });
         args.push(curArg);
       }
       return utils.tryWrapperForImpl(Impl.implementation.fromRect(globalObject, ...args));
