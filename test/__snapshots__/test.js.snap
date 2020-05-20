@@ -206,7 +206,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -470,7 +470,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -672,7 +672,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -851,7 +851,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -1025,7 +1025,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -10310,7 +10310,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -10574,7 +10574,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -10776,7 +10776,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -10955,7 +10955,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
@@ -11129,7 +11129,7 @@ Object.assign(AsyncIteratorPrototype, {
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
       return nextPromise.then(next => {
         internal.ongoingPromise = null;
-        if (next === undefined) {
+        if (next === utils.asyncIteratorEOS) {
           internal.isFinished = true;
           return { value: undefined, done: true };
         }
