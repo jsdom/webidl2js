@@ -204,14 +204,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -468,14 +474,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -670,14 +682,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -849,14 +867,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -1023,14 +1047,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -1048,7 +1078,7 @@ Object.assign(AsyncIteratorPrototype, {
     }
 
     if (internal.isFinished) {
-      return Promise.reject(new TypeError(\\"return() cannot be called after async iteration is already finished\\"));
+      return { value, done: true };
     }
     internal.isFinished = true;
 
@@ -10310,14 +10340,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -10574,14 +10610,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -10776,14 +10818,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -10955,14 +11003,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -11129,14 +11183,20 @@ Object.assign(AsyncIteratorPrototype, {
       }
 
       const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(next => {
-        internal.ongoingPromise = null;
-        if (next === utils.asyncIteratorEOI) {
-          internal.isFinished = true;
-          return { value: undefined, done: true };
+      return nextPromise.then(
+        next => {
+          internal.ongoingPromise = null;
+          if (next === utils.asyncIteratorEOI) {
+            internal.isFinished = true;
+            return { value: undefined, done: true };
+          }
+          return { value: utils.tryWrapperForImpl(next), done: false };
+        },
+        reason => {
+          internal.ongoingPromise = null;
+          throw reason;
         }
-        return { value: utils.tryWrapperForImpl(next), done: false };
-      });
+      );
     };
 
     internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
@@ -11154,7 +11214,7 @@ Object.assign(AsyncIteratorPrototype, {
     }
 
     if (internal.isFinished) {
-      return Promise.reject(new TypeError(\\"return() cannot be called after async iteration is already finished\\"));
+      return { value, done: true };
     }
     internal.isFinished = true;
 
