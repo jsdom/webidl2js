@@ -215,12 +215,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -485,12 +488,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -693,12 +699,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -878,12 +887,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -1058,12 +1070,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   },
 
@@ -1073,16 +1088,18 @@ Object.assign(AsyncIteratorPrototype, {
       return Promise.reject(new TypeError(\\"return() called on a value that is not an async iterator prototype object\\"));
     }
 
-    if (internal.ongoingPromise) {
-      return Promise.reject(new TypeError(\\"return() cannot be called while an ongoing call to next() has not settled\\"));
-    }
+    const returnSteps = () => {
+      if (internal.isFinished) {
+        return Promise.resolve({ value, done: true });
+      }
+      internal.isFinished = true;
 
-    if (internal.isFinished) {
-      return { value, done: true };
-    }
-    internal.isFinished = true;
+      return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+    };
 
-    const returnPromise = internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+    const returnPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(returnSteps, returnSteps)
+      : returnSteps();
     return returnPromise.then(() => ({ value, done: true }));
   }
 });
@@ -10351,12 +10368,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -10621,12 +10641,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -10829,12 +10852,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -11014,12 +11040,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   }
 });
@@ -11194,12 +11223,15 @@ Object.assign(AsyncIteratorPrototype, {
         },
         reason => {
           internal.ongoingPromise = null;
+          internal.isFinished = true;
           throw reason;
         }
       );
     };
 
-    internal.ongoingPromise = internal.ongoingPromise ? internal.ongoingPromise.then(nextSteps) : nextSteps();
+    internal.ongoingPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(nextSteps, nextSteps)
+      : nextSteps();
     return internal.ongoingPromise;
   },
 
@@ -11209,16 +11241,18 @@ Object.assign(AsyncIteratorPrototype, {
       return Promise.reject(new TypeError(\\"return() called on a value that is not an async iterator prototype object\\"));
     }
 
-    if (internal.ongoingPromise) {
-      return Promise.reject(new TypeError(\\"return() cannot be called while an ongoing call to next() has not settled\\"));
-    }
+    const returnSteps = () => {
+      if (internal.isFinished) {
+        return Promise.resolve({ value, done: true });
+      }
+      internal.isFinished = true;
 
-    if (internal.isFinished) {
-      return { value, done: true };
-    }
-    internal.isFinished = true;
+      return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+    };
 
-    const returnPromise = internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+    const returnPromise = internal.ongoingPromise
+      ? internal.ongoingPromise.then(returnSteps, returnSteps)
+      : returnSteps();
     return returnPromise.then(() => ({ value, done: true }));
   }
 });
