@@ -3818,104 +3818,120 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      assign(url) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        assign(url) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
 
-        if (arguments.length < 1) {
-          throw new TypeError(
-            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
-          );
-        }
-        const args = [];
-        {
-          let curArg = arguments[0];
-          curArg = conversions[\\"USVString\\"](curArg, {
-            context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+          if (arguments.length < 1) {
+            throw new TypeError(
+              \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
+                arguments.length +
+                \\" present.\\"
+            );
+          }
+          const args = [];
+          {
+            let curArg = arguments[0];
+            curArg = conversions[\\"USVString\\"](curArg, {
+              context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+            });
+            args.push(curArg);
+          }
+          return esValue[implSymbol].assign(...args);
+        },
+        get href() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"href\\"];
+        },
+        set href(V) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
           });
-          args.push(curArg);
+
+          esValue[implSymbol][\\"href\\"] = V;
+        },
+        toString() {
+          const esValue = this;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"href\\"];
+        },
+        get origin() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"origin\\"];
+        },
+        get protocol() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(
+              \\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\"
+            );
+          }
+
+          return esValue[implSymbol][\\"protocol\\"];
+        },
+        set protocol(V) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(
+              \\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\"
+            );
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
+          });
+
+          esValue[implSymbol][\\"protocol\\"] = V;
         }
-        return esValue[implSymbol].assign(...args);
-      },
-      get href() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      assign: { configurable: false, writable: false },
+      href: { configurable: false },
+      toString: { configurable: false, writable: false },
+      origin: { configurable: false },
+      protocol: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
 
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      set href(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"href\\"] = V;
-      },
-      toString() {
-        const esValue = this;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      get origin() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"origin\\"];
-      },
-      get protocol() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"protocol\\"];
-      },
-      set protocol(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"protocol\\"] = V;
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    assign: { configurable: false, writable: false },
-    href: { configurable: false },
-    toString: { configurable: false, writable: false },
-    origin: { configurable: false },
-    protocol: { configurable: false }
-  });
+exports._internalSetup = (wrapper, globalObject) => {
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -3950,6 +3966,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
@@ -4026,23 +4043,37 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      get a() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        get a() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
 
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
+          }
+
+          return esValue[implSymbol][\\"a\\"];
         }
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      a: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
 
-        return esValue[implSymbol][\\"a\\"];
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, { a: { configurable: false } });
+exports._internalSetup = (wrapper, globalObject) => {
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -4081,6 +4112,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
@@ -5019,46 +5051,58 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        unforgeablePromiseOperation() {
+          try {
+            const esValue = this !== null && this !== undefined ? this : globalObject;
+            if (!exports.is(esValue)) {
+              throw new TypeError(
+                \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
+              );
+            }
+
+            return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        },
+        get unforgeablePromiseAttribute() {
+          try {
+            const esValue = this !== null && this !== undefined ? this : globalObject;
+
+            if (!exports.is(esValue)) {
+              throw new TypeError(
+                \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
+              );
+            }
+
+            return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      unforgeablePromiseOperation: { configurable: false, writable: false },
+      unforgeablePromiseAttribute: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
+
 exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      unforgeablePromiseOperation() {
-        try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-          if (!exports.is(esValue)) {
-            throw new TypeError(
-              \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
-            );
-          }
-
-          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      },
-      get unforgeablePromiseAttribute() {
-        try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-
-          if (!exports.is(esValue)) {
-            throw new TypeError(
-              \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
-            );
-          }
-
-          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    unforgeablePromiseOperation: { configurable: false, writable: false },
-    unforgeablePromiseAttribute: { configurable: false }
-  });
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -5093,6 +5137,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
@@ -14049,104 +14094,120 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      assign(url) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        assign(url) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'assign' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
 
-        if (arguments.length < 1) {
-          throw new TypeError(
-            \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
-              arguments.length +
-              \\" present.\\"
-          );
-        }
-        const args = [];
-        {
-          let curArg = arguments[0];
-          curArg = conversions[\\"USVString\\"](curArg, {
-            context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+          if (arguments.length < 1) {
+            throw new TypeError(
+              \\"Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only \\" +
+                arguments.length +
+                \\" present.\\"
+            );
+          }
+          const args = [];
+          {
+            let curArg = arguments[0];
+            curArg = conversions[\\"USVString\\"](curArg, {
+              context: \\"Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1\\"
+            });
+            args.push(curArg);
+          }
+          return esValue[implSymbol].assign(...args);
+        },
+        get href() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"href\\"];
+        },
+        set href(V) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
           });
-          args.push(curArg);
+
+          esValue[implSymbol][\\"href\\"] = V;
+        },
+        toString() {
+          const esValue = this;
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"href\\"];
+        },
+        get origin() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
+          }
+
+          return esValue[implSymbol][\\"origin\\"];
+        },
+        get protocol() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(
+              \\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\"
+            );
+          }
+
+          return esValue[implSymbol][\\"protocol\\"];
+        },
+        set protocol(V) {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
+
+          if (!exports.is(esValue)) {
+            throw new TypeError(
+              \\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\"
+            );
+          }
+
+          V = conversions[\\"USVString\\"](V, {
+            context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
+          });
+
+          esValue[implSymbol][\\"protocol\\"] = V;
         }
-        return esValue[implSymbol].assign(...args);
-      },
-      get href() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      assign: { configurable: false, writable: false },
+      href: { configurable: false },
+      toString: { configurable: false, writable: false },
+      origin: { configurable: false },
+      protocol: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
 
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      set href(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set href' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'href' property on 'LegacyUnforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"href\\"] = V;
-      },
-      toString() {
-        const esValue = this;
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'toString' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"href\\"];
-      },
-      get origin() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get origin' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"origin\\"];
-      },
-      get protocol() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        return esValue[implSymbol][\\"protocol\\"];
-      },
-      set protocol(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'set protocol' called on an object that is not a valid instance of LegacyUnforgeable.\\");
-        }
-
-        V = conversions[\\"USVString\\"](V, {
-          context: \\"Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value\\"
-        });
-
-        esValue[implSymbol][\\"protocol\\"] = V;
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    assign: { configurable: false, writable: false },
-    href: { configurable: false },
-    toString: { configurable: false, writable: false },
-    origin: { configurable: false },
-    protocol: { configurable: false }
-  });
+exports._internalSetup = (wrapper, globalObject) => {
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -14181,6 +14242,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
@@ -14257,23 +14319,37 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
-exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      get a() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        get a() {
+          const esValue = this !== null && this !== undefined ? this : globalObject;
 
-        if (!exports.is(esValue)) {
-          throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
+          if (!exports.is(esValue)) {
+            throw new TypeError(\\"'get a' called on an object that is not a valid instance of LegacyUnforgeableMap.\\");
+          }
+
+          return esValue[implSymbol][\\"a\\"];
         }
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      a: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
 
-        return esValue[implSymbol][\\"a\\"];
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, { a: { configurable: false } });
+exports._internalSetup = (wrapper, globalObject) => {
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -14312,6 +14388,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
@@ -15250,46 +15327,58 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
   return utils.implForWrapper(wrapper);
 };
 
+function getUnforgeables(globalObject) {
+  let unforgeables = unforgeablesMap.get(globalObject);
+  if (unforgeables === undefined) {
+    unforgeables = Object.create(
+      null,
+      Object.getOwnPropertyDescriptors({
+        unforgeablePromiseOperation() {
+          try {
+            const esValue = this !== null && this !== undefined ? this : globalObject;
+            if (!exports.is(esValue)) {
+              throw new TypeError(
+                \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
+              );
+            }
+
+            return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        },
+        get unforgeablePromiseAttribute() {
+          try {
+            const esValue = this !== null && this !== undefined ? this : globalObject;
+
+            if (!exports.is(esValue)) {
+              throw new TypeError(
+                \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
+              );
+            }
+
+            return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+      })
+    );
+    Object.defineProperties(unforgeables, {
+      unforgeablePromiseOperation: { configurable: false, writable: false },
+      unforgeablePromiseAttribute: { configurable: false }
+    });
+    unforgeablesMap.set(globalObject, unforgeables);
+  }
+  return unforgeables;
+}
+
 exports._internalSetup = (wrapper, globalObject) => {
-  Object.defineProperties(
-    wrapper,
-    Object.getOwnPropertyDescriptors({
-      unforgeablePromiseOperation() {
-        try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-          if (!exports.is(esValue)) {
-            throw new TypeError(
-              \\"'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes.\\"
-            );
-          }
-
-          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      },
-      get unforgeablePromiseAttribute() {
-        try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-
-          if (!exports.is(esValue)) {
-            throw new TypeError(
-              \\"'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes.\\"
-            );
-          }
-
-          return utils.tryWrapperForImpl(esValue[implSymbol][\\"unforgeablePromiseAttribute\\"]);
-        } catch (e) {
-          return Promise.reject(e);
-        }
-      }
-    })
-  );
-
-  Object.defineProperties(wrapper, {
-    unforgeablePromiseOperation: { configurable: false, writable: false },
-    unforgeablePromiseAttribute: { configurable: false }
-  });
+  const unforgeables = getUnforgeables(globalObject);
+  for (const key of Reflect.ownKeys(unforgeables)) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(unforgeables, key);
+    Object.defineProperty(wrapper, key, descriptor);
+  }
 };
 
 exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
@@ -15324,6 +15413,7 @@ exports.new = (globalObject, newTarget) => {
   return wrapper[implSymbol];
 };
 
+const unforgeablesMap = new WeakMap();
 const exposed = new Set([\\"Window\\"]);
 
 exports.install = (globalObject, globalNames) => {
