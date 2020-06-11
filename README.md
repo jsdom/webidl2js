@@ -385,7 +385,7 @@ stringifier           DOMString operation(); // `toString()` is not needed.
 
 IDL indexed and named properties require multiple things on the implementation class to work properly.
 
-The first is the getters, (optional) setters, and (optional) deleters operations. Much like stringifiers, getters, setters, and deleters can either be standalone or aliased to a named operation (though not an attribute). If an operation is standalone, then the implementation class must implement following symbol-named methods. The `utils` object below refers to the default export from the generated utilities file `utils.js`.
+The first is the getters, (optional) setters, and (optional) deleters operations. Much like stringifiers, getters, setters, and deleters can either be standalone or aliased to a named operation (though not an attribute). If an operation is standalone, then the implementation class must implement the following symbol-named methods. The `utils` object below refers to the default export from the generated utilities file `utils.js`.
 
 - Getters: `utils.indexedGet`, `utils.namedGet`
 - Setters: `utils.indexedSetNew`, `utils.indexedSetExisting`, `utils.namedSetNew`, `utils.namedSetExisting`
@@ -394,6 +394,20 @@ The first is the getters, (optional) setters, and (optional) deleters operations
 The second is the interface's supported property indices/names. By default, the implementation class should implement both a Boolean-returning `utils.supportsPropertyIndex`/`utils.supportsPropertyName` method that takes a single Number or String argument, respectively, and an iterable-returning `utils.supportedPropertyIndices`/`utils.supportedPropertyNames` for each variety of getters the interface exposes.
 
 If the getter function always returns a constant value for unsupported properties, webidl2js also offers a non-standard extended attribute `[WebIDL2JSValueAsUnsupported]` (documented below) that would simply call the getter function to check if a property index/name is supported, so that `supportsPropertyIndex`/`supportsPropertyName` would not need to be implemented separately. However, when using the extended attribute, be very sure that the value specified in the attribute is returned *if and only if* the property is unsupported.
+
+### Iterables
+
+For synchronous value iterable declarations, there is no need to add implementation-class code: they will be automatically generated based on the indexed property getter and `length` property.
+
+For synchronous pair iterable declarations, the implementation class needs to implement the `[Symbol.iterator]()` property, returning an iterable of `[key, value]` pairs. These can be impls; the generated code will convert them into wrappers as necessary.
+
+### Async iterables
+
+[Asynchronous iterable declarations](https://heycam.github.io/webidl/#idl-async-iterable) require the implementation class to implement the following symbol-named methods, corresponding to algorithms from the Web IDL specification. The `utils` object below refers to the default export from the generated utilities file `utils.js`.
+
+- `utils.asyncIteratorNext`: corresponds to the [get the next iteration result](https://heycam.github.io/webidl/#dfn-get-the-next-iteration-result) algorithm, and receives a single argument containing an instance of the generated async iterator. For pair asynchronous iterables, the return value must be a `[key, value]` pair array, or `utils.asyncIteratorEOI` to signal the end of the iteration. For value asynchronous iterables, the return value must be the value, or `utils.asyncIteratorEOI` to signal the end of the iteration.
+- `utils.asyncIteratorInit`: corresponds to the [asynchronous iterator initialization steps](https://heycam.github.io/webidl/#asynchronous-iterator-initialization-steps), and receives two arguments: the instance of the generated async iterator, and an array containing the post-conversion arguments. This method is optional.
+- `utils.asyncIteratorReturn`: corresponds to the [asynchronous iterator return](https://heycam.github.io/webidl/#asynchronous-iterator-return) algorithm, and receives two arguments: the instance of the generated async iterator, and the argument passed to the `return()` method. This method is optional. Note that if you include it, you need to annote the async iterable declaration with [`[WebIDL2JSHasReturnSteps]`](#webidl2jshasreturnsteps).
 
 ### Other, non-exposed data and functionality
 
@@ -449,6 +463,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
   - Stringifiers
   - Named and indexed `getter`/`setter`/`deleter` declarations
   - `iterable<>` declarations
+  - `async iterable<>` declarations
   - Class strings (with the semantics of [heycam/webidl#357](https://github.com/heycam/webidl/pull/357))
 - Dictionary types
 - Enumeration types
@@ -507,6 +522,12 @@ A couple of non-standard extended attributes are baked in to webidl2js:
 ### `[WebIDL2JSCallWithGlobal]`
 
 When the `[WebIDL2JSCallWithGlobal]` extended attribute is specified on static IDL operations, the generated interface code passes the [current global object](https://html.spec.whatwg.org/multipage/webappapis.html#current-global-object) as the first parameter to the implementation code. All other parameters follow `globalObject` and are unchanged. This could be used to implement factory functions that create objects in the current realm.
+
+### `[WebIDL2JSHasReturnSteps]`
+
+This extended attribute can be applied to async iterable declarations. It declares that the implementation class will implement the `[idlUtils.asyncIteratorReturn]()` method.
+
+This is necessary because we need to figure out at code-generation time whether to generate a `return()` method on the async iterator prototype. At that point, only the Web IDL is available, not the implementation class properties. So, we need a signal in the Web IDL itself.
 
 ### `[WebIDL2JSValueAsUnsupported=value]`
 

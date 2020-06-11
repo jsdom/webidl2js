@@ -7,7 +7,7 @@
   "dependencies": {
     "prettier": "^2.0.4",
     "webidl-conversions": "^6.1.0",
-    "webidl2": "^23.11.0"
+    "webidl2": "^23.12.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
