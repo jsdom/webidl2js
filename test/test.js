@@ -118,6 +118,28 @@ describe("with processors", () => {
   }
 });
 
+describe("with external imports", () => {
+  beforeAll(() => {
+    const transformer = new Transformer({
+      importedTypes: {
+        "Imported-DOMException": "domexception/webidl2js-wrapper",
+        "Imported-URL": "whatwg-url/webidl2js-wrapper#URL",
+        "Imported-URLSearchParams": "whatwg-url/webidl2js-wrapper#URLSearchParams"
+      }
+    });
+    transformer.addSource(casesDir, implsDir);
+
+    return transformer.generate(outputDir);
+  });
+
+  test("UsingExternal.webidl", () => {
+    const outputFile = path.resolve(outputDir, "UsingExternal.js");
+    const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
+
+    expect(output).toMatchSnapshot();
+  });
+});
+
 test("utils.js", () => {
   const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
   const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });

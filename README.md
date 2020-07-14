@@ -110,6 +110,8 @@ The main module's default export is a class which you can construct with a few o
 - `implSuffix`: a suffix used, if any, to find files within the source directory based on the IDL file name
 - `suppressErrors`: set to true to suppress errors during generation
 - `processCEReactions` and `processHTMLConstructor`: see below
+- `processReflect`: see below
+- `importedTypes`: see below
 
 The `addSource()` method can then be called multiple times to add directories containing `.webidl` IDL files and `.js` implementation class files.
 
@@ -240,6 +242,27 @@ function processReflect(idl, implName) {
 }
 ```
 
+### `importedTypes`
+
+The `importedTypes` option takes a `record<string, string>` parameter, where keys are the names of Web IDL types, and the values are the path to the wrapper class API.
+
+In case where a single module exports multiple webidl2js interface wrappers under different namespaces, it's possible to use the `#` symbol to separate the module path from the property name, eg.:
+
+```js
+new WebIDL2JS({
+  importedTypes: {
+    // The `domexception` package exports the wrapper class API
+    // for `DOMException` at the top level of `domexception/webidl-wrapper`:
+    DOMException: "domexception/webidl-wrapper",
+
+    // The `whatwg-url` package exports the wrapper class APIs
+    // for `URL` and `URLSearchParams` as properties of `whatwg-url/webidl-wrapper`:
+    URL: "whatwg-url/webidl-wrapper#URL",
+    URLSearchParams: "whatwg-url/webidl-wrapper#URLSearchParams",
+  }
+});
+```
+
 ## Generated wrapper class file API
 
 The example above showed a simplified generated wrapper file with only three exports: `create`, `is`, and `interface`. In reality the generated wrapper file will contain more functionality, documented here. This functionality is different between generated wrapper files for interfaces and for dictionaries.
@@ -263,6 +286,10 @@ This is useful in other parts of your program that are not implementation class 
 Performs the Web IDL conversion algorithm for this interface, converting _value_ into the correct representation of the interface type suitable for consumption by implementation classes: the corresponding impl.
 
 In practice, this means doing a type-check equivalent to `is(value)`, and if it passes, returns the corresponding impl. If the type-check fails, it throws an informative exception. _context_ can be used to describe the provided value in any resulting error message.
+
+#### `validate(value, { context })`
+
+Like `convert(value)`, but returns the wrapper class. This exists to support imported types, which can't use `utils.wrapperFromImpl(value)` as the wrapper and impl private symbols aren't shared between packages.
 
 #### `install(globalObject, globalNames)`
 
