@@ -4441,14 +4441,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"boolean\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"boolean\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -4496,14 +4488,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -4543,14 +4527,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -4586,14 +4562,6 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions[\\"boolean\\"](curArg, {
-              context: \\"Failed to execute 'overloadsBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
               context: \\"Failed to execute 'overloadsBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
             });
             args.push(curArg);
@@ -4831,10 +4799,6 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else if (typeof curArg === \\"function\\") {
         } else if (utils.isObject(curArg)) {
-        } else if (typeof curArg === \\"boolean\\") {
-          curArg = conversions[\\"boolean\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"boolean\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
@@ -4873,10 +4837,6 @@ exports.install = (globalObject, globalNames) => {
           curArg = conversions[\\"boolean\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
           });
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
@@ -4911,10 +4871,6 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else if (typeof curArg === \\"function\\") {
         } else if (utils.isObject(curArg)) {
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
@@ -4945,10 +4901,6 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (typeof curArg === \\"boolean\\") {
           curArg = conversions[\\"boolean\\"](curArg, {
-            context: \\"Failed to execute 'unionBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
           });
         } else {
@@ -15379,14 +15331,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"boolean\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"boolean\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -15434,14 +15378,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -15481,14 +15417,6 @@ exports.install = (globalObject, globalNames) => {
             });
             args.push(curArg);
           }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
-              context: \\"Failed to execute 'overloadsObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
         } else {
           {
             let curArg = arguments[0];
@@ -15524,14 +15452,6 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions[\\"boolean\\"](curArg, {
-              context: \\"Failed to execute 'overloadsBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-            });
-            args.push(curArg);
-          }
-        } else if (typeof curArg === \\"number\\") {
-          {
-            let curArg = arguments[0];
-            curArg = conversions[\\"long\\"](curArg, {
               context: \\"Failed to execute 'overloadsBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
             });
             args.push(curArg);
@@ -15769,10 +15689,6 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else if (typeof curArg === \\"function\\") {
         } else if (utils.isObject(curArg)) {
-        } else if (typeof curArg === \\"boolean\\") {
-          curArg = conversions[\\"boolean\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"boolean\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBoolean' on 'NoUselessIfElse': parameter 1\\"
@@ -15811,10 +15727,6 @@ exports.install = (globalObject, globalNames) => {
           curArg = conversions[\\"boolean\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
           });
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
@@ -15849,10 +15761,6 @@ exports.install = (globalObject, globalNames) => {
         } else if (ArrayBuffer.isView(curArg)) {
         } else if (typeof curArg === \\"function\\") {
         } else if (utils.isObject(curArg)) {
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
-            context: \\"Failed to execute 'unionObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
         } else {
           curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionObjectOrNumeric' on 'NoUselessIfElse': parameter 1\\"
@@ -15883,10 +15791,6 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (typeof curArg === \\"boolean\\") {
           curArg = conversions[\\"boolean\\"](curArg, {
-            context: \\"Failed to execute 'unionBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
-          });
-        } else if (typeof curArg === \\"number\\") {
-          curArg = conversions[\\"long\\"](curArg, {
             context: \\"Failed to execute 'unionBooleanOrNumeric' on 'NoUselessIfElse': parameter 1\\"
           });
         } else {
