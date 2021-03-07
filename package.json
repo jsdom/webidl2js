@@ -3,6 +3,9 @@
   "version": "16.2.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
+  "files": [
+    "lib/"
+  ],
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
     "prettier": "^2.0.4",
