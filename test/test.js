@@ -44,7 +44,7 @@ describe("generation", () => {
 
     for (const idlFile of idlFiles) {
       test(idlFile, () => {
-        const outputFile = path.resolve(outputDir, path.basename(idlFile, ".webidl") + ".js");
+        const outputFile = path.resolve(outputDir, `${path.basename(idlFile, ".webidl")}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
         expect(output).toMatchSnapshot();
@@ -77,7 +77,7 @@ describe("generation", () => {
         processReflect(idl, implObj) {
           const reflectAttr = idl.extAttrs.find(attr => attr.name === "Reflect");
           const attrName =
-            reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/g, "-") || idl.name.toLowerCase();
+            (reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/g, "-")) || idl.name.toLowerCase();
           if (idl.idlType.idlType === "USVString") {
             const reflectURL = idl.extAttrs.find(attr => attr.name === "ReflectURL");
             if (reflectURL) {
@@ -111,7 +111,7 @@ describe("generation", () => {
 
     for (const idlFile of idlFiles) {
       test(idlFile, () => {
-        const outputFile = path.resolve(outputDir, path.basename(idlFile, ".webidl") + ".js");
+        const outputFile = path.resolve(outputDir, `${path.basename(idlFile, ".webidl")}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
         expect(output).toMatchSnapshot();
