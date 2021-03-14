@@ -282,11 +282,11 @@ Creates a new instance of the wrapper class and corresponding implementation cla
 
 This is useful inside implementation class files, where it is easiest to only deal with impls, not wrappers.
 
-#### `new(globalObject)`
+#### `new(globalObject, newTarget)`
 
 Creates a new instance of the wrapper class and corresponding implementation class, but without invoking the implementation class constructor logic. Then returns the implementation class.
 
-This corresponds to the [Web IDL "new" algorithm](https://heycam.github.io/webidl/#new), and is useful when implementing specifications that initialize objects in different ways than their constructors do.
+This corresponds to the [WebIDL "create a new object implementing the interface"](https://heycam.github.io/webidl/#new) and ["internally create a new object implementing the interface"](https://heycam.github.io/webidl/#internally-create-a-new-object-implementing-the-interface) algorithms, and is useful when implementing specifications that initialize objects in different ways than their constructors do.
 
 #### `setup(obj, globalObject, constructorArgs, privateData)`
 
