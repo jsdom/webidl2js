@@ -3117,7 +3117,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
         esValue[implSymbol][\\"length\\"] = V;
       },
-      [Symbol.iterator]: Array.prototype[Symbol.iterator],
+      [Symbol.iterator]: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator],
       keys: ctorRegistry[\\"%Array%\\"].prototype.keys,
       values: ctorRegistry[\\"%Array%\\"].prototype.values,
       entries: ctorRegistry[\\"%Array%\\"].prototype.entries,
@@ -8000,7 +8000,11 @@ exports.install = (globalObject, globalNames) => {
     item: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLList\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true },
+    [Symbol.iterator]: {
+      value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator],
+      configurable: true,
+      writable: true
+    },
     keys: { value: ctorRegistry[\\"%Array%\\"].prototype.keys, configurable: true, enumerable: true, writable: true },
     values: { value: ctorRegistry[\\"%Array%\\"].prototype.values, configurable: true, enumerable: true, writable: true },
     entries: { value: ctorRegistry[\\"%Array%\\"].prototype.entries, configurable: true, enumerable: true, writable: true },
@@ -8790,7 +8794,7 @@ exports.install = (globalObject, globalNames) => {
     namedItem: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: { value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator], configurable: true, writable: true }
   });
   ctorRegistry[interfaceName] = URLSearchParamsCollection;
 
@@ -9086,7 +9090,7 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(URLSearchParamsCollection2.prototype, {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: { value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator], configurable: true, writable: true }
   });
   ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
@@ -13025,7 +13029,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
         esValue[implSymbol][\\"length\\"] = V;
       },
-      [Symbol.iterator]: Array.prototype[Symbol.iterator],
+      [Symbol.iterator]: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator],
       keys: ctorRegistry[\\"%Array%\\"].prototype.keys,
       values: ctorRegistry[\\"%Array%\\"].prototype.values,
       entries: ctorRegistry[\\"%Array%\\"].prototype.entries,
@@ -17892,7 +17896,11 @@ exports.install = (globalObject, globalNames) => {
     item: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLList\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true },
+    [Symbol.iterator]: {
+      value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator],
+      configurable: true,
+      writable: true
+    },
     keys: { value: ctorRegistry[\\"%Array%\\"].prototype.keys, configurable: true, enumerable: true, writable: true },
     values: { value: ctorRegistry[\\"%Array%\\"].prototype.values, configurable: true, enumerable: true, writable: true },
     entries: { value: ctorRegistry[\\"%Array%\\"].prototype.entries, configurable: true, enumerable: true, writable: true },
@@ -18682,7 +18690,7 @@ exports.install = (globalObject, globalNames) => {
     namedItem: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: { value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator], configurable: true, writable: true }
   });
   ctorRegistry[interfaceName] = URLSearchParamsCollection;
 
@@ -18978,7 +18986,7 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(URLSearchParamsCollection2.prototype, {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
-    [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: { value: ctorRegistry[\\"%Array%\\"].prototype[Symbol.iterator], configurable: true, writable: true }
   });
   ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
