@@ -12,10 +12,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(...args) {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -62,10 +58,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -96,10 +88,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -199,14 +187,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterablePairArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -217,15 +197,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -487,14 +459,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterablePairNoArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -505,15 +469,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -713,14 +669,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableValueArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -731,15 +679,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -916,16 +856,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableValueNoArgs\\"] === undefined) {
-    throw new Error(
-      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
-    );
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -936,17 +866,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -1116,14 +1036,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableWithReturn\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -1134,15 +1046,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -1337,15 +1241,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor BufferSourceTypes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -1611,15 +1507,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"CEReactions\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor CEReactions is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -2105,15 +1993,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DOMImplementation is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -2338,15 +2218,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DOMRect is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -2691,15 +2563,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DictionaryConvert is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -2826,15 +2690,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Enum\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Enum is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3023,15 +2879,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"EventTarget\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor EventTarget is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3169,15 +3017,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Global\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Global is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3398,15 +3238,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor HTMLConstructor is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3508,15 +3340,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyLenientAttributes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3712,15 +3536,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyNoInterfaceObject is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -3852,15 +3668,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyUnforgeable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -4060,15 +3868,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyUnforgeableMap is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -4368,15 +4168,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"MixedIn\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor MixedIn is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -4633,15 +4425,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Overloads\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Overloads is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -5053,15 +4837,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor PromiseTypes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -5303,15 +5079,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Reflect\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Reflect is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -5602,15 +5370,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Replaceable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -5772,15 +5532,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor SeqAndRec is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -6087,15 +5839,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Static\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Static is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -6249,15 +5993,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Storage\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Storage is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -6641,15 +6377,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor StringifierAttribute is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -6772,17 +6500,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor StringifierDefaultOperation is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -6896,17 +6614,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor StringifierNamedOperation is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -7032,15 +6740,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor StringifierOperation is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -7154,15 +6854,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor TypedefsAndUnions is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -7711,15 +7403,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URL\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URL is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -8120,10 +7804,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(url, string) {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -8162,10 +7842,6 @@ const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   function invokeTheCallbackFunction(url) {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -8223,15 +7899,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLList\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URLList is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -8539,14 +8207,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"URLSearchParams\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
-  }
-
   const iteratorPrototype = ctorRegistry[\\"URLSearchParams Iterator\\"];
   const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -8557,15 +8217,7 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -9006,17 +8658,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor URLSearchParamsCollection is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -9375,17 +9017,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor URLSearchParamsCollection2 is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -9447,12 +9079,6 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-
-  if (globalObject.URLSearchParamsCollection === undefined) {
-    throw new Error(
-      \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
-    );
-  }
   class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9715,15 +9341,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor UnderscoredProperties is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -9916,15 +9534,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Unscopable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Unscopable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -10081,15 +9691,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Variadic\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Variadic is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -10346,15 +9948,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor ZeroArgConstructor is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -10443,10 +10037,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction() {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -10546,14 +10136,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterablePairArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -10564,15 +10146,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -10834,14 +10408,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterablePairNoArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -10852,15 +10418,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -11060,14 +10618,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableValueArgs\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -11078,15 +10628,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -11263,16 +10805,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableValueNoArgs\\"] === undefined) {
-    throw new Error(
-      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
-    );
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -11283,17 +10815,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -11463,14 +10985,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"AsyncIterableWithReturn\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
-  }
-
   const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"];
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -11481,15 +10995,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -11684,15 +11190,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor BufferSourceTypes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -11957,15 +11455,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"CEReactions\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor CEReactions is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -12411,15 +11901,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DOMImplementation is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -12644,15 +12126,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DOMRect is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -12997,15 +12471,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor DictionaryConvert is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -13132,15 +12598,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Enum\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Enum is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -13329,15 +12787,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"EventTarget\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor EventTarget is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -13475,15 +12925,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Global\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Global is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -13703,15 +13145,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor HTMLConstructor is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -13813,15 +13247,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyLenientAttributes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -14017,15 +13443,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyNoInterfaceObject is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -14157,15 +13575,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyUnforgeable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -14365,15 +13775,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor LegacyUnforgeableMap is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -14673,15 +14075,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"MixedIn\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor MixedIn is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -14938,15 +14332,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Overloads\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Overloads is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -15358,15 +14744,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor PromiseTypes is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -15607,15 +14985,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Reflect\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Reflect is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -15892,15 +15262,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Replaceable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -16062,15 +15424,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor SeqAndRec is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -16377,15 +15731,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Static\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Static is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -16539,15 +15885,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Storage\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Storage is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -16931,15 +16269,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor StringifierAttribute is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -17062,17 +16392,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor StringifierDefaultOperation is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -17186,17 +16506,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor StringifierNamedOperation is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -17322,15 +16632,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor StringifierOperation is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -17444,15 +16746,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor TypedefsAndUnions is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -18001,15 +17295,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URL\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URL is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -18410,10 +17696,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   }
 
   function invokeTheCallbackFunction(url, string) {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -18452,10 +17734,6 @@ const utils = require(\\"./utils.js\\");
 
 exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   function invokeTheCallbackFunction(url) {
-    if (new.target !== undefined) {
-      throw new Error(\\"Internal error: invokeTheCallbackFunction is not a constructor\\");
-    }
-
     const thisArg = utils.tryWrapperForImpl(this);
     let callResult;
 
@@ -18513,15 +17791,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLList\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URLList is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -18829,14 +18099,6 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 
 exports.createDefaultIterator = (globalObject, target, kind) => {
   const ctorRegistry = globalObject[ctorRegistrySymbol];
-  if (ctorRegistry === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
-  if (ctorRegistry[\\"URLSearchParams\\"] === undefined) {
-    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
-  }
-
   const iteratorPrototype = ctorRegistry[\\"URLSearchParams Iterator\\"];
   const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
@@ -18847,15 +18109,7 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -19296,17 +18550,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor URLSearchParamsCollection is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -19665,17 +18909,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"];
-  if (ctor === undefined) {
-    throw new Error(
-      \\"Internal error: constructor URLSearchParamsCollection2 is not installed on the passed global object\\"
-    );
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -19737,12 +18971,6 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-
-  if (globalObject.URLSearchParamsCollection === undefined) {
-    throw new Error(
-      \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
-    );
-  }
   class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -20005,15 +19233,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor UnderscoredProperties is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -20206,15 +19426,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Unscopable\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Unscopable is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -20371,15 +19583,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"Variadic\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor Variadic is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
@@ -20636,15 +19840,7 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
 };
 
 function makeWrapper(globalObject) {
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    throw new Error(\\"Internal error: invalid global object\\");
-  }
-
   const ctor = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"];
-  if (ctor === undefined) {
-    throw new Error(\\"Internal error: constructor ZeroArgConstructor is not installed on the passed global object\\");
-  }
-
   return Object.create(ctor.prototype);
 }
 
