@@ -196,9 +196,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -229,8 +237,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -468,9 +476,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -501,8 +517,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -678,9 +694,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -711,8 +735,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -865,9 +889,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -898,8 +930,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -1045,9 +1077,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -1078,8 +1118,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -1240,9 +1280,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'BufferSourceTypes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -1273,8 +1321,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -1506,9 +1554,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'CEReactions'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"CEReactions\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"CEReactions\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 function makeProxy(wrapper, globalObject) {
@@ -1550,8 +1606,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -1992,9 +2048,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DOMImplementation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -2025,8 +2089,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -2217,9 +2281,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DOMRect'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DOMRect\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -2250,8 +2322,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -2562,9 +2634,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DictionaryConvert'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -2595,8 +2675,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -2689,9 +2769,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Enum'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Enum\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Enum\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -2722,8 +2810,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -2878,9 +2966,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'EventTarget'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"EventTarget\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"EventTarget\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -2911,8 +3007,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3016,9 +3112,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Global'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Global\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Global\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3148,8 +3252,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3237,9 +3341,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'HTMLConstructor'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3270,8 +3382,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3339,9 +3451,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyLenientAttributes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3372,8 +3492,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3535,9 +3655,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyNoInterfaceObject'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3568,8 +3696,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3667,9 +3795,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyUnforgeable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3798,8 +3934,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -3867,9 +4003,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyUnforgeableMap'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -3919,8 +4063,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -4167,9 +4311,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"MixedIn\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"MixedIn\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -4200,8 +4352,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -4424,9 +4576,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Overloads'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Overloads\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Overloads\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -4457,8 +4617,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -4836,9 +4996,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -4909,8 +5077,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -5078,9 +5246,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Reflect\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Reflect\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -5111,8 +5287,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -5369,9 +5545,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Replaceable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Replaceable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -5402,8 +5586,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -5531,9 +5715,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -5564,8 +5756,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -5838,9 +6030,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Static'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Static\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Static\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -5871,8 +6071,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -5992,9 +6192,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Storage'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Storage\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Storage\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6027,8 +6235,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6376,9 +6584,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6409,8 +6625,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6499,9 +6715,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6532,8 +6756,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6613,9 +6837,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6646,8 +6878,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6739,9 +6971,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6772,8 +7012,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -6853,9 +7093,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'TypedefsAndUnions'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -6886,8 +7134,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -7402,9 +7650,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URL'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URL\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URL\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -7435,8 +7691,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -7898,9 +8154,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLList'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLList\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLList\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -7933,8 +8197,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -8220,9 +8484,17 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -8253,8 +8525,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -8661,9 +8933,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -8696,8 +8976,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9020,9 +9300,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection2'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -9057,8 +9345,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9344,9 +9632,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'UnderscoredProperties'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -9377,8 +9673,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9537,9 +9833,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Unscopable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Unscopable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Unscopable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -9570,8 +9874,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9694,9 +9998,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Variadic'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Variadic\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Variadic\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -9727,8 +10039,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -9951,9 +10263,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -9984,8 +10304,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -10149,9 +10469,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -10182,8 +10510,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -10421,9 +10749,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterablePairNoArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -10454,8 +10790,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -10631,9 +10967,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -10664,8 +11008,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -10818,9 +11162,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableValueNoArgs\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -10851,8 +11203,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -10998,9 +11350,17 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"AsyncIterableWithReturn\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -11031,8 +11391,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -11193,9 +11553,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'BufferSourceTypes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"BufferSourceTypes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -11226,8 +11594,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -11458,9 +11826,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'CEReactions'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"CEReactions\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"CEReactions\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 function makeProxy(wrapper, globalObject) {
@@ -11502,8 +11878,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -11904,9 +12280,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DOMImplementation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DOMImplementation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -11937,8 +12321,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -12129,9 +12513,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DOMRect'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DOMRect\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DOMRect\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -12162,8 +12554,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -12474,9 +12866,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'DictionaryConvert'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"DictionaryConvert\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -12507,8 +12907,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -12601,9 +13001,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Enum'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Enum\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Enum\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -12634,8 +13042,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -12790,9 +13198,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'EventTarget'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"EventTarget\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"EventTarget\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -12823,8 +13239,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -12928,9 +13344,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Global'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Global\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Global\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13060,8 +13484,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13148,9 +13572,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'HTMLConstructor'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"HTMLConstructor\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13181,8 +13613,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13250,9 +13682,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyLenientAttributes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyLenientAttributes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13283,8 +13723,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13446,9 +13886,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyNoInterfaceObject'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyNoInterfaceObject\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13479,8 +13927,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13578,9 +14026,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyUnforgeable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13709,8 +14165,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -13778,9 +14234,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'LegacyUnforgeableMap'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"LegacyUnforgeableMap\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -13830,8 +14294,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -14078,9 +14542,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'MixedIn'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"MixedIn\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"MixedIn\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -14111,8 +14583,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -14335,9 +14807,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Overloads'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Overloads\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Overloads\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -14368,8 +14848,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -14747,9 +15227,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'PromiseTypes'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"PromiseTypes\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -14820,8 +15308,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -14988,9 +15476,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Reflect'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Reflect\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Reflect\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -15021,8 +15517,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -15265,9 +15761,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Replaceable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Replaceable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Replaceable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -15298,8 +15802,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -15427,9 +15931,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'SeqAndRec'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"SeqAndRec\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -15460,8 +15972,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -15734,9 +16246,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Static'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Static\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Static\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -15767,8 +16287,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -15888,9 +16408,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Storage'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Storage\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Storage\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -15923,8 +16451,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16272,9 +16800,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierAttribute'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierAttribute\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -16305,8 +16841,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16395,9 +16931,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierDefaultOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierDefaultOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -16428,8 +16972,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16509,9 +17053,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierNamedOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierNamedOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -16542,8 +17094,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16635,9 +17187,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'StringifierOperation'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"StringifierOperation\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -16668,8 +17228,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -16749,9 +17309,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'TypedefsAndUnions'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"TypedefsAndUnions\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -16782,8 +17350,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -17298,9 +17866,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URL'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URL\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URL\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -17331,8 +17907,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -17794,9 +18370,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLList'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLList\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLList\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -17829,8 +18413,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -18116,9 +18700,17 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
   return iterator;
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParams\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -18149,8 +18741,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -18557,9 +19149,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -18592,8 +19192,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -18916,9 +19516,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParamsCollection2'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"URLSearchParamsCollection2\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -18953,8 +19561,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  let wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -19240,9 +19848,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'UnderscoredProperties'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"UnderscoredProperties\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -19273,8 +19889,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -19433,9 +20049,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Unscopable'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Unscopable\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Unscopable\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -19466,8 +20090,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -19590,9 +20214,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'Variadic'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"Variadic\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"Variadic\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -19623,8 +20255,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
@@ -19847,9 +20479,17 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'ZeroArgConstructor'.\`);
 };
 
-function makeWrapper(globalObject) {
-  const ctor = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"];
-  return Object.create(ctor.prototype);
+function makeWrapper(globalObject, newTarget) {
+  let proto;
+  if (newTarget !== undefined) {
+    proto = newTarget.prototype;
+  }
+
+  if (!utils.isObject(proto)) {
+    proto = globalObject[ctorRegistrySymbol][\\"ZeroArgConstructor\\"].prototype;
+  }
+
+  return Object.create(proto);
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
@@ -19880,8 +20520,8 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   return wrapper;
 };
 
-exports.new = globalObject => {
-  const wrapper = makeWrapper(globalObject);
+exports.new = (globalObject, newTarget) => {
+  const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   Object.defineProperty(wrapper, implSymbol, {
