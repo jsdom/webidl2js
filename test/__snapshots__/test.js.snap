@@ -184,50 +184,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterablePairArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterablePairArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -241,8 +197,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterablePairArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterablePairArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -313,6 +279,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterablePairArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -346,7 +314,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -381,7 +349,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -416,7 +384,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key+value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key+value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -430,10 +398,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterablePairArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterablePairArgs.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterablePairArgs;
+  ctorRegistry[interfaceName] = AsyncIterablePairArgs;
+
+  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterablePairArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterablePairArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -457,50 +472,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterablePairNoArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -514,8 +485,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterablePairNoArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterablePairNoArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -586,6 +567,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterablePairNoArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -598,7 +581,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -612,7 +595,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -626,7 +609,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key+value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key+value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -640,10 +623,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterablePairNoArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterablePairNoArgs.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterablePairNoArgs;
+  ctorRegistry[interfaceName] = AsyncIterablePairNoArgs;
+
+  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterablePairNoArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -668,50 +698,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableValueArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableValueArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -725,8 +711,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableValueArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableValueArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -797,6 +793,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableValueArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -817,7 +815,7 @@ exports.install = (globalObject, globalNames) => {
         args[0] = undefined;
       }
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -829,10 +827,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableValueArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableValueArgs.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableValueArgs;
+  ctorRegistry[interfaceName] = AsyncIterableValueArgs;
+
+  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableValueArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableValueArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -856,50 +901,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableValueNoArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -913,8 +914,20 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableValueNoArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableValueNoArgs\\"] === undefined) {
+    throw new Error(
+      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
+    );
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -987,6 +1000,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableValueNoArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -999,7 +1014,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -1011,10 +1026,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableValueNoArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableValueNoArgs.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableValueNoArgs;
+  ctorRegistry[interfaceName] = AsyncIterableValueNoArgs;
+
+  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableValueNoArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1039,71 +1101,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableWithReturn\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableWithReturn AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  },
-
-  return(value) {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"return() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const returnSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value, done: true });
-      }
-      internal.isFinished = true;
-
-      return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
-    };
-
-    const returnPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(returnSteps, returnSteps)
-      : returnSteps();
-    return returnPromise.then(() => ({ value, done: true }));
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -1117,8 +1114,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableWithReturn'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableWithReturn\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -1189,6 +1196,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableWithReturn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1205,7 +1214,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -1217,10 +1226,80 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableWithReturn\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableWithReturn.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableWithReturn;
+  ctorRegistry[interfaceName] = AsyncIterableWithReturn;
+
+  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableWithReturn AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableWithReturn async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        },
+
+        return(value) {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"return() called on a value that is not a AsyncIterableWithReturn async iterator object\\")
+            );
+          }
+
+          const returnSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value, done: true });
+            }
+            internal.isFinished = true;
+
+            return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+          };
+
+          const returnPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(returnSteps, returnSteps)
+            : returnSteps();
+          return returnPromise.then(() => ({ value, done: true }));
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1320,6 +1399,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1491,10 +1572,7 @@ exports.install = (globalObject, globalNames) => {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = BufferSourceTypes;
+  ctorRegistry[interfaceName] = BufferSourceTypes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -1608,6 +1686,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -1707,10 +1787,7 @@ exports.install = (globalObject, globalNames) => {
     promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = CEReactions;
+  ctorRegistry[interfaceName] = CEReactions;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2090,6 +2167,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2220,10 +2299,7 @@ exports.install = (globalObject, globalNames) => {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DOMImplementation;
+  ctorRegistry[interfaceName] = DOMImplementation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2324,6 +2400,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DOMRect {
     constructor() {
       const args = [];
@@ -2488,10 +2566,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"DOMRect\\", configurable: true }
   });
   Object.defineProperties(DOMRect, { fromRect: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DOMRect;
+  ctorRegistry[interfaceName] = DOMRect;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2678,6 +2753,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2710,10 +2787,7 @@ exports.install = (globalObject, globalNames) => {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DictionaryConvert;
+  ctorRegistry[interfaceName] = DictionaryConvert;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -2814,6 +2888,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -2869,10 +2945,7 @@ exports.install = (globalObject, globalNames) => {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Enum;
+  ctorRegistry[interfaceName] = Enum;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3012,6 +3085,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -3056,10 +3131,7 @@ exports.install = (globalObject, globalNames) => {
     addEventListener: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"EventTarget\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = EventTarget;
+  ctorRegistry[interfaceName] = EventTarget;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3206,10 +3278,10 @@ exports._internalSetup = (wrapper, globalObject) => {
         esValue[implSymbol][\\"length\\"] = V;
       },
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
-      keys: Array.prototype.keys,
-      values: Array.prototype[Symbol.iterator],
-      entries: Array.prototype.entries,
-      forEach: Array.prototype.forEach
+      keys: ctorRegistry[\\"%Array%\\"].prototype.keys,
+      values: ctorRegistry[\\"%Array%\\"].prototype.values,
+      entries: ctorRegistry[\\"%Array%\\"].prototype.entries,
+      forEach: ctorRegistry[\\"%Array%\\"].prototype.forEach
     })
   );
 
@@ -3258,6 +3330,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3285,10 +3359,7 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
   Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Global;
+  ctorRegistry[interfaceName] = Global;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3389,6 +3460,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class HTMLConstructor {
     constructor() {
       return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
@@ -3397,10 +3470,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = HTMLConstructor;
+  ctorRegistry[interfaceName] = HTMLConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3500,6 +3570,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyLenientAttributes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3602,10 +3674,7 @@ exports.install = (globalObject, globalNames) => {
     replaceableLenientThis: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyLenientAttributes\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyLenientAttributes;
+  ctorRegistry[interfaceName] = LegacyLenientAttributes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -3705,6 +3774,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyNoInterfaceObject {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3749,10 +3820,7 @@ exports.install = (globalObject, globalNames) => {
     abc: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyNoInterfaceObject\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyNoInterfaceObject;
+  ctorRegistry[interfaceName] = LegacyNoInterfaceObject;
 };
 
 const Impl = require(\\"../implementations/LegacyNoInterfaceObject.js\\");
@@ -3944,6 +4012,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyUnforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -3952,10 +4022,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyUnforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"LegacyUnforgeable\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeable;
+  ctorRegistry[interfaceName] = LegacyUnforgeable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4076,6 +4143,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyUnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4084,10 +4153,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyUnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"LegacyUnforgeableMap\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeableMap;
+  ctorRegistry[interfaceName] = LegacyUnforgeableMap;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4364,6 +4430,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -4448,10 +4516,7 @@ exports.install = (globalObject, globalNames) => {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = MixedIn;
+  ctorRegistry[interfaceName] = MixedIn;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -4630,6 +4695,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Overloads {
     constructor() {
       const args = [];
@@ -4948,10 +5015,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Overloads;
+  ctorRegistry[interfaceName] = Overloads;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5091,6 +5155,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5198,10 +5264,7 @@ exports.install = (globalObject, globalNames) => {
     staticPromiseOperation: { enumerable: true },
     staticPromiseAttribute: { enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = PromiseTypes;
+  ctorRegistry[interfaceName] = PromiseTypes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5302,6 +5365,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5499,10 +5564,7 @@ exports.install = (globalObject, globalNames) => {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Reflect;
+  ctorRegistry[interfaceName] = Reflect;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5602,6 +5664,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Replaceable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -5636,10 +5700,7 @@ exports.install = (globalObject, globalNames) => {
     replaceable: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Replaceable\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Replaceable;
+  ctorRegistry[interfaceName] = Replaceable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -5773,6 +5834,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -5986,10 +6049,7 @@ exports.install = (globalObject, globalNames) => {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = SeqAndRec;
+  ctorRegistry[interfaceName] = SeqAndRec;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6089,6 +6149,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6149,10 +6211,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Static;
+  ctorRegistry[interfaceName] = Static;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6256,6 +6315,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6376,10 +6437,7 @@ exports.install = (globalObject, globalNames) => {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Storage;
+  ctorRegistry[interfaceName] = Storage;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6645,6 +6703,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6674,10 +6734,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierAttribute;
+  ctorRegistry[interfaceName] = StringifierAttribute;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6779,6 +6836,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6799,10 +6858,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierDefaultOperation;
+  ctorRegistry[interfaceName] = StringifierDefaultOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -6904,6 +6960,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -6936,10 +6994,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierNamedOperation;
+  ctorRegistry[interfaceName] = StringifierNamedOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7039,6 +7094,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7057,10 +7114,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierOperation;
+  ctorRegistry[interfaceName] = StringifierOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7162,6 +7216,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -7617,10 +7673,7 @@ exports.install = (globalObject, globalNames) => {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = TypedefsAndUnions;
+  ctorRegistry[interfaceName] = TypedefsAndUnions;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -7720,6 +7773,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -8030,10 +8085,7 @@ exports.install = (globalObject, globalNames) => {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URL;
+  ctorRegistry[interfaceName] = URL;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8237,6 +8289,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -8279,15 +8333,12 @@ exports.install = (globalObject, globalNames) => {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLList\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true },
-    keys: { value: Array.prototype.keys, configurable: true, enumerable: true, writable: true },
-    values: { value: Array.prototype[Symbol.iterator], configurable: true, enumerable: true, writable: true },
-    entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
-    forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
+    keys: { value: ctorRegistry[\\"%Array%\\"].prototype.keys, configurable: true, enumerable: true, writable: true },
+    values: { value: ctorRegistry[\\"%Array%\\"].prototype.values, configurable: true, enumerable: true, writable: true },
+    entries: { value: ctorRegistry[\\"%Array%\\"].prototype.entries, configurable: true, enumerable: true, writable: true },
+    forEach: { value: ctorRegistry[\\"%Array%\\"].prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLList;
+  ctorRegistry[interfaceName] = URLList;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -8473,35 +8524,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParams\\";
 
-const IteratorPrototype = Object.create(utils.IteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this && this[utils.iterInternalSymbol];
-      if (!internal) {
-        throw new TypeError(\\"next() called on a value that is not an iterator prototype object\\");
-      }
-
-      const { target, kind, index } = internal;
-      const values = Array.from(target[implSymbol]);
-      const len = values.length;
-      if (index >= len) {
-        return { value: undefined, done: true };
-      }
-
-      const pair = values[index];
-      internal.index = index + 1;
-      return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
-  [Symbol.toStringTag]: {
-    value: \\"URLSearchParams Iterator\\",
-    configurable: true
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -8515,8 +8537,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParams'.\`);
 };
 
-exports.createDefaultIterator = (target, kind) => {
-  const iterator = Object.create(IteratorPrototype);
+exports.createDefaultIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"URLSearchParams\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
+  }
+
+  const iteratorPrototype = ctorRegistry[\\"URLSearchParams Iterator\\"];
+  const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, index: 0 },
     configurable: true
@@ -8587,6 +8619,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -8852,21 +8886,21 @@ exports.install = (globalObject, globalNames) => {
       if (!exports.is(this)) {
         throw new TypeError(\\"'keys' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"key\\");
+      return exports.createDefaultIterator(globalObject, this, \\"key\\");
     }
 
     values() {
       if (!exports.is(this)) {
         throw new TypeError(\\"'values' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"value\\");
+      return exports.createDefaultIterator(globalObject, this, \\"value\\");
     }
 
     entries() {
       if (!exports.is(this)) {
         throw new TypeError(\\"'entries' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"key+value\\");
+      return exports.createDefaultIterator(globalObject, this, \\"key+value\\");
     }
 
     forEach(callback) {
@@ -8906,10 +8940,35 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParams;
+  ctorRegistry[interfaceName] = URLSearchParams;
+
+  ctorRegistry[\\"URLSearchParams Iterator\\"] = Object.assign(
+    Object.create(ctorRegistry[\\"%IteratorPrototype%\\"], {
+      [Symbol.toStringTag]: {
+        configurable: true,
+        value: \\"URLSearchParams Iterator\\"
+      }
+    }),
+    {
+      next() {
+        const internal = this && this[utils.iterInternalSymbol];
+        if (!internal) {
+          throw new TypeError(\\"next() called on a value that is not a URLSearchParams iterator object\\");
+        }
+
+        const { target, kind, index } = internal;
+        const values = Array.from(target[implSymbol]);
+        const len = values.length;
+        if (index >= len) {
+          return { value: undefined, done: true };
+        }
+
+        const pair = values[index];
+        internal.index = index + 1;
+        return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
+      }
+    }
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9015,6 +9074,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9089,10 +9150,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParamsCollection;
+  ctorRegistry[interfaceName] = URLSearchParamsCollection;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9388,6 +9446,8 @@ exports.install = (globalObject, globalNames) => {
     return;
   }
 
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
+
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -9402,10 +9462,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParamsCollection2;
+  ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9720,6 +9777,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9819,10 +9878,7 @@ exports.install = (globalObject, globalNames) => {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = UnderscoredProperties;
+  ctorRegistry[interfaceName] = UnderscoredProperties;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -9922,6 +9978,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -9984,10 +10042,7 @@ exports.install = (globalObject, globalNames) => {
       configurable: true
     }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Unscopable;
+  ctorRegistry[interfaceName] = Unscopable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10088,6 +10143,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10251,10 +10308,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Variadic;
+  ctorRegistry[interfaceName] = Variadic;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10354,6 +10408,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -10362,10 +10418,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = ZeroArgConstructor;
+  ctorRegistry[interfaceName] = ZeroArgConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10478,50 +10531,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterablePairArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterablePairArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -10535,8 +10544,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterablePairArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterablePairArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterablePairArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -10607,6 +10626,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterablePairArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10640,7 +10661,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'keys' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10675,7 +10696,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'values' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10710,7 +10731,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'entries' on 'AsyncIterablePairArgs': parameter 3\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key+value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key+value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10724,10 +10745,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterablePairArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterablePairArgs.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterablePairArgs;
+  ctorRegistry[interfaceName] = AsyncIterablePairArgs;
+
+  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterablePairArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterablePairArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10751,50 +10819,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterablePairNoArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -10808,8 +10832,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterablePairNoArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterablePairNoArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterablePairNoArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -10880,6 +10914,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterablePairNoArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -10892,7 +10928,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10906,7 +10942,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10920,7 +10956,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"key+value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"key+value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -10934,10 +10970,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterablePairNoArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterablePairNoArgs.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterablePairNoArgs;
+  ctorRegistry[interfaceName] = AsyncIterablePairNoArgs;
+
+  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterablePairNoArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -10962,50 +11045,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableValueArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableValueArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -11019,8 +11058,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableValueArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableValueArgs\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableValueArgs is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -11091,6 +11140,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableValueArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11111,7 +11162,7 @@ exports.install = (globalObject, globalNames) => {
         args[0] = undefined;
       }
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -11123,10 +11174,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableValueArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableValueArgs.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableValueArgs;
+  ctorRegistry[interfaceName] = AsyncIterableValueArgs;
+
+  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableValueArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableValueArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11150,50 +11248,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableValueNoArgs\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -11207,8 +11261,20 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableValueNoArgs'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableValueNoArgs\\"] === undefined) {
+    throw new Error(
+      \\"Internal error: constructor AsyncIterableValueNoArgs is not installed on the passed global object\\"
+    );
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -11281,6 +11347,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableValueNoArgs {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11293,7 +11361,7 @@ exports.install = (globalObject, globalNames) => {
 
       const args = [];
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -11305,10 +11373,57 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableValueNoArgs\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableValueNoArgs.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableValueNoArgs;
+  ctorRegistry[interfaceName] = AsyncIterableValueNoArgs;
+
+  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableValueNoArgs async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11333,71 +11448,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"AsyncIterableWithReturn\\";
 
-const AsyncIteratorPrototype = Object.create(utils.AsyncIteratorPrototype, {
-  [Symbol.toStringTag]: {
-    value: \\"AsyncIterableWithReturn AsyncIterator\\",
-    configurable: true
-  }
-});
-
-Object.assign(AsyncIteratorPrototype, {
-  next() {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"next() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const nextSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value: undefined, done: true });
-      }
-
-      const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
-      return nextPromise.then(
-        next => {
-          internal.ongoingPromise = null;
-          if (next === utils.asyncIteratorEOI) {
-            internal.isFinished = true;
-            return { value: undefined, done: true };
-          }
-          return { value: utils.tryWrapperForImpl(next), done: false };
-        },
-        reason => {
-          internal.ongoingPromise = null;
-          internal.isFinished = true;
-          throw reason;
-        }
-      );
-    };
-
-    internal.ongoingPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(nextSteps, nextSteps)
-      : nextSteps();
-    return internal.ongoingPromise;
-  },
-
-  return(value) {
-    const internal = this && this[utils.iterInternalSymbol];
-    if (!internal) {
-      return Promise.reject(new TypeError(\\"return() called on a value that is not an async iterator prototype object\\"));
-    }
-
-    const returnSteps = () => {
-      if (internal.isFinished) {
-        return Promise.resolve({ value, done: true });
-      }
-      internal.isFinished = true;
-
-      return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
-    };
-
-    const returnPromise = internal.ongoingPromise
-      ? internal.ongoingPromise.then(returnSteps, returnSteps)
-      : returnSteps();
-    return returnPromise.then(() => ({ value, done: true }));
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -11411,8 +11461,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'AsyncIterableWithReturn'.\`);
 };
 
-exports.createDefaultAsyncIterator = (target, kind) => {
-  const iterator = Object.create(AsyncIteratorPrototype);
+exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"AsyncIterableWithReturn\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor AsyncIterableWithReturn is not installed on the passed global object\\");
+  }
+
+  const asyncIteratorPrototype = ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"];
+  const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
     configurable: true
@@ -11483,6 +11543,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class AsyncIterableWithReturn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11499,7 +11561,7 @@ exports.install = (globalObject, globalNames) => {
         context: \\"Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1\\"
       });
 
-      const asyncIterator = exports.createDefaultAsyncIterator(this, \\"value\\");
+      const asyncIterator = exports.createDefaultAsyncIterator(globalObject, this, \\"value\\");
       if (this[implSymbol][utils.asyncIteratorInit]) {
         this[implSymbol][utils.asyncIteratorInit](asyncIterator, args);
       }
@@ -11511,10 +11573,80 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"AsyncIterableWithReturn\\", configurable: true },
     [Symbol.asyncIterator]: { value: AsyncIterableWithReturn.prototype.values, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = AsyncIterableWithReturn;
+  ctorRegistry[interfaceName] = AsyncIterableWithReturn;
+
+  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.assign(
+    Object.create(
+      utils.AsyncIteratorPrototype,
+      {
+        [Symbol.toStringTag]: {
+          value: \\"AsyncIterableWithReturn AsyncIterator\\",
+          configurable: true
+        }
+      },
+      {
+        next() {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"next() called on a value that is not a AsyncIterableWithReturn async iterator object\\")
+            );
+          }
+
+          const nextSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value: undefined, done: true });
+            }
+
+            const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
+            return nextPromise.then(
+              next => {
+                internal.ongoingPromise = null;
+                if (next === utils.asyncIteratorEOI) {
+                  internal.isFinished = true;
+                  return { value: undefined, done: true };
+                }
+                return { value: utils.tryWrapperForImpl(next), done: false };
+              },
+              reason => {
+                internal.ongoingPromise = null;
+                internal.isFinished = true;
+                throw reason;
+              }
+            );
+          };
+
+          internal.ongoingPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(nextSteps, nextSteps)
+            : nextSteps();
+          return internal.ongoingPromise;
+        },
+
+        return(value) {
+          const internal = this && this[utils.iterInternalSymbol];
+          if (!internal) {
+            return Promise.reject(
+              new TypeError(\\"return() called on a value that is not a AsyncIterableWithReturn async iterator object\\")
+            );
+          }
+
+          const returnSteps = () => {
+            if (internal.isFinished) {
+              return Promise.resolve({ value, done: true });
+            }
+            internal.isFinished = true;
+
+            return internal.target[implSymbol][utils.asyncIteratorReturn](this, value);
+          };
+
+          const returnPromise = internal.ongoingPromise
+            ? internal.ongoingPromise.then(returnSteps, returnSteps)
+            : returnSteps();
+          return returnPromise.then(() => ({ value, done: true }));
+        }
+      }
+    )
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11614,6 +11746,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class BufferSourceTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11785,10 +11919,7 @@ exports.install = (globalObject, globalNames) => {
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"BufferSourceTypes\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = BufferSourceTypes;
+  ctorRegistry[interfaceName] = BufferSourceTypes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -11901,6 +12032,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class CEReactions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -11975,10 +12108,7 @@ exports.install = (globalObject, globalNames) => {
     promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"CEReactions\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = CEReactions;
+  ctorRegistry[interfaceName] = CEReactions;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12343,6 +12473,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DOMImplementation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12473,10 +12605,7 @@ exports.install = (globalObject, globalNames) => {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DOMImplementation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DOMImplementation;
+  ctorRegistry[interfaceName] = DOMImplementation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12577,6 +12706,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DOMRect {
     constructor() {
       const args = [];
@@ -12741,10 +12872,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"DOMRect\\", configurable: true }
   });
   Object.defineProperties(DOMRect, { fromRect: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DOMRect;
+  ctorRegistry[interfaceName] = DOMRect;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -12931,6 +13059,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class DictionaryConvert {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -12963,10 +13093,7 @@ exports.install = (globalObject, globalNames) => {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"DictionaryConvert\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = DictionaryConvert;
+  ctorRegistry[interfaceName] = DictionaryConvert;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13067,6 +13194,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Enum {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13122,10 +13251,7 @@ exports.install = (globalObject, globalNames) => {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Enum\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Enum;
+  ctorRegistry[interfaceName] = Enum;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13265,6 +13391,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class EventTarget {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -13309,10 +13437,7 @@ exports.install = (globalObject, globalNames) => {
     addEventListener: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"EventTarget\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = EventTarget;
+  ctorRegistry[interfaceName] = EventTarget;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13459,10 +13584,10 @@ exports._internalSetup = (wrapper, globalObject) => {
         esValue[implSymbol][\\"length\\"] = V;
       },
       [Symbol.iterator]: Array.prototype[Symbol.iterator],
-      keys: Array.prototype.keys,
-      values: Array.prototype[Symbol.iterator],
-      entries: Array.prototype.entries,
-      forEach: Array.prototype.forEach
+      keys: ctorRegistry[\\"%Array%\\"].prototype.keys,
+      values: ctorRegistry[\\"%Array%\\"].prototype.values,
+      entries: ctorRegistry[\\"%Array%\\"].prototype.entries,
+      forEach: ctorRegistry[\\"%Array%\\"].prototype.forEach
     })
   );
 
@@ -13511,6 +13636,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Global {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13538,10 +13665,7 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: \\"Global\\", configurable: true } });
   Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Global;
+  ctorRegistry[interfaceName] = Global;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13641,6 +13765,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class HTMLConstructor {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13649,10 +13775,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"HTMLConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = HTMLConstructor;
+  ctorRegistry[interfaceName] = HTMLConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13752,6 +13875,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyLenientAttributes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -13854,10 +13979,7 @@ exports.install = (globalObject, globalNames) => {
     replaceableLenientThis: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyLenientAttributes\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyLenientAttributes;
+  ctorRegistry[interfaceName] = LegacyLenientAttributes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -13957,6 +14079,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyNoInterfaceObject {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14001,10 +14125,7 @@ exports.install = (globalObject, globalNames) => {
     abc: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"LegacyNoInterfaceObject\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyNoInterfaceObject;
+  ctorRegistry[interfaceName] = LegacyNoInterfaceObject;
 };
 
 const Impl = require(\\"../implementations/LegacyNoInterfaceObject.js\\");
@@ -14196,6 +14317,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyUnforgeable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14204,10 +14327,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyUnforgeable.prototype, {
     [Symbol.toStringTag]: { value: \\"LegacyUnforgeable\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeable;
+  ctorRegistry[interfaceName] = LegacyUnforgeable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -14328,6 +14448,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class LegacyUnforgeableMap {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14336,10 +14458,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyUnforgeableMap.prototype, {
     [Symbol.toStringTag]: { value: \\"LegacyUnforgeableMap\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = LegacyUnforgeableMap;
+  ctorRegistry[interfaceName] = LegacyUnforgeableMap;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -14616,6 +14735,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class MixedIn {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -14700,10 +14821,7 @@ exports.install = (globalObject, globalNames) => {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = MixedIn;
+  ctorRegistry[interfaceName] = MixedIn;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -14882,6 +15000,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Overloads {
     constructor() {
       const args = [];
@@ -15200,10 +15320,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Overloads\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Overloads;
+  ctorRegistry[interfaceName] = Overloads;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -15343,6 +15460,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class PromiseTypes {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15450,10 +15569,7 @@ exports.install = (globalObject, globalNames) => {
     staticPromiseOperation: { enumerable: true },
     staticPromiseAttribute: { enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = PromiseTypes;
+  ctorRegistry[interfaceName] = PromiseTypes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -15553,6 +15669,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Reflect {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15736,10 +15854,7 @@ exports.install = (globalObject, globalNames) => {
     withUnderscore: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Reflect\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Reflect;
+  ctorRegistry[interfaceName] = Reflect;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -15839,6 +15954,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Replaceable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -15873,10 +15990,7 @@ exports.install = (globalObject, globalNames) => {
     replaceable: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Replaceable\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Replaceable;
+  ctorRegistry[interfaceName] = Replaceable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -16010,6 +16124,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class SeqAndRec {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -16223,10 +16339,7 @@ exports.install = (globalObject, globalNames) => {
     frozenArrayConsumer: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"SeqAndRec\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = SeqAndRec;
+  ctorRegistry[interfaceName] = SeqAndRec;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -16326,6 +16439,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Static {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -16386,10 +16501,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"Static\\", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Static;
+  ctorRegistry[interfaceName] = Static;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -16493,6 +16605,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Storage {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -16613,10 +16727,7 @@ exports.install = (globalObject, globalNames) => {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Storage\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Storage;
+  ctorRegistry[interfaceName] = Storage;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -16882,6 +16993,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierAttribute {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -16911,10 +17024,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierAttribute\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierAttribute;
+  ctorRegistry[interfaceName] = StringifierAttribute;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -17016,6 +17126,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierDefaultOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -17036,10 +17148,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierDefaultOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierDefaultOperation;
+  ctorRegistry[interfaceName] = StringifierDefaultOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -17141,6 +17250,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierNamedOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -17173,10 +17284,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierNamedOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierNamedOperation;
+  ctorRegistry[interfaceName] = StringifierNamedOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -17276,6 +17384,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class StringifierOperation {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -17294,10 +17404,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"StringifierOperation\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = StringifierOperation;
+  ctorRegistry[interfaceName] = StringifierOperation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -17399,6 +17506,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class TypedefsAndUnions {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -17854,10 +17963,7 @@ exports.install = (globalObject, globalNames) => {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"TypedefsAndUnions\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = TypedefsAndUnions;
+  ctorRegistry[interfaceName] = TypedefsAndUnions;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -17957,6 +18063,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URL {
     constructor(url) {
       if (arguments.length < 1) {
@@ -18267,10 +18375,7 @@ exports.install = (globalObject, globalNames) => {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URL\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URL;
+  ctorRegistry[interfaceName] = URL;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -18474,6 +18579,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLList {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -18516,15 +18623,12 @@ exports.install = (globalObject, globalNames) => {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"URLList\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true },
-    keys: { value: Array.prototype.keys, configurable: true, enumerable: true, writable: true },
-    values: { value: Array.prototype[Symbol.iterator], configurable: true, enumerable: true, writable: true },
-    entries: { value: Array.prototype.entries, configurable: true, enumerable: true, writable: true },
-    forEach: { value: Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
+    keys: { value: ctorRegistry[\\"%Array%\\"].prototype.keys, configurable: true, enumerable: true, writable: true },
+    values: { value: ctorRegistry[\\"%Array%\\"].prototype.values, configurable: true, enumerable: true, writable: true },
+    entries: { value: ctorRegistry[\\"%Array%\\"].prototype.entries, configurable: true, enumerable: true, writable: true },
+    forEach: { value: ctorRegistry[\\"%Array%\\"].prototype.forEach, configurable: true, enumerable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLList;
+  ctorRegistry[interfaceName] = URLList;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -18710,35 +18814,6 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = \\"URLSearchParams\\";
 
-const IteratorPrototype = Object.create(utils.IteratorPrototype, {
-  next: {
-    value: function next() {
-      const internal = this && this[utils.iterInternalSymbol];
-      if (!internal) {
-        throw new TypeError(\\"next() called on a value that is not an iterator prototype object\\");
-      }
-
-      const { target, kind, index } = internal;
-      const values = Array.from(target[implSymbol]);
-      const len = values.length;
-      if (index >= len) {
-        return { value: undefined, done: true };
-      }
-
-      const pair = values[index];
-      internal.index = index + 1;
-      return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
-    },
-    writable: true,
-    enumerable: true,
-    configurable: true
-  },
-  [Symbol.toStringTag]: {
-    value: \\"URLSearchParams Iterator\\",
-    configurable: true
-  }
-});
-
 exports.is = value => {
   return utils.isObject(value) && utils.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
@@ -18752,8 +18827,18 @@ exports.convert = (value, { context = \\"The provided value\\" } = {}) => {
   throw new TypeError(\`\${context} is not of type 'URLSearchParams'.\`);
 };
 
-exports.createDefaultIterator = (target, kind) => {
-  const iterator = Object.create(IteratorPrototype);
+exports.createDefaultIterator = (globalObject, target, kind) => {
+  const ctorRegistry = globalObject[ctorRegistrySymbol];
+  if (ctorRegistry === undefined) {
+    throw new Error(\\"Internal error: invalid global object\\");
+  }
+
+  if (ctorRegistry[\\"URLSearchParams\\"] === undefined) {
+    throw new Error(\\"Internal error: constructor URLSearchParams is not installed on the passed global object\\");
+  }
+
+  const iteratorPrototype = ctorRegistry[\\"URLSearchParams Iterator\\"];
+  const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, index: 0 },
     configurable: true
@@ -18824,6 +18909,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLSearchParams {
     constructor() {
       const args = [];
@@ -19089,21 +19176,21 @@ exports.install = (globalObject, globalNames) => {
       if (!exports.is(this)) {
         throw new TypeError(\\"'keys' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"key\\");
+      return exports.createDefaultIterator(globalObject, this, \\"key\\");
     }
 
     values() {
       if (!exports.is(this)) {
         throw new TypeError(\\"'values' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"value\\");
+      return exports.createDefaultIterator(globalObject, this, \\"value\\");
     }
 
     entries() {
       if (!exports.is(this)) {
         throw new TypeError(\\"'entries' called on an object that is not a valid instance of URLSearchParams.\\");
       }
-      return exports.createDefaultIterator(this, \\"key+value\\");
+      return exports.createDefaultIterator(globalObject, this, \\"key+value\\");
     }
 
     forEach(callback) {
@@ -19143,10 +19230,35 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParams\\", configurable: true },
     [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParams;
+  ctorRegistry[interfaceName] = URLSearchParams;
+
+  ctorRegistry[\\"URLSearchParams Iterator\\"] = Object.assign(
+    Object.create(ctorRegistry[\\"%IteratorPrototype%\\"], {
+      [Symbol.toStringTag]: {
+        configurable: true,
+        value: \\"URLSearchParams Iterator\\"
+      }
+    }),
+    {
+      next() {
+        const internal = this && this[utils.iterInternalSymbol];
+        if (!internal) {
+          throw new TypeError(\\"next() called on a value that is not a URLSearchParams iterator object\\");
+        }
+
+        const { target, kind, index } = internal;
+        const values = Array.from(target[implSymbol]);
+        const len = values.length;
+        if (index >= len) {
+          return { value: undefined, done: true };
+        }
+
+        const pair = values[index];
+        internal.index = index + 1;
+        return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
+      }
+    }
+  );
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -19252,6 +19364,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class URLSearchParamsCollection {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -19326,10 +19440,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParamsCollection;
+  ctorRegistry[interfaceName] = URLSearchParamsCollection;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -19625,6 +19736,8 @@ exports.install = (globalObject, globalNames) => {
     return;
   }
 
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
+
   if (globalObject.URLSearchParamsCollection === undefined) {
     throw new Error(
       \\"Internal error: attempting to evaluate URLSearchParamsCollection2 before URLSearchParamsCollection\\"
@@ -19639,10 +19752,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: \\"URLSearchParamsCollection2\\", configurable: true },
     [Symbol.iterator]: { value: Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = URLSearchParamsCollection2;
+  ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -19957,6 +20067,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class UnderscoredProperties {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -20056,10 +20168,7 @@ exports.install = (globalObject, globalNames) => {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = UnderscoredProperties;
+  ctorRegistry[interfaceName] = UnderscoredProperties;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -20159,6 +20268,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Unscopable {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -20221,10 +20332,7 @@ exports.install = (globalObject, globalNames) => {
       configurable: true
     }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Unscopable;
+  ctorRegistry[interfaceName] = Unscopable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -20325,6 +20433,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class Variadic {
     constructor() {
       throw new TypeError(\\"Illegal constructor\\");
@@ -20488,10 +20598,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded2: { enumerable: true },
     [Symbol.toStringTag]: { value: \\"Variadic\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = Variadic;
+  ctorRegistry[interfaceName] = Variadic;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
@@ -20591,6 +20698,8 @@ exports.install = (globalObject, globalNames) => {
   if (!globalNames.some(globalName => exposed.has(globalName))) {
     return;
   }
+
+  const ctorRegistry = utils.initCtorRegistry(globalObject);
   class ZeroArgConstructor {
     constructor() {
       return exports.setup(Object.create(new.target.prototype), globalObject, undefined);
@@ -20599,10 +20708,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: \\"ZeroArgConstructor\\", configurable: true }
   });
-  if (globalObject[ctorRegistrySymbol] === undefined) {
-    globalObject[ctorRegistrySymbol] = Object.create(null);
-  }
-  globalObject[ctorRegistrySymbol][interfaceName] = ZeroArgConstructor;
+  ctorRegistry[interfaceName] = ZeroArgConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
