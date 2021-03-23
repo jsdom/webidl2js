@@ -421,6 +421,17 @@ It is often useful for implementation classes to inherit from each other, if the
 
 However, it is not required! The wrapper classes will have a correct inheritance chain, regardless of the implementation class inheritance chain. Just make sure that, either via inheritance or manual implementation, you implement all of the expected operations and attributes.
 
+### The `[LegacyFactoryFunction]` extended attribute
+
+For interfaces which have the `[LegacyFactoryFunction]` extended attribute, the implementation class file must contain the `legacyFactoryFunction` export, with the signature `(thisValue, globalObject, [...legacyFactoryFunctionArgs], { newTarget, wrapper })`, which is used for:
+
+- Setting up initial state that will always be used, such as caches or default values
+- `thisValue` holds the value of a new uninitialized implementation instance, which may be ignored by returning a different object, similarly to how constructors with overridden return values are implemented.
+- Keep a reference to the relevant `globalObject` for later consumption.
+- Processing constructor arguments `legacyFactoryFunctionArgs` passed to the legacy factory function constructor, if the legacy factory function takes arguments.
+- `newTarget` holds a reference to the value of `new.target` that the legacy factor function was invoked with.
+- `wrapper` holds a reference to the uninitialized wrapper instance, just like in `privateData` with the standard impl constructor.
+
 ### The init export
 
 In addition to the `implementation` export, for interfaces, your implementation class file can contain an `init` export. This would be a function taking as an argument an instance of the implementation class, and is called when any wrapper/implementation pairs are constructed (such as by the exports of the [generated wrapper module](https://github.com/jsdom/webidl2js#for-interfaces)). In particular, it is called even if they are constructed by [`new()`](newglobalobject), which does not invoke the implementation class constructor.
@@ -484,6 +495,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]`
+- `[LegacyFactoryFunction]`
 - `[LegacyLenientThis]`
 - `[LegacyLenientSetter]`
 - `[LegacyNoInterfaceObject]`
@@ -510,7 +522,6 @@ Notable missing features include:
 - `[AllowShared]`
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
-- `[LegacyFactoryFunction]`
 - `[LegacyNamespace]`
 - `[LegacyTreatNonObjectAsNull]`
 - `[SecureContext]`
