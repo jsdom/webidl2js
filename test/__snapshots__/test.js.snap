@@ -380,7 +380,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterablePairArgs;
 
-  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterablePairArgs AsyncIterator\\",
       configurable: true
@@ -592,7 +592,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterablePairNoArgs;
 
-  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
       configurable: true
@@ -783,7 +783,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableValueArgs;
 
-  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableValueArgs AsyncIterator\\",
       configurable: true
@@ -965,7 +965,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableValueNoArgs;
 
-  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
       configurable: true
@@ -1152,7 +1152,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableWithReturn;
 
-  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableWithReturn AsyncIterator\\",
       configurable: true
@@ -10644,7 +10644,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterablePairArgs;
 
-  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterablePairArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterablePairArgs AsyncIterator\\",
       configurable: true
@@ -10856,7 +10856,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterablePairNoArgs;
 
-  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterablePairNoArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterablePairNoArgs AsyncIterator\\",
       configurable: true
@@ -11047,7 +11047,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableValueArgs;
 
-  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableValueArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableValueArgs AsyncIterator\\",
       configurable: true
@@ -11229,7 +11229,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableValueNoArgs;
 
-  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableValueNoArgs AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableValueNoArgs AsyncIterator\\",
       configurable: true
@@ -11416,7 +11416,7 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = AsyncIterableWithReturn;
 
-  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.create(utils.AsyncIteratorPrototype, {
+  ctorRegistry[\\"AsyncIterableWithReturn AsyncIterator\\"] = Object.create(ctorRegistry[\\"%AsyncIteratorPrototype%\\"], {
     [Symbol.toStringTag]: {
       value: \\"AsyncIterableWithReturn AsyncIterator\\",
       configurable: true
