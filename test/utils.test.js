@@ -48,4 +48,22 @@ describe("utils.js", () => {
       expect(globalObject[utils.ctorRegistrySymbol]).toBeDefined();
     });
   });
+
+  describe("newObjectInRealm", () => {
+    test("creates a new object in the given realm with the properties of the given object", () => {
+      const realm = { Object: function Object() {}, Array };
+      const object = utils.newObjectInRealm(realm, { foo: 42 });
+      expect(object).toBeInstanceOf(realm.Object);
+      expect(object).toEqual({ foo: 42 });
+    });
+
+    test("uses the captured intrinsic Object, not the current realm.Object", () => {
+      const realm = { Object, Array };
+      utils.initCtorRegistry(realm);
+      realm.Object = function Object() {};
+      const object = utils.newObjectInRealm(realm, {});
+      expect(object).toBeInstanceOf(Object);
+      expect(object).not.toBeInstanceOf(realm.Object);
+    });
+  });
 });
