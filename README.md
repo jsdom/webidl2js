@@ -451,6 +451,10 @@ This can be useful when you are given a wrapper, but need to modify its inaccess
 
 Returns the corresponding impl class instance for a given wrapper class instance, or returns the argument back if it is not an implementation class instance.
 
+### `registerConstructor(globalObject, key, constructor)`
+
+Tells webidl2js about a type associated with the given realm (`globalObject`). This can be called prior to installing interfaces to supply the correct in-realm value for types not exposed on the global object itself. Currently the only documented key is `"%AsyncIteratorPrototype%"`, for specifying the prototype to inherit from when creating async iterators.
+
 ## Web IDL features
 
 webidl2js is implementing an ever-growing subset of the Web IDL specification. So far we have implemented:
