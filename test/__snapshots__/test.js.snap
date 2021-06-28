@@ -167,6 +167,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -397,7 +398,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -406,9 +407,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+            return newObjectInRealm(globalObject, utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind));
           },
           reason => {
             internal.ongoingPromise = null;
@@ -442,6 +443,7 @@ exports[`generation with processors AsyncIterablePairNoArgs.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -609,7 +611,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -618,9 +620,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+            return newObjectInRealm(globalObject, utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind));
           },
           reason => {
             internal.ongoingPromise = null;
@@ -655,6 +657,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -800,7 +803,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -809,9 +812,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -845,6 +848,7 @@ exports[`generation with processors AsyncIterableValueNoArgs.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -982,7 +986,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -991,9 +995,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -1028,6 +1032,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -1169,7 +1174,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -1178,9 +1183,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -1206,7 +1211,7 @@ exports.install = (globalObject, globalNames) => {
 
       const returnSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value, done: true }));
         }
         internal.isFinished = true;
 
@@ -1216,7 +1221,7 @@ exports.install = (globalObject, globalNames) => {
       const returnPromise = internal.ongoingPromise
         ? internal.ongoingPromise.then(returnSteps, returnSteps)
         : returnSteps();
-      return returnPromise.then(() => ({ value, done: true }));
+      return returnPromise.then(() => newObjectInRealm(globalObject, { value, done: true }));
     }
   });
 
@@ -8448,6 +8453,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Function = require(\\"./Function.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -8880,12 +8886,12 @@ exports.install = (globalObject, globalNames) => {
       const values = Array.from(target[implSymbol]);
       const len = values.length;
       if (index >= len) {
-        return { value: undefined, done: true };
+        return newObjectInRealm(globalObject, { value: undefined, done: true });
       }
 
       const pair = values[index];
       internal.index = index + 1;
-      return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
+      return newObjectInRealm(globalObject, utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind));
     }
   });
 
@@ -10431,6 +10437,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -10661,7 +10668,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -10670,9 +10677,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+            return newObjectInRealm(globalObject, utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind));
           },
           reason => {
             internal.ongoingPromise = null;
@@ -10706,6 +10713,7 @@ exports[`generation without processors AsyncIterablePairNoArgs.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -10873,7 +10881,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -10882,9 +10890,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind);
+            return newObjectInRealm(globalObject, utils.iteratorResult(next.map(utils.tryWrapperForImpl), kind));
           },
           reason => {
             internal.ongoingPromise = null;
@@ -10919,6 +10927,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const URL = require(\\"./URL.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -11064,7 +11073,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -11073,9 +11082,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -11109,6 +11118,7 @@ exports[`generation without processors AsyncIterableValueNoArgs.webidl 1`] = `
 const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -11246,7 +11256,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -11255,9 +11265,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -11292,6 +11302,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Dictionary = require(\\"./Dictionary.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -11433,7 +11444,7 @@ exports.install = (globalObject, globalNames) => {
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value: undefined, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
         }
 
         const nextPromise = internal.target[implSymbol][utils.asyncIteratorNext](this);
@@ -11442,9 +11453,9 @@ exports.install = (globalObject, globalNames) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
-              return { value: undefined, done: true };
+              return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return { value: utils.tryWrapperForImpl(next), done: false };
+            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
           },
           reason => {
             internal.ongoingPromise = null;
@@ -11470,7 +11481,7 @@ exports.install = (globalObject, globalNames) => {
 
       const returnSteps = () => {
         if (internal.isFinished) {
-          return Promise.resolve({ value, done: true });
+          return Promise.resolve(newObjectInRealm(globalObject, { value, done: true }));
         }
         internal.isFinished = true;
 
@@ -11480,7 +11491,7 @@ exports.install = (globalObject, globalNames) => {
       const returnPromise = internal.ongoingPromise
         ? internal.ongoingPromise.then(returnSteps, returnSteps)
         : returnSteps();
-      return returnPromise.then(() => ({ value, done: true }));
+      return returnPromise.then(() => newObjectInRealm(globalObject, { value, done: true }));
     }
   });
 
@@ -18655,6 +18666,7 @@ const conversions = require(\\"webidl-conversions\\");
 const utils = require(\\"./utils.js\\");
 
 const Function = require(\\"./Function.js\\");
+const newObjectInRealm = utils.newObjectInRealm;
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -19087,12 +19099,12 @@ exports.install = (globalObject, globalNames) => {
       const values = Array.from(target[implSymbol]);
       const len = values.length;
       if (index >= len) {
-        return { value: undefined, done: true };
+        return newObjectInRealm(globalObject, { value: undefined, done: true });
       }
 
       const pair = values[index];
       internal.index = index + 1;
-      return utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind);
+      return newObjectInRealm(globalObject, utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind));
     }
   });
 
