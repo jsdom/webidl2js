@@ -32,19 +32,19 @@ describe("utils.js", () => {
     });
   });
 
-  describe("registerConstructor", () => {
+  describe("registerIntrinsic", () => {
     test("sets a value in the ctorRegistry", () => {
       const globalObject = { Array };
       const ctorRegistry = utils.initCtorRegistry(globalObject);
       expect(ctorRegistry["%AsyncIteratorPrototype%"]).toBe(utils.AsyncIteratorPrototype);
       const asyncIteratorPrototype = {};
-      utils.registerConstructor(globalObject, "%AsyncIteratorPrototype%", asyncIteratorPrototype);
+      utils.registerIntrinsic(globalObject, "%AsyncIteratorPrototype%", asyncIteratorPrototype);
       expect(ctorRegistry["%AsyncIteratorPrototype%"]).toBe(asyncIteratorPrototype);
     });
 
     test("initializes the ctorRegistry if it doesn't exist", () => {
       const globalObject = { Array };
-      utils.registerConstructor(globalObject, "%AsyncIteratorPrototype%", {});
+      utils.registerIntrinsic(globalObject, "%AsyncIteratorPrototype%", {});
       expect(globalObject[utils.ctorRegistrySymbol]).toBeDefined();
     });
   });
