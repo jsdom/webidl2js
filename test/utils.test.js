@@ -32,33 +32,18 @@ describe("utils.js", () => {
     });
   });
 
-  describe("registerIntrinsic", () => {
-    test("sets a value in the ctorRegistry", () => {
-      const globalObject = { Array };
-      const ctorRegistry = utils.initCtorRegistry(globalObject);
-      expect(ctorRegistry["%AsyncIteratorPrototype%"]).toBe(utils.AsyncIteratorPrototype);
-      const asyncIteratorPrototype = {};
-      utils.registerIntrinsic(globalObject, "%AsyncIteratorPrototype%", asyncIteratorPrototype);
-      expect(ctorRegistry["%AsyncIteratorPrototype%"]).toBe(asyncIteratorPrototype);
-    });
-
-    test("initializes the ctorRegistry if it doesn't exist", () => {
-      const globalObject = { Array };
-      utils.registerIntrinsic(globalObject, "%AsyncIteratorPrototype%", {});
-      expect(globalObject[utils.ctorRegistrySymbol]).toBeDefined();
-    });
-  });
-
   describe("newObjectInRealm", () => {
     test("creates a new object in the given realm with the properties of the given object", () => {
-      const realm = { Object: function Object() {}, Array };
+      // eslint-disable-next-line no-eval
+      const realm = { Object: function Object() {}, Array, eval };
       const object = utils.newObjectInRealm(realm, { foo: 42 });
       expect(object).toBeInstanceOf(realm.Object);
       expect(object).toEqual({ foo: 42 });
     });
 
     test("uses the captured intrinsic Object, not the current realm.Object", () => {
-      const realm = { Object, Array };
+      // eslint-disable-next-line no-eval
+      const realm = { Object, Array, eval };
       utils.initCtorRegistry(realm);
       realm.Object = function Object() {};
       const object = utils.newObjectInRealm(realm, {});
