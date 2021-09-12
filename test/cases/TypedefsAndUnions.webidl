@@ -1,14 +1,14 @@
 [Exposed=Window]
 interface TypedefsAndUnions {
-  void numOrStrConsumer(NumOrStr a);
-  void numOrEnumConsumer((double or RequestDestination)? a);
-  void numOrStrOrNullConsumer(NumOrStrOrNull a);
-  void numOrStrOrURLOrNullConsumer(NumOrStrOrURLOrNull? a);
-  void urlMapInnerConsumer(URLMapInner a);
-  void urlMapConsumer(URLMap a);
-  void bufferSourceOrURLConsumer((BufferSource or URL) b);
-  void arrayBufferViewOrURLMapConsumer((ArrayBufferView or URLMap) b);
-  void arrayBufferViewDupConsumer((ArrayBufferView or Uint8ClampedArray) b);
+  undefined numOrStrConsumer(NumOrStr a);
+  undefined numOrEnumConsumer((double or RequestDestination)? a);
+  undefined numOrStrOrNullConsumer(NumOrStrOrNull a);
+  undefined numOrStrOrURLOrNullConsumer(NumOrStrOrURLOrNull? a);
+  undefined urlMapInnerConsumer(URLMapInner a);
+  undefined urlMapConsumer(URLMap a);
+  undefined bufferSourceOrURLConsumer((BufferSource or URL) b);
+  undefined arrayBufferViewOrURLMapConsumer((ArrayBufferView or URLMap) b);
+  undefined arrayBufferViewDupConsumer((ArrayBufferView or Uint8ClampedArray) b);
 
   attribute (ArrayBuffer or Uint8Array or Uint16Array) buf;
   attribute DOMTimeStamp time;

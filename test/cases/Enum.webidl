@@ -1,5 +1,5 @@
 [Exposed=Window]
 interface Enum {
-  void op(RequestDestination destination);
+  undefined op(RequestDestination destination);
   attribute RequestDestination attr;
 };

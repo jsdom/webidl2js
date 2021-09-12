@@ -1,4 +1,4 @@
 [Exposed=Window]
 interface URLSearchParamsCollection2 : URLSearchParamsCollection {
-  setter void (DOMString key, URL value);
+  setter undefined (DOMString key, URL value);
 };
