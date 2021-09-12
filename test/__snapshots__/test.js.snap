@@ -4104,6 +4104,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -4152,7 +4161,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -4170,7 +4179,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -4205,7 +4214,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -4226,7 +4240,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -4241,7 +4255,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -4256,7 +4270,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -4276,7 +4290,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -4285,6 +4299,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -4335,12 +4351,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (![\\"a\\"].includes(P)) {
       if (!utils.hasOwn(target, P)) {
         if (desc.get || desc.set) {
@@ -4365,24 +4383,26 @@ const proxyHandler = {
       }
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
 
+    const globalObject = this._globalObject;
+
     if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
       return false;
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
@@ -6397,6 +6417,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -6418,7 +6447,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -6436,7 +6465,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -6595,7 +6624,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -6616,7 +6650,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -6631,7 +6665,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -6646,7 +6680,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -6666,7 +6700,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -6675,6 +6709,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -6720,12 +6756,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (!utils.hasOwn(target, P)) {
       if (desc.get || desc.set) {
         return false;
@@ -6743,12 +6781,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
       target[implSymbol].removeItem(P);
@@ -6756,12 +6796,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/Storage.js\\");
 "
@@ -8409,6 +8449,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -8430,7 +8479,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -8448,7 +8497,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -8522,7 +8571,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -8543,7 +8597,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -8558,7 +8612,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -8571,7 +8625,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -8595,7 +8649,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -8604,6 +8658,7 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
     }
     let ownDesc;
 
@@ -8651,24 +8706,28 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
 
+    const globalObject = this._globalObject;
+
     if (utils.isArrayIndexPropName(P)) {
       return false;
     }
 
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -8676,12 +8735,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLList.js\\");
 "
@@ -9200,6 +9259,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -9221,7 +9289,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -9239,7 +9307,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -9339,7 +9407,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -9360,7 +9433,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -9375,7 +9448,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -9394,7 +9467,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -9428,7 +9501,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -9437,6 +9510,7 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
     }
     let ownDesc;
 
@@ -9483,12 +9557,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       return false;
@@ -9500,12 +9576,14 @@ const proxyHandler = {
       }
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -9517,12 +9595,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
@@ -9567,6 +9645,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -9590,7 +9677,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -9608,7 +9695,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -9643,7 +9730,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -9664,7 +9756,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -9679,7 +9771,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -9698,7 +9790,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -9732,7 +9824,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -9741,6 +9833,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -9803,12 +9897,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       return false;
@@ -9834,12 +9930,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -9851,12 +9949,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
@@ -14610,6 +14708,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -14658,7 +14765,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -14676,7 +14783,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -14711,7 +14818,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -14732,7 +14844,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -14747,7 +14859,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -14762,7 +14874,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -14782,7 +14894,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -14791,6 +14903,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -14841,12 +14955,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (![\\"a\\"].includes(P)) {
       if (!utils.hasOwn(target, P)) {
         if (desc.get || desc.set) {
@@ -14871,24 +14987,26 @@ const proxyHandler = {
       }
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
 
+    const globalObject = this._globalObject;
+
     if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
       return false;
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/LegacyUnforgeableMap.js\\");
 "
@@ -16888,6 +17006,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -16909,7 +17036,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -16927,7 +17054,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -17086,7 +17213,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -17107,7 +17239,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -17122,7 +17254,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -17137,7 +17269,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -17157,7 +17289,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -17166,6 +17298,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -17211,12 +17345,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
     if (!utils.hasOwn(target, P)) {
       if (desc.get || desc.set) {
         return false;
@@ -17234,12 +17370,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
       target[implSymbol].removeItem(P);
@@ -17247,12 +17385,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/Storage.js\\");
 "
@@ -18900,6 +19038,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -18921,7 +19068,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -18939,7 +19086,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -19013,7 +19160,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -19034,7 +19186,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -19049,7 +19201,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -19062,7 +19214,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -19086,7 +19238,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -19095,6 +19247,7 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
     }
     let ownDesc;
 
@@ -19142,24 +19295,28 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
 
+    const globalObject = this._globalObject;
+
     if (utils.isArrayIndexPropName(P)) {
       return false;
     }
 
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -19167,12 +19324,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLList.js\\");
 "
@@ -19691,6 +19848,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -19712,7 +19878,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -19730,7 +19896,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -19830,7 +19996,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -19851,7 +20022,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -19866,7 +20037,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -19885,7 +20056,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -19919,7 +20090,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -19928,6 +20099,7 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
     }
     let ownDesc;
 
@@ -19974,12 +20146,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       return false;
@@ -19991,12 +20165,14 @@ const proxyHandler = {
       }
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -20008,12 +20184,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLSearchParamsCollection.js\\");
 "
@@ -20058,6 +20234,15 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
+function makeProxy(wrapper, globalObject) {
+  let proxyHandler = proxyHandlerCache.get(globalObject);
+  if (proxyHandler === undefined) {
+    proxyHandler = new ProxyHandler(globalObject);
+    proxyHandlerCache.set(globalObject, proxyHandler);
+  }
+  return new Proxy(wrapper, proxyHandler);
+}
+
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
   return exports.setup(wrapper, globalObject, constructorArgs, privateData);
@@ -20081,7 +20266,7 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -20099,7 +20284,7 @@ exports.new = (globalObject, newTarget) => {
     configurable: true
   });
 
-  wrapper = new Proxy(wrapper, proxyHandler);
+  wrapper = makeProxy(wrapper, globalObject);
 
   wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
@@ -20134,7 +20319,12 @@ exports.install = (globalObject, globalNames) => {
   });
 };
 
-const proxyHandler = {
+const proxyHandlerCache = new WeakMap();
+class ProxyHandler {
+  constructor(globalObject) {
+    this._globalObject = globalObject;
+  }
+
   get(target, P, receiver) {
     if (typeof P === \\"symbol\\") {
       return Reflect.get(target, P, receiver);
@@ -20155,7 +20345,7 @@ const proxyHandler = {
       return undefined;
     }
     return Reflect.apply(getter, receiver, []);
-  },
+  }
 
   has(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -20170,7 +20360,7 @@ const proxyHandler = {
       return Reflect.has(parent, P);
     }
     return false;
-  },
+  }
 
   ownKeys(target) {
     const keys = new Set();
@@ -20189,7 +20379,7 @@ const proxyHandler = {
       keys.add(key);
     }
     return [...keys];
-  },
+  }
 
   getOwnPropertyDescriptor(target, P) {
     if (typeof P === \\"symbol\\") {
@@ -20223,7 +20413,7 @@ const proxyHandler = {
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
-  },
+  }
 
   set(target, P, V, receiver) {
     if (typeof P === \\"symbol\\") {
@@ -20232,6 +20422,8 @@ const proxyHandler = {
     // The \`receiver\` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas \`target\` refers to the Proxy target:
     if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+      const globalObject = this._globalObject;
+
       if (typeof P === \\"string\\") {
         let namedValue = V;
 
@@ -20294,12 +20486,14 @@ const proxyHandler = {
       valueDesc = { writable: true, enumerable: true, configurable: true, value: V };
     }
     return Reflect.defineProperty(receiver, P, valueDesc);
-  },
+  }
 
   defineProperty(target, P, desc) {
     if (typeof P === \\"symbol\\") {
       return Reflect.defineProperty(target, P, desc);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       return false;
@@ -20325,12 +20519,14 @@ const proxyHandler = {
       return true;
     }
     return Reflect.defineProperty(target, P, desc);
-  },
+  }
 
   deleteProperty(target, P) {
     if (typeof P === \\"symbol\\") {
       return Reflect.deleteProperty(target, P);
     }
+
+    const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -20342,12 +20538,12 @@ const proxyHandler = {
     }
 
     return Reflect.deleteProperty(target, P);
-  },
+  }
 
   preventExtensions() {
     return false;
   }
-};
+}
 
 const Impl = require(\\"../implementations/URLSearchParamsCollection2.js\\");
 "
