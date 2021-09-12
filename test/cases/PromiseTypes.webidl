@@ -1,7 +1,7 @@
 [Exposed=Window]
 interface PromiseTypes {
-  void voidPromiseConsumer(Promise<void> p);
-  void promiseConsumer(Promise<double> p);
+  undefined voidPromiseConsumer(Promise<void> p);
+  undefined promiseConsumer(Promise<double> p);
 
   Promise<void> promiseOperation();
   readonly attribute Promise<void> promiseAttribute;

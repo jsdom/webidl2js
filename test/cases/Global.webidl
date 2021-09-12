@@ -1,7 +1,7 @@
 [Global=Global,Exposed=Global]
 interface Global {
-  void op();
-  [LegacyUnforgeable] void unforgeableOp();
+  undefined op();
+  [LegacyUnforgeable] undefined unforgeableOp();
   attribute DOMString attr;
   [LegacyUnforgeable] attribute DOMString unforgeableAttr;
 
@@ -9,6 +9,6 @@ interface Global {
   attribute unsigned long length;
   iterable<DOMString>;
 
-  static void staticOp();
+  static undefined staticOp();
   static attribute DOMString staticAttr;
 };

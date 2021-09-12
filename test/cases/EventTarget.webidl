@@ -4,7 +4,7 @@
 interface EventTarget {
   constructor();
 
-  void addEventListener(DOMString type, EventListener? callback);
-  // void removeEventListener(DOMString type, EventListener? callback);
+  undefined addEventListener(DOMString type, EventListener? callback);
+  // undefined removeEventListener(DOMString type, EventListener? callback);
   // boolean dispatchEvent(Event event);
 };
