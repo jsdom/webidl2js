@@ -258,7 +258,7 @@ Returns a boolean indicating whether _value_ is an instance of the wrapper class
 
 This is useful in other parts of your program that are not implementation class files, but instead receive wrapper classes from client code.
 
-#### `convert(value, { context })`
+#### `convert(globalObject, value, { context })`
 
 Performs the Web IDL conversion algorithm for this interface, converting _value_ into the correct representation of the interface type suitable for consumption by implementation classes: the corresponding impl.
 
@@ -296,13 +296,13 @@ jsdom does this for `Window`, which is written in custom, non-webidl2js-generate
 
 ### For callback interfaces
 
-#### `convert(value, { context })`
+#### `convert(globalObject, value, { context })`
 
-Performs the Web IDL conversion algorithm for this callback interface, converting _value_ into a function that performs [call a user object's operation](https://heycam.github.io/webidl/#call-a-user-objects-operation) when called, with _thisArg_ being the `this` value of the converted function.
+Performs the Web IDL conversion algorithm for this callback interface, converting `value` into a function that performs [call a user object's operation](https://heycam.github.io/webidl/#call-a-user-objects-operation) when called, with _thisArg_ being the `this` value of the converted function. `globalObject` is used to ensure error cases result in `Error` or `Promise` objects from the correct realm.
 
-The resulting function has an _objectReference_ property, which is the same object as _value_ and can be used to perform identity checks, as `convert` returns a new function object every time.
+The resulting function has an `objectReference` property, which is the same object as `value` and can be used to perform identity checks, as `convert` returns a new function object every time.
 
-If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
+If any part of the conversion fails, `context` can be used to describe the provided value in any resulting error message.
 
 #### `install(globalObject, globalNames)`
 
@@ -312,11 +312,11 @@ The second argument `globalNames` is the same as for [the `install()` export for
 
 ### For dictionaries
 
-#### `convert(value, { context })`
+#### `convert(globalObject, value, { context })`
 
-Performs the Web IDL conversion algorithm for this dictionary, converting _value_ into the correct representation of the dictionary type suitable for consumption by implementation classes: a `null`-[[Prototype]] object with its properties properly converted.
+Performs the Web IDL conversion algorithm for this dictionary, converting `value` into the correct representation of the dictionary type suitable for consumption by implementation classes: a `null`-[[Prototype]] object with its properties properly converted. `globalObject` is used to ensure error cases result in `Error` or `Promise` objects from the correct realm.
 
-If any part of the conversion fails, _context_ can be used to describe the provided value in any resulting error message.
+If any part of the conversion fails, `context` can be used to describe the provided value in any resulting error message.
 
 ### Other requirements
 
