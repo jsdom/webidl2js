@@ -8,14 +8,14 @@
   ],
   "repository": "github:jsdom/webidl2js",
   "dependencies": {
-    "prettier": "^2.4.1",
+    "prettier": "^2.5.1",
     "webidl-conversions": "^7.0.0",
-    "webidl2": "^24.1.2"
+    "webidl2": "^24.2.0"
   },
   "devDependencies": {
-    "@domenic/eslint-config": "^1.4.0",
-    "eslint": "^7.32.0",
-    "jest": "^27.2.4"
+    "@domenic/eslint-config": "^2.0.0",
+    "eslint": "^8.8.0",
+    "jest": "^27.5.0"
   },
   "scripts": {
     "test": "jest",
