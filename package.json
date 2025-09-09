@@ -6,11 +6,14 @@
   "files": [
     "lib/"
   ],
-  "repository": "github:jsdom/webidl2js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsdom/webidl2js.git"
+  },
   "dependencies": {
     "prettier": "^2.8.8",
-    "webidl-conversions": "^7.0.0",
-    "webidl2": "^24.4.1"
+    "webidl-conversions": "^8.0.0",
+    "webidl2": "^24.5.0"
   },
   "devDependencies": {
     "@domenic/eslint-config": "^4.0.1",
