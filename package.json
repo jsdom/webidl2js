@@ -1,6 +1,6 @@
 {
   "name": "webidl2js",
-  "version": "18.0.2",
+  "version": "19.0.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "main": "lib/transformer.js",
   "files": [
