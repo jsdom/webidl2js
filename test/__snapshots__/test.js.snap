@@ -1600,6 +1600,44 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    arbs(source) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arbs' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arbs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arbs(...args);
+    }
+
     arab(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -1651,6 +1689,64 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].arsab(...args);
     }
+
+    arabv(abv) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arabv' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arabv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'arabv' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arabv' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arabv(...args);
+    }
+
+    aru8a(u8) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'aru8a' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'aru8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["Uint8Array"](curArg, {
+          context: "Failed to execute 'aru8a' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].aru8a(...args);
+    }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
@@ -1661,8 +1757,11 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    arbs: { enumerable: true },
     arab: { enumerable: true },
     arsab: { enumerable: true },
+    arabv: { enumerable: true },
+    aru8a: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
   ctorRegistry[interfaceName] = BufferSourceTypes;
@@ -12997,6 +13096,44 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    arbs(source) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arbs' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arbs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arbs' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arbs(...args);
+    }
+
     arab(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -13048,6 +13185,64 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].arsab(...args);
     }
+
+    arabv(abv) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arabv' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arabv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'arabv' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowResizable: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arabv' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arabv(...args);
+    }
+
+    aru8a(u8) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'aru8a' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'aru8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["Uint8Array"](curArg, {
+          context: "Failed to execute 'aru8a' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].aru8a(...args);
+    }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
@@ -13058,8 +13253,11 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    arbs: { enumerable: true },
     arab: { enumerable: true },
     arsab: { enumerable: true },
+    arabv: { enumerable: true },
+    aru8a: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
   ctorRegistry[interfaceName] = BufferSourceTypes;
