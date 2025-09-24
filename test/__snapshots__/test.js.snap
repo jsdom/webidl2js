@@ -1381,6 +1381,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'bs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new globalObject.TypeError(
@@ -1509,6 +1513,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
@@ -1537,6 +1545,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
@@ -5702,6 +5714,10 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
+                  curArg = conversions["ArrayBuffer"](curArg, {
+                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    globals: globalObject
+                  });
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new globalObject.TypeError(
@@ -5714,6 +5730,10 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
+                  curArg = conversions["ArrayBuffer"](curArg, {
+                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    globals: globalObject
+                  });
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new globalObject.TypeError(
@@ -5759,6 +5779,10 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[2];
             if (utils.isArrayBuffer(curArg)) {
+              curArg = conversions["ArrayBuffer"](curArg, {
+                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 3",
+                globals: globalObject
+              });
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new globalObject.TypeError(
@@ -5770,6 +5794,10 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[3];
             if (utils.isArrayBuffer(curArg)) {
+              curArg = conversions["ArrayBuffer"](curArg, {
+                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 4",
+                globals: globalObject
+              });
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new globalObject.TypeError(
@@ -8338,6 +8366,10 @@ exports.install = (globalObject, globalNames) => {
         if (URL.is(curArg)) {
           curArg = utils.implForWrapper(curArg);
         } else if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new globalObject.TypeError(
@@ -8463,7 +8495,15 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else {
           throw new globalObject.TypeError(
             "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1" +
@@ -8497,6 +8537,10 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (utils.isArrayBuffer(V)) {
+        V = conversions["ArrayBuffer"](V, {
+          context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
+          globals: globalObject
+        });
       } else if (
         ArrayBuffer.isView(V) &&
         (V.constructor.name === "Uint8Array" || V.constructor.name === "Uint16Array")
@@ -12634,6 +12678,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'bs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new globalObject.TypeError(
@@ -12762,6 +12810,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
@@ -12790,6 +12842,10 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
         } else {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
@@ -16913,6 +16969,10 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
+                  curArg = conversions["ArrayBuffer"](curArg, {
+                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    globals: globalObject
+                  });
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new globalObject.TypeError(
@@ -16925,6 +16985,10 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
+                  curArg = conversions["ArrayBuffer"](curArg, {
+                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    globals: globalObject
+                  });
                 } else if (ArrayBuffer.isView(curArg)) {
                 } else {
                   throw new globalObject.TypeError(
@@ -16970,6 +17034,10 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[2];
             if (utils.isArrayBuffer(curArg)) {
+              curArg = conversions["ArrayBuffer"](curArg, {
+                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 3",
+                globals: globalObject
+              });
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new globalObject.TypeError(
@@ -16981,6 +17049,10 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[3];
             if (utils.isArrayBuffer(curArg)) {
+              curArg = conversions["ArrayBuffer"](curArg, {
+                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 4",
+                globals: globalObject
+              });
             } else if (ArrayBuffer.isView(curArg)) {
             } else {
               throw new globalObject.TypeError(
@@ -19534,6 +19606,10 @@ exports.install = (globalObject, globalNames) => {
         if (URL.is(curArg)) {
           curArg = utils.implForWrapper(curArg);
         } else if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else if (ArrayBuffer.isView(curArg)) {
         } else {
           throw new globalObject.TypeError(
@@ -19659,7 +19735,15 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
         } else {
           throw new globalObject.TypeError(
             "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1" +
@@ -19693,6 +19777,10 @@ exports.install = (globalObject, globalNames) => {
       }
 
       if (utils.isArrayBuffer(V)) {
+        V = conversions["ArrayBuffer"](V, {
+          context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
+          globals: globalObject
+        });
       } else if (
         ArrayBuffer.isView(V) &&
         (V.constructor.name === "Uint8Array" || V.constructor.name === "Uint16Array")
