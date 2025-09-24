@@ -19,4 +19,8 @@ interface BufferSourceTypes {
   undefined arsab([AllowResizable] SharedArrayBuffer sab);
   undefined arabv([AllowResizable] ArrayBufferView abv);
   undefined aru8a([AllowResizable] Uint8Array u8);
+
+  undefined arsbs([AllowResizable] AllowSharedBufferSource source);
+  undefined arsabv([AllowResizable, AllowShared] ArrayBufferView abv);
+  undefined arsu8a([AllowResizable, AllowShared] Uint8Array u8);
 };
