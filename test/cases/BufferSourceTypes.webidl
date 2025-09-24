@@ -9,4 +9,7 @@ interface BufferSourceTypes {
   undefined abUnion((ArrayBuffer or DOMString) ab);
   undefined sabUnion((SharedArrayBuffer or DOMString) ab);
   undefined u8aUnion((Uint8Array or DOMString) ab);
+
+  undefined arab([AllowResizable] ArrayBuffer ab);
+  undefined arsab([AllowResizable] SharedArrayBuffer sab);
 };

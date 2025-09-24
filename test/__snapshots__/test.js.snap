@@ -1587,6 +1587,58 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].u8aUnion(...args);
     }
+
+    arab(ab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["ArrayBuffer"](curArg, {
+          context: "Failed to execute 'arab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arab(...args);
+    }
+
+    arsab(sab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arsab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arsab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["SharedArrayBuffer"](curArg, {
+          context: "Failed to execute 'arsab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arsab(...args);
+    }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
@@ -1597,6 +1649,8 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    arab: { enumerable: true },
+    arsab: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
   ctorRegistry[interfaceName] = BufferSourceTypes;
@@ -12884,6 +12938,58 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].u8aUnion(...args);
     }
+
+    arab(ab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["ArrayBuffer"](curArg, {
+          context: "Failed to execute 'arab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arab(...args);
+    }
+
+    arsab(sab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arsab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arsab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["SharedArrayBuffer"](curArg, {
+          context: "Failed to execute 'arsab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowResizable: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arsab(...args);
+    }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
@@ -12894,6 +13000,8 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    arab: { enumerable: true },
+    arsab: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
   ctorRegistry[interfaceName] = BufferSourceTypes;
