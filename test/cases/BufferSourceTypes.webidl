@@ -10,6 +10,8 @@ interface BufferSourceTypes {
   undefined sabUnion((SharedArrayBuffer or DOMString) ab);
   undefined u8aUnion((Uint8Array or DOMString) ab);
 
+  undefined asbs(AllowSharedBufferSource source);
+  undefined asabv([AllowShared] ArrayBufferView abv);
   undefined asu8a([AllowShared] Uint8Array u8);
 
   undefined arbs([AllowResizable] BufferSource source);

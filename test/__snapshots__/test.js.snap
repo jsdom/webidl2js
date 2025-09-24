@@ -1600,6 +1600,80 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    asbs(source) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asbs' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asbs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        } else if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        } else if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowShared: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asbs(...args);
+    }
+
+    asabv(abv) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asabv' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asabv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'asabv' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowShared: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asabv' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asabv(...args);
+    }
+
     asu8a(u8) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -1783,6 +1857,8 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    asbs: { enumerable: true },
+    asabv: { enumerable: true },
     asu8a: { enumerable: true },
     arbs: { enumerable: true },
     arab: { enumerable: true },
@@ -13123,6 +13199,80 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    asbs(source) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asbs' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asbs' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+          curArg = conversions["ArrayBuffer"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        } else if (utils.isSharedArrayBuffer(curArg)) {
+          curArg = conversions["SharedArrayBuffer"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        } else if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowShared: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asbs(...args);
+    }
+
+    asabv(abv) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asabv' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asabv' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (ArrayBuffer.isView(curArg)) {
+          curArg = conversions["ArrayBufferView"](curArg, {
+            context: "Failed to execute 'asabv' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject,
+            allowShared: true
+          });
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asabv' on 'BufferSourceTypes': parameter 1" + " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asabv(...args);
+    }
+
     asu8a(u8) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -13306,6 +13456,8 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    asbs: { enumerable: true },
+    asabv: { enumerable: true },
     asu8a: { enumerable: true },
     arbs: { enumerable: true },
     arab: { enumerable: true },
