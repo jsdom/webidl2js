@@ -11,16 +11,16 @@ interface BufferSourceTypes {
   undefined u8aUnion((Uint8Array or DOMString) ab);
 
   undefined asbs(AllowSharedBufferSource source);
-  undefined asabv([AllowShared] ArrayBufferView abv);
-  undefined asu8a([AllowShared] Uint8Array u8);
+  undefined abvAllowShared([AllowShared] ArrayBufferView abv);
+  undefined u8aAllowShared([AllowShared] Uint8Array u8);
 
-  undefined arbs([AllowResizable] BufferSource source);
-  undefined arab([AllowResizable] ArrayBuffer ab);
-  undefined arsab([AllowResizable] SharedArrayBuffer sab);
-  undefined arabv([AllowResizable] ArrayBufferView abv);
-  undefined aru8a([AllowResizable] Uint8Array u8);
+  undefined bsAllowResizable([AllowResizable] BufferSource source);
+  undefined abAllowResizable([AllowResizable] ArrayBuffer ab);
+  undefined sabAllowResizable([AllowResizable] SharedArrayBuffer sab);
+  undefined abvAllowResizable([AllowResizable] ArrayBufferView abv);
+  undefined u8aAllowResizable([AllowResizable] Uint8Array u8);
 
-  undefined arsbs([AllowResizable] AllowSharedBufferSource source);
-  undefined arsabv([AllowResizable, AllowShared] ArrayBufferView abv);
-  undefined arsu8a([AllowResizable, AllowShared] Uint8Array u8);
+  undefined asbsAllowResizable([AllowResizable] AllowSharedBufferSource source);
+  undefined abvAllowResizableShared([AllowResizable, AllowShared] ArrayBufferView abv);
+  undefined u8aAllowResizableShared([AllowResizable, AllowShared] Uint8Array u8);
 };
