@@ -9,6 +9,7 @@ interface TypedefsAndUnions {
   undefined bufferSourceOrURLConsumer((BufferSource or URL) b);
   undefined arrayBufferViewOrURLMapConsumer((ArrayBufferView or URLMap) b);
   undefined arrayBufferViewDupConsumer((ArrayBufferView or Uint8ClampedArray) b);
+  undefined arrayBufferOrSharedArrayBufferConsumer((ArrayBuffer or SharedArrayBuffer) b);
 
   attribute (ArrayBuffer or Uint8Array or Uint16Array) buf;
   attribute DOMTimeStamp time;
