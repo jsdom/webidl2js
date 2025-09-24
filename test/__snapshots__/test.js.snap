@@ -1415,6 +1415,31 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].ab(...args);
     }
 
+    sab(sab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'sab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'sab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["SharedArrayBuffer"](curArg, {
+          context: "Failed to execute 'sab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].sab(...args);
+    }
+
     abv(abv) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -1495,6 +1520,34 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].abUnion(...args);
     }
 
+    sabUnion(ab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'sabUnion' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'sabUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isSharedArrayBuffer(curArg)) {
+        } else {
+          curArg = conversions["DOMString"](curArg, {
+            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].sabUnion(...args);
+    }
+
     u8aUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -1526,9 +1579,11 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
     ab: { enumerable: true },
+    sab: { enumerable: true },
     abv: { enumerable: true },
     u8a: { enumerable: true },
     abUnion: { enumerable: true },
+    sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
@@ -8391,6 +8446,35 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].arrayBufferViewDupConsumer(...args);
     }
 
+    arrayBufferOrSharedArrayBufferConsumer(b) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arrayBufferOrSharedArrayBufferConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+        } else if (utils.isSharedArrayBuffer(curArg)) {
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arrayBufferOrSharedArrayBufferConsumer(...args);
+    }
+
     get buf() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -8465,6 +8549,7 @@ exports.install = (globalObject, globalNames) => {
     bufferSourceOrURLConsumer: { enumerable: true },
     arrayBufferViewOrURLMapConsumer: { enumerable: true },
     arrayBufferViewDupConsumer: { enumerable: true },
+    arrayBufferOrSharedArrayBufferConsumer: { enumerable: true },
     buf: { enumerable: true },
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: "TypedefsAndUnions", configurable: true }
@@ -12583,6 +12668,31 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].ab(...args);
     }
 
+    sab(sab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'sab' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'sab' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["SharedArrayBuffer"](curArg, {
+          context: "Failed to execute 'sab' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].sab(...args);
+    }
+
     abv(abv) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -12663,6 +12773,34 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].abUnion(...args);
     }
 
+    sabUnion(ab) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'sabUnion' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'sabUnion' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isSharedArrayBuffer(curArg)) {
+        } else {
+          curArg = conversions["DOMString"](curArg, {
+            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].sabUnion(...args);
+    }
+
     u8aUnion(ab) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -12694,9 +12832,11 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(BufferSourceTypes.prototype, {
     bs: { enumerable: true },
     ab: { enumerable: true },
+    sab: { enumerable: true },
     abv: { enumerable: true },
     u8a: { enumerable: true },
     abUnion: { enumerable: true },
+    sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
@@ -19502,6 +19642,35 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].arrayBufferViewDupConsumer(...args);
     }
 
+    arrayBufferOrSharedArrayBufferConsumer(b) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'arrayBufferOrSharedArrayBufferConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isArrayBuffer(curArg)) {
+        } else if (utils.isSharedArrayBuffer(curArg)) {
+        } else {
+          throw new globalObject.TypeError(
+            "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " is not of any supported type."
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].arrayBufferOrSharedArrayBufferConsumer(...args);
+    }
+
     get buf() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -19576,6 +19745,7 @@ exports.install = (globalObject, globalNames) => {
     bufferSourceOrURLConsumer: { enumerable: true },
     arrayBufferViewOrURLMapConsumer: { enumerable: true },
     arrayBufferViewDupConsumer: { enumerable: true },
+    arrayBufferOrSharedArrayBufferConsumer: { enumerable: true },
     buf: { enumerable: true },
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: "TypedefsAndUnions", configurable: true }
