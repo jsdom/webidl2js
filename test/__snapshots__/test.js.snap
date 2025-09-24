@@ -1600,6 +1600,32 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    asu8a(u8) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asu8a' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asu8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["Uint8Array"](curArg, {
+          context: "Failed to execute 'asu8a' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowShared: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asu8a(...args);
+    }
+
     arbs(source) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -1757,6 +1783,7 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    asu8a: { enumerable: true },
     arbs: { enumerable: true },
     arab: { enumerable: true },
     arsab: { enumerable: true },
@@ -13096,6 +13123,32 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].u8aUnion(...args);
     }
 
+    asu8a(u8) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asu8a' called on an object that is not a valid instance of BufferSourceTypes."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asu8a' on 'BufferSourceTypes': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        curArg = conversions["Uint8Array"](curArg, {
+          context: "Failed to execute 'asu8a' on 'BufferSourceTypes': parameter 1",
+          globals: globalObject,
+          allowShared: true
+        });
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asu8a(...args);
+    }
+
     arbs(source) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -13253,6 +13306,7 @@ exports.install = (globalObject, globalNames) => {
     abUnion: { enumerable: true },
     sabUnion: { enumerable: true },
     u8aUnion: { enumerable: true },
+    asu8a: { enumerable: true },
     arbs: { enumerable: true },
     arab: { enumerable: true },
     arsab: { enumerable: true },
