@@ -4,6 +4,7 @@ interface TypedefsAndUnions {
   undefined numOrEnumConsumer((double or RequestDestination)? a);
   undefined numOrStrOrNullConsumer(NumOrStrOrNull a);
   undefined numOrStrOrURLOrNullConsumer(NumOrStrOrURLOrNull? a);
+  undefined numOrObjConsumer((double or object) a);
   undefined urlMapInnerConsumer(URLMapInner a);
   undefined urlMapConsumer(URLMap a);
   undefined bufferSourceOrURLConsumer((BufferSource or URL) b);

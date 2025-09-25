@@ -8645,6 +8645,42 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].numOrStrOrURLOrNullConsumer(...args);
     }
 
+    numOrObjConsumer(a) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'numOrObjConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isObject(curArg)) {
+          if (curArg[utils.implSymbol]) {
+            curArg = utils.implForWrapper(curArg);
+          }
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].numOrObjConsumer(...args);
+    }
+
     urlMapInnerConsumer(a) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -9080,6 +9116,7 @@ exports.install = (globalObject, globalNames) => {
     numOrEnumConsumer: { enumerable: true },
     numOrStrOrNullConsumer: { enumerable: true },
     numOrStrOrURLOrNullConsumer: { enumerable: true },
+    numOrObjConsumer: { enumerable: true },
     urlMapInnerConsumer: { enumerable: true },
     urlMapConsumer: { enumerable: true },
     bufferSourceOrURLConsumer: { enumerable: true },
@@ -20379,6 +20416,42 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].numOrStrOrURLOrNullConsumer(...args);
     }
 
+    numOrObjConsumer(a) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'numOrObjConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isObject(curArg)) {
+          if (curArg[utils.implSymbol]) {
+            curArg = utils.implForWrapper(curArg);
+          }
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].numOrObjConsumer(...args);
+    }
+
     urlMapInnerConsumer(a) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -20814,6 +20887,7 @@ exports.install = (globalObject, globalNames) => {
     numOrEnumConsumer: { enumerable: true },
     numOrStrOrNullConsumer: { enumerable: true },
     numOrStrOrURLOrNullConsumer: { enumerable: true },
+    numOrObjConsumer: { enumerable: true },
     urlMapInnerConsumer: { enumerable: true },
     urlMapConsumer: { enumerable: true },
     bufferSourceOrURLConsumer: { enumerable: true },
