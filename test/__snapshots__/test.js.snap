@@ -8407,6 +8407,8 @@ const utils = require("./utils.js");
 
 const RequestDestination = require("./RequestDestination.js");
 const URL = require("./URL.js");
+const AsyncCallbackFunction = require("./AsyncCallbackFunction.js");
+const AsyncCallbackInterface = require("./AsyncCallbackInterface.js");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -8923,6 +8925,82 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].arrayBufferOrSharedArrayBufferConsumer(...args);
     }
 
+    callbackFunctionOrNumConsumer(cb) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'callbackFunctionOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (typeof curArg === "function") {
+          curArg = AsyncCallbackFunction.convert(globalObject, curArg, {
+            context:
+              "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " callback function"
+          });
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].callbackFunctionOrNumConsumer(...args);
+    }
+
+    callbackInterfaceOrNumConsumer(cb) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'callbackInterfaceOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isObject(curArg)) {
+          curArg = AsyncCallbackInterface.convert(globalObject, curArg, {
+            context:
+              "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " callback interface"
+          });
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].callbackInterfaceOrNumConsumer(...args);
+    }
+
     get buf() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -9008,6 +9086,8 @@ exports.install = (globalObject, globalNames) => {
     arrayBufferViewOrURLMapConsumer: { enumerable: true },
     arrayBufferViewDupConsumer: { enumerable: true },
     arrayBufferOrSharedArrayBufferConsumer: { enumerable: true },
+    callbackFunctionOrNumConsumer: { enumerable: true },
+    callbackInterfaceOrNumConsumer: { enumerable: true },
     buf: { enumerable: true },
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: "TypedefsAndUnions", configurable: true }
@@ -20061,6 +20141,8 @@ const utils = require("./utils.js");
 
 const RequestDestination = require("./RequestDestination.js");
 const URL = require("./URL.js");
+const AsyncCallbackFunction = require("./AsyncCallbackFunction.js");
+const AsyncCallbackInterface = require("./AsyncCallbackInterface.js");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
@@ -20577,6 +20659,82 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].arrayBufferOrSharedArrayBufferConsumer(...args);
     }
 
+    callbackFunctionOrNumConsumer(cb) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'callbackFunctionOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (typeof curArg === "function") {
+          curArg = AsyncCallbackFunction.convert(globalObject, curArg, {
+            context:
+              "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " callback function"
+          });
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].callbackFunctionOrNumConsumer(...args);
+    }
+
+    callbackInterfaceOrNumConsumer(cb) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'callbackInterfaceOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (utils.isObject(curArg)) {
+          curArg = AsyncCallbackInterface.convert(globalObject, curArg, {
+            context:
+              "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
+              " callback interface"
+          });
+        } else if (typeof curArg === "number") {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        } else {
+          curArg = conversions["double"](curArg, {
+            context: "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            globals: globalObject
+          });
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].callbackInterfaceOrNumConsumer(...args);
+    }
+
     get buf() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
@@ -20662,6 +20820,8 @@ exports.install = (globalObject, globalNames) => {
     arrayBufferViewOrURLMapConsumer: { enumerable: true },
     arrayBufferViewDupConsumer: { enumerable: true },
     arrayBufferOrSharedArrayBufferConsumer: { enumerable: true },
+    callbackFunctionOrNumConsumer: { enumerable: true },
+    callbackInterfaceOrNumConsumer: { enumerable: true },
     buf: { enumerable: true },
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: "TypedefsAndUnions", configurable: true }
