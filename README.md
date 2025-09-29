@@ -475,12 +475,15 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `record<>` types
 - `Promise<>` types
 - `FrozenArray<>` types
+- Buffer source types
 - `typedef`s
 - Partial interfaces and dictionaries
 - Interface mixins
 - Basic types (via [webidl-conversions][])
 - Overload resolution (although [tricky cases are not easy on the implementation class](#overloaded-operations))
 - Variadic arguments
+- `[AllowShared]`
+- `[AllowResizable]`
 - `[Clamp]`
 - `[EnforceRange]`
 - `[Exposed]`
@@ -507,7 +510,8 @@ Notable missing features include:
 
 - Namespaces
 - `maplike<>` and `setlike<>`
-- `[AllowShared]`
+- `async_sequence<>` types
+- `ObservableArray<>` types
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LegacyFactoryFunction]`
