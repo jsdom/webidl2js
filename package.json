@@ -11,7 +11,7 @@
     "url": "git+https://github.com/jsdom/webidl2js.git"
   },
   "dependencies": {
-    "prettier": "^2.8.8",
+    "oxfmt": "^0.45.0",
     "webidl-conversions": "^8.0.0",
     "webidl2": "^24.5.0"
   },
