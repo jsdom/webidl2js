@@ -1,7 +1,11 @@
 "use strict";
 
+const { describe, test, before, snapshot } = require("node:test");
+const assert = require("node:assert/strict");
 const fs = require("fs");
 const path = require("path");
+
+snapshot.setDefaultSnapshotSerializers([value => value]);
 const Transformer = require("..");
 const reflector = require("./reflector");
 
@@ -9,33 +13,34 @@ const rootDir = path.resolve(__dirname, "..");
 const casesDir = path.resolve(__dirname, "cases");
 const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
+const snapshotsDir = path.resolve(__dirname, "snapshots");
 
 const idlFiles = fs.readdirSync(casesDir);
 
 describe("generation", () => {
   describe("built-in types", () => {
-    beforeAll(() => {
+    before(() => {
       const transformer = new Transformer();
       return transformer.generate(outputDir);
     });
 
-    test("Function", () => {
+    test("Function", t => {
       const outputFile = path.resolve(outputDir, "Function.js");
       const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-      expect(output).toMatchSnapshot();
+      t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "built-in-types", "Function.js"));
     });
 
-    test("VoidFunction", () => {
+    test("VoidFunction", t => {
       const outputFile = path.resolve(outputDir, "VoidFunction.js");
       const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-      expect(output).toMatchSnapshot();
+      t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "built-in-types", "VoidFunction.js"));
     });
   });
 
   describe("without processors", () => {
-    beforeAll(() => {
+    before(() => {
       const transformer = new Transformer();
       transformer.addSource(casesDir, implsDir);
 
@@ -43,17 +48,18 @@ describe("generation", () => {
     });
 
     for (const idlFile of idlFiles) {
-      test(idlFile, () => {
-        const outputFile = path.resolve(outputDir, `${path.basename(idlFile, ".webidl")}.js`);
+      test(idlFile, t => {
+        const basename = path.basename(idlFile, ".webidl");
+        const outputFile = path.resolve(outputDir, `${basename}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-        expect(output).toMatchSnapshot();
+        t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "without-processors", `${basename}.js`));
       });
     }
   });
 
   describe("with processors", () => {
-    beforeAll(() => {
+    before(() => {
       const transformer = new Transformer({
         processCEReactions(code) {
           const ceReactions = this.addImport("../CEReactions");
@@ -110,11 +116,12 @@ describe("generation", () => {
     });
 
     for (const idlFile of idlFiles) {
-      test(idlFile, () => {
-        const outputFile = path.resolve(outputDir, `${path.basename(idlFile, ".webidl")}.js`);
+      test(idlFile, t => {
+        const basename = path.basename(idlFile, ".webidl");
+        const outputFile = path.resolve(outputDir, `${basename}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-        expect(output).toMatchSnapshot();
+        t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "with-processors", `${basename}.js`));
       });
     }
   });
@@ -122,6 +129,6 @@ describe("generation", () => {
   test("utils.js", () => {
     const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
     const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });
-    expect(output).toBe(input);
+    assert.strictEqual(output, input);
   });
 });

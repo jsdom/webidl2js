@@ -1,5 +1,7 @@
 "use strict";
 
+const { describe, test } = require("node:test");
+const assert = require("node:assert/strict");
 const utils = require("../lib/output/utils");
 
 describe("utils.js", () => {
@@ -15,20 +17,20 @@ describe("utils.js", () => {
 
     for (const primitive of primitives) {
       test(primitive === null ? "null" : typeof primitive, () => {
-        expect(utils.isObject(primitive)).toBe(false);
+        assert.strictEqual(utils.isObject(primitive), false);
       });
     }
 
     test("bigint", () => {
-      expect(utils.isObject(123n)).toBe(false);
+      assert.strictEqual(utils.isObject(123n), false);
     });
 
     test("object", () => {
-      expect(utils.isObject({})).toBe(true);
+      assert.strictEqual(utils.isObject({}), true);
     });
 
     test("function", () => {
-      expect(utils.isObject(() => {})).toBe(true);
+      assert.strictEqual(utils.isObject(() => {}), true);
     });
   });
 
@@ -36,8 +38,8 @@ describe("utils.js", () => {
     test("creates a new object in the given realm with the properties of the given object", () => {
       const realm = { Object: function Object() {}, Array };
       const object = utils.newObjectInRealm(realm, { foo: 42 });
-      expect(object).toBeInstanceOf(realm.Object);
-      expect(object).toEqual({ foo: 42 });
+      assert(object instanceof realm.Object);
+      assert.deepStrictEqual({ ...object }, { foo: 42 });
     });
 
     test("uses the captured intrinsic Object, not the current realm.Object", () => {
@@ -45,8 +47,8 @@ describe("utils.js", () => {
       utils.initCtorRegistry(realm);
       realm.Object = function Object() {};
       const object = utils.newObjectInRealm(realm, {});
-      expect(object).toBeInstanceOf(Object);
-      expect(object).not.toBeInstanceOf(realm.Object);
+      assert(object instanceof Object);
+      assert(!(object instanceof realm.Object));
     });
   });
 
@@ -170,15 +172,15 @@ describe("utils.js", () => {
         const isAsync = label.includes("async");
         const asyncSequence = utils.convertAsyncSequence(iterable, x => x);
 
-        expect(asyncSequence.object).toBe(iterable);
-        expect(asyncSequence.method).toBe(isAsync ? iterable[Symbol.asyncIterator] : iterable[Symbol.iterator]);
-        expect(asyncSequence.type).toBe(isAsync ? "async" : "sync");
-        expect(utils.wrapperForImpl(asyncSequence)).toBe(iterable);
+        assert.strictEqual(asyncSequence.object, iterable);
+        assert.strictEqual(asyncSequence.method, isAsync ? iterable[Symbol.asyncIterator] : iterable[Symbol.iterator]);
+        assert.strictEqual(asyncSequence.type, isAsync ? "async" : "sync");
+        assert.strictEqual(utils.wrapperForImpl(asyncSequence), iterable);
 
         const iterator = asyncSequence[Symbol.asyncIterator]();
-        await expect(iterator.next()).resolves.toEqual({ done: false, value: "a" });
-        await expect(iterator.next()).resolves.toEqual({ done: false, value: "b" });
-        await expect(iterator.next()).resolves.toEqual({ done: true, value: undefined });
+        assert.deepStrictEqual(await iterator.next(), { done: false, value: "a" });
+        assert.deepStrictEqual(await iterator.next(), { done: false, value: "b" });
+        assert.deepStrictEqual(await iterator.next(), { done: true, value: undefined });
       });
     }
 
@@ -207,9 +209,9 @@ describe("utils.js", () => {
 
     for (const [label, iterable] of badIterables) {
       test(`throws on invalid iterables; specifically ${label}`, () => {
-        expect(() => {
+        assert.throws(() => {
           utils.convertAsyncSequence(iterable, x => x);
-        }).toThrow(TypeError);
+        }, TypeError);
       });
     }
 
@@ -229,9 +231,9 @@ describe("utils.js", () => {
     for (const [label, iterable] of badIteratorMethods) {
       test(`throws when opening iterables with bad iterator methods; specifically ${label}`, () => {
         const asyncSequence = utils.convertAsyncSequence(iterable, x => x);
-        expect(() => {
+        assert.throws(() => {
           asyncSequence[Symbol.asyncIterator]();
-        }).toThrow(TypeError);
+        }, TypeError);
       });
     }
   });
