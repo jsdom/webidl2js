@@ -5,7 +5,7 @@ export default [
   {
     ignores: [
       "test/output/",
-      "test/__snapshots__/"
+      "test/snapshots/"
     ]
   },
   {
@@ -13,15 +13,6 @@ export default [
     languageOptions: {
       sourceType: "commonjs",
       globals: globals.node
-    }
-  },
-  {
-    files: [
-      "test/test.js",
-      "test/*.test.js"
-    ],
-    languageOptions: {
-      globals: globals.jest
     }
   },
   ...domenicConfig,
