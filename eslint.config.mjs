@@ -1,5 +1,6 @@
 import domenicConfig from "@domenic/eslint-config";
 import globals from "globals";
+import stylisticConfig from "@domenic/eslint-config/stylistic";
 
 export default [
   {
@@ -16,9 +17,10 @@ export default [
     }
   },
   ...domenicConfig,
+  ...stylisticConfig,
   {
     rules: {
-      "max-len": ["error", { code: 120, ignoreTemplateLiterals: true }],
+      "@stylistic/max-len": ["error", { code: 120, ignoreUrls: true, ignoreTemplateLiterals: true }],
       "require-unicode-regexp": "off"
     }
   }

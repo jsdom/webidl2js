@@ -16,9 +16,10 @@
     "webidl2": "^24.5.0"
   },
   "devDependencies": {
-    "@domenic/eslint-config": "^4.0.1",
-    "eslint": "^9.35.0",
-    "globals": "^16.3.0"
+    "@domenic/eslint-config": "^5.1.0",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.2.0",
+    "globals": "^17.5.0"
   },
   "scripts": {
     "test": "node --test test/*.js",
