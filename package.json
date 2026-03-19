@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "oxfmt": "^0.45.0",
-    "webidl-conversions": "^8.0.0",
+    "webidl-conversions": "^8.0.1",
     "webidl2": "^24.5.0"
   },
   "devDependencies": {
