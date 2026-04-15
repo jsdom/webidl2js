@@ -7257,6 +7257,81 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].sequenceConsumer2(...args);
     }
 
+    asyncSequenceConsumer(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = conversions["USVString"](item, {
+                context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+                globals: globalObject
+              });
+              return item;
+            },
+            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asyncSequenceConsumer(...args);
+    }
+
+    asyncSequenceConsumer2(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = utils.tryImplForWrapper(item);
+              return item;
+            },
+            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asyncSequenceConsumer2(...args);
+    }
+
     frozenArrayConsumer(arr) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -7295,13 +7370,55 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].frozenArrayConsumer(...args);
     }
+
+    asyncSequencePassthrough(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequencePassthrough' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = conversions["double"](item, {
+                context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
+                globals: globalObject
+              });
+              return item;
+            },
+            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return utils.tryWrapperForImpl(esValue[implSymbol].asyncSequencePassthrough(...args));
+    }
   }
   Object.defineProperties(SeqAndRec.prototype, {
     recordConsumer: { enumerable: true },
     recordConsumer2: { enumerable: true },
     sequenceConsumer: { enumerable: true },
     sequenceConsumer2: { enumerable: true },
+    asyncSequenceConsumer: { enumerable: true },
+    asyncSequenceConsumer2: { enumerable: true },
     frozenArrayConsumer: { enumerable: true },
+    asyncSequencePassthrough: { enumerable: true },
     [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true }
   });
   ctorRegistry[interfaceName] = SeqAndRec;
@@ -19028,6 +19145,81 @@ exports.install = (globalObject, globalNames) => {
       return esValue[implSymbol].sequenceConsumer2(...args);
     }
 
+    asyncSequenceConsumer(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = conversions["USVString"](item, {
+                context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+                globals: globalObject
+              });
+              return item;
+            },
+            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asyncSequenceConsumer(...args);
+    }
+
+    asyncSequenceConsumer2(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = utils.tryImplForWrapper(item);
+              return item;
+            },
+            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return esValue[implSymbol].asyncSequenceConsumer2(...args);
+    }
+
     frozenArrayConsumer(arr) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
       if (!exports.is(esValue)) {
@@ -19066,13 +19258,55 @@ exports.install = (globalObject, globalNames) => {
       }
       return esValue[implSymbol].frozenArrayConsumer(...args);
     }
+
+    asyncSequencePassthrough(async_seq) {
+      const esValue = this !== null && this !== undefined ? this : globalObject;
+      if (!exports.is(esValue)) {
+        throw new globalObject.TypeError(
+          "'asyncSequencePassthrough' called on an object that is not a valid instance of SeqAndRec."
+        );
+      }
+
+      if (arguments.length < 1) {
+        throw new globalObject.TypeError(
+          \`Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only \${arguments.length} present.\`
+        );
+      }
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (!utils.isObject(curArg)) {
+          throw new globalObject.TypeError(
+            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
+              " is not an async iterable object."
+          );
+        } else {
+          curArg = utils.convertAsyncSequence(
+            curArg,
+            function (item) {
+              item = conversions["double"](item, {
+                context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
+                globals: globalObject
+              });
+              return item;
+            },
+            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
+          );
+        }
+        args.push(curArg);
+      }
+      return utils.tryWrapperForImpl(esValue[implSymbol].asyncSequencePassthrough(...args));
+    }
   }
   Object.defineProperties(SeqAndRec.prototype, {
     recordConsumer: { enumerable: true },
     recordConsumer2: { enumerable: true },
     sequenceConsumer: { enumerable: true },
     sequenceConsumer2: { enumerable: true },
+    asyncSequenceConsumer: { enumerable: true },
+    asyncSequenceConsumer2: { enumerable: true },
     frozenArrayConsumer: { enumerable: true },
+    asyncSequencePassthrough: { enumerable: true },
     [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true }
   });
   ctorRegistry[interfaceName] = SeqAndRec;
