@@ -173,6 +173,7 @@ describe("utils.js", () => {
         expect(asyncSequence.object).toBe(iterable);
         expect(asyncSequence.method).toBe(isAsync ? iterable[Symbol.asyncIterator] : iterable[Symbol.iterator]);
         expect(asyncSequence.type).toBe(isAsync ? "async" : "sync");
+        expect(utils.wrapperForImpl(asyncSequence)).toBe(iterable);
 
         const iterator = asyncSequence[Symbol.asyncIterator]();
         expect(await iterator.next()).toEqual({ done: false, value: "a" });
