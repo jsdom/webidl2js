@@ -176,9 +176,9 @@ describe("utils.js", () => {
         expect(utils.wrapperForImpl(asyncSequence)).toBe(iterable);
 
         const iterator = asyncSequence[Symbol.asyncIterator]();
-        expect(await iterator.next()).toEqual({ done: false, value: "a" });
-        expect(await iterator.next()).toEqual({ done: false, value: "b" });
-        expect(await iterator.next()).toEqual({ done: true, value: undefined });
+        await expect(iterator.next()).resolves.toEqual({ done: false, value: "a" });
+        await expect(iterator.next()).resolves.toEqual({ done: false, value: "b" });
+        await expect(iterator.next()).resolves.toEqual({ done: true, value: undefined });
       });
     }
 
