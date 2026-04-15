@@ -210,5 +210,27 @@ describe("utils.js", () => {
         }).toThrow(TypeError);
       });
     }
+
+    const badIteratorMethods = [
+      [
+        "an object with an @@iterator method returning a non-object", {
+          [Symbol.iterator]: () => 42
+        }
+      ],
+      [
+        "an object with an @@asyncIterator method returning a non-object", {
+          [Symbol.asyncIterator]: () => 42
+        }
+      ]
+    ];
+
+    for (const [label, iterable] of badIteratorMethods) {
+      test(`throws when opening iterables with bad iterator methods; specifically ${label}`, () => {
+        const asyncSequence = utils.convertAsyncSequence(iterable, x => x);
+        expect(() => {
+          asyncSequence[Symbol.asyncIterator]();
+        }).toThrow(TypeError);
+      });
+    }
   });
 });
