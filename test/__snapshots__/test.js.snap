@@ -10206,7 +10206,10 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (curArg !== undefined) {
           if (utils.isObject(curArg)) {
-            if (curArg[Symbol.iterator] !== undefined) {
+            if (
+              utils.getMethod(curArg, Symbol.iterator, "Failed to construct 'URLSearchParams': parameter 1") !==
+              undefined
+            ) {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
                   "Failed to construct 'URLSearchParams': parameter 1" + " sequence" + " is not an iterable object."
@@ -22094,7 +22097,10 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (curArg !== undefined) {
           if (utils.isObject(curArg)) {
-            if (curArg[Symbol.iterator] !== undefined) {
+            if (
+              utils.getMethod(curArg, Symbol.iterator, "Failed to construct 'URLSearchParams': parameter 1") !==
+              undefined
+            ) {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
                   "Failed to construct 'URLSearchParams': parameter 1" + " sequence" + " is not an iterable object."
