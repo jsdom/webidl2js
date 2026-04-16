@@ -7273,24 +7273,17 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = conversions["USVString"](item, {
-                context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
-                globals: globalObject
-              });
-              return item;
-            },
-            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = conversions["USVString"](item, {
+              context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+              globals: globalObject
+            });
+            return item;
+          },
+          "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return esValue[implSymbol].asyncSequenceConsumer(...args);
@@ -7312,21 +7305,14 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = utils.tryImplForWrapper(item);
-              return item;
-            },
-            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = utils.tryImplForWrapper(item);
+            return item;
+          },
+          "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return esValue[implSymbol].asyncSequenceConsumer2(...args);
@@ -7387,24 +7373,17 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = conversions["double"](item, {
-                context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
-                globals: globalObject
-              });
-              return item;
-            },
-            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = conversions["double"](item, {
+              context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
+              globals: globalObject
+            });
+            return item;
+          },
+          "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return utils.tryWrapperForImpl(esValue[implSymbol].asyncSequencePassthrough(...args));
@@ -19164,24 +19143,17 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = conversions["USVString"](item, {
-                context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
-                globals: globalObject
-              });
-              return item;
-            },
-            "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = conversions["USVString"](item, {
+              context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+              globals: globalObject
+            });
+            return item;
+          },
+          "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return esValue[implSymbol].asyncSequenceConsumer(...args);
@@ -19203,21 +19175,14 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = utils.tryImplForWrapper(item);
-              return item;
-            },
-            "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = utils.tryImplForWrapper(item);
+            return item;
+          },
+          "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return esValue[implSymbol].asyncSequenceConsumer2(...args);
@@ -19278,24 +19243,17 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        if (!utils.isObject(curArg)) {
-          throw new globalObject.TypeError(
-            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
-              " is not an async iterable object."
-          );
-        } else {
-          curArg = utils.convertAsyncSequence(
-            curArg,
-            function (item) {
-              item = conversions["double"](item, {
-                context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
-                globals: globalObject
-              });
-              return item;
-            },
-            "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
-          );
-        }
+        curArg = utils.convertAsyncSequence(
+          curArg,
+          function (item) {
+            item = conversions["double"](item, {
+              context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
+              globals: globalObject
+            });
+            return item;
+          },
+          "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
+        );
         args.push(curArg);
       }
       return utils.tryWrapperForImpl(esValue[implSymbol].asyncSequencePassthrough(...args));
