@@ -192,6 +192,7 @@ describe("utils.js", () => {
       ["Object.create(null)", Object.create(null)],
       ["a function", () => 42],
       ["a symbol", Symbol("foo")],
+      ["a string", "ab"],
       [
         "an object with a non-callable @@iterator method", {
           [Symbol.iterator]: 42
