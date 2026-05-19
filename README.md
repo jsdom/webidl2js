@@ -477,7 +477,8 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `FrozenArray<>` types
 - Buffer source types
 - `typedef`s
-- Partial interfaces and dictionaries
+- Namespaces
+- Partial interfaces, namespaces, and dictionaries
 - Interface mixins
 - Basic types (via [webidl-conversions][])
 - Overload resolution (although [tricky cases are not easy on the implementation class](#overloaded-operations))
@@ -508,7 +509,6 @@ Supported Web IDL extensions defined in HTML:
 
 Notable missing features include:
 
-- Namespaces
 - `maplike<>` and `setlike<>`
 - `async_sequence<>` types
 - `ObservableArray<>` types

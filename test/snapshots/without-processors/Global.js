@@ -199,14 +199,10 @@ exports.install = (globalObject, globalNames) => {
     }
 
     static get staticAttr() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
       return Impl.implementation["staticAttr"];
     }
 
     static set staticAttr(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'staticAttr' property on 'Global': The provided value",
         globals: globalObject
