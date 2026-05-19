@@ -223,9 +223,7 @@ exports.install = (globalObject, globalNames) => {
 
     static get staticPromiseAttribute() {
       try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        return Impl.implementation["staticPromiseAttribute"];
+        return utils.tryWrapperForImpl(Impl.implementation["staticPromiseAttribute"]);
       } catch (e) {
         return globalObject.Promise.reject(e);
       }

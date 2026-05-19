@@ -130,14 +130,10 @@ exports.install = (globalObject, globalNames) => {
     }
 
     static get abc() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
       return Impl.implementation["abc"];
     }
 
     static set abc(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'abc' property on 'Static': The provided value",
         globals: globalObject
