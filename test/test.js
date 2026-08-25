@@ -4,6 +4,7 @@ const { describe, test, before, snapshot } = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("fs");
 const path = require("path");
+const vm = require("vm");
 
 snapshot.setDefaultSnapshotSerializers([value => value]);
 const Transformer = require("..");
@@ -16,6 +17,16 @@ const outputDir = path.resolve(__dirname, "output");
 const snapshotsDir = path.resolve(__dirname, "snapshots");
 
 const idlFiles = fs.readdirSync(casesDir);
+
+function createLegacyPlatformObject(name, privateData) {
+  const generated = require(path.resolve(outputDir, `${name}.js`));
+  const utils = require(path.resolve(outputDir, "utils.js"));
+  const context = vm.createContext();
+  const globalObject = vm.runInContext("globalThis", context);
+  generated.install(globalObject, ["Window"]);
+  const wrapper = generated.create(globalObject, [], privateData);
+  return { globalObject, implementation: utils.implForWrapper(wrapper), wrapper };
+}
 
 describe("generation", () => {
   describe("built-in types", () => {
@@ -56,6 +67,99 @@ describe("generation", () => {
         t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "without-processors", `${basename}.js`));
       });
     }
+
+    describe("legacy platform object property access", () => {
+      test("indexed properties and ordinary fallbacks", () => {
+        const { globalObject, wrapper } = createLegacyPlatformObject("URLList", { values: ["zero"] });
+
+        assert.strictEqual(wrapper[0], "zero");
+        assert.strictEqual(wrapper[1], undefined);
+
+        Object.defineProperty(globalObject.URLList.prototype, "receiver", {
+          configurable: true,
+          get() {
+            return this;
+          }
+        });
+        const derived = Object.create(wrapper);
+        assert.strictEqual(derived.receiver, derived);
+
+        Object.defineProperty(wrapper, "ownAccessor", {
+          configurable: true,
+          get() {
+            return this;
+          }
+        });
+        assert.strictEqual(wrapper.ownAccessor, wrapper);
+
+        const symbol = Symbol("test");
+        wrapper[symbol] = "symbol value";
+        assert.strictEqual(wrapper[symbol], "symbol value");
+
+        Object.setPrototypeOf(wrapper, null);
+        assert.strictEqual(wrapper.missing, undefined);
+      });
+
+      test("combined indexed and named properties", () => {
+        const named = {
+          1: "named numeric property",
+          item: "named prototype property",
+          person: "named property"
+        };
+        const { implementation, wrapper } = createLegacyPlatformObject("HTMLCollection", {
+          indexed: ["indexed property"],
+          named
+        });
+
+        implementation.indexedCalls.length = 0;
+        implementation.namedCalls.length = 0;
+        assert.strictEqual(wrapper[0], "indexed property");
+        assert.deepStrictEqual(implementation.indexedCalls, [0]);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+
+        assert.strictEqual(wrapper[1], undefined);
+        assert.deepStrictEqual(implementation.indexedCalls, [0, 1]);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "1"), undefined);
+        assert.deepStrictEqual(implementation.indexedCalls, [0, 1, 1]);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+
+        assert.strictEqual(wrapper.person, "named property");
+        assert.deepStrictEqual(implementation.namedCalls, ["person"]);
+        assert.strictEqual(typeof wrapper.item, "function");
+
+        const ownNamed = {};
+        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject("HTMLCollection", { named: ownNamed });
+        Object.defineProperty(wrapperWithOwnProperty, "person", {
+          configurable: true,
+          value: "own property"
+        });
+        ownNamed.person = "named property";
+        assert.strictEqual(wrapperWithOwnProperty.person, "own property");
+      });
+
+      test("LegacyOverrideBuiltins named properties", () => {
+        const entries = { inherited: "named property" };
+        const { globalObject, wrapper } = createLegacyPlatformObject("LegacyOverrideBuiltins", { entries });
+        Object.defineProperty(globalObject.LegacyOverrideBuiltins.prototype, "inherited", {
+          configurable: true,
+          value: "inherited property"
+        });
+        assert.strictEqual(wrapper.inherited, "named property");
+
+        const ownEntries = {};
+        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject("LegacyOverrideBuiltins", {
+          entries: ownEntries
+        });
+        Object.defineProperty(wrapperWithOwnProperty, "own", {
+          configurable: true,
+          value: "own property"
+        });
+        ownEntries.own = "named property";
+        assert.strictEqual(wrapperWithOwnProperty.own, "own property");
+      });
+    });
   });
 
   describe("with processors", () => {

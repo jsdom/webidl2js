@@ -251,22 +251,13 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.get(target, P, receiver);
     }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc === undefined) {
-      const parent = Object.getPrototypeOf(target);
-      if (parent === null) {
-        return undefined;
-      }
-      return Reflect.get(target, P, receiver);
+
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
+      const namedValue = target[implSymbol].getItem(P);
+      return utils.tryWrapperForImpl(namedValue);
     }
-    if (!desc.get && !desc.set) {
-      return desc.value;
-    }
-    const getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return Reflect.apply(getter, receiver, []);
+
+    return Reflect.get(target, P, receiver);
   }
 
   has(target, P) {
@@ -303,11 +294,9 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.getOwnPropertyDescriptor(target, P);
     }
-    let ignoreNamedProps = false;
 
-    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target) && !ignoreNamedProps) {
+    if (target[implSymbol][utils.supportsPropertyName](P) && !(P in target)) {
       const namedValue = target[implSymbol].getItem(P);
-
       return {
         writable: true,
         enumerable: true,
