@@ -166,22 +166,17 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.get(target, P, receiver);
     }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc === undefined) {
-      const parent = Object.getPrototypeOf(target);
-      if (parent === null) {
-        return undefined;
+
+    if (utils.isArrayIndexPropName(P)) {
+      const index = P >>> 0;
+
+      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
+        const indexedValue = target[implSymbol].item(index);
+        return utils.tryWrapperForImpl(indexedValue);
       }
-      return Reflect.get(target, P, receiver);
     }
-    if (!desc.get && !desc.set) {
-      return desc.value;
-    }
-    const getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return Reflect.apply(getter, receiver, []);
+
+    return Reflect.get(target, P, receiver);
   }
 
   has(target, P) {
@@ -216,7 +211,6 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.getOwnPropertyDescriptor(target, P);
     }
-    let ignoreNamedProps = false;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
@@ -230,7 +224,6 @@ class ProxyHandler {
           value: utils.tryWrapperForImpl(indexedValue)
         };
       }
-      ignoreNamedProps = true;
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);

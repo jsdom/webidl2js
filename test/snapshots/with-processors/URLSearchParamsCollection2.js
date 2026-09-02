@@ -131,22 +131,27 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.get(target, P, receiver);
     }
-    const desc = this.getOwnPropertyDescriptor(target, P);
-    if (desc === undefined) {
-      const parent = Object.getPrototypeOf(target);
-      if (parent === null) {
-        return undefined;
+    let ignoreNamedProps = false;
+
+    if (utils.isArrayIndexPropName(P)) {
+      const index = P >>> 0;
+
+      const indexedValue = target[implSymbol].item(index);
+      if (indexedValue !== undefined) {
+        return utils.tryWrapperForImpl(indexedValue);
       }
-      return Reflect.get(target, P, receiver);
+
+      ignoreNamedProps = true;
     }
-    if (!desc.get && !desc.set) {
-      return desc.value;
+
+    if (!ignoreNamedProps) {
+      const namedValue = target[implSymbol].namedItem(P);
+      if (namedValue !== null && !(P in target)) {
+        return utils.tryWrapperForImpl(namedValue);
+      }
     }
-    const getter = desc.get;
-    if (getter === undefined) {
-      return undefined;
-    }
-    return Reflect.apply(getter, receiver, []);
+
+    return Reflect.get(target, P, receiver);
   }
 
   has(target, P) {
@@ -191,6 +196,7 @@ class ProxyHandler {
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
+
       const indexedValue = target[implSymbol].item(index);
       if (indexedValue !== undefined) {
         return {
@@ -200,18 +206,20 @@ class ProxyHandler {
           value: utils.tryWrapperForImpl(indexedValue)
         };
       }
+
       ignoreNamedProps = true;
     }
 
-    const namedValue = target[implSymbol].namedItem(P);
-
-    if (namedValue !== null && !(P in target) && !ignoreNamedProps) {
-      return {
-        writable: true,
-        enumerable: true,
-        configurable: true,
-        value: utils.tryWrapperForImpl(namedValue)
-      };
+    if (!ignoreNamedProps) {
+      const namedValue = target[implSymbol].namedItem(P);
+      if (namedValue !== null && !(P in target)) {
+        return {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: utils.tryWrapperForImpl(namedValue)
+        };
+      }
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);

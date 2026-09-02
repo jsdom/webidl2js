@@ -6,7 +6,7 @@ const utils = require("./utils.js");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
-const interfaceName = "URLList";
+const interfaceName = "LegacyOverrideBuiltins";
 
 exports.is = value => {
   return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
@@ -18,7 +18,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   if (exports.is(value)) {
     return utils.implForWrapper(value);
   }
-  throw new globalObject.TypeError(`${context} is not of type 'URLList'.`);
+  throw new globalObject.TypeError(`${context} is not of type 'LegacyOverrideBuiltins'.`);
 };
 
 function makeWrapper(globalObject, newTarget) {
@@ -28,7 +28,7 @@ function makeWrapper(globalObject, newTarget) {
   }
 
   if (!utils.isObject(proto)) {
-    proto = globalObject[ctorRegistrySymbol]["URLList"].prototype;
+    proto = globalObject[ctorRegistrySymbol]["LegacyOverrideBuiltins"].prototype;
   }
 
   return Object.create(proto);
@@ -99,60 +99,20 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-  class URLList {
+  class LegacyOverrideBuiltins {
     constructor() {
       throw new globalObject.TypeError("Illegal constructor");
     }
-
-    item(index) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
-        throw new globalObject.TypeError("'item' called on an object that is not a valid instance of URLList.");
-      }
-
-      if (arguments.length < 1) {
-        throw new globalObject.TypeError(
-          `Failed to execute 'item' on 'URLList': 1 argument required, but only ${arguments.length} present.`
-        );
-      }
-      const args = [];
-      {
-        let curArg = arguments[0];
-        curArg = conversions["unsigned long"](curArg, {
-          context: "Failed to execute 'item' on 'URLList': parameter 1",
-          globals: globalObject
-        });
-        args.push(curArg);
-      }
-      return utils.tryWrapperForImpl(esValue[implSymbol].item(...args));
-    }
-
-    get length() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
-        throw new globalObject.TypeError("'get length' called on an object that is not a valid instance of URLList.");
-      }
-
-      return esValue[implSymbol]["length"];
-    }
   }
-  Object.defineProperties(URLList.prototype, {
-    item: { enumerable: true },
-    length: { enumerable: true },
-    [Symbol.toStringTag]: { value: "URLList", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true },
-    keys: { value: globalObject.Array.prototype.keys, configurable: true, enumerable: true, writable: true },
-    values: { value: globalObject.Array.prototype.values, configurable: true, enumerable: true, writable: true },
-    entries: { value: globalObject.Array.prototype.entries, configurable: true, enumerable: true, writable: true },
-    forEach: { value: globalObject.Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
+  Object.defineProperties(LegacyOverrideBuiltins.prototype, {
+    [Symbol.toStringTag]: { value: "LegacyOverrideBuiltins", configurable: true }
   });
-  ctorRegistry[interfaceName] = URLList;
+  ctorRegistry[interfaceName] = LegacyOverrideBuiltins;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URLList
+    value: LegacyOverrideBuiltins
   });
 };
 
@@ -167,13 +127,9 @@ class ProxyHandler {
       return Reflect.get(target, P, receiver);
     }
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
-        return utils.tryWrapperForImpl(indexedValue);
-      }
+    if (target[implSymbol][utils.supportsPropertyName](P) && !Object.hasOwn(target, P)) {
+      const namedValue = target[implSymbol][utils.namedGet](P);
+      return utils.tryWrapperForImpl(namedValue);
     }
 
     return Reflect.get(target, P, receiver);
@@ -197,8 +153,10 @@ class ProxyHandler {
   ownKeys(target) {
     const keys = new Set();
 
-    for (const key of target[implSymbol][utils.supportedPropertyIndices]) {
-      keys.add(`${key}`);
+    for (const key of target[implSymbol][utils.supportedPropertyNames]) {
+      if (!Object.hasOwn(target, key)) {
+        keys.add(`${key}`);
+      }
     }
 
     for (const key of Reflect.ownKeys(target)) {
@@ -212,18 +170,14 @@ class ProxyHandler {
       return Reflect.getOwnPropertyDescriptor(target, P);
     }
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
-        return {
-          writable: false,
-          enumerable: true,
-          configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
-        };
-      }
+    if (target[implSymbol][utils.supportsPropertyName](P) && !Object.hasOwn(target, P)) {
+      const namedValue = target[implSymbol][utils.namedGet](P);
+      return {
+        writable: false,
+        enumerable: true,
+        configurable: true,
+        value: utils.tryWrapperForImpl(namedValue)
+      };
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
@@ -240,20 +194,6 @@ class ProxyHandler {
     }
     let ownDesc;
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
-        ownDesc = {
-          writable: false,
-          enumerable: true,
-          configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
-        };
-      }
-    }
-
     if (ownDesc === undefined) {
       ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
     }
@@ -267,7 +207,8 @@ class ProxyHandler {
 
     const globalObject = this._globalObject;
 
-    if (utils.isArrayIndexPropName(P)) {
+    const creating = !target[implSymbol][utils.supportsPropertyName](P);
+    if (!creating) {
       return false;
     }
 
@@ -281,9 +222,8 @@ class ProxyHandler {
 
     const globalObject = this._globalObject;
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-      return !target[implSymbol][utils.supportsPropertyIndex](index);
+    if (target[implSymbol][utils.supportsPropertyName](P) && !Object.hasOwn(target, P)) {
+      return false;
     }
 
     return Reflect.deleteProperty(target, P);
@@ -294,4 +234,4 @@ class ProxyHandler {
   }
 }
 
-const Impl = require("../implementations/URLList.js");
+const Impl = require("../implementations/LegacyOverrideBuiltins.js");
