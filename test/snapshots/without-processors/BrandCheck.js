@@ -6,7 +6,7 @@ const utils = require("./utils.js");
 const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
-const interfaceName = "LegacyLenientAttributes";
+const interfaceName = "BrandCheck";
 
 exports.is = value => {
   return (
@@ -23,7 +23,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   if (exports.is(value)) {
     return utils.implForWrapper(value);
   }
-  throw new globalObject.TypeError(`${context} is not of type 'LegacyLenientAttributes'.`);
+  throw new globalObject.TypeError(`${context} is not of type 'BrandCheck'.`);
 };
 
 function makeWrapper(globalObject, newTarget) {
@@ -33,7 +33,7 @@ function makeWrapper(globalObject, newTarget) {
   }
 
   if (!utils.isObject(proto)) {
-    proto = globalObject[ctorRegistrySymbol]["LegacyLenientAttributes"].prototype;
+    proto = globalObject[ctorRegistrySymbol]["BrandCheck"].prototype;
   }
 
   return Object.create(proto);
@@ -91,116 +91,57 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-  class LegacyLenientAttributes {
+  class BrandCheck {
     constructor() {
       throw new globalObject.TypeError("Illegal constructor");
     }
 
-    get lenientSetter() {
+    method() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
-
       if (!exports.is(esValue)) {
-        throw new globalObject.TypeError(
-          "'get lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes."
-        );
+        throw new globalObject.TypeError("'method' called on an object that is not a valid instance of BrandCheck.");
       }
 
-      return esValue[implSymbol]["lenientSetter"];
+      return esValue[implSymbol].method();
     }
 
-    set lenientSetter(V) {
+    get value() {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        throw new globalObject.TypeError(
-          "'set lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes."
-        );
-      }
-    }
-
-    get lenientThisSetter() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
-        return;
+        throw new globalObject.TypeError("'get value' called on an object that is not a valid instance of BrandCheck.");
       }
 
-      return esValue[implSymbol]["lenientThisSetter"];
+      return esValue[implSymbol]["value"];
     }
 
-    set lenientThisSetter(V) {}
-
-    get lenientThis() {
+    set value(V) {
       const esValue = this !== null && this !== undefined ? this : globalObject;
 
       if (!exports.is(esValue)) {
-        return;
-      }
-
-      return esValue[implSymbol]["lenientThis"];
-    }
-
-    set lenientThis(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
-        return;
+        throw new globalObject.TypeError("'set value' called on an object that is not a valid instance of BrandCheck.");
       }
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'lenientThis' property on 'LegacyLenientAttributes': The provided value",
+        context: "Failed to set the 'value' property on 'BrandCheck': The provided value",
         globals: globalObject
       });
 
-      esValue[implSymbol]["lenientThis"] = V;
-    }
-
-    get readonlyLenientThis() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
-        return;
-      }
-
-      return esValue[implSymbol]["readonlyLenientThis"];
-    }
-
-    get replaceableLenientThis() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
-        return;
-      }
-
-      return esValue[implSymbol]["replaceableLenientThis"];
-    }
-
-    set replaceableLenientThis(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      Object.defineProperty(esValue, "replaceableLenientThis", {
-        configurable: true,
-        enumerable: true,
-        value: V,
-        writable: true
-      });
+      esValue[implSymbol]["value"] = V;
     }
   }
-  Object.defineProperties(LegacyLenientAttributes.prototype, {
-    lenientSetter: { enumerable: true },
-    lenientThisSetter: { enumerable: true },
-    lenientThis: { enumerable: true },
-    readonlyLenientThis: { enumerable: true },
-    replaceableLenientThis: { enumerable: true },
-    [Symbol.toStringTag]: { value: "LegacyLenientAttributes", configurable: true }
+  Object.defineProperties(BrandCheck.prototype, {
+    method: { enumerable: true },
+    value: { enumerable: true },
+    [Symbol.toStringTag]: { value: "BrandCheck", configurable: true }
   });
-  ctorRegistry[interfaceName] = LegacyLenientAttributes;
+  ctorRegistry[interfaceName] = BrandCheck;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: LegacyLenientAttributes
+    value: BrandCheck
   });
 };
 
-const Impl = require("../implementations/LegacyLenientAttributes.js");
+const Impl = require("../implementations/BrandCheck.js");

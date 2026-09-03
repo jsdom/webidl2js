@@ -160,6 +160,28 @@ describe("generation", () => {
         assert.strictEqual(wrapperWithOwnProperty.own, "own property");
       });
     });
+
+    describe("brand checks", () => {
+      test("a no-op Proxy wrapping a wrapper does not pass the brand check", () => {
+        const { wrapper } = createLegacyPlatformObject("BrandCheck", {});
+        const proxy = new Proxy(wrapper, {});
+
+        assert.throws(() => {
+          proxy.value = "evil";
+        }, /is not a valid instance of BrandCheck/);
+        assert.throws(() => {
+          return proxy.value;
+        }, /is not a valid instance of BrandCheck/);
+        assert.throws(() => {
+          proxy.method();
+        }, /is not a valid instance of BrandCheck/);
+
+        // Direct (non-proxied) usage keeps working.
+        wrapper.value = "fine";
+        assert.strictEqual(wrapper.value, "fine");
+        assert.strictEqual(wrapper.method(), "called");
+      });
+    });
   });
 
   describe("with processors", () => {

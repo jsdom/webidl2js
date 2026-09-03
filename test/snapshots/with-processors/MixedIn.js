@@ -9,7 +9,12 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 const interfaceName = "MixedIn";
 
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return (
+    utils.isObject(value) &&
+    Object.hasOwn(value, implSymbol) &&
+    value[implSymbol] instanceof Impl.implementation &&
+    value[implSymbol][utils.wrapperSymbol] === value
+  );
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
