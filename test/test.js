@@ -69,6 +69,22 @@ describe("generation", () => {
     }
 
     describe("legacy platform object property access", () => {
+      test("borrowed methods accept wrappers from another realm and reject invalid receivers", () => {
+        const first = createLegacyPlatformObject("HTMLCollection", {});
+        const indexed = ["first"];
+        const second = createLegacyPlatformObject("HTMLCollection", { indexed });
+        const { item } = first.globalObject.HTMLCollection.prototype;
+
+        assert.strictEqual(item.call(second.wrapper, 0), "first");
+        indexed.push("second");
+        assert.strictEqual(second.wrapper.length, 2);
+        assert.strictEqual(item.call(second.wrapper, 1), "second");
+
+        for (const receiver of [null, {}, Object.create(second.wrapper)]) {
+          assert.throws(() => item.call(receiver, 0), /not a valid instance of HTMLCollection/);
+        }
+      });
+
       test("indexed properties and ordinary fallbacks", () => {
         const { globalObject, wrapper } = createLegacyPlatformObject("URLList", { values: ["zero"] });
 

@@ -8,7 +8,12 @@ const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "HTMLCollection";
 
+const knownWrappers = new WeakSet();
 exports.is = value => {
+  if (knownWrappers.has(value)) {
+    return true;
+  }
+
   return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
 };
 exports.isImpl = value => {
@@ -40,7 +45,9 @@ function makeProxy(wrapper, globalObject) {
     proxyHandler = new ProxyHandler(globalObject);
     proxyHandlerCache.set(globalObject, proxyHandler);
   }
-  return new Proxy(wrapper, proxyHandler);
+  const proxy = new Proxy(wrapper, proxyHandler);
+  knownWrappers.add(proxy);
+  return proxy;
 }
 
 exports.create = (globalObject, constructorArgs, privateData) => {
