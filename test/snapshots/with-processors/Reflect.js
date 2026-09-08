@@ -4,20 +4,23 @@ const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
 const whatwg_url = require("whatwg-url");
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "Reflect";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'Reflect'.`);
 };
@@ -51,14 +54,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -67,16 +68,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window"]);
@@ -93,21 +92,19 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedBoolean() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectedBoolean' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      return esValue[implSymbol].hasAttributeNS(null, "reflectedboolean");
+      return $impl.hasAttributeNS(null, "reflectedboolean");
     }
 
     set reflectedBoolean(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectedBoolean' called on an object that is not a valid instance of Reflect."
         );
@@ -119,29 +116,27 @@ exports.install = (globalObject, globalNames) => {
       });
 
       if (V) {
-        esValue[implSymbol].setAttributeNS(null, "reflectedboolean", "");
+        $impl.setAttributeNS(null, "reflectedboolean", "");
       } else {
-        esValue[implSymbol].removeAttributeNS(null, "reflectedboolean");
+        $impl.removeAttributeNS(null, "reflectedboolean");
       }
     }
 
     get reflectedDOMString() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectedDOMString' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = esValue[implSymbol].getAttributeNS(null, "reflecteddomstring");
+      const value = $impl.getAttributeNS(null, "reflecteddomstring");
       return value === null ? "" : value;
     }
 
     set reflectedDOMString(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectedDOMString' called on an object that is not a valid instance of Reflect."
         );
@@ -152,26 +147,24 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "reflecteddomstring", V);
+      $impl.setAttributeNS(null, "reflecteddomstring", V);
     }
 
     get reflectedLong() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectedLong' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = parseInt(esValue[implSymbol].getAttributeNS(null, "reflectedlong"));
+      const value = parseInt($impl.getAttributeNS(null, "reflectedlong"));
       return isNaN(value) || value < -2147483648 || value > 2147483647 ? 0 : value;
     }
 
     set reflectedLong(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectedLong' called on an object that is not a valid instance of Reflect."
         );
@@ -182,26 +175,24 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "reflectedlong", String(V));
+      $impl.setAttributeNS(null, "reflectedlong", String(V));
     }
 
     get reflectedUnsignedLong() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectedUnsignedLong' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = parseInt(esValue[implSymbol].getAttributeNS(null, "reflectedunsignedlong"));
+      const value = parseInt($impl.getAttributeNS(null, "reflectedunsignedlong"));
       return isNaN(value) || value < 0 || value > 2147483647 ? 0 : value;
     }
 
     set reflectedUnsignedLong(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectedUnsignedLong' called on an object that is not a valid instance of Reflect."
         );
@@ -212,19 +203,18 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "reflectedunsignedlong", String(V > 2147483647 ? 0 : V));
+      $impl.setAttributeNS(null, "reflectedunsignedlong", String(V > 2147483647 ? 0 : V));
     }
 
     get reflectedUSVStringURL() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectedUSVStringURL' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = esValue[implSymbol].getAttributeNS(null, "reflectedusvstringurl");
+      const value = $impl.getAttributeNS(null, "reflectedusvstringurl");
       if (value === null) {
         return "";
       }
@@ -233,9 +223,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     set reflectedUSVStringURL(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectedUSVStringURL' called on an object that is not a valid instance of Reflect."
         );
@@ -246,26 +235,24 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "reflectedusvstringurl", V);
+      $impl.setAttributeNS(null, "reflectedusvstringurl", V);
     }
 
     get reflectionTest() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get reflectionTest' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = esValue[implSymbol].getAttributeNS(null, "reflection");
+      const value = $impl.getAttributeNS(null, "reflection");
       return value === null ? "" : value;
     }
 
     set reflectionTest(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set reflectionTest' called on an object that is not a valid instance of Reflect."
         );
@@ -276,26 +263,24 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "reflection", V);
+      $impl.setAttributeNS(null, "reflection", V);
     }
 
     get withUnderscore() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'get withUnderscore' called on an object that is not a valid instance of Reflect."
         );
       }
 
-      const value = esValue[implSymbol].getAttributeNS(null, "with-underscore");
+      const value = $impl.getAttributeNS(null, "with-underscore");
       return value === null ? "" : value;
     }
 
     set withUnderscore(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'set withUnderscore' called on an object that is not a valid instance of Reflect."
         );
@@ -306,7 +291,7 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol].setAttributeNS(null, "with-underscore", V);
+      $impl.setAttributeNS(null, "with-underscore", V);
     }
   }
   Object.defineProperties(Reflect.prototype, {

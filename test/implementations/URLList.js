@@ -19,3 +19,7 @@ exports.implementation = class URLListImpl {
     return this._values[index];
   }
 };
+
+exports.init = impl => {
+  impl.wrapperSeenDuringInit = utils.wrapperForImpl(impl);
+};

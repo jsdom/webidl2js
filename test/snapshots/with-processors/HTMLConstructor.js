@@ -4,20 +4,23 @@ const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
 const HTMLConstructor_HTMLConstructor = require("../HTMLConstructor.js").HTMLConstructor;
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "HTMLConstructor";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'HTMLConstructor'.`);
 };
@@ -51,14 +54,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -67,16 +68,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window"]);

@@ -5,6 +5,36 @@ const assert = require("node:assert/strict");
 const utils = require("../lib/output/utils");
 
 describe("utils.js", () => {
+  describe("wrapper associations", () => {
+    test("returns null for missing associations and preserves unknown values in try helpers", () => {
+      for (const value of [undefined, null, false, 0, 1n, "", {}, Symbol("value")]) {
+        assert.strictEqual(utils.wrapperForImpl(value), null);
+        assert.strictEqual(utils.implForWrapper(value), null);
+        assert.strictEqual(utils.tryWrapperForImpl(value), value);
+        assert.strictEqual(utils.tryImplForWrapper(value), value);
+      }
+    });
+
+    test("rejects replacement of an existing implementation or interface brand", () => {
+      const wrapper = {};
+      const impl = {};
+      const descriptor = utils.createInterfaceDescriptor();
+      const otherDescriptor = utils.createInterfaceDescriptor();
+      utils.registerWrapper(wrapper, impl, descriptor);
+      assert.throws(() => utils.registerWrapper(wrapper, {}, otherDescriptor), TypeError);
+      assert.strictEqual(utils.implForWrapper(wrapper), impl);
+      assert.strictEqual(utils.implForWrapperWithInterface(wrapper, descriptor), impl);
+      assert.strictEqual(utils.implForWrapperWithInterface(wrapper, otherDescriptor), null);
+    });
+
+    test("untyped lookup ignores extra callback arguments", () => {
+      const wrapper = {};
+      const impl = {};
+      utils.registerWrapper(wrapper, impl, utils.createInterfaceDescriptor());
+      assert.deepStrictEqual([{}, wrapper].map(utils.implForWrapper), [null, impl]);
+    });
+  });
+
   describe("isObject", () => {
     const primitives = [
       123,

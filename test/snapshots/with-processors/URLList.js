@@ -3,20 +3,23 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "URLList";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'URLList'.`);
 };
@@ -34,12 +37,14 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
-function makeProxy(wrapper, globalObject) {
+function makeProxy(wrapper, impl, globalObject) {
   let proxyHandler = proxyHandlerCache.get(globalObject);
   if (proxyHandler === undefined) {
     proxyHandler = new ProxyHandler(globalObject);
     proxyHandlerCache.set(globalObject, proxyHandler);
   }
+  // The target needs an implementation for proxy traps, but only the final proxy gets the interface brand.
+  utils.registerWrapper(wrapper, impl, undefined);
   return new Proxy(wrapper, proxyHandler);
 }
 
@@ -59,16 +64,14 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper = makeProxy(wrapper, globalObject);
+  wrapper = makeProxy(wrapper, impl, globalObject);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -77,18 +80,16 @@ exports.new = (globalObject, newTarget) => {
   let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper = makeProxy(wrapper, globalObject);
+  wrapper = makeProxy(wrapper, impl, globalObject);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window"]);
@@ -105,8 +106,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     item(index) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'item' called on an object that is not a valid instance of URLList.");
       }
 
@@ -124,17 +125,16 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(esValue[implSymbol].item(...args));
+      return utils.tryWrapperForImpl($impl.item(...args));
     }
 
     get length() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get length' called on an object that is not a valid instance of URLList.");
       }
 
-      return esValue[implSymbol]["length"];
+      return $impl["length"];
     }
   }
   Object.defineProperties(URLList.prototype, {
@@ -166,12 +166,13 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.get(target, P, receiver);
     }
+    const impl = utils.implForWrapper(target);
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
 
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
+      if (impl[utils.supportsPropertyIndex](index)) {
+        const indexedValue = impl.item(index);
         return utils.tryWrapperForImpl(indexedValue);
       }
     }
@@ -195,9 +196,10 @@ class ProxyHandler {
   }
 
   ownKeys(target) {
+    const impl = utils.implForWrapper(target);
     const keys = new Set();
 
-    for (const key of target[implSymbol][utils.supportedPropertyIndices]) {
+    for (const key of impl[utils.supportedPropertyIndices]) {
       keys.add(`${key}`);
     }
 
@@ -211,12 +213,13 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.getOwnPropertyDescriptor(target, P);
     }
+    const impl = utils.implForWrapper(target);
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
 
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
+      if (impl[utils.supportsPropertyIndex](index)) {
+        const indexedValue = impl.item(index);
         return {
           writable: false,
           enumerable: true,
@@ -233,9 +236,10 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.set(target, P, V, receiver);
     }
+    const impl = utils.implForWrapper(target);
     // The `receiver` argument refers to the Proxy exotic object or an object
     // that inherits from it, whereas `target` refers to the Proxy target:
-    if (target[implSymbol][utils.wrapperSymbol] === receiver) {
+    if (utils.wrapperForImpl(impl) === receiver) {
       const globalObject = this._globalObject;
     }
     let ownDesc;
@@ -243,8 +247,8 @@ class ProxyHandler {
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
 
-      if (target[implSymbol][utils.supportsPropertyIndex](index)) {
-        const indexedValue = target[implSymbol].item(index);
+      if (impl[utils.supportsPropertyIndex](index)) {
+        const indexedValue = impl.item(index);
         ownDesc = {
           writable: false,
           enumerable: true,
@@ -264,6 +268,7 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.defineProperty(target, P, desc);
     }
+    const impl = utils.implForWrapper(target);
 
     const globalObject = this._globalObject;
 
@@ -278,12 +283,13 @@ class ProxyHandler {
     if (typeof P === "symbol") {
       return Reflect.deleteProperty(target, P);
     }
+    const impl = utils.implForWrapper(target);
 
     const globalObject = this._globalObject;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
-      return !target[implSymbol][utils.supportsPropertyIndex](index);
+      return !impl[utils.supportsPropertyIndex](index);
     }
 
     return Reflect.deleteProperty(target, P);
