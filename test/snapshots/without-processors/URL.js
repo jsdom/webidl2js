@@ -3,20 +3,23 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "URL";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'URL'.`);
 };
@@ -50,14 +53,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -66,16 +67,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window", "Worker"]);
@@ -116,28 +115,26 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toJSON() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'toJSON' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol].toJSON();
+      return $impl.toJSON();
     }
 
     get href() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get href' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["href"];
+      return $impl["href"];
     }
 
     set href(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set href' called on an object that is not a valid instance of URL.");
       }
 
@@ -146,42 +143,39 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["href"] = V;
+      $impl["href"] = V;
     }
 
     toString() {
-      const esValue = this;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'toString' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["href"];
+      return $impl["href"];
     }
 
     get origin() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get origin' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["origin"];
+      return $impl["origin"];
     }
 
     get protocol() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get protocol' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["protocol"];
+      return $impl["protocol"];
     }
 
     set protocol(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set protocol' called on an object that is not a valid instance of URL.");
       }
 
@@ -190,23 +184,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["protocol"] = V;
+      $impl["protocol"] = V;
     }
 
     get username() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get username' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["username"];
+      return $impl["username"];
     }
 
     set username(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set username' called on an object that is not a valid instance of URL.");
       }
 
@@ -215,23 +207,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["username"] = V;
+      $impl["username"] = V;
     }
 
     get password() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get password' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["password"];
+      return $impl["password"];
     }
 
     set password(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set password' called on an object that is not a valid instance of URL.");
       }
 
@@ -240,23 +230,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["password"] = V;
+      $impl["password"] = V;
     }
 
     get host() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get host' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["host"];
+      return $impl["host"];
     }
 
     set host(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set host' called on an object that is not a valid instance of URL.");
       }
 
@@ -265,23 +253,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["host"] = V;
+      $impl["host"] = V;
     }
 
     get hostname() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get hostname' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["hostname"];
+      return $impl["hostname"];
     }
 
     set hostname(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set hostname' called on an object that is not a valid instance of URL.");
       }
 
@@ -290,23 +276,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["hostname"] = V;
+      $impl["hostname"] = V;
     }
 
     get port() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get port' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["port"];
+      return $impl["port"];
     }
 
     set port(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set port' called on an object that is not a valid instance of URL.");
       }
 
@@ -315,23 +299,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["port"] = V;
+      $impl["port"] = V;
     }
 
     get pathname() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get pathname' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["pathname"];
+      return $impl["pathname"];
     }
 
     set pathname(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set pathname' called on an object that is not a valid instance of URL.");
       }
 
@@ -340,23 +322,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["pathname"] = V;
+      $impl["pathname"] = V;
     }
 
     get search() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get search' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["search"];
+      return $impl["search"];
     }
 
     set search(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set search' called on an object that is not a valid instance of URL.");
       }
 
@@ -365,35 +345,32 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["search"] = V;
+      $impl["search"] = V;
     }
 
     get searchParams() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get searchParams' called on an object that is not a valid instance of URL.");
       }
 
       return utils.getSameObject(this, "searchParams", () => {
-        return utils.tryWrapperForImpl(esValue[implSymbol]["searchParams"]);
+        return utils.tryWrapperForImpl($impl["searchParams"]);
       });
     }
 
     get hash() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get hash' called on an object that is not a valid instance of URL.");
       }
 
-      return esValue[implSymbol]["hash"];
+      return $impl["hash"];
     }
 
     set hash(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set hash' called on an object that is not a valid instance of URL.");
       }
 
@@ -402,7 +379,7 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["hash"] = V;
+      $impl["hash"] = V;
     }
   }
   Object.defineProperties(URL.prototype, {

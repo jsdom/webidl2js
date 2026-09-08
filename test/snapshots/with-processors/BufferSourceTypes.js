@@ -3,20 +3,23 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "BufferSourceTypes";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'BufferSourceTypes'.`);
 };
@@ -50,14 +53,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -66,16 +67,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window"]);
@@ -92,8 +91,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bs(source) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'bs' called on an object that is not a valid instance of BufferSourceTypes.");
       }
 
@@ -122,12 +121,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].bs(...args);
+      return $impl.bs(...args);
     }
 
     ab(ab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'ab' called on an object that is not a valid instance of BufferSourceTypes.");
       }
 
@@ -145,12 +144,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].ab(...args);
+      return $impl.ab(...args);
     }
 
     sab(sab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'sab' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -170,12 +169,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].sab(...args);
+      return $impl.sab(...args);
     }
 
     abv(abv) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abv' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -201,12 +200,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].abv(...args);
+      return $impl.abv(...args);
     }
 
     u8a(u8) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'u8a' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -226,12 +225,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].u8a(...args);
+      return $impl.u8a(...args);
     }
 
     abUnion(ab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abUnion' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -258,12 +257,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].abUnion(...args);
+      return $impl.abUnion(...args);
     }
 
     sabUnion(ab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'sabUnion' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -290,12 +289,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].sabUnion(...args);
+      return $impl.sabUnion(...args);
     }
 
     u8aUnion(ab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'u8aUnion' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -322,12 +321,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].u8aUnion(...args);
+      return $impl.u8aUnion(...args);
     }
 
     asbs(source) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'asbs' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -364,12 +363,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].asbs(...args);
+      return $impl.asbs(...args);
     }
 
     abvAllowShared(abv) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abvAllowShared' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -396,12 +395,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].abvAllowShared(...args);
+      return $impl.abvAllowShared(...args);
     }
 
     u8aAllowShared(u8) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'u8aAllowShared' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -422,12 +421,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].u8aAllowShared(...args);
+      return $impl.u8aAllowShared(...args);
     }
 
     bsAllowResizable(source) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'bsAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -461,12 +460,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].bsAllowResizable(...args);
+      return $impl.bsAllowResizable(...args);
     }
 
     abAllowResizable(ab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -487,12 +486,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].abAllowResizable(...args);
+      return $impl.abAllowResizable(...args);
     }
 
     sabAllowResizable(sab) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'sabAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -513,12 +512,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].sabAllowResizable(...args);
+      return $impl.sabAllowResizable(...args);
     }
 
     abvAllowResizable(abv) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abvAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -546,12 +545,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].abvAllowResizable(...args);
+      return $impl.abvAllowResizable(...args);
     }
 
     u8aAllowResizable(u8) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'u8aAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -572,12 +571,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].u8aAllowResizable(...args);
+      return $impl.u8aAllowResizable(...args);
     }
 
     asbsAllowResizable(source) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'asbsAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -618,12 +617,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].asbsAllowResizable(...args);
+      return $impl.asbsAllowResizable(...args);
     }
 
     abvAllowResizableShared(abv) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'abvAllowResizableShared' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -652,12 +651,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].abvAllowResizableShared(...args);
+      return $impl.abvAllowResizableShared(...args);
     }
 
     u8aAllowResizableShared(u8) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'u8aAllowResizableShared' called on an object that is not a valid instance of BufferSourceTypes."
         );
@@ -679,7 +678,7 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].u8aAllowResizableShared(...args);
+      return $impl.u8aAllowResizableShared(...args);
     }
   }
   Object.defineProperties(BufferSourceTypes.prototype, {

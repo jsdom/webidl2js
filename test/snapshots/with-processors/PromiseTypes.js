@@ -3,20 +3,23 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "PromiseTypes";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'PromiseTypes'.`);
 };
@@ -51,29 +54,28 @@ function getUnforgeables(globalObject) {
     utils.define(unforgeables, {
       unforgeablePromiseOperation() {
         try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-          if (!exports.is(esValue)) {
+          const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+          if ($impl === null) {
             throw new globalObject.TypeError(
               "'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes."
             );
           }
 
-          return utils.tryWrapperForImpl(esValue[implSymbol].unforgeablePromiseOperation());
+          return utils.tryWrapperForImpl($impl.unforgeablePromiseOperation());
         } catch (e) {
           return globalObject.Promise.reject(e);
         }
       },
       get unforgeablePromiseAttribute() {
         try {
-          const esValue = this !== null && this !== undefined ? this : globalObject;
-
-          if (!exports.is(esValue)) {
+          const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+          if ($impl === null) {
             throw new globalObject.TypeError(
               "'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes."
             );
           }
 
-          return utils.tryWrapperForImpl(esValue[implSymbol]["unforgeablePromiseAttribute"]);
+          return utils.tryWrapperForImpl($impl["unforgeablePromiseAttribute"]);
         } catch (e) {
           return globalObject.Promise.reject(e);
         }
@@ -96,14 +98,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -112,16 +112,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const unforgeablesMap = new WeakMap();
@@ -139,8 +137,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     voidPromiseConsumer(p) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'voidPromiseConsumer' called on an object that is not a valid instance of PromiseTypes."
         );
@@ -157,12 +155,12 @@ exports.install = (globalObject, globalNames) => {
         curArg = new globalObject.Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
-      return esValue[implSymbol].voidPromiseConsumer(...args);
+      return $impl.voidPromiseConsumer(...args);
     }
 
     promiseConsumer(p) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'promiseConsumer' called on an object that is not a valid instance of PromiseTypes."
         );
@@ -179,19 +177,19 @@ exports.install = (globalObject, globalNames) => {
         curArg = new globalObject.Promise(resolve => resolve(curArg));
         args.push(curArg);
       }
-      return esValue[implSymbol].promiseConsumer(...args);
+      return $impl.promiseConsumer(...args);
     }
 
     promiseOperation() {
       try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'promiseOperation' called on an object that is not a valid instance of PromiseTypes."
           );
         }
 
-        return utils.tryWrapperForImpl(esValue[implSymbol].promiseOperation());
+        return utils.tryWrapperForImpl($impl.promiseOperation());
       } catch (e) {
         return globalObject.Promise.reject(e);
       }
@@ -199,15 +197,14 @@ exports.install = (globalObject, globalNames) => {
 
     get promiseAttribute() {
       try {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'get promiseAttribute' called on an object that is not a valid instance of PromiseTypes."
           );
         }
 
-        return utils.tryWrapperForImpl(esValue[implSymbol]["promiseAttribute"]);
+        return utils.tryWrapperForImpl($impl["promiseAttribute"]);
       } catch (e) {
         return globalObject.Promise.reject(e);
       }

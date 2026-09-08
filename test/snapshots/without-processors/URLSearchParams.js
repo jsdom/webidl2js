@@ -5,20 +5,23 @@ const utils = require("./utils.js");
 
 const Function = require("./Function.js");
 const newObjectInRealm = utils.newObjectInRealm;
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "URLSearchParams";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'URLSearchParams'.`);
 };
@@ -63,14 +66,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -79,16 +80,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window", "Worker"]);
@@ -192,8 +191,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     append(name, value) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'append' called on an object that is not a valid instance of URLSearchParams."
         );
@@ -221,12 +220,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].append(...args);
+      return $impl.append(...args);
     }
 
     delete(name) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'delete' called on an object that is not a valid instance of URLSearchParams."
         );
@@ -246,12 +245,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].delete(...args);
+      return $impl.delete(...args);
     }
 
     get(name) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get' called on an object that is not a valid instance of URLSearchParams.");
       }
 
@@ -269,12 +268,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].get(...args);
+      return $impl.get(...args);
     }
 
     getAll(name) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'getAll' called on an object that is not a valid instance of URLSearchParams."
         );
@@ -294,12 +293,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(esValue[implSymbol].getAll(...args));
+      return utils.tryWrapperForImpl($impl.getAll(...args));
     }
 
     has(name) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'has' called on an object that is not a valid instance of URLSearchParams.");
       }
 
@@ -317,12 +316,12 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].has(...args);
+      return $impl.has(...args);
     }
 
     set(name, value) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set' called on an object that is not a valid instance of URLSearchParams.");
       }
 
@@ -348,60 +347,68 @@ exports.install = (globalObject, globalNames) => {
         });
         args.push(curArg);
       }
-      return esValue[implSymbol].set(...args);
+      return $impl.set(...args);
     }
 
     sort() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'sort' called on an object that is not a valid instance of URLSearchParams.");
       }
 
-      return esValue[implSymbol].sort();
+      return $impl.sort();
     }
 
     toString() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'toString' called on an object that is not a valid instance of URLSearchParams."
         );
       }
 
-      return esValue[implSymbol].toString();
+      return $impl.toString();
     }
 
     keys() {
-      if (!exports.is(this)) {
+      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'keys' called on an object that is not a valid instance of URLSearchParams.");
       }
-      return exports.createDefaultIterator(globalObject, this, "key");
+
+      return exports.createDefaultIterator(globalObject, $impl, "key");
     }
 
     values() {
-      if (!exports.is(this)) {
+      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'values' called on an object that is not a valid instance of URLSearchParams."
         );
       }
-      return exports.createDefaultIterator(globalObject, this, "value");
+
+      return exports.createDefaultIterator(globalObject, $impl, "value");
     }
 
     entries() {
-      if (!exports.is(this)) {
+      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'entries' called on an object that is not a valid instance of URLSearchParams."
         );
       }
-      return exports.createDefaultIterator(globalObject, this, "key+value");
+
+      return exports.createDefaultIterator(globalObject, $impl, "key+value");
     }
 
     forEach(callback) {
-      if (!exports.is(this)) {
+      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'forEach' called on an object that is not a valid instance of URLSearchParams."
         );
       }
+
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."
@@ -411,12 +418,12 @@ exports.install = (globalObject, globalNames) => {
         context: "Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1"
       });
       const thisArg = arguments[1];
-      let pairs = Array.from(this[implSymbol]);
+      let pairs = Array.from($impl);
       let i = 0;
       while (i < pairs.length) {
         const [key, value] = pairs[i].map(utils.tryWrapperForImpl);
         callback.call(thisArg, value, key, this);
-        pairs = Array.from(this[implSymbol]);
+        pairs = Array.from($impl);
         i++;
       }
     }
@@ -453,7 +460,7 @@ exports.install = (globalObject, globalNames) => {
       }
 
       const { target, kind, index } = internal;
-      const values = Array.from(target[implSymbol]);
+      const values = Array.from(target);
       const len = values.length;
       if (index >= len) {
         return newObjectInRealm(globalObject, { value: undefined, done: true });

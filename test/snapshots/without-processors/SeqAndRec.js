@@ -4,20 +4,23 @@ const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
 const URL = require("./URL.js");
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "SeqAndRec";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'SeqAndRec'.`);
 };
@@ -51,14 +54,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -67,16 +68,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window"]);
@@ -93,8 +92,8 @@ exports.install = (globalObject, globalNames) => {
     }
 
     recordConsumer(rec) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'recordConsumer' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -138,12 +137,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].recordConsumer(...args);
+      return $impl.recordConsumer(...args);
     }
 
     recordConsumer2(rec) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'recordConsumer2' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -186,12 +185,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].recordConsumer2(...args);
+      return $impl.recordConsumer2(...args);
     }
 
     sequenceConsumer(seq) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'sequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -224,12 +223,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].sequenceConsumer(...args);
+      return $impl.sequenceConsumer(...args);
     }
 
     sequenceConsumer2(seq) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'sequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -259,12 +258,12 @@ exports.install = (globalObject, globalNames) => {
         }
         args.push(curArg);
       }
-      return esValue[implSymbol].sequenceConsumer2(...args);
+      return $impl.sequenceConsumer2(...args);
     }
 
     asyncSequenceConsumer(async_seq) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'asyncSequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -291,12 +290,12 @@ exports.install = (globalObject, globalNames) => {
         );
         args.push(curArg);
       }
-      return esValue[implSymbol].asyncSequenceConsumer(...args);
+      return $impl.asyncSequenceConsumer(...args);
     }
 
     asyncSequenceConsumer2(async_seq) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'asyncSequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -320,12 +319,12 @@ exports.install = (globalObject, globalNames) => {
         );
         args.push(curArg);
       }
-      return esValue[implSymbol].asyncSequenceConsumer2(...args);
+      return $impl.asyncSequenceConsumer2(...args);
     }
 
     frozenArrayConsumer(arr) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'frozenArrayConsumer' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -359,12 +358,12 @@ exports.install = (globalObject, globalNames) => {
         curArg = Object.freeze(curArg);
         args.push(curArg);
       }
-      return esValue[implSymbol].frozenArrayConsumer(...args);
+      return $impl.frozenArrayConsumer(...args);
     }
 
     asyncSequencePassthrough(async_seq) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError(
           "'asyncSequencePassthrough' called on an object that is not a valid instance of SeqAndRec."
         );
@@ -391,7 +390,7 @@ exports.install = (globalObject, globalNames) => {
         );
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl(esValue[implSymbol].asyncSequencePassthrough(...args));
+      return utils.tryWrapperForImpl($impl.asyncSequencePassthrough(...args));
     }
   }
   Object.defineProperties(SeqAndRec.prototype, {

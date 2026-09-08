@@ -4,20 +4,23 @@ const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
 const Dictionary = require("./Dictionary.js");
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "DOMRect";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'DOMRect'.`);
 };
@@ -51,14 +54,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -67,16 +68,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const exposed = new Set(["Window", "Worker"]);
@@ -142,19 +141,17 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get x() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get x' called on an object that is not a valid instance of DOMRect.");
       }
 
-      return esValue[implSymbol]["x"];
+      return $impl["x"];
     }
 
     set x(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set x' called on an object that is not a valid instance of DOMRect.");
       }
 
@@ -163,23 +160,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["x"] = V;
+      $impl["x"] = V;
     }
 
     get y() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get y' called on an object that is not a valid instance of DOMRect.");
       }
 
-      return esValue[implSymbol]["y"];
+      return $impl["y"];
     }
 
     set y(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set y' called on an object that is not a valid instance of DOMRect.");
       }
 
@@ -188,23 +183,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["y"] = V;
+      $impl["y"] = V;
     }
 
     get width() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get width' called on an object that is not a valid instance of DOMRect.");
       }
 
-      return esValue[implSymbol]["width"];
+      return $impl["width"];
     }
 
     set width(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set width' called on an object that is not a valid instance of DOMRect.");
       }
 
@@ -213,23 +206,21 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["width"] = V;
+      $impl["width"] = V;
     }
 
     get height() {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'get height' called on an object that is not a valid instance of DOMRect.");
       }
 
-      return esValue[implSymbol]["height"];
+      return $impl["height"];
     }
 
     set height(V) {
-      const esValue = this !== null && this !== undefined ? this : globalObject;
-
-      if (!exports.is(esValue)) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
         throw new globalObject.TypeError("'set height' called on an object that is not a valid instance of DOMRect.");
       }
 
@@ -238,7 +229,7 @@ exports.install = (globalObject, globalNames) => {
         globals: globalObject
       });
 
-      esValue[implSymbol]["height"] = V;
+      $impl["height"] = V;
     }
 
     static fromRect() {

@@ -3,20 +3,23 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const implSymbol = utils.implSymbol;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "LegacyUnforgeable";
 
+const $interfaceDescriptor = utils.createInterfaceDescriptor();
+exports.interfaceDescriptor = $interfaceDescriptor;
+
 exports.is = value => {
-  return utils.isObject(value) && Object.hasOwn(value, implSymbol) && value[implSymbol] instanceof Impl.implementation;
+  return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
 exports.isImpl = value => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
-  if (exports.is(value)) {
-    return utils.implForWrapper(value);
+  const impl = utils.implForWrapperWithInterface(value, $interfaceDescriptor);
+  if (impl !== null) {
+    return impl;
   }
   throw new globalObject.TypeError(`${context} is not of type 'LegacyUnforgeable'.`);
 };
@@ -50,8 +53,8 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       assign(url) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'assign' called on an object that is not a valid instance of LegacyUnforgeable."
           );
@@ -71,23 +74,21 @@ function getUnforgeables(globalObject) {
           });
           args.push(curArg);
         }
-        return esValue[implSymbol].assign(...args);
+        return $impl.assign(...args);
       },
       get href() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'get href' called on an object that is not a valid instance of LegacyUnforgeable."
           );
         }
 
-        return esValue[implSymbol]["href"];
+        return $impl["href"];
       },
       set href(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'set href' called on an object that is not a valid instance of LegacyUnforgeable."
           );
@@ -98,44 +99,41 @@ function getUnforgeables(globalObject) {
           globals: globalObject
         });
 
-        esValue[implSymbol]["href"] = V;
+        $impl["href"] = V;
       },
       toString() {
-        const esValue = this;
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'toString' called on an object that is not a valid instance of LegacyUnforgeable."
           );
         }
 
-        return esValue[implSymbol]["href"];
+        return $impl["href"];
       },
       get origin() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'get origin' called on an object that is not a valid instance of LegacyUnforgeable."
           );
         }
 
-        return esValue[implSymbol]["origin"];
+        return $impl["origin"];
       },
       get protocol() {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'get protocol' called on an object that is not a valid instance of LegacyUnforgeable."
           );
         }
 
-        return esValue[implSymbol]["protocol"];
+        return $impl["protocol"];
       },
       set protocol(V) {
-        const esValue = this !== null && this !== undefined ? this : globalObject;
-
-        if (!exports.is(esValue)) {
+        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+        if ($impl === null) {
           throw new globalObject.TypeError(
             "'set protocol' called on an object that is not a valid instance of LegacyUnforgeable."
           );
@@ -146,7 +144,7 @@ function getUnforgeables(globalObject) {
           globals: globalObject
         });
 
-        esValue[implSymbol]["protocol"] = V;
+        $impl["protocol"] = V;
       }
     });
     Object.defineProperties(unforgeables, {
@@ -169,14 +167,12 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: new Impl.implementation(globalObject, constructorArgs, privateData),
-    configurable: true
-  });
+  const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
   return wrapper;
 };
@@ -185,16 +181,14 @@ exports.new = (globalObject, newTarget) => {
   const wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
-  Object.defineProperty(wrapper, implSymbol, {
-    value: Object.create(Impl.implementation.prototype),
-    configurable: true
-  });
+  const impl = Object.create(Impl.implementation.prototype);
 
-  wrapper[implSymbol][utils.wrapperSymbol] = wrapper;
+  utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
+  impl[utils.wrapperSymbol] = wrapper;
   if (Impl.init) {
-    Impl.init(wrapper[implSymbol]);
+    Impl.init(impl);
   }
-  return wrapper[implSymbol];
+  return impl;
 };
 
 const unforgeablesMap = new WeakMap();
