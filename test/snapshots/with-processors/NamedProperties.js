@@ -5,7 +5,7 @@ const utils = require("./utils.js");
 
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
-const interfaceName = "HTMLCollection";
+const interfaceName = "NamedProperties";
 
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
@@ -21,7 +21,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   if (impl !== null) {
     return impl;
   }
-  throw new globalObject.TypeError(`${context} is not of type 'HTMLCollection'.`);
+  throw new globalObject.TypeError(`${context} is not of type 'NamedProperties'.`);
 };
 
 function makeWrapper(globalObject, newTarget) {
@@ -31,7 +31,7 @@ function makeWrapper(globalObject, newTarget) {
   }
 
   if (!utils.isObject(proto)) {
-    proto = globalObject[ctorRegistrySymbol]["HTMLCollection"].prototype;
+    proto = globalObject[ctorRegistrySymbol]["NamedProperties"].prototype;
   }
 
   return Object.create(proto);
@@ -97,90 +97,65 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-  class HTMLCollection {
+  class NamedProperties {
     constructor() {
-      throw new globalObject.TypeError("Illegal constructor");
-    }
-
-    item(index) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'item' called on an object that is not a valid instance of HTMLCollection.");
-      }
-
-      if (arguments.length < 1) {
-        throw new globalObject.TypeError(
-          `Failed to execute 'item' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`
-        );
-      }
-      const args = [];
-      {
-        let curArg = arguments[0];
-        curArg = conversions["unsigned long"](curArg, {
-          context: "Failed to execute 'item' on 'HTMLCollection': parameter 1",
-          globals: globalObject
-        });
-        args.push(curArg);
-      }
-      return utils.tryWrapperForImpl($impl.item(...args));
+      return setup(Object.create(new.target.prototype), globalObject, undefined, undefined, true);
     }
 
     namedItem(name) {
       const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
       if ($impl === null) {
         throw new globalObject.TypeError(
-          "'namedItem' called on an object that is not a valid instance of HTMLCollection."
+          "'namedItem' called on an object that is not a valid instance of NamedProperties."
         );
       }
 
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'namedItem' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'namedItem' on 'NamedProperties': 1 argument required, but only ${arguments.length} present.`
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'namedItem' on 'HTMLCollection': parameter 1",
+          context: "Failed to execute 'namedItem' on 'NamedProperties': parameter 1",
           globals: globalObject
         });
         args.push(curArg);
       }
-      return utils.tryWrapperForImpl($impl.namedItem(...args));
+      return $impl.namedItem(...args);
     }
 
     get length() {
       const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
       if ($impl === null) {
         throw new globalObject.TypeError(
-          "'get length' called on an object that is not a valid instance of HTMLCollection."
+          "'get length' called on an object that is not a valid instance of NamedProperties."
         );
       }
 
       return $impl["length"];
     }
   }
-  Object.defineProperties(HTMLCollection.prototype, {
-    item: { enumerable: true },
+  Object.defineProperties(NamedProperties.prototype, {
     namedItem: { enumerable: true },
     length: { enumerable: true },
-    [Symbol.toStringTag]: { value: "HTMLCollection", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.toStringTag]: { value: "NamedProperties", configurable: true }
   });
-  ctorRegistry[interfaceName] = HTMLCollection;
+  ctorRegistry[interfaceName] = NamedProperties;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
-    ordinary: new ProxyHandler(globalObject, HTMLCollection.prototype),
+    ordinary: new ProxyHandler(globalObject, NamedProperties.prototype),
     other: new ProxyHandler(globalObject, null)
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: HTMLCollection
+    value: NamedProperties
   });
 };
 
@@ -196,29 +171,16 @@ class ProxyHandler {
       return Reflect.get(target, P, receiver);
     }
     const impl = utils.implForWrapper(target);
-    let ignoreNamedProps = false;
-
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-
-      const indexedValue = impl.item(index);
-      if (indexedValue !== null) {
-        return utils.tryWrapperForImpl(indexedValue);
-      }
-
-      ignoreNamedProps = true;
-    }
 
     if (
-      !ignoreNamedProps &&
       !(
         this._interfacePrototype !== null &&
         Object.getPrototypeOf(target) === this._interfacePrototype &&
         Object.hasOwn(this._interfacePrototype, P)
       )
     ) {
-      const namedValue = impl.namedItem(P);
-      if (namedValue !== null && !(P in target)) {
+      if (impl[utils.supportsPropertyName](P) && !(P in target)) {
+        const namedValue = impl.namedItem(P);
         return utils.tryWrapperForImpl(namedValue);
       }
     }
@@ -245,10 +207,6 @@ class ProxyHandler {
     const impl = utils.implForWrapper(target);
     const keys = new Set();
 
-    for (const key of impl[utils.supportedPropertyIndices]) {
-      keys.add(`${key}`);
-    }
-
     for (const key of impl[utils.supportedPropertyNames]) {
       if (!(key in target)) {
         keys.add(`${key}`);
@@ -266,37 +224,19 @@ class ProxyHandler {
       return Reflect.getOwnPropertyDescriptor(target, P);
     }
     const impl = utils.implForWrapper(target);
-    let ignoreNamedProps = false;
-
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-
-      const indexedValue = impl.item(index);
-      if (indexedValue !== null) {
-        return {
-          writable: false,
-          enumerable: true,
-          configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
-        };
-      }
-
-      ignoreNamedProps = true;
-    }
 
     if (
-      !ignoreNamedProps &&
       !(
         this._interfacePrototype !== null &&
         Object.getPrototypeOf(target) === this._interfacePrototype &&
         Object.hasOwn(this._interfacePrototype, P)
       )
     ) {
-      const namedValue = impl.namedItem(P);
-      if (namedValue !== null && !(P in target)) {
+      if (impl[utils.supportsPropertyName](P) && !(P in target)) {
+        const namedValue = impl.namedItem(P);
         return {
           writable: false,
-          enumerable: false,
+          enumerable: true,
           configurable: true,
           value: utils.tryWrapperForImpl(namedValue)
         };
@@ -318,19 +258,6 @@ class ProxyHandler {
     }
     let ownDesc;
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-      const indexedValue = impl.item(index);
-      if (indexedValue !== null) {
-        ownDesc = {
-          writable: false,
-          enumerable: true,
-          configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
-        };
-      }
-    }
-
     if (ownDesc === undefined) {
       ownDesc = Reflect.getOwnPropertyDescriptor(target, P);
     }
@@ -344,12 +271,8 @@ class ProxyHandler {
     const impl = utils.implForWrapper(target);
 
     const globalObject = this._globalObject;
-
-    if (utils.isArrayIndexPropName(P)) {
-      return false;
-    }
     if (!Object.hasOwn(target, P)) {
-      const creating = !(impl.namedItem(P) !== null);
+      const creating = !impl[utils.supportsPropertyName](P);
       if (!creating) {
         return false;
       }
@@ -365,12 +288,7 @@ class ProxyHandler {
 
     const globalObject = this._globalObject;
 
-    if (utils.isArrayIndexPropName(P)) {
-      const index = P >>> 0;
-      return !(impl.item(index) !== null);
-    }
-
-    if (impl.namedItem(P) !== null && !(P in target)) {
+    if (impl[utils.supportsPropertyName](P) && !(P in target)) {
       return false;
     }
 
@@ -382,4 +300,4 @@ class ProxyHandler {
   }
 }
 
-const Impl = require("../implementations/HTMLCollection.js");
+const Impl = require("../implementations/NamedProperties.js");
