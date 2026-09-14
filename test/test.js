@@ -439,6 +439,195 @@ describe("generation", () => {
         assert.strictEqual(wrapperWithOwnProperty.person, "own property");
       });
 
+      test("skips named lookup for ordinary prototype properties", () => {
+        const { wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
+          indexed: ["first", "second"],
+          named: { length: "named length", item: "named item" }
+        });
+        for (let i = 0; i < 100; ++i) {
+          assert.strictEqual(wrapper.length, 2);
+        }
+        assert.deepStrictEqual(Array.from(wrapper), ["first", "second"]);
+        assert.strictEqual(typeof wrapper.item, "function");
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        assert.strictEqual("length" in wrapper, true);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+        assert.strictEqual(wrapper.namedItem("length"), "named length");
+        assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+      });
+
+      test("reflects changes to ordinary prototype properties", () => {
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
+          named: { length: "named length", custom: "named custom" }
+        });
+        const { prototype } = globalObject.HTMLCollection;
+        delete prototype.length;
+        assert.strictEqual(wrapper.length, "named length");
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length").value, "named length");
+        let getterCalls = 0;
+        Object.defineProperty(prototype, "custom", {
+          configurable: true,
+          get() {
+            ++getterCalls;
+            return this;
+          }
+        });
+        implementation.namedCalls.length = 0;
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "custom"), undefined);
+        assert.strictEqual(getterCalls, 0);
+        assert.strictEqual(wrapper.custom, wrapper);
+        const derived = Object.create(wrapper);
+        assert.strictEqual(derived.custom, derived);
+        assert.strictEqual(getterCalls, 2);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+        delete prototype.custom;
+        assert.strictEqual(wrapper.custom, "named custom");
+        Object.setPrototypeOf(wrapper, null);
+        assert.strictEqual(wrapper.length, "named length");
+      });
+
+      test("captures the installed prototype independently of the public constructor", () => {
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {});
+        globalObject.HTMLCollection = new Proxy(() => {}, {
+          get() {
+            throw new Error("unexpected constructor property access");
+          }
+        });
+        assert.strictEqual(wrapper.length, 0);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+      });
+
+      test("does not inspect unrecognized prototype proxies for unsupported names", () => {
+        const { globalObject, wrapper } = createLegacyPlatformObject("HTMLCollection", {});
+        const calls = [];
+        function unexpected() {
+          throw new Error("unexpected prototype trap");
+        }
+        Object.setPrototypeOf(wrapper, new Proxy(globalObject.HTMLCollection.prototype, {
+          getPrototypeOf: unexpected,
+          getOwnPropertyDescriptor: unexpected,
+          has: unexpected,
+          get(target, property, receiver) {
+            calls.push(property);
+            return Reflect.get(target, property, receiver);
+          }
+        }));
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+        assert.strictEqual(wrapper.length, 0);
+        assert.deepStrictEqual(calls, ["length"]);
+      });
+
+      test("does not inspect revoked prototype proxies for unsupported names", () => {
+        const { globalObject, wrapper } = createLegacyPlatformObject("HTMLCollection", {});
+        const { proxy, revoke } = Proxy.revocable(globalObject.HTMLCollection.prototype, {});
+        Object.setPrototypeOf(wrapper, proxy);
+        revoke();
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        assert.throws(() => wrapper.length, TypeError);
+      });
+
+      test("does not traverse beyond the captured prototype", () => {
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {});
+        const { prototype } = globalObject.HTMLCollection;
+        const { proxy, revoke } = Proxy.revocable(Object.getPrototypeOf(prototype), {});
+        Object.setPrototypeOf(prototype, proxy);
+        revoke();
+        assert.strictEqual(wrapper.length, 0);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+      });
+
+      test("preserves the supported-name lookup before observable prototype checks", () => {
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
+          named: { length: "named length" }
+        });
+        const marker = new Error("prototype check");
+        Object.setPrototypeOf(wrapper, new Proxy(globalObject.HTMLCollection.prototype, {
+          has() {
+            assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+            throw marker;
+          }
+        }));
+        assert.throws(() => wrapper.length, error => error === marker);
+      });
+
+      test("preserves indexed property precedence over ordinary prototype properties", () => {
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
+          indexed: ["indexed value"],
+          named: { 0: "named value", 1: "unsupported index" }
+        });
+        Object.defineProperty(globalObject.HTMLCollection.prototype, "0", {
+          get() {
+            throw new Error("unexpected prototype getter");
+          }
+        });
+        assert.strictEqual(wrapper[0], "indexed value");
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "0").value, "indexed value");
+        assert.strictEqual(wrapper[1], undefined);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+      });
+
+      test("preserves caller-supplied proxy wrappers passed to setup", () => {
+        const { globalObject } = createLegacyPlatformObject("HTMLCollection", {});
+        const generated = require(path.resolve(outputDir, "HTMLCollection.js"));
+        const target = new Proxy(Object.create(globalObject.HTMLCollection.prototype), {
+          getPrototypeOf() {
+            throw new Error("unexpected wrapper prototype trap");
+          }
+        });
+        const wrapper = generated.setup(target, globalObject);
+        assert.strictEqual(wrapper.length, 0);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+      });
+
+      test("optimizes internally created wrappers with delayed implementation initialization", () => {
+        const { globalObject } = createLegacyPlatformObject("HTMLCollection", {});
+        const generated = require(path.resolve(outputDir, "HTMLCollection.js"));
+        const utils = require(path.resolve(outputDir, "utils.js"));
+        const implementation = generated.new(globalObject);
+        implementation._indexed = [];
+        implementation._named = {};
+        implementation.indexedCalls = [];
+        implementation.namedCalls = [];
+        const wrapper = utils.wrapperForImpl(implementation);
+        assert.strictEqual(wrapper.length, 0);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+      });
+
+      test("optimizes public constructors and separate supported-name checks", () => {
+        const generated = require(path.resolve(outputDir, "NamedProperties.js"));
+        const utils = require(path.resolve(outputDir, "utils.js"));
+        const globalObject = vm.runInNewContext("globalThis");
+        generated.install(globalObject, ["Window"]);
+        const wrapper = new globalObject.NamedProperties();
+        const implementation = utils.implForWrapper(wrapper);
+        implementation.entries.set("length", "named length");
+        assert.strictEqual(wrapper.length, 1);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        assert.deepStrictEqual(implementation.supportsCalls, []);
+        assert.deepStrictEqual(implementation.namedCalls, []);
+        assert.strictEqual(wrapper.namedItem("length"), "named length");
+        assert.deepStrictEqual(implementation.supportsCalls, []);
+        assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+        assert.strictEqual(wrapper.missing, undefined);
+        assert.deepStrictEqual(implementation.supportsCalls, ["missing"]);
+        assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+        delete globalObject.NamedProperties.prototype.length;
+        assert.strictEqual(wrapper.length, "named length");
+        assert.deepStrictEqual(implementation.supportsCalls, ["missing", "length"]);
+        assert.deepStrictEqual(implementation.namedCalls, ["length", "length"]);
+      });
+
+      test("preserves lookups after changing to another realm's prototype", () => {
+        const { wrapper } = createLegacyPlatformObject("HTMLCollection", { indexed: ["element"] });
+        const { globalObject } = createLegacyPlatformObject("HTMLCollection", {});
+        Object.setPrototypeOf(wrapper, globalObject.HTMLCollection.prototype);
+        assert.strictEqual(wrapper.length, 1);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+      });
+
       test("LegacyOverrideBuiltins named properties", () => {
         const entries = { inherited: "named property" };
         const { globalObject, wrapper } = createLegacyPlatformObject("LegacyOverrideBuiltins", { entries });

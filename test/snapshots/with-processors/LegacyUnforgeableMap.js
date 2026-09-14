@@ -37,12 +37,9 @@ function makeWrapper(globalObject, newTarget) {
   return Object.create(proto);
 }
 
-function makeProxy(wrapper, impl, globalObject) {
-  let proxyHandler = proxyHandlerCache.get(globalObject);
-  if (proxyHandler === undefined) {
-    proxyHandler = new ProxyHandler(globalObject);
-    proxyHandlerCache.set(globalObject, proxyHandler);
-  }
+function makeProxy(wrapper, impl, globalObject, isOrdinary) {
+  const handlers = proxyHandlerCache.get(globalObject);
+  const proxyHandler = isOrdinary ? handlers.ordinary : handlers.other;
   // The target needs an implementation for proxy traps, but only the final proxy gets the interface brand.
   utils.registerWrapper(wrapper, impl, undefined);
   return new Proxy(wrapper, proxyHandler);
@@ -50,7 +47,7 @@ function makeProxy(wrapper, impl, globalObject) {
 
 exports.create = (globalObject, constructorArgs, privateData) => {
   const wrapper = makeWrapper(globalObject);
-  return exports.setup(wrapper, globalObject, constructorArgs, privateData);
+  return setup(wrapper, globalObject, constructorArgs, privateData, true);
 };
 
 exports.createImpl = (globalObject, constructorArgs, privateData) => {
@@ -86,13 +83,13 @@ exports._internalSetup = (wrapper, globalObject) => {
   utils.define(wrapper, getUnforgeables(globalObject));
 };
 
-exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) => {
+const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
   const impl = new Impl.implementation(globalObject, constructorArgs, privateData);
 
-  wrapper = makeProxy(wrapper, impl, globalObject);
+  wrapper = makeProxy(wrapper, impl, globalObject, isOrdinary);
 
   utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
   impl[utils.wrapperSymbol] = wrapper;
@@ -101,14 +98,14 @@ exports.setup = (wrapper, globalObject, constructorArgs = [], privateData = {}) 
   }
   return wrapper;
 };
+exports.setup = setup;
 
 exports.new = (globalObject, newTarget) => {
   let wrapper = makeWrapper(globalObject, newTarget);
 
   exports._internalSetup(wrapper, globalObject);
   const impl = Object.create(Impl.implementation.prototype);
-
-  wrapper = makeProxy(wrapper, impl, globalObject);
+  wrapper = makeProxy(wrapper, impl, globalObject, true);
 
   utils.registerWrapper(wrapper, impl, $interfaceDescriptor);
   impl[utils.wrapperSymbol] = wrapper;
@@ -137,6 +134,13 @@ exports.install = (globalObject, globalNames) => {
   });
   ctorRegistry[interfaceName] = LegacyUnforgeableMap;
 
+  // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied
+  // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
+  proxyHandlerCache.set(globalObject, {
+    ordinary: new ProxyHandler(globalObject, LegacyUnforgeableMap.prototype),
+    other: new ProxyHandler(globalObject, null)
+  });
+
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
@@ -146,8 +150,9 @@ exports.install = (globalObject, globalNames) => {
 
 const proxyHandlerCache = new WeakMap();
 class ProxyHandler {
-  constructor(globalObject) {
+  constructor(globalObject, interfacePrototype) {
     this._globalObject = globalObject;
+    this._interfacePrototype = interfacePrototype;
   }
 
   get(target, P, receiver) {
@@ -156,9 +161,17 @@ class ProxyHandler {
     }
     const impl = utils.implForWrapper(target);
 
-    if (impl[utils.supportsPropertyName](P) && !(P in target)) {
-      const namedValue = impl[utils.namedGet](P);
-      return utils.tryWrapperForImpl(namedValue);
+    if (
+      !(
+        this._interfacePrototype !== null &&
+        Object.getPrototypeOf(target) === this._interfacePrototype &&
+        Object.hasOwn(this._interfacePrototype, P)
+      )
+    ) {
+      if (impl[utils.supportsPropertyName](P) && !(P in target)) {
+        const namedValue = impl[utils.namedGet](P);
+        return utils.tryWrapperForImpl(namedValue);
+      }
     }
 
     return Reflect.get(target, P, receiver);
@@ -201,14 +214,22 @@ class ProxyHandler {
     }
     const impl = utils.implForWrapper(target);
 
-    if (impl[utils.supportsPropertyName](P) && !(P in target)) {
-      const namedValue = impl[utils.namedGet](P);
-      return {
-        writable: true,
-        enumerable: true,
-        configurable: true,
-        value: utils.tryWrapperForImpl(namedValue)
-      };
+    if (
+      !(
+        this._interfacePrototype !== null &&
+        Object.getPrototypeOf(target) === this._interfacePrototype &&
+        Object.hasOwn(this._interfacePrototype, P)
+      )
+    ) {
+      if (impl[utils.supportsPropertyName](P) && !(P in target)) {
+        const namedValue = impl[utils.namedGet](P);
+        return {
+          writable: true,
+          enumerable: true,
+          configurable: true,
+          value: utils.tryWrapperForImpl(namedValue)
+        };
+      }
     }
 
     return Reflect.getOwnPropertyDescriptor(target, P);
