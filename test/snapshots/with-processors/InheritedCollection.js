@@ -3,13 +3,12 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const URL = require("./URL.js");
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
-const URLSearchParamsCollection = require("./URLSearchParamsCollection.js");
+const HTMLFormControlsCollection = require("./HTMLFormControlsCollection.js");
 
-const interfaceName = "URLSearchParamsCollection2";
+const interfaceName = "InheritedCollection";
 
-const $interfaceDescriptor = utils.createInterfaceDescriptor(() => URLSearchParamsCollection.interfaceDescriptor);
+const $interfaceDescriptor = utils.createInterfaceDescriptor(() => HTMLFormControlsCollection.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 exports.is = value => {
@@ -23,7 +22,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   if (impl !== null) {
     return impl;
   }
-  throw new globalObject.TypeError(`${context} is not of type 'URLSearchParamsCollection2'.`);
+  throw new globalObject.TypeError(`${context} is not of type 'InheritedCollection'.`);
 };
 
 function makeWrapper(globalObject, newTarget) {
@@ -33,7 +32,7 @@ function makeWrapper(globalObject, newTarget) {
   }
 
   if (!utils.isObject(proto)) {
-    proto = globalObject[ctorRegistrySymbol]["URLSearchParamsCollection2"].prototype;
+    proto = globalObject[ctorRegistrySymbol]["InheritedCollection"].prototype;
   }
 
   return Object.create(proto);
@@ -58,7 +57,7 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
 };
 
 exports._internalSetup = (wrapper, globalObject) => {
-  URLSearchParamsCollection._internalSetup(wrapper, globalObject);
+  HTMLFormControlsCollection._internalSetup(wrapper, globalObject);
 };
 
 const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
@@ -101,23 +100,24 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-  class URLSearchParamsCollection2 extends globalObject.URLSearchParamsCollection {
+  class InheritedCollection extends globalObject.HTMLFormControlsCollection {
     constructor() {
       throw new globalObject.TypeError("Illegal constructor");
     }
   }
-  Object.defineProperties(URLSearchParamsCollection2.prototype, {
-    [Symbol.toStringTag]: { value: "URLSearchParamsCollection2", configurable: true },
+  Object.defineProperties(InheritedCollection.prototype, {
+    [Symbol.toStringTag]: { value: "InheritedCollection", configurable: true },
     [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
-  ctorRegistry[interfaceName] = URLSearchParamsCollection2;
+  ctorRegistry[interfaceName] = InheritedCollection;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, [
-      ctorRegistry["URLSearchParamsCollection2"].prototype,
-      ctorRegistry["URLSearchParamsCollection"].prototype
+      ctorRegistry["InheritedCollection"].prototype,
+      ctorRegistry["HTMLFormControlsCollection"].prototype,
+      ctorRegistry["HTMLCollection"].prototype
     ]),
     other: new ProxyHandler(globalObject, [])
   });
@@ -125,7 +125,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URLSearchParamsCollection2
+    value: InheritedCollection
   });
 };
 
@@ -163,7 +163,7 @@ class ProxyHandler {
       const index = P >>> 0;
 
       const indexedValue = impl.item(index);
-      if (indexedValue !== undefined) {
+      if (indexedValue !== null) {
         return utils.tryWrapperForImpl(indexedValue);
       }
 
@@ -226,7 +226,7 @@ class ProxyHandler {
       const index = P >>> 0;
 
       const indexedValue = impl.item(index);
-      if (indexedValue !== undefined) {
+      if (indexedValue !== null) {
         return {
           writable: false,
           enumerable: true,
@@ -242,7 +242,7 @@ class ProxyHandler {
       const namedValue = impl.namedItem(P);
       if (namedValue !== null && !(P in target)) {
         return {
-          writable: true,
+          writable: false,
           enumerable: true,
           configurable: true,
           value: utils.tryWrapperForImpl(namedValue)
@@ -262,30 +262,13 @@ class ProxyHandler {
     // that inherits from it, whereas `target` refers to the Proxy target:
     if (utils.wrapperForImpl(impl) === receiver) {
       const globalObject = this._globalObject;
-
-      if (typeof P === "string") {
-        let namedValue = V;
-
-        namedValue = URL.convert(globalObject, namedValue, {
-          context: "Failed to set the '" + P + "' property on 'URLSearchParamsCollection2': The provided value"
-        });
-
-        const creating = !(impl.namedItem(P) !== null);
-        if (creating) {
-          impl[utils.namedSetNew](P, namedValue);
-        } else {
-          impl[utils.namedSetExisting](P, namedValue);
-        }
-
-        return true;
-      }
     }
     let ownDesc;
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
       const indexedValue = impl.item(index);
-      if (indexedValue !== undefined) {
+      if (indexedValue !== null) {
         ownDesc = {
           writable: false,
           enumerable: true,
@@ -313,24 +296,10 @@ class ProxyHandler {
       return false;
     }
     if (!Object.hasOwn(target, P)) {
-      if (desc.get || desc.set) {
+      const creating = !(impl.namedItem(P) !== null);
+      if (!creating) {
         return false;
       }
-
-      let namedValue = desc.value;
-
-      namedValue = URL.convert(globalObject, namedValue, {
-        context: "Failed to set the '" + P + "' property on 'URLSearchParamsCollection2': The provided value"
-      });
-
-      const creating = !(impl.namedItem(P) !== null);
-      if (creating) {
-        impl[utils.namedSetNew](P, namedValue);
-      } else {
-        impl[utils.namedSetExisting](P, namedValue);
-      }
-
-      return true;
     }
     return Reflect.defineProperty(target, P, desc);
   }
@@ -345,7 +314,7 @@ class ProxyHandler {
 
     if (utils.isArrayIndexPropName(P)) {
       const index = P >>> 0;
-      return !(impl.item(index) !== undefined);
+      return !(impl.item(index) !== null);
     }
 
     if (impl.namedItem(P) !== null && !(P in target)) {
@@ -360,4 +329,4 @@ class ProxyHandler {
   }
 }
 
-const Impl = require("../implementations/URLSearchParamsCollection2.js");
+const Impl = require("../implementations/InheritedCollection.js");
