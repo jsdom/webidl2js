@@ -140,8 +140,11 @@ exports.install = (globalObject, globalNames) => {
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
-    ordinary: new ProxyHandler(globalObject, HTMLFormControlsCollection.prototype),
-    other: new ProxyHandler(globalObject, null)
+    ordinary: new ProxyHandler(globalObject, [
+      ctorRegistry["HTMLFormControlsCollection"].prototype,
+      ctorRegistry["HTMLCollection"].prototype
+    ]),
+    other: new ProxyHandler(globalObject, [])
   });
 
   Object.defineProperty(globalObject, interfaceName, {
@@ -153,9 +156,25 @@ exports.install = (globalObject, globalNames) => {
 
 const proxyHandlerCache = new WeakMap();
 class ProxyHandler {
-  constructor(globalObject, interfacePrototype) {
+  constructor(globalObject, interfacePrototypes) {
     this._globalObject = globalObject;
-    this._interfacePrototype = interfacePrototype;
+    this._interfacePrototypes = interfacePrototypes;
+  }
+
+  _hasPrototypeProperty(target, P) {
+    // The prototypes captured during installation are ordinary. Check each live link before
+    // inspecting the next prototype so later changes cannot introduce observable Proxy traps.
+    for (let i = 0; i < this._interfacePrototypes.length; ++i) {
+      const prototype = this._interfacePrototypes[i];
+      if (Object.getPrototypeOf(target) !== prototype) {
+        return false;
+      }
+      if (Object.hasOwn(prototype, P)) {
+        return true;
+      }
+      target = prototype;
+    }
+    return false;
   }
 
   get(target, P, receiver) {
@@ -176,14 +195,7 @@ class ProxyHandler {
       ignoreNamedProps = true;
     }
 
-    if (
-      !ignoreNamedProps &&
-      !(
-        this._interfacePrototype !== null &&
-        Object.getPrototypeOf(target) === this._interfacePrototype &&
-        Object.hasOwn(this._interfacePrototype, P)
-      )
-    ) {
+    if (!ignoreNamedProps && !this._hasPrototypeProperty(target, P)) {
       const namedValue = impl.namedItem(P);
       if (namedValue !== null && !(P in target)) {
         return utils.tryWrapperForImpl(namedValue);
@@ -251,14 +263,7 @@ class ProxyHandler {
       ignoreNamedProps = true;
     }
 
-    if (
-      !ignoreNamedProps &&
-      !(
-        this._interfacePrototype !== null &&
-        Object.getPrototypeOf(target) === this._interfacePrototype &&
-        Object.hasOwn(this._interfacePrototype, P)
-      )
-    ) {
+    if (!ignoreNamedProps && !this._hasPrototypeProperty(target, P)) {
       const namedValue = impl.namedItem(P);
       if (namedValue !== null && !(P in target)) {
         return {

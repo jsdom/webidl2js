@@ -19,12 +19,14 @@ const snapshotsDir = path.resolve(__dirname, "snapshots");
 
 const idlFiles = fs.readdirSync(casesDir);
 
-function createLegacyPlatformObject(name, privateData) {
+function createLegacyPlatformObject(name, privateData, ancestors = []) {
   const generated = require(path.resolve(outputDir, `${name}.js`));
   const utils = require(path.resolve(outputDir, "utils.js"));
   const context = vm.createContext();
   const globalObject = vm.runInContext("globalThis", context);
-  generated.install(globalObject, ["Window"]);
+  for (const interfaceName of [...ancestors, name]) {
+    require(path.resolve(outputDir, `${interfaceName}.js`)).install(globalObject, ["Window"]);
+  }
   const wrapper = generated.create(globalObject, [], privateData);
   return { globalObject, implementation: utils.implForWrapper(wrapper), wrapper };
 }
@@ -454,6 +456,184 @@ describe("generation", () => {
         assert.deepStrictEqual(implementation.namedCalls, []);
         assert.strictEqual(wrapper.namedItem("length"), "named length");
         assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+      });
+
+      describe("inherited prototype properties", () => {
+        function createCollection(privateData = {}) {
+          return createLegacyPlatformObject("HTMLFormControlsCollection", privateData, ["HTMLCollection"]);
+        }
+
+        test("skips named lookups for inherited members during iteration", () => {
+          const { wrapper, implementation } = createCollection({
+            indexed: ["first", "second"],
+            named: { length: "named length", item: "named item" }
+          });
+          assert.strictEqual(wrapper.length, 2);
+          assert.strictEqual(typeof wrapper.item, "function");
+          assert.deepStrictEqual(Array.from(wrapper), ["first", "second"]);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.strictEqual("length" in wrapper, true);
+          assert.deepStrictEqual(implementation.namedCalls, []);
+          assert.strictEqual(wrapper.namedItem("length"), "named length");
+          assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+        });
+
+        test("checks more than one ordinary ancestor", () => {
+          const { wrapper, implementation } = createLegacyPlatformObject("InheritedCollection", {
+            indexed: ["first", "second"]
+          }, ["HTMLCollection", "HTMLFormControlsCollection"]);
+          assert.deepStrictEqual(Array.from(wrapper), ["first", "second"]);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.deepStrictEqual(implementation.namedCalls, []);
+        });
+
+        test("reflects ancestor property changes without invoking accessors early", () => {
+          const { globalObject, wrapper, implementation } = createCollection({
+            named: { length: "named length", custom: "named custom" }
+          });
+          const { prototype } = globalObject.HTMLCollection;
+          delete prototype.length;
+          assert.strictEqual(wrapper.length, "named length");
+          let getterCalls = 0;
+          Object.defineProperty(prototype, "custom", {
+            configurable: true,
+            get() {
+              ++getterCalls;
+              return this;
+            }
+          });
+          implementation.namedCalls.length = 0;
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "custom"), undefined);
+          assert.strictEqual("custom" in wrapper, true);
+          assert.strictEqual(getterCalls, 0);
+          assert.strictEqual(wrapper.custom, wrapper);
+          const derived = Object.create(wrapper);
+          assert.strictEqual(derived.custom, derived);
+          assert.strictEqual(getterCalls, 2);
+          assert.deepStrictEqual(implementation.namedCalls, []);
+          delete prototype.custom;
+          assert.strictEqual(wrapper.custom, "named custom");
+        });
+
+        test("falls back for changed ancestors and resumes after restoring them", () => {
+          const { globalObject, wrapper, implementation } = createCollection({
+            indexed: ["element"], named: { length: "named length" }
+          });
+          const childPrototype = globalObject.HTMLFormControlsCollection.prototype;
+          const parentPrototype = globalObject.HTMLCollection.prototype;
+          const other = createCollection();
+          Object.setPrototypeOf(childPrototype, other.globalObject.HTMLCollection.prototype);
+          globalObject.HTMLCollection = new Proxy(() => {}, {
+            get() {
+              throw new Error("unexpected constructor property access");
+            }
+          });
+          assert.strictEqual(wrapper.length, 1);
+          assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+          Object.setPrototypeOf(childPrototype, parentPrototype);
+          implementation.namedCalls.length = 0;
+          assert.strictEqual(wrapper.length, 1);
+          assert.deepStrictEqual(implementation.namedCalls, []);
+          Object.setPrototypeOf(childPrototype, null);
+          assert.strictEqual(wrapper.length, "named length");
+        });
+
+        test("does not probe a proxy inserted between ordinary prototypes", () => {
+          const { globalObject, wrapper, implementation } = createCollection();
+          const calls = [];
+          function unexpected() {
+            throw new Error("unexpected ancestor trap");
+          }
+          const proxy = new Proxy(globalObject.HTMLCollection.prototype, {
+            getPrototypeOf: unexpected,
+            getOwnPropertyDescriptor: unexpected,
+            has: unexpected,
+            get(target, property, receiver) {
+              calls.push(property);
+              return Reflect.get(target, property, receiver);
+            }
+          });
+          Object.setPrototypeOf(globalObject.HTMLFormControlsCollection.prototype, proxy);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+          assert.strictEqual(wrapper.length, 0);
+          assert.deepStrictEqual(implementation.namedCalls, ["length", "missing", "length"]);
+          assert.deepStrictEqual(calls, ["length"]);
+        });
+
+        test("preserves supported-name lookup before observable ancestor checks", () => {
+          const { globalObject, wrapper, implementation } = createCollection({
+            named: { length: "named length" }
+          });
+          const marker = new Error("ancestor check");
+          const proxy = new Proxy(globalObject.HTMLCollection.prototype, {
+            getOwnPropertyDescriptor() {
+              throw new Error("unexpected early ancestor check");
+            },
+            has() {
+              assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+              throw marker;
+            }
+          });
+          Object.setPrototypeOf(globalObject.HTMLFormControlsCollection.prototype, proxy);
+          assert.throws(() => wrapper.length, error => error === marker);
+        });
+
+        test("does not probe a revoked ancestor proxy", () => {
+          const { globalObject, wrapper } = createCollection();
+          const { proxy, revoke } = Proxy.revocable(globalObject.HTMLCollection.prototype, {});
+          Object.setPrototypeOf(globalObject.HTMLFormControlsCollection.prototype, proxy);
+          revoke();
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+          assert.throws(() => wrapper.length, TypeError);
+        });
+
+        test("does not trust an ancestor proxy present during installation", () => {
+          const { globalObject } = createLegacyPlatformObject("HTMLCollection", {});
+          const parentPrototype = globalObject.HTMLCollection.prototype;
+          function unexpected() {
+            throw new Error("unexpected ancestor trap");
+          }
+          globalObject.HTMLCollection = function HTMLCollection() {};
+          globalObject.HTMLCollection.prototype = new Proxy(parentPrototype, {
+            getPrototypeOf: unexpected,
+            getOwnPropertyDescriptor: unexpected,
+            has: unexpected
+          });
+          const generated = require(path.resolve(outputDir, "HTMLFormControlsCollection.js"));
+          generated.install(globalObject, ["Window"]);
+          const wrapper = generated.create(globalObject);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+          assert.strictEqual(wrapper.length, 0);
+        });
+
+        test("stops before an unknown proxy above a captured ancestor", () => {
+          const { globalObject, wrapper, implementation } = createCollection();
+          const { prototype } = globalObject.HTMLCollection;
+          const { proxy, revoke } = Proxy.revocable(Object.getPrototypeOf(prototype), {});
+          Object.setPrototypeOf(prototype, proxy);
+          revoke();
+          assert.strictEqual(wrapper.length, 0);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+          assert.deepStrictEqual(implementation.namedCalls, []);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
+          assert.deepStrictEqual(implementation.namedCalls, ["missing"]);
+        });
+
+        test("does not probe caller-supplied wrapper proxies", () => {
+          const { globalObject } = createCollection();
+          const generated = require(path.resolve(outputDir, "HTMLFormControlsCollection.js"));
+          const target = new Proxy(Object.create(globalObject.HTMLFormControlsCollection.prototype), {
+            getPrototypeOf() {
+              throw new Error("unexpected wrapper prototype trap");
+            }
+          });
+          const wrapper = generated.setup(target, globalObject);
+          assert.strictEqual(wrapper.length, 0);
+          assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
+        });
       });
 
       test("reflects changes to ordinary prototype properties", () => {
