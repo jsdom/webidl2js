@@ -17,7 +17,14 @@ const implsDir = path.resolve(__dirname, "implementations");
 const outputDir = path.resolve(__dirname, "output");
 const snapshotsDir = path.resolve(__dirname, "snapshots");
 
-const idlFiles = fs.readdirSync(casesDir);
+const idlFiles = fs.readdirSync(casesDir).filter(file => file.endsWith(".webidl"));
+const externalInterfaces = [
+  "ExternalAttributes",
+  "ExternalCEReactions",
+  "ExternalExposure",
+  "ExternalOperations",
+  "ExternalSources"
+];
 
 function createLegacyPlatformObject(name, privateData, ancestors = []) {
   const generated = require(path.resolve(outputDir, `${name}.js`));
@@ -55,8 +62,9 @@ describe("generation", () => {
 
   describe("without processors", () => {
     before(() => {
-      const transformer = new Transformer();
+      const transformer = new Transformer({ externalInterfaces });
       transformer.addSource(casesDir, implsDir);
+      transformer.addSource(path.join(casesDir, "partial-sources"), path.join(implsDir, "partial-sources"));
 
       return transformer.generate(outputDir);
     });
@@ -70,6 +78,39 @@ describe("generation", () => {
         t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "without-processors", `${basename}.js`));
       });
     }
+
+    test("installs static partials onto an independently generated constructor", async () => {
+      const baseOutputDir = path.join(outputDir, "external-base");
+      fs.mkdirSync(baseOutputDir, { recursive: true });
+      const transformer = new Transformer();
+      transformer.addSource(path.join(casesDir, "external-base"), path.join(implsDir, "external-base"));
+      await transformer.generate(baseOutputDir);
+
+      const base = require(path.join(baseOutputDir, "ExternalOperations.js"));
+      const partial = require(path.join(outputDir, "ExternalOperations.js"));
+      const utils = require(path.join(baseOutputDir, "utils.js"));
+      const globalObject = vm.runInNewContext("globalThis");
+      assert.throws(() => partial.install(globalObject, ["Window"]), /must be installed before its partial interfaces/);
+
+      base.install(globalObject, ["Window"]);
+      const constructor = globalObject.ExternalOperations;
+      const { prototype } = constructor;
+      const instance = new constructor();
+      partial.install(globalObject, ["Window"]);
+
+      assert.strictEqual(globalObject.ExternalOperations, constructor);
+      assert.strictEqual(constructor.prototype, prototype);
+      assert.strictEqual(globalObject[utils.ctorRegistrySymbol].ExternalOperations, constructor);
+      assert.strictEqual(instance.value, "base");
+      assert.strictEqual(instance.constructor, constructor);
+      assert.strictEqual(Object.getPrototypeOf(constructor.create()), prototype);
+      assert.strictEqual(base.is(constructor.create()), true);
+      const { currentGlobal, stringify } = constructor;
+      assert.strictEqual(currentGlobal.call({}), globalObject);
+      assert.strictEqual(stringify(42), "42");
+      assert.throws(() => stringify(Symbol("invalid")), globalObject.TypeError);
+      assert.throws(() => partial.install(globalObject, ["Window"]), /already has a member named/);
+    });
 
     describe("platform object brand checks", () => {
       let BrandCheck, BrandCheckParent, BrandCheckGrandchild, BrandCheckSibling, utils,
@@ -834,6 +875,7 @@ describe("generation", () => {
   describe("with processors", () => {
     before(() => {
       const transformer = new Transformer({
+        externalInterfaces,
         processCEReactions(code) {
           const ceReactions = this.addImport("../CEReactions");
 
@@ -884,6 +926,7 @@ describe("generation", () => {
         }
       });
       transformer.addSource(casesDir, implsDir);
+      transformer.addSource(path.join(casesDir, "partial-sources"), path.join(implsDir, "partial-sources"));
 
       return transformer.generate(outputDir);
     });
