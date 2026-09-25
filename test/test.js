@@ -71,6 +71,24 @@ describe("generation", () => {
       });
     }
 
+    test("lenient-only interfaces ignore invalid receivers before converting setter values", () => {
+      const generated = require(path.resolve(outputDir, "LegacyLenientThisOnly.js"));
+      const globalObject = vm.runInNewContext("globalThis");
+      generated.install(globalObject, ["Window"]);
+      const wrapper = generated.create(globalObject);
+      const { get, set } = Object.getOwnPropertyDescriptor(globalObject.LegacyLenientThisOnly.prototype, "value");
+
+      assert.strictEqual(get.call(wrapper), "initial");
+      set.call(wrapper, 42);
+      assert.strictEqual(get.call(wrapper), "42");
+
+      for (const receiver of [undefined, null, {}, new Proxy(wrapper, {})]) {
+        assert.strictEqual(get.call(receiver), undefined);
+        assert.strictEqual(set.call(receiver, Symbol("not convertible")), undefined);
+      }
+      assert.strictEqual(get.call(wrapper), "42");
+    });
+
     describe("platform object brand checks", () => {
       let BrandCheck, BrandCheckParent, BrandCheckGrandchild, BrandCheckSibling, utils,
         globalObject, wrapper, impl;
