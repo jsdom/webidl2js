@@ -94,13 +94,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     grandchildMethod() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'grandchildMethod' called on an object that is not a valid instance of BrandCheckGrandchild."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckGrandchild",
+        "grandchildMethod"
+      );
       return $impl.grandchildMethod();
     }
   }

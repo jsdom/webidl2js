@@ -141,19 +141,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get x() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get x' called on an object that is not a valid instance of DOMRect.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "get x"
+      );
       return $impl["x"];
     }
 
     set x(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set x' called on an object that is not a valid instance of DOMRect.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "set x"
+      );
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'x' property on 'DOMRect': The provided value",
@@ -164,19 +169,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get y() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get y' called on an object that is not a valid instance of DOMRect.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "get y"
+      );
       return $impl["y"];
     }
 
     set y(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set y' called on an object that is not a valid instance of DOMRect.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "set y"
+      );
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'y' property on 'DOMRect': The provided value",
@@ -187,19 +197,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get width() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get width' called on an object that is not a valid instance of DOMRect.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "get width"
+      );
       return $impl["width"];
     }
 
     set width(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set width' called on an object that is not a valid instance of DOMRect.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "set width"
+      );
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'width' property on 'DOMRect': The provided value",
@@ -210,19 +225,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get height() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get height' called on an object that is not a valid instance of DOMRect.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "get height"
+      );
       return $impl["height"];
     }
 
     set height(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set height' called on an object that is not a valid instance of DOMRect.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMRect",
+        "set height"
+      );
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'height' property on 'DOMRect': The provided value",

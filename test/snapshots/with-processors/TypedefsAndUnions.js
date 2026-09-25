@@ -95,13 +95,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'numOrStrConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "numOrStrConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +128,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrEnumConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'numOrEnumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "numOrEnumConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -163,13 +163,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrOrNullConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'numOrStrOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "numOrStrOrNullConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -202,13 +202,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrOrURLOrNullConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'numOrStrOrURLOrNullConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "numOrStrOrURLOrNullConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -243,13 +243,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrObjConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'numOrObjConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "numOrObjConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -277,13 +277,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     urlMapInnerConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'urlMapInnerConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "urlMapInnerConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -325,13 +325,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     urlMapConsumer(a) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'urlMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "urlMapConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -377,13 +377,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bufferSourceOrURLConsumer(b) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'bufferSourceOrURLConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "bufferSourceOrURLConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -416,13 +416,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferViewOrURLMapConsumer(b) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'arrayBufferViewOrURLMapConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "arrayBufferViewOrURLMapConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -488,13 +488,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferViewDupConsumer(b) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'arrayBufferViewDupConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "arrayBufferViewDupConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -520,13 +520,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferOrSharedArrayBufferConsumer(b) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'arrayBufferOrSharedArrayBufferConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "arrayBufferOrSharedArrayBufferConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -557,13 +557,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     callbackFunctionOrNumConsumer(cb) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'callbackFunctionOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "callbackFunctionOrNumConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -595,13 +595,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     callbackInterfaceOrNumConsumer(cb) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'callbackInterfaceOrNumConsumer' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "callbackInterfaceOrNumConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -633,24 +633,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get buf() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get buf' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "get buf"
+      );
       return utils.tryWrapperForImpl($impl["buf"]);
     }
 
     set buf(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set buf' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "set buf"
+      );
       if (utils.isArrayBuffer(V)) {
         V = conversions["ArrayBuffer"](V, {
           context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
@@ -676,23 +676,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get time() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get time' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "get time"
+      );
       return $impl["time"];
     }
 
     set time(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set time' called on an object that is not a valid instance of TypedefsAndUnions."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "TypedefsAndUnions",
+        "set time"
+      );
 
       V = conversions["unsigned long long"](V, {
         context: "Failed to set the 'time' property on 'TypedefsAndUnions': The provided value",

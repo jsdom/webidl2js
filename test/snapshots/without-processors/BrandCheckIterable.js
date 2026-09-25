@@ -104,46 +104,40 @@ exports.install = (globalObject, globalNames) => {
     }
 
     keys() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'keys' called on an object that is not a valid instance of BrandCheckIterable."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "BrandCheckIterable", "keys");
       return exports.createDefaultIterator(globalObject, $impl, "key");
     }
 
     values() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'values' called on an object that is not a valid instance of BrandCheckIterable."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckIterable",
+        "values"
+      );
       return exports.createDefaultIterator(globalObject, $impl, "value");
     }
 
     entries() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'entries' called on an object that is not a valid instance of BrandCheckIterable."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckIterable",
+        "entries"
+      );
       return exports.createDefaultIterator(globalObject, $impl, "key+value");
     }
 
     forEach(callback) {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'forEach' called on an object that is not a valid instance of BrandCheckIterable."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckIterable",
+        "forEach"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."

@@ -92,13 +92,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     recordConsumer(rec) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'recordConsumer' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "recordConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -141,13 +141,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     recordConsumer2(rec) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'recordConsumer2' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "recordConsumer2"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -189,13 +189,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sequenceConsumer(seq) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'sequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "sequenceConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -227,13 +227,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sequenceConsumer2(seq) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'sequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "sequenceConsumer2"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -262,13 +262,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequenceConsumer(async_seq) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'asyncSequenceConsumer' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "asyncSequenceConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -294,13 +294,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequenceConsumer2(async_seq) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'asyncSequenceConsumer2' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "asyncSequenceConsumer2"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -323,13 +323,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     frozenArrayConsumer(arr) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'frozenArrayConsumer' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "frozenArrayConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -362,13 +362,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequencePassthrough(async_seq) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'asyncSequencePassthrough' called on an object that is not a valid instance of SeqAndRec."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "SeqAndRec",
+        "asyncSequencePassthrough"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`

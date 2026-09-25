@@ -91,13 +91,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'toString' called on an object that is not a valid instance of StringifierDefaultOperation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "StringifierDefaultOperation",
+        "toString"
+      );
       return $impl.toString();
     }
   }

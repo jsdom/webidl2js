@@ -91,28 +91,35 @@ exports.install = (globalObject, globalNames) => {
     }
 
     def() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'def' called on an object that is not a valid instance of Static.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Static",
+        "def"
+      );
       return $impl.def();
     }
 
     get abc() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get abc' called on an object that is not a valid instance of Static.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Static",
+        "get abc"
+      );
       return $impl["abc"];
     }
 
     set abc(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set abc' called on an object that is not a valid instance of Static.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Static",
+        "set abc"
+      );
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'abc' property on 'Static': The provided value",

@@ -92,10 +92,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     simple1() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'simple1' called on an object that is not a valid instance of Variadic.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Variadic",
+        "simple1"
+      );
       const args = [];
       for (let i = 0; i < arguments.length; i++) {
         let curArg = arguments[i];
@@ -109,11 +112,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     simple2(first) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'simple2' called on an object that is not a valid instance of Variadic.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Variadic",
+        "simple2"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'simple2' on 'Variadic': 1 argument required, but only ${arguments.length} present.`
@@ -139,10 +144,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     overloaded1() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'overloaded1' called on an object that is not a valid instance of Variadic.");
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Variadic",
+        "overloaded1"
+      );
       const args = [];
       switch (arguments.length) {
         case 0:
@@ -174,11 +182,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     overloaded2(first) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'overloaded2' called on an object that is not a valid instance of Variadic.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Variadic",
+        "overloaded2"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only ${arguments.length} present.`

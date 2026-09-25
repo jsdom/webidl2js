@@ -91,24 +91,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     operation() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'operation' called on an object that is not a valid instance of StringifierNamedOperation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "StringifierNamedOperation",
+        "operation"
+      );
       return $impl.operation();
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'toString' called on an object that is not a valid instance of StringifierNamedOperation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "StringifierNamedOperation",
+        "toString"
+      );
       return $impl.operation();
     }
   }

@@ -103,12 +103,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     values() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'values' called on an object that is not a valid instance of AsyncIterableValueNoArgs."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "AsyncIterableValueNoArgs",
+        "values"
+      );
 
       const args = [];
 

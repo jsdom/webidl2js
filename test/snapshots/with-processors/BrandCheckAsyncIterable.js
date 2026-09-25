@@ -103,12 +103,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     keys() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'keys' called on an object that is not a valid instance of BrandCheckAsyncIterable."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckAsyncIterable",
+        "keys"
+      );
 
       const args = [];
       if (arguments[0] !== undefined) {
@@ -129,12 +130,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     values() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'values' called on an object that is not a valid instance of BrandCheckAsyncIterable."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckAsyncIterable",
+        "values"
+      );
 
       const args = [];
       if (arguments[0] !== undefined) {
@@ -155,12 +157,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     entries() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'entries' called on an object that is not a valid instance of BrandCheckAsyncIterable."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckAsyncIterable",
+        "entries"
+      );
 
       const args = [];
       if (arguments[0] !== undefined) {

@@ -54,13 +54,13 @@ function getUnforgeables(globalObject) {
     utils.define(unforgeables, {
       unforgeablePromiseOperation() {
         try {
-          const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-          if ($impl === null) {
-            throw new globalObject.TypeError(
-              "'unforgeablePromiseOperation' called on an object that is not a valid instance of PromiseTypes."
-            );
-          }
-
+          const $impl = utils.requireImplForWrapper(
+            this ?? globalObject,
+            $interfaceDescriptor,
+            globalObject,
+            "PromiseTypes",
+            "unforgeablePromiseOperation"
+          );
           return utils.tryWrapperForImpl($impl.unforgeablePromiseOperation());
         } catch (e) {
           return globalObject.Promise.reject(e);
@@ -68,13 +68,13 @@ function getUnforgeables(globalObject) {
       },
       get unforgeablePromiseAttribute() {
         try {
-          const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-          if ($impl === null) {
-            throw new globalObject.TypeError(
-              "'get unforgeablePromiseAttribute' called on an object that is not a valid instance of PromiseTypes."
-            );
-          }
-
+          const $impl = utils.requireImplForWrapper(
+            this ?? globalObject,
+            $interfaceDescriptor,
+            globalObject,
+            "PromiseTypes",
+            "get unforgeablePromiseAttribute"
+          );
           return utils.tryWrapperForImpl($impl["unforgeablePromiseAttribute"]);
         } catch (e) {
           return globalObject.Promise.reject(e);
@@ -137,13 +137,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     voidPromiseConsumer(p) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'voidPromiseConsumer' called on an object that is not a valid instance of PromiseTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "PromiseTypes",
+        "voidPromiseConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`
@@ -159,13 +159,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     promiseConsumer(p) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'promiseConsumer' called on an object that is not a valid instance of PromiseTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "PromiseTypes",
+        "promiseConsumer"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`
@@ -182,13 +182,13 @@ exports.install = (globalObject, globalNames) => {
 
     promiseOperation() {
       try {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'promiseOperation' called on an object that is not a valid instance of PromiseTypes."
-          );
-        }
-
+        const $impl = utils.requireImplForWrapper(
+          this ?? globalObject,
+          $interfaceDescriptor,
+          globalObject,
+          "PromiseTypes",
+          "promiseOperation"
+        );
         return utils.tryWrapperForImpl($impl.promiseOperation());
       } catch (e) {
         return globalObject.Promise.reject(e);
@@ -197,13 +197,13 @@ exports.install = (globalObject, globalNames) => {
 
     get promiseAttribute() {
       try {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get promiseAttribute' called on an object that is not a valid instance of PromiseTypes."
-          );
-        }
-
+        const $impl = utils.requireImplForWrapper(
+          this ?? globalObject,
+          $interfaceDescriptor,
+          globalObject,
+          "PromiseTypes",
+          "get promiseAttribute"
+        );
         return utils.tryWrapperForImpl($impl["promiseAttribute"]);
       } catch (e) {
         return globalObject.Promise.reject(e);

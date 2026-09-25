@@ -103,13 +103,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     item(index) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'item' called on an object that is not a valid instance of URLSearchParamsCollection."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParamsCollection",
+        "item"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +128,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     namedItem(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'namedItem' called on an object that is not a valid instance of URLSearchParamsCollection."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParamsCollection",
+        "namedItem"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only ${arguments.length} present.`
@@ -153,13 +153,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get length() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get length' called on an object that is not a valid instance of URLSearchParamsCollection."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParamsCollection",
+        "get length"
+      );
       return $impl["length"];
     }
   }

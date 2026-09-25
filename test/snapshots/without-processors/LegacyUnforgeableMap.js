@@ -61,13 +61,13 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       get a() {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get a' called on an object that is not a valid instance of LegacyUnforgeableMap."
-          );
-        }
-
+        const $impl = utils.requireImplForWrapper(
+          this ?? globalObject,
+          $interfaceDescriptor,
+          globalObject,
+          "LegacyUnforgeableMap",
+          "get a"
+        );
         return $impl["a"];
       }
     });

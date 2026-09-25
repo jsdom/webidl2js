@@ -91,34 +91,35 @@ exports.install = (globalObject, globalNames) => {
     }
 
     parentMethod() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'parentMethod' called on an object that is not a valid instance of BrandCheckParent."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckParent",
+        "parentMethod"
+      );
       return $impl.parentMethod();
     }
 
     get value() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get value' called on an object that is not a valid instance of BrandCheckParent."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckParent",
+        "get value"
+      );
       return $impl["value"];
     }
 
     set value(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set value' called on an object that is not a valid instance of BrandCheckParent."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckParent",
+        "set value"
+      );
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'value' property on 'BrandCheckParent': The provided value",
@@ -129,12 +130,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'toString' called on an object that is not a valid instance of BrandCheckParent."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckParent",
+        "toString"
+      );
 
       return $impl["value"];
     }

@@ -176,6 +176,24 @@ describe("generation", () => {
         }
       });
 
+      test("preserves the realm and message of invalid receiver errors", () => {
+        const parentPrototype = globalObject.BrandCheckParent.prototype;
+        const valueDescriptor = Object.getOwnPropertyDescriptor(parentPrototype, "value");
+        const cases = [
+          ["BrandCheck", "childMethod", () => wrapper.childMethod.call({})],
+          ["BrandCheckParent", "get value", () => valueDescriptor.get.call({})],
+          ["BrandCheckParent", "set value", () => valueDescriptor.set.call({}, "value")],
+          ["BrandCheckParent", "toString", () => parentPrototype.toString.call({})]
+        ];
+
+        for (const [interfaceName, context, invoke] of cases) {
+          assert.throws(invoke, {
+            constructor: globalObject.TypeError,
+            message: `'${context}' called on an object that is not a valid instance of ${interfaceName}.`
+          });
+        }
+      });
+
       test("preserves brands across realms and prototype changes", () => {
         const otherGlobalObject = vm.runInNewContext("globalThis");
         install(otherGlobalObject);

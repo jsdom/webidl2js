@@ -92,13 +92,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     addEventListener(type, callback) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'addEventListener' called on an object that is not a valid instance of EventTarget."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "EventTarget",
+        "addEventListener"
+      );
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only ${arguments.length} present.`

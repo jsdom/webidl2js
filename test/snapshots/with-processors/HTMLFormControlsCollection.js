@@ -106,13 +106,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     namedItem(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'namedItem' called on an object that is not a valid instance of HTMLFormControlsCollection."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "HTMLFormControlsCollection",
+        "namedItem"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'namedItem' on 'HTMLFormControlsCollection': 1 argument required, but only ${arguments.length} present.`

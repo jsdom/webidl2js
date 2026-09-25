@@ -94,13 +94,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     siblingMethod() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'siblingMethod' called on an object that is not a valid instance of BrandCheckSibling."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BrandCheckSibling",
+        "siblingMethod"
+      );
       return $impl.siblingMethod();
     }
   }

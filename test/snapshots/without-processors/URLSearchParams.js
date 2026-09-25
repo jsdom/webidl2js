@@ -191,13 +191,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     append(name, value) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'append' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "append"
+      );
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`
@@ -224,13 +224,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     delete(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'delete' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "delete"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
@@ -249,11 +249,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get' called on an object that is not a valid instance of URLSearchParams.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "get"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
@@ -272,13 +274,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     getAll(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'getAll' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "getAll"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
@@ -297,11 +299,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     has(name) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'has' called on an object that is not a valid instance of URLSearchParams.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "has"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
@@ -320,11 +324,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     set(name, value) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set' called on an object that is not a valid instance of URLSearchParams.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "set"
+      );
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`
@@ -351,64 +357,44 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sort() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'sort' called on an object that is not a valid instance of URLSearchParams.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "sort"
+      );
       return $impl.sort();
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'toString' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLSearchParams",
+        "toString"
+      );
       return $impl.toString();
     }
 
     keys() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'keys' called on an object that is not a valid instance of URLSearchParams.");
-      }
-
+      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "URLSearchParams", "keys");
       return exports.createDefaultIterator(globalObject, $impl, "key");
     }
 
     values() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'values' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "URLSearchParams", "values");
       return exports.createDefaultIterator(globalObject, $impl, "value");
     }
 
     entries() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'entries' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "URLSearchParams", "entries");
       return exports.createDefaultIterator(globalObject, $impl, "key+value");
     }
 
     forEach(callback) {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'forEach' called on an object that is not a valid instance of URLSearchParams."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "URLSearchParams", "forEach");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."

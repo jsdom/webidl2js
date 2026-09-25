@@ -91,13 +91,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     createDocumentType(qualifiedName, publicId, systemId) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'createDocumentType' called on an object that is not a valid instance of DOMImplementation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMImplementation",
+        "createDocumentType"
+      );
       if (arguments.length < 3) {
         throw new globalObject.TypeError(
           `Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only ${arguments.length} present.`
@@ -132,13 +132,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     createDocument(namespace, qualifiedName) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'createDocument' called on an object that is not a valid instance of DOMImplementation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMImplementation",
+        "createDocument"
+      );
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only ${arguments.length} present.`
@@ -183,12 +183,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     createHTMLDocument() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'createHTMLDocument' called on an object that is not a valid instance of DOMImplementation."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMImplementation",
+        "createHTMLDocument"
+      );
       const args = [];
       {
         let curArg = arguments[0];
@@ -204,13 +205,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     hasFeature() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'hasFeature' called on an object that is not a valid instance of DOMImplementation."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "DOMImplementation",
+        "hasFeature"
+      );
       return $impl.hasFeature();
     }
   }

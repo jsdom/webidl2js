@@ -91,25 +91,25 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get replaceable() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get replaceable' called on an object that is not a valid instance of Replaceable."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Replaceable",
+        "get replaceable"
+      );
       return $impl["replaceable"];
     }
 
     set replaceable(V) {
       const esValue = this ?? globalObject;
-
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set replaceable' called on an object that is not a valid instance of Replaceable."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "Replaceable",
+        "set replaceable"
+      );
 
       Object.defineProperty(esValue, "replaceable", {
         configurable: true,

@@ -106,11 +106,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     item(index) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'item' called on an object that is not a valid instance of URLList.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLList",
+        "item"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'item' on 'URLList': 1 argument required, but only ${arguments.length} present.`
@@ -129,11 +131,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get length() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get length' called on an object that is not a valid instance of URLList.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "URLList",
+        "get length"
+      );
       return $impl["length"];
     }
   }

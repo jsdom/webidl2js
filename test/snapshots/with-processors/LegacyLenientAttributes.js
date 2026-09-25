@@ -91,23 +91,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get lenientSetter() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "LegacyLenientAttributes",
+        "get lenientSetter"
+      );
       return $impl["lenientSetter"];
     }
 
     set lenientSetter(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set lenientSetter' called on an object that is not a valid instance of LegacyLenientAttributes."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "LegacyLenientAttributes",
+        "set lenientSetter"
+      );
     }
 
     get lenientThisSetter() {

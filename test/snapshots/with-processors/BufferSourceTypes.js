@@ -91,11 +91,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bs(source) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'bs' called on an object that is not a valid instance of BufferSourceTypes.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "bs"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -125,11 +127,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     ab(ab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'ab' called on an object that is not a valid instance of BufferSourceTypes.");
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "ab"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -148,13 +152,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sab(sab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'sab' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "sab"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sab' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -173,13 +177,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abv(abv) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abv' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abv"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -204,13 +208,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8a(u8) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'u8a' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "u8a"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -229,13 +233,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abUnion(ab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abUnion' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abUnion"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -261,13 +265,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sabUnion(ab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'sabUnion' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "sabUnion"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sabUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -293,13 +297,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aUnion(ab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'u8aUnion' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "u8aUnion"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -325,13 +329,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asbs(source) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'asbs' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "asbs"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asbs' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -367,13 +371,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowShared(abv) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abvAllowShared' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abvAllowShared"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -399,13 +403,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowShared(u8) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'u8aAllowShared' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "u8aAllowShared"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -425,13 +429,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bsAllowResizable(source) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'bsAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "bsAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -464,13 +468,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abAllowResizable(ab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -490,13 +494,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sabAllowResizable(sab) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'sabAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "sabAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sabAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -516,13 +520,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowResizable(abv) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abvAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abvAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -549,13 +553,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowResizable(u8) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'u8aAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "u8aAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -575,13 +579,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asbsAllowResizable(source) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'asbsAllowResizable' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "asbsAllowResizable"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -621,13 +625,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowResizableShared(abv) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'abvAllowResizableShared' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "abvAllowResizableShared"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -655,13 +659,13 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowResizableShared(u8) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'u8aAllowResizableShared' called on an object that is not a valid instance of BufferSourceTypes."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "BufferSourceTypes",
+        "u8aAllowResizableShared"
+      );
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowResizableShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`

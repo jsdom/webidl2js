@@ -91,23 +91,24 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get attr' called on an object that is not a valid instance of StringifierAttribute."
-        );
-      }
-
+      const $impl = utils.requireImplForWrapper(
+        this ?? globalObject,
+        $interfaceDescriptor,
+        globalObject,
+        "StringifierAttribute",
+        "get attr"
+      );
       return $impl["attr"];
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'toString' called on an object that is not a valid instance of StringifierAttribute."
-        );
-      }
+      const $impl = utils.requireImplForWrapper(
+        this,
+        $interfaceDescriptor,
+        globalObject,
+        "StringifierAttribute",
+        "toString"
+      );
 
       return $impl["attr"];
     }
