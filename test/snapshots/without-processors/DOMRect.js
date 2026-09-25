@@ -11,6 +11,10 @@ const interfaceName = "DOMRect";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -141,24 +145,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get x() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "get x"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get x");
       return $impl["x"];
     }
 
     set x(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "set x"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set x");
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'x' property on 'DOMRect': The provided value",
@@ -169,24 +161,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get y() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "get y"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get y");
       return $impl["y"];
     }
 
     set y(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "set y"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set y");
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'y' property on 'DOMRect': The provided value",
@@ -197,24 +177,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get width() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "get width"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get width");
       return $impl["width"];
     }
 
     set width(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "set width"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set width");
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'width' property on 'DOMRect': The provided value",
@@ -225,24 +193,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get height() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "get height"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get height");
       return $impl["height"];
     }
 
     set height(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DOMRect",
-        "set height"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set height");
 
       V = conversions["unrestricted double"](V, {
         context: "Failed to set the 'height' property on 'DOMRect': The provided value",

@@ -10,6 +10,10 @@ const interfaceName = "LegacyUnforgeable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -53,13 +57,7 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       assign(url) {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "assign"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "assign");
         if (arguments.length < 1) {
           throw new globalObject.TypeError(
             `Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only ${arguments.length} present.`
@@ -77,23 +75,11 @@ function getUnforgeables(globalObject) {
         return $impl.assign(...args);
       },
       get href() {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "get href"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get href");
         return $impl["href"];
       },
       set href(V) {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "set href"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
         V = conversions["USVString"](V, {
           context: "Failed to set the 'href' property on 'LegacyUnforgeable': The provided value",
@@ -103,44 +89,20 @@ function getUnforgeables(globalObject) {
         $impl["href"] = V;
       },
       toString() {
-        const $impl = utils.requireImplForWrapper(
-          this,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "toString"
-        );
+        const $impl = $requireImpl(this, globalObject, "toString");
 
         return $impl["href"];
       },
       get origin() {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "get origin"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get origin");
         return $impl["origin"];
       },
       get protocol() {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "get protocol"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get protocol");
         return $impl["protocol"];
       },
       set protocol(V) {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeable",
-          "set protocol"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
         V = conversions["USVString"](V, {
           context: "Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value",

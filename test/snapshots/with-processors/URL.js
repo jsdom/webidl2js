@@ -10,6 +10,10 @@ const interfaceName = "URL";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -115,35 +119,17 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toJSON() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "toJSON"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "toJSON");
       return $impl.toJSON();
     }
 
     get href() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get href"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get href");
       return $impl["href"];
     }
 
     set href(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set href"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'href' property on 'URL': The provided value",
@@ -154,41 +140,23 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "URL", "toString");
+      const $impl = $requireImpl(this, globalObject, "toString");
 
       return $impl["href"];
     }
 
     get origin() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get origin"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get origin");
       return $impl["origin"];
     }
 
     get protocol() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get protocol"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get protocol");
       return $impl["protocol"];
     }
 
     set protocol(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set protocol"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'protocol' property on 'URL': The provided value",
@@ -199,24 +167,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get username() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get username"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get username");
       return $impl["username"];
     }
 
     set username(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set username"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set username");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'username' property on 'URL': The provided value",
@@ -227,24 +183,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get password() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get password"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get password");
       return $impl["password"];
     }
 
     set password(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set password"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set password");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'password' property on 'URL': The provided value",
@@ -255,24 +199,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get host() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get host"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get host");
       return $impl["host"];
     }
 
     set host(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set host"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set host");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'host' property on 'URL': The provided value",
@@ -283,24 +215,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get hostname() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get hostname"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get hostname");
       return $impl["hostname"];
     }
 
     set hostname(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set hostname"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set hostname");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hostname' property on 'URL': The provided value",
@@ -311,24 +231,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get port() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get port"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get port");
       return $impl["port"];
     }
 
     set port(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set port"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set port");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'port' property on 'URL': The provided value",
@@ -339,24 +247,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get pathname() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get pathname"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get pathname");
       return $impl["pathname"];
     }
 
     set pathname(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set pathname"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set pathname");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'pathname' property on 'URL': The provided value",
@@ -367,24 +263,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get search() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get search"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get search");
       return $impl["search"];
     }
 
     set search(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set search"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set search");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'search' property on 'URL': The provided value",
@@ -395,37 +279,19 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get searchParams() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get searchParams"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get searchParams");
       return utils.getSameObject(this, "searchParams", () => {
         return utils.tryWrapperForImpl($impl["searchParams"]);
       });
     }
 
     get hash() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "get hash"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get hash");
       return $impl["hash"];
     }
 
     set hash(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URL",
-        "set hash"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set hash");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hash' property on 'URL': The provided value",

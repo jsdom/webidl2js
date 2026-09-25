@@ -10,6 +10,10 @@ const interfaceName = "URLSearchParamsCollection";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -103,13 +107,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     item(index) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URLSearchParamsCollection",
-        "item"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "item");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'item' on 'URLSearchParamsCollection': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +126,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     namedItem(name) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URLSearchParamsCollection",
-        "namedItem"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "namedItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'namedItem' on 'URLSearchParamsCollection': 1 argument required, but only ${arguments.length} present.`
@@ -153,13 +145,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get length() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URLSearchParamsCollection",
-        "get length"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get length");
       return $impl["length"];
     }
   }

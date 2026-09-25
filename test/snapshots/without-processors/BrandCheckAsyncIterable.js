@@ -11,6 +11,10 @@ const interfaceName = "BrandCheckAsyncIterable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -103,13 +107,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     keys() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckAsyncIterable",
-        "keys"
-      );
+      const $impl = $requireImpl(this, globalObject, "keys");
 
       const args = [];
       if (arguments[0] !== undefined) {
@@ -130,13 +128,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     values() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckAsyncIterable",
-        "values"
-      );
+      const $impl = $requireImpl(this, globalObject, "values");
 
       const args = [];
       if (arguments[0] !== undefined) {
@@ -157,13 +149,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     entries() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckAsyncIterable",
-        "entries"
-      );
+      const $impl = $requireImpl(this, globalObject, "entries");
 
       const args = [];
       if (arguments[0] !== undefined) {

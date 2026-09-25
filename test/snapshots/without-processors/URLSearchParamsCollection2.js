@@ -12,6 +12,10 @@ const interfaceName = "URLSearchParamsCollection2";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => URLSearchParamsCollection.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };

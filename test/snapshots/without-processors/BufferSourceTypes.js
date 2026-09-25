@@ -10,6 +10,10 @@ const interfaceName = "BufferSourceTypes";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,13 +95,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bs(source) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "bs"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "bs");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bs' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -127,13 +125,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     ab(ab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "ab"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "ab");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'ab' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -152,13 +144,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sab(sab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "sab"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "sab");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sab' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -177,13 +163,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abv(abv) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abv"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abv");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abv' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -208,13 +188,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8a(u8) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "u8a"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "u8a");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8a' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -233,13 +207,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abUnion(ab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abUnion"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abUnion");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -265,13 +233,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sabUnion(ab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "sabUnion"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "sabUnion");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sabUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -297,13 +259,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aUnion(ab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "u8aUnion"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "u8aUnion");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aUnion' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -329,13 +285,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asbs(source) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "asbs"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "asbs");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asbs' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -371,13 +321,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowShared(abv) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abvAllowShared"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abvAllowShared");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -403,13 +347,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowShared(u8) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "u8aAllowShared"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "u8aAllowShared");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -429,13 +367,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bsAllowResizable(source) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "bsAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "bsAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -468,13 +400,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abAllowResizable(ab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -494,13 +420,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sabAllowResizable(sab) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "sabAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "sabAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sabAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -520,13 +440,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowResizable(abv) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abvAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abvAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -553,13 +467,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowResizable(u8) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "u8aAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "u8aAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -579,13 +487,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asbsAllowResizable(source) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "asbsAllowResizable"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "asbsAllowResizable");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -625,13 +527,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     abvAllowResizableShared(abv) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "abvAllowResizableShared"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "abvAllowResizableShared");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`
@@ -659,13 +555,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     u8aAllowResizableShared(u8) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BufferSourceTypes",
-        "u8aAllowResizableShared"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "u8aAllowResizableShared");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'u8aAllowResizableShared' on 'BufferSourceTypes': 1 argument required, but only ${arguments.length} present.`

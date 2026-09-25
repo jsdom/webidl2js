@@ -11,6 +11,10 @@ const interfaceName = "Enum";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,7 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     op(destination) {
-      const $impl = utils.requireImplForWrapper(this ?? globalObject, $interfaceDescriptor, globalObject, "Enum", "op");
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "op");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'op' on 'Enum': 1 argument required, but only ${arguments.length} present.`
@@ -110,24 +114,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attr() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Enum",
-        "get attr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attr");
       return utils.tryWrapperForImpl($impl["attr"]);
     }
 
     set attr(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Enum",
-        "set attr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = `${V}`;
       if (!RequestDestination.enumerationValues.has(V)) {

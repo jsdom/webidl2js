@@ -14,6 +14,10 @@ const interfaceName = "TypedefsAndUnions";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -95,13 +99,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "numOrStrConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "numOrStrConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +126,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrEnumConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "numOrEnumConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "numOrEnumConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -163,13 +155,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrOrNullConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "numOrStrOrNullConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "numOrStrOrNullConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -202,13 +188,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrStrOrURLOrNullConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "numOrStrOrURLOrNullConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "numOrStrOrURLOrNullConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -243,13 +223,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     numOrObjConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "numOrObjConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "numOrObjConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -277,13 +251,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     urlMapInnerConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "urlMapInnerConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "urlMapInnerConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -325,13 +293,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     urlMapConsumer(a) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "urlMapConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "urlMapConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -377,13 +339,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     bufferSourceOrURLConsumer(b) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "bufferSourceOrURLConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "bufferSourceOrURLConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -416,13 +372,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferViewOrURLMapConsumer(b) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "arrayBufferViewOrURLMapConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "arrayBufferViewOrURLMapConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -488,13 +438,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferViewDupConsumer(b) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "arrayBufferViewDupConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "arrayBufferViewDupConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -520,13 +464,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     arrayBufferOrSharedArrayBufferConsumer(b) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "arrayBufferOrSharedArrayBufferConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "arrayBufferOrSharedArrayBufferConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -557,13 +495,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     callbackFunctionOrNumConsumer(cb) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "callbackFunctionOrNumConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "callbackFunctionOrNumConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -595,13 +527,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     callbackInterfaceOrNumConsumer(cb) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "callbackInterfaceOrNumConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "callbackInterfaceOrNumConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': 1 argument required, but only ${arguments.length} present.`
@@ -633,24 +559,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get buf() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "get buf"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get buf");
       return utils.tryWrapperForImpl($impl["buf"]);
     }
 
     set buf(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "set buf"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set buf");
       if (utils.isArrayBuffer(V)) {
         V = conversions["ArrayBuffer"](V, {
           context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
@@ -676,24 +590,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get time() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "get time"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get time");
       return $impl["time"];
     }
 
     set time(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "TypedefsAndUnions",
-        "set time"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set time");
 
       V = conversions["unsigned long long"](V, {
         context: "Failed to set the 'time' property on 'TypedefsAndUnions': The provided value",

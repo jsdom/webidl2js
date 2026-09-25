@@ -10,6 +10,10 @@ const interfaceName = "StringifierDefaultOperation";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,13 +95,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "StringifierDefaultOperation",
-        "toString"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "toString");
       return $impl.toString();
     }
   }

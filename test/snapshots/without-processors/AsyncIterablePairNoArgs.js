@@ -11,6 +11,10 @@ const interfaceName = "AsyncIterablePairNoArgs";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -103,13 +107,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     keys() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "AsyncIterablePairNoArgs",
-        "keys"
-      );
+      const $impl = $requireImpl(this, globalObject, "keys");
 
       const args = [];
 
@@ -121,13 +119,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     values() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "AsyncIterablePairNoArgs",
-        "values"
-      );
+      const $impl = $requireImpl(this, globalObject, "values");
 
       const args = [];
 
@@ -139,13 +131,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     entries() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "AsyncIterablePairNoArgs",
-        "entries"
-      );
+      const $impl = $requireImpl(this, globalObject, "entries");
 
       const args = [];
 

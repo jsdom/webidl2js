@@ -10,6 +10,10 @@ const interfaceName = "URLList";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -106,13 +110,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     item(index) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URLList",
-        "item"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "item");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'item' on 'URLList': 1 argument required, but only ${arguments.length} present.`
@@ -131,13 +129,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get length() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "URLList",
-        "get length"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get length");
       return $impl["length"];
     }
   }

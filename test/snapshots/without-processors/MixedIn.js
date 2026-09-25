@@ -10,6 +10,10 @@ const interfaceName = "MixedIn";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,46 +95,22 @@ exports.install = (globalObject, globalNames) => {
     }
 
     mixedInOp() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "mixedInOp"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "mixedInOp");
       return $impl.mixedInOp();
     }
 
     ifaceMixinOp() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "ifaceMixinOp"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "ifaceMixinOp");
       return $impl.ifaceMixinOp();
     }
 
     get mixedInAttr() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "get mixedInAttr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get mixedInAttr");
       return $impl["mixedInAttr"];
     }
 
     set mixedInAttr(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "set mixedInAttr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set mixedInAttr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value",
@@ -141,24 +121,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get ifaceMixinAttr() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "get ifaceMixinAttr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get ifaceMixinAttr");
       return $impl["ifaceMixinAttr"];
     }
 
     set ifaceMixinAttr(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "MixedIn",
-        "set ifaceMixinAttr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set ifaceMixinAttr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value",

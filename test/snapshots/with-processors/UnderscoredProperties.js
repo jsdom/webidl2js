@@ -10,6 +10,10 @@ const interfaceName = "UnderscoredProperties";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,13 +95,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     operation(sequence) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "UnderscoredProperties",
-        "operation"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "operation");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`
@@ -129,24 +127,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attribute() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "UnderscoredProperties",
-        "get attribute"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attribute");
       return $impl["attribute"];
     }
 
     set attribute(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "UnderscoredProperties",
-        "set attribute"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attribute");
 
       V = conversions["byte"](V, {
         context: "Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value",

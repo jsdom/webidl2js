@@ -11,6 +11,10 @@ const interfaceName = "CEReactions";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -104,13 +108,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     method() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "CEReactions",
-        "method"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "method");
       CEReactions.preSteps(globalObject);
       try {
         return $impl.method();
@@ -121,13 +119,7 @@ exports.install = (globalObject, globalNames) => {
 
     promiseOperation() {
       try {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "CEReactions",
-          "promiseOperation"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "promiseOperation");
         CEReactions.preSteps(globalObject);
         try {
           return utils.tryWrapperForImpl($impl.promiseOperation());
@@ -140,13 +132,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attr() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "CEReactions",
-        "get attr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attr");
 
       CEReactions.preSteps(globalObject);
       try {
@@ -157,13 +143,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     set attr(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "CEReactions",
-        "set attr"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'attr' property on 'CEReactions': The provided value",
@@ -180,13 +160,7 @@ exports.install = (globalObject, globalNames) => {
 
     get promiseAttribute() {
       try {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "CEReactions",
-          "get promiseAttribute"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get promiseAttribute");
 
         CEReactions.preSteps(globalObject);
         try {

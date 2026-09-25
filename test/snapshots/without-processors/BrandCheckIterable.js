@@ -12,6 +12,10 @@ const interfaceName = "BrandCheckIterable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -104,40 +108,22 @@ exports.install = (globalObject, globalNames) => {
     }
 
     keys() {
-      const $impl = utils.requireImplForWrapper(this, $interfaceDescriptor, globalObject, "BrandCheckIterable", "keys");
+      const $impl = $requireImpl(this, globalObject, "keys");
       return exports.createDefaultIterator(globalObject, $impl, "key");
     }
 
     values() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckIterable",
-        "values"
-      );
+      const $impl = $requireImpl(this, globalObject, "values");
       return exports.createDefaultIterator(globalObject, $impl, "value");
     }
 
     entries() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckIterable",
-        "entries"
-      );
+      const $impl = $requireImpl(this, globalObject, "entries");
       return exports.createDefaultIterator(globalObject, $impl, "key+value");
     }
 
     forEach(callback) {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckIterable",
-        "forEach"
-      );
+      const $impl = $requireImpl(this, globalObject, "forEach");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."

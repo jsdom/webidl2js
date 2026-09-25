@@ -11,6 +11,10 @@ const interfaceName = "EventTarget";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,13 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     addEventListener(type, callback) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "EventTarget",
-        "addEventListener"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "addEventListener");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'addEventListener' on 'EventTarget': 2 arguments required, but only ${arguments.length} present.`

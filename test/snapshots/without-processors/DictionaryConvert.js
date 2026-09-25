@@ -11,6 +11,10 @@ const interfaceName = "DictionaryConvert";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,13 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     op() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "DictionaryConvert",
-        "op"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "op");
       const args = [];
       {
         let curArg = arguments[0];

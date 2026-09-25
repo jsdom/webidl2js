@@ -11,6 +11,10 @@ const interfaceName = "Overloads";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -116,13 +120,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     compatible(arg1) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Overloads",
-        "compatible"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "compatible");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'compatible' on 'Overloads': 1 argument required, but only ${arguments.length} present.`
@@ -192,13 +190,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     incompatible1(arg1) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Overloads",
-        "incompatible1"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "incompatible1");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'incompatible1' on 'Overloads': 1 argument required, but only ${arguments.length} present.`
@@ -231,13 +223,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     incompatible2(arg1) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Overloads",
-        "incompatible2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "incompatible2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'incompatible2' on 'Overloads': 1 argument required, but only ${arguments.length} present.`
@@ -277,13 +263,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     incompatible3(arg1) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Overloads",
-        "incompatible3"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "incompatible3");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'incompatible3' on 'Overloads': 1 argument required, but only ${arguments.length} present.`

@@ -11,6 +11,10 @@ const interfaceName = "BrandCheckSibling";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => BrandCheckParent.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -94,13 +98,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     siblingMethod() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckSibling",
-        "siblingMethod"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "siblingMethod");
       return $impl.siblingMethod();
     }
   }

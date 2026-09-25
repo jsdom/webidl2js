@@ -11,6 +11,10 @@ const interfaceName = "InheritedCollection";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => HTMLFormControlsCollection.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };

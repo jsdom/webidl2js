@@ -10,6 +10,10 @@ const interfaceName = "Unscopable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,24 +95,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get unscopableTest() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Unscopable",
-        "get unscopableTest"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get unscopableTest");
       return $impl["unscopableTest"];
     }
 
     set unscopableTest(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Unscopable",
-        "set unscopableTest"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableTest");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'unscopableTest' property on 'Unscopable': The provided value",
@@ -119,24 +111,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get unscopableMixin() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Unscopable",
-        "get unscopableMixin"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get unscopableMixin");
       return $impl["unscopableMixin"];
     }
 
     set unscopableMixin(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Unscopable",
-        "set unscopableMixin"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableMixin");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value",

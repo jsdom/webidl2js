@@ -10,6 +10,10 @@ const interfaceName = "LegacyLenientAttributes";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,24 +95,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get lenientSetter() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "LegacyLenientAttributes",
-        "get lenientSetter"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get lenientSetter");
       return $impl["lenientSetter"];
     }
 
     set lenientSetter(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "LegacyLenientAttributes",
-        "set lenientSetter"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set lenientSetter");
     }
 
     get lenientThisSetter() {

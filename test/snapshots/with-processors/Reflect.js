@@ -11,6 +11,10 @@ const interfaceName = "Reflect";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,24 +96,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedBoolean() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectedBoolean"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedBoolean");
       return $impl.hasAttributeNS(null, "reflectedboolean");
     }
 
     set reflectedBoolean(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectedBoolean"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedBoolean");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'reflectedBoolean' property on 'Reflect': The provided value",
@@ -124,26 +116,14 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedDOMString() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectedDOMString"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedDOMString");
 
       const value = $impl.getAttributeNS(null, "reflecteddomstring");
       return value === null ? "" : value;
     }
 
     set reflectedDOMString(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectedDOMString"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedDOMString");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectedDOMString' property on 'Reflect': The provided value",
@@ -154,26 +134,14 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedLong() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectedLong"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedLong");
 
       const value = parseInt($impl.getAttributeNS(null, "reflectedlong"));
       return isNaN(value) || value < -2147483648 || value > 2147483647 ? 0 : value;
     }
 
     set reflectedLong(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectedLong"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedLong");
 
       V = conversions["long"](V, {
         context: "Failed to set the 'reflectedLong' property on 'Reflect': The provided value",
@@ -184,26 +152,14 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedUnsignedLong() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectedUnsignedLong"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedUnsignedLong");
 
       const value = parseInt($impl.getAttributeNS(null, "reflectedunsignedlong"));
       return isNaN(value) || value < 0 || value > 2147483647 ? 0 : value;
     }
 
     set reflectedUnsignedLong(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectedUnsignedLong"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUnsignedLong");
 
       V = conversions["unsigned long"](V, {
         context: "Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value",
@@ -214,13 +170,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedUSVStringURL() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectedUSVStringURL"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedUSVStringURL");
 
       const value = $impl.getAttributeNS(null, "reflectedusvstringurl");
       if (value === null) {
@@ -231,13 +181,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     set reflectedUSVStringURL(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectedUSVStringURL"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUSVStringURL");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value",
@@ -248,26 +192,14 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectionTest() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get reflectionTest"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectionTest");
 
       const value = $impl.getAttributeNS(null, "reflection");
       return value === null ? "" : value;
     }
 
     set reflectionTest(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set reflectionTest"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectionTest");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectionTest' property on 'Reflect': The provided value",
@@ -278,26 +210,14 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get withUnderscore() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "get withUnderscore"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get withUnderscore");
 
       const value = $impl.getAttributeNS(null, "with-underscore");
       return value === null ? "" : value;
     }
 
     set withUnderscore(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Reflect",
-        "set withUnderscore"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set withUnderscore");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'withUnderscore' property on 'Reflect': The provided value",

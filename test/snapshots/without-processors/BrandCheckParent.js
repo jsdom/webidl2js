@@ -10,6 +10,10 @@ const interfaceName = "BrandCheckParent";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,35 +95,17 @@ exports.install = (globalObject, globalNames) => {
     }
 
     parentMethod() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckParent",
-        "parentMethod"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "parentMethod");
       return $impl.parentMethod();
     }
 
     get value() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckParent",
-        "get value"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get value");
       return $impl["value"];
     }
 
     set value(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckParent",
-        "set value"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set value");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'value' property on 'BrandCheckParent': The provided value",
@@ -130,13 +116,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "BrandCheckParent",
-        "toString"
-      );
+      const $impl = $requireImpl(this, globalObject, "toString");
 
       return $impl["value"];
     }

@@ -10,6 +10,10 @@ const interfaceName = "LegacyNoInterfaceObject";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,35 +95,17 @@ exports.install = (globalObject, globalNames) => {
     }
 
     def() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "LegacyNoInterfaceObject",
-        "def"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "def");
       return $impl.def();
     }
 
     get abc() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "LegacyNoInterfaceObject",
-        "get abc"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get abc");
       return $impl["abc"];
     }
 
     set abc(V) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "LegacyNoInterfaceObject",
-        "set abc"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set abc");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'abc' property on 'LegacyNoInterfaceObject': The provided value",

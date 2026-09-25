@@ -11,6 +11,10 @@ const interfaceName = "SeqAndRec";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,13 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     recordConsumer(rec) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "recordConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "recordConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -141,13 +139,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     recordConsumer2(rec) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "recordConsumer2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "recordConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -189,13 +181,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sequenceConsumer(seq) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "sequenceConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "sequenceConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -227,13 +213,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     sequenceConsumer2(seq) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "sequenceConsumer2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "sequenceConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -262,13 +242,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequenceConsumer(async_seq) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "asyncSequenceConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequenceConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -294,13 +268,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequenceConsumer2(async_seq) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "asyncSequenceConsumer2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequenceConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -323,13 +291,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     frozenArrayConsumer(arr) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "frozenArrayConsumer"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "frozenArrayConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
@@ -362,13 +324,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     asyncSequencePassthrough(async_seq) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "SeqAndRec",
-        "asyncSequencePassthrough"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequencePassthrough");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`

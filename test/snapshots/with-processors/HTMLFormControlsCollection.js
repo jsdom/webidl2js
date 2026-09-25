@@ -11,6 +11,10 @@ const interfaceName = "HTMLFormControlsCollection";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => HTMLCollection.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -106,13 +110,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     namedItem(name) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "HTMLFormControlsCollection",
-        "namedItem"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "namedItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'namedItem' on 'HTMLFormControlsCollection': 1 argument required, but only ${arguments.length} present.`

@@ -11,6 +11,10 @@ const interfaceName = "Variadic";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,13 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     simple1() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Variadic",
-        "simple1"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "simple1");
       const args = [];
       for (let i = 0; i < arguments.length; i++) {
         let curArg = arguments[i];
@@ -112,13 +110,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     simple2(first) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Variadic",
-        "simple2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "simple2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'simple2' on 'Variadic': 1 argument required, but only ${arguments.length} present.`
@@ -144,13 +136,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     overloaded1() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Variadic",
-        "overloaded1"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "overloaded1");
       const args = [];
       switch (arguments.length) {
         case 0:
@@ -182,13 +168,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     overloaded2(first) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Variadic",
-        "overloaded2"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "overloaded2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'overloaded2' on 'Variadic': 1 argument required, but only ${arguments.length} present.`

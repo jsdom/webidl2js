@@ -10,6 +10,10 @@ const interfaceName = "LegacyUnforgeableMap";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -61,13 +65,7 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       get a() {
-        const $impl = utils.requireImplForWrapper(
-          this ?? globalObject,
-          $interfaceDescriptor,
-          globalObject,
-          "LegacyUnforgeableMap",
-          "get a"
-        );
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get a");
         return $impl["a"];
       }
     });

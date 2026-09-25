@@ -10,6 +10,10 @@ const interfaceName = "Storage";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -103,13 +107,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     key(index) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "key"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "key");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'key' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +126,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     getItem(key) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "getItem"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "getItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'getItem' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -153,13 +145,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     setItem(key, value) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "setItem"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "setItem");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'setItem' on 'Storage': 2 arguments required, but only ${arguments.length} present.`
@@ -186,13 +172,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     removeItem(key) {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "removeItem"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "removeItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'removeItem' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -211,24 +191,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     clear() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "clear"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "clear");
       return $impl.clear();
     }
 
     get length() {
-      const $impl = utils.requireImplForWrapper(
-        this ?? globalObject,
-        $interfaceDescriptor,
-        globalObject,
-        "Storage",
-        "get length"
-      );
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get length");
       return $impl["length"];
     }
   }

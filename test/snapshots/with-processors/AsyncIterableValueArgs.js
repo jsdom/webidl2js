@@ -12,6 +12,10 @@ const interfaceName = "AsyncIterableValueArgs";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -104,13 +108,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     values() {
-      const $impl = utils.requireImplForWrapper(
-        this,
-        $interfaceDescriptor,
-        globalObject,
-        "AsyncIterableValueArgs",
-        "values"
-      );
+      const $impl = $requireImpl(this, globalObject, "values");
 
       const args = [];
       if (arguments[0] !== undefined) {
