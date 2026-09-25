@@ -11,6 +11,10 @@ const interfaceName = "CircularParent";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -92,13 +96,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     accept(child) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'accept' called on an object that is not a valid instance of CircularParent."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "accept");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'accept' on 'CircularParent': 1 argument required, but only ${arguments.length} present.`

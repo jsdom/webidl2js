@@ -10,6 +10,10 @@ const interfaceName = "Unscopable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,23 +95,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get unscopableTest() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get unscopableTest' called on an object that is not a valid instance of Unscopable."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get unscopableTest");
       return $impl["unscopableTest"];
     }
 
     set unscopableTest(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set unscopableTest' called on an object that is not a valid instance of Unscopable."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableTest");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'unscopableTest' property on 'Unscopable': The provided value",
@@ -118,23 +111,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get unscopableMixin() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get unscopableMixin' called on an object that is not a valid instance of Unscopable."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get unscopableMixin");
       return $impl["unscopableMixin"];
     }
 
     set unscopableMixin(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set unscopableMixin' called on an object that is not a valid instance of Unscopable."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableMixin");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value",

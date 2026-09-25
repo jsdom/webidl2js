@@ -10,6 +10,10 @@ const interfaceName = "MixedIn";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,41 +95,22 @@ exports.install = (globalObject, globalNames) => {
     }
 
     mixedInOp() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'mixedInOp' called on an object that is not a valid instance of MixedIn.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "mixedInOp");
       return $impl.mixedInOp();
     }
 
     ifaceMixinOp() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'ifaceMixinOp' called on an object that is not a valid instance of MixedIn.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "ifaceMixinOp");
       return $impl.ifaceMixinOp();
     }
 
     get mixedInAttr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get mixedInAttr' called on an object that is not a valid instance of MixedIn."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get mixedInAttr");
       return $impl["mixedInAttr"];
     }
 
     set mixedInAttr(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set mixedInAttr' called on an object that is not a valid instance of MixedIn."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set mixedInAttr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value",
@@ -136,23 +121,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get ifaceMixinAttr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get ifaceMixinAttr' called on an object that is not a valid instance of MixedIn."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get ifaceMixinAttr");
       return $impl["ifaceMixinAttr"];
     }
 
     set ifaceMixinAttr(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set ifaceMixinAttr' called on an object that is not a valid instance of MixedIn."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set ifaceMixinAttr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value",

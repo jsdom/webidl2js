@@ -10,6 +10,10 @@ const interfaceName = "Global";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -50,34 +54,19 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
 exports._internalSetup = (wrapper, globalObject) => {
   utils.define(wrapper, {
     op() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'op' called on an object that is not a valid instance of Global.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "op");
       return $impl.op();
     },
     unforgeableOp() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'unforgeableOp' called on an object that is not a valid instance of Global.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "unforgeableOp");
       return $impl.unforgeableOp();
     },
     get attr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get attr' called on an object that is not a valid instance of Global.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attr");
       return $impl["attr"];
     },
     set attr(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set attr' called on an object that is not a valid instance of Global.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'attr' property on 'Global': The provided value",
@@ -87,22 +76,11 @@ exports._internalSetup = (wrapper, globalObject) => {
       $impl["attr"] = V;
     },
     get unforgeableAttr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get unforgeableAttr' called on an object that is not a valid instance of Global."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get unforgeableAttr");
       return $impl["unforgeableAttr"];
     },
     set unforgeableAttr(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set unforgeableAttr' called on an object that is not a valid instance of Global."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set unforgeableAttr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'unforgeableAttr' property on 'Global': The provided value",
@@ -112,18 +90,11 @@ exports._internalSetup = (wrapper, globalObject) => {
       $impl["unforgeableAttr"] = V;
     },
     get length() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get length' called on an object that is not a valid instance of Global.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get length");
       return $impl["length"];
     },
     set length(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set length' called on an object that is not a valid instance of Global.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set length");
 
       V = conversions["unsigned long"](V, {
         context: "Failed to set the 'length' property on 'Global': The provided value",

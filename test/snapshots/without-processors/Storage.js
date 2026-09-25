@@ -10,6 +10,10 @@ const interfaceName = "Storage";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -103,11 +107,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     key(index) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'key' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "key");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'key' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -126,11 +126,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     getItem(key) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'getItem' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "getItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'getItem' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -149,11 +145,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     setItem(key, value) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'setItem' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "setItem");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
           `Failed to execute 'setItem' on 'Storage': 2 arguments required, but only ${arguments.length} present.`
@@ -180,11 +172,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     removeItem(key) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'removeItem' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "removeItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'removeItem' on 'Storage': 1 argument required, but only ${arguments.length} present.`
@@ -203,20 +191,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     clear() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'clear' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "clear");
       return $impl.clear();
     }
 
     get length() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get length' called on an object that is not a valid instance of Storage.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get length");
       return $impl["length"];
     }
   }

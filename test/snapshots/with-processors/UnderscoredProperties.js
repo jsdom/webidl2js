@@ -10,6 +10,10 @@ const interfaceName = "UnderscoredProperties";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,13 +95,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     operation(sequence) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'operation' called on an object that is not a valid instance of UnderscoredProperties."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "operation");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`
@@ -129,23 +127,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attribute() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get attribute' called on an object that is not a valid instance of UnderscoredProperties."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attribute");
       return $impl["attribute"];
     }
 
     set attribute(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set attribute' called on an object that is not a valid instance of UnderscoredProperties."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attribute");
 
       V = conversions["byte"](V, {
         context: "Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value",
