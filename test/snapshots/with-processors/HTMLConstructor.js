@@ -3,7 +3,7 @@
 const conversions = require("webidl-conversions");
 const utils = require("./utils.js");
 
-const HTMLConstructor_HTMLConstructor = require("../HTMLConstructor.js").HTMLConstructor;
+const $import_HTMLConstructor = require("../HTMLConstructor.js").HTMLConstructor;
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
 const interfaceName = "HTMLConstructor";
@@ -88,7 +88,7 @@ exports.install = (globalObject, globalNames) => {
   const ctorRegistry = utils.initCtorRegistry(globalObject);
   class HTMLConstructor {
     constructor() {
-      return HTMLConstructor_HTMLConstructor(globalObject, interfaceName);
+      return $import_HTMLConstructor(globalObject, interfaceName);
     }
   }
   Object.defineProperties(HTMLConstructor.prototype, {
