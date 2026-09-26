@@ -25,10 +25,10 @@ test("named imports from different modules stay distinct when member imports are
     "../third.js": { [suffixedExport]: () => 3 }
   };
   const result = vm.runInNewContext(`${first.generate()}
-    ${firstName}() + ${secondName}() + ${suffixedName}();`, {
+    [${firstName}(), ${secondName}(), ${suffixedName}()];`, {
     require: name => modules[name]
   });
-  assert.strictEqual(result, 6);
+  assert.deepStrictEqual(Array.from(result), [1, 2, 3]);
 });
 
 test("named import aliases do not shadow generated implementation locals", () => {
@@ -61,11 +61,11 @@ test("whole-module imports and named imports cannot reuse the same local name", 
     const names = namedFirst ? [addNamed(), addModule()] : [addModule(), addNamed()];
     assert.notStrictEqual(names[0], names[1]);
     const result = vm.runInNewContext(`${imports.generate()}
-      ${names[0]}() + ${names[1]}();`, {
+      [${names[0]}(), ${names[1]}()];`, {
       require(name) {
         return name === "../example.js" ? { run: () => 1 } : () => 2;
       }
     });
-    assert.strictEqual(result, 3);
+    assert.deepStrictEqual(Array.from(result), namedFirst ? [1, 2] : [2, 1]);
   }
 });
