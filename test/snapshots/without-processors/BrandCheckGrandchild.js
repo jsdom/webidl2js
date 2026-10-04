@@ -11,6 +11,10 @@ const interfaceName = "BrandCheckGrandchild";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => BrandCheck.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -94,13 +98,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     grandchildMethod() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'grandchildMethod' called on an object that is not a valid instance of BrandCheckGrandchild."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "grandchildMethod");
       return $impl.grandchildMethod();
     }
   }

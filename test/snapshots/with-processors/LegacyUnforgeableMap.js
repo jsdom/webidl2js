@@ -10,6 +10,10 @@ const interfaceName = "LegacyUnforgeableMap";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -61,13 +65,7 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       get a() {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get a' called on an object that is not a valid instance of LegacyUnforgeableMap."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get a");
         return $impl["a"];
       }
     });

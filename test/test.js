@@ -71,6 +71,24 @@ describe("generation", () => {
       });
     }
 
+    test("lenient-only interfaces ignore invalid receivers before converting setter values", () => {
+      const generated = require(path.resolve(outputDir, "LegacyLenientThisOnly.js"));
+      const globalObject = vm.runInNewContext("globalThis");
+      generated.install(globalObject, ["Window"]);
+      const wrapper = generated.create(globalObject);
+      const { get, set } = Object.getOwnPropertyDescriptor(globalObject.LegacyLenientThisOnly.prototype, "value");
+
+      assert.strictEqual(get.call(wrapper), "initial");
+      set.call(wrapper, 42);
+      assert.strictEqual(get.call(wrapper), "42");
+
+      for (const receiver of [undefined, null, {}, new Proxy(wrapper, {})]) {
+        assert.strictEqual(get.call(receiver), undefined);
+        assert.strictEqual(set.call(receiver, Symbol("not convertible")), undefined);
+      }
+      assert.strictEqual(get.call(wrapper), "42");
+    });
+
     describe("platform object brand checks", () => {
       let BrandCheck, BrandCheckParent, BrandCheckGrandchild, BrandCheckSibling, utils,
         globalObject, wrapper, impl;
@@ -173,6 +191,24 @@ describe("generation", () => {
         for (const value of invalid) {
           assert.strictEqual(BrandCheck.is(value), false);
           assert.throws(() => childMethod.call(value), globalObject.TypeError);
+        }
+      });
+
+      test("preserves the realm and message of invalid receiver errors", () => {
+        const parentPrototype = globalObject.BrandCheckParent.prototype;
+        const valueDescriptor = Object.getOwnPropertyDescriptor(parentPrototype, "value");
+        const cases = [
+          ["BrandCheck", "childMethod", () => wrapper.childMethod.call({})],
+          ["BrandCheckParent", "get value", () => valueDescriptor.get.call({})],
+          ["BrandCheckParent", "set value", () => valueDescriptor.set.call({}, "value")],
+          ["BrandCheckParent", "toString", () => parentPrototype.toString.call({})]
+        ];
+
+        for (const [interfaceName, context, invoke] of cases) {
+          assert.throws(invoke, {
+            constructor: globalObject.TypeError,
+            message: `'${context}' called on an object that is not a valid instance of ${interfaceName}.`
+          });
         }
       });
 

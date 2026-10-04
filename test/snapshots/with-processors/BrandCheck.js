@@ -11,6 +11,10 @@ const interfaceName = "BrandCheck";
 const $interfaceDescriptor = utils.createInterfaceDescriptor(() => BrandCheckParent.interfaceDescriptor);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -94,22 +98,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     childMethod() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'childMethod' called on an object that is not a valid instance of BrandCheck."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "childMethod");
       return $impl.childMethod();
     }
 
     shadow(interfaceDescriptor) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'shadow' called on an object that is not a valid instance of BrandCheck.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "shadow");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'shadow' on 'BrandCheck': 1 argument required, but only ${arguments.length} present.`
@@ -128,13 +122,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     objectUnion(value) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'objectUnion' called on an object that is not a valid instance of BrandCheck."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "objectUnion");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
           `Failed to execute 'objectUnion' on 'BrandCheck': 1 argument required, but only ${arguments.length} present.`

@@ -10,6 +10,10 @@ const interfaceName = "Reflect";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -91,23 +95,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedBoolean() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectedBoolean' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedBoolean");
       return $impl["reflectedBoolean"];
     }
 
     set reflectedBoolean(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectedBoolean' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedBoolean");
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'reflectedBoolean' property on 'Reflect': The provided value",
@@ -118,23 +111,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedDOMString() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectedDOMString' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedDOMString");
       return $impl["reflectedDOMString"];
     }
 
     set reflectedDOMString(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectedDOMString' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedDOMString");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectedDOMString' property on 'Reflect': The provided value",
@@ -145,23 +127,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedLong() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectedLong' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedLong");
       return $impl["reflectedLong"];
     }
 
     set reflectedLong(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectedLong' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedLong");
 
       V = conversions["long"](V, {
         context: "Failed to set the 'reflectedLong' property on 'Reflect': The provided value",
@@ -172,23 +143,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedUnsignedLong() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectedUnsignedLong' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedUnsignedLong");
       return $impl["reflectedUnsignedLong"];
     }
 
     set reflectedUnsignedLong(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectedUnsignedLong' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUnsignedLong");
 
       V = conversions["unsigned long"](V, {
         context: "Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value",
@@ -199,23 +159,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectedUSVStringURL() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectedUSVStringURL' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectedUSVStringURL");
       return $impl["reflectedUSVStringURL"];
     }
 
     set reflectedUSVStringURL(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectedUSVStringURL' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUSVStringURL");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value",
@@ -226,23 +175,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get reflectionTest() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get reflectionTest' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get reflectionTest");
       return $impl["reflectionTest"];
     }
 
     set reflectionTest(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set reflectionTest' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectionTest");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectionTest' property on 'Reflect': The provided value",
@@ -253,23 +191,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get withUnderscore() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'get withUnderscore' called on an object that is not a valid instance of Reflect."
-        );
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get withUnderscore");
       return $impl["withUnderscore"];
     }
 
     set withUnderscore(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError(
-          "'set withUnderscore' called on an object that is not a valid instance of Reflect."
-        );
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set withUnderscore");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'withUnderscore' property on 'Reflect': The provided value",

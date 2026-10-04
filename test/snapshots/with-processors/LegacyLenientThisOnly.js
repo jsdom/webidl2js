@@ -5,14 +5,10 @@ const utils = require("./utils.js");
 
 const ctorRegistrySymbol = utils.ctorRegistrySymbol;
 
-const interfaceName = "LegacyNoInterfaceObject";
+const interfaceName = "LegacyLenientThisOnly";
 
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
-
-function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
-}
 
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
@@ -25,7 +21,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   if (impl !== null) {
     return impl;
   }
-  throw new globalObject.TypeError(`${context} is not of type 'LegacyNoInterfaceObject'.`);
+  throw new globalObject.TypeError(`${context} is not of type 'LegacyLenientThisOnly'.`);
 };
 
 function makeWrapper(globalObject, newTarget) {
@@ -35,7 +31,7 @@ function makeWrapper(globalObject, newTarget) {
   }
 
   if (!utils.isObject(proto)) {
-    proto = globalObject[ctorRegistrySymbol]["LegacyNoInterfaceObject"].prototype;
+    proto = globalObject[ctorRegistrySymbol]["LegacyLenientThisOnly"].prototype;
   }
 
   return Object.create(proto);
@@ -89,39 +85,45 @@ exports.install = (globalObject, globalNames) => {
   }
 
   const ctorRegistry = utils.initCtorRegistry(globalObject);
-  class LegacyNoInterfaceObject {
+  class LegacyLenientThisOnly {
     constructor() {
       throw new globalObject.TypeError("Illegal constructor");
     }
 
-    def() {
-      const $impl = $requireImpl(this ?? globalObject, globalObject, "def");
-      return $impl.def();
+    get value() {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
+        return;
+      }
+
+      return $impl["value"];
     }
 
-    get abc() {
-      const $impl = $requireImpl(this ?? globalObject, globalObject, "get abc");
-      return $impl["abc"];
-    }
-
-    set abc(V) {
-      const $impl = $requireImpl(this ?? globalObject, globalObject, "set abc");
+    set value(V) {
+      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
+      if ($impl === null) {
+        return;
+      }
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'abc' property on 'LegacyNoInterfaceObject': The provided value",
+        context: "Failed to set the 'value' property on 'LegacyLenientThisOnly': The provided value",
         globals: globalObject
       });
 
-      $impl["abc"] = V;
+      $impl["value"] = V;
     }
   }
-  delete LegacyNoInterfaceObject.constructor;
-  Object.defineProperties(LegacyNoInterfaceObject.prototype, {
-    def: { enumerable: true },
-    abc: { enumerable: true },
-    [Symbol.toStringTag]: { value: "LegacyNoInterfaceObject", configurable: true }
+  Object.defineProperties(LegacyLenientThisOnly.prototype, {
+    value: { enumerable: true },
+    [Symbol.toStringTag]: { value: "LegacyLenientThisOnly", configurable: true }
   });
-  ctorRegistry[interfaceName] = LegacyNoInterfaceObject;
+  ctorRegistry[interfaceName] = LegacyLenientThisOnly;
+
+  Object.defineProperty(globalObject, interfaceName, {
+    configurable: true,
+    writable: true,
+    value: LegacyLenientThisOnly
+  });
 };
 
-const Impl = require("../implementations/LegacyNoInterfaceObject.js");
+const Impl = require("../implementations/LegacyLenientThisOnly.js");

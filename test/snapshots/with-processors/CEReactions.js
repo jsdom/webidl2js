@@ -11,6 +11,10 @@ const interfaceName = "CEReactions";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -104,11 +108,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     method() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'method' called on an object that is not a valid instance of CEReactions.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "method");
       CEReactions.preSteps(globalObject);
       try {
         return $impl.method();
@@ -119,13 +119,7 @@ exports.install = (globalObject, globalNames) => {
 
     promiseOperation() {
       try {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'promiseOperation' called on an object that is not a valid instance of CEReactions."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "promiseOperation");
         CEReactions.preSteps(globalObject);
         try {
           return utils.tryWrapperForImpl($impl.promiseOperation());
@@ -138,10 +132,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get attr() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get attr' called on an object that is not a valid instance of CEReactions.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get attr");
 
       CEReactions.preSteps(globalObject);
       try {
@@ -152,10 +143,7 @@ exports.install = (globalObject, globalNames) => {
     }
 
     set attr(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set attr' called on an object that is not a valid instance of CEReactions.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'attr' property on 'CEReactions': The provided value",
@@ -172,12 +160,7 @@ exports.install = (globalObject, globalNames) => {
 
     get promiseAttribute() {
       try {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get promiseAttribute' called on an object that is not a valid instance of CEReactions."
-          );
-        }
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get promiseAttribute");
 
         CEReactions.preSteps(globalObject);
         try {

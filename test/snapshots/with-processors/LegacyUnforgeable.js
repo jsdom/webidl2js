@@ -10,6 +10,10 @@ const interfaceName = "LegacyUnforgeable";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -53,13 +57,7 @@ function getUnforgeables(globalObject) {
     unforgeables = Object.create(null);
     utils.define(unforgeables, {
       assign(url) {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'assign' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "assign");
         if (arguments.length < 1) {
           throw new globalObject.TypeError(
             `Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only ${arguments.length} present.`
@@ -77,22 +75,11 @@ function getUnforgeables(globalObject) {
         return $impl.assign(...args);
       },
       get href() {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get href' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get href");
         return $impl["href"];
       },
       set href(V) {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'set href' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
         V = conversions["USVString"](V, {
           context: "Failed to set the 'href' property on 'LegacyUnforgeable': The provided value",
@@ -102,42 +89,20 @@ function getUnforgeables(globalObject) {
         $impl["href"] = V;
       },
       toString() {
-        const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'toString' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
+        const $impl = $requireImpl(this, globalObject, "toString");
 
         return $impl["href"];
       },
       get origin() {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get origin' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get origin");
         return $impl["origin"];
       },
       get protocol() {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'get protocol' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
-
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "get protocol");
         return $impl["protocol"];
       },
       set protocol(V) {
-        const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-        if ($impl === null) {
-          throw new globalObject.TypeError(
-            "'set protocol' called on an object that is not a valid instance of LegacyUnforgeable."
-          );
-        }
+        const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
         V = conversions["USVString"](V, {
           context: "Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value",

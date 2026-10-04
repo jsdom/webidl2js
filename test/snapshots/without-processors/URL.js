@@ -10,6 +10,10 @@ const interfaceName = "URL";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
+function $requireImpl(wrapper, globalObject, context) {
+  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+}
+
 exports.is = value => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
@@ -115,28 +119,17 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toJSON() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'toJSON' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "toJSON");
       return $impl.toJSON();
     }
 
     get href() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get href' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get href");
       return $impl["href"];
     }
 
     set href(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set href' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'href' property on 'URL': The provided value",
@@ -147,37 +140,23 @@ exports.install = (globalObject, globalNames) => {
     }
 
     toString() {
-      const $impl = utils.implForWrapperWithInterface(this, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'toString' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this, globalObject, "toString");
 
       return $impl["href"];
     }
 
     get origin() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get origin' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get origin");
       return $impl["origin"];
     }
 
     get protocol() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get protocol' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get protocol");
       return $impl["protocol"];
     }
 
     set protocol(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set protocol' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'protocol' property on 'URL': The provided value",
@@ -188,19 +167,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get username() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get username' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get username");
       return $impl["username"];
     }
 
     set username(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set username' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set username");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'username' property on 'URL': The provided value",
@@ -211,19 +183,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get password() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get password' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get password");
       return $impl["password"];
     }
 
     set password(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set password' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set password");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'password' property on 'URL': The provided value",
@@ -234,19 +199,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get host() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get host' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get host");
       return $impl["host"];
     }
 
     set host(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set host' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set host");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'host' property on 'URL': The provided value",
@@ -257,19 +215,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get hostname() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get hostname' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get hostname");
       return $impl["hostname"];
     }
 
     set hostname(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set hostname' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set hostname");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hostname' property on 'URL': The provided value",
@@ -280,19 +231,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get port() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get port' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get port");
       return $impl["port"];
     }
 
     set port(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set port' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set port");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'port' property on 'URL': The provided value",
@@ -303,19 +247,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get pathname() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get pathname' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get pathname");
       return $impl["pathname"];
     }
 
     set pathname(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set pathname' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set pathname");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'pathname' property on 'URL': The provided value",
@@ -326,19 +263,12 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get search() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get search' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get search");
       return $impl["search"];
     }
 
     set search(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set search' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set search");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'search' property on 'URL': The provided value",
@@ -349,30 +279,19 @@ exports.install = (globalObject, globalNames) => {
     }
 
     get searchParams() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get searchParams' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get searchParams");
       return utils.getSameObject(this, "searchParams", () => {
         return utils.tryWrapperForImpl($impl["searchParams"]);
       });
     }
 
     get hash() {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'get hash' called on an object that is not a valid instance of URL.");
-      }
-
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "get hash");
       return $impl["hash"];
     }
 
     set hash(V) {
-      const $impl = utils.implForWrapperWithInterface(this ?? globalObject, $interfaceDescriptor);
-      if ($impl === null) {
-        throw new globalObject.TypeError("'set hash' called on an object that is not a valid instance of URL.");
-      }
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "set hash");
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hash' property on 'URL': The provided value",
