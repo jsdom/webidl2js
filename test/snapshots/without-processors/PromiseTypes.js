@@ -138,7 +138,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = new globalObject.Promise(resolve => resolve(curArg));
+        curArg = new globalObject.Promise(resolve => utils.safePromiseResolve(resolve, curArg));
         args.push(curArg);
       }
       return $impl.voidPromiseConsumer(...args);
@@ -154,7 +154,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = new globalObject.Promise(resolve => resolve(curArg));
+        curArg = new globalObject.Promise(resolve => utils.safePromiseResolve(resolve, curArg));
         args.push(curArg);
       }
       return $impl.promiseConsumer(...args);

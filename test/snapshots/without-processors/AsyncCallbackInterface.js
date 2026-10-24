@@ -24,7 +24,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = new globalObject.Promise(resolve => resolve(callResult));
+      callResult = new globalObject.Promise(resolve => utils.safePromiseResolve(resolve, callResult));
       return callResult;
     } catch (err) {
       return globalObject.Promise.reject(err);
