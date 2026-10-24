@@ -2,6 +2,7 @@
 
 const { describe, test } = require("node:test");
 const assert = require("node:assert/strict");
+const { setTimeout: delay } = require("node:timers/promises");
 const utils = require("../lib/output/utils");
 
 describe("utils.js", () => {
@@ -266,5 +267,168 @@ describe("utils.js", () => {
         }, TypeError);
       });
     }
+  });
+
+  describe("safePromiseResolve", () => {
+    function safelyResolve(value) {
+      return new Promise(resolve => {
+        utils.safePromiseResolve(resolve, value);
+      });
+    }
+
+    // Whether the promise settles before a microtask that is queued right after this is called.
+    async function settlesWithoutDeferral(promise) {
+      const log = [];
+      promise.then(() => log.push("settled"), () => log.push("settled"));
+      Promise.resolve().then(() => log.push("microtask"));
+      await delay(0);
+      return log[0] === "settled";
+    }
+
+    test("fulfills with a primitive without deferring", async () => {
+      await Promise.all([undefined, null, false, 0, 1n, "", Symbol("value")].map(async value => {
+        const promise = safelyResolve(value);
+        assert.strictEqual(await settlesWithoutDeferral(promise), true);
+        assert.strictEqual(await promise, value);
+      }));
+    });
+
+    test("fulfills with an object without a then property without deferring", async () => {
+      const value = {};
+      const promise = safelyResolve(value);
+      assert.strictEqual(await settlesWithoutDeferral(promise), true);
+      assert.strictEqual(await promise, value);
+    });
+
+    test("does not defer for a then data property that shadows a getter further up the prototype chain", async () => {
+      const value = Object.create({
+        get then() {
+          throw new Error("The getter should not be called.");
+        }
+      });
+      Object.defineProperty(value, "then", { value: undefined });
+      const promise = safelyResolve(value);
+      assert.strictEqual(await settlesWithoutDeferral(promise), true);
+      assert.strictEqual(await promise, value);
+    });
+
+    test("does not defer for a then accessor without a getter", async () => {
+      const value = {};
+      // eslint-disable-next-line accessor-pairs -- A setter without a getter is what this tests.
+      Object.defineProperty(value, "then", { set() {} });
+      const promise = safelyResolve(value);
+      assert.strictEqual(await settlesWithoutDeferral(promise), true);
+      assert.strictEqual(await promise, value);
+    });
+
+    for (const [description, createValue] of [
+      [
+        "an own then getter", log => {
+          return {
+            get then() {
+              log.push("get then");
+              return undefined;
+            }
+          };
+        }
+      ],
+      [
+        "a then getter further up the prototype chain", log => {
+          return Object.create(Object.create({
+            get then() {
+              log.push("get then");
+              return undefined;
+            }
+          }));
+        }
+      ]
+    ]) {
+      test(`does not run ${description} synchronously`, async () => {
+        const log = [];
+        const value = createValue(log);
+        const promise = safelyResolve(value);
+        assert.deepStrictEqual(log, []);
+        assert.strictEqual(await settlesWithoutDeferral(promise), false);
+        assert.strictEqual(await promise, value);
+        assert.ok(log.includes("get then"));
+      });
+    }
+
+    test("adopts the function returned by a then getter, without running the getter synchronously", async () => {
+      const log = [];
+      const value = {
+        get then() {
+          log.push("get then");
+          return resolve => resolve("adopted");
+        }
+      };
+      const promise = safelyResolve(value);
+      assert.deepStrictEqual(log, []);
+      assert.strictEqual(await promise, "adopted");
+      assert.deepStrictEqual(log, ["get then"]);
+    });
+
+    test("calls the function returned by a then getter on the same tick as ordinary resolution", async () => {
+      const log = [];
+      safelyResolve({
+        get then() {
+          return () => log.push("deferred");
+        }
+      });
+      Promise.resolve({ then: () => log.push("ordinary") });
+      await delay(0);
+      assert.deepStrictEqual(log, ["deferred", "ordinary"]);
+    });
+
+    test("rejects with the error thrown by a then getter, without throwing synchronously", async () => {
+      const error = new Error("then getter");
+      const promise = safelyResolve({
+        get then() {
+          throw error;
+        }
+      });
+      await assert.rejects(promise, e => e === error);
+    });
+
+    test("rejects with the error thrown by the function returned by a then getter", async () => {
+      const error = new Error("then function");
+      const promise = safelyResolve({
+        get then() {
+          return () => {
+            throw error;
+          };
+        }
+      });
+      await assert.rejects(promise, e => e === error);
+    });
+
+    test("ignores an error thrown by the function returned by a then getter after it resolved", async () => {
+      const promise = safelyResolve({
+        get then() {
+          return resolve => {
+            resolve("adopted");
+            throw new Error("This error should be ignored.");
+          };
+        }
+      });
+      assert.strictEqual(await promise, "adopted");
+    });
+
+    test("adopts a thenable with a then method", async () => {
+      assert.strictEqual(await safelyResolve({ then: resolve => resolve("adopted") }), "adopted");
+    });
+
+    test("rejects with the error thrown by a then method", async () => {
+      const error = new Error("then method");
+      await assert.rejects(safelyResolve({
+        then() {
+          throw error;
+        }
+      }), e => e === error);
+    });
+
+    test("adopts a promise", async () => {
+      assert.strictEqual(await safelyResolve(Promise.resolve("adopted")), "adopted");
+    });
   });
 });
