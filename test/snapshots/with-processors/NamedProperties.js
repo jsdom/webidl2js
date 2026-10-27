@@ -135,6 +135,7 @@ exports.install = (globalObject, globalNames) => {
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: "NamedProperties", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, NamedProperties, NamedProperties.prototype);
   ctorRegistry[interfaceName] = NamedProperties;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied

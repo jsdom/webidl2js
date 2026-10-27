@@ -121,6 +121,7 @@ exports.install = (globalObject, globalNames) => {
     abc: { enumerable: true },
     [Symbol.toStringTag]: { value: "LegacyNoInterfaceObject", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, LegacyNoInterfaceObject, LegacyNoInterfaceObject.prototype);
   ctorRegistry[interfaceName] = LegacyNoInterfaceObject;
 };
 

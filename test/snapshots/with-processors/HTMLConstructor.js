@@ -94,6 +94,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(HTMLConstructor.prototype, {
     [Symbol.toStringTag]: { value: "HTMLConstructor", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, HTMLConstructor, HTMLConstructor.prototype);
   ctorRegistry[interfaceName] = HTMLConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {

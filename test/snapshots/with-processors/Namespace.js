@@ -87,6 +87,7 @@ exports.install = (globalObject, globalNames) => {
     VALUE: { value: 7, enumerable: true }
   });
 
+  utils.adoptFunctionsIntoRealm(globalObject, namespaceObject);
   Object.defineProperty(globalObject, namespaceName, {
     configurable: true,
     writable: true,

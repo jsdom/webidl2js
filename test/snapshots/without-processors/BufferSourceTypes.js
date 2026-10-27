@@ -597,6 +597,7 @@ exports.install = (globalObject, globalNames) => {
     u8aAllowResizableShared: { enumerable: true },
     [Symbol.toStringTag]: { value: "BufferSourceTypes", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BufferSourceTypes, BufferSourceTypes.prototype);
   ctorRegistry[interfaceName] = BufferSourceTypes;
 
   Object.defineProperty(globalObject, interfaceName, {

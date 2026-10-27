@@ -155,6 +155,7 @@ exports.install = (globalObject, globalNames) => {
     objectUnion: { enumerable: true },
     [Symbol.toStringTag]: { value: "BrandCheck", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BrandCheck, BrandCheck.prototype);
   ctorRegistry[interfaceName] = BrandCheck;
 
   Object.defineProperty(globalObject, interfaceName, {

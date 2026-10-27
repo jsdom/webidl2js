@@ -318,6 +318,7 @@ exports.install = (globalObject, globalNames) => {
     hash: { enumerable: true },
     [Symbol.toStringTag]: { value: "URL", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, URL, URL.prototype);
   ctorRegistry[interfaceName] = URL;
 
   Object.defineProperty(globalObject, interfaceName, {

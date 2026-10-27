@@ -119,6 +119,7 @@ function getUnforgeables(globalObject) {
       origin: { configurable: false },
       protocol: { configurable: false }
     });
+    utils.adoptFunctionsIntoRealm(globalObject, unforgeables);
     unforgeablesMap.set(globalObject, unforgeables);
   }
   return unforgeables;
@@ -173,6 +174,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyUnforgeable.prototype, {
     [Symbol.toStringTag]: { value: "LegacyUnforgeable", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, LegacyUnforgeable, LegacyUnforgeable.prototype);
   ctorRegistry[interfaceName] = LegacyUnforgeable;
 
   Object.defineProperty(globalObject, interfaceName, {

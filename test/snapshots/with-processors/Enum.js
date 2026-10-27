@@ -134,6 +134,7 @@ exports.install = (globalObject, globalNames) => {
     attr: { enumerable: true },
     [Symbol.toStringTag]: { value: "Enum", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, Enum, Enum.prototype);
   ctorRegistry[interfaceName] = Enum;
 
   Object.defineProperty(globalObject, interfaceName, {

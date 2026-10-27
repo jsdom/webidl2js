@@ -228,6 +228,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "DOMRect", configurable: true }
   });
   Object.defineProperties(DOMRect, { fromRect: { enumerable: true } });
+  utils.adoptFunctionsIntoRealm(globalObject, DOMRect, DOMRect.prototype);
   ctorRegistry[interfaceName] = DOMRect;
 
   Object.defineProperty(globalObject, interfaceName, {

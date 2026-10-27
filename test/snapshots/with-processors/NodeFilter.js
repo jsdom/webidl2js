@@ -67,6 +67,7 @@ exports.install = (globalObject, globalNames) => {
     SHOW_NOTATION: { value: 0x800, enumerable: true }
   });
 
+  utils.adoptFunctionsIntoRealm(globalObject, NodeFilter);
   Object.defineProperty(globalObject, "NodeFilter", {
     configurable: true,
     writable: true,

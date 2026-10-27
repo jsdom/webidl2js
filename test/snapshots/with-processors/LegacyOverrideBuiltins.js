@@ -108,6 +108,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(LegacyOverrideBuiltins.prototype, {
     [Symbol.toStringTag]: { value: "LegacyOverrideBuiltins", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, LegacyOverrideBuiltins, LegacyOverrideBuiltins.prototype);
   ctorRegistry[interfaceName] = LegacyOverrideBuiltins;
 
   Object.defineProperty(globalObject, interfaceName, {

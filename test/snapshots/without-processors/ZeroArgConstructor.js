@@ -93,6 +93,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(ZeroArgConstructor.prototype, {
     [Symbol.toStringTag]: { value: "ZeroArgConstructor", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, ZeroArgConstructor, ZeroArgConstructor.prototype);
   ctorRegistry[interfaceName] = ZeroArgConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {

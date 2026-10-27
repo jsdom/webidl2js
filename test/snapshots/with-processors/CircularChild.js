@@ -96,6 +96,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(CircularChild.prototype, {
     [Symbol.toStringTag]: { value: "CircularChild", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, CircularChild, CircularChild.prototype);
   ctorRegistry[interfaceName] = CircularChild;
 
   Object.defineProperty(globalObject, interfaceName, {

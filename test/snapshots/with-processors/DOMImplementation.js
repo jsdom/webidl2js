@@ -202,6 +202,7 @@ exports.install = (globalObject, globalNames) => {
     hasFeature: { enumerable: true },
     [Symbol.toStringTag]: { value: "DOMImplementation", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, DOMImplementation, DOMImplementation.prototype);
   ctorRegistry[interfaceName] = DOMImplementation;
 
   Object.defineProperty(globalObject, interfaceName, {

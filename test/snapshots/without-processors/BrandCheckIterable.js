@@ -151,6 +151,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "BrandCheckIterable", configurable: true },
     [Symbol.iterator]: { value: BrandCheckIterable.prototype.entries, configurable: true, writable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BrandCheckIterable, BrandCheckIterable.prototype);
   ctorRegistry[interfaceName] = BrandCheckIterable;
 
   ctorRegistry["BrandCheckIterable Iterator"] = Object.create(ctorRegistry["%IteratorPrototype%"], {
@@ -178,6 +179,10 @@ exports.install = (globalObject, globalNames) => {
       return newObjectInRealm(globalObject, utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind));
     }
   });
+
+  if (ctorRegistry["BrandCheckIterable Iterator"] !== undefined) {
+    utils.adoptFunctionsIntoRealm(globalObject, ctorRegistry["BrandCheckIterable Iterator"]);
+  }
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,

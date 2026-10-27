@@ -349,6 +349,7 @@ exports.install = (globalObject, globalNames) => {
     numbers: { enumerable: true },
     [Symbol.toStringTag]: { value: "ObservableArrays", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, ObservableArrays, ObservableArrays.prototype);
   ctorRegistry[interfaceName] = ObservableArrays;
 
   Object.defineProperty(globalObject, interfaceName, {

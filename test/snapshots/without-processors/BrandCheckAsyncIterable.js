@@ -176,6 +176,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "BrandCheckAsyncIterable", configurable: true },
     [Symbol.asyncIterator]: { value: BrandCheckAsyncIterable.prototype.entries, configurable: true, writable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BrandCheckAsyncIterable, BrandCheckAsyncIterable.prototype);
   ctorRegistry[interfaceName] = BrandCheckAsyncIterable;
 
   ctorRegistry["BrandCheckAsyncIterable AsyncIterator"] = Object.create(ctorRegistry["%AsyncIteratorPrototype%"], {
@@ -252,6 +253,10 @@ exports.install = (globalObject, globalNames) => {
       return internal.ongoingPromise.then(() => newObjectInRealm(globalObject, { value, done: true }));
     }
   });
+
+  if (ctorRegistry["BrandCheckAsyncIterable AsyncIterator"] !== undefined) {
+    utils.adoptFunctionsIntoRealm(globalObject, ctorRegistry["BrandCheckAsyncIterable AsyncIterator"]);
+  }
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,

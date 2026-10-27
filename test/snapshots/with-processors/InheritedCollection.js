@@ -109,6 +109,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "InheritedCollection", configurable: true },
     [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, InheritedCollection, InheritedCollection.prototype);
   ctorRegistry[interfaceName] = InheritedCollection;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied

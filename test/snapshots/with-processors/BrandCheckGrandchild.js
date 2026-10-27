@@ -106,6 +106,7 @@ exports.install = (globalObject, globalNames) => {
     grandchildMethod: { enumerable: true },
     [Symbol.toStringTag]: { value: "BrandCheckGrandchild", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BrandCheckGrandchild, BrandCheckGrandchild.prototype);
   ctorRegistry[interfaceName] = BrandCheckGrandchild;
 
   Object.defineProperty(globalObject, interfaceName, {

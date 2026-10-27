@@ -174,6 +174,7 @@ exports.install = (globalObject, globalNames) => {
     replaceableLenientThis: { enumerable: true },
     [Symbol.toStringTag]: { value: "LegacyLenientAttributes", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, LegacyLenientAttributes, LegacyLenientAttributes.prototype);
   ctorRegistry[interfaceName] = LegacyLenientAttributes;
 
   Object.defineProperty(globalObject, interfaceName, {
