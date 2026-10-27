@@ -376,16 +376,14 @@ Note that for IDL attributes that are `readonly`, these properties do not need t
 
 #### Observable array attributes
 
-For an `ObservableArray<T>` attribute, the implementation property holds the backing list as an ordinary array. Initialize it to an empty array in the constructor (or another initialization path), then read and mutate that same array for the object's lifetime. Do not replace the backing array. Its elements must already be valid implementation-side values of type `T`, such as impls for interface types.
+For an `ObservableArray<T>` attribute, the implementation property holds the backing list as an ordinary array. Initialize it to an empty array in the constructor (or another initialization path), then read and mutate that same array for the object's lifetime. Do not replace the backing array, and never add elements to it that are not valid implementation-side values of type `T`.
 
 When using the generated `new()` export, the caller is responsible for initializing the backing lists along with the rest of the implementation state before using the observable arrays.
-
-The wrapper exposes a persistent array proxy. JavaScript mutations through that proxy perform element conversions and call optional implementation hooks. Assigning the wrapper's attribute converts the input to a sequence and replaces the backing array's contents without replacing either the backing array or the proxy. A `readonly` observable array attribute still allows mutations through its proxy.
 
 Use the symbol factories from the generated `utils.js` to implement the attribute's set and delete algorithms:
 
 ```js
-const utils = require("./utils.js"); // Adjust to the generated utilities path.
+const utils = require("./utils.js");
 
 exports.implementation = class BuildingImpl {
   constructor() {
@@ -402,9 +400,7 @@ exports.implementation = class BuildingImpl {
 };
 ```
 
-Each factory returns a stable symbol for the given attribute name. Both hooks are optional, receive the element's implementation-side value and its numeric index, and run before the backing list changes. Replacing an element calls the delete hook followed by the set hook. Hooks can throw; changes completed before an exception remain in effect.
-
-Direct implementation-side mutations, such as `this.employees.push(employeeImpl)`, are reflected by the proxy without conversion or hooks. The hooks should perform the specification's side effects; webidl2js updates the backing list itself after they return.
+Note that direct implementation-side mutations, such as `this.employees.push(employeeImpl)`, are reflected by the proxy without conversion or hooks, and correspond to specification side effects that manipulate the backing list directly.
 
 #### Static attributes
 
@@ -511,9 +507,11 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Callback functions
 - Nullable types
 - `sequence<>` types
+- `async_sequence<>` types
 - `record<>` types
 - `Promise<>` types
 - `FrozenArray<>` types
+- `ObservableArray<>` types
 - Buffer source types
 - `typedef`s
 - Namespaces
@@ -549,13 +547,10 @@ Supported Web IDL extensions defined in HTML:
 Notable missing features include:
 
 - `maplike<>` and `setlike<>`
-- `async_sequence<>` types
-- `ObservableArray<>` types
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LegacyFactoryFunction]`
 - `[LegacyNamespace]`
-- `[LegacyTreatNonObjectAsNull]`
 - `[SecureContext]`
 
 ## Nonstandard extended attributes
