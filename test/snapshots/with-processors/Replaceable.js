@@ -115,6 +115,7 @@ exports.install = (globalObject, globalNames) => {
     replaceable: { enumerable: true },
     [Symbol.toStringTag]: { value: "Replaceable", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, Replaceable, Replaceable.prototype);
   ctorRegistry[interfaceName] = Replaceable;
 
   Object.defineProperty(globalObject, interfaceName, {

@@ -156,6 +156,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "HTMLCollection", configurable: true },
     [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, HTMLCollection, HTMLCollection.prototype);
   ctorRegistry[interfaceName] = HTMLCollection;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied

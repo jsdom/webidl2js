@@ -110,6 +110,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "URLSearchParamsCollection2", configurable: true },
     [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, URLSearchParamsCollection2, URLSearchParamsCollection2.prototype);
   ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied

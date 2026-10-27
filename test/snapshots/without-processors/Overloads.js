@@ -435,6 +435,7 @@ exports.install = (globalObject, globalNames) => {
     incompatible3: { enumerable: true },
     [Symbol.toStringTag]: { value: "Overloads", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, Overloads, Overloads.prototype);
   ctorRegistry[interfaceName] = Overloads;
 
   Object.defineProperty(globalObject, interfaceName, {

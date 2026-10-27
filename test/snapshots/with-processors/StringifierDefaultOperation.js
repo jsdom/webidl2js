@@ -103,6 +103,7 @@ exports.install = (globalObject, globalNames) => {
     toString: { enumerable: true },
     [Symbol.toStringTag]: { value: "StringifierDefaultOperation", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, StringifierDefaultOperation, StringifierDefaultOperation.prototype);
   ctorRegistry[interfaceName] = StringifierDefaultOperation;
 
   Object.defineProperty(globalObject, interfaceName, {

@@ -180,6 +180,7 @@ exports.install = (globalObject, globalNames) => {
     promiseAttribute: { enumerable: true },
     [Symbol.toStringTag]: { value: "CEReactions", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, CEReactions, CEReactions.prototype);
   ctorRegistry[interfaceName] = CEReactions;
 
   // Only internally created wrappers have targets known to be ordinary objects. Caller-supplied

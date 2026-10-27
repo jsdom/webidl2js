@@ -122,6 +122,7 @@ exports.install = (globalObject, globalNames) => {
     op: { enumerable: true },
     [Symbol.toStringTag]: { value: "DictionaryConvert", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, DictionaryConvert, DictionaryConvert.prototype);
   ctorRegistry[interfaceName] = DictionaryConvert;
 
   Object.defineProperty(globalObject, interfaceName, {

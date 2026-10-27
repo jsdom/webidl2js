@@ -100,6 +100,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(ObservableArraysChild.prototype, {
     [Symbol.toStringTag]: { value: "ObservableArraysChild", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, ObservableArraysChild, ObservableArraysChild.prototype);
   ctorRegistry[interfaceName] = ObservableArraysChild;
 
   Object.defineProperty(globalObject, interfaceName, {

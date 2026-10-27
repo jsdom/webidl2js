@@ -623,6 +623,7 @@ exports.install = (globalObject, globalNames) => {
     time: { enumerable: true },
     [Symbol.toStringTag]: { value: "TypedefsAndUnions", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, TypedefsAndUnions, TypedefsAndUnions.prototype);
   ctorRegistry[interfaceName] = TypedefsAndUnions;
 
   Object.defineProperty(globalObject, interfaceName, {

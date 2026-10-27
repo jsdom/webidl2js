@@ -138,6 +138,7 @@ exports.install = (globalObject, globalNames) => {
     [Symbol.toStringTag]: { value: "Static", configurable: true }
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
+  utils.adoptFunctionsIntoRealm(globalObject, Static, Static.prototype);
   ctorRegistry[interfaceName] = Static;
 
   Object.defineProperty(globalObject, interfaceName, {

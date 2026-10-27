@@ -77,6 +77,7 @@ function getUnforgeables(globalObject) {
       unforgeablePromiseOperation: { configurable: false, writable: false },
       unforgeablePromiseAttribute: { configurable: false }
     });
+    utils.adoptFunctionsIntoRealm(globalObject, unforgeables);
     unforgeablesMap.set(globalObject, unforgeables);
   }
   return unforgeables;
@@ -205,6 +206,7 @@ exports.install = (globalObject, globalNames) => {
     staticPromiseOperation: { enumerable: true },
     staticPromiseAttribute: { enumerable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, PromiseTypes, PromiseTypes.prototype);
   ctorRegistry[interfaceName] = PromiseTypes;
 
   Object.defineProperty(globalObject, interfaceName, {

@@ -360,6 +360,7 @@ exports.install = (globalObject, globalNames) => {
     asyncSequencePassthrough: { enumerable: true },
     [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, SeqAndRec, SeqAndRec.prototype);
   ctorRegistry[interfaceName] = SeqAndRec;
 
   Object.defineProperty(globalObject, interfaceName, {

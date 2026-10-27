@@ -129,6 +129,7 @@ exports.install = (globalObject, globalNames) => {
     addEventListener: { enumerable: true },
     [Symbol.toStringTag]: { value: "EventTarget", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, EventTarget, EventTarget.prototype);
   ctorRegistry[interfaceName] = EventTarget;
 
   Object.defineProperty(globalObject, interfaceName, {

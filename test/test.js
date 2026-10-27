@@ -804,6 +804,49 @@ describe("generation", () => {
       });
     });
 
+    describe("functions belong to the global object's realm", () => {
+      function install(names, globalNames = ["Window"]) {
+        const globalObject = vm.runInNewContext("globalThis");
+        for (const name of names) {
+          require(path.resolve(outputDir, `${name}.js`)).install(globalObject, globalNames);
+        }
+        return globalObject;
+      }
+
+      test("interface objects, operations and accessors", () => {
+        const globalObject = install(["BrandCheckParent", "BrandCheck"]);
+        const functionPrototype = globalObject.Function.prototype;
+        const { BrandCheck, BrandCheckParent } = globalObject;
+
+        assert.equal(Object.getPrototypeOf(BrandCheckParent), functionPrototype);
+        assert.equal(Object.getPrototypeOf(BrandCheck), BrandCheckParent);
+        assert.equal(Object.getPrototypeOf(BrandCheck.prototype.childMethod), functionPrototype);
+        const { get, set } = Object.getOwnPropertyDescriptor(BrandCheckParent.prototype, "value");
+        assert.equal(Object.getPrototypeOf(get), functionPrototype);
+        assert.equal(Object.getPrototypeOf(set), functionPrototype);
+        assert.equal(BrandCheck.constructor, globalObject.Function);
+      });
+
+      test("iterator prototype methods", () => {
+        const globalObject = install(["BrandCheckParent", "BrandCheck", "BrandCheckIterable"]);
+        const iteratorPrototype = Object.getPrototypeOf(
+          globalObject.BrandCheckIterable.prototype[Symbol.iterator].call(
+            require(path.resolve(outputDir, "BrandCheckIterable.js")).create(globalObject, [], { values: [] })
+          )
+        );
+        assert.equal(Object.getPrototypeOf(iteratorPrototype.next), globalObject.Function.prototype);
+      });
+
+      test("leaves functions alone when installed into this realm", () => {
+        require(path.resolve(outputDir, "BrandCheckParent.js")).install(globalThis, ["Window"]);
+        try {
+          assert.equal(Object.getPrototypeOf(globalThis.BrandCheckParent), Function.prototype);
+        } finally {
+          delete globalThis.BrandCheckParent;
+        }
+      });
+    });
+
     describe("legacy platform object property access", () => {
       test("brands the final proxy but leaves its backing target unbranded", () => {
         const URLList = require(path.resolve(outputDir, "URLList.js"));

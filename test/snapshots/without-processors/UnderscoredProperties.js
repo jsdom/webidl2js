@@ -170,6 +170,7 @@ exports.install = (globalObject, globalNames) => {
     static: { enumerable: true },
     const: { value: 42, enumerable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, UnderscoredProperties, UnderscoredProperties.prototype);
   ctorRegistry[interfaceName] = UnderscoredProperties;
 
   Object.defineProperty(globalObject, interfaceName, {

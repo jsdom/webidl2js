@@ -106,6 +106,7 @@ exports.install = (globalObject, globalNames) => {
     siblingMethod: { enumerable: true },
     [Symbol.toStringTag]: { value: "BrandCheckSibling", configurable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, BrandCheckSibling, BrandCheckSibling.prototype);
   ctorRegistry[interfaceName] = BrandCheckSibling;
 
   Object.defineProperty(globalObject, interfaceName, {

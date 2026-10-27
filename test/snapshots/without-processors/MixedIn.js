@@ -149,6 +149,7 @@ exports.install = (globalObject, globalNames) => {
     mixedInConst: { value: 43, enumerable: true },
     ifaceMixinConst: { value: 42, enumerable: true }
   });
+  utils.adoptFunctionsIntoRealm(globalObject, MixedIn, MixedIn.prototype);
   ctorRegistry[interfaceName] = MixedIn;
 
   Object.defineProperty(globalObject, interfaceName, {
