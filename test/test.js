@@ -89,6 +89,439 @@ describe("generation", () => {
       assert.strictEqual(get.call(wrapper), "42");
     });
 
+    describe("observable arrays", () => {
+      let generated, utils, globalObject, wrapper, impl;
+
+      beforeEach(() => {
+        generated = require(path.resolve(outputDir, "ObservableArrays.js"));
+        utils = require(path.resolve(outputDir, "utils.js"));
+        globalObject = vm.runInNewContext("globalThis");
+        generated.install(globalObject, ["Window"]);
+        wrapper = new globalObject.ObservableArrays();
+        impl = utils.implForWrapper(wrapper);
+      });
+
+      test("uses stable, attribute-specific symbols", () => {
+        assert.strictEqual(utils.observableArraySet("names"), utils.observableArraySet("names"));
+        assert.strictEqual(utils.observableArrayDelete("names"), utils.observableArrayDelete("names"));
+        assert.notStrictEqual(utils.observableArraySet("names"), utils.observableArraySet("employees"));
+        assert.notStrictEqual(utils.observableArraySet("names"), utils.observableArrayDelete("names"));
+      });
+
+      test("preserves the proxy and backing list across assignment and self-assignment", () => {
+        const array = wrapper.names;
+        const list = impl.names;
+        wrapper.names = [1, "two"];
+        assert.strictEqual(wrapper.names, array);
+        assert.strictEqual(impl.names, list);
+        assert.deepStrictEqual([...array], ["1", "two"]);
+        assert.deepStrictEqual(list, ["1", "two"]);
+        wrapper.names = array;
+        assert.strictEqual(wrapper.names, array);
+        assert.deepStrictEqual(list, ["1", "two"]);
+        assert.notStrictEqual(new globalObject.ObservableArrays().names, array);
+      });
+
+      test("reflects implementation mutations without conversion or hooks", () => {
+        const array = wrapper.names;
+        impl.names.push("one", "two");
+        assert.deepStrictEqual([...array], ["one", "two"]);
+        impl.names.splice(0, 1, "three");
+        assert.deepStrictEqual([...array], ["three", "two"]);
+        impl.names.length = 0;
+        assert.strictEqual(array.length, 0);
+        assert.deepStrictEqual(impl.events, []);
+      });
+
+      test("converts elements and runs hooks before changing the list", () => {
+        wrapper.names.push(1);
+        wrapper.names[0] = 2;
+        wrapper.names.push("three");
+        wrapper.names.length = 0;
+        assert.deepStrictEqual(impl.events, [
+          ["set", "1", 0, []],
+          ["delete", "1", 0, ["1"]],
+          ["set", "2", 0, ["1"]],
+          ["set", "three", 1, ["2"]],
+          ["delete", "three", 1, ["2", "three"]],
+          ["delete", "2", 0, ["2"]]
+        ]);
+      });
+
+      test("converts the complete assignment before running hooks or changing the list", () => {
+        impl.names.push("original");
+        const marker = new Error("conversion failed");
+        assert.throws(() => {
+          wrapper.names = [
+            "first",
+            {
+              toString() {
+                throw marker;
+              }
+            }
+          ];
+        }, error => error === marker);
+        assert.deepStrictEqual(impl.names, ["original"]);
+        assert.deepStrictEqual(impl.events, []);
+
+        let conversions = 0;
+        wrapper.names = [
+          {
+            toString() {
+              ++conversions;
+              return "new";
+            }
+          }
+        ];
+        assert.strictEqual(conversions, 1);
+        assert.deepStrictEqual(impl.events, [
+          ["delete", "original", 0, ["original"]],
+          ["set", "new", 0, []]
+        ]);
+        const instance = wrapper;
+        for (const value of [null, undefined, "string", 1, {}]) {
+          assert.throws(() => {
+            instance.names = value;
+          }, { name: "TypeError" });
+          assert.deepStrictEqual(impl.names, ["new"]);
+        }
+      });
+
+      test("preserves partial changes when hooks throw", () => {
+        const marker = new Error("hook failed");
+        impl.names.push("one", "two", "three");
+        impl.onDelete = (value, index) => {
+          if (index === 1) {
+            throw marker;
+          }
+        };
+        assert.throws(() => {
+          wrapper.names.length = 0;
+        }, error => error === marker);
+        assert.deepStrictEqual(impl.names, ["one", "two"]);
+
+        impl.onDelete = undefined;
+        impl.onSet = value => {
+          if (value === "bad") {
+            throw marker;
+          }
+        };
+        assert.throws(() => {
+          wrapper.names = ["good", "bad", "later"];
+        }, error => error === marker);
+        assert.deepStrictEqual(impl.names, ["good"]);
+        impl.events.length = 0;
+        assert.throws(() => {
+          wrapper.names[0] = "bad";
+        }, error => error === marker);
+        assert.deepStrictEqual(impl.names, ["good"]);
+        assert.deepStrictEqual(impl.events, [
+          ["delete", "good", 0, ["good"]],
+          ["set", "bad", 0, ["good"]]
+        ]);
+      });
+
+      test("stores impls and exposes wrappers, including property descriptors", () => {
+        const employee = new globalObject.ObservableArrays();
+        const employeeImpl = utils.implForWrapper(employee);
+        wrapper.employees.push(employee, null);
+        assert.deepStrictEqual(impl.employees, [employeeImpl, null]);
+        assert.deepStrictEqual([...wrapper.employees], [employee, null]);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper.employees, "0").value, employee);
+        assert.deepStrictEqual(impl.events, [["employee set", employeeImpl, 0], ["employee set", null, 1]]);
+
+        wrapper.employees = [employee];
+        assert.deepStrictEqual(impl.employees, [employeeImpl]);
+        assert.strictEqual(wrapper.employees.pop(), employee);
+        assert.deepStrictEqual(impl.events.at(-1), ["employee delete", employeeImpl, 0]);
+        assert.throws(() => wrapper.employees.push({}), globalObject.TypeError);
+        assert.deepStrictEqual(impl.employees, []);
+      });
+
+      test("round-trips callback elements without converting them twice", () => {
+        let calls = 0;
+        function callback() {
+          ++calls;
+        }
+        wrapper.callbacks = [callback];
+        assert.strictEqual(wrapper.callbacks[0], callback);
+        impl.callbacks[0]();
+        assert.strictEqual(calls, 1);
+        wrapper.callbacks.push(callback);
+        assert.strictEqual(wrapper.callbacks[1], callback);
+      });
+
+      test("supports readonly attributes and omitted hooks", () => {
+        const array = wrapper.readonlyNames;
+        array.push(42);
+        assert.deepStrictEqual(impl.readonlyNames, ["42"]);
+        assert.throws(() => {
+          wrapper.readonlyNames = [];
+        }, TypeError);
+        assert.strictEqual(wrapper.readonlyNames, array);
+        assert.deepStrictEqual(impl.events, []);
+        wrapper.numbers = [1.9, 2 ** 32 + 2];
+        assert.deepStrictEqual(impl.numbers, [1, 2]);
+      });
+
+      test("supports frozen array elements", () => {
+        wrapper.groups = [[1, "two"]];
+        wrapper.groups.push(new Set([3]));
+        assert.deepStrictEqual(wrapper.groups[0], ["1", "two"]);
+        assert.deepStrictEqual(wrapper.groups[1], ["3"]);
+        assert(Object.isFrozen(wrapper.groups[0]));
+        assert.strictEqual(wrapper.groups[0], impl.groups[0]);
+      });
+
+      test("supports native array methods and array identity checks", () => {
+        const array = wrapper.names;
+        assert(Array.isArray(array));
+        assert(array instanceof globalObject.Array);
+        assert.strictEqual(array.constructor, globalObject.Array);
+        array.push("b", "c");
+        array.unshift("a");
+        assert.strictEqual(array.shift(), "a");
+        assert.deepStrictEqual([...array.splice(0, 1, "x", "y")], ["b"]);
+        array.reverse();
+        assert.deepStrictEqual([...array], ["c", "y", "x"]);
+        assert.deepStrictEqual([...array.map(value => value.toUpperCase())], ["C", "Y", "X"]);
+        assert.deepStrictEqual([].concat(array), ["c", "y", "x"]);
+        assert.strictEqual(JSON.stringify(array), '["c","y","x"]');
+      });
+
+      test("rejects holes, length growth, and deleting anything except the last index", () => {
+        const array = wrapper.names;
+        assert.strictEqual(Reflect.set(array, "1", Symbol("not converted")), false);
+        assert.strictEqual(Reflect.set(array, "length", 1), false);
+        array.push("one", "two");
+        assert.strictEqual(Reflect.deleteProperty(array, "0"), false);
+        assert.strictEqual(Reflect.deleteProperty(array, "2"), false);
+        assert.strictEqual(Reflect.deleteProperty(array, "length"), false);
+        assert.strictEqual(Reflect.deleteProperty(array, "1"), true);
+        assert.deepStrictEqual([...array], ["one"]);
+        assert.strictEqual(Reflect.set(array, "length", 0), true);
+      });
+
+      test("validates length and coerces it twice", () => {
+        const array = wrapper.names;
+        for (const value of [-1, 0.5, NaN, Infinity, 2 ** 32]) {
+          assert.throws(() => {
+            array.length = value;
+          }, globalObject.RangeError);
+        }
+        for (const value of [1n, Symbol("length")]) {
+          assert.throws(() => {
+            array.length = value;
+          }, globalObject.TypeError);
+        }
+        let calls = 0;
+        wrapper.names.push("one");
+        wrapper.names.length = {
+          valueOf() {
+            ++calls;
+            return 0;
+          }
+        };
+        assert.strictEqual(calls, 2);
+        assert.deepStrictEqual(impl.names, []);
+      });
+
+      test("exposes virtual descriptors and keys while preserving ordinary properties", () => {
+        const array = wrapper.names;
+        impl.names.push("one", "two");
+        const symbol = Symbol("extra");
+        array.extra = 1;
+        array["01"] = "ordinary";
+        array[2 ** 32 - 1] = "also ordinary";
+        array[symbol] = 2;
+        assert.deepStrictEqual(Reflect.ownKeys(array), ["0", "1", "length", "extra", "01", "4294967295", symbol]);
+        assert.deepStrictEqual(Object.getOwnPropertyDescriptor(array, "length"), {
+          value: 2, writable: true, enumerable: false, configurable: false
+        });
+        assert.deepStrictEqual(Object.getOwnPropertyDescriptor(array, "0"), {
+          value: "one", writable: true, enumerable: true, configurable: true
+        });
+        assert.strictEqual(Object.getOwnPropertyDescriptor(array, "2"), undefined);
+        assert.strictEqual("1" in array, true);
+        assert.strictEqual("2" in array, false);
+        assert.strictEqual("length" in array, true);
+        assert.strictEqual("extra" in array, true);
+        assert.strictEqual(array[symbol], 2);
+        assert.strictEqual(Reflect.deleteProperty(array, "extra"), true);
+        assert.strictEqual("extra" in array, false);
+
+        const receiver = {};
+        Reflect.set(array, "other", 3, receiver);
+        assert.strictEqual(receiver.other, 3);
+        assert.strictEqual(array.other, undefined);
+        Reflect.set(array, "0", "changed", receiver);
+        assert.strictEqual(array[0], "changed");
+        assert.strictEqual(receiver[0], undefined);
+      });
+
+      test("restricts indexed and length descriptors and remains extensible", () => {
+        const array = wrapper.names;
+        array.push("original");
+        for (const descriptor of [
+          { get() {} },
+          { set() {} },
+          { writable: false },
+          { enumerable: false },
+          { configurable: false }
+        ]) {
+          assert.strictEqual(Reflect.defineProperty(array, "0", descriptor), false);
+        }
+        for (const descriptor of [{ get() {} }, { writable: false }, { enumerable: true }, { configurable: true }]) {
+          assert.strictEqual(Reflect.defineProperty(array, "length", descriptor), false);
+        }
+        assert.strictEqual(Reflect.defineProperty(array, "0", { value: 42 }), true);
+        assert.strictEqual(array[0], "42");
+        const events = impl.events.length;
+        assert.strictEqual(Reflect.defineProperty(array, "0", {}), true);
+        assert.strictEqual(impl.events.length, events);
+        assert.strictEqual(Reflect.defineProperty(array, "length", { value: 0 }), true);
+        assert.strictEqual(array.length, 0);
+        assert.strictEqual(Reflect.preventExtensions(array), false);
+        for (const operation of [Object.preventExtensions, Object.seal, Object.freeze]) {
+          assert.throws(() => operation(array), TypeError);
+        }
+        assert(Object.isExtensible(array));
+      });
+
+      test("keeps the owning realm when accessors are borrowed", () => {
+        const otherGlobal = vm.runInNewContext("globalThis");
+        generated.install(otherGlobal, ["Window"]);
+        const other = generated.create(otherGlobal);
+        const { get, set } = Object.getOwnPropertyDescriptor(globalObject.ObservableArrays.prototype, "names");
+        const array = get.call(other);
+        assert.strictEqual(Object.getPrototypeOf(array), otherGlobal.Array.prototype);
+        assert.strictEqual(array, other.names);
+        set.call(other, [42]);
+        assert.deepStrictEqual([...array], ["42"]);
+        assert.throws(() => array.push(Symbol("invalid")), otherGlobal.TypeError);
+        for (const receiver of [{}, new Proxy(wrapper, {}), Object.create(wrapper)]) {
+          assert.throws(() => get.call(receiver), globalObject.TypeError);
+          assert.throws(() => set.call(receiver, []), globalObject.TypeError);
+        }
+      });
+
+      test("uses the captured array prototype after the global constructor changes", () => {
+        const arrayPrototype = globalObject.Array.prototype;
+        globalObject.Array = function Array() {
+          throw new Error("unexpected constructor call");
+        };
+        const instance = generated.create(globalObject);
+        assert(Array.isArray(instance.names));
+        assert.strictEqual(Object.getPrototypeOf(instance.names), arrayPrototype);
+        instance.names.push("one");
+        assert.deepStrictEqual([...instance.names], ["one"]);
+      });
+
+      test("ignores inherited indexed properties outside the backing list", () => {
+        const array = wrapper.names;
+        const prototype = Object.create(globalObject.Array.prototype);
+        prototype[0] = "inherited";
+        Object.setPrototypeOf(array, prototype);
+        assert.strictEqual(array[0], undefined);
+        assert.strictEqual("0" in array, false);
+        assert.strictEqual(Object.getOwnPropertyDescriptor(array, "0"), undefined);
+        impl.names.push("own");
+        assert.strictEqual(array[0], "own");
+        assert.strictEqual("0" in array, true);
+      });
+
+      test("supports inherited and mixed-in attributes through every creation path", () => {
+        const child = require(path.resolve(outputDir, "ObservableArraysChild.js"));
+        child.install(globalObject, ["Window"]);
+        for (const module of [generated, child]) {
+          const createdImpl = module.new(globalObject);
+          assert.strictEqual(createdImpl.names, undefined);
+          Object.assign(createdImpl, {
+            names: [],
+            readonlyNames: [],
+            employees: [],
+            callbacks: [],
+            groups: [],
+            numbers: [],
+            events: []
+          });
+          const instances = [
+            module.create(globalObject),
+            utils.wrapperForImpl(module.createImpl(globalObject)),
+            utils.wrapperForImpl(createdImpl),
+            module.setup(Object.create(globalObject[module === child ? "ObservableArraysChild" : "ObservableArrays"]
+              .prototype), globalObject)
+          ];
+          for (const instance of instances) {
+            instance.names.push("one");
+            instance.numbers.push(2.5);
+            const implementation = utils.implForWrapper(instance);
+            assert.deepStrictEqual(implementation.names, ["one"]);
+            assert.deepStrictEqual(implementation.numbers, [2]);
+            assert.strictEqual(Object.getPrototypeOf(instance.names), globalObject.Array.prototype);
+          }
+        }
+      });
+    });
+
+    describe("invalid observable array declarations", () => {
+      const declarations = [
+        ["static attributes", "static attribute ObservableArray<DOMString> names;"],
+        ["nullable arrays", "attribute ObservableArray<DOMString>? names;"],
+        ["dictionary elements", "attribute ObservableArray<EmployeeRecord> names;"],
+        ["sequence elements", "attribute ObservableArray<sequence<DOMString>> names;"],
+        ["record elements", "attribute ObservableArray<record<DOMString, long>> names;"],
+        ["observable array elements", "attribute ObservableArray<ObservableArray<DOMString>> names;"],
+        ["return values", "ObservableArray<DOMString> names();"],
+        ["arguments", "undefined names(ObservableArray<DOMString> values);"],
+        ["nested arrays", "attribute sequence<ObservableArray<DOMString>> names;"],
+        ["unions", "attribute (ObservableArray<DOMString> or DOMString) names;"],
+        ["typedef arguments", "undefined names(Names values);"],
+        ["typedef dictionary elements", "attribute ObservableArray<RecordAlias> names;"]
+      ];
+
+      for (const [name, member] of declarations) {
+        test(name, async () => {
+          const directory = fs.mkdtempSync(path.join(outputDir, "invalid-observable-array-"));
+          try {
+            const idlPath = path.join(directory, "Invalid.webidl");
+            fs.writeFileSync(idlPath, `
+              dictionary EmployeeRecord {};
+              typedef EmployeeRecord RecordAlias;
+              typedef ObservableArray<DOMString> Names;
+              [Exposed=Window] interface Invalid { ${member} };
+            `);
+            const transformer = new Transformer();
+            transformer.addSource(idlPath, implsDir);
+            await assert.rejects(transformer.generate(directory), /ObservableArray/);
+          } finally {
+            fs.rmSync(directory, { recursive: true });
+          }
+        });
+      }
+
+      for (const [name, declaration] of [
+        ["dictionary members", "dictionary Invalid { ObservableArray<DOMString> names; };"],
+        [
+          "namespace attributes",
+          "[Exposed=Window] namespace Invalid { readonly attribute ObservableArray<long> names; };"
+        ]
+      ]) {
+        test(name, async () => {
+          const directory = fs.mkdtempSync(path.join(outputDir, "invalid-observable-array-"));
+          try {
+            const idlPath = path.join(directory, "Invalid.webidl");
+            fs.writeFileSync(idlPath, declaration);
+            const transformer = new Transformer();
+            transformer.addSource(idlPath, implsDir);
+            await assert.rejects(transformer.generate(directory), /ObservableArray/);
+          } finally {
+            fs.rmSync(directory, { recursive: true });
+          }
+        });
+      }
+    });
+
     describe("platform object brand checks", () => {
       let BrandCheck, BrandCheckParent, BrandCheckGrandchild, BrandCheckSibling, utils,
         globalObject, wrapper, impl;

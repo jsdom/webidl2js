@@ -374,6 +374,34 @@ IDL attributes that you wish to implement need to have corresponding properties 
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
 
+#### Observable array attributes
+
+For an `ObservableArray<T>` attribute, the implementation property holds the backing list as an ordinary array. Initialize it to an empty array in the constructor (or another initialization path), then read and mutate that same array for the object's lifetime. Do not replace the backing array, and never add elements to it that are not valid implementation-side values of type `T`.
+
+When using the generated `new()` export, the caller is responsible for initializing the backing lists along with the rest of the implementation state before using the observable arrays.
+
+Use the symbol factories from the generated `utils.js` to implement the attribute's set and delete algorithms:
+
+```js
+const utils = require("./utils.js");
+
+exports.implementation = class BuildingImpl {
+  constructor() {
+    this.employees = [];
+  }
+
+  [utils.observableArraySet("employees")](value, index) {
+    // Validate the employee or perform specification-defined side effects.
+  }
+
+  [utils.observableArrayDelete("employees")](value, index) {
+    // Perform specification-defined removal side effects.
+  }
+};
+```
+
+Note that direct implementation-side mutations, such as `this.employees.push(employeeImpl)`, are reflected by the proxy without conversion or hooks, and correspond to specification side effects that manipulate the backing list directly.
+
 #### Static attributes
 
 Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute.
@@ -479,9 +507,11 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - Callback functions
 - Nullable types
 - `sequence<>` types
+- `async_sequence<>` types
 - `record<>` types
 - `Promise<>` types
 - `FrozenArray<>` types
+- `ObservableArray<>` types
 - Buffer source types
 - `typedef`s
 - Namespaces
@@ -517,13 +547,10 @@ Supported Web IDL extensions defined in HTML:
 Notable missing features include:
 
 - `maplike<>` and `setlike<>`
-- `async_sequence<>` types
-- `ObservableArray<>` types
 - `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LegacyFactoryFunction]`
 - `[LegacyNamespace]`
-- `[LegacyTreatNonObjectAsNull]`
 - `[SecureContext]`
 
 ## Nonstandard extended attributes
