@@ -374,6 +374,38 @@ IDL attributes that you wish to implement need to have corresponding properties 
 
 Note that for IDL attributes that are `readonly`, these properties do not need to be accessor properties. If you create a data property with the correct name, the wrapper class will still expose the property to consumers as a getter wrapping your implementation class's data property. This can sometimes be more convenient.
 
+#### Observable array attributes
+
+For an `ObservableArray<T>` attribute, the implementation property holds the backing list as an ordinary array. Initialize it to an empty array in the constructor (or another initialization path), then read and mutate that same array for the object's lifetime. Do not replace the backing array. Its elements must already be valid implementation-side values of type `T`, such as impls for interface types.
+
+When using the generated `new()` export, the caller is responsible for initializing the backing lists along with the rest of the implementation state before using the observable arrays.
+
+The wrapper exposes a persistent array proxy. JavaScript mutations through that proxy perform element conversions and call optional implementation hooks. Assigning the wrapper's attribute converts the input to a sequence and replaces the backing array's contents without replacing either the backing array or the proxy. A `readonly` observable array attribute still allows mutations through its proxy.
+
+Use the symbol factories from the generated `utils.js` to implement the attribute's set and delete algorithms:
+
+```js
+const utils = require("./utils.js"); // Adjust to the generated utilities path.
+
+exports.implementation = class BuildingImpl {
+  constructor() {
+    this.employees = [];
+  }
+
+  [utils.observableArraySet("employees")](value, index) {
+    // Validate the employee or perform specification-defined side effects.
+  }
+
+  [utils.observableArrayDelete("employees")](value, index) {
+    // Perform specification-defined removal side effects.
+  }
+};
+```
+
+Each factory returns a stable symbol for the given attribute name. Both hooks are optional, receive the element's implementation-side value and its numeric index, and run before the backing list changes. Replacing an element calls the delete hook followed by the set hook. Hooks can throw; changes completed before an exception remain in effect.
+
+Direct implementation-side mutations, such as `this.employees.push(employeeImpl)`, are reflected by the proxy without conversion or hooks. The hooks should perform the specification's side effects; webidl2js updates the backing list itself after they return.
+
 #### Static attributes
 
 Just like static operations, static attributes are defined as properties on the constructor of the implementation class. And just like other attributes, the attribute can either be implemented as an accessor attribute or (if it is readonly) a data attribute.
