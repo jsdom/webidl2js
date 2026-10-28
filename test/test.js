@@ -35,7 +35,98 @@ describe("generation", () => {
   describe("built-in types", () => {
     before(() => {
       const transformer = new Transformer();
+      transformer.addSource(path.join(casesDir, "CallbackUsage.webidl"), implsDir);
       return transformer.generate(outputDir);
+    });
+
+    for (const [name, idl, expected] of [
+      ["no sources", "", []],
+      ["no callbacks", "[Exposed=Window] interface Example { attribute DOMString value; };", []],
+      [
+        "Function argument",
+        "[Exposed=Window] interface Example { undefined run(Function callback); };",
+        ["Function.js"],
+      ],
+      [
+        "VoidFunction attribute",
+        "[Exposed=Window] interface Example { attribute VoidFunction handler; };",
+        ["VoidFunction.js"],
+      ],
+      [
+        "nested types and typedefs",
+        `typedef (Function or DOMString) Callback;
+         dictionary Options { sequence<Callback> callbacks; VoidFunction? done = null; };`,
+        ["Function.js", "VoidFunction.js"],
+      ],
+      [
+        "namespace operation",
+        "[Exposed=Window] namespace Example { undefined run(VoidFunction callback); };",
+        ["VoidFunction.js"],
+      ],
+      ["callback return value", "callback Factory = Function ();", ["Function.js"]],
+      [
+        "callback interface return value",
+        "callback interface Factory { VoidFunction create(); };",
+        ["VoidFunction.js"],
+      ],
+      [
+        "pair iterable's implicit dependency",
+        "[Exposed=Window] interface Example { iterable<DOMString, DOMString>; };",
+        ["Function.js"],
+      ],
+      [
+        "types that need no conversion module",
+        `typedef Function Unused;
+         interface mixin UnusedMixin { undefined run(VoidFunction callback); };
+         [Exposed=Window] interface Example { readonly attribute Function handler; };`,
+        [],
+      ],
+      [
+        "explicit callback definitions",
+        "callback Function = any (any... arguments); callback VoidFunction = undefined ();",
+        ["Function.js", "VoidFunction.js"],
+      ],
+    ]) {
+      test(`only emits needed callback helpers: ${name}`, async (t) => {
+        const directory = fs.mkdtempSync(path.join(outputDir, "built-in-types-"));
+        t.after(() => fs.rmSync(directory, { recursive: true }));
+        const transformer = new Transformer();
+        if (idl) {
+          const idlPath = path.join(directory, "input.webidl");
+          fs.writeFileSync(idlPath, idl);
+          transformer.addSource(idlPath, implsDir);
+        }
+        await transformer.generate(directory);
+        assert.deepStrictEqual(
+          fs
+            .readdirSync(directory)
+            .filter((file) => ["Function.js", "VoidFunction.js"].includes(file)),
+          expected,
+        );
+      });
+    }
+
+    test("recomputes callback dependencies when reusing a transformer", async (t) => {
+      const directory = fs.mkdtempSync(path.join(outputDir, "built-in-types-"));
+      t.after(() => fs.rmSync(directory, { recursive: true }));
+      const idlPath = path.join(directory, "input.webidl");
+      const transformer = new Transformer();
+      transformer.addSource(idlPath, implsDir);
+
+      async function checkGeneration(callback) {
+        fs.writeFileSync(idlPath, `dictionary Options { ${callback} handler; };`);
+        await transformer.generate(directory);
+        assert.deepStrictEqual(
+          fs.readdirSync(directory).sort(),
+          [`${callback}.js`, "Options.js", "input.webidl", "utils.js"].sort(),
+        );
+        for (const file of fs.readdirSync(directory)) {
+          fs.unlinkSync(path.join(directory, file));
+        }
+      }
+
+      await checkGeneration("Function");
+      await checkGeneration("VoidFunction");
     });
 
     test("Function", (t) => {
