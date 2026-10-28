@@ -24,7 +24,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   const string = `${value}`;
   if (!enumerationValues.has(string)) {
     throw new globalObject.TypeError(
-      `${context} '${string}' is not a valid enumeration value for RequestDestination`,
+      `${context} must be one of: "", "audio", "document", "embed", "font", "image", "manifest", "object", "report", "script", "sharedworker", "style", "track", "video", "worker", "xslt". Received: ${JSON.stringify(string)}.`,
     );
   }
   return string;

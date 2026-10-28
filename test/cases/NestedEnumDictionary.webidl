@@ -1,0 +1,3 @@
+dictionary NestedEnumDictionary {
+  EnumDictionary options;
+};
