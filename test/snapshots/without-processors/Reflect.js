@@ -109,7 +109,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedBoolean");
 
       V = conversions["boolean"](V, {
-        context: "Failed to set the 'reflectedBoolean' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectedBoolean' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -125,7 +125,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedDOMString");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'reflectedDOMString' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectedDOMString' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -141,7 +141,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedLong");
 
       V = conversions["long"](V, {
-        context: "Failed to set the 'reflectedLong' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectedLong' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -157,8 +157,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUnsignedLong");
 
       V = conversions["unsigned long"](V, {
-        context:
-          "Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -174,8 +173,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUSVStringURL");
 
       V = conversions["USVString"](V, {
-        context:
-          "Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -191,7 +189,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectionTest");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'reflectionTest' property on 'Reflect': The provided value",
+        context: `Failed to set the 'reflectionTest' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 
@@ -207,7 +205,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set withUnderscore");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'withUnderscore' property on 'Reflect': The provided value",
+        context: `Failed to set the 'withUnderscore' property on 'Reflect': The provided value`,
         globals: globalObject,
       });
 

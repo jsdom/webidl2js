@@ -112,7 +112,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = CircularChild.convert(globalObject, curArg, {
-          context: "Failed to execute 'accept' on 'CircularParent': parameter 1",
+          context: `Failed to execute 'accept' on 'CircularParent': parameter 1`,
         });
         args.push(curArg);
       }

@@ -109,8 +109,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set mediaText");
 
       V = conversions["DOMString"](V, {
-        context:
-          "Failed to set the 'mediaText' property on 'StringifierTypedefAttribute': The provided value",
+        context: `Failed to set the 'mediaText' property on 'StringifierTypedefAttribute': The provided value`,
         globals: globalObject,
         treatNullAsEmptyString: true,
       });

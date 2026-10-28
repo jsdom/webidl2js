@@ -106,8 +106,7 @@ exports.install = (globalObject, globalNames) => {
       }
 
       V = conversions["DOMString"](V, {
-        context:
-          "Failed to set the 'value' property on 'LegacyLenientThisOnly': The provided value",
+        context: `Failed to set the 'value' property on 'LegacyLenientThisOnly': The provided value`,
         globals: globalObject,
       });
 

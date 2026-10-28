@@ -119,14 +119,12 @@ exports.install = (globalObject, globalNames) => {
               utils.getMethod(
                 curArg,
                 Symbol.iterator,
-                "Failed to construct 'URLSearchParams': parameter 1",
+                `Failed to construct 'URLSearchParams': parameter 1`,
               ) !== undefined
             ) {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
-                  "Failed to construct 'URLSearchParams': parameter 1" +
-                    " sequence" +
-                    " is not an iterable object.",
+                  `Failed to construct 'URLSearchParams': parameter 1 sequence is not an iterable object.`,
                 );
               } else {
                 const V = [];
@@ -134,21 +132,14 @@ exports.install = (globalObject, globalNames) => {
                 for (let nextItem of tmp) {
                   if (!utils.isObject(nextItem)) {
                     throw new globalObject.TypeError(
-                      "Failed to construct 'URLSearchParams': parameter 1" +
-                        " sequence" +
-                        "'s element" +
-                        " is not an iterable object.",
+                      `Failed to construct 'URLSearchParams': parameter 1 sequence's element is not an iterable object.`,
                     );
                   } else {
                     const V = [];
                     const tmp = nextItem;
                     for (let nextItem of tmp) {
                       nextItem = conversions["USVString"](nextItem, {
-                        context:
-                          "Failed to construct 'URLSearchParams': parameter 1" +
-                          " sequence" +
-                          "'s element" +
-                          "'s element",
+                        context: `Failed to construct 'URLSearchParams': parameter 1 sequence's element's element`,
                         globals: globalObject,
                       });
 
@@ -164,9 +155,7 @@ exports.install = (globalObject, globalNames) => {
             } else {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
-                  "Failed to construct 'URLSearchParams': parameter 1" +
-                    " record" +
-                    " is not an object.",
+                  `Failed to construct 'URLSearchParams': parameter 1 record is not an object.`,
                 );
               } else {
                 const result = Object.create(null);
@@ -176,18 +165,14 @@ exports.install = (globalObject, globalNames) => {
                     let typedKey = key;
 
                     typedKey = conversions["USVString"](typedKey, {
-                      context:
-                        "Failed to construct 'URLSearchParams': parameter 1" + " record" + "'s key",
+                      context: `Failed to construct 'URLSearchParams': parameter 1 record's key`,
                       globals: globalObject,
                     });
 
                     let typedValue = curArg[key];
 
                     typedValue = conversions["USVString"](typedValue, {
-                      context:
-                        "Failed to construct 'URLSearchParams': parameter 1" +
-                        " record" +
-                        "'s value",
+                      context: `Failed to construct 'URLSearchParams': parameter 1 record's value`,
                       globals: globalObject,
                     });
 
@@ -199,7 +184,7 @@ exports.install = (globalObject, globalNames) => {
             }
           } else {
             curArg = conversions["USVString"](curArg, {
-              context: "Failed to construct 'URLSearchParams': parameter 1",
+              context: `Failed to construct 'URLSearchParams': parameter 1`,
               globals: globalObject,
             });
           }
@@ -222,7 +207,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'append' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'append' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -230,7 +215,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'append' on 'URLSearchParams': parameter 2",
+          context: `Failed to execute 'append' on 'URLSearchParams': parameter 2`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -249,7 +234,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'delete' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'delete' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -268,7 +253,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'get' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'get' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -287,7 +272,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'getAll' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'getAll' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -306,7 +291,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'has' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'has' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -325,7 +310,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'set' on 'URLSearchParams': parameter 1",
+          context: `Failed to execute 'set' on 'URLSearchParams': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -333,7 +318,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to execute 'set' on 'URLSearchParams': parameter 2",
+          context: `Failed to execute 'set' on 'URLSearchParams': parameter 2`,
           globals: globalObject,
         });
         args.push(curArg);

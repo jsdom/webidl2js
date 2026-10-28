@@ -24,7 +24,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'configure' on 'Namespace': parameter 1",
+          context: `Failed to execute 'configure' on 'Namespace': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -44,7 +44,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["unsigned long"](curArg, {
-              context: "Failed to execute 'overloaded' on 'Namespace': parameter 1",
+              context: `Failed to execute 'overloaded' on 'Namespace': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -53,7 +53,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'overloaded' on 'Namespace': parameter 1",
+              context: `Failed to execute 'overloaded' on 'Namespace': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);

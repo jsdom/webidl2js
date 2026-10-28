@@ -119,7 +119,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set mixedInAttr");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value",
+        context: `Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value`,
         globals: globalObject,
       });
 
@@ -135,7 +135,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set ifaceMixinAttr");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value",
+        context: `Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value`,
         globals: globalObject,
       });
 

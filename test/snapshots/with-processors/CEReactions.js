@@ -158,7 +158,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'attr' property on 'CEReactions': The provided value",
+        context: `Failed to set the 'attr' property on 'CEReactions': The provided value`,
         globals: globalObject,
       });
 
@@ -309,7 +309,7 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context: "Failed to set the '" + P + "' property on 'CEReactions': The provided value",
+          context: `Failed to set the '${P}' property on 'CEReactions': The provided value`,
           globals: globalObject,
         });
 
@@ -351,7 +351,7 @@ class ProxyHandler {
       let namedValue = desc.value;
 
       namedValue = conversions["DOMString"](namedValue, {
-        context: "Failed to set the '" + P + "' property on 'CEReactions': The provided value",
+        context: `Failed to set the '${P}' property on 'CEReactions': The provided value`,
         globals: globalObject,
       });
 

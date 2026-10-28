@@ -75,7 +75,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set attr");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'attr' property on 'Global': The provided value",
+        context: `Failed to set the 'attr' property on 'Global': The provided value`,
         globals: globalObject,
       });
 
@@ -89,7 +89,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set unforgeableAttr");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'unforgeableAttr' property on 'Global': The provided value",
+        context: `Failed to set the 'unforgeableAttr' property on 'Global': The provided value`,
         globals: globalObject,
       });
 
@@ -103,7 +103,7 @@ exports._internalSetup = (wrapper, globalObject) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set length");
 
       V = conversions["unsigned long"](V, {
-        context: "Failed to set the 'length' property on 'Global': The provided value",
+        context: `Failed to set the 'length' property on 'Global': The provided value`,
         globals: globalObject,
       });
 
@@ -174,7 +174,7 @@ exports.install = (globalObject, globalNames) => {
 
     static set staticAttr(V) {
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'staticAttr' property on 'Global': The provided value",
+        context: `Failed to set the 'staticAttr' property on 'Global': The provided value`,
         globals: globalObject,
       });
 

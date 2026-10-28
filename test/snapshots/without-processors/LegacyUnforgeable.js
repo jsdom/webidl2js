@@ -73,7 +73,7 @@ function getUnforgeables(globalObject) {
         {
           let curArg = arguments[0];
           curArg = conversions["USVString"](curArg, {
-            context: "Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1",
+            context: `Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1`,
             globals: globalObject,
           });
           args.push(curArg);
@@ -88,7 +88,7 @@ function getUnforgeables(globalObject) {
         const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
         V = conversions["USVString"](V, {
-          context: "Failed to set the 'href' property on 'LegacyUnforgeable': The provided value",
+          context: `Failed to set the 'href' property on 'LegacyUnforgeable': The provided value`,
           globals: globalObject,
         });
 
@@ -111,8 +111,7 @@ function getUnforgeables(globalObject) {
         const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
         V = conversions["USVString"](V, {
-          context:
-            "Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value",
+          context: `Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value`,
           globals: globalObject,
         });
 

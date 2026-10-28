@@ -108,7 +108,7 @@ exports.install = (globalObject, globalNames) => {
             {
               let curArg = arguments[0];
               curArg = URL.convert(globalObject, curArg, {
-                context: "Failed to construct 'Overloads': parameter 1",
+                context: `Failed to construct 'Overloads': parameter 1`,
               });
               args.push(curArg);
             }
@@ -116,7 +116,7 @@ exports.install = (globalObject, globalNames) => {
             {
               let curArg = arguments[0];
               curArg = conversions["DOMString"](curArg, {
-                context: "Failed to construct 'Overloads': parameter 1",
+                context: `Failed to construct 'Overloads': parameter 1`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -140,7 +140,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'compatible' on 'Overloads': parameter 1",
+              context: `Failed to execute 'compatible' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -150,7 +150,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'compatible' on 'Overloads': parameter 1",
+              context: `Failed to execute 'compatible' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -158,7 +158,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[1];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'compatible' on 'Overloads': parameter 2",
+              context: `Failed to execute 'compatible' on 'Overloads': parameter 2`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -168,7 +168,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'compatible' on 'Overloads': parameter 1",
+              context: `Failed to execute 'compatible' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -176,7 +176,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[1];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'compatible' on 'Overloads': parameter 2",
+              context: `Failed to execute 'compatible' on 'Overloads': parameter 2`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -185,7 +185,7 @@ exports.install = (globalObject, globalNames) => {
             let curArg = arguments[2];
             if (curArg !== undefined) {
               curArg = conversions["long"](curArg, {
-                context: "Failed to execute 'compatible' on 'Overloads': parameter 3",
+                context: `Failed to execute 'compatible' on 'Overloads': parameter 3`,
                 globals: globalObject,
               });
             } else {
@@ -211,7 +211,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["long"](curArg, {
-              context: "Failed to execute 'incompatible1' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible1' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -220,7 +220,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible1' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible1' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -243,7 +243,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible2' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible2' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -253,7 +253,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible2' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible2' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -261,7 +261,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[1];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible2' on 'Overloads': parameter 2",
+              context: `Failed to execute 'incompatible2' on 'Overloads': parameter 2`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -283,7 +283,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible3' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible3' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -293,7 +293,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible3' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible3' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -305,7 +305,7 @@ exports.install = (globalObject, globalNames) => {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
                   curArg = URL.convert(globalObject, curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                   });
                 }
                 args.push(curArg);
@@ -315,7 +315,7 @@ exports.install = (globalObject, globalNames) => {
                 let curArg = arguments[1];
                 if (curArg !== undefined) {
                   curArg = URL.convert(globalObject, curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                   });
                 }
                 args.push(curArg);
@@ -325,18 +325,17 @@ exports.install = (globalObject, globalNames) => {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
                   curArg = conversions["ArrayBuffer"](curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                     globals: globalObject,
                   });
                 } else if (ArrayBuffer.isView(curArg)) {
                   curArg = conversions["ArrayBufferView"](curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                     globals: globalObject,
                   });
                 } else {
                   throw new globalObject.TypeError(
-                    "Failed to execute 'incompatible3' on 'Overloads': parameter 2" +
-                      " is not of any supported type.",
+                    `Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.`,
                   );
                 }
                 args.push(curArg);
@@ -346,18 +345,17 @@ exports.install = (globalObject, globalNames) => {
                 let curArg = arguments[1];
                 if (utils.isArrayBuffer(curArg)) {
                   curArg = conversions["ArrayBuffer"](curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                     globals: globalObject,
                   });
                 } else if (ArrayBuffer.isView(curArg)) {
                   curArg = conversions["ArrayBufferView"](curArg, {
-                    context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                    context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                     globals: globalObject,
                   });
                 } else {
                   throw new globalObject.TypeError(
-                    "Failed to execute 'incompatible3' on 'Overloads': parameter 2" +
-                      " is not of any supported type.",
+                    `Failed to execute 'incompatible3' on 'Overloads': parameter 2 is not of any supported type.`,
                   );
                 }
                 args.push(curArg);
@@ -366,7 +364,7 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[1];
                 curArg = conversions["DOMString"](curArg, {
-                  context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+                  context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
                   globals: globalObject,
                 });
                 args.push(curArg);
@@ -383,7 +381,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
-              context: "Failed to execute 'incompatible3' on 'Overloads': parameter 1",
+              context: `Failed to execute 'incompatible3' on 'Overloads': parameter 1`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -391,7 +389,7 @@ exports.install = (globalObject, globalNames) => {
           {
             let curArg = arguments[1];
             curArg = conversions["long"](curArg, {
-              context: "Failed to execute 'incompatible3' on 'Overloads': parameter 2",
+              context: `Failed to execute 'incompatible3' on 'Overloads': parameter 2`,
               globals: globalObject,
             });
             args.push(curArg);
@@ -400,18 +398,17 @@ exports.install = (globalObject, globalNames) => {
             let curArg = arguments[2];
             if (utils.isArrayBuffer(curArg)) {
               curArg = conversions["ArrayBuffer"](curArg, {
-                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 3",
+                context: `Failed to execute 'incompatible3' on 'Overloads': parameter 3`,
                 globals: globalObject,
               });
             } else if (ArrayBuffer.isView(curArg)) {
               curArg = conversions["ArrayBufferView"](curArg, {
-                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 3",
+                context: `Failed to execute 'incompatible3' on 'Overloads': parameter 3`,
                 globals: globalObject,
               });
             } else {
               throw new globalObject.TypeError(
-                "Failed to execute 'incompatible3' on 'Overloads': parameter 3" +
-                  " is not of any supported type.",
+                `Failed to execute 'incompatible3' on 'Overloads': parameter 3 is not of any supported type.`,
               );
             }
             args.push(curArg);
@@ -420,18 +417,17 @@ exports.install = (globalObject, globalNames) => {
             let curArg = arguments[3];
             if (utils.isArrayBuffer(curArg)) {
               curArg = conversions["ArrayBuffer"](curArg, {
-                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 4",
+                context: `Failed to execute 'incompatible3' on 'Overloads': parameter 4`,
                 globals: globalObject,
               });
             } else if (ArrayBuffer.isView(curArg)) {
               curArg = conversions["ArrayBufferView"](curArg, {
-                context: "Failed to execute 'incompatible3' on 'Overloads': parameter 4",
+                context: `Failed to execute 'incompatible3' on 'Overloads': parameter 4`,
                 globals: globalObject,
               });
             } else {
               throw new globalObject.TypeError(
-                "Failed to execute 'incompatible3' on 'Overloads': parameter 4" +
-                  " is not of any supported type.",
+                `Failed to execute 'incompatible3' on 'Overloads': parameter 4 is not of any supported type.`,
               );
             }
             args.push(curArg);

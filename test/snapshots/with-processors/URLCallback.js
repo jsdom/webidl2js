@@ -7,7 +7,7 @@ const URL = require("./URL.js");
 
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
   if (typeof value !== "function") {
-    throw new globalObject.TypeError(context + " is not a function");
+    throw new globalObject.TypeError(`${context} is not a function`);
   }
 
   function invokeTheCallbackFunction(url, string) {
@@ -18,7 +18,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
     callResult = Reflect.apply(value, thisArg, [url, string]);
 
-    callResult = URL.convert(globalObject, callResult, { context: context });
+    callResult = URL.convert(globalObject, callResult, { context });
 
     return callResult;
   }
@@ -28,7 +28,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
     let callResult = Reflect.construct(value, [url, string]);
 
-    callResult = URL.convert(globalObject, callResult, { context: context });
+    callResult = URL.convert(globalObject, callResult, { context });
 
     return callResult;
   };

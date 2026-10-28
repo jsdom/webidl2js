@@ -119,7 +119,7 @@ exports.install = (globalObject, globalNames) => {
       const args = [];
       args[0] = arguments[0];
       args[0] = Dictionary.convert(globalObject, args[0], {
-        context: "Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1",
+        context: `Failed to execute 'values' on 'AsyncIterableWithReturn': parameter 1`,
       });
 
       const asyncIterator = exports.createDefaultAsyncIterator(globalObject, $impl, "value");

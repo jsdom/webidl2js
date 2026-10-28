@@ -116,13 +116,13 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (typeof curArg === "number") {
           curArg = conversions["double"](curArg, {
-            context: "Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
             clamp: true,
           });
         } else {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'numOrStrConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         }
@@ -146,12 +146,12 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (typeof curArg === "number") {
             curArg = conversions["double"](curArg, {
-              context: "Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
             });
           } else {
             curArg = RequestDestination.convert(globalObject, curArg, {
-              context: "Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrEnumConsumer' on 'TypedefsAndUnions': parameter 1`,
             });
           }
         }
@@ -175,16 +175,14 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (typeof curArg === "number") {
             curArg = conversions["double"](curArg, {
-              context:
-                "Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
               clamp: true,
               enforceRange: true,
             });
           } else {
             curArg = conversions["DOMString"](curArg, {
-              context:
-                "Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrStrOrNullConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
               enforceRange: true,
             });
@@ -212,16 +210,14 @@ exports.install = (globalObject, globalNames) => {
             curArg = utils.implForWrapper(curArg);
           } else if (typeof curArg === "number") {
             curArg = conversions["double"](curArg, {
-              context:
-                "Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
               clamp: true,
               enforceRange: true,
             });
           } else {
             curArg = conversions["DOMString"](curArg, {
-              context:
-                "Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'numOrStrOrURLOrNullConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
               enforceRange: true,
             });
@@ -246,12 +242,12 @@ exports.install = (globalObject, globalNames) => {
           curArg = utils.tryImplForWrapper(curArg);
         } else if (typeof curArg === "number") {
           curArg = conversions["double"](curArg, {
-            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["double"](curArg, {
-            context: "Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'numOrObjConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         }
@@ -272,8 +268,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " is not an object.",
+            `Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.`,
           );
         } else {
           const result = Object.create(null);
@@ -283,18 +278,14 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions["USVString"](typedKey, {
-                context:
-                  "Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1" +
-                  "'s key",
+                context: `Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's key`,
                 globals: globalObject,
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(globalObject, typedValue, {
-                context:
-                  "Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1" +
-                  "'s value",
+                context: `Failed to execute 'urlMapInnerConsumer' on 'TypedefsAndUnions': parameter 1's value`,
               });
 
               result[typedKey] = typedValue;
@@ -322,8 +313,7 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (!utils.isObject(curArg)) {
             throw new globalObject.TypeError(
-              "Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                " is not an object.",
+              `Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1 is not an object.`,
             );
           } else {
             const result = Object.create(null);
@@ -333,18 +323,14 @@ exports.install = (globalObject, globalNames) => {
                 let typedKey = key;
 
                 typedKey = conversions["USVString"](typedKey, {
-                  context:
-                    "Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                    "'s key",
+                  context: `Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's key`,
                   globals: globalObject,
                 });
 
                 let typedValue = curArg[key];
 
                 typedValue = URL.convert(globalObject, typedValue, {
-                  context:
-                    "Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                    "'s value",
+                  context: `Failed to execute 'urlMapConsumer' on 'TypedefsAndUnions': parameter 1's value`,
                 });
 
                 result[typedKey] = typedValue;
@@ -372,20 +358,17 @@ exports.install = (globalObject, globalNames) => {
           curArg = utils.implForWrapper(curArg);
         } else if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context:
-              "Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context:
-              "Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'bufferSourceOrURLConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -412,16 +395,13 @@ exports.install = (globalObject, globalNames) => {
         } else {
           if (ArrayBuffer.isView(curArg)) {
             curArg = conversions["ArrayBufferView"](curArg, {
-              context:
-                "Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1",
+              context: `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1`,
               globals: globalObject,
             });
           } else if (utils.isObject(curArg)) {
             if (!utils.isObject(curArg)) {
               throw new globalObject.TypeError(
-                "Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                  " record" +
-                  " is not an object.",
+                `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record is not an object.`,
               );
             } else {
               const result = Object.create(null);
@@ -431,20 +411,14 @@ exports.install = (globalObject, globalNames) => {
                   let typedKey = key;
 
                   typedKey = conversions["USVString"](typedKey, {
-                    context:
-                      "Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                      " record" +
-                      "'s key",
+                    context: `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's key`,
                     globals: globalObject,
                   });
 
                   let typedValue = curArg[key];
 
                   typedValue = URL.convert(globalObject, typedValue, {
-                    context:
-                      "Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                      " record" +
-                      "'s value",
+                    context: `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 record's value`,
                   });
 
                   result[typedKey] = typedValue;
@@ -454,8 +428,7 @@ exports.install = (globalObject, globalNames) => {
             }
           } else {
             throw new globalObject.TypeError(
-              "Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1" +
-                " is not of any supported type.",
+              `Failed to execute 'arrayBufferViewOrURLMapConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.`,
             );
           }
         }
@@ -476,14 +449,12 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context:
-              "Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'arrayBufferViewDupConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -507,20 +478,17 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context:
-              "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else if (utils.isSharedArrayBuffer(curArg)) {
           curArg = conversions["SharedArrayBuffer"](curArg, {
-            context:
-              "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'arrayBufferOrSharedArrayBufferConsumer' on 'TypedefsAndUnions': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -544,20 +512,16 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (typeof curArg === "function") {
           curArg = AsyncCallbackFunction.convert(globalObject, curArg, {
-            context:
-              "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " callback function",
+            context: `Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1 callback function`,
           });
         } else if (typeof curArg === "number") {
           curArg = conversions["double"](curArg, {
-            context:
-              "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["double"](curArg, {
-            context:
-              "Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'callbackFunctionOrNumConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         }
@@ -582,20 +546,16 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isObject(curArg)) {
           curArg = AsyncCallbackInterface.convert(globalObject, curArg, {
-            context:
-              "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1" +
-              " callback interface",
+            context: `Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1 callback interface`,
           });
         } else if (typeof curArg === "number") {
           curArg = conversions["double"](curArg, {
-            context:
-              "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["double"](curArg, {
-            context:
-              "Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1",
+            context: `Failed to execute 'callbackInterfaceOrNumConsumer' on 'TypedefsAndUnions': parameter 1`,
             globals: globalObject,
           });
         }
@@ -613,23 +573,22 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set buf");
       if (utils.isArrayBuffer(V)) {
         V = conversions["ArrayBuffer"](V, {
-          context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
+          context: `Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value`,
           globals: globalObject,
         });
       } else if (ArrayBuffer.isView(V) && V.constructor.name === "Uint8Array") {
         V = conversions["Uint8Array"](V, {
-          context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
+          context: `Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value`,
           globals: globalObject,
         });
       } else if (ArrayBuffer.isView(V) && V.constructor.name === "Uint16Array") {
         V = conversions["Uint16Array"](V, {
-          context: "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value",
+          context: `Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value`,
           globals: globalObject,
         });
       } else {
         throw new globalObject.TypeError(
-          "Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value" +
-            " is not of any supported type.",
+          `Failed to set the 'buf' property on 'TypedefsAndUnions': The provided value is not of any supported type.`,
         );
       }
       $impl["buf"] = V;
@@ -644,7 +603,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set time");
 
       V = conversions["unsigned long long"](V, {
-        context: "Failed to set the 'time' property on 'TypedefsAndUnions': The provided value",
+        context: `Failed to set the 'time' property on 'TypedefsAndUnions': The provided value`,
         globals: globalObject,
       });
 

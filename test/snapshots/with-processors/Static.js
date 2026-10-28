@@ -114,7 +114,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set abc");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'abc' property on 'Static': The provided value",
+        context: `Failed to set the 'abc' property on 'Static': The provided value`,
         globals: globalObject,
       });
 
@@ -131,7 +131,7 @@ exports.install = (globalObject, globalNames) => {
 
     static set abc(V) {
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'abc' property on 'Static': The provided value",
+        context: `Failed to set the 'abc' property on 'Static': The provided value`,
         globals: globalObject,
       });
 

@@ -14,7 +14,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = Function.convert(globalObject, value, {
-        context: context + " has member 'function' that",
+        context: `${context} has member 'function' that`,
       });
 
       ret[key] = value;
@@ -26,7 +26,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = URLCallback.convert(globalObject, value, {
-        context: context + " has member 'urlCallback' that",
+        context: `${context} has member 'urlCallback' that`,
       });
 
       ret[key] = value;
@@ -41,7 +41,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
         value = null;
       } else {
         value = URLHandlerNonNull.convert(globalObject, value, {
-          context: context + " has member 'urlHandler' that",
+          context: `${context} has member 'urlHandler' that`,
         });
       }
       ret[key] = value;
@@ -53,7 +53,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = URLHandlerNonNull.convert(globalObject, value, {
-        context: context + " has member 'urlHandlerNonNull' that",
+        context: `${context} has member 'urlHandlerNonNull' that`,
       });
 
       ret[key] = value;
@@ -65,7 +65,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = VoidFunction.convert(globalObject, value, {
-        context: context + " has member 'voidFunction' that",
+        context: `${context} has member 'voidFunction' that`,
       });
 
       ret[key] = value;

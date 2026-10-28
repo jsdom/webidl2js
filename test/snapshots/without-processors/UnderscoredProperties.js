@@ -112,17 +112,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" +
-              " is not an iterable object.",
+            `Failed to execute 'operation' on 'UnderscoredProperties': parameter 1 is not an iterable object.`,
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["DOMString"](nextItem, {
-              context:
-                "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" +
-                "'s element",
+              context: `Failed to execute 'operation' on 'UnderscoredProperties': parameter 1's element`,
               globals: globalObject,
             });
 
@@ -144,8 +141,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set attribute");
 
       V = conversions["byte"](V, {
-        context:
-          "Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value",
+        context: `Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value`,
         globals: globalObject,
       });
 
@@ -162,7 +158,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'static' on 'UnderscoredProperties': parameter 1",
+          context: `Failed to execute 'static' on 'UnderscoredProperties': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);

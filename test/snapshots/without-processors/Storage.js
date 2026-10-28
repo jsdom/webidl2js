@@ -129,7 +129,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["unsigned long"](curArg, {
-          context: "Failed to execute 'key' on 'Storage': parameter 1",
+          context: `Failed to execute 'key' on 'Storage': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -148,7 +148,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'getItem' on 'Storage': parameter 1",
+          context: `Failed to execute 'getItem' on 'Storage': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -167,7 +167,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'setItem' on 'Storage': parameter 1",
+          context: `Failed to execute 'setItem' on 'Storage': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -175,7 +175,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'setItem' on 'Storage': parameter 2",
+          context: `Failed to execute 'setItem' on 'Storage': parameter 2`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -194,7 +194,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'removeItem' on 'Storage': parameter 1",
+          context: `Failed to execute 'removeItem' on 'Storage': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -338,7 +338,7 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context: "Failed to set the '" + P + "' property on 'Storage': The provided value",
+          context: `Failed to set the '${P}' property on 'Storage': The provided value`,
           globals: globalObject,
         });
 
@@ -370,7 +370,7 @@ class ProxyHandler {
       let namedValue = desc.value;
 
       namedValue = conversions["DOMString"](namedValue, {
-        context: "Failed to set the '" + P + "' property on 'Storage': The provided value",
+        context: `Failed to set the '${P}' property on 'Storage': The provided value`,
         globals: globalObject,
       });
 

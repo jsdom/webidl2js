@@ -129,7 +129,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'namedItem' on 'NamedProperties': parameter 1",
+          context: `Failed to execute 'namedItem' on 'NamedProperties': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);

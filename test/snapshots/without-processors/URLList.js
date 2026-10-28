@@ -126,7 +126,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["unsigned long"](curArg, {
-          context: "Failed to execute 'item' on 'URLList': parameter 1",
+          context: `Failed to execute 'item' on 'URLList': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
