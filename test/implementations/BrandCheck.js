@@ -24,6 +24,6 @@ exports.implementation = class BrandCheckImpl {
   }
 };
 
-exports.init = impl => {
+exports.init = (impl) => {
   impl.wrapperSeenDuringInit = utils.wrapperForImpl(impl);
 };

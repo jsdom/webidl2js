@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -61,7 +67,13 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
 
 exports._internalSetup = (wrapper, globalObject) => {};
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -96,7 +108,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -110,7 +122,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "item");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'item' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'item' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -118,7 +130,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["unsigned long"](curArg, {
           context: "Failed to execute 'item' on 'HTMLCollection': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -129,7 +141,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "namedItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'namedItem' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'namedItem' on 'HTMLCollection': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -137,7 +149,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'namedItem' on 'HTMLCollection': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -154,7 +166,11 @@ exports.install = (globalObject, globalNames) => {
     namedItem: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: "HTMLCollection", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: globalObject.Array.prototype[Symbol.iterator],
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = HTMLCollection;
 
@@ -162,13 +178,13 @@ exports.install = (globalObject, globalNames) => {
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, HTMLCollection.prototype),
-    other: new ProxyHandler(globalObject, null)
+    other: new ProxyHandler(globalObject, null),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: HTMLCollection
+    value: HTMLCollection,
   });
 };
 
@@ -265,7 +281,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
 
@@ -286,7 +302,7 @@ class ProxyHandler {
           writable: false,
           enumerable: false,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -314,7 +330,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }

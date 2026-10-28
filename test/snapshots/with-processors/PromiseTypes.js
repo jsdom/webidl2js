@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -58,7 +64,11 @@ function getUnforgeables(globalObject) {
     utils.define(unforgeables, {
       unforgeablePromiseOperation() {
         try {
-          const $impl = $requireImpl(this ?? globalObject, globalObject, "unforgeablePromiseOperation");
+          const $impl = $requireImpl(
+            this ?? globalObject,
+            globalObject,
+            "unforgeablePromiseOperation",
+          );
           return utils.tryWrapperForImpl($impl.unforgeablePromiseOperation());
         } catch (e) {
           return globalObject.Promise.reject(e);
@@ -66,16 +76,20 @@ function getUnforgeables(globalObject) {
       },
       get unforgeablePromiseAttribute() {
         try {
-          const $impl = $requireImpl(this ?? globalObject, globalObject, "get unforgeablePromiseAttribute");
+          const $impl = $requireImpl(
+            this ?? globalObject,
+            globalObject,
+            "get unforgeablePromiseAttribute",
+          );
           return utils.tryWrapperForImpl($impl["unforgeablePromiseAttribute"]);
         } catch (e) {
           return globalObject.Promise.reject(e);
         }
-      }
+      },
     });
     Object.defineProperties(unforgeables, {
       unforgeablePromiseOperation: { configurable: false, writable: false },
-      unforgeablePromiseAttribute: { configurable: false }
+      unforgeablePromiseAttribute: { configurable: false },
     });
     unforgeablesMap.set(globalObject, unforgeables);
   }
@@ -118,7 +132,7 @@ const unforgeablesMap = new WeakMap();
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -132,13 +146,13 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "voidPromiseConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'voidPromiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = new globalObject.Promise(resolve => resolve(curArg));
+        curArg = new globalObject.Promise((resolve) => resolve(curArg));
         args.push(curArg);
       }
       return $impl.voidPromiseConsumer(...args);
@@ -148,13 +162,13 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "promiseConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'promiseConsumer' on 'PromiseTypes': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
-        curArg = new globalObject.Promise(resolve => resolve(curArg));
+        curArg = new globalObject.Promise((resolve) => resolve(curArg));
         args.push(curArg);
       }
       return $impl.promiseConsumer(...args);
@@ -199,18 +213,18 @@ exports.install = (globalObject, globalNames) => {
     promiseConsumer: { enumerable: true },
     promiseOperation: { enumerable: true },
     promiseAttribute: { enumerable: true },
-    [Symbol.toStringTag]: { value: "PromiseTypes", configurable: true }
+    [Symbol.toStringTag]: { value: "PromiseTypes", configurable: true },
   });
   Object.defineProperties(PromiseTypes, {
     staticPromiseOperation: { enumerable: true },
-    staticPromiseAttribute: { enumerable: true }
+    staticPromiseAttribute: { enumerable: true },
   });
   ctorRegistry[interfaceName] = PromiseTypes;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: PromiseTypes
+    value: PromiseTypes,
   });
 };
 

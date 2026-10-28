@@ -19,7 +19,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
     return callResult;
   }
 
-  invokeTheCallbackFunction.construct = url => {
+  invokeTheCallbackFunction.construct = (url) => {
     url = utils.tryWrapperForImpl(url);
 
     let callResult = Reflect.construct(value, [url]);

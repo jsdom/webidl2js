@@ -12,13 +12,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -85,7 +91,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -99,7 +105,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "recordConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'recordConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -107,7 +113,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + " is not an object."
+            "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + " is not an object.",
           );
         } else {
           const result = Object.create(null);
@@ -117,15 +123,17 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions["USVString"](typedKey, {
-                context: "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s key",
-                globals: globalObject
+                context:
+                  "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s key",
+                globals: globalObject,
               });
 
               let typedValue = curArg[key];
 
               typedValue = conversions["double"](typedValue, {
-                context: "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s value",
-                globals: globalObject
+                context:
+                  "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s value",
+                globals: globalObject,
               });
 
               result[typedKey] = typedValue;
@@ -142,7 +150,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "recordConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'recordConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -150,7 +158,8 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + " is not an object."
+            "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" +
+              " is not an object.",
           );
         } else {
           const result = Object.create(null);
@@ -160,14 +169,16 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions["USVString"](typedKey, {
-                context: "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s key",
-                globals: globalObject
+                context:
+                  "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s key",
+                globals: globalObject,
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(globalObject, typedValue, {
-                context: "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s value"
+                context:
+                  "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s value",
               });
 
               result[typedKey] = typedValue;
@@ -184,7 +195,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "sequenceConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'sequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -192,15 +203,17 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" + " is not an iterable object."
+            "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" +
+              " is not an iterable object.",
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["USVString"](nextItem, {
-              context: "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
-              globals: globalObject
+              context:
+                "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+              globals: globalObject,
             });
 
             V.push(nextItem);
@@ -216,7 +229,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "sequenceConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'sequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -224,7 +237,8 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1" + " is not an iterable object."
+            "Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1" +
+              " is not an iterable object.",
           );
         } else {
           const V = [];
@@ -245,7 +259,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequenceConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -255,12 +269,14 @@ exports.install = (globalObject, globalNames) => {
           curArg,
           function (item) {
             item = conversions["USVString"](item, {
-              context: "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
-              globals: globalObject
+              context:
+                "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
+                "'s element",
+              globals: globalObject,
             });
             return item;
           },
-          "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1"
+          "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1",
         );
         args.push(curArg);
       }
@@ -271,7 +287,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequenceConsumer2");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -283,7 +299,7 @@ exports.install = (globalObject, globalNames) => {
             item = utils.tryImplForWrapper(item);
             return item;
           },
-          "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1"
+          "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1",
         );
         args.push(curArg);
       }
@@ -294,7 +310,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "frozenArrayConsumer");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -302,15 +318,18 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" + " is not an iterable object."
+            "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" +
+              " is not an iterable object.",
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["double"](nextItem, {
-              context: "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" + "'s element",
-              globals: globalObject
+              context:
+                "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" +
+                "'s element",
+              globals: globalObject,
             });
 
             V.push(nextItem);
@@ -327,7 +346,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequencePassthrough");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -337,12 +356,14 @@ exports.install = (globalObject, globalNames) => {
           curArg,
           function (item) {
             item = conversions["double"](item, {
-              context: "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" + "'s element",
-              globals: globalObject
+              context:
+                "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
+                "'s element",
+              globals: globalObject,
             });
             return item;
           },
-          "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1"
+          "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1",
         );
         args.push(curArg);
       }
@@ -358,14 +379,14 @@ exports.install = (globalObject, globalNames) => {
     asyncSequenceConsumer2: { enumerable: true },
     frozenArrayConsumer: { enumerable: true },
     asyncSequencePassthrough: { enumerable: true },
-    [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true }
+    [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true },
   });
   ctorRegistry[interfaceName] = SeqAndRec;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: SeqAndRec
+    value: SeqAndRec,
   });
 };
 

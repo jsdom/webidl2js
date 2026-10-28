@@ -20,6 +20,6 @@ exports.implementation = class URLListImpl {
   }
 };
 
-exports.init = impl => {
+exports.init = (impl) => {
   impl.wrapperSeenDuringInit = utils.wrapperForImpl(impl);
 };

@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -67,10 +73,10 @@ function getUnforgeables(globalObject) {
       get a() {
         const $impl = $requireImpl(this ?? globalObject, globalObject, "get a");
         return $impl["a"];
-      }
+      },
     });
     Object.defineProperties(unforgeables, {
-      a: { configurable: false }
+      a: { configurable: false },
     });
     unforgeablesMap.set(globalObject, unforgeables);
   }
@@ -81,7 +87,13 @@ exports._internalSetup = (wrapper, globalObject) => {
   utils.define(wrapper, getUnforgeables(globalObject));
 };
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -117,7 +129,7 @@ const unforgeablesMap = new WeakMap();
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -128,7 +140,7 @@ exports.install = (globalObject, globalNames) => {
     }
   }
   Object.defineProperties(LegacyUnforgeableMap.prototype, {
-    [Symbol.toStringTag]: { value: "LegacyUnforgeableMap", configurable: true }
+    [Symbol.toStringTag]: { value: "LegacyUnforgeableMap", configurable: true },
   });
   ctorRegistry[interfaceName] = LegacyUnforgeableMap;
 
@@ -136,13 +148,13 @@ exports.install = (globalObject, globalNames) => {
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, LegacyUnforgeableMap.prototype),
-    other: new ProxyHandler(globalObject, null)
+    other: new ProxyHandler(globalObject, null),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: LegacyUnforgeableMap
+    value: LegacyUnforgeableMap,
   });
 };
 
@@ -225,7 +237,7 @@ class ProxyHandler {
           writable: true,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -247,8 +259,9 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context: "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
-          globals: globalObject
+          context:
+            "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
+          globals: globalObject,
         });
 
         const creating = !impl[utils.supportsPropertyName](P);
@@ -285,8 +298,9 @@ class ProxyHandler {
         let namedValue = desc.value;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context: "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
-          globals: globalObject
+          context:
+            "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
+          globals: globalObject,
         });
 
         const creating = !impl[utils.supportsPropertyName](P);

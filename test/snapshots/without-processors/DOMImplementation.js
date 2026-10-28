@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -98,7 +104,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "createDocumentType");
       if (arguments.length < 3) {
         throw new globalObject.TypeError(
-          `Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only ${arguments.length} present.`
+          `Failed to execute 'createDocumentType' on 'DOMImplementation': 3 arguments required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -106,7 +112,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -114,7 +120,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[1];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 2",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -122,7 +128,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[2];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 3",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -133,7 +139,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "createDocument");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
-          `Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only ${arguments.length} present.`
+          `Failed to execute 'createDocument' on 'DOMImplementation': 2 arguments required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -144,7 +150,7 @@ exports.install = (globalObject, globalNames) => {
         } else {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'createDocument' on 'DOMImplementation': parameter 1",
-            globals: globalObject
+            globals: globalObject,
           });
         }
         args.push(curArg);
@@ -154,7 +160,7 @@ exports.install = (globalObject, globalNames) => {
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'createDocument' on 'DOMImplementation': parameter 2",
           globals: globalObject,
-          treatNullAsEmptyString: true
+          treatNullAsEmptyString: true,
         });
         args.push(curArg);
       }
@@ -182,7 +188,7 @@ exports.install = (globalObject, globalNames) => {
         if (curArg !== undefined) {
           curArg = conversions["DOMString"](curArg, {
             context: "Failed to execute 'createHTMLDocument' on 'DOMImplementation': parameter 1",
-            globals: globalObject
+            globals: globalObject,
           });
         }
         args.push(curArg);
@@ -200,14 +206,14 @@ exports.install = (globalObject, globalNames) => {
     createDocument: { enumerable: true },
     createHTMLDocument: { enumerable: true },
     hasFeature: { enumerable: true },
-    [Symbol.toStringTag]: { value: "DOMImplementation", configurable: true }
+    [Symbol.toStringTag]: { value: "DOMImplementation", configurable: true },
   });
   ctorRegistry[interfaceName] = DOMImplementation;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: DOMImplementation
+    value: DOMImplementation,
   });
 };
 

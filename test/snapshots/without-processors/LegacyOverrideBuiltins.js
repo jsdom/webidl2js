@@ -10,10 +10,10 @@ const interfaceName = "LegacyOverrideBuiltins";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -95,7 +95,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -106,14 +106,14 @@ exports.install = (globalObject, globalNames) => {
     }
   }
   Object.defineProperties(LegacyOverrideBuiltins.prototype, {
-    [Symbol.toStringTag]: { value: "LegacyOverrideBuiltins", configurable: true }
+    [Symbol.toStringTag]: { value: "LegacyOverrideBuiltins", configurable: true },
   });
   ctorRegistry[interfaceName] = LegacyOverrideBuiltins;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: LegacyOverrideBuiltins
+    value: LegacyOverrideBuiltins,
   });
 };
 
@@ -180,7 +180,7 @@ class ProxyHandler {
         writable: false,
         enumerable: true,
         configurable: true,
-        value: utils.tryWrapperForImpl(namedValue)
+        value: utils.tryWrapperForImpl(namedValue),
       };
     }
 

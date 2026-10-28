@@ -8,17 +8,25 @@ const HTMLCollection = require("./HTMLCollection.js");
 
 const interfaceName = "HTMLFormControlsCollection";
 
-const $interfaceDescriptor = utils.createInterfaceDescriptor(() => HTMLCollection.interfaceDescriptor);
+const $interfaceDescriptor = utils.createInterfaceDescriptor(
+  () => HTMLCollection.interfaceDescriptor,
+);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -64,7 +72,13 @@ exports._internalSetup = (wrapper, globalObject) => {
   HTMLCollection._internalSetup(wrapper, globalObject);
 };
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -99,7 +113,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -113,7 +127,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "namedItem");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'namedItem' on 'HTMLFormControlsCollection': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'namedItem' on 'HTMLFormControlsCollection': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -121,7 +135,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'namedItem' on 'HTMLFormControlsCollection': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -131,7 +145,11 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(HTMLFormControlsCollection.prototype, {
     namedItem: { enumerable: true },
     [Symbol.toStringTag]: { value: "HTMLFormControlsCollection", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: globalObject.Array.prototype[Symbol.iterator],
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = HTMLFormControlsCollection;
 
@@ -140,15 +158,15 @@ exports.install = (globalObject, globalNames) => {
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, [
       ctorRegistry["HTMLFormControlsCollection"].prototype,
-      ctorRegistry["HTMLCollection"].prototype
+      ctorRegistry["HTMLCollection"].prototype,
     ]),
-    other: new ProxyHandler(globalObject, [])
+    other: new ProxyHandler(globalObject, []),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: HTMLFormControlsCollection
+    value: HTMLFormControlsCollection,
   });
 };
 
@@ -254,7 +272,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
 
@@ -268,7 +286,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -296,7 +314,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }

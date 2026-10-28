@@ -9,13 +9,15 @@ const URLSearchParamsCollection = require("./URLSearchParamsCollection.js");
 
 const interfaceName = "URLSearchParamsCollection2";
 
-const $interfaceDescriptor = utils.createInterfaceDescriptor(() => URLSearchParamsCollection.interfaceDescriptor);
+const $interfaceDescriptor = utils.createInterfaceDescriptor(
+  () => URLSearchParamsCollection.interfaceDescriptor,
+);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -61,7 +63,13 @@ exports._internalSetup = (wrapper, globalObject) => {
   URLSearchParamsCollection._internalSetup(wrapper, globalObject);
 };
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -96,7 +104,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -108,7 +116,11 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(URLSearchParamsCollection2.prototype, {
     [Symbol.toStringTag]: { value: "URLSearchParamsCollection2", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: globalObject.Array.prototype[Symbol.iterator],
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = URLSearchParamsCollection2;
 
@@ -117,15 +129,15 @@ exports.install = (globalObject, globalNames) => {
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, [
       ctorRegistry["URLSearchParamsCollection2"].prototype,
-      ctorRegistry["URLSearchParamsCollection"].prototype
+      ctorRegistry["URLSearchParamsCollection"].prototype,
     ]),
-    other: new ProxyHandler(globalObject, [])
+    other: new ProxyHandler(globalObject, []),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URLSearchParamsCollection2
+    value: URLSearchParamsCollection2,
   });
 };
 
@@ -231,7 +243,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
 
@@ -245,7 +257,7 @@ class ProxyHandler {
           writable: true,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -267,7 +279,10 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = URL.convert(globalObject, namedValue, {
-          context: "Failed to set the '" + P + "' property on 'URLSearchParamsCollection2': The provided value"
+          context:
+            "Failed to set the '" +
+            P +
+            "' property on 'URLSearchParamsCollection2': The provided value",
         });
 
         const creating = !(impl.namedItem(P) !== null);
@@ -290,7 +305,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }
@@ -320,7 +335,10 @@ class ProxyHandler {
       let namedValue = desc.value;
 
       namedValue = URL.convert(globalObject, namedValue, {
-        context: "Failed to set the '" + P + "' property on 'URLSearchParamsCollection2': The provided value"
+        context:
+          "Failed to set the '" +
+          P +
+          "' property on 'URLSearchParamsCollection2': The provided value",
       });
 
       const creating = !(impl.namedItem(P) !== null);

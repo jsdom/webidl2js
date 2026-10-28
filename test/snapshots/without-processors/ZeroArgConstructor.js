@@ -10,10 +10,10 @@ const interfaceName = "ZeroArgConstructor";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -80,7 +80,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -91,14 +91,14 @@ exports.install = (globalObject, globalNames) => {
     }
   }
   Object.defineProperties(ZeroArgConstructor.prototype, {
-    [Symbol.toStringTag]: { value: "ZeroArgConstructor", configurable: true }
+    [Symbol.toStringTag]: { value: "ZeroArgConstructor", configurable: true },
   });
   ctorRegistry[interfaceName] = ZeroArgConstructor;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: ZeroArgConstructor
+    value: ZeroArgConstructor,
   });
 };
 

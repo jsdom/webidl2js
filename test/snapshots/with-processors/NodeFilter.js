@@ -25,7 +25,10 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
     let callResult = Reflect.apply(X, thisArg, [node]);
 
-    callResult = conversions["unsigned short"](callResult, { context: context, globals: globalObject });
+    callResult = conversions["unsigned short"](callResult, {
+      context: context,
+      globals: globalObject,
+    });
 
     return callResult;
   }
@@ -39,7 +42,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -64,12 +67,12 @@ exports.install = (globalObject, globalNames) => {
     SHOW_DOCUMENT: { value: 0x100, enumerable: true },
     SHOW_DOCUMENT_TYPE: { value: 0x200, enumerable: true },
     SHOW_DOCUMENT_FRAGMENT: { value: 0x400, enumerable: true },
-    SHOW_NOTATION: { value: 0x800, enumerable: true }
+    SHOW_NOTATION: { value: 0x800, enumerable: true },
   });
 
   Object.defineProperty(globalObject, "NodeFilter", {
     configurable: true,
     writable: true,
-    value: NodeFilter
+    value: NodeFilter,
   });
 };

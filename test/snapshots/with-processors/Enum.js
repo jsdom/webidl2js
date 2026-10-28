@@ -12,13 +12,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -85,7 +91,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -99,14 +105,14 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "op");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'op' on 'Enum': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'op' on 'Enum': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
       {
         let curArg = arguments[0];
         curArg = RequestDestination.convert(globalObject, curArg, {
-          context: "Failed to execute 'op' on 'Enum': parameter 1"
+          context: "Failed to execute 'op' on 'Enum': parameter 1",
         });
         args.push(curArg);
       }
@@ -132,14 +138,14 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(Enum.prototype, {
     op: { enumerable: true },
     attr: { enumerable: true },
-    [Symbol.toStringTag]: { value: "Enum", configurable: true }
+    [Symbol.toStringTag]: { value: "Enum", configurable: true },
   });
   ctorRegistry[interfaceName] = Enum;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: Enum
+    value: Enum,
   });
 };
 

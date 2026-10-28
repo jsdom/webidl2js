@@ -10,10 +10,10 @@ const interfaceName = "LegacyLenientThisOnly";
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -80,7 +80,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -106,8 +106,9 @@ exports.install = (globalObject, globalNames) => {
       }
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'value' property on 'LegacyLenientThisOnly': The provided value",
-        globals: globalObject
+        context:
+          "Failed to set the 'value' property on 'LegacyLenientThisOnly': The provided value",
+        globals: globalObject,
       });
 
       $impl["value"] = V;
@@ -115,14 +116,14 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(LegacyLenientThisOnly.prototype, {
     value: { enumerable: true },
-    [Symbol.toStringTag]: { value: "LegacyLenientThisOnly", configurable: true }
+    [Symbol.toStringTag]: { value: "LegacyLenientThisOnly", configurable: true },
   });
   ctorRegistry[interfaceName] = LegacyLenientThisOnly;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: LegacyLenientThisOnly
+    value: LegacyLenientThisOnly,
   });
 };
 

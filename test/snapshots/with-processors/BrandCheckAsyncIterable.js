@@ -12,13 +12,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -35,7 +41,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
-    configurable: true
+    configurable: true,
   });
   return iterator;
 };
@@ -96,7 +102,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -114,7 +120,7 @@ exports.install = (globalObject, globalNames) => {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
           context: "Failed to execute 'keys' on 'BrandCheckAsyncIterable': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
       } else {
         args[0] = 0;
@@ -135,7 +141,7 @@ exports.install = (globalObject, globalNames) => {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
           context: "Failed to execute 'values' on 'BrandCheckAsyncIterable': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
       } else {
         args[0] = 0;
@@ -156,7 +162,7 @@ exports.install = (globalObject, globalNames) => {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
           context: "Failed to execute 'entries' on 'BrandCheckAsyncIterable': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
       } else {
         args[0] = 0;
@@ -174,35 +180,44 @@ exports.install = (globalObject, globalNames) => {
     values: { enumerable: true },
     entries: { enumerable: true },
     [Symbol.toStringTag]: { value: "BrandCheckAsyncIterable", configurable: true },
-    [Symbol.asyncIterator]: { value: BrandCheckAsyncIterable.prototype.entries, configurable: true, writable: true }
+    [Symbol.asyncIterator]: {
+      value: BrandCheckAsyncIterable.prototype.entries,
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = BrandCheckAsyncIterable;
 
-  ctorRegistry["BrandCheckAsyncIterable AsyncIterator"] = Object.create(ctorRegistry["%AsyncIteratorPrototype%"], {
-    [Symbol.toStringTag]: {
-      value: "BrandCheckAsyncIterable AsyncIterator",
-      configurable: true
-    }
-  });
+  ctorRegistry["BrandCheckAsyncIterable AsyncIterator"] = Object.create(
+    ctorRegistry["%AsyncIteratorPrototype%"],
+    {
+      [Symbol.toStringTag]: {
+        value: "BrandCheckAsyncIterable AsyncIterator",
+        configurable: true,
+      },
+    },
+  );
   utils.define(ctorRegistry["BrandCheckAsyncIterable AsyncIterator"], {
     next() {
       const internal = this && this[utils.iterInternalSymbol];
       if (!internal) {
         return globalObject.Promise.reject(
           new globalObject.TypeError(
-            "next() called on a value that is not a BrandCheckAsyncIterable async iterator object"
-          )
+            "next() called on a value that is not a BrandCheckAsyncIterable async iterator object",
+          ),
         );
       }
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return globalObject.Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
+          return globalObject.Promise.resolve(
+            newObjectInRealm(globalObject, { value: undefined, done: true }),
+          );
         }
 
         const nextPromise = internal.target[utils.asyncIteratorNext](this);
         return nextPromise.then(
-          next => {
+          (next) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
@@ -210,14 +225,14 @@ exports.install = (globalObject, globalNames) => {
             }
             return newObjectInRealm(
               globalObject,
-              utils.iteratorResult(next.map(utils.tryWrapperForImpl), internal.kind)
+              utils.iteratorResult(next.map(utils.tryWrapperForImpl), internal.kind),
             );
           },
-          reason => {
+          (reason) => {
             internal.ongoingPromise = null;
             internal.isFinished = true;
             throw reason;
-          }
+          },
         );
       };
 
@@ -232,14 +247,16 @@ exports.install = (globalObject, globalNames) => {
       if (!internal) {
         return globalObject.Promise.reject(
           new globalObject.TypeError(
-            "return() called on a value that is not a BrandCheckAsyncIterable async iterator object"
-          )
+            "return() called on a value that is not a BrandCheckAsyncIterable async iterator object",
+          ),
         );
       }
 
       const returnSteps = () => {
         if (internal.isFinished) {
-          return globalObject.Promise.resolve(newObjectInRealm(globalObject, { value, done: true }));
+          return globalObject.Promise.resolve(
+            newObjectInRealm(globalObject, { value, done: true }),
+          );
         }
         internal.isFinished = true;
 
@@ -249,14 +266,16 @@ exports.install = (globalObject, globalNames) => {
       internal.ongoingPromise = internal.ongoingPromise
         ? internal.ongoingPromise.then(returnSteps, returnSteps)
         : returnSteps();
-      return internal.ongoingPromise.then(() => newObjectInRealm(globalObject, { value, done: true }));
-    }
+      return internal.ongoingPromise.then(() =>
+        newObjectInRealm(globalObject, { value, done: true }),
+      );
+    },
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: BrandCheckAsyncIterable
+    value: BrandCheckAsyncIterable,
   });
 };
 

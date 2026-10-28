@@ -2,33 +2,37 @@
   "name": "webidl2js",
   "version": "21.1.0",
   "description": "Auto-generates class structures for WebIDL specifications",
-  "main": "lib/transformer.js",
-  "files": [
-    "lib/"
-  ],
+  "license": "MIT",
+  "author": "Sebastian Mayr <npm@smayr.name>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jsdom/webidl2js.git"
   },
+  "files": [
+    "lib/"
+  ],
+  "main": "lib/transformer.js",
+  "scripts": {
+    "test": "node --test test/*.js",
+    "update-snapshots": "node --test --test-update-snapshots test/*.js",
+    "check": "npm run lint && npm run fmt:check",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check"
+  },
   "dependencies": {
-    "oxfmt": "^0.71.0",
+    "oxfmt": "0.75.0",
     "webidl-conversions": "^8.0.1",
     "webidl2": "^24.5.0"
   },
   "devDependencies": {
-    "@domenic/eslint-config": "^5.1.0",
+    "@domenic/eslint-config": "^6.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "globals": "^17.13.0"
-  },
-  "scripts": {
-    "test": "node --test test/*.js",
-    "update-snapshots": "node --test --test-update-snapshots test/*.js",
-    "lint": "eslint"
   },
   "engines": {
     "node": "^22.14.0 || >=24.0.0"
-  },
-  "author": "Sebastian Mayr <npm@smayr.name>",
-  "license": "MIT"
+  }
 }

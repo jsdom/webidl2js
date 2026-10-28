@@ -22,7 +22,9 @@ exports.implementation = class BrandCheckIterableImpl {
     this.calls.push("next");
     const index = this.positions.get(iterator);
     this.positions.set(iterator, index + 1);
-    return Promise.resolve(index < this.values.length ? this.values[index] : utils.asyncIteratorEOI);
+    return Promise.resolve(
+      index < this.values.length ? this.values[index] : utils.asyncIteratorEOI,
+    );
   }
 
   [utils.asyncIteratorReturn](iterator, value) {
