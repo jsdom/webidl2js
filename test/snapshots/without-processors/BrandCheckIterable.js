@@ -13,13 +13,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -36,7 +42,7 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
   const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, index: 0 },
-    configurable: true
+    configurable: true,
   });
   return iterator;
 };
@@ -97,7 +103,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -126,11 +132,11 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this, globalObject, "forEach");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."
+          "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.",
         );
       }
       callback = Function.convert(globalObject, callback, {
-        context: "Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1"
+        context: "Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1",
       });
       const thisArg = arguments[1];
       let pairs = Array.from($impl);
@@ -149,21 +155,27 @@ exports.install = (globalObject, globalNames) => {
     entries: { enumerable: true },
     forEach: { enumerable: true },
     [Symbol.toStringTag]: { value: "BrandCheckIterable", configurable: true },
-    [Symbol.iterator]: { value: BrandCheckIterable.prototype.entries, configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: BrandCheckIterable.prototype.entries,
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = BrandCheckIterable;
 
   ctorRegistry["BrandCheckIterable Iterator"] = Object.create(ctorRegistry["%IteratorPrototype%"], {
     [Symbol.toStringTag]: {
       configurable: true,
-      value: "BrandCheckIterable Iterator"
-    }
+      value: "BrandCheckIterable Iterator",
+    },
   });
   utils.define(ctorRegistry["BrandCheckIterable Iterator"], {
     next() {
       const internal = this && this[utils.iterInternalSymbol];
       if (!internal) {
-        throw new globalObject.TypeError("next() called on a value that is not a BrandCheckIterable iterator object");
+        throw new globalObject.TypeError(
+          "next() called on a value that is not a BrandCheckIterable iterator object",
+        );
       }
 
       const { target, kind, index } = internal;
@@ -175,14 +187,17 @@ exports.install = (globalObject, globalNames) => {
 
       const pair = values[index];
       internal.index = index + 1;
-      return newObjectInRealm(globalObject, utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind));
-    }
+      return newObjectInRealm(
+        globalObject,
+        utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind),
+      );
+    },
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: BrandCheckIterable
+    value: BrandCheckIterable,
   });
 };
 

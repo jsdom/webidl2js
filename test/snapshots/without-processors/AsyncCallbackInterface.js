@@ -17,14 +17,16 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
       if (typeof O !== "function") {
         X = O["asyncMethod"];
         if (typeof X !== "function") {
-          throw new globalObject.TypeError(`${context} does not correctly implement AsyncCallbackInterface.`);
+          throw new globalObject.TypeError(
+            `${context} does not correctly implement AsyncCallbackInterface.`,
+          );
         }
         thisArg = O;
       }
 
       let callResult = Reflect.apply(X, thisArg, []);
 
-      callResult = new globalObject.Promise(resolve => resolve(callResult));
+      callResult = new globalObject.Promise((resolve) => resolve(callResult));
       return callResult;
     } catch (err) {
       return globalObject.Promise.reject(err);

@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -60,7 +66,7 @@ function getUnforgeables(globalObject) {
         const $impl = $requireImpl(this ?? globalObject, globalObject, "assign");
         if (arguments.length < 1) {
           throw new globalObject.TypeError(
-            `Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only ${arguments.length} present.`
+            `Failed to execute 'assign' on 'LegacyUnforgeable': 1 argument required, but only ${arguments.length} present.`,
           );
         }
         const args = [];
@@ -68,7 +74,7 @@ function getUnforgeables(globalObject) {
           let curArg = arguments[0];
           curArg = conversions["USVString"](curArg, {
             context: "Failed to execute 'assign' on 'LegacyUnforgeable': parameter 1",
-            globals: globalObject
+            globals: globalObject,
           });
           args.push(curArg);
         }
@@ -83,7 +89,7 @@ function getUnforgeables(globalObject) {
 
         V = conversions["USVString"](V, {
           context: "Failed to set the 'href' property on 'LegacyUnforgeable': The provided value",
-          globals: globalObject
+          globals: globalObject,
         });
 
         $impl["href"] = V;
@@ -105,19 +111,20 @@ function getUnforgeables(globalObject) {
         const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
         V = conversions["USVString"](V, {
-          context: "Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value",
-          globals: globalObject
+          context:
+            "Failed to set the 'protocol' property on 'LegacyUnforgeable': The provided value",
+          globals: globalObject,
         });
 
         $impl["protocol"] = V;
-      }
+      },
     });
     Object.defineProperties(unforgeables, {
       assign: { configurable: false, writable: false },
       href: { configurable: false },
       toString: { configurable: false, writable: false },
       origin: { configurable: false },
-      protocol: { configurable: false }
+      protocol: { configurable: false },
     });
     unforgeablesMap.set(globalObject, unforgeables);
   }
@@ -160,7 +167,7 @@ const unforgeablesMap = new WeakMap();
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -171,14 +178,14 @@ exports.install = (globalObject, globalNames) => {
     }
   }
   Object.defineProperties(LegacyUnforgeable.prototype, {
-    [Symbol.toStringTag]: { value: "LegacyUnforgeable", configurable: true }
+    [Symbol.toStringTag]: { value: "LegacyUnforgeable", configurable: true },
   });
   ctorRegistry[interfaceName] = LegacyUnforgeable;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: LegacyUnforgeable
+    value: LegacyUnforgeable,
   });
 };
 

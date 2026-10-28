@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -61,7 +67,13 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
 
 exports._internalSetup = (wrapper, globalObject) => {};
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -96,7 +108,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -130,7 +142,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'attr' property on 'CEReactions': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["attr"] = V;
@@ -150,7 +162,7 @@ exports.install = (globalObject, globalNames) => {
     promiseOperation: { enumerable: true },
     attr: { enumerable: true },
     promiseAttribute: { enumerable: true },
-    [Symbol.toStringTag]: { value: "CEReactions", configurable: true }
+    [Symbol.toStringTag]: { value: "CEReactions", configurable: true },
   });
   ctorRegistry[interfaceName] = CEReactions;
 
@@ -158,13 +170,13 @@ exports.install = (globalObject, globalNames) => {
   // wrappers passed to `setup()` can be proxies, so their handlers must not probe the target's prototype.
   proxyHandlerCache.set(globalObject, {
     ordinary: new ProxyHandler(globalObject, CEReactions.prototype),
-    other: new ProxyHandler(globalObject, null)
+    other: new ProxyHandler(globalObject, null),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: CEReactions
+    value: CEReactions,
   });
 };
 
@@ -247,7 +259,7 @@ class ProxyHandler {
           writable: true,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -270,7 +282,7 @@ class ProxyHandler {
 
         namedValue = conversions["DOMString"](namedValue, {
           context: "Failed to set the '" + P + "' property on 'CEReactions': The provided value",
-          globals: globalObject
+          globals: globalObject,
         });
 
         const creating = !impl[utils.supportsPropertyName](P);
@@ -307,7 +319,7 @@ class ProxyHandler {
 
       namedValue = conversions["DOMString"](namedValue, {
         context: "Failed to set the '" + P + "' property on 'CEReactions': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       const creating = !impl[utils.supportsPropertyName](P);

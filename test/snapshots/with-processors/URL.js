@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window", "Worker"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -93,7 +99,7 @@ exports.install = (globalObject, globalNames) => {
     constructor(url) {
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to construct 'URL': 1 argument required, but only ${arguments.length} present.`
+          `Failed to construct 'URL': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -101,7 +107,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to construct 'URL': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -110,7 +116,7 @@ exports.install = (globalObject, globalNames) => {
         if (curArg !== undefined) {
           curArg = conversions["USVString"](curArg, {
             context: "Failed to construct 'URL': parameter 2",
-            globals: globalObject
+            globals: globalObject,
           });
         }
         args.push(curArg);
@@ -133,7 +139,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'href' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["href"] = V;
@@ -160,7 +166,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'protocol' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["protocol"] = V;
@@ -176,7 +182,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'username' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["username"] = V;
@@ -192,7 +198,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'password' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["password"] = V;
@@ -208,7 +214,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'host' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["host"] = V;
@@ -224,7 +230,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hostname' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["hostname"] = V;
@@ -240,7 +246,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'port' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["port"] = V;
@@ -256,7 +262,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'pathname' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["pathname"] = V;
@@ -272,7 +278,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'search' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["search"] = V;
@@ -295,7 +301,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["USVString"](V, {
         context: "Failed to set the 'hash' property on 'URL': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["hash"] = V;
@@ -316,21 +322,21 @@ exports.install = (globalObject, globalNames) => {
     search: { enumerable: true },
     searchParams: { enumerable: true },
     hash: { enumerable: true },
-    [Symbol.toStringTag]: { value: "URL", configurable: true }
+    [Symbol.toStringTag]: { value: "URL", configurable: true },
   });
   ctorRegistry[interfaceName] = URL;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URL
+    value: URL,
   });
 
   if (globalNames.includes("Window")) {
     Object.defineProperty(globalObject, "webkitURL", {
       configurable: true,
       writable: true,
-      value: URL
+      value: URL,
     });
   }
 };

@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -104,7 +110,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["boolean"](V, {
         context: "Failed to set the 'reflectedBoolean' property on 'Reflect': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["reflectedBoolean"] = V;
@@ -120,7 +126,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectedDOMString' property on 'Reflect': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["reflectedDOMString"] = V;
@@ -136,7 +142,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["long"](V, {
         context: "Failed to set the 'reflectedLong' property on 'Reflect': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["reflectedLong"] = V;
@@ -151,8 +157,9 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUnsignedLong");
 
       V = conversions["unsigned long"](V, {
-        context: "Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value",
-        globals: globalObject
+        context:
+          "Failed to set the 'reflectedUnsignedLong' property on 'Reflect': The provided value",
+        globals: globalObject,
       });
 
       $impl["reflectedUnsignedLong"] = V;
@@ -167,8 +174,9 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set reflectedUSVStringURL");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value",
-        globals: globalObject
+        context:
+          "Failed to set the 'reflectedUSVStringURL' property on 'Reflect': The provided value",
+        globals: globalObject,
       });
 
       $impl["reflectedUSVStringURL"] = V;
@@ -184,7 +192,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'reflectionTest' property on 'Reflect': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["reflectionTest"] = V;
@@ -200,7 +208,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'withUnderscore' property on 'Reflect': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["withUnderscore"] = V;
@@ -214,14 +222,14 @@ exports.install = (globalObject, globalNames) => {
     reflectedUSVStringURL: { enumerable: true },
     reflectionTest: { enumerable: true },
     withUnderscore: { enumerable: true },
-    [Symbol.toStringTag]: { value: "Reflect", configurable: true }
+    [Symbol.toStringTag]: { value: "Reflect", configurable: true },
   });
   ctorRegistry[interfaceName] = Reflect;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: Reflect
+    value: Reflect,
   });
 };
 

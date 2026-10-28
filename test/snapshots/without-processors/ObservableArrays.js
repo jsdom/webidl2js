@@ -12,13 +12,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -54,48 +60,52 @@ exports.createImpl = (globalObject, constructorArgs, privateData) => {
 
 exports._internalSetup = (wrapper, globalObject) => {};
 exports._initializeObservableArrays = (impl, globalObject) => {
-  utils.initObservableArray(impl, globalObject, "names", value => {
+  utils.initObservableArray(impl, globalObject, "names", (value) => {
     value = conversions["DOMString"](value, {
-      context: "Failed to modify the 'names' observable array on 'ObservableArrays': The provided value",
-      globals: globalObject
+      context:
+        "Failed to modify the 'names' observable array on 'ObservableArrays': The provided value",
+      globals: globalObject,
     });
 
     return value;
   });
 
-  utils.initObservableArray(impl, globalObject, "readonlyNames", value => {
+  utils.initObservableArray(impl, globalObject, "readonlyNames", (value) => {
     value = conversions["DOMString"](value, {
-      context: "Failed to modify the 'readonlyNames' observable array on 'ObservableArrays': The provided value",
-      globals: globalObject
+      context:
+        "Failed to modify the 'readonlyNames' observable array on 'ObservableArrays': The provided value",
+      globals: globalObject,
     });
 
     return value;
   });
 
-  utils.initObservableArray(impl, globalObject, "employees", value => {
+  utils.initObservableArray(impl, globalObject, "employees", (value) => {
     if (value === null || value === undefined) {
       value = null;
     } else {
       value = exports.convert(globalObject, value, {
-        context: "Failed to modify the 'employees' observable array on 'ObservableArrays': The provided value"
+        context:
+          "Failed to modify the 'employees' observable array on 'ObservableArrays': The provided value",
       });
     }
     return value;
   });
 
-  utils.initObservableArray(impl, globalObject, "callbacks", value => {
+  utils.initObservableArray(impl, globalObject, "callbacks", (value) => {
     value = VoidFunction.convert(globalObject, value, {
-      context: "Failed to modify the 'callbacks' observable array on 'ObservableArrays': The provided value"
+      context:
+        "Failed to modify the 'callbacks' observable array on 'ObservableArrays': The provided value",
     });
 
     return value;
   });
 
-  utils.initObservableArray(impl, globalObject, "groups", value => {
+  utils.initObservableArray(impl, globalObject, "groups", (value) => {
     if (!utils.isObject(value)) {
       throw new globalObject.TypeError(
         "Failed to modify the 'groups' observable array on 'ObservableArrays': The provided value" +
-          " is not an iterable object."
+          " is not an iterable object.",
       );
     } else {
       const V = [];
@@ -103,8 +113,9 @@ exports._initializeObservableArrays = (impl, globalObject) => {
       for (let nextItem of tmp) {
         nextItem = conversions["DOMString"](nextItem, {
           context:
-            "Failed to modify the 'groups' observable array on 'ObservableArrays': The provided value" + "'s element",
-          globals: globalObject
+            "Failed to modify the 'groups' observable array on 'ObservableArrays': The provided value" +
+            "'s element",
+          globals: globalObject,
         });
 
         V.push(nextItem);
@@ -115,10 +126,11 @@ exports._initializeObservableArrays = (impl, globalObject) => {
     return value;
   });
 
-  utils.initObservableArray(impl, globalObject, "numbers", value => {
+  utils.initObservableArray(impl, globalObject, "numbers", (value) => {
     value = conversions["long"](value, {
-      context: "Failed to modify the 'numbers' observable array on 'ObservableArrays': The provided value",
-      globals: globalObject
+      context:
+        "Failed to modify the 'numbers' observable array on 'ObservableArrays': The provided value",
+      globals: globalObject,
     });
 
     return value;
@@ -157,7 +169,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -177,15 +189,18 @@ exports.install = (globalObject, globalNames) => {
       let value = V;
       if (!utils.isObject(value)) {
         throw new globalObject.TypeError(
-          "Failed to set the 'names' property on 'ObservableArrays': The provided value" + " is not an iterable object."
+          "Failed to set the 'names' property on 'ObservableArrays': The provided value" +
+            " is not an iterable object.",
         );
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
           nextItem = conversions["DOMString"](nextItem, {
-            context: "Failed to set the 'names' property on 'ObservableArrays': The provided value" + "'s element",
-            globals: globalObject
+            context:
+              "Failed to set the 'names' property on 'ObservableArrays': The provided value" +
+              "'s element",
+            globals: globalObject,
           });
 
           V.push(nextItem);
@@ -212,7 +227,7 @@ exports.install = (globalObject, globalNames) => {
       if (!utils.isObject(value)) {
         throw new globalObject.TypeError(
           "Failed to set the 'employees' property on 'ObservableArrays': The provided value" +
-            " is not an iterable object."
+            " is not an iterable object.",
         );
       } else {
         const V = [];
@@ -222,7 +237,9 @@ exports.install = (globalObject, globalNames) => {
             nextItem = null;
           } else {
             nextItem = exports.convert(globalObject, nextItem, {
-              context: "Failed to set the 'employees' property on 'ObservableArrays': The provided value" + "'s element"
+              context:
+                "Failed to set the 'employees' property on 'ObservableArrays': The provided value" +
+                "'s element",
             });
           }
           V.push(nextItem);
@@ -244,14 +261,16 @@ exports.install = (globalObject, globalNames) => {
       if (!utils.isObject(value)) {
         throw new globalObject.TypeError(
           "Failed to set the 'callbacks' property on 'ObservableArrays': The provided value" +
-            " is not an iterable object."
+            " is not an iterable object.",
         );
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
           nextItem = VoidFunction.convert(globalObject, nextItem, {
-            context: "Failed to set the 'callbacks' property on 'ObservableArrays': The provided value" + "'s element"
+            context:
+              "Failed to set the 'callbacks' property on 'ObservableArrays': The provided value" +
+              "'s element",
           });
 
           V.push(nextItem);
@@ -273,7 +292,7 @@ exports.install = (globalObject, globalNames) => {
       if (!utils.isObject(value)) {
         throw new globalObject.TypeError(
           "Failed to set the 'groups' property on 'ObservableArrays': The provided value" +
-            " is not an iterable object."
+            " is not an iterable object.",
         );
       } else {
         const V = [];
@@ -283,7 +302,7 @@ exports.install = (globalObject, globalNames) => {
             throw new globalObject.TypeError(
               "Failed to set the 'groups' property on 'ObservableArrays': The provided value" +
                 "'s element" +
-                " is not an iterable object."
+                " is not an iterable object.",
             );
           } else {
             const V = [];
@@ -294,7 +313,7 @@ exports.install = (globalObject, globalNames) => {
                   "Failed to set the 'groups' property on 'ObservableArrays': The provided value" +
                   "'s element" +
                   "'s element",
-                globals: globalObject
+                globals: globalObject,
               });
 
               V.push(nextItem);
@@ -321,15 +340,17 @@ exports.install = (globalObject, globalNames) => {
       if (!utils.isObject(value)) {
         throw new globalObject.TypeError(
           "Failed to set the 'numbers' property on 'ObservableArrays': The provided value" +
-            " is not an iterable object."
+            " is not an iterable object.",
         );
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
           nextItem = conversions["long"](nextItem, {
-            context: "Failed to set the 'numbers' property on 'ObservableArrays': The provided value" + "'s element",
-            globals: globalObject
+            context:
+              "Failed to set the 'numbers' property on 'ObservableArrays': The provided value" +
+              "'s element",
+            globals: globalObject,
           });
 
           V.push(nextItem);
@@ -347,14 +368,14 @@ exports.install = (globalObject, globalNames) => {
     callbacks: { enumerable: true },
     groups: { enumerable: true },
     numbers: { enumerable: true },
-    [Symbol.toStringTag]: { value: "ObservableArrays", configurable: true }
+    [Symbol.toStringTag]: { value: "ObservableArrays", configurable: true },
   });
   ctorRegistry[interfaceName] = ObservableArrays;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: ObservableArrays
+    value: ObservableArrays,
   });
 };
 

@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -114,7 +120,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'mixedInAttr' property on 'MixedIn': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["mixedInAttr"] = V;
@@ -130,7 +136,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'ifaceMixinAttr' property on 'MixedIn': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["ifaceMixinAttr"] = V;
@@ -143,18 +149,18 @@ exports.install = (globalObject, globalNames) => {
     ifaceMixinAttr: { enumerable: true },
     [Symbol.toStringTag]: { value: "MixedIn", configurable: true },
     mixedInConst: { value: 43, enumerable: true },
-    ifaceMixinConst: { value: 42, enumerable: true }
+    ifaceMixinConst: { value: 42, enumerable: true },
   });
   Object.defineProperties(MixedIn, {
     mixedInConst: { value: 43, enumerable: true },
-    ifaceMixinConst: { value: 42, enumerable: true }
+    ifaceMixinConst: { value: 42, enumerable: true },
   });
   ctorRegistry[interfaceName] = MixedIn;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: MixedIn
+    value: MixedIn,
   });
 };
 

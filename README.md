@@ -44,16 +44,16 @@ class SomeInterface {
       throw new TypeError(
         "Failed to execute 'add' on 'SomeInterface': 2 arguments required, but only " +
           arguments.length +
-          " present."
+          " present.",
       );
     }
 
     const args = [];
     args[0] = conversions["unsigned long"](arguments[0], {
-      context: "Failed to execute 'add' on 'SomeInterface': parameter 1"
+      context: "Failed to execute 'add' on 'SomeInterface': parameter 1",
     });
     args[1] = conversions["unsigned long"](arguments[1], {
-      context: "Failed to execute 'add' on 'SomeInterface': parameter 2"
+      context: "Failed to execute 'add' on 'SomeInterface': parameter 2",
     });
 
     return impl.add(...args);
@@ -62,7 +62,7 @@ class SomeInterface {
 
 Object.defineProperties(SomeInterface.prototype, {
   add: { enumerable: true },
-  [Symbol.toStringTag]: { value: "SomeInterface", configurable: true }
+  [Symbol.toStringTag]: { value: "SomeInterface", configurable: true },
 });
 
 exports.create = (globalObject, constructorArgs = [], privateData = {}) => {
@@ -76,7 +76,7 @@ exports.create = (globalObject, constructorArgs = [], privateData = {}) => {
 
 const $interfaceDescriptor = utils.createInterfaceDescriptor();
 
-exports.is = obj => utils.implForWrapperWithInterface(obj, $interfaceDescriptor) !== null;
+exports.is = (obj) => utils.implForWrapperWithInterface(obj, $interfaceDescriptor) !== null;
 ```
 
 The above is a simplification of the actual generated code, but should give you some idea of what's going on. We bring your attention to a few points:
@@ -91,7 +91,7 @@ The above is a simplification of the actual generated code, but should give you 
 - After performing Web IDL-related processing, webidl2js delegates to the implementation class for the non-boilerplate parts of `add()`. This allows you to focus on writing the interesting parts of the implementation without worrying about types, brand-checking, parameter-processing, etc.
 - webidl2js attempts to generate informative error messages using what it knows.
 
-For more examples, you can check out the `test/` directory (with the generated output being in `test/__snapshots__`). Alternately, you can install [jsdom](https://www.npmjs.com/package/jsdom), [whatwg-url](https://www.npmjs.com/package/whatwg-url), or [domexception](https://www.npmjs.com/package/domexception) from npm and check out their source code. (Note that browsing them on GitHub will not work, as we do not check the generated files into Git, but instead generate them as part of publishing the package to npm.)
+For more examples, you can check out the `test/` directory (with the generated output being in `test/snapshots/`). Alternately, you can install [jsdom](https://www.npmjs.com/package/jsdom) or [whatwg-url](https://www.npmjs.com/package/whatwg-url) from npm and check out their source code. (Note that browsing them on GitHub will not work, as we do not check the generated files into Git, but instead generate them as part of publishing the package to npm.)
 
 ## Wrapper class file generation API
 
@@ -104,7 +104,7 @@ const WebIDL2JS = require("webidl2js");
 const transformer = new WebIDL2JS({ implSuffix: "-impl" });
 
 transformer.addSource("idl", "impls");
-transformer.generate("wrappers").catch(err => {
+transformer.generate("wrappers").catch((err) => {
   console.error(err.stack);
   process.exit(1);
 });
@@ -176,11 +176,11 @@ const transformer = new WebIDL2JS({
     return `
       return ${htmlConstructor}(globalObject, interfaceName);
     `;
-  }
+  },
 });
 
 transformer.addSource("idl", "impls");
-transformer.generate("wrappers").catch(err => {
+transformer.generate("wrappers").catch((err) => {
   console.error(err.stack);
   process.exit(1);
 });
@@ -238,7 +238,7 @@ function processReflect(idl, implName) {
         } else {
           ${implName}.removeAttributeNS(null, "${attrName}");
         }
-      `
+      `,
     };
   }
   throw new Error(`Not-yet-implemented IDL type for reflection: ${idl.idlType.idlType}`);
@@ -408,7 +408,7 @@ Just like static operations, static attributes are defined as properties on the 
 
 ### toString method implementing IDL stringifier
 
-Web IDL allows stringifiers to be either *aliased* to a specific attribute or named operation, or *standalone*. If the interface defines a standalone stringifier, the implementation class should define a string-returning `toString` method implementing the stringification behavior of that interface. The method is not needed if the stringifier is aliased: webidl2js will just call the attribute getter or named operation for stringification.
+Web IDL allows stringifiers to be either _aliased_ to a specific attribute or named operation, or _standalone_. If the interface defines a standalone stringifier, the implementation class should define a string-returning `toString` method implementing the stringification behavior of that interface. The method is not needed if the stringifier is aliased: webidl2js will just call the attribute getter or named operation for stringification.
 
 ```webidl
 stringifier;                                 // `toString()` is needed on the implementation class.
@@ -428,7 +428,7 @@ The first is the getters, (optional) setters, and (optional) deleters operations
 
 The second is the interface's supported property indices/names. By default, the implementation class should implement both a Boolean-returning `utils.supportsPropertyIndex`/`utils.supportsPropertyName` method that takes a single Number or String argument, respectively, and an iterable-returning `utils.supportedPropertyIndices`/`utils.supportedPropertyNames` for each variety of getters the interface exposes.
 
-If the getter function always returns a constant value for unsupported properties, webidl2js also offers a non-standard extended attribute `[WebIDL2JSValueAsUnsupported]` (documented below) that would simply call the getter function to check if a property index/name is supported, so that `supportsPropertyIndex`/`supportsPropertyName` would not need to be implemented separately. However, when using the extended attribute, be very sure that the value specified in the attribute is returned *if and only if* the property is unsupported.
+If the getter function always returns a constant value for unsupported properties, webidl2js also offers a non-standard extended attribute `[WebIDL2JSValueAsUnsupported]` (documented below) that would simply call the getter function to check if a property index/name is supported, so that `supportsPropertyIndex`/`supportsPropertyName` would not need to be implemented separately. However, when using the extended attribute, be very sure that the value specified in the attribute is returned _if and only if_ the property is unsupported.
 
 ### Iterables
 

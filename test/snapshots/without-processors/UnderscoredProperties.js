@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -98,7 +104,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "operation");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'operation' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -106,15 +112,18 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" + " is not an iterable object."
+            "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" +
+              " is not an iterable object.",
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["DOMString"](nextItem, {
-              context: "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" + "'s element",
-              globals: globalObject
+              context:
+                "Failed to execute 'operation' on 'UnderscoredProperties': parameter 1" +
+                "'s element",
+              globals: globalObject,
             });
 
             V.push(nextItem);
@@ -135,8 +144,9 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set attribute");
 
       V = conversions["byte"](V, {
-        context: "Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value",
-        globals: globalObject
+        context:
+          "Failed to set the 'attribute' property on 'UnderscoredProperties': The provided value",
+        globals: globalObject,
       });
 
       $impl["attribute"] = V;
@@ -145,7 +155,7 @@ exports.install = (globalObject, globalNames) => {
     static static(void_) {
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'static' on 'UnderscoredProperties': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -153,7 +163,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'static' on 'UnderscoredProperties': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -164,18 +174,18 @@ exports.install = (globalObject, globalNames) => {
     operation: { enumerable: true },
     attribute: { enumerable: true },
     [Symbol.toStringTag]: { value: "UnderscoredProperties", configurable: true },
-    const: { value: 42, enumerable: true }
+    const: { value: 42, enumerable: true },
   });
   Object.defineProperties(UnderscoredProperties, {
     static: { enumerable: true },
-    const: { value: 42, enumerable: true }
+    const: { value: 42, enumerable: true },
   });
   ctorRegistry[interfaceName] = UnderscoredProperties;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: UnderscoredProperties
+    value: UnderscoredProperties,
   });
 };
 

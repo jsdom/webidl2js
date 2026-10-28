@@ -8,13 +8,15 @@ const HTMLFormControlsCollection = require("./HTMLFormControlsCollection.js");
 
 const interfaceName = "InheritedCollection";
 
-const $interfaceDescriptor = utils.createInterfaceDescriptor(() => HTMLFormControlsCollection.interfaceDescriptor);
+const $interfaceDescriptor = utils.createInterfaceDescriptor(
+  () => HTMLFormControlsCollection.interfaceDescriptor,
+);
 exports.interfaceDescriptor = $interfaceDescriptor;
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -60,7 +62,13 @@ exports._internalSetup = (wrapper, globalObject) => {
   HTMLFormControlsCollection._internalSetup(wrapper, globalObject);
 };
 
-const setup = (wrapper, globalObject, constructorArgs = [], privateData = {}, isOrdinary = false) => {
+const setup = (
+  wrapper,
+  globalObject,
+  constructorArgs = [],
+  privateData = {},
+  isOrdinary = false,
+) => {
   privateData.wrapper = wrapper;
 
   exports._internalSetup(wrapper, globalObject);
@@ -95,7 +103,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -107,7 +115,11 @@ exports.install = (globalObject, globalNames) => {
   }
   Object.defineProperties(InheritedCollection.prototype, {
     [Symbol.toStringTag]: { value: "InheritedCollection", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: globalObject.Array.prototype[Symbol.iterator],
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = InheritedCollection;
 
@@ -117,15 +129,15 @@ exports.install = (globalObject, globalNames) => {
     ordinary: new ProxyHandler(globalObject, [
       ctorRegistry["InheritedCollection"].prototype,
       ctorRegistry["HTMLFormControlsCollection"].prototype,
-      ctorRegistry["HTMLCollection"].prototype
+      ctorRegistry["HTMLCollection"].prototype,
     ]),
-    other: new ProxyHandler(globalObject, [])
+    other: new ProxyHandler(globalObject, []),
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: InheritedCollection
+    value: InheritedCollection,
   });
 };
 
@@ -231,7 +243,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
 
@@ -245,7 +257,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(namedValue)
+          value: utils.tryWrapperForImpl(namedValue),
         };
       }
     }
@@ -273,7 +285,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }

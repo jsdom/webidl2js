@@ -12,13 +12,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -35,7 +41,7 @@ exports.createDefaultAsyncIterator = (globalObject, target, kind) => {
   const iterator = Object.create(asyncIteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, ongoingPromise: null, isFinished: false },
-    configurable: true
+    configurable: true,
   });
   return iterator;
 };
@@ -96,7 +102,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -121,47 +127,59 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(AsyncIterableValueNoArgs.prototype, {
     values: { enumerable: true },
     [Symbol.toStringTag]: { value: "AsyncIterableValueNoArgs", configurable: true },
-    [Symbol.asyncIterator]: { value: AsyncIterableValueNoArgs.prototype.values, configurable: true, writable: true }
+    [Symbol.asyncIterator]: {
+      value: AsyncIterableValueNoArgs.prototype.values,
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = AsyncIterableValueNoArgs;
 
-  ctorRegistry["AsyncIterableValueNoArgs AsyncIterator"] = Object.create(ctorRegistry["%AsyncIteratorPrototype%"], {
-    [Symbol.toStringTag]: {
-      value: "AsyncIterableValueNoArgs AsyncIterator",
-      configurable: true
-    }
-  });
+  ctorRegistry["AsyncIterableValueNoArgs AsyncIterator"] = Object.create(
+    ctorRegistry["%AsyncIteratorPrototype%"],
+    {
+      [Symbol.toStringTag]: {
+        value: "AsyncIterableValueNoArgs AsyncIterator",
+        configurable: true,
+      },
+    },
+  );
   utils.define(ctorRegistry["AsyncIterableValueNoArgs AsyncIterator"], {
     next() {
       const internal = this && this[utils.iterInternalSymbol];
       if (!internal) {
         return globalObject.Promise.reject(
           new globalObject.TypeError(
-            "next() called on a value that is not a AsyncIterableValueNoArgs async iterator object"
-          )
+            "next() called on a value that is not a AsyncIterableValueNoArgs async iterator object",
+          ),
         );
       }
 
       const nextSteps = () => {
         if (internal.isFinished) {
-          return globalObject.Promise.resolve(newObjectInRealm(globalObject, { value: undefined, done: true }));
+          return globalObject.Promise.resolve(
+            newObjectInRealm(globalObject, { value: undefined, done: true }),
+          );
         }
 
         const nextPromise = internal.target[utils.asyncIteratorNext](this);
         return nextPromise.then(
-          next => {
+          (next) => {
             internal.ongoingPromise = null;
             if (next === utils.asyncIteratorEOI) {
               internal.isFinished = true;
               return newObjectInRealm(globalObject, { value: undefined, done: true });
             }
-            return newObjectInRealm(globalObject, { value: utils.tryWrapperForImpl(next), done: false });
+            return newObjectInRealm(globalObject, {
+              value: utils.tryWrapperForImpl(next),
+              done: false,
+            });
           },
-          reason => {
+          (reason) => {
             internal.ongoingPromise = null;
             internal.isFinished = true;
             throw reason;
-          }
+          },
         );
       };
 
@@ -169,13 +187,13 @@ exports.install = (globalObject, globalNames) => {
         ? internal.ongoingPromise.then(nextSteps, nextSteps)
         : nextSteps();
       return internal.ongoingPromise;
-    }
+    },
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: AsyncIterableValueNoArgs
+    value: AsyncIterableValueNoArgs,
   });
 };
 

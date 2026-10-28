@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -84,7 +90,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -109,7 +115,7 @@ exports.install = (globalObject, globalNames) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'abc' property on 'Static': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["abc"] = V;
@@ -126,7 +132,7 @@ exports.install = (globalObject, globalNames) => {
     static set abc(V) {
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'abc' property on 'Static': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       Impl.implementation["abc"] = V;
@@ -135,7 +141,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperties(Static.prototype, {
     def: { enumerable: true },
     abc: { enumerable: true },
-    [Symbol.toStringTag]: { value: "Static", configurable: true }
+    [Symbol.toStringTag]: { value: "Static", configurable: true },
   });
   Object.defineProperties(Static, { def: { enumerable: true }, abc: { enumerable: true } });
   ctorRegistry[interfaceName] = Static;
@@ -143,7 +149,7 @@ exports.install = (globalObject, globalNames) => {
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: Static
+    value: Static,
   });
 };
 

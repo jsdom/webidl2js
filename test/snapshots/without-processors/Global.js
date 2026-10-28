@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -70,7 +76,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'attr' property on 'Global': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["attr"] = V;
@@ -84,7 +90,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'unforgeableAttr' property on 'Global': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["unforgeableAttr"] = V;
@@ -98,7 +104,7 @@ exports._internalSetup = (wrapper, globalObject) => {
 
       V = conversions["unsigned long"](V, {
         context: "Failed to set the 'length' property on 'Global': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       $impl["length"] = V;
@@ -107,13 +113,13 @@ exports._internalSetup = (wrapper, globalObject) => {
     keys: globalObject.Array.prototype.keys,
     values: globalObject.Array.prototype.values,
     entries: globalObject.Array.prototype.entries,
-    forEach: globalObject.Array.prototype.forEach
+    forEach: globalObject.Array.prototype.forEach,
   });
 
   Object.defineProperties(wrapper, {
     unforgeableOp: { configurable: false, writable: false },
     unforgeableAttr: { configurable: false },
-    [Symbol.iterator]: { enumerable: false }
+    [Symbol.iterator]: { enumerable: false },
   });
 };
 
@@ -148,7 +154,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Global"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -169,20 +175,25 @@ exports.install = (globalObject, globalNames) => {
     static set staticAttr(V) {
       V = conversions["DOMString"](V, {
         context: "Failed to set the 'staticAttr' property on 'Global': The provided value",
-        globals: globalObject
+        globals: globalObject,
       });
 
       Impl.implementation["staticAttr"] = V;
     }
   }
-  Object.defineProperties(Global.prototype, { [Symbol.toStringTag]: { value: "Global", configurable: true } });
-  Object.defineProperties(Global, { staticOp: { enumerable: true }, staticAttr: { enumerable: true } });
+  Object.defineProperties(Global.prototype, {
+    [Symbol.toStringTag]: { value: "Global", configurable: true },
+  });
+  Object.defineProperties(Global, {
+    staticOp: { enumerable: true },
+    staticAttr: { enumerable: true },
+  });
   ctorRegistry[interfaceName] = Global;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: Global
+    value: Global,
   });
 };
 

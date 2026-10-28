@@ -12,7 +12,7 @@ module.exports.boolean = {
         ${implObj}.removeAttributeNS(null, "${attrName}");
       }
     `;
-  }
+  },
 };
 
 module.exports.DOMString = {
@@ -24,7 +24,7 @@ module.exports.DOMString = {
   },
   set(implObj, attrName) {
     return `${implObj}.setAttributeNS(null, "${attrName}", V);`;
-  }
+  },
 };
 
 module.exports.USVString = {
@@ -36,7 +36,7 @@ module.exports.USVString = {
   },
   set(implObj, attrName) {
     return `${implObj}.setAttributeNS(null, "${attrName}", V);`;
-  }
+  },
 };
 
 module.exports.long = {
@@ -48,7 +48,7 @@ module.exports.long = {
   },
   set(implObj, attrName) {
     return `${implObj}.setAttributeNS(null, "${attrName}", String(V));`;
-  }
+  },
 };
 
 module.exports["unsigned long"] = {
@@ -60,5 +60,5 @@ module.exports["unsigned long"] = {
   },
   set(implObj, attrName) {
     return `${implObj}.setAttributeNS(null, "${attrName}", String(V > 2147483647 ? 0 : V));`;
-  }
+  },
 };

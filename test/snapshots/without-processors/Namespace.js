@@ -7,7 +7,7 @@ const namespaceName = "Namespace";
 const exposed = new Set(["Window", "Worker"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -17,7 +17,7 @@ exports.install = (globalObject, globalNames) => {
     configure(value) {
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'configure' on 'Namespace': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'configure' on 'Namespace': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -25,7 +25,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
           context: "Failed to execute 'configure' on 'Namespace': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -34,7 +34,7 @@ exports.install = (globalObject, globalNames) => {
     overloaded(value) {
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'overloaded' on 'Namespace': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'overloaded' on 'Namespace': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -45,7 +45,7 @@ exports.install = (globalObject, globalNames) => {
             let curArg = arguments[0];
             curArg = conversions["unsigned long"](curArg, {
               context: "Failed to execute 'overloaded' on 'Namespace': parameter 1",
-              globals: globalObject
+              globals: globalObject,
             });
             args.push(curArg);
           }
@@ -54,7 +54,7 @@ exports.install = (globalObject, globalNames) => {
             let curArg = arguments[0];
             curArg = conversions["DOMString"](curArg, {
               context: "Failed to execute 'overloaded' on 'Namespace': parameter 1",
-              globals: globalObject
+              globals: globalObject,
             });
             args.push(curArg);
           }
@@ -72,18 +72,18 @@ exports.install = (globalObject, globalNames) => {
       return utils.getSameObject(namespaceObject, "staticObject", () => {
         return utils.tryWrapperForImpl(Impl.implementation["staticObject"]);
       });
-    }
+    },
   });
 
   Object.defineProperties(namespaceObject, {
     [Symbol.toStringTag]: { value: "Namespace", configurable: true },
-    VALUE: { value: 7, enumerable: true }
+    VALUE: { value: 7, enumerable: true },
   });
 
   Object.defineProperty(globalObject, namespaceName, {
     configurable: true,
     writable: true,
-    value: namespaceObject
+    value: namespaceObject,
   });
 };
 

@@ -11,13 +11,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -99,7 +105,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -113,7 +119,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "item");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'item' on 'URLList': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'item' on 'URLList': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -121,7 +127,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["unsigned long"](curArg, {
           context: "Failed to execute 'item' on 'URLList': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -137,18 +143,42 @@ exports.install = (globalObject, globalNames) => {
     item: { enumerable: true },
     length: { enumerable: true },
     [Symbol.toStringTag]: { value: "URLList", configurable: true },
-    [Symbol.iterator]: { value: globalObject.Array.prototype[Symbol.iterator], configurable: true, writable: true },
-    keys: { value: globalObject.Array.prototype.keys, configurable: true, enumerable: true, writable: true },
-    values: { value: globalObject.Array.prototype.values, configurable: true, enumerable: true, writable: true },
-    entries: { value: globalObject.Array.prototype.entries, configurable: true, enumerable: true, writable: true },
-    forEach: { value: globalObject.Array.prototype.forEach, configurable: true, enumerable: true, writable: true }
+    [Symbol.iterator]: {
+      value: globalObject.Array.prototype[Symbol.iterator],
+      configurable: true,
+      writable: true,
+    },
+    keys: {
+      value: globalObject.Array.prototype.keys,
+      configurable: true,
+      enumerable: true,
+      writable: true,
+    },
+    values: {
+      value: globalObject.Array.prototype.values,
+      configurable: true,
+      enumerable: true,
+      writable: true,
+    },
+    entries: {
+      value: globalObject.Array.prototype.entries,
+      configurable: true,
+      enumerable: true,
+      writable: true,
+    },
+    forEach: {
+      value: globalObject.Array.prototype.forEach,
+      configurable: true,
+      enumerable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = URLList;
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URLList
+    value: URLList,
   });
 };
 
@@ -220,7 +250,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }
@@ -249,7 +279,7 @@ class ProxyHandler {
           writable: false,
           enumerable: true,
           configurable: true,
-          value: utils.tryWrapperForImpl(indexedValue)
+          value: utils.tryWrapperForImpl(indexedValue),
         };
       }
     }

@@ -7,7 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
 
-snapshot.setDefaultSnapshotSerializers([value => value]);
+snapshot.setDefaultSnapshotSerializers([(value) => value]);
 const Transformer = require("..");
 const reflector = require("./reflector");
 
@@ -38,18 +38,21 @@ describe("generation", () => {
       return transformer.generate(outputDir);
     });
 
-    test("Function", t => {
+    test("Function", (t) => {
       const outputFile = path.resolve(outputDir, "Function.js");
       const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
       t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "built-in-types", "Function.js"));
     });
 
-    test("VoidFunction", t => {
+    test("VoidFunction", (t) => {
       const outputFile = path.resolve(outputDir, "VoidFunction.js");
       const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-      t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "built-in-types", "VoidFunction.js"));
+      t.assert.fileSnapshot(
+        output,
+        path.resolve(snapshotsDir, "built-in-types", "VoidFunction.js"),
+      );
     });
   });
 
@@ -62,12 +65,15 @@ describe("generation", () => {
     });
 
     for (const idlFile of idlFiles) {
-      test(idlFile, t => {
+      test(idlFile, (t) => {
         const basename = path.basename(idlFile, ".webidl");
         const outputFile = path.resolve(outputDir, `${basename}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-        t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "without-processors", `${basename}.js`));
+        t.assert.fileSnapshot(
+          output,
+          path.resolve(snapshotsDir, "without-processors", `${basename}.js`),
+        );
       });
     }
 
@@ -76,7 +82,10 @@ describe("generation", () => {
       const globalObject = vm.runInNewContext("globalThis");
       generated.install(globalObject, ["Window"]);
       const wrapper = generated.create(globalObject);
-      const { get, set } = Object.getOwnPropertyDescriptor(globalObject.LegacyLenientThisOnly.prototype, "value");
+      const { get, set } = Object.getOwnPropertyDescriptor(
+        globalObject.LegacyLenientThisOnly.prototype,
+        "value",
+      );
 
       assert.strictEqual(get.call(wrapper), "initial");
       set.call(wrapper, 42);
@@ -103,9 +112,18 @@ describe("generation", () => {
 
       test("uses stable, attribute-specific symbols", () => {
         assert.strictEqual(utils.observableArraySet("names"), utils.observableArraySet("names"));
-        assert.strictEqual(utils.observableArrayDelete("names"), utils.observableArrayDelete("names"));
-        assert.notStrictEqual(utils.observableArraySet("names"), utils.observableArraySet("employees"));
-        assert.notStrictEqual(utils.observableArraySet("names"), utils.observableArrayDelete("names"));
+        assert.strictEqual(
+          utils.observableArrayDelete("names"),
+          utils.observableArrayDelete("names"),
+        );
+        assert.notStrictEqual(
+          utils.observableArraySet("names"),
+          utils.observableArraySet("employees"),
+        );
+        assert.notStrictEqual(
+          utils.observableArraySet("names"),
+          utils.observableArrayDelete("names"),
+        );
       });
 
       test("preserves the proxy and backing list across assignment and self-assignment", () => {
@@ -144,23 +162,26 @@ describe("generation", () => {
           ["set", "2", 0, ["1"]],
           ["set", "three", 1, ["2"]],
           ["delete", "three", 1, ["2", "three"]],
-          ["delete", "2", 0, ["2"]]
+          ["delete", "2", 0, ["2"]],
         ]);
       });
 
       test("converts the complete assignment before running hooks or changing the list", () => {
         impl.names.push("original");
         const marker = new Error("conversion failed");
-        assert.throws(() => {
-          wrapper.names = [
-            "first",
-            {
-              toString() {
-                throw marker;
-              }
-            }
-          ];
-        }, error => error === marker);
+        assert.throws(
+          () => {
+            wrapper.names = [
+              "first",
+              {
+                toString() {
+                  throw marker;
+                },
+              },
+            ];
+          },
+          (error) => error === marker,
+        );
         assert.deepStrictEqual(impl.names, ["original"]);
         assert.deepStrictEqual(impl.events, []);
 
@@ -170,19 +191,22 @@ describe("generation", () => {
             toString() {
               ++conversions;
               return "new";
-            }
-          }
+            },
+          },
         ];
         assert.strictEqual(conversions, 1);
         assert.deepStrictEqual(impl.events, [
           ["delete", "original", 0, ["original"]],
-          ["set", "new", 0, []]
+          ["set", "new", 0, []],
         ]);
         const instance = wrapper;
         for (const value of [null, undefined, "string", 1, {}]) {
-          assert.throws(() => {
-            instance.names = value;
-          }, { name: "TypeError" });
+          assert.throws(
+            () => {
+              instance.names = value;
+            },
+            { name: "TypeError" },
+          );
           assert.deepStrictEqual(impl.names, ["new"]);
         }
       });
@@ -195,29 +219,38 @@ describe("generation", () => {
             throw marker;
           }
         };
-        assert.throws(() => {
-          wrapper.names.length = 0;
-        }, error => error === marker);
+        assert.throws(
+          () => {
+            wrapper.names.length = 0;
+          },
+          (error) => error === marker,
+        );
         assert.deepStrictEqual(impl.names, ["one", "two"]);
 
         impl.onDelete = undefined;
-        impl.onSet = value => {
+        impl.onSet = (value) => {
           if (value === "bad") {
             throw marker;
           }
         };
-        assert.throws(() => {
-          wrapper.names = ["good", "bad", "later"];
-        }, error => error === marker);
+        assert.throws(
+          () => {
+            wrapper.names = ["good", "bad", "later"];
+          },
+          (error) => error === marker,
+        );
         assert.deepStrictEqual(impl.names, ["good"]);
         impl.events.length = 0;
-        assert.throws(() => {
-          wrapper.names[0] = "bad";
-        }, error => error === marker);
+        assert.throws(
+          () => {
+            wrapper.names[0] = "bad";
+          },
+          (error) => error === marker,
+        );
         assert.deepStrictEqual(impl.names, ["good"]);
         assert.deepStrictEqual(impl.events, [
           ["delete", "good", 0, ["good"]],
-          ["set", "bad", 0, ["good"]]
+          ["set", "bad", 0, ["good"]],
         ]);
       });
 
@@ -228,7 +261,10 @@ describe("generation", () => {
         assert.deepStrictEqual(impl.employees, [employeeImpl, null]);
         assert.deepStrictEqual([...wrapper.employees], [employee, null]);
         assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper.employees, "0").value, employee);
-        assert.deepStrictEqual(impl.events, [["employee set", employeeImpl, 0], ["employee set", null, 1]]);
+        assert.deepStrictEqual(impl.events, [
+          ["employee set", employeeImpl, 0],
+          ["employee set", null, 1],
+        ]);
 
         wrapper.employees = [employee];
         assert.deepStrictEqual(impl.employees, [employeeImpl]);
@@ -284,7 +320,7 @@ describe("generation", () => {
         assert.deepStrictEqual([...array.splice(0, 1, "x", "y")], ["b"]);
         array.reverse();
         assert.deepStrictEqual([...array], ["c", "y", "x"]);
-        assert.deepStrictEqual([...array.map(value => value.toUpperCase())], ["C", "Y", "X"]);
+        assert.deepStrictEqual([...array.map((value) => value.toUpperCase())], ["C", "Y", "X"]);
         assert.deepStrictEqual([].concat(array), ["c", "y", "x"]);
         assert.strictEqual(JSON.stringify(array), '["c","y","x"]');
       });
@@ -320,7 +356,7 @@ describe("generation", () => {
           valueOf() {
             ++calls;
             return 0;
-          }
+          },
         };
         assert.strictEqual(calls, 2);
         assert.deepStrictEqual(impl.names, []);
@@ -334,12 +370,26 @@ describe("generation", () => {
         array["01"] = "ordinary";
         array[2 ** 32 - 1] = "also ordinary";
         array[symbol] = 2;
-        assert.deepStrictEqual(Reflect.ownKeys(array), ["0", "1", "length", "extra", "01", "4294967295", symbol]);
+        assert.deepStrictEqual(Reflect.ownKeys(array), [
+          "0",
+          "1",
+          "length",
+          "extra",
+          "01",
+          "4294967295",
+          symbol,
+        ]);
         assert.deepStrictEqual(Object.getOwnPropertyDescriptor(array, "length"), {
-          value: 2, writable: true, enumerable: false, configurable: false
+          value: 2,
+          writable: true,
+          enumerable: false,
+          configurable: false,
         });
         assert.deepStrictEqual(Object.getOwnPropertyDescriptor(array, "0"), {
-          value: "one", writable: true, enumerable: true, configurable: true
+          value: "one",
+          writable: true,
+          enumerable: true,
+          configurable: true,
         });
         assert.strictEqual(Object.getOwnPropertyDescriptor(array, "2"), undefined);
         assert.strictEqual("1" in array, true);
@@ -367,11 +417,16 @@ describe("generation", () => {
           { set() {} },
           { writable: false },
           { enumerable: false },
-          { configurable: false }
+          { configurable: false },
         ]) {
           assert.strictEqual(Reflect.defineProperty(array, "0", descriptor), false);
         }
-        for (const descriptor of [{ get() {} }, { writable: false }, { enumerable: true }, { configurable: true }]) {
+        for (const descriptor of [
+          { get() {} },
+          { writable: false },
+          { enumerable: true },
+          { configurable: true },
+        ]) {
           assert.strictEqual(Reflect.defineProperty(array, "length", descriptor), false);
         }
         assert.strictEqual(Reflect.defineProperty(array, "0", { value: 42 }), true);
@@ -392,7 +447,10 @@ describe("generation", () => {
         const otherGlobal = vm.runInNewContext("globalThis");
         generated.install(otherGlobal, ["Window"]);
         const other = generated.create(otherGlobal);
-        const { get, set } = Object.getOwnPropertyDescriptor(globalObject.ObservableArrays.prototype, "names");
+        const { get, set } = Object.getOwnPropertyDescriptor(
+          globalObject.ObservableArrays.prototype,
+          "names",
+        );
         const array = get.call(other);
         assert.strictEqual(Object.getPrototypeOf(array), otherGlobal.Array.prototype);
         assert.strictEqual(array, other.names);
@@ -443,14 +501,19 @@ describe("generation", () => {
             callbacks: [],
             groups: [],
             numbers: [],
-            events: []
+            events: [],
           });
           const instances = [
             module.create(globalObject),
             utils.wrapperForImpl(module.createImpl(globalObject)),
             utils.wrapperForImpl(createdImpl),
-            module.setup(Object.create(globalObject[module === child ? "ObservableArraysChild" : "ObservableArrays"]
-              .prototype), globalObject)
+            module.setup(
+              Object.create(
+                globalObject[module === child ? "ObservableArraysChild" : "ObservableArrays"]
+                  .prototype,
+              ),
+              globalObject,
+            ),
           ];
           for (const instance of instances) {
             instance.names.push("one");
@@ -471,13 +534,16 @@ describe("generation", () => {
         ["dictionary elements", "attribute ObservableArray<EmployeeRecord> names;"],
         ["sequence elements", "attribute ObservableArray<sequence<DOMString>> names;"],
         ["record elements", "attribute ObservableArray<record<DOMString, long>> names;"],
-        ["observable array elements", "attribute ObservableArray<ObservableArray<DOMString>> names;"],
+        [
+          "observable array elements",
+          "attribute ObservableArray<ObservableArray<DOMString>> names;",
+        ],
         ["return values", "ObservableArray<DOMString> names();"],
         ["arguments", "undefined names(ObservableArray<DOMString> values);"],
         ["nested arrays", "attribute sequence<ObservableArray<DOMString>> names;"],
         ["unions", "attribute (ObservableArray<DOMString> or DOMString) names;"],
         ["typedef arguments", "undefined names(Names values);"],
-        ["typedef dictionary elements", "attribute ObservableArray<RecordAlias> names;"]
+        ["typedef dictionary elements", "attribute ObservableArray<RecordAlias> names;"],
       ];
 
       for (const [name, member] of declarations) {
@@ -485,15 +551,18 @@ describe("generation", () => {
           const directory = fs.mkdtempSync(path.join(outputDir, "invalid-observable-array-"));
           try {
             const idlPath = path.join(directory, "Invalid.webidl");
-            fs.writeFileSync(idlPath, `
+            fs.writeFileSync(
+              idlPath,
+              `
               dictionary EmployeeRecord {};
               typedef EmployeeRecord RecordAlias;
               typedef ObservableArray<DOMString> Names;
               [Exposed=Window] interface Invalid { ${member} };
-            `);
+            `,
+            );
             const transformer = new Transformer();
             transformer.addSource(idlPath, implsDir);
-            await assert.rejects(transformer.generate(directory), /ObservableArray/);
+            await assert.rejects(transformer.generate(directory), /ObservableArray/u);
           } finally {
             fs.rmSync(directory, { recursive: true });
           }
@@ -504,8 +573,8 @@ describe("generation", () => {
         ["dictionary members", "dictionary Invalid { ObservableArray<DOMString> names; };"],
         [
           "namespace attributes",
-          "[Exposed=Window] namespace Invalid { readonly attribute ObservableArray<long> names; };"
-        ]
+          "[Exposed=Window] namespace Invalid { readonly attribute ObservableArray<long> names; };",
+        ],
       ]) {
         test(name, async () => {
           const directory = fs.mkdtempSync(path.join(outputDir, "invalid-observable-array-"));
@@ -514,7 +583,7 @@ describe("generation", () => {
             fs.writeFileSync(idlPath, declaration);
             const transformer = new Transformer();
             transformer.addSource(idlPath, implsDir);
-            await assert.rejects(transformer.generate(directory), /ObservableArray/);
+            await assert.rejects(transformer.generate(directory), /ObservableArray/u);
           } finally {
             fs.rmSync(directory, { recursive: true });
           }
@@ -523,8 +592,14 @@ describe("generation", () => {
     });
 
     describe("platform object brand checks", () => {
-      let BrandCheck, BrandCheckParent, BrandCheckGrandchild, BrandCheckSibling, utils,
-        globalObject, wrapper, impl;
+      let BrandCheck,
+        BrandCheckParent,
+        BrandCheckGrandchild,
+        BrandCheckSibling,
+        utils,
+        globalObject,
+        wrapper,
+        impl;
 
       function install(global) {
         BrandCheckParent.install(global, ["Window"]);
@@ -588,7 +663,11 @@ describe("generation", () => {
           ++trapCalls;
           throw new Error("unexpected proxy trap");
         }
-        const proxy = new Proxy(wrapper, { get: trap, getOwnPropertyDescriptor: trap, getPrototypeOf: trap });
+        const proxy = new Proxy(wrapper, {
+          get: trap,
+          getOwnPropertyDescriptor: trap,
+          getPrototypeOf: trap,
+        });
         const parentPrototype = globalObject.BrandCheckParent.prototype;
         const valueDescriptor = Object.getOwnPropertyDescriptor(parentPrototype, "value");
         assert.strictEqual(BrandCheck.is(proxy), false);
@@ -618,7 +697,7 @@ describe("generation", () => {
           0,
           1n,
           "",
-          Symbol("value")
+          Symbol("value"),
         ];
         const { childMethod } = wrapper;
         for (const value of invalid) {
@@ -634,13 +713,13 @@ describe("generation", () => {
           ["BrandCheck", "childMethod", () => wrapper.childMethod.call({})],
           ["BrandCheckParent", "get value", () => valueDescriptor.get.call({})],
           ["BrandCheckParent", "set value", () => valueDescriptor.set.call({}, "value")],
-          ["BrandCheckParent", "toString", () => parentPrototype.toString.call({})]
+          ["BrandCheckParent", "toString", () => parentPrototype.toString.call({})],
         ];
 
         for (const [interfaceName, context, invoke] of cases) {
           assert.throws(invoke, {
             constructor: globalObject.TypeError,
-            message: `'${context}' called on an object that is not a valid instance of ${interfaceName}.`
+            message: `'${context}' called on an object that is not a valid instance of ${interfaceName}.`,
           });
         }
       });
@@ -665,7 +744,10 @@ describe("generation", () => {
         const customWrapper = Object.create(globalObject.BrandCheck.prototype);
         assert.strictEqual(BrandCheck.setup(customWrapper, globalObject), customWrapper);
         assert.strictEqual(BrandCheck.is(customWrapper), true);
-        assert.strictEqual(utils.wrapperForImpl(utils.implForWrapper(customWrapper)), customWrapper);
+        assert.strictEqual(
+          utils.wrapperForImpl(utils.implForWrapper(customWrapper)),
+          customWrapper,
+        );
 
         for (const newImpl of [BrandCheck.new(globalObject), BrandCheck.createImpl(globalObject)]) {
           const newWrapper = utils.wrapperForImpl(newImpl);
@@ -689,8 +771,11 @@ describe("generation", () => {
     for (const entry of ["CircularParent", "CircularChild"]) {
       test(`circular inheritance imports with ${entry} loaded first`, () => {
         // Each subprocess has a fresh CommonJS cache, so both dependency orders are exercised.
-        execFileSync(process.execPath, [
-          "-e", `
+        execFileSync(
+          process.execPath,
+          [
+            "-e",
+            `
           const assert = require("node:assert/strict");
           const vm = require("node:vm");
           require("./${entry}.js");
@@ -707,8 +792,10 @@ describe("generation", () => {
           assert.equal(Child.is(parent), false);
           parent.accept(child);
           assert.equal(utils.implForWrapper(parent).child, utils.implForWrapper(child));
-        `
-        ], { cwd: outputDir, stdio: "pipe" });
+        `,
+          ],
+          { cwd: outputDir, stdio: "pipe" },
+        );
       });
     }
 
@@ -749,7 +836,11 @@ describe("generation", () => {
             values.push(["third", utils.implForWrapper(value)]);
           }
         }, thisArg);
-        assert.deepStrictEqual(calls, [["first", value], ["second", value], ["third", value]]);
+        assert.deepStrictEqual(calls, [
+          ["first", value],
+          ["second", value],
+          ["third", value],
+        ]);
       });
 
       for (const name of ["BrandCheckIterable", "BrandCheckAsyncIterable"]) {
@@ -757,7 +848,12 @@ describe("generation", () => {
           const { globalObject, wrapper } = createIterable(name, []);
           const revocable = Proxy.revocable(wrapper, {});
           revocable.revoke();
-          for (const receiver of [{}, Object.create(wrapper), new Proxy(wrapper, {}), revocable.proxy]) {
+          for (const receiver of [
+            {},
+            Object.create(wrapper),
+            new Proxy(wrapper, {}),
+            revocable.proxy,
+          ]) {
             assert.throws(() => wrapper.entries.call(receiver), globalObject.TypeError);
           }
         });
@@ -770,10 +866,17 @@ describe("generation", () => {
         require(path.resolve(outputDir, "BrandCheckParent.js")).install(globalObject, ["Window"]);
         BrandCheck.install(globalObject, ["Window"]);
         const value = new globalObject.BrandCheck();
-        impl.values.push(["first", utils.implForWrapper(value)], ["second", utils.implForWrapper(value)]);
+        impl.values.push(
+          ["first", utils.implForWrapper(value)],
+          ["second", utils.implForWrapper(value)],
+        );
         const iterator = wrapper.entries("1");
         assert.strictEqual(impl.offset, 1);
-        const [first, second, returned] = await Promise.all([iterator.next(), iterator.next(), iterator.return("end")]);
+        const [first, second, returned] = await Promise.all([
+          iterator.next(),
+          iterator.next(),
+          iterator.return("end"),
+        ]);
         assert.deepStrictEqual(first.value, ["first", value]);
         assert.deepStrictEqual(second.value, ["second", value]);
         assert.strictEqual(returned.done, true);
@@ -794,7 +897,10 @@ describe("generation", () => {
       });
 
       test("async value iterators unwrap their stored implementation and finish at end of iteration", async () => {
-        const { wrapper, impl } = createIterable("BrandCheckAsyncValueIterable", ["first", "second"]);
+        const { wrapper, impl } = createIterable("BrandCheckAsyncValueIterable", [
+          "first",
+          "second",
+        ]);
         const values = [];
         for await (const value of wrapper) {
           values.push(value);
@@ -836,12 +942,14 @@ describe("generation", () => {
         assert.strictEqual(item.call(second.wrapper, 1), "second");
 
         for (const receiver of [null, {}, Object.create(second.wrapper)]) {
-          assert.throws(() => item.call(receiver, 0), /not a valid instance of HTMLCollection/);
+          assert.throws(() => item.call(receiver, 0), /not a valid instance of HTMLCollection/u);
         }
       });
 
       test("indexed properties and ordinary fallbacks", () => {
-        const { globalObject, wrapper } = createLegacyPlatformObject("URLList", { values: ["zero"] });
+        const { globalObject, wrapper } = createLegacyPlatformObject("URLList", {
+          values: ["zero"],
+        });
 
         assert.strictEqual(wrapper[0], "zero");
         assert.strictEqual(wrapper[1], undefined);
@@ -850,7 +958,7 @@ describe("generation", () => {
           configurable: true,
           get() {
             return this;
-          }
+          },
         });
         const derived = Object.create(wrapper);
         assert.strictEqual(derived.receiver, derived);
@@ -859,7 +967,7 @@ describe("generation", () => {
           configurable: true,
           get() {
             return this;
-          }
+          },
         });
         assert.strictEqual(wrapper.ownAccessor, wrapper);
 
@@ -875,11 +983,11 @@ describe("generation", () => {
         const named = {
           1: "named numeric property",
           item: "named prototype property",
-          person: "named property"
+          person: "named property",
         };
         const { implementation, wrapper } = createLegacyPlatformObject("HTMLCollection", {
           indexed: ["indexed property"],
-          named
+          named,
         });
 
         implementation.indexedCalls.length = 0;
@@ -901,10 +1009,12 @@ describe("generation", () => {
         assert.strictEqual(typeof wrapper.item, "function");
 
         const ownNamed = {};
-        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject("HTMLCollection", { named: ownNamed });
+        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject("HTMLCollection", {
+          named: ownNamed,
+        });
         Object.defineProperty(wrapperWithOwnProperty, "person", {
           configurable: true,
-          value: "own property"
+          value: "own property",
         });
         ownNamed.person = "named property";
         assert.strictEqual(wrapperWithOwnProperty.person, "own property");
@@ -913,7 +1023,7 @@ describe("generation", () => {
       test("skips named lookup for ordinary prototype properties", () => {
         const { wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
           indexed: ["first", "second"],
-          named: { length: "named length", item: "named item" }
+          named: { length: "named length", item: "named item" },
         });
         for (let i = 0; i < 100; ++i) {
           assert.strictEqual(wrapper.length, 2);
@@ -929,13 +1039,15 @@ describe("generation", () => {
 
       describe("inherited prototype properties", () => {
         function createCollection(privateData = {}) {
-          return createLegacyPlatformObject("HTMLFormControlsCollection", privateData, ["HTMLCollection"]);
+          return createLegacyPlatformObject("HTMLFormControlsCollection", privateData, [
+            "HTMLCollection",
+          ]);
         }
 
         test("skips named lookups for inherited members during iteration", () => {
           const { wrapper, implementation } = createCollection({
             indexed: ["first", "second"],
-            named: { length: "named length", item: "named item" }
+            named: { length: "named length", item: "named item" },
           });
           assert.strictEqual(wrapper.length, 2);
           assert.strictEqual(typeof wrapper.item, "function");
@@ -948,9 +1060,13 @@ describe("generation", () => {
         });
 
         test("checks more than one ordinary ancestor", () => {
-          const { wrapper, implementation } = createLegacyPlatformObject("InheritedCollection", {
-            indexed: ["first", "second"]
-          }, ["HTMLCollection", "HTMLFormControlsCollection"]);
+          const { wrapper, implementation } = createLegacyPlatformObject(
+            "InheritedCollection",
+            {
+              indexed: ["first", "second"],
+            },
+            ["HTMLCollection", "HTMLFormControlsCollection"],
+          );
           assert.deepStrictEqual(Array.from(wrapper), ["first", "second"]);
           assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
           assert.deepStrictEqual(implementation.namedCalls, []);
@@ -958,7 +1074,7 @@ describe("generation", () => {
 
         test("reflects ancestor property changes without invoking accessors early", () => {
           const { globalObject, wrapper, implementation } = createCollection({
-            named: { length: "named length", custom: "named custom" }
+            named: { length: "named length", custom: "named custom" },
           });
           const { prototype } = globalObject.HTMLCollection;
           delete prototype.length;
@@ -969,7 +1085,7 @@ describe("generation", () => {
             get() {
               ++getterCalls;
               return this;
-            }
+            },
           });
           implementation.namedCalls.length = 0;
           assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "custom"), undefined);
@@ -986,7 +1102,8 @@ describe("generation", () => {
 
         test("falls back for changed ancestors and resumes after restoring them", () => {
           const { globalObject, wrapper, implementation } = createCollection({
-            indexed: ["element"], named: { length: "named length" }
+            indexed: ["element"],
+            named: { length: "named length" },
           });
           const childPrototype = globalObject.HTMLFormControlsCollection.prototype;
           const parentPrototype = globalObject.HTMLCollection.prototype;
@@ -995,7 +1112,7 @@ describe("generation", () => {
           globalObject.HTMLCollection = new Proxy(() => {}, {
             get() {
               throw new Error("unexpected constructor property access");
-            }
+            },
           });
           assert.strictEqual(wrapper.length, 1);
           assert.deepStrictEqual(implementation.namedCalls, ["length"]);
@@ -1020,7 +1137,7 @@ describe("generation", () => {
             get(target, property, receiver) {
               calls.push(property);
               return Reflect.get(target, property, receiver);
-            }
+            },
           });
           Object.setPrototypeOf(globalObject.HTMLFormControlsCollection.prototype, proxy);
           assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
@@ -1032,7 +1149,7 @@ describe("generation", () => {
 
         test("preserves supported-name lookup before observable ancestor checks", () => {
           const { globalObject, wrapper, implementation } = createCollection({
-            named: { length: "named length" }
+            named: { length: "named length" },
           });
           const marker = new Error("ancestor check");
           const proxy = new Proxy(globalObject.HTMLCollection.prototype, {
@@ -1042,10 +1159,13 @@ describe("generation", () => {
             has() {
               assert.deepStrictEqual(implementation.namedCalls, ["length"]);
               throw marker;
-            }
+            },
           });
           Object.setPrototypeOf(globalObject.HTMLFormControlsCollection.prototype, proxy);
-          assert.throws(() => wrapper.length, error => error === marker);
+          assert.throws(
+            () => wrapper.length,
+            (error) => error === marker,
+          );
         });
 
         test("does not probe a revoked ancestor proxy", () => {
@@ -1068,7 +1188,7 @@ describe("generation", () => {
           globalObject.HTMLCollection.prototype = new Proxy(parentPrototype, {
             getPrototypeOf: unexpected,
             getOwnPropertyDescriptor: unexpected,
-            has: unexpected
+            has: unexpected,
           });
           const generated = require(path.resolve(outputDir, "HTMLFormControlsCollection.js"));
           generated.install(globalObject, ["Window"]);
@@ -1094,11 +1214,14 @@ describe("generation", () => {
         test("does not probe caller-supplied wrapper proxies", () => {
           const { globalObject } = createCollection();
           const generated = require(path.resolve(outputDir, "HTMLFormControlsCollection.js"));
-          const target = new Proxy(Object.create(globalObject.HTMLFormControlsCollection.prototype), {
-            getPrototypeOf() {
-              throw new Error("unexpected wrapper prototype trap");
-            }
-          });
+          const target = new Proxy(
+            Object.create(globalObject.HTMLFormControlsCollection.prototype),
+            {
+              getPrototypeOf() {
+                throw new Error("unexpected wrapper prototype trap");
+              },
+            },
+          );
           const wrapper = generated.setup(target, globalObject);
           assert.strictEqual(wrapper.length, 0);
           assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
@@ -1106,20 +1229,26 @@ describe("generation", () => {
       });
 
       test("reflects changes to ordinary prototype properties", () => {
-        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
-          named: { length: "named length", custom: "named custom" }
-        });
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject(
+          "HTMLCollection",
+          {
+            named: { length: "named length", custom: "named custom" },
+          },
+        );
         const { prototype } = globalObject.HTMLCollection;
         delete prototype.length;
         assert.strictEqual(wrapper.length, "named length");
-        assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length").value, "named length");
+        assert.strictEqual(
+          Object.getOwnPropertyDescriptor(wrapper, "length").value,
+          "named length",
+        );
         let getterCalls = 0;
         Object.defineProperty(prototype, "custom", {
           configurable: true,
           get() {
             ++getterCalls;
             return this;
-          }
+          },
         });
         implementation.namedCalls.length = 0;
         assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "custom"), undefined);
@@ -1136,11 +1265,14 @@ describe("generation", () => {
       });
 
       test("captures the installed prototype independently of the public constructor", () => {
-        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {});
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject(
+          "HTMLCollection",
+          {},
+        );
         globalObject.HTMLCollection = new Proxy(() => {}, {
           get() {
             throw new Error("unexpected constructor property access");
-          }
+          },
         });
         assert.strictEqual(wrapper.length, 0);
         assert.deepStrictEqual(implementation.namedCalls, []);
@@ -1152,15 +1284,18 @@ describe("generation", () => {
         function unexpected() {
           throw new Error("unexpected prototype trap");
         }
-        Object.setPrototypeOf(wrapper, new Proxy(globalObject.HTMLCollection.prototype, {
-          getPrototypeOf: unexpected,
-          getOwnPropertyDescriptor: unexpected,
-          has: unexpected,
-          get(target, property, receiver) {
-            calls.push(property);
-            return Reflect.get(target, property, receiver);
-          }
-        }));
+        Object.setPrototypeOf(
+          wrapper,
+          new Proxy(globalObject.HTMLCollection.prototype, {
+            getPrototypeOf: unexpected,
+            getOwnPropertyDescriptor: unexpected,
+            has: unexpected,
+            get(target, property, receiver) {
+              calls.push(property);
+              return Reflect.get(target, property, receiver);
+            },
+          }),
+        );
         assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "length"), undefined);
         assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "missing"), undefined);
         assert.strictEqual(wrapper.length, 0);
@@ -1177,7 +1312,10 @@ describe("generation", () => {
       });
 
       test("does not traverse beyond the captured prototype", () => {
-        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {});
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject(
+          "HTMLCollection",
+          {},
+        );
         const { prototype } = globalObject.HTMLCollection;
         const { proxy, revoke } = Proxy.revocable(Object.getPrototypeOf(prototype), {});
         Object.setPrototypeOf(prototype, proxy);
@@ -1189,28 +1327,40 @@ describe("generation", () => {
       });
 
       test("preserves the supported-name lookup before observable prototype checks", () => {
-        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
-          named: { length: "named length" }
-        });
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject(
+          "HTMLCollection",
+          {
+            named: { length: "named length" },
+          },
+        );
         const marker = new Error("prototype check");
-        Object.setPrototypeOf(wrapper, new Proxy(globalObject.HTMLCollection.prototype, {
-          has() {
-            assert.deepStrictEqual(implementation.namedCalls, ["length"]);
-            throw marker;
-          }
-        }));
-        assert.throws(() => wrapper.length, error => error === marker);
+        Object.setPrototypeOf(
+          wrapper,
+          new Proxy(globalObject.HTMLCollection.prototype, {
+            has() {
+              assert.deepStrictEqual(implementation.namedCalls, ["length"]);
+              throw marker;
+            },
+          }),
+        );
+        assert.throws(
+          () => wrapper.length,
+          (error) => error === marker,
+        );
       });
 
       test("preserves indexed property precedence over ordinary prototype properties", () => {
-        const { globalObject, wrapper, implementation } = createLegacyPlatformObject("HTMLCollection", {
-          indexed: ["indexed value"],
-          named: { 0: "named value", 1: "unsupported index" }
-        });
+        const { globalObject, wrapper, implementation } = createLegacyPlatformObject(
+          "HTMLCollection",
+          {
+            indexed: ["indexed value"],
+            named: { 0: "named value", 1: "unsupported index" },
+          },
+        );
         Object.defineProperty(globalObject.HTMLCollection.prototype, "0", {
           get() {
             throw new Error("unexpected prototype getter");
-          }
+          },
         });
         assert.strictEqual(wrapper[0], "indexed value");
         assert.strictEqual(Object.getOwnPropertyDescriptor(wrapper, "0").value, "indexed value");
@@ -1224,7 +1374,7 @@ describe("generation", () => {
         const target = new Proxy(Object.create(globalObject.HTMLCollection.prototype), {
           getPrototypeOf() {
             throw new Error("unexpected wrapper prototype trap");
-          }
+          },
         });
         const wrapper = generated.setup(target, globalObject);
         assert.strictEqual(wrapper.length, 0);
@@ -1279,20 +1429,25 @@ describe("generation", () => {
 
       test("LegacyOverrideBuiltins named properties", () => {
         const entries = { inherited: "named property" };
-        const { globalObject, wrapper } = createLegacyPlatformObject("LegacyOverrideBuiltins", { entries });
+        const { globalObject, wrapper } = createLegacyPlatformObject("LegacyOverrideBuiltins", {
+          entries,
+        });
         Object.defineProperty(globalObject.LegacyOverrideBuiltins.prototype, "inherited", {
           configurable: true,
-          value: "inherited property"
+          value: "inherited property",
         });
         assert.strictEqual(wrapper.inherited, "named property");
 
         const ownEntries = {};
-        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject("LegacyOverrideBuiltins", {
-          entries: ownEntries
-        });
+        const { wrapper: wrapperWithOwnProperty } = createLegacyPlatformObject(
+          "LegacyOverrideBuiltins",
+          {
+            entries: ownEntries,
+          },
+        );
         Object.defineProperty(wrapperWithOwnProperty, "own", {
           configurable: true,
-          value: "own property"
+          value: "own property",
         });
         ownEntries.own = "named property";
         assert.strictEqual(wrapperWithOwnProperty.own, "own property");
@@ -1323,11 +1478,12 @@ describe("generation", () => {
           `;
         },
         processReflect(idl, implObj) {
-          const reflectAttr = idl.extAttrs.find(attr => attr.name === "Reflect");
+          const reflectAttr = idl.extAttrs.find((attr) => attr.name === "Reflect");
           const attrName =
-            (reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/g, "-")) || idl.name.toLowerCase();
+            (reflectAttr && reflectAttr.rhs && reflectAttr.rhs.value.replace(/_/gu, "-")) ||
+            idl.name.toLowerCase();
           if (idl.idlType.idlType === "USVString") {
-            const reflectURL = idl.extAttrs.find(attr => attr.name === "ReflectURL");
+            const reflectURL = idl.extAttrs.find((attr) => attr.name === "ReflectURL");
             if (reflectURL) {
               const whatwgURL = this.addImport("whatwg-url");
               return {
@@ -1341,16 +1497,16 @@ describe("generation", () => {
                 `,
                 set: `
                   ${implObj}.setAttributeNS(null, "${attrName}", V);
-                `
+                `,
               };
             }
           }
           const reflect = reflector[idl.idlType.idlType];
           return {
             get: reflect.get(implObj, attrName),
-            set: reflect.set(implObj, attrName)
+            set: reflect.set(implObj, attrName),
           };
-        }
+        },
       });
       transformer.addSource(casesDir, implsDir);
 
@@ -1358,18 +1514,23 @@ describe("generation", () => {
     });
 
     for (const idlFile of idlFiles) {
-      test(idlFile, t => {
+      test(idlFile, (t) => {
         const basename = path.basename(idlFile, ".webidl");
         const outputFile = path.resolve(outputDir, `${basename}.js`);
         const output = fs.readFileSync(outputFile, { encoding: "utf-8" });
 
-        t.assert.fileSnapshot(output, path.resolve(snapshotsDir, "with-processors", `${basename}.js`));
+        t.assert.fileSnapshot(
+          output,
+          path.resolve(snapshotsDir, "with-processors", `${basename}.js`),
+        );
       });
     }
   });
 
   test("utils.js", () => {
-    const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), { encoding: "utf-8" });
+    const input = fs.readFileSync(path.resolve(rootDir, "lib/output/utils.js"), {
+      encoding: "utf-8",
+    });
     const output = fs.readFileSync(path.resolve(outputDir, "utils.js"), { encoding: "utf-8" });
     assert.strictEqual(output, input);
   });

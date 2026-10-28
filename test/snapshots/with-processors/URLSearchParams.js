@@ -13,13 +13,19 @@ const $interfaceDescriptor = utils.createInterfaceDescriptor();
 exports.interfaceDescriptor = $interfaceDescriptor;
 
 function $requireImpl(wrapper, globalObject, context) {
-  return utils.requireImplForWrapper(wrapper, $interfaceDescriptor, globalObject, interfaceName, context);
+  return utils.requireImplForWrapper(
+    wrapper,
+    $interfaceDescriptor,
+    globalObject,
+    interfaceName,
+    context,
+  );
 }
 
-exports.is = value => {
+exports.is = (value) => {
   return utils.implForWrapperWithInterface(value, $interfaceDescriptor) !== null;
 };
-exports.isImpl = value => {
+exports.isImpl = (value) => {
   return utils.isObject(value) && value instanceof Impl.implementation;
 };
 exports.convert = (globalObject, value, { context = "The provided value" } = {}) => {
@@ -36,7 +42,7 @@ exports.createDefaultIterator = (globalObject, target, kind) => {
   const iterator = Object.create(iteratorPrototype);
   Object.defineProperty(iterator, utils.iterInternalSymbol, {
     value: { target, kind, index: 0 },
-    configurable: true
+    configurable: true,
   });
   return iterator;
 };
@@ -97,7 +103,7 @@ exports.new = (globalObject, newTarget) => {
 const exposed = new Set(["Window", "Worker"]);
 
 exports.install = (globalObject, globalNames) => {
-  if (!globalNames.some(globalName => exposed.has(globalName))) {
+  if (!globalNames.some((globalName) => exposed.has(globalName))) {
     return;
   }
 
@@ -110,12 +116,17 @@ exports.install = (globalObject, globalNames) => {
         if (curArg !== undefined) {
           if (utils.isObject(curArg)) {
             if (
-              utils.getMethod(curArg, Symbol.iterator, "Failed to construct 'URLSearchParams': parameter 1") !==
-              undefined
+              utils.getMethod(
+                curArg,
+                Symbol.iterator,
+                "Failed to construct 'URLSearchParams': parameter 1",
+              ) !== undefined
             ) {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
-                  "Failed to construct 'URLSearchParams': parameter 1" + " sequence" + " is not an iterable object."
+                  "Failed to construct 'URLSearchParams': parameter 1" +
+                    " sequence" +
+                    " is not an iterable object.",
                 );
               } else {
                 const V = [];
@@ -126,7 +137,7 @@ exports.install = (globalObject, globalNames) => {
                       "Failed to construct 'URLSearchParams': parameter 1" +
                         " sequence" +
                         "'s element" +
-                        " is not an iterable object."
+                        " is not an iterable object.",
                     );
                   } else {
                     const V = [];
@@ -138,7 +149,7 @@ exports.install = (globalObject, globalNames) => {
                           " sequence" +
                           "'s element" +
                           "'s element",
-                        globals: globalObject
+                        globals: globalObject,
                       });
 
                       V.push(nextItem);
@@ -153,7 +164,9 @@ exports.install = (globalObject, globalNames) => {
             } else {
               if (!utils.isObject(curArg)) {
                 throw new globalObject.TypeError(
-                  "Failed to construct 'URLSearchParams': parameter 1" + " record" + " is not an object."
+                  "Failed to construct 'URLSearchParams': parameter 1" +
+                    " record" +
+                    " is not an object.",
                 );
               } else {
                 const result = Object.create(null);
@@ -163,15 +176,19 @@ exports.install = (globalObject, globalNames) => {
                     let typedKey = key;
 
                     typedKey = conversions["USVString"](typedKey, {
-                      context: "Failed to construct 'URLSearchParams': parameter 1" + " record" + "'s key",
-                      globals: globalObject
+                      context:
+                        "Failed to construct 'URLSearchParams': parameter 1" + " record" + "'s key",
+                      globals: globalObject,
                     });
 
                     let typedValue = curArg[key];
 
                     typedValue = conversions["USVString"](typedValue, {
-                      context: "Failed to construct 'URLSearchParams': parameter 1" + " record" + "'s value",
-                      globals: globalObject
+                      context:
+                        "Failed to construct 'URLSearchParams': parameter 1" +
+                        " record" +
+                        "'s value",
+                      globals: globalObject,
                     });
 
                     result[typedKey] = typedValue;
@@ -183,7 +200,7 @@ exports.install = (globalObject, globalNames) => {
           } else {
             curArg = conversions["USVString"](curArg, {
               context: "Failed to construct 'URLSearchParams': parameter 1",
-              globals: globalObject
+              globals: globalObject,
             });
           }
         } else {
@@ -198,7 +215,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "append");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
-          `Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`
+          `Failed to execute 'append' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -206,7 +223,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'append' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -214,7 +231,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[1];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'append' on 'URLSearchParams': parameter 2",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -225,7 +242,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "delete");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'delete' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -233,7 +250,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'delete' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -244,7 +261,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "get");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'get' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -252,7 +269,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'get' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -263,7 +280,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "getAll");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'getAll' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -271,7 +288,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'getAll' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -282,7 +299,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "has");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          `Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`
+          `Failed to execute 'has' on 'URLSearchParams': 1 argument required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -290,7 +307,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'has' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -301,7 +318,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set");
       if (arguments.length < 2) {
         throw new globalObject.TypeError(
-          `Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`
+          `Failed to execute 'set' on 'URLSearchParams': 2 arguments required, but only ${arguments.length} present.`,
         );
       }
       const args = [];
@@ -309,7 +326,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'set' on 'URLSearchParams': parameter 1",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -317,7 +334,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[1];
         curArg = conversions["USVString"](curArg, {
           context: "Failed to execute 'set' on 'URLSearchParams': parameter 2",
-          globals: globalObject
+          globals: globalObject,
         });
         args.push(curArg);
       }
@@ -353,11 +370,11 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this, globalObject, "forEach");
       if (arguments.length < 1) {
         throw new globalObject.TypeError(
-          "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present."
+          "Failed to execute 'forEach' on 'iterable': 1 argument required, but only 0 present.",
         );
       }
       callback = Function.convert(globalObject, callback, {
-        context: "Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1"
+        context: "Failed to execute 'forEach' on 'iterable': The callback provided as parameter 1",
       });
       const thisArg = arguments[1];
       let pairs = Array.from($impl);
@@ -384,21 +401,27 @@ exports.install = (globalObject, globalNames) => {
     entries: { enumerable: true },
     forEach: { enumerable: true },
     [Symbol.toStringTag]: { value: "URLSearchParams", configurable: true },
-    [Symbol.iterator]: { value: URLSearchParams.prototype.entries, configurable: true, writable: true }
+    [Symbol.iterator]: {
+      value: URLSearchParams.prototype.entries,
+      configurable: true,
+      writable: true,
+    },
   });
   ctorRegistry[interfaceName] = URLSearchParams;
 
   ctorRegistry["URLSearchParams Iterator"] = Object.create(ctorRegistry["%IteratorPrototype%"], {
     [Symbol.toStringTag]: {
       configurable: true,
-      value: "URLSearchParams Iterator"
-    }
+      value: "URLSearchParams Iterator",
+    },
   });
   utils.define(ctorRegistry["URLSearchParams Iterator"], {
     next() {
       const internal = this && this[utils.iterInternalSymbol];
       if (!internal) {
-        throw new globalObject.TypeError("next() called on a value that is not a URLSearchParams iterator object");
+        throw new globalObject.TypeError(
+          "next() called on a value that is not a URLSearchParams iterator object",
+        );
       }
 
       const { target, kind, index } = internal;
@@ -410,14 +433,17 @@ exports.install = (globalObject, globalNames) => {
 
       const pair = values[index];
       internal.index = index + 1;
-      return newObjectInRealm(globalObject, utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind));
-    }
+      return newObjectInRealm(
+        globalObject,
+        utils.iteratorResult(pair.map(utils.tryWrapperForImpl), kind),
+      );
+    },
   });
 
   Object.defineProperty(globalObject, interfaceName, {
     configurable: true,
     writable: true,
-    value: URLSearchParams
+    value: URLSearchParams,
   });
 };
 
