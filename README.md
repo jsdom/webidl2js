@@ -462,9 +462,9 @@ In addition to the `implementation` export, for interfaces, your implementation 
 
 ## The generated utilities file
 
-Along with the generated wrapper class files, webidl2js will also generate a utilities file, `utils.js`, in the same directory. (We may make the name less generic; see [#52](https://github.com/jsdom/webidl2js/issues/52) for this and other concerns.) This contains several functions for converting between wrapper and implementation classes.
+Along with the generated wrapper class files, webidl2js will also generate a utilities file, `utils.js`, in the same directory. (We may make the name less generic; see [#52](https://github.com/jsdom/webidl2js/issues/52) for this and other concerns.) This contains the utilities that the generated wrapper classes use. Most of them are internal, but the ones documented below are also meant for implementation class code.
 
-Using these functions should be rare, in ideal circumstances. Most of the time, you can operate entirely on wrapper classes from the outside, and entirely on implementation classes while writing implementation class code. But, exceptions exist, such as when needing to reach into the internals of a class you only have the wrapper of, or dealing with unusual containers inside your implementation classes (as explained above).
+Using the functions for converting between wrapper and implementation classes should be rare, in ideal circumstances. Most of the time, you can operate entirely on wrapper classes from the outside, and entirely on implementation classes while writing implementation class code. But, exceptions exist, such as when needing to reach into the internals of a class you only have the wrapper of, or dealing with unusual containers inside your implementation classes (as explained above).
 
 ### `wrapperForImpl(impl)`
 
@@ -485,6 +485,22 @@ This can be useful when you are given a wrapper, but need to modify its inaccess
 ### `tryImplForWrapper(value)`
 
 Returns the corresponding impl class instance for a given wrapper class instance, or returns the argument back if it has no associated implementation.
+
+### `safePromiseResolve(resolve, value)`
+
+Resolves a promise with `value`, given the promise's `resolve` function, using the [SafePromiseResolve](https://tc39.es/proposal-thenable-curtailment/#sec-safe-promise-resolve) operation. If looking up `value`'s `then` property could run author code, that lookup, and anything it runs, is deferred to a microtask. Otherwise, this is the same as calling `resolve(value)`.
+
+Use this when implementation class code [resolves](https://webidl.spec.whatwg.org/#resolve) a promise with an object that author code can see, such as a dictionary, so that a getter on `Object.prototype.then` cannot run in the middle of your algorithm:
+
+```js
+const promise = new Promise(resolve => {
+  utils.safePromiseResolve(resolve, { value: chunk, done: false });
+});
+```
+
+The generated wrapper classes already use this when converting a JavaScript value to a `Promise<T>`.
+
+Proxies cannot be detected, so looking up `then` on a proxy still runs its traps synchronously, as `resolve(value)` would.
 
 ## Web IDL features
 

@@ -15,7 +15,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
     try {
       callResult = Reflect.apply(value, thisArg, []);
 
-      callResult = new globalObject.Promise(resolve => resolve(callResult));
+      callResult = new globalObject.Promise(resolve => utils.safePromiseResolve(resolve, callResult));
       return callResult;
     } catch (err) {
       return globalObject.Promise.reject(err);
@@ -25,7 +25,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
   invokeTheCallbackFunction.construct = () => {
     let callResult = Reflect.construct(value, []);
 
-    callResult = new globalObject.Promise(resolve => resolve(callResult));
+    callResult = new globalObject.Promise(resolve => utils.safePromiseResolve(resolve, callResult));
     return callResult;
   };
 
