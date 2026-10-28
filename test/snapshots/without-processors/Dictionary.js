@@ -12,7 +12,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["boolean"](value, {
-        context: `${context} has member 'boolWithDefault' that`,
+        context: `${context}'s 'boolWithDefault' member`,
         globals: globalObject,
       });
 
@@ -27,7 +27,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = URL.convert(globalObject, value, {
-        context: `${context} has member 'requiredInterface' that`,
+        context: `${context}'s 'requiredInterface' member`,
       });
 
       ret[key] = value;
@@ -41,15 +41,13 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new globalObject.TypeError(
-          `${context} has member 'seq' that is not an iterable object.`,
-        );
+        throw new globalObject.TypeError(`${context}'s 'seq' member is not an iterable object.`);
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
           nextItem = URLSearchParams.convert(globalObject, nextItem, {
-            context: `${context} has member 'seq' that's element`,
+            context: `${context}'s 'seq' member's element`,
           });
 
           V.push(nextItem);
@@ -66,7 +64,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["DOMString"](value, {
-        context: `${context} has member 'vanillaString' that`,
+        context: `${context}'s 'vanillaString' member`,
         globals: globalObject,
       });
 

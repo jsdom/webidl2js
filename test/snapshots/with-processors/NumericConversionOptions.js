@@ -9,7 +9,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["octet"](value, {
-        context: `${context} has member 'clamped' that`,
+        context: `${context}'s 'clamped' member`,
         globals: globalObject,
         clamp: true,
       });
@@ -23,7 +23,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unsigned short"](value, {
-        context: `${context} has member 'ranged' that`,
+        context: `${context}'s 'ranged' member`,
         globals: globalObject,
         enforceRange: true,
       });
@@ -37,7 +37,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unsigned short"](value, {
-        context: `${context} has member 'typedefClamped' that`,
+        context: `${context}'s 'typedefClamped' member`,
         globals: globalObject,
         clamp: true,
       });
@@ -51,7 +51,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unsigned long"](value, {
-        context: `${context} has member 'typedefRanged' that`,
+        context: `${context}'s 'typedefRanged' member`,
         globals: globalObject,
         enforceRange: true,
       });

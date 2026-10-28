@@ -14,7 +14,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["DOMString"](value, {
-        context: `${context} has member 'alpha' that`,
+        context: `${context}'s 'alpha' member`,
         globals: globalObject,
       });
 
@@ -29,15 +29,13 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       if (!utils.isObject(value)) {
-        throw new globalObject.TypeError(
-          `${context} has member 'empty' that is not an iterable object.`,
-        );
+        throw new globalObject.TypeError(`${context}'s 'empty' member is not an iterable object.`);
       } else {
         const V = [];
         const tmp = value;
         for (let nextItem of tmp) {
           nextItem = conversions["DOMString"](nextItem, {
-            context: `${context} has member 'empty' that's element`,
+            context: `${context}'s 'empty' member's element`,
             globals: globalObject,
           });
 
@@ -57,7 +55,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unrestricted double"](value, {
-        context: `${context} has member 'negativeInfinity' that`,
+        context: `${context}'s 'negativeInfinity' member`,
         globals: globalObject,
       });
 
@@ -72,7 +70,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unrestricted double"](value, {
-        context: `${context} has member 'notANumber' that`,
+        context: `${context}'s 'notANumber' member`,
         globals: globalObject,
       });
 
@@ -89,9 +87,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
       if (value === null || value === undefined) {
         value = null;
       } else {
-        value = URL.convert(globalObject, value, {
-          context: `${context} has member 'nullable' that`,
-        });
+        value = URL.convert(globalObject, value, { context: `${context}'s 'nullable' member` });
       }
       ret[key] = value;
     } else {
@@ -104,7 +100,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["long"](value, {
-        context: `${context} has member 'number' that`,
+        context: `${context}'s 'number' member`,
         globals: globalObject,
       });
 
@@ -119,7 +115,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["unrestricted double"](value, {
-        context: `${context} has member 'positiveInfinity' that`,
+        context: `${context}'s 'positiveInfinity' member`,
         globals: globalObject,
       });
 
@@ -134,7 +130,7 @@ exports._convertInherit = (globalObject, obj, ret, { context = "The provided val
     let value = obj === undefined || obj === null ? undefined : obj[key];
     if (value !== undefined) {
       value = conversions["boolean"](value, {
-        context: `${context} has member 'zebra' that`,
+        context: `${context}'s 'zebra' member`,
         globals: globalObject,
       });
 
