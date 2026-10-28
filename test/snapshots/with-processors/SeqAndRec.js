@@ -113,7 +113,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + " is not an object.",
+            `Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1 is not an object.`,
           );
         } else {
           const result = Object.create(null);
@@ -123,16 +123,14 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions["USVString"](typedKey, {
-                context:
-                  "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s key",
+                context: `Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's key`,
                 globals: globalObject,
               });
 
               let typedValue = curArg[key];
 
               typedValue = conversions["double"](typedValue, {
-                context:
-                  "Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1" + "'s value",
+                context: `Failed to execute 'recordConsumer' on 'SeqAndRec': parameter 1's value`,
                 globals: globalObject,
               });
 
@@ -158,8 +156,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" +
-              " is not an object.",
+            `Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1 is not an object.`,
           );
         } else {
           const result = Object.create(null);
@@ -169,16 +166,14 @@ exports.install = (globalObject, globalNames) => {
               let typedKey = key;
 
               typedKey = conversions["USVString"](typedKey, {
-                context:
-                  "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s key",
+                context: `Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's key`,
                 globals: globalObject,
               });
 
               let typedValue = curArg[key];
 
               typedValue = URL.convert(globalObject, typedValue, {
-                context:
-                  "Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1" + "'s value",
+                context: `Failed to execute 'recordConsumer2' on 'SeqAndRec': parameter 1's value`,
               });
 
               result[typedKey] = typedValue;
@@ -203,16 +198,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" +
-              " is not an iterable object.",
+            `Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.`,
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["USVString"](nextItem, {
-              context:
-                "Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1" + "'s element",
+              context: `Failed to execute 'sequenceConsumer' on 'SeqAndRec': parameter 1's element`,
               globals: globalObject,
             });
 
@@ -237,8 +230,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1" +
-              " is not an iterable object.",
+            `Failed to execute 'sequenceConsumer2' on 'SeqAndRec': parameter 1 is not an iterable object.`,
           );
         } else {
           const V = [];
@@ -269,14 +261,12 @@ exports.install = (globalObject, globalNames) => {
           curArg,
           function (item) {
             item = conversions["USVString"](item, {
-              context:
-                "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1" +
-                "'s element",
+              context: `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1's element`,
               globals: globalObject,
             });
             return item;
           },
-          "Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1",
+          `Failed to execute 'asyncSequenceConsumer' on 'SeqAndRec': parameter 1`,
         );
         args.push(curArg);
       }
@@ -299,7 +289,7 @@ exports.install = (globalObject, globalNames) => {
             item = utils.tryImplForWrapper(item);
             return item;
           },
-          "Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1",
+          `Failed to execute 'asyncSequenceConsumer2' on 'SeqAndRec': parameter 1`,
         );
         args.push(curArg);
       }
@@ -318,17 +308,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (!utils.isObject(curArg)) {
           throw new globalObject.TypeError(
-            "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" +
-              " is not an iterable object.",
+            `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.`,
           );
         } else {
           const V = [];
           const tmp = curArg;
           for (let nextItem of tmp) {
             nextItem = conversions["double"](nextItem, {
-              context:
-                "Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1" +
-                "'s element",
+              context: `Failed to execute 'frozenArrayConsumer' on 'SeqAndRec': parameter 1's element`,
               globals: globalObject,
             });
 
@@ -356,14 +343,12 @@ exports.install = (globalObject, globalNames) => {
           curArg,
           function (item) {
             item = conversions["double"](item, {
-              context:
-                "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1" +
-                "'s element",
+              context: `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1's element`,
               globals: globalObject,
             });
             return item;
           },
-          "Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1",
+          `Failed to execute 'asyncSequencePassthrough' on 'SeqAndRec': parameter 1`,
         );
         args.push(curArg);
       }

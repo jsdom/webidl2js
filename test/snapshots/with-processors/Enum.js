@@ -112,7 +112,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = RequestDestination.convert(globalObject, curArg, {
-          context: "Failed to execute 'op' on 'Enum': parameter 1",
+          context: `Failed to execute 'op' on 'Enum': parameter 1`,
         });
         args.push(curArg);
       }

@@ -111,7 +111,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 1",
+          context: `Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -119,7 +119,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 2",
+          context: `Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 2`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -127,7 +127,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[2];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 3",
+          context: `Failed to execute 'createDocumentType' on 'DOMImplementation': parameter 3`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -149,7 +149,7 @@ exports.install = (globalObject, globalNames) => {
           curArg = null;
         } else {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'createDocument' on 'DOMImplementation': parameter 1",
+            context: `Failed to execute 'createDocument' on 'DOMImplementation': parameter 1`,
             globals: globalObject,
           });
         }
@@ -158,7 +158,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'createDocument' on 'DOMImplementation': parameter 2",
+          context: `Failed to execute 'createDocument' on 'DOMImplementation': parameter 2`,
           globals: globalObject,
           treatNullAsEmptyString: true,
         });
@@ -187,7 +187,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (curArg !== undefined) {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'createHTMLDocument' on 'DOMImplementation': parameter 1",
+            context: `Failed to execute 'createHTMLDocument' on 'DOMImplementation': parameter 1`,
             globals: globalObject,
           });
         }

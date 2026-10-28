@@ -114,8 +114,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set abc");
 
       V = conversions["DOMString"](V, {
-        context:
-          "Failed to set the 'abc' property on 'LegacyNoInterfaceObject': The provided value",
+        context: `Failed to set the 'abc' property on 'LegacyNoInterfaceObject': The provided value`,
         globals: globalObject,
       });
 

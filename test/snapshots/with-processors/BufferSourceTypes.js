@@ -112,18 +112,17 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context: "Failed to execute 'bs' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'bs' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'bs' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'bs' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'bs' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'bs' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -142,7 +141,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["ArrayBuffer"](curArg, {
-          context: "Failed to execute 'ab' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'ab' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -161,7 +160,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["SharedArrayBuffer"](curArg, {
-          context: "Failed to execute 'sab' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'sab' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -181,13 +180,12 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'abv' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abv' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'abv' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'abv' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -206,7 +204,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["Uint8Array"](curArg, {
-          context: "Failed to execute 'u8a' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'u8a' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -226,12 +224,12 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         }
@@ -252,12 +250,12 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isSharedArrayBuffer(curArg)) {
           curArg = conversions["SharedArrayBuffer"](curArg, {
-            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'sabUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         }
@@ -278,12 +276,12 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg) && curArg.constructor.name === "Uint8Array") {
           curArg = conversions["Uint8Array"](curArg, {
-            context: "Failed to execute 'u8aUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'u8aUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'u8aUnion' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'u8aUnion' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         }
@@ -304,24 +302,23 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else if (utils.isSharedArrayBuffer(curArg)) {
           curArg = conversions["SharedArrayBuffer"](curArg, {
-            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
           });
         } else if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowShared: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'asbs' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -341,14 +338,13 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'abvAllowShared' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abvAllowShared' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowShared: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'abvAllowShared' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'abvAllowShared' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -367,7 +363,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["Uint8Array"](curArg, {
-          context: "Failed to execute 'u8aAllowShared' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'u8aAllowShared' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
           allowShared: true,
         });
@@ -388,20 +384,19 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context: "Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
           });
         } else if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'bsAllowResizable' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -420,7 +415,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["ArrayBuffer"](curArg, {
-          context: "Failed to execute 'abAllowResizable' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'abAllowResizable' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
           allowResizable: true,
         });
@@ -440,7 +435,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["SharedArrayBuffer"](curArg, {
-          context: "Failed to execute 'sabAllowResizable' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'sabAllowResizable' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
           allowResizable: true,
         });
@@ -461,14 +456,13 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'abvAllowResizable' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -487,7 +481,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["Uint8Array"](curArg, {
-          context: "Failed to execute 'u8aAllowResizable' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'u8aAllowResizable' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
           allowResizable: true,
         });
@@ -508,27 +502,26 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (utils.isArrayBuffer(curArg)) {
           curArg = conversions["ArrayBuffer"](curArg, {
-            context: "Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
           });
         } else if (utils.isSharedArrayBuffer(curArg)) {
           curArg = conversions["SharedArrayBuffer"](curArg, {
-            context: "Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
           });
         } else if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context: "Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
             allowShared: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'asbsAllowResizable' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -548,16 +541,14 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (ArrayBuffer.isView(curArg)) {
           curArg = conversions["ArrayBufferView"](curArg, {
-            context:
-              "Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': parameter 1",
+            context: `Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': parameter 1`,
             globals: globalObject,
             allowResizable: true,
             allowShared: true,
           });
         } else {
           throw new globalObject.TypeError(
-            "Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': parameter 1" +
-              " is not of any supported type.",
+            `Failed to execute 'abvAllowResizableShared' on 'BufferSourceTypes': parameter 1 is not of any supported type.`,
           );
         }
         args.push(curArg);
@@ -576,8 +567,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["Uint8Array"](curArg, {
-          context:
-            "Failed to execute 'u8aAllowResizableShared' on 'BufferSourceTypes': parameter 1",
+          context: `Failed to execute 'u8aAllowResizableShared' on 'BufferSourceTypes': parameter 1`,
           globals: globalObject,
           allowResizable: true,
           allowShared: true,

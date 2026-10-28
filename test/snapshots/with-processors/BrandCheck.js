@@ -121,7 +121,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["any"](curArg, {
-          context: "Failed to execute 'shadow' on 'BrandCheck': parameter 1",
+          context: `Failed to execute 'shadow' on 'BrandCheck': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -143,12 +143,12 @@ exports.install = (globalObject, globalNames) => {
           curArg = utils.tryImplForWrapper(curArg);
         } else if (typeof curArg === "number") {
           curArg = conversions["double"](curArg, {
-            context: "Failed to execute 'objectUnion' on 'BrandCheck': parameter 1",
+            context: `Failed to execute 'objectUnion' on 'BrandCheck': parameter 1`,
             globals: globalObject,
           });
         } else {
           curArg = conversions["double"](curArg, {
-            context: "Failed to execute 'objectUnion' on 'BrandCheck': parameter 1",
+            context: `Failed to execute 'objectUnion' on 'BrandCheck': parameter 1`,
             globals: globalObject,
           });
         }

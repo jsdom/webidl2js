@@ -109,7 +109,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableTest");
 
       V = conversions["boolean"](V, {
-        context: "Failed to set the 'unscopableTest' property on 'Unscopable': The provided value",
+        context: `Failed to set the 'unscopableTest' property on 'Unscopable': The provided value`,
         globals: globalObject,
       });
 
@@ -125,7 +125,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set unscopableMixin");
 
       V = conversions["boolean"](V, {
-        context: "Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value",
+        context: `Failed to set the 'unscopableMixin' property on 'Unscopable': The provided value`,
         globals: globalObject,
       });
 

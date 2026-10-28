@@ -112,7 +112,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'addEventListener' on 'EventTarget': parameter 1",
+          context: `Failed to execute 'addEventListener' on 'EventTarget': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -123,7 +123,7 @@ exports.install = (globalObject, globalNames) => {
           curArg = null;
         } else {
           curArg = EventListener.convert(globalObject, curArg, {
-            context: "Failed to execute 'addEventListener' on 'EventTarget': parameter 2",
+            context: `Failed to execute 'addEventListener' on 'EventTarget': parameter 2`,
           });
         }
         args.push(curArg);

@@ -108,7 +108,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (curArg !== undefined) {
           curArg = conversions["DOMString"](curArg, {
-            context: "Failed to execute 'op' on 'DictionaryConvert': parameter 1",
+            context: `Failed to execute 'op' on 'DictionaryConvert': parameter 1`,
             globals: globalObject,
           });
         }
@@ -117,7 +117,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[1];
         curArg = Dictionary.convert(globalObject, curArg, {
-          context: "Failed to execute 'op' on 'DictionaryConvert': parameter 2",
+          context: `Failed to execute 'op' on 'DictionaryConvert': parameter 2`,
         });
         args.push(curArg);
       }

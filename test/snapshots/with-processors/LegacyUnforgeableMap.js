@@ -259,8 +259,7 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context:
-            "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
+          context: `Failed to set the '${P}' property on 'LegacyUnforgeableMap': The provided value`,
           globals: globalObject,
         });
 
@@ -298,8 +297,7 @@ class ProxyHandler {
         let namedValue = desc.value;
 
         namedValue = conversions["DOMString"](namedValue, {
-          context:
-            "Failed to set the '" + P + "' property on 'LegacyUnforgeableMap': The provided value",
+          context: `Failed to set the '${P}' property on 'LegacyUnforgeableMap': The provided value`,
           globals: globalObject,
         });
 

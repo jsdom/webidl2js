@@ -119,7 +119,7 @@ exports.install = (globalObject, globalNames) => {
       if (arguments[0] !== undefined) {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
-          context: "Failed to execute 'keys' on 'BrandCheckAsyncIterable': parameter 1",
+          context: `Failed to execute 'keys' on 'BrandCheckAsyncIterable': parameter 1`,
           globals: globalObject,
         });
       } else {
@@ -140,7 +140,7 @@ exports.install = (globalObject, globalNames) => {
       if (arguments[0] !== undefined) {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
-          context: "Failed to execute 'values' on 'BrandCheckAsyncIterable': parameter 1",
+          context: `Failed to execute 'values' on 'BrandCheckAsyncIterable': parameter 1`,
           globals: globalObject,
         });
       } else {
@@ -161,7 +161,7 @@ exports.install = (globalObject, globalNames) => {
       if (arguments[0] !== undefined) {
         args[0] = arguments[0];
         args[0] = conversions["unsigned long"](args[0], {
-          context: "Failed to execute 'entries' on 'BrandCheckAsyncIterable': parameter 1",
+          context: `Failed to execute 'entries' on 'BrandCheckAsyncIterable': parameter 1`,
           globals: globalObject,
         });
       } else {

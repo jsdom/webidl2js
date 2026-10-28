@@ -103,7 +103,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[0];
         if (curArg !== undefined) {
           curArg = conversions["unrestricted double"](curArg, {
-            context: "Failed to construct 'DOMRect': parameter 1",
+            context: `Failed to construct 'DOMRect': parameter 1`,
             globals: globalObject,
           });
         } else {
@@ -115,7 +115,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[1];
         if (curArg !== undefined) {
           curArg = conversions["unrestricted double"](curArg, {
-            context: "Failed to construct 'DOMRect': parameter 2",
+            context: `Failed to construct 'DOMRect': parameter 2`,
             globals: globalObject,
           });
         } else {
@@ -127,7 +127,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[2];
         if (curArg !== undefined) {
           curArg = conversions["unrestricted double"](curArg, {
-            context: "Failed to construct 'DOMRect': parameter 3",
+            context: `Failed to construct 'DOMRect': parameter 3`,
             globals: globalObject,
           });
         } else {
@@ -139,7 +139,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[3];
         if (curArg !== undefined) {
           curArg = conversions["unrestricted double"](curArg, {
-            context: "Failed to construct 'DOMRect': parameter 4",
+            context: `Failed to construct 'DOMRect': parameter 4`,
             globals: globalObject,
           });
         } else {
@@ -159,7 +159,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set x");
 
       V = conversions["unrestricted double"](V, {
-        context: "Failed to set the 'x' property on 'DOMRect': The provided value",
+        context: `Failed to set the 'x' property on 'DOMRect': The provided value`,
         globals: globalObject,
       });
 
@@ -175,7 +175,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set y");
 
       V = conversions["unrestricted double"](V, {
-        context: "Failed to set the 'y' property on 'DOMRect': The provided value",
+        context: `Failed to set the 'y' property on 'DOMRect': The provided value`,
         globals: globalObject,
       });
 
@@ -191,7 +191,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set width");
 
       V = conversions["unrestricted double"](V, {
-        context: "Failed to set the 'width' property on 'DOMRect': The provided value",
+        context: `Failed to set the 'width' property on 'DOMRect': The provided value`,
         globals: globalObject,
       });
 
@@ -207,7 +207,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set height");
 
       V = conversions["unrestricted double"](V, {
-        context: "Failed to set the 'height' property on 'DOMRect': The provided value",
+        context: `Failed to set the 'height' property on 'DOMRect': The provided value`,
         globals: globalObject,
       });
 
@@ -219,7 +219,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = Dictionary.convert(globalObject, curArg, {
-          context: "Failed to execute 'fromRect' on 'DOMRect': parameter 1",
+          context: `Failed to execute 'fromRect' on 'DOMRect': parameter 1`,
         });
         args.push(curArg);
       }

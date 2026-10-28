@@ -107,7 +107,7 @@ exports.install = (globalObject, globalNames) => {
       for (let i = 0; i < arguments.length; i++) {
         let curArg = arguments[i];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'simple1' on 'Variadic': parameter " + (i + 1),
+          context: `Failed to execute 'simple1' on 'Variadic': parameter ${i + 1}`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -126,7 +126,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["DOMString"](curArg, {
-          context: "Failed to execute 'simple2' on 'Variadic': parameter 1",
+          context: `Failed to execute 'simple2' on 'Variadic': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -134,7 +134,7 @@ exports.install = (globalObject, globalNames) => {
       for (let i = 1; i < arguments.length; i++) {
         let curArg = arguments[i];
         curArg = URL.convert(globalObject, curArg, {
-          context: "Failed to execute 'simple2' on 'Variadic': parameter " + (i + 1),
+          context: `Failed to execute 'simple2' on 'Variadic': parameter ${i + 1}`,
         });
         args.push(curArg);
       }
@@ -153,7 +153,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions["unsigned long"](curArg, {
-                context: "Failed to execute 'overloaded1' on 'Variadic': parameter " + (i + 1),
+                context: `Failed to execute 'overloaded1' on 'Variadic': parameter ${i + 1}`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -162,7 +162,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 0; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions["DOMString"](curArg, {
-                context: "Failed to execute 'overloaded1' on 'Variadic': parameter " + (i + 1),
+                context: `Failed to execute 'overloaded1' on 'Variadic': parameter ${i + 1}`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -189,7 +189,7 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[0];
                 curArg = conversions["unsigned long"](curArg, {
-                  context: "Failed to execute 'overloaded2' on 'Variadic': parameter 1",
+                  context: `Failed to execute 'overloaded2' on 'Variadic': parameter 1`,
                   globals: globalObject,
                 });
                 args.push(curArg);
@@ -198,7 +198,7 @@ exports.install = (globalObject, globalNames) => {
               {
                 let curArg = arguments[0];
                 curArg = conversions["DOMString"](curArg, {
-                  context: "Failed to execute 'overloaded2' on 'Variadic': parameter 1",
+                  context: `Failed to execute 'overloaded2' on 'Variadic': parameter 1`,
                   globals: globalObject,
                 });
                 args.push(curArg);
@@ -212,7 +212,7 @@ exports.install = (globalObject, globalNames) => {
             {
               let curArg = arguments[0];
               curArg = conversions["unsigned long"](curArg, {
-                context: "Failed to execute 'overloaded2' on 'Variadic': parameter 1",
+                context: `Failed to execute 'overloaded2' on 'Variadic': parameter 1`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -220,7 +220,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions["DOMString"](curArg, {
-                context: "Failed to execute 'overloaded2' on 'Variadic': parameter " + (i + 1),
+                context: `Failed to execute 'overloaded2' on 'Variadic': parameter ${i + 1}`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -229,7 +229,7 @@ exports.install = (globalObject, globalNames) => {
             {
               let curArg = arguments[0];
               curArg = conversions["DOMString"](curArg, {
-                context: "Failed to execute 'overloaded2' on 'Variadic': parameter 1",
+                context: `Failed to execute 'overloaded2' on 'Variadic': parameter 1`,
                 globals: globalObject,
               });
               args.push(curArg);
@@ -237,7 +237,7 @@ exports.install = (globalObject, globalNames) => {
             for (let i = 1; i < arguments.length; i++) {
               let curArg = arguments[i];
               curArg = conversions["DOMString"](curArg, {
-                context: "Failed to execute 'overloaded2' on 'Variadic': parameter " + (i + 1),
+                context: `Failed to execute 'overloaded2' on 'Variadic': parameter ${i + 1}`,
                 globals: globalObject,
               });
               args.push(curArg);

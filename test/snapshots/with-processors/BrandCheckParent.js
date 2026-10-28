@@ -114,7 +114,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set value");
 
       V = conversions["DOMString"](V, {
-        context: "Failed to set the 'value' property on 'BrandCheckParent': The provided value",
+        context: `Failed to set the 'value' property on 'BrandCheckParent': The provided value`,
         globals: globalObject,
       });
 

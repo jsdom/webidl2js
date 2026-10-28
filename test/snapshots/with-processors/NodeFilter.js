@@ -25,10 +25,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
     let callResult = Reflect.apply(X, thisArg, [node]);
 
-    callResult = conversions["unsigned short"](callResult, {
-      context: context,
-      globals: globalObject,
-    });
+    callResult = conversions["unsigned short"](callResult, { context, globals: globalObject });
 
     return callResult;
   }

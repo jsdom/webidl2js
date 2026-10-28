@@ -279,10 +279,7 @@ class ProxyHandler {
         let namedValue = V;
 
         namedValue = URL.convert(globalObject, namedValue, {
-          context:
-            "Failed to set the '" +
-            P +
-            "' property on 'URLSearchParamsCollection2': The provided value",
+          context: `Failed to set the '${P}' property on 'URLSearchParamsCollection2': The provided value`,
         });
 
         const creating = !(impl.namedItem(P) !== null);
@@ -335,10 +332,7 @@ class ProxyHandler {
       let namedValue = desc.value;
 
       namedValue = URL.convert(globalObject, namedValue, {
-        context:
-          "Failed to set the '" +
-          P +
-          "' property on 'URLSearchParamsCollection2': The provided value",
+        context: `Failed to set the '${P}' property on 'URLSearchParamsCollection2': The provided value`,
       });
 
       const creating = !(impl.namedItem(P) !== null);

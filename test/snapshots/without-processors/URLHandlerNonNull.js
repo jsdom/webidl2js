@@ -14,7 +14,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
       callResult = Reflect.apply(value, thisArg, [url]);
     }
 
-    callResult = conversions["any"](callResult, { context: context, globals: globalObject });
+    callResult = conversions["any"](callResult, { context, globals: globalObject });
 
     return callResult;
   }
@@ -24,7 +24,7 @@ exports.convert = (globalObject, value, { context = "The provided value" } = {})
 
     let callResult = Reflect.construct(value, [url]);
 
-    callResult = conversions["any"](callResult, { context: context, globals: globalObject });
+    callResult = conversions["any"](callResult, { context, globals: globalObject });
 
     return callResult;
   };

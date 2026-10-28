@@ -106,7 +106,7 @@ exports.install = (globalObject, globalNames) => {
       {
         let curArg = arguments[0];
         curArg = conversions["USVString"](curArg, {
-          context: "Failed to construct 'URL': parameter 1",
+          context: `Failed to construct 'URL': parameter 1`,
           globals: globalObject,
         });
         args.push(curArg);
@@ -115,7 +115,7 @@ exports.install = (globalObject, globalNames) => {
         let curArg = arguments[1];
         if (curArg !== undefined) {
           curArg = conversions["USVString"](curArg, {
-            context: "Failed to construct 'URL': parameter 2",
+            context: `Failed to construct 'URL': parameter 2`,
             globals: globalObject,
           });
         }
@@ -138,7 +138,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set href");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'href' property on 'URL': The provided value",
+        context: `Failed to set the 'href' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -165,7 +165,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set protocol");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'protocol' property on 'URL': The provided value",
+        context: `Failed to set the 'protocol' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -181,7 +181,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set username");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'username' property on 'URL': The provided value",
+        context: `Failed to set the 'username' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -197,7 +197,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set password");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'password' property on 'URL': The provided value",
+        context: `Failed to set the 'password' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -213,7 +213,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set host");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'host' property on 'URL': The provided value",
+        context: `Failed to set the 'host' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -229,7 +229,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set hostname");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'hostname' property on 'URL': The provided value",
+        context: `Failed to set the 'hostname' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -245,7 +245,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set port");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'port' property on 'URL': The provided value",
+        context: `Failed to set the 'port' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -261,7 +261,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set pathname");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'pathname' property on 'URL': The provided value",
+        context: `Failed to set the 'pathname' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -277,7 +277,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set search");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'search' property on 'URL': The provided value",
+        context: `Failed to set the 'search' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
@@ -300,7 +300,7 @@ exports.install = (globalObject, globalNames) => {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "set hash");
 
       V = conversions["USVString"](V, {
-        context: "Failed to set the 'hash' property on 'URL': The provided value",
+        context: `Failed to set the 'hash' property on 'URL': The provided value`,
         globals: globalObject,
       });
 
