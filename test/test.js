@@ -6,9 +6,12 @@ const assert = require("node:assert/strict");
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const webidl = require("webidl2");
+const idlConversions = require("webidl-conversions");
 
 snapshot.setDefaultSnapshotSerializers([(value) => value]);
 const Transformer = require("..");
+const Types = require("../lib/types");
 const reflector = require("./reflector");
 
 const rootDir = path.resolve(__dirname, "..");
@@ -32,6 +35,37 @@ function createLegacyPlatformObject(name, privateData, ancestors = []) {
 }
 
 describe("generation", () => {
+  for (const [type, wrapped] of [
+    ["octet", 255],
+    ["(octet or DOMString)", 255],
+    ["DOMTimeStamp", 2 ** 64],
+  ]) {
+    test(`conversion attributes remain local to each use of ${type}`, () => {
+      const { ctx } = new Transformer();
+      const [{ idlType }] = webidl.parse(`typedef ${type} Test;`);
+      const original = JSON.stringify(idlType);
+      const resolved = Types.resolveType(ctx, idlType);
+      const originalResolved = JSON.stringify(resolved);
+
+      function convert(attrs) {
+        const { body } = Types.generateTypeConversion(ctx, "value", idlType, attrs);
+        const run = vm.compileFunction(`${body}\nreturn value;`, [
+          "value",
+          "conversions",
+          "globalObject",
+        ]);
+        return run(-1, idlConversions, globalThis);
+      }
+
+      assert.strictEqual(convert([{ name: "Clamp" }]), 0);
+      assert.strictEqual(convert([]), wrapped);
+      assert.throws(() => convert([{ name: "EnforceRange" }]), TypeError);
+      assert.strictEqual(convert([]), wrapped);
+      assert.strictEqual(JSON.stringify(idlType), original);
+      assert.strictEqual(JSON.stringify(resolved), originalResolved);
+    });
+  }
+
   describe("built-in types", () => {
     before(() => {
       const transformer = new Transformer();

@@ -9,6 +9,7 @@ interface SeqAndRec {
   undefined asyncSequenceConsumer(async_sequence<USVString> async_seq);
   undefined asyncSequenceConsumer2(async_sequence<UnknownInterface> async_seq);
   undefined frozenArrayConsumer(FrozenArray<double> arr);
+  undefined defaultSequenceConsumer(optional sequence<DOMString> seq = []);
 
   async_sequence<double> asyncSequencePassthrough(async_sequence<double> async_seq);
 };

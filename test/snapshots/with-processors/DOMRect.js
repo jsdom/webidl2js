@@ -248,6 +248,12 @@ exports.install = (globalObject, globalNames) => {
       writable: true,
       value: DOMRect,
     });
+
+    Object.defineProperty(globalObject, "LegacyRect", {
+      configurable: true,
+      writable: true,
+      value: DOMRect,
+    });
   }
 };
 
