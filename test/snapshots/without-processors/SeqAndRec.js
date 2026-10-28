@@ -329,6 +329,37 @@ exports.install = (globalObject, globalNames) => {
       return $impl.frozenArrayConsumer(...args);
     }
 
+    defaultSequenceConsumer() {
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "defaultSequenceConsumer");
+      const args = [];
+      {
+        let curArg = arguments[0];
+        if (curArg !== undefined) {
+          if (!utils.isObject(curArg)) {
+            throw new globalObject.TypeError(
+              `Failed to execute 'defaultSequenceConsumer' on 'SeqAndRec': parameter 1 is not an iterable object.`,
+            );
+          } else {
+            const V = [];
+            const tmp = curArg;
+            for (let nextItem of tmp) {
+              nextItem = conversions["DOMString"](nextItem, {
+                context: `Failed to execute 'defaultSequenceConsumer' on 'SeqAndRec': parameter 1's element`,
+                globals: globalObject,
+              });
+
+              V.push(nextItem);
+            }
+            curArg = V;
+          }
+        } else {
+          curArg = [];
+        }
+        args.push(curArg);
+      }
+      return $impl.defaultSequenceConsumer(...args);
+    }
+
     asyncSequencePassthrough(async_seq) {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "asyncSequencePassthrough");
       if (arguments.length < 1) {
@@ -363,6 +394,7 @@ exports.install = (globalObject, globalNames) => {
     asyncSequenceConsumer: { enumerable: true },
     asyncSequenceConsumer2: { enumerable: true },
     frozenArrayConsumer: { enumerable: true },
+    defaultSequenceConsumer: { enumerable: true },
     asyncSequencePassthrough: { enumerable: true },
     [Symbol.toStringTag]: { value: "SeqAndRec", configurable: true },
   });

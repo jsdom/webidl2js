@@ -2,7 +2,7 @@
 
 [Exposed=(Window,Worker),
  Serializable,
- LegacyWindowAlias=SVGRect]
+ LegacyWindowAlias=(SVGRect, LegacyRect)]
 interface DOMRect /* : DOMRectReadOnly */ {
   constructor(optional unrestricted double x = 0, optional unrestricted double y = 0,
           optional unrestricted double width = 0, optional unrestricted double height = 0);

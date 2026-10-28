@@ -100,6 +100,11 @@ exports.install = (globalObject, globalNames) => {
       throw new globalObject.TypeError("Illegal constructor");
     }
 
+    unscopableOperation() {
+      const $impl = $requireImpl(this ?? globalObject, globalObject, "unscopableOperation");
+      return $impl.unscopableOperation();
+    }
+
     get unscopableTest() {
       const $impl = $requireImpl(this ?? globalObject, globalObject, "get unscopableTest");
       return $impl["unscopableTest"];
@@ -133,11 +138,17 @@ exports.install = (globalObject, globalNames) => {
     }
   }
   Object.defineProperties(Unscopable.prototype, {
+    unscopableOperation: { enumerable: true },
     unscopableTest: { enumerable: true },
     unscopableMixin: { enumerable: true },
     [Symbol.toStringTag]: { value: "Unscopable", configurable: true },
     [Symbol.unscopables]: {
-      value: { unscopableTest: true, unscopableMixin: true, __proto__: null },
+      value: {
+        unscopableTest: true,
+        unscopableOperation: true,
+        unscopableMixin: true,
+        __proto__: null,
+      },
       configurable: true,
     },
   });
