@@ -1,7 +1,5 @@
-# node specific
 node_modules/
-npm-debug.log
+npm-debug.log*
 
-# project specific
-/test/output/*
-coverage/
+/coverage/
+/test/output/
