@@ -8,10 +8,10 @@ describe("utils.js", () => {
   describe("wrapper associations", () => {
     test("returns null for missing associations and preserves unknown values in try helpers", () => {
       for (const value of [undefined, null, false, 0, 1n, "", {}, Symbol("value")]) {
-        assert.strictEqual(utils.wrapperForImpl(value), null);
-        assert.strictEqual(utils.implForWrapper(value), null);
-        assert.strictEqual(utils.tryWrapperForImpl(value), value);
-        assert.strictEqual(utils.tryImplForWrapper(value), value);
+        assert.equal(utils.wrapperForImpl(value), null);
+        assert.equal(utils.implForWrapper(value), null);
+        assert.equal(utils.tryWrapperForImpl(value), value);
+        assert.equal(utils.tryImplForWrapper(value), value);
       }
     });
 
@@ -22,16 +22,16 @@ describe("utils.js", () => {
       const otherDescriptor = utils.createInterfaceDescriptor();
       utils.registerWrapper(wrapper, impl, descriptor);
       assert.throws(() => utils.registerWrapper(wrapper, {}, otherDescriptor), TypeError);
-      assert.strictEqual(utils.implForWrapper(wrapper), impl);
-      assert.strictEqual(utils.implForWrapperWithInterface(wrapper, descriptor), impl);
-      assert.strictEqual(utils.implForWrapperWithInterface(wrapper, otherDescriptor), null);
+      assert.equal(utils.implForWrapper(wrapper), impl);
+      assert.equal(utils.implForWrapperWithInterface(wrapper, descriptor), impl);
+      assert.equal(utils.implForWrapperWithInterface(wrapper, otherDescriptor), null);
     });
 
     test("untyped lookup ignores extra callback arguments", () => {
       const wrapper = {};
       const impl = {};
       utils.registerWrapper(wrapper, impl, utils.createInterfaceDescriptor());
-      assert.deepStrictEqual([{}, wrapper].map(utils.implForWrapper), [null, impl]);
+      assert.deepEqual([{}, wrapper].map(utils.implForWrapper), [null, impl]);
     });
   });
 
@@ -40,20 +40,20 @@ describe("utils.js", () => {
 
     for (const primitive of primitives) {
       test(primitive === null ? "null" : typeof primitive, () => {
-        assert.strictEqual(utils.isObject(primitive), false);
+        assert.equal(utils.isObject(primitive), false);
       });
     }
 
     test("bigint", () => {
-      assert.strictEqual(utils.isObject(123n), false);
+      assert.equal(utils.isObject(123n), false);
     });
 
     test("object", () => {
-      assert.strictEqual(utils.isObject({}), true);
+      assert.equal(utils.isObject({}), true);
     });
 
     test("function", () => {
-      assert.strictEqual(
+      assert.equal(
         utils.isObject(() => {}),
         true,
       );
@@ -65,7 +65,7 @@ describe("utils.js", () => {
       const realm = { Object: function Object() {}, Array };
       const object = utils.newObjectInRealm(realm, { foo: 42 });
       assert(object instanceof realm.Object);
-      assert.deepStrictEqual({ ...object }, { foo: 42 });
+      assert.deepEqual({ ...object }, { foo: 42 });
     });
 
     test("uses the captured intrinsic Object, not the current realm.Object", () => {
@@ -205,18 +205,18 @@ describe("utils.js", () => {
         const isAsync = label.includes("async");
         const asyncSequence = utils.convertAsyncSequence(iterable, (x) => x);
 
-        assert.strictEqual(asyncSequence.object, iterable);
-        assert.strictEqual(
+        assert.equal(asyncSequence.object, iterable);
+        assert.equal(
           asyncSequence.method,
           isAsync ? iterable[Symbol.asyncIterator] : iterable[Symbol.iterator],
         );
-        assert.strictEqual(asyncSequence.type, isAsync ? "async" : "sync");
-        assert.strictEqual(utils.wrapperForImpl(asyncSequence), iterable);
+        assert.equal(asyncSequence.type, isAsync ? "async" : "sync");
+        assert.equal(utils.wrapperForImpl(asyncSequence), iterable);
 
         const iterator = asyncSequence[Symbol.asyncIterator]();
-        assert.deepStrictEqual(await iterator.next(), { done: false, value: "a" });
-        assert.deepStrictEqual(await iterator.next(), { done: false, value: "b" });
-        assert.deepStrictEqual(await iterator.next(), { done: true, value: undefined });
+        assert.deepEqual(await iterator.next(), { done: false, value: "a" });
+        assert.deepEqual(await iterator.next(), { done: false, value: "b" });
+        assert.deepEqual(await iterator.next(), { done: true, value: undefined });
       });
     }
 

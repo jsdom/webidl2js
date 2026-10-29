@@ -11,15 +11,16 @@
   "files": [
     "lib/"
   ],
+  "type": "commonjs",
   "main": "lib/transformer.js",
   "scripts": {
-    "test": "node --test test/*.js",
-    "update-snapshots": "node --test --test-update-snapshots test/*.js",
     "check": "npm run lint && npm run fmt:check",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "fmt:check": "oxfmt --check",
+    "test": "node --test test/*.js",
+    "test:update-snapshots": "node --test --test-update-snapshots test/*.js"
   },
   "dependencies": {
     "oxfmt": "0.75.0",
@@ -27,7 +28,7 @@
     "webidl2": "^24.5.0"
   },
   "devDependencies": {
-    "@domenic/eslint-config": "^6.0.0",
+    "@domenic/eslint-config": "^6.1.0",
     "@stylistic/eslint-plugin": "^5.10.0",
     "eslint": "^10.13.0",
     "globals": "^17.13.0"
