@@ -1,6 +1,6 @@
 {
   "name": "webidl2js",
-  "version": "21.1.0",
+  "version": "21.2.0",
   "description": "Auto-generates class structures for WebIDL specifications",
   "license": "MIT",
   "author": "Sebastian Mayr <npm@smayr.name>",
