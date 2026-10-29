@@ -523,6 +523,7 @@ webidl2js is implementing an ever-growing subset of the Web IDL specification. S
 - `[AllowShared]`
 - `[AllowResizable]`
 - `[Clamp]`
+- `[Default]` (for `toJSON()` operations)
 - `[EnforceRange]`
 - `[Exposed]`
 - `[LegacyLenientThis]`
@@ -547,7 +548,6 @@ Supported Web IDL extensions defined in HTML:
 Notable missing features include:
 
 - `maplike<>` and `setlike<>`
-- `[Default]` (for `toJSON()` operations)
 - `[Global]`'s various consequences, including the named properties object and `[[SetPrototypeOf]]`
 - `[LegacyFactoryFunction]`
 - `[LegacyNamespace]`
