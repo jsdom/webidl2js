@@ -223,6 +223,125 @@ describe("generation", () => {
       assert.equal(get.call(wrapper), "42");
     });
 
+    describe("default toJSON", () => {
+      let globalObject, wrapper, impl, utils;
+      const baseKeys = ["x", "enabled", "label", "payload", "nested", "choice", "names"];
+
+      function install() {
+        const global = vm.runInNewContext("globalThis");
+        for (const name of ["DefaultToJSON", "DefaultToJSONMiddle"]) {
+          require(path.join(outputDir, `${name}.js`)).install(global, ["Window"]);
+        }
+        return global;
+      }
+
+      beforeEach(() => {
+        utils = require(path.join(outputDir, "utils.js"));
+        globalObject = install();
+        wrapper = new globalObject.DefaultToJSON();
+        impl = utils.implForWrapper(wrapper);
+      });
+
+      test("runs implementation getters in order and skips non-JSON or unexposed attributes", () => {
+        Object.defineProperty(wrapper, "x", {
+          get() {
+            throw new Error("shadowed");
+          },
+        });
+        Object.defineProperty(globalObject.DefaultToJSON.prototype, "enabled", {
+          get() {
+            throw new Error("replaced");
+          },
+        });
+        const reads = [];
+        for (const key of baseKeys) {
+          const value = impl[key];
+          Object.defineProperty(impl, key, {
+            configurable: true,
+            get() {
+              reads.push(key);
+              return value;
+            },
+          });
+        }
+        for (const key of ["ignored", "promise", "handler", "nonJSONUnion", "workerOnly"]) {
+          Object.defineProperty(impl, key, {
+            get() {
+              throw new Error(`must not read ${key}`);
+            },
+          });
+        }
+        const result = wrapper.toJSON();
+        assert.equal(result.x, 1);
+        assert.equal(result.enabled, true);
+        assert.deepEqual(reads, baseKeys);
+        const error = new Error("getter failed");
+        Object.defineProperty(impl, "label", {
+          get() {
+            throw error;
+          },
+        });
+        assert.throws(
+          () => wrapper.toJSON(),
+          (e) => e === error,
+        );
+      });
+
+      test("uses the invoked method's realm and preserves nested interface wrappers", () => {
+        const other = install();
+        const nested = new other.DefaultToJSONMiddle();
+        impl.nested = utils.implForWrapper(nested);
+        const result = other.DefaultToJSON.prototype.toJSON.call(wrapper);
+        assert.equal(Object.getPrototypeOf(result), other.Object.prototype);
+        assert.notEqual(other.DefaultToJSON.prototype.toJSON.call(wrapper), result);
+        assert.equal(result.nested, nested);
+        assert.equal(Object.getPrototypeOf(result.nested), other.DefaultToJSONMiddle.prototype);
+        assert.equal(JSON.parse(JSON.stringify(wrapper)).nested.x, 1);
+        for (const receiver of [{}, null, undefined, new Proxy(wrapper, {})]) {
+          assert.throws(() => other.DefaultToJSON.prototype.toJSON.call(receiver), other.TypeError);
+        }
+      });
+
+      test("defines data properties without invoking inherited setters", () => {
+        Object.defineProperty(globalObject.Object.prototype, "x", {
+          get() {
+            return undefined;
+          },
+          set() {
+            throw new Error("inherited setter");
+          },
+          configurable: true,
+        });
+        assert.deepEqual(Object.getOwnPropertyDescriptor(wrapper.toJSON(), "x"), {
+          value: 1,
+          configurable: true,
+          enumerable: true,
+          writable: true,
+        });
+      });
+
+      for (const declaration of [
+        "[Exposed=Window] interface Invalid { [Default] object other(); };",
+        "[Exposed=Window] interface Invalid { [Default] static object toJSON(); };",
+        "[Exposed=Window] interface Invalid { [Default] DOMString toJSON(); };",
+        "[Exposed=Window] interface Invalid { [Default] object? toJSON(); };",
+        "[Exposed=Window] interface Invalid { [Default] object toJSON(long value); };",
+        "[Exposed=Window] interface Invalid { [Default] object toJSON(); object toJSON(long value); };",
+        "[Exposed=Window] interface Invalid { [Default=Value] object toJSON(); };",
+        "[Exposed=Window] namespace Invalid { [Default] object toJSON(); };",
+      ]) {
+        test(`rejects invalid declaration: ${declaration}`, async (t) => {
+          const directory = fs.mkdtempSync(path.join(outputDir, "invalid-default-"));
+          t.after(() => fs.rmSync(directory, { recursive: true }));
+          const idlPath = path.join(directory, "Invalid.webidl");
+          fs.writeFileSync(idlPath, declaration);
+          const transformer = new Transformer();
+          transformer.addSource(idlPath, implsDir);
+          await assert.rejects(transformer.generate(directory), /\[Default\]/u);
+        });
+      }
+    });
+
     describe("observable arrays", () => {
       let generated, utils, globalObject, wrapper, impl;
 
